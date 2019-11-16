@@ -6,7 +6,7 @@
     <description>Recent content on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 16 Nov 2019 10:32:56 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 16 Nov 2019 13:56:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -21,12 +21,21 @@
     </item>
     
     <item>
+      <title>从 Hexo 到 Hugo 的配置与总结</title>
+      <link>http://localhost:1313/2019/11/16/hexo-to-hugo/</link>
+      <pubDate>Sat, 16 Nov 2019 13:56:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/16/hexo-to-hugo/</guid>
+      <description>&lt;p&gt;从 2017 年使用 Hexo 生成 blog 到现在已经过去很长时间了，自己也修改网页的样式，添加了许多实用的功能。但一直以来 Hexo 生成静态资源的速度不是那么的快，甚至需要好几秒的时间。直到后来使用 Hugo 的时候发现，&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; 在这方面是真的快，仅需几百毫秒就可以生成静态资源。这就萌生了我从 Hexo 转换到 Hugo 的想法，毕竟 Hugo 是用 Go 写的嘛。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Matlab编译文件时出错，提示cl.exe不是内部或外部命令</title>
       <link>http://localhost:1313/2019/11/16/compilienn-file/</link>
       <pubDate>Sat, 16 Nov 2019 10:32:56 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/11/16/compilienn-file/</guid>
-      <description>&lt;p&gt;在用Matlab中的&lt;code&gt;vl_compilenn&lt;/code&gt;函数进行编译时，提示&lt;strong&gt;&amp;lsquo;cl.exe&amp;rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件。&lt;/strong&gt;的错误。现已找到解决办法，在这里记录下来。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在用Matlab中的 &lt;code&gt;vl_compilenn&lt;/code&gt; 函数进行编译时，提示 &lt;strong&gt;&amp;lsquo;cl.exe&amp;rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件&lt;/strong&gt; 的错误，现已找到解决办法，在这里记录下来。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -35,7 +44,7 @@
       <pubDate>Wed, 13 Nov 2019 07:52:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/11/13/linux-io/</guid>
-      <description>&lt;p&gt;本文通过「情景再现」的方式解释 Linux 中的 IO 模型，这对于学习 &lt;strong&gt;Java 高并发&lt;/strong&gt;还是有些许帮助的。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文通过「情景再现」的方式解释 Linux 中的 IO 模型，这对于学习 &lt;strong&gt;Java 高并发&lt;/strong&gt; 还是有些许帮助的。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -44,9 +53,7 @@
       <pubDate>Wed, 06 Nov 2019 19:23:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/11/06/VLSM/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;本文转自 51CTO 的作者「百年求索」——《可变长度子网掩码（VLSM）在子网划分中的应用》。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;本文转自 51CTO 的作者「百年求索」——《可变长度子网掩码（VLSM）在子网划分中的应用》。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -55,9 +62,7 @@
       <pubDate>Tue, 05 Nov 2019 10:15:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/11/05/Delete-dropbox-right-click-menu/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;通过删除注册表的方式将鼠标右键菜单中的&lt;code&gt;使用转移功能发送...&lt;/code&gt;去掉。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;通过删除注册表的方式将鼠标右键菜单中的 &lt;code&gt;使用转移功能发送...&lt;/code&gt; 去掉。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -66,9 +71,7 @@
       <pubDate>Mon, 04 Nov 2019 20:01:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/11/04/ruankao/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;再有一段时间就软考了，这篇文章是为了将之前看过的、出现频率比较高的知识点总结一下，以便日后复习用。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;再有一段时间就软考了，这篇文章是为了将之前看过的、出现频率比较高的知识点总结一下，以便日后复习用。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -77,9 +80,7 @@
       <pubDate>Wed, 11 Sep 2019 21:32:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-FindDuplicationInArray/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;在一个长度为 &lt;code&gt;n&lt;/code&gt; 的数组里的所有数字都在 &lt;code&gt;0&lt;/code&gt; 到 &lt;code&gt;n-1&lt;/code&gt; 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在一个长度为 &lt;code&gt;n&lt;/code&gt; 的数组里的所有数字都在 &lt;code&gt;0&lt;/code&gt; 到 &lt;code&gt;n-1&lt;/code&gt; 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -88,9 +89,7 @@
       <pubDate>Wed, 11 Sep 2019 16:26:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-NextNodeInBinaryTrees/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;给定一棵二叉树和其中的一个节点，找出中序遍历顺序的下一个节点。树中的节点除了有两个分别指向左右子节点的指针以外，还有一个指向父节点的指针。&lt;/p&gt;</description>
+      <description>&lt;p&gt;给定一棵二叉树和其中的一个节点，找出中序遍历顺序的下一个节点。树中的节点除了有两个分别指向左右子节点的指针以外，还有一个指向父节点的指针。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -99,9 +98,7 @@
       <pubDate>Wed, 11 Sep 2019 15:30:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-PrintListInReversedOrder/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;输入一个链表，从尾到头反过来打印出每个结点的值。&lt;/p&gt;</description>
+      <description>&lt;p&gt;输入一个链表，从尾到头反过来打印出每个结点的值。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -110,9 +107,7 @@
       <pubDate>Wed, 11 Sep 2019 14:57:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-ReplaceSpaces/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;请实现一个函数，把字符串中的每个空格替换成&lt;code&gt;%20&lt;/code&gt;。例如输入&lt;code&gt;We are happy.&lt;/code&gt;，则输出&lt;code&gt;We%20are%20happy.&lt;/code&gt;。&lt;/p&gt;</description>
+      <description>&lt;p&gt;请实现一个函数，把字符串中的每个空格替换成 &lt;code&gt;%20&lt;/code&gt;。例如输入 &lt;code&gt;We are happy.&lt;/code&gt;，则输出 &lt;code&gt;We%20are%20happy.&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -121,9 +116,7 @@
       <pubDate>Wed, 11 Sep 2019 14:31:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-FindInPartiallySortedMatrix/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -132,9 +125,7 @@
       <pubDate>Wed, 11 Sep 2019 10:48:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-ConstructBinaryTree/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列&lt;code&gt;{1, 2, 4, 7, 3, 5, 6, 8}&lt;/code&gt;和中序遍历序列&lt;code&gt;{4, 7, 2, 1, 5, 3, 8, 6}&lt;/code&gt;，则重建出二叉树并输出它的头结点。&lt;/p&gt;</description>
+      <description>&lt;p&gt;输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列&lt;code&gt;{1, 2, 4, 7, 3, 5, 6, 8}&lt;/code&gt;和中序遍历序列&lt;code&gt;{4, 7, 2, 1, 5, 3, 8, 6}&lt;/code&gt;，则重建出二叉树并输出它的头结点。&lt;/p&gt;</description>
     </item>
     
     <item>

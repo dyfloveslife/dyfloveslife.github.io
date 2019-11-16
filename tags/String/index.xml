@@ -17,9 +17,7 @@
       <pubDate>Wed, 11 Sep 2019 14:57:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-ReplaceSpaces/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;请实现一个函数，把字符串中的每个空格替换成&lt;code&gt;%20&lt;/code&gt;。例如输入&lt;code&gt;We are happy.&lt;/code&gt;，则输出&lt;code&gt;We%20are%20happy.&lt;/code&gt;。&lt;/p&gt;</description>
+      <description>&lt;p&gt;请实现一个函数，把字符串中的每个空格替换成 &lt;code&gt;%20&lt;/code&gt;。例如输入 &lt;code&gt;We are happy.&lt;/code&gt;，则输出 &lt;code&gt;We%20are%20happy.&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -17,9 +17,7 @@
       <pubDate>Wed, 11 Sep 2019 21:32:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-FindDuplicationInArray/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;在一个长度为 &lt;code&gt;n&lt;/code&gt; 的数组里的所有数字都在 &lt;code&gt;0&lt;/code&gt; 到 &lt;code&gt;n-1&lt;/code&gt; 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在一个长度为 &lt;code&gt;n&lt;/code&gt; 的数组里的所有数字都在 &lt;code&gt;0&lt;/code&gt; 到 &lt;code&gt;n-1&lt;/code&gt; 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -28,9 +26,7 @@
       <pubDate>Wed, 11 Sep 2019 16:26:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-NextNodeInBinaryTrees/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;给定一棵二叉树和其中的一个节点，找出中序遍历顺序的下一个节点。树中的节点除了有两个分别指向左右子节点的指针以外，还有一个指向父节点的指针。&lt;/p&gt;</description>
+      <description>&lt;p&gt;给定一棵二叉树和其中的一个节点，找出中序遍历顺序的下一个节点。树中的节点除了有两个分别指向左右子节点的指针以外，还有一个指向父节点的指针。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -39,9 +35,7 @@
       <pubDate>Wed, 11 Sep 2019 15:30:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-PrintListInReversedOrder/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;输入一个链表，从尾到头反过来打印出每个结点的值。&lt;/p&gt;</description>
+      <description>&lt;p&gt;输入一个链表，从尾到头反过来打印出每个结点的值。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -50,9 +44,7 @@
       <pubDate>Wed, 11 Sep 2019 14:57:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-ReplaceSpaces/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;请实现一个函数，把字符串中的每个空格替换成&lt;code&gt;%20&lt;/code&gt;。例如输入&lt;code&gt;We are happy.&lt;/code&gt;，则输出&lt;code&gt;We%20are%20happy.&lt;/code&gt;。&lt;/p&gt;</description>
+      <description>&lt;p&gt;请实现一个函数，把字符串中的每个空格替换成 &lt;code&gt;%20&lt;/code&gt;。例如输入 &lt;code&gt;We are happy.&lt;/code&gt;，则输出 &lt;code&gt;We%20are%20happy.&lt;/code&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -61,9 +53,7 @@
       <pubDate>Wed, 11 Sep 2019 14:31:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-FindInPartiallySortedMatrix/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -72,9 +62,7 @@
       <pubDate>Wed, 11 Sep 2019 10:48:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/09/11/offer-ConstructBinaryTree/</guid>
-      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
-
-&lt;p&gt;输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列&lt;code&gt;{1, 2, 4, 7, 3, 5, 6, 8}&lt;/code&gt;和中序遍历序列&lt;code&gt;{4, 7, 2, 1, 5, 3, 8, 6}&lt;/code&gt;，则重建出二叉树并输出它的头结点。&lt;/p&gt;</description>
+      <description>&lt;p&gt;输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列&lt;code&gt;{1, 2, 4, 7, 3, 5, 6, 8}&lt;/code&gt;和中序遍历序列&lt;code&gt;{4, 7, 2, 1, 5, 3, 8, 6}&lt;/code&gt;，则重建出二叉树并输出它的头结点。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -17,7 +17,7 @@
       <pubDate>Sat, 16 Nov 2019 10:32:56 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/11/16/compilienn-file/</guid>
-      <description>&lt;p&gt;在用Matlab中的&lt;code&gt;vl_compilenn&lt;/code&gt;函数进行编译时，提示&lt;strong&gt;&amp;lsquo;cl.exe&amp;rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件。&lt;/strong&gt;的错误。现已找到解决办法，在这里记录下来。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在用Matlab中的 &lt;code&gt;vl_compilenn&lt;/code&gt; 函数进行编译时，提示 &lt;strong&gt;&amp;lsquo;cl.exe&amp;rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件&lt;/strong&gt; 的错误，现已找到解决办法，在这里记录下来。&lt;/p&gt;</description>
     </item>
     
   </channel>

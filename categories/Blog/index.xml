@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Carol&#39;s blog</title>
+    <link>http://localhost:1313/categories/Blog/</link>
+    <description>Recent content in Blog on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 16 Nov 2019 13:56:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/Blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>从 Hexo 到 Hugo 的配置与总结</title>
+      <link>http://localhost:1313/2019/11/16/hexo-to-hugo/</link>
+      <pubDate>Sat, 16 Nov 2019 13:56:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/16/hexo-to-hugo/</guid>
+      <description>&lt;p&gt;从 2017 年使用 Hexo 生成 blog 到现在已经过去很长时间了，自己也修改网页的样式，添加了许多实用的功能。但一直以来 Hexo 生成静态资源的速度不是那么的快，甚至需要好几秒的时间。直到后来使用 Hugo 的时候发现，&lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; 在这方面是真的快，仅需几百毫秒就可以生成静态资源。这就萌生了我从 Hexo 转换到 Hugo 的想法，毕竟 Hugo 是用 Go 写的嘛。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

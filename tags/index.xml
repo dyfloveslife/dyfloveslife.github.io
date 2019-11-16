@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/</link>
+    <description>Recent content in Tags on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 16 Nov 2019 10:32:56 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MATLAB</title>
+      <link>http://localhost:1313/tags/MATLAB/</link>
+      <pubDate>Sat, 16 Nov 2019 10:32:56 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/MATLAB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>技巧</title>
+      <link>http://localhost:1313/tags/%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Sat, 16 Nov 2019 10:32:56 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E6%8A%80%E5%B7%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IO</title>
+      <link>http://localhost:1313/tags/IO/</link>
+      <pubDate>Wed, 13 Nov 2019 07:52:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/IO/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://localhost:1313/tags/Linux/</link>
+      <pubDate>Wed, 13 Nov 2019 07:52:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Computer Network</title>
+      <link>http://localhost:1313/tags/Computer-Network/</link>
+      <pubDate>Wed, 06 Nov 2019 19:23:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Computer-Network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DropBox</title>
+      <link>http://localhost:1313/tags/DropBox/</link>
+      <pubDate>Tue, 05 Nov 2019 10:15:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/DropBox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Algorithm</title>
+      <link>http://localhost:1313/tags/Algorithm/</link>
+      <pubDate>Wed, 11 Sep 2019 21:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Array</title>
+      <link>http://localhost:1313/tags/Array/</link>
+      <pubDate>Wed, 11 Sep 2019 21:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Array/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>剑指Offer</title>
+      <link>http://localhost:1313/tags/%E5%89%91%E6%8C%87Offer/</link>
+      <pubDate>Wed, 11 Sep 2019 21:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E5%89%91%E6%8C%87Offer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BinaryTree</title>
+      <link>http://localhost:1313/tags/BinaryTree/</link>
+      <pubDate>Wed, 11 Sep 2019 16:26:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/BinaryTree/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LinkedList</title>
+      <link>http://localhost:1313/tags/LinkedList/</link>
+      <pubDate>Wed, 11 Sep 2019 15:30:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/LinkedList/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>String</title>
+      <link>http://localhost:1313/tags/String/</link>
+      <pubDate>Wed, 11 Sep 2019 14:57:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/String/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DI</title>
+      <link>http://localhost:1313/tags/DI/</link>
+      <pubDate>Sat, 03 Aug 2019 21:03:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/DI/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>http://localhost:1313/tags/Spring/</link>
+      <pubDate>Sat, 03 Aug 2019 21:03:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Spring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IOC</title>
+      <link>http://localhost:1313/tags/IOC/</link>
+      <pubDate>Sat, 03 Aug 2019 16:30:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/IOC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AOP</title>
+      <link>http://localhost:1313/tags/AOP/</link>
+      <pubDate>Sat, 03 Aug 2019 13:15:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/AOP/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JdbcTemplate</title>
+      <link>http://localhost:1313/tags/JdbcTemplate/</link>
+      <pubDate>Sat, 03 Aug 2019 13:15:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/JdbcTemplate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Chrome</title>
+      <link>http://localhost:1313/tags/Chrome/</link>
+      <pubDate>Sun, 12 May 2019 13:12:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Chrome/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Keras</title>
+      <link>http://localhost:1313/tags/Keras/</link>
+      <pubDate>Mon, 08 Apr 2019 08:04:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Keras/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine learning</title>
+      <link>http://localhost:1313/tags/Machine-learning/</link>
+      <pubDate>Mon, 08 Apr 2019 08:04:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PyTorch</title>
+      <link>http://localhost:1313/tags/PyTorch/</link>
+      <pubDate>Mon, 08 Apr 2019 08:04:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/PyTorch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>生活</title>
+      <link>http://localhost:1313/tags/%E7%94%9F%E6%B4%BB/</link>
+      <pubDate>Thu, 07 Mar 2019 16:39:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E7%94%9F%E6%B4%BB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Github</title>
+      <link>http://localhost:1313/tags/Github/</link>
+      <pubDate>Tue, 05 Mar 2019 08:27:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Logging</title>
+      <link>http://localhost:1313/tags/Logging/</link>
+      <pubDate>Thu, 16 Aug 2018 16:51:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Logging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>http://localhost:1313/tags/Python/</link>
+      <pubDate>Thu, 16 Aug 2018 16:51:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Module</title>
+      <link>http://localhost:1313/tags/Module/</link>
+      <pubDate>Wed, 15 Aug 2018 16:09:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Module/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JSON</title>
+      <link>http://localhost:1313/tags/JSON/</link>
+      <pubDate>Tue, 14 Aug 2018 10:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/JSON/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>crawler</title>
+      <link>http://localhost:1313/tags/crawler/</link>
+      <pubDate>Sun, 05 Aug 2018 21:27:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/crawler/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OpenCV</title>
+      <link>http://localhost:1313/tags/OpenCV/</link>
+      <pubDate>Wed, 01 Aug 2018 14:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/OpenCV/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CopyAndDeepCopy</title>
+      <link>http://localhost:1313/tags/CopyAndDeepCopy/</link>
+      <pubDate>Mon, 30 Jul 2018 18:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/CopyAndDeepCopy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C Language</title>
+      <link>http://localhost:1313/tags/C-Language/</link>
+      <pubDate>Sun, 29 Jul 2018 15:17:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/C-Language/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CLassAndObject</title>
+      <link>http://localhost:1313/tags/CLassAndObject/</link>
+      <pubDate>Mon, 16 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/CLassAndObject/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DataStructure</title>
+      <link>http://localhost:1313/tags/DataStructure/</link>
+      <pubDate>Sun, 15 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/DataStructure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VariableScope</title>
+      <link>http://localhost:1313/tags/VariableScope/</link>
+      <pubDate>Sat, 14 Jul 2018 14:50:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/VariableScope/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Function</title>
+      <link>http://localhost:1313/tags/Function/</link>
+      <pubDate>Fri, 13 Jul 2018 16:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Function/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IteratorAndGenerators</title>
+      <link>http://localhost:1313/tags/IteratorAndGenerators/</link>
+      <pubDate>Fri, 13 Jul 2018 15:09:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/IteratorAndGenerators/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LoopStatement</title>
+      <link>http://localhost:1313/tags/LoopStatement/</link>
+      <pubDate>Mon, 09 Jul 2018 15:51:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/LoopStatement/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ConditionalControl</title>
+      <link>http://localhost:1313/tags/ConditionalControl/</link>
+      <pubDate>Mon, 09 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/ConditionalControl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Operator</title>
+      <link>http://localhost:1313/tags/Operator/</link>
+      <pubDate>Sat, 07 Jul 2018 17:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Operator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BasicDataType</title>
+      <link>http://localhost:1313/tags/BasicDataType/</link>
+      <pubDate>Fri, 06 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/BasicDataType/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BasicGrammer</title>
+      <link>http://localhost:1313/tags/BasicGrammer/</link>
+      <pubDate>Thu, 05 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/BasicGrammer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ShadowsocksR</title>
+      <link>http://localhost:1313/tags/ShadowsocksR/</link>
+      <pubDate>Mon, 14 May 2018 21:41:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/ShadowsocksR/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VPS</title>
+      <link>http://localhost:1313/tags/VPS/</link>
+      <pubDate>Mon, 14 May 2018 21:41:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/VPS/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data structure</title>
+      <link>http://localhost:1313/tags/Data-structure/</link>
+      <pubDate>Thu, 29 Jun 2017 12:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Data-structure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C#</title>
+      <link>http://localhost:1313/tags/C#/</link>
+      <pubDate>Sun, 25 Jun 2017 12:13:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/C#/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Database</title>
+      <link>http://localhost:1313/tags/Database/</link>
+      <pubDate>Mon, 19 Jun 2017 18:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Database/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DNS</title>
+      <link>http://localhost:1313/tags/DNS/</link>
+      <pubDate>Sun, 04 Jun 2017 20:29:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/DNS/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>http://localhost:1313/tags/Windows/</link>
+      <pubDate>Sun, 04 Jun 2017 20:29:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>http://localhost:1313/tags/Web/</link>
+      <pubDate>Sat, 03 Jun 2017 22:46:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>FTP</title>
+      <link>http://localhost:1313/tags/FTP/</link>
+      <pubDate>Sat, 03 Jun 2017 16:17:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/FTP/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DHCP</title>
+      <link>http://localhost:1313/tags/DHCP/</link>
+      <pubDate>Sat, 03 Jun 2017 11:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/DHCP/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Server</title>
+      <link>http://localhost:1313/tags/Web-Server/</link>
+      <pubDate>Fri, 02 Jun 2017 21:41:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Web-Server/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Static linkedlist</title>
+      <link>http://localhost:1313/tags/Static-linkedlist/</link>
+      <pubDate>Tue, 14 Mar 2017 22:03:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Static-linkedlist/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>C#——字符串格式化 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="前几天在上C#时，学到了使用Connection连接数据库这一功能。 当时我写的连接字符串语句： 1 String s = &amp;#34;Server=&amp;#34; &#43; textBox1.Text &#43; &amp;#34;;Database=&amp;#34; &#43; textBox2.Text &#43; &amp;#34;;User Id=&amp;#34; &#43; textBox3.Text &#43; &amp;#34;;Password=&amp;#34; &#43; textBox4.Text &#43; &amp;#34;&amp;#34;; 这" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2017/04/27/StringFormatting/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="C#——字符串格式化" />
+<meta property="og:description" content="前几天在上C#时，学到了使用Connection连接数据库这一功能。 当时我写的连接字符串语句： 1 String s = &#34;Server=&#34; &#43; textBox1.Text &#43; &#34;;Database=&#34; &#43; textBox2.Text &#43; &#34;;User Id=&#34; &#43; textBox3.Text &#43; &#34;;Password=&#34; &#43; textBox4.Text &#43; &#34;&#34;; 这" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2017/04/27/StringFormatting/" />
+<meta property="article:published_time" content="2017-04-27T22:57:11+08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta itemprop="name" content="C#——字符串格式化">
+<meta itemprop="description" content="前几天在上C#时，学到了使用Connection连接数据库这一功能。 当时我写的连接字符串语句： 1 String s = &#34;Server=&#34; &#43; textBox1.Text &#43; &#34;;Database=&#34; &#43; textBox2.Text &#43; &#34;;User Id=&#34; &#43; textBox3.Text &#43; &#34;;Password=&#34; &#43; textBox4.Text &#43; &#34;&#34;; 这">
+
+
+<meta itemprop="datePublished" content="2017-04-27T22:57:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
+<meta itemprop="wordCount" content="133">
+
+
+
+<meta itemprop="keywords" content="C#," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C#——字符串格式化"/>
+<meta name="twitter:description" content="前几天在上C#时，学到了使用Connection连接数据库这一功能。 当时我写的连接字符串语句： 1 String s = &#34;Server=&#34; &#43; textBox1.Text &#43; &#34;;Database=&#34; &#43; textBox2.Text &#43; &#34;;User Id=&#34; &#43; textBox3.Text &#43; &#34;;Password=&#34; &#43; textBox4.Text &#43; &#34;&#34;; 这"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">C#——字符串格式化</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-04-27 </span>
+        <div class="post-category">
+            <a href="/categories/C/"> C# </a>
+            </div>
+          <span class="more-meta"> 133 words </span>
+          <span class="more-meta"> 1 min read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>前几天在上C#时，学到了使用Connection连接数据库这一功能。</p>
+</blockquote>
+
+<p>当时我写的连接字符串语句：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="err">String s </span><span class="o">=</span> <span class="s">&#34;Server=&#34;</span> <span class="o">+</span> <span class="n">textBox1</span><span class="p">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;;Database=&#34;</span> <span class="o">+</span> <span class="n">textBox2</span><span class="p">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;;User Id=&#34;</span> <span class="o">+</span> <span class="n">textBox3</span><span class="p">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;;Password=&#34;</span> <span class="o">+</span> <span class="n">textBox4</span><span class="p">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;&#34;</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这种写起来出错率高，可读性弱，不易修改。</p>
+
+<p>后来发现有一种更简单的写法，用字符串格式化：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="err">String s </span><span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="na">Fromat</span><span class="p">(</span><span class="s">&#34;Server={0};Database={1};User Id={2};Password={3}&#34;</span><span class="p">,</span><span class="n">textBox1</span><span class="p">.</span><span class="na">Text</span><span class="p">,</span><span class="n">textBox2</span><span class="p">.</span><span class="na">Text</span><span class="p">,</span><span class="n">textBox3</span><span class="p">.</span><span class="na">Text</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这样写起来就好多了，简单又直观。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-11-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/C/">C#</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Linux环境下配置web服务器---通过域名访问主机</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2017/03/27/My-computer-application-software/">
+            <span class="next-text nav-default">《我的应用软件》</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

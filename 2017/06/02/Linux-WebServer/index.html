@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Linux 环境下配置 Web 服务器 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="2017/6/6 [更新]基于端口的虚拟主机
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2017/06/02/Linux-WebServer/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Linux 环境下配置 Web 服务器" />
+<meta property="og:description" content="
+
+2017/6/6 [更新]基于端口的虚拟主机
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2017/06/02/Linux-WebServer/" />
+<meta property="article:published_time" content="2017-06-02T21:41:11+08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta itemprop="name" content="Linux 环境下配置 Web 服务器">
+<meta itemprop="description" content="
+
+2017/6/6 [更新]基于端口的虚拟主机
+
+">
+
+
+<meta itemprop="datePublished" content="2017-06-02T21:41:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
+<meta itemprop="wordCount" content="897">
+
+
+
+<meta itemprop="keywords" content="Linux,Web Server," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux 环境下配置 Web 服务器"/>
+<meta name="twitter:description" content="
+
+2017/6/6 [更新]基于端口的虚拟主机
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linux 环境下配置 Web 服务器</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-06-02 </span>
+        <div class="post-category">
+            <a href="/categories/Linux/"> Linux </a>
+            </div>
+          <span class="more-meta"> 897 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#一-安装">一、安装</a>
+<ul>
+<li><a href="#1-挂载第一张镜像-安装httpd和httpd-manual">1.挂载第一张镜像，安装httpd和httpd-manual。</a></li>
+<li><a href="#2-开启服务-并测试是否可用">2.开启服务，并测试是否可用。</a></li>
+</ul></li>
+<li><a href="#二-创建个人web站点">二.创建个人Web站点</a>
+<ul>
+<li><a href="#1-新建用户-修改默认主路径的权限">1.新建用户，修改默认主路径的权限</a></li>
+<li><a href="#2-修改配置文件">2.修改配置文件</a></li>
+<li><a href="#3-测试">3.测试</a></li>
+</ul></li>
+<li><a href="#三-创建虚拟目录">三.创建虚拟目录</a>
+<ul>
+<li><a href="#1-创建目录-设置首页信息">1.创建目录，设置首页信息</a></li>
+<li><a href="#2-修改文件">2.修改文件</a></li>
+<li><a href="#3-测试-1">3.测试</a></li>
+</ul></li>
+<li><a href="#四-基于域名的虚拟主机">四.基于域名的虚拟主机</a></li>
+<li><a href="#五-基于端口的虚拟主机">五.基于端口的虚拟主机</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <hr />
+
+<p><strong>2017/6/6 [更新]基于端口的虚拟主机</strong></p>
+
+<hr />
+
+<blockquote>
+<p>说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
+软件包：<strong>shrike-i386-disc1.iso</strong>
+步骤：
+1. Httpd包的安装（包括httpd和httpd-manual）
+2. 创建个人web站点
+3. 创建虚拟目录
+4. 基于域名的虚拟主机
+5. 基于端口的虚拟主机</p>
+</blockquote>
+
+<hr />
+
+<p><strong>注意：先配置虚拟机静态IP。（本次为：192.168.1.2）</strong></p>
+
+<hr />
+
+<h1 id="一-安装">一、安装</h1>
+
+<h2 id="1-挂载第一张镜像-安装httpd和httpd-manual">1.挂载第一张镜像，安装httpd和httpd-manual。</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">mount /dev/cdrom /mnt/cdrom			//挂载镜像
+cd /mnt/cdrom/RedHar/RPMS			//进入软件包目录
+rpm -ivh httpd-2.0.40-21.i386.rpm
+rpm -ivh httpd-manual-2.0.40-21.i386.rpm</pre></td></tr></table>
+</div>
+</div>
+<h2 id="2-开启服务-并测试是否可用">2.开启服务，并测试是否可用。</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">service httpd start</pre></td></tr></table>
+</div>
+</div>
+<p>在浏览器输入： <code>192.168.1.2</code>
+出现如下界面即可：
+<img src="/images/web1.png" alt="web" /></p>
+
+<p>然在 <code>/var/www/html</code> 下，新建index.html，写入 <code>Hello World!</code> 等随意字符。重启服务后，再打开浏览器，查看效果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">echo &#34;Hello World&#34;&gt;/var/www/html/index.html
+service httpd restart</pre></td></tr></table>
+</div>
+</div>
+<p>如下图：
+<img src="/images/web2.png" alt="web" /></p>
+
+<h1 id="二-创建个人web站点">二.创建个人Web站点</h1>
+
+<h2 id="1-新建用户-修改默认主路径的权限">1.新建用户，修改默认主路径的权限</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">useradd dyf			//假设用户名为：dyf
+passwd 	dyf
+chmod 711 /home/dyf
+cd /home/dyf
+mkdir public_html
+chown dyf:dyf public_html</pre></td></tr></table>
+</div>
+</div>
+<h2 id="2-修改配置文件">2.修改配置文件</h2>
+
+<p>在 <code>/etc/httpd/conf</code> 中的 <code>httpd.conf</code> 文件。
+如下图：
+<img src="/images/web3.png" alt="web" /></p>
+
+<h2 id="3-测试">3.测试</h2>
+
+<p>重启服务，并在浏览器输入 <code>192.168.1.2/~dyf</code> 即可。</p>
+
+<h1 id="三-创建虚拟目录">三.创建虚拟目录</h1>
+
+<h2 id="1-创建目录-设置首页信息">1.创建目录，设置首页信息</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">mkdir -p /dir/test
+cd /dir/test
+echo &#34;Dys&#39;s /dir/test directory!&#34;&gt;index.html</pre></td></tr></table>
+</div>
+</div>
+<h2 id="2-修改文件">2.修改文件</h2>
+
+<p>在 <code>/etc/httpd/conf</code> 中的 <code>httpd.conf</code> 文件。在 <code>Alias /icons &quot;/var/www/icons/&quot;</code> 下面添加语句 <code>Alias /test &quot;/dir/test&quot;</code> 即可。
+如下图：
+<img src="/images/web4.png" alt="web" /></p>
+
+<h2 id="3-测试-1">3.测试</h2>
+
+<p>重启服务，并在浏览器输入 <code>192.168.1.2/test/index.html</code> 即可。
+如下图：
+<img src="/images/web5.png" alt="web" /></p>
+
+<h1 id="四-基于域名的虚拟主机">四.基于域名的虚拟主机</h1>
+
+<blockquote>
+<p><strong>需要先配置DNS</strong>
+<strong>需要先配置DNS</strong>
+<strong>需要先配置DNS</strong></p>
+</blockquote>
+
+<p>具体请参见《Linux配置web服务器——通过域名访问主机》。</p>
+
+<h1 id="五-基于端口的虚拟主机">五.基于端口的虚拟主机</h1>
+
+<blockquote>
+<p><strong>不需要配置DNS，直接指定不同端口，访问不同端口获取不同网页。</strong>
+接下来我们实现访问不同端口，进入不同网页的例子。<strong>记得先配置静态IP哦！~</strong></p>
+</blockquote>
+
+<ol>
+<li><p>在<code>/var/www</code>下创建用于测试的文件和网页。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">	cd /var/www
+	mkdir test80
+	echo &#34;This is 80 port&#34;&gt;/var/www/test80/index.html
+	mkdir test81
+	echo &#34;This is 81 port&#34;&gt;/var/www/test81/index.html</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>修改<code>/etc/httpd/conf/httpd.conf</code> 文件。
+在改文件最下面，添加如图信息：
+<img src="/images/linux_web1.png" alt="linux_web" />
+然后添加如下图信息：
+&gt; 小提示：用键盘上的 <code>Ctrl+F</code> 两个按键直接查询 <code>liten</code> 即可。
+<img src="/images/linux_web2.png" alt="linux_web" /></p></li>
+
+<li><p>重启服务 <code>service httpd restart</code>。
+如下图：
+<img src="/images/linux_web3.png" alt="linux_web" /></p></li>
+
+<li><p>测试
+打开浏览器，输入 <code>http://192.168.1.2</code>，即可默认访问<code>80</code> 端口。如下图:
+<img src="/images/linux_web4.png" alt="linux_web" />
+同理，输入<code>http://192.168.1.2：81</code>，即可访问 <code>81</code>端口下的内容。如下图：
+<img src="/images/linux_web5.png" alt="linux_web" /></p></li>
+</ol>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-11-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Linux/">Linux</a>
+          <a href="/tags/Web-Server/">Web Server</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2017/06/03/Windows-DHCP/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Windows环境下配置DHCP</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2017/06/01/Linux-FTP/">
+            <span class="next-text nav-default">Linux环境下配置FTP服务器</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

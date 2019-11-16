@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Operator on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/Operator/</link>
+    <description>Recent content in Operator on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 07 Jul 2018 17:24:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/Operator/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python学习笔记——运算符</title>
+      <link>http://localhost:1313/2018/07/07/learning-python-Operator/</link>
+      <pubDate>Sat, 07 Jul 2018 17:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/07/learning-python-Operator/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Operator/contents.png&#34; alt=&#34;Operator-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

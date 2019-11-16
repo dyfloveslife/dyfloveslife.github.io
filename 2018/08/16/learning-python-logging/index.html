@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Python中的logging - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。 " /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2018/08/16/learning-python-logging/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Python中的logging" />
+<meta property="og:description" content="日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2018/08/16/learning-python-logging/" />
+<meta property="article:published_time" content="2018-08-16T16:51:11+08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta itemprop="name" content="Python中的logging">
+<meta itemprop="description" content="日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。
+">
+
+
+<meta itemprop="datePublished" content="2018-08-16T16:51:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
+<meta itemprop="wordCount" content="1557">
+
+
+
+<meta itemprop="keywords" content="Python,Logging," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python中的logging"/>
+<meta name="twitter:description" content="日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Python中的logging</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-08-16 </span>
+        <div class="post-category">
+            <a href="/categories/Python/"> Python </a>
+            </div>
+          <span class="more-meta"> 1557 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <p>日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。
+<img src="/images/Python/Logging/log_picture.png" alt="logging" /></p>
+
+<p>logging为我们提供了许多记录日志的方法，如<code>debug()</code>、<code>info()</code>、<code>warning()</code>、<code>error()</code>、<code>critical()</code>。根据处理事件的情况不同，又可以分为不同的等级，如<code>DEBUG</code>、<code>INFO</code>、<code>WARNING</code>、<code>ERROR</code>、<code>CRITICAL</code>。如下表格：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">等级</th>
+<th align="left">啥时候用？</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">DEBUG</td>
+<td align="left">输出详细信息，通常仅在诊断问题的时候使用。</td>
+</tr>
+
+<tr>
+<td align="center">INFO</td>
+<td align="left">按照预期正在进行的并且是确认的事情。</td>
+</tr>
+
+<tr>
+<td align="center">WARNING</td>
+<td align="left">预示着发生了意想不到的事情，或者在不久的将来预示着一些问题（例如“磁盘空间低”）。软件仍在按预期运行。</td>
+</tr>
+
+<tr>
+<td align="center">ERROR</td>
+<td align="left">由于更严重的问题，该软件无法执行某些功能。</td>
+</tr>
+
+<tr>
+<td align="center">CRITICAL</td>
+<td align="left">表明程序本身可能无法继续运行的严重的错误。</td>
+</tr>
+</tbody>
+</table>
+
+<p>下表给出了日志记录的等级：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">等级</th>
+<th align="center">数值</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">CRITICAL</td>
+<td align="center">50</td>
+</tr>
+
+<tr>
+<td align="center">ERROT</td>
+<td align="center">40</td>
+</tr>
+
+<tr>
+<td align="center">WARNING</td>
+<td align="center">30</td>
+</tr>
+
+<tr>
+<td align="center">INFO</td>
+<td align="center">20</td>
+</tr>
+
+<tr>
+<td align="center">DEBUG</td>
+<td align="center">10</td>
+</tr>
+
+<tr>
+<td align="center">NOTSET</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+
+<p>然而，默认情况下是<code>WARNING</code>，这种情况下它会追踪此级别及以上级别的事件。</p>
+
+<p>可以以不同方式处理被跟踪的事件。处理跟踪事件的最简单方法是将它们打印到控制台，另一种常见方法是将它们写入磁盘文件。</p>
+
+<p>先来看一个简单的例子，首先导入<code>logging</code>模块，通过模块的<code>basicConfig</code>方法设置了日志文件的名称以及将跟踪阈值的日志记录级别设置为<code>DEBUG</code>，最后输出三条日志信息，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;example.log&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;This message should go to the log file.&#39;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;So should this&#39;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;And this, too.&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行程序后会生成一个日志文件<code>example.log</code>，打开它就会看到日志信息，如下图：
+<img src="/images/Python/Logging/example_log.png" alt="logging" /></p>
+
+<p>你可以看到，单单是输出了日志信息，而没有时间，不方便查看。接下来通过另一个例子将日志时间、日志等级等信息一起记录下来。</p>
+
+<p>下面的例子用于计算一元二次方程的根，计算完成后将日志记录下来，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># 规定打印日志的格式</span>
+<span class="n">LOG_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1"> </span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+<span class="c1"># 增加以及初始化logger</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;f:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge</span><span class="se">\\</span><span class="s1">test.log&#39;</span><span class="p">,</span>
+                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+                    <span class="n">format</span><span class="o">=</span><span class="n">LOG_FORMAT</span><span class="p">,</span>
+                    <span class="n">filemode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="c1"># getLogger(name)用于获取logger对象，如果不指定记录器的名称name，则返回root对象</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">quadratic_formula</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    返回方程 ax^2 + bx + c = 0 的根
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;quadratic_formula({0}, {1}, {2})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+
+    <span class="c1"># 计算判别式</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;# Compute the discriminant&#39;</span><span class="p">)</span>
+    <span class="n">disc</span> <span class="o">=</span> <span class="n">b</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">c</span>
+
+    <span class="c1"># 计算两个根</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;# compute the two roots&#39;</span><span class="p">)</span>
+    <span class="n">root1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">disc</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">root2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">disc</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+
+    <span class="c1"># 返回根</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;# return the roots&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">root1</span><span class="p">,</span> <span class="n">root2</span>
+
+<span class="n">roots</span> <span class="o">=</span> <span class="n">quadratic_formula</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>同时，执行程序后会生成一个日志文件<code>test.log</code>，打开它就会看到日志信息，如下图：
+<img src="/images/Python/Logging/test_log.png" alt="logging" /></p>
+
+<p>你可以看到，在有解的情况下不仅返回了方程的根，而且也将计算顺序以日志的形式保存了下来。</p>
+
+<p>下面我们给它一个无解的参数，看看它的日志文件会保存什么东西。修改下列语句：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">roots</span> <span class="o">=</span> <span class="n">quadratic_formula</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>你可以看到控制台报错，同时日志文件如下图：
+<img src="/images/Python/Logging/test_log_error.png" alt="logging" /></p>
+
+<p>这是因为它在执行完<code>logger.debug('# compute the two roots')</code>这条语句之后就不再执行了，也就是我们修改的参数不满足方程根的求解。</p>
+
+<p>再最后一个例子，我们结合<code>try-except-else-finally</code>来说明<code>logging</code>的使用方法。</p>
+
+<p>对于不熟悉<code>try-except-else-finally</code>的同学，你可以看下面的图片：
+<img src="/images/Python/Logging/try-except.png" alt="logging" /></p>
+
+<p>该例子用于统计打开一个文件所需要的时间，并将其记录在日志文件中，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&#34;F:</span><span class="se">\\</span><span class="s2">Python_test</span><span class="se">\\</span><span class="s2">BasicKnowledge</span><span class="se">\\</span><span class="s2">problems.log&#34;</span><span class="p">,</span>
+                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">read_file_timed</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Return the contents of the file at &#39;path&#39; and measure time required&#34;&#34;&#34;</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">except</span> <span class="n">FileNotFoundError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="k">raise</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">stop_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">stop_time</span> <span class="o">-</span> <span class="n">start_time</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Time required for {file} = {time}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">dt</span><span class="p">))</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="n">read_file_timed</span><span class="p">(</span><span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge</span><span class="se">\\</span><span class="s1">google_stock_data.csv&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果<code>google_stock_data.csv</code>文件存在的话，你可以看到日志文件中有如下内容：
+<img src="/images/Python/Logging/problems.png" alt="logging" /></p>
+
+<p>如果打开一个不存在的文件，执行程序后，会出现如下的内容：
+<img src="/images/Python/Logging/problems_1.png" alt="logging" /></p>
+
+<p>好了，介绍完了。对于一个比较有意思的谷歌股票数据文件，你可以在<a href="https://goo.gl/3zaUlD">这里</a>下载。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-11-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Python/">Python</a>
+          <a href="/tags/Logging/">Logging</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2018/08/27/learning-writing-and-english/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">学会写作和英语吧！</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2018/08/15/learning-python-Module/">
+            <span class="next-text nav-default">Python学习笔记——模块</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

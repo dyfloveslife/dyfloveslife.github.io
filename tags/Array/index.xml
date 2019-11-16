@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Array on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/Array/</link>
+    <description>Recent content in Array on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 11 Sep 2019 21:32:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/Array/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>剑指Offer-数组中重复的数字</title>
+      <link>http://localhost:1313/2019/09/11/offer-FindDuplicationInArray/</link>
+      <pubDate>Wed, 11 Sep 2019 21:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/09/11/offer-FindDuplicationInArray/</guid>
+      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
+
+&lt;p&gt;在一个长度为 &lt;code&gt;n&lt;/code&gt; 的数组里的所有数字都在 &lt;code&gt;0&lt;/code&gt; 到 &lt;code&gt;n-1&lt;/code&gt; 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>剑指Offer-二维数组中的查找</title>
+      <link>http://localhost:1313/2019/09/11/offer-FindInPartiallySortedMatrix/</link>
+      <pubDate>Wed, 11 Sep 2019 14:31:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/09/11/offer-FindInPartiallySortedMatrix/</guid>
+      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
+
+&lt;p&gt;在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

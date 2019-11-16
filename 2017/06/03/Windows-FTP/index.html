@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Windows环境下配置FTP服务器 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content=" 软件： VMware Workstation Pro 环境： Windows 2008 R2
+ 步骤： 1. 配置虚拟机静态IP 2. 安装Web服务器(IIS)，同时安装FTP服务器。 3. 添加站点 4. 用户名登录 5. 下载、上传文件 6. 隔离用户
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2017/06/03/Windows-FTP/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Windows环境下配置FTP服务器" />
+<meta property="og:description" content="
+软件： VMware Workstation Pro
+环境： Windows 2008 R2
+
+
+步骤：
+1.  配置虚拟机静态IP
+2.  安装Web服务器(IIS)，同时安装FTP服务器。
+3.  添加站点
+4.  用户名登录
+5.  下载、上传文件
+6.  隔离用户" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2017/06/03/Windows-FTP/" />
+<meta property="article:published_time" content="2017-06-03T16:17:11+08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta itemprop="name" content="Windows环境下配置FTP服务器">
+<meta itemprop="description" content="
+软件： VMware Workstation Pro
+环境： Windows 2008 R2
+
+
+步骤：
+1.  配置虚拟机静态IP
+2.  安装Web服务器(IIS)，同时安装FTP服务器。
+3.  添加站点
+4.  用户名登录
+5.  下载、上传文件
+6.  隔离用户">
+
+
+<meta itemprop="datePublished" content="2017-06-03T16:17:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
+<meta itemprop="wordCount" content="1426">
+
+
+
+<meta itemprop="keywords" content="Windows,FTP," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Windows环境下配置FTP服务器"/>
+<meta name="twitter:description" content="
+软件： VMware Workstation Pro
+环境： Windows 2008 R2
+
+
+步骤：
+1.  配置虚拟机静态IP
+2.  安装Web服务器(IIS)，同时安装FTP服务器。
+3.  添加站点
+4.  用户名登录
+5.  下载、上传文件
+6.  隔离用户"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Windows环境下配置FTP服务器</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-06-03 </span>
+        <div class="post-category">
+            <a href="/categories/Windows/"> Windows </a>
+            </div>
+          <span class="more-meta"> 1426 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#一-配置虚拟机静态ip">一.配置虚拟机静态IP</a></li>
+<li><a href="#二-安装">二.安装</a></li>
+<li><a href="#三-添加站点">三.添加站点</a>
+<ul>
+<li><a href="#1-站点的添加">1.站点的添加</a></li>
+<li><a href="#2-测试">2.测试</a></li>
+</ul></li>
+<li><a href="#四-用户名登录">四.用户名登录</a>
+<ul>
+<li><a href="#1-添加用户">1.添加用户</a></li>
+<li><a href="#2-更改权限">2.更改权限</a></li>
+</ul></li>
+<li><a href="#五-上传-下载文件">五.上传、下载文件</a>
+<ul>
+<li><a href="#1-修改浏览器设置">1.修改浏览器设置</a></li>
+<li><a href="#2-下载文件">2.下载文件</a></li>
+<li><a href="#3-上传文件">3.上传文件</a></li>
+</ul></li>
+<li><a href="#六-隔离用户">六.隔离用户</a>
+<ul>
+<li><a href="#1-创建用户user1和user2">1.创建用户user1和user2</a></li>
+<li><a href="#2-创建文件夹">2.创建文件夹</a></li>
+<li><a href="#3-创建文件">3.创建文件</a></li>
+<li><a href="#4-修改权限">4.修改权限</a></li>
+<li><a href="#5-应用隔离用户">5.应用隔离用户</a></li>
+<li><a href="#6-测试">6.测试</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>软件： <code>VMware Workstation Pro</code>
+环境： <code>Windows 2008 R2</code></p>
+</blockquote>
+
+<p>步骤：
+1.  配置虚拟机静态IP
+2.  安装Web服务器(IIS)，同时安装FTP服务器。
+3.  添加站点
+4.  用户名登录
+5.  下载、上传文件
+6.  隔离用户</p>
+
+<h1 id="一-配置虚拟机静态ip">一.配置虚拟机静态IP</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">IP地址：192.168.1.2
+子网掩码：255.255.255.0
+默认网关：192.168.1.1
+首选DNS服务器：192.168.1.254</pre></td></tr></table>
+</div>
+</div>
+<h1 id="二-安装">二.安装</h1>
+
+<p>打开 <code>服务器管理器</code> ，右击 <code>角色</code> ，然后 <code>添加角色</code> 。
+①选中 <code>Web服务器(IIS)</code>。如下图：
+<img src="/images/ftp1.png" alt="ftp" />
+②点击 <code>下一步</code> ，在 <code>角色服务</code> 中，选中 <code>FTP服务器</code> 。如下图：
+<img src="/images/ftp2.png" alt="ftp" />
+③继续下一步，直至完成安装。</p>
+
+<h1 id="三-添加站点">三.添加站点</h1>
+
+<h2 id="1-站点的添加">1.站点的添加</h2>
+
+<p>打开 <code>开始</code>-&gt; <code>管理工具</code> -&gt; <code>Internet 信息服务(IIS)管理器</code>。右击 <code>网站</code> -&gt; <code>添加站点</code> 。</p>
+
+<blockquote>
+<p>注意：先在C盘下创建 <code>ftp</code> 文件夹。</p>
+</blockquote>
+
+<p>填写FTP站点名称，选择物理路径，如下图：
+<img src="/images/ftp3.png" alt="ftp" />
+IP地址选择已配置好的静态IP，并将SSL修改为 <code>无</code> 。如下图：
+<img src="/images/ftp4.png" alt="ftp" />
+身份验证： <code>匿名</code> ，授权： <code>所有用户</code> ，权限： <code>读取</code> 、<code>写入</code> 。如下图：
+<img src="/images/ftp5.png" alt="ftp" />
+最后单击 <code>完成</code> 。</p>
+
+<h2 id="2-测试">2.测试</h2>
+
+<p>2.1 先在 <code>C:\ftp\</code> 新建一个 <code>1.html</code> 文件，并输入文字。如下图：
+<img src="/images/ftp6.png" alt="ftp" />
+2.2 在浏览器输入： <code>ftp://192.168.1.2/1.html</code> 即可。如下图：
+<img src="/images/ftp7.png" alt="ftp" /></p>
+
+<h1 id="四-用户名登录">四.用户名登录</h1>
+
+<h2 id="1-添加用户">1.添加用户</h2>
+
+<p>打开 <code>服务器管理器</code> ,依次展开 <code>配置</code> -&gt; <code>本地用户和组</code> -&gt; <code>用户</code> 。右击空白处，新建用户。填入 <code>用户名</code> 和 <code>密码</code> .</p>
+
+<blockquote>
+<p>注意：密码尽量复杂，包括大小写字母、数字等。
+去掉 <code>用户下次登录时须更改密码</code> ，勾选 <code>密码永不过期</code> 。</p>
+</blockquote>
+
+<p>如下图：
+<img src="/images/ftp8.png" alt="ftp" /></p>
+
+<h2 id="2-更改权限">2.更改权限</h2>
+
+<p>2.1 在 <code>Internet 信息服务(IIS)管理器</code> 下，单击 <code>FTP站点</code> ，在中间一栏有 <code>FTP身份验证</code> 。打开后，启用 <code>基本身份验证</code> , 禁用 <code>匿名身份验证</code> 。如下图：
+<img src="/images/ftp9.png" alt="ftp" />
+2.2 在浏览器输入： <code>ftp://192.168.1.2</code> ,此时需要用户名和密码，输入即可访问。如下图：
+<img src="/images/ftp10.png" alt="ftp" /></p>
+
+<h1 id="五-上传-下载文件">五.上传、下载文件</h1>
+
+<h2 id="1-修改浏览器设置">1.修改浏览器设置</h2>
+
+<p>打开浏览器，在命令栏里单击 <code>工具</code> -&gt; <code>Internet 选项</code>。在 <code>安全</code> 中，选择 <code>自定义级别</code> 。在<code>下载</code>中，单击 <code>启用</code> 即可。如下图：
+<img src="/images/ftp11.png" alt="ftp" /></p>
+
+<h2 id="2-下载文件">2.下载文件</h2>
+
+<p>打开 <code>我的电脑</code>，在地址栏输入 <code>ftp://192.168.1.2</code> ，并输入用户名和密码进入。将 <code>1.html</code> 复制到桌面即可完成文件的下载。</p>
+
+<h2 id="3-上传文件">3.上传文件</h2>
+
+<p>在桌面新建 <code>1.txt</code>文件,复制到FTP中即可完成文件的上传。</p>
+
+<h1 id="六-隔离用户">六.隔离用户</h1>
+
+<blockquote>
+<p>说明：用户隔离是Windows Server 2008 R2系统中FTP服务的一项重要功能。如果不隔离用户，那么所有用户在登录FTP站点之后,默认都将被导向到FTP站点的主目录，看到的都是相同的内容。通过隔离用户，可以让用户拥有其专属目录，此时用户登录FTP站点后，会被导向到此专属目录，而且可以被限制在其专属目录内，也就是无法切换到其他用户的专属目录，因而只能查看或修改自己专属目录内的文件。对于匿名用户，则可以设置一个公共目录，如果是用匿名用户的身份登录看到的是相同的公共内容。</p>
+</blockquote>
+
+<h2 id="1-创建用户user1和user2">1.创建用户user1和user2</h2>
+
+<p>如下图：
+<img src="/images/ftpGeLi1.png" alt="ftp" /></p>
+
+<h2 id="2-创建文件夹">2.创建文件夹</h2>
+
+<p>在<code>C:\ftp\localuser\</code>下新建 <code>user1</code> 、<code>user2</code>和<code>public</code> 三个文件夹 注意：这里的文件名要与新创建的用户名相同。如下图：
+<img src="/images/ftpGeLi2.png" alt="ftp" /></p>
+
+<h2 id="3-创建文件">3.创建文件</h2>
+
+<p>在user1文件夹下创建<code>user1.txt</code>，在use2文件夹下创建<code>user2.txt</code>，在public文件夹下创建<code>pub.txt</code>（这是为了测试隔离用户是否可行）</p>
+
+<h2 id="4-修改权限">4.修改权限</h2>
+
+<p>在 <code>Internet 信息服务(IIS)管理器</code> 下，展开 <code>FTP站点</code> -&gt; <code>localuser</code> -&gt; <code>user1</code>,中间一栏有 <code>FTP授权规则</code>。右击它，进行 <code>编辑</code>,并选择 <code>指定的用户</code> ,填写 <code>user1</code>，权限中的<code>读取</code>和<code>写入</code> 勾上。(<strong>user2也一样</strong>)如下图：
+<img src="/images/ftpGeLi3.png" alt="ftp" /></p>
+
+<h2 id="5-应用隔离用户">5.应用隔离用户</h2>
+
+<p>回到 <code>FTP站点</code> ，在中间一栏有 <code>FTP用户隔离</code> 。选中隔离用户下的 <code>用户名目录</code> ,并单击右侧 <code>应用</code> 。如下图：
+<img src="/images/ftpGeLi4.png" alt="ftp" /></p>
+
+<h2 id="6-测试">6.测试</h2>
+
+<p>打开 <code>我的电脑</code>，在地址栏输入 <code>ftp://192.168.1.2</code> ，以 <code>user1</code> 登录，即可看到 <code>user1.txt</code>(user2同理)</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-11-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Windows/">Windows</a>
+          <a href="/tags/FTP/">FTP</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2017/06/03/Windows-Web/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Windows 环境下配置 Web 服务器</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2017/06/03/Linux-DNS/">
+            <span class="next-text nav-default">Linux环境下配置DNS服务器</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

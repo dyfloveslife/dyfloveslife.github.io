@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Carol&#39;s blog</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 16 Nov 2019 10:32:56 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Sat, 16 Nov 2019 09:30:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/about/</guid>
+      <description>关于我 硕士/计算机技术。 自身没有任何光环，却始终保持着对技术、书籍、写作的热爱。 学会学习，也要学会分享。 我会分享一些包括但不限于技术、感悟、</description>
+    </item>
+    
+    <item>
+      <title>Matlab编译文件时出错，提示cl.exe不是内部或外部命令</title>
+      <link>http://localhost:1313/2019/11/16/compilienn-file/</link>
+      <pubDate>Sat, 16 Nov 2019 10:32:56 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/16/compilienn-file/</guid>
+      <description>&lt;p&gt;在用Matlab中的&lt;code&gt;vl_compilenn&lt;/code&gt;函数进行编译时，提示&lt;strong&gt;&amp;lsquo;cl.exe&amp;rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件。&lt;/strong&gt;的错误。现已找到解决办法，在这里记录下来。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>情景再现 Linux 中的 IO 模型</title>
+      <link>http://localhost:1313/2019/11/13/linux-io/</link>
+      <pubDate>Wed, 13 Nov 2019 07:52:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/13/linux-io/</guid>
+      <description>&lt;p&gt;本文通过「情景再现」的方式解释 Linux 中的 IO 模型，这对于学习 &lt;strong&gt;Java 高并发&lt;/strong&gt;还是有些许帮助的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>可变长子网掩码在子网划分中的应用「转」</title>
+      <link>http://localhost:1313/2019/11/06/VLSM/</link>
+      <pubDate>Wed, 06 Nov 2019 19:23:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/06/VLSM/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文转自 51CTO 的作者「百年求索」——《可变长度子网掩码（VLSM）在子网划分中的应用》。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>去掉 DropBox 桌面右键菜单——使用转移功能发送...</title>
+      <link>http://localhost:1313/2019/11/05/Delete-dropbox-right-click-menu/</link>
+      <pubDate>Tue, 05 Nov 2019 10:15:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/05/Delete-dropbox-right-click-menu/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;通过删除注册表的方式将鼠标右键菜单中的&lt;code&gt;使用转移功能发送...&lt;/code&gt;去掉。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>软考知识点总结</title>
+      <link>http://localhost:1313/2019/11/04/ruankao/</link>
+      <pubDate>Mon, 04 Nov 2019 20:01:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/04/ruankao/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;再有一段时间就软考了，这篇文章是为了将之前看过的、出现频率比较高的知识点总结一下，以便日后复习用。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>剑指Offer-数组中重复的数字</title>
+      <link>http://localhost:1313/2019/09/11/offer-FindDuplicationInArray/</link>
+      <pubDate>Wed, 11 Sep 2019 21:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/09/11/offer-FindDuplicationInArray/</guid>
+      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
+
+&lt;p&gt;在一个长度为 &lt;code&gt;n&lt;/code&gt; 的数组里的所有数字都在 &lt;code&gt;0&lt;/code&gt; 到 &lt;code&gt;n-1&lt;/code&gt; 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>剑指Offer-二叉树的下一个节点</title>
+      <link>http://localhost:1313/2019/09/11/offer-NextNodeInBinaryTrees/</link>
+      <pubDate>Wed, 11 Sep 2019 16:26:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/09/11/offer-NextNodeInBinaryTrees/</guid>
+      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
+
+&lt;p&gt;给定一棵二叉树和其中的一个节点，找出中序遍历顺序的下一个节点。树中的节点除了有两个分别指向左右子节点的指针以外，还有一个指向父节点的指针。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>剑指Offer-从尾到头打印链表</title>
+      <link>http://localhost:1313/2019/09/11/offer-PrintListInReversedOrder/</link>
+      <pubDate>Wed, 11 Sep 2019 15:30:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/09/11/offer-PrintListInReversedOrder/</guid>
+      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
+
+&lt;p&gt;输入一个链表，从尾到头反过来打印出每个结点的值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>剑指Offer-替换空格</title>
+      <link>http://localhost:1313/2019/09/11/offer-ReplaceSpaces/</link>
+      <pubDate>Wed, 11 Sep 2019 14:57:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/09/11/offer-ReplaceSpaces/</guid>
+      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
+
+&lt;p&gt;请实现一个函数，把字符串中的每个空格替换成&lt;code&gt;%20&lt;/code&gt;。例如输入&lt;code&gt;We are happy.&lt;/code&gt;，则输出&lt;code&gt;We%20are%20happy.&lt;/code&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>剑指Offer-二维数组中的查找</title>
+      <link>http://localhost:1313/2019/09/11/offer-FindInPartiallySortedMatrix/</link>
+      <pubDate>Wed, 11 Sep 2019 14:31:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/09/11/offer-FindInPartiallySortedMatrix/</guid>
+      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
+
+&lt;p&gt;在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>剑指Offer-重建二叉树</title>
+      <link>http://localhost:1313/2019/09/11/offer-ConstructBinaryTree/</link>
+      <pubDate>Wed, 11 Sep 2019 10:48:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/09/11/offer-ConstructBinaryTree/</guid>
+      <description>&lt;h2 id=&#34;题目描述&#34;&gt;题目描述&lt;/h2&gt;
+
+&lt;p&gt;输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列&lt;code&gt;{1, 2, 4, 7, 3, 5, 6, 8}&lt;/code&gt;和中序遍历序列&lt;code&gt;{4, 7, 2, 1, 5, 3, 8, 6}&lt;/code&gt;，则重建出二叉树并输出它的头结点。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Spring 学习笔记（三）依赖注入 DI </title>
+      <link>http://localhost:1313/2019/08/03/spring-di/</link>
+      <pubDate>Sat, 03 Aug 2019 21:03:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/08/03/spring-di/</guid>
+      <description>&lt;p&gt;　　本篇文章主要对 Spring 框架中的核心功能之一&lt;strong&gt;依赖注入 (DI，Dependency Injection)&lt;/strong&gt; 进行介绍，也是采用 &lt;strong&gt;理论+实战&lt;/strong&gt; 的方式给大家阐述其中的原理以及明确需要注意的地方。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Spring 学习笔记（二）控制反转 IoC </title>
+      <link>http://localhost:1313/2019/08/03/spring-ioc/</link>
+      <pubDate>Sat, 03 Aug 2019 16:30:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/08/03/spring-ioc/</guid>
+      <description>&lt;p&gt;　　本篇文章主要对 Spring 框架中的核心功能之一&lt;strong&gt;控制反转 (IOC，Inversion of Control)&lt;/strong&gt; 进行介绍，采用 &lt;strong&gt;理论+实战&lt;/strong&gt; 的方式给大家阐述其中的原理以及明确需要注意的地方。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Spring 学习笔记（一）框架介绍</title>
+      <link>http://localhost:1313/2019/08/03/spring-framework-introduction/</link>
+      <pubDate>Sat, 03 Aug 2019 13:15:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/08/03/spring-framework-introduction/</guid>
+      <description>&lt;p&gt;　　本篇文章主要对 Spring 框架进行整体介绍，包括其核心功能模块与体系结构，让大家对该框架有个大体的认识。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title> Spring 学习笔记（零）文章导读</title>
+      <link>http://localhost:1313/2019/08/03/spring-outline/</link>
+      <pubDate>Sat, 03 Aug 2019 10:20:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/08/03/spring-outline/</guid>
+      <description>《Spring学习笔记》系列文章是博主在学习过 Spring 后对其进行总结的入门系列博文，适合初入 Spring 的小白，如果你最近正在学习或者打算学习 Spring 的话，不妨随</description>
+    </item>
+    
+    <item>
+      <title>Chrome 浏览器使用小贴士</title>
+      <link>http://localhost:1313/2019/05/12/chrome-tips/</link>
+      <pubDate>Sun, 12 May 2019 13:12:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/05/12/chrome-tips/</guid>
+      <description>&lt;p&gt;本篇文章主要介绍以下内容：
+1. 开启 Chrome 浏览器多线程下载；
+2. 加速 Youtube、Netflix 等流媒体视频播放。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用迁移学习来区分外星人和铁血战士</title>
+      <link>http://localhost:1313/2019/04/08/how-to-distinguish-Aliens-vs-Predators-with-transfer-learning/</link>
+      <pubDate>Mon, 08 Apr 2019 08:04:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/04/08/how-to-distinguish-Aliens-vs-Predators-with-transfer-learning/</guid>
+      <description>&lt;p&gt;不管是区分外星人和铁血战士，还是对图像进行分类的其他问题，都可以利用机器学习的方法来进行处理，而且使用起来更高效、更有趣。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的一些思考</title>
+      <link>http://localhost:1313/2019/03/07/some-of-my-thoughts/</link>
+      <pubDate>Thu, 07 Mar 2019 16:39:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/03/07/some-of-my-thoughts/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;这些思考之前也有过，只不过被自然辩证法的老师给激发了出来，在这里记录一下。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>加速Github的clone速度</title>
+      <link>http://localhost:1313/2019/03/05/accelerate-github-clone/</link>
+      <pubDate>Tue, 05 Mar 2019 08:27:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/03/05/accelerate-github-clone/</guid>
+      <description>&lt;p&gt;今天在Github上要clone一个感兴趣的库到本地，发现clone速度奇慢无比。于是在Github上搜索加速clone的方法，亲身体验后发现，clone速度提升巨大，你也赶快来试试吧！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>坚持不懈</title>
+      <link>http://localhost:1313/2019/02/28/20190228/</link>
+      <pubDate>Thu, 28 Feb 2019 19:37:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/02/28/20190228/</guid>
+      <description>&lt;p&gt;　　开学到现在已经有四天的时间了，这几天除了整理东西、准备开学以外，留给自己的学习时间还真没有多少。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2018年总结</title>
+      <link>http://localhost:1313/2019/02/03/20190203/</link>
+      <pubDate>Sun, 03 Feb 2019 19:38:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/02/03/20190203/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;其实学校很早就放假了，回到家休息了一段时间后才有心思总结2018年的点点滴滴。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>20181126</title>
+      <link>http://localhost:1313/2018/11/26/20181126/</link>
+      <pubDate>Mon, 26 Nov 2018 07:59:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/11/26/20181126/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;上周终于忙完了立项答辩，幸运的是老师没怎么怼我。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>读书</title>
+      <link>http://localhost:1313/2018/11/21/read-books/</link>
+      <pubDate>Wed, 21 Nov 2018 08:06:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/11/21/read-books/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;研究生的生活多姿多彩，但又怎能少得了读书！&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>2018-11-19</title>
+      <link>http://localhost:1313/2018/11/19/20181119/</link>
+      <pubDate>Mon, 19 Nov 2018 18:57:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/11/19/20181119/</guid>
+      <description>&lt;p&gt;好久没写博客啦，感觉文章的输出突然少了许多（好像之前也没怎么输出），本篇文章就记录一下这几天发生的事情吧~&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>随记</title>
+      <link>http://localhost:1313/2018/11/07/20181107-suiji/</link>
+      <pubDate>Wed, 07 Nov 2018 12:53:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/11/07/20181107-suiji/</guid>
+      <description>&lt;p&gt;从开学到现在已经两个多月了，这两个月以来，我收获了许多，但最重要的是收获了爱❤情！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>国庆小记</title>
+      <link>http://localhost:1313/2018/10/08/guoqingxiaoji/</link>
+      <pubDate>Mon, 08 Oct 2018 10:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/10/08/guoqingxiaoji/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;国庆七天的假期过得很快，这里是一些碎碎念。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>中秋小记</title>
+      <link>http://localhost:1313/2018/09/25/zhongqiuxiaoji/</link>
+      <pubDate>Tue, 25 Sep 2018 12:20:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/09/25/zhongqiuxiaoji/</guid>
+      <description>&lt;p&gt;&lt;center&gt;
+《望月怀远》
+张九龄
+海上生明月，天涯共此时。
+情人怨遥夜，竟夕起相思。
+灭烛怜光满，披衣觉露滋。
+不堪盈手赠，还寝梦佳静。&lt;/center&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>学会写作和英语吧！</title>
+      <link>http://localhost:1313/2018/08/27/learning-writing-and-english/</link>
+      <pubDate>Mon, 27 Aug 2018 20:16:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/27/learning-writing-and-english/</guid>
+      <description>&lt;p&gt;　　常常提起笔不知道该写什么，有时一个话题在脑中要构思好久。对于日常的学习往往只是输入，而没有用自己的理解对相应的知识进行输出，这是我目前的状态。
+　　我很后悔，由于早年缺乏认知，使得自己对技能的理解不够深入；
+　　但我也很十分庆幸，因为在人的一生中，做好一件事情或者学习一门技能最好的时间是十年之前，其次是现在。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的logging</title>
+      <link>http://localhost:1313/2018/08/16/learning-python-logging/</link>
+      <pubDate>Thu, 16 Aug 2018 16:51:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/16/learning-python-logging/</guid>
+      <description>&lt;p&gt;日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。
+&lt;img src=&#34;http://localhost:1313/images/Python/Logging/log_picture.png&#34; alt=&#34;logging&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——模块</title>
+      <link>http://localhost:1313/2018/08/15/learning-python-Module/</link>
+      <pubDate>Wed, 15 Aug 2018 16:09:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/15/learning-python-Module/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Module/contents.png&#34; alt=&#34;Module-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的JSON数据解析</title>
+      <link>http://localhost:1313/2018/08/14/learning-python-JSON/</link>
+      <pubDate>Tue, 14 Aug 2018 10:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/14/learning-python-JSON/</guid>
+      <description>&lt;p&gt;JSON（JavaScript Object Notation）是一种使用JavaScript表示的轻量级数据格式。JSON数据包很小并且很快被浏览器解析。今天我们将探讨如何在Python中读取和编写JSON数据。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python实战——爬取酷狗音乐Top500</title>
+      <link>http://localhost:1313/2018/08/05/learning-python-KuGouTop500/</link>
+      <pubDate>Sun, 05 Aug 2018 21:27:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/05/learning-python-KuGouTop500/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;　　学习Python有一段时间了，基础的语法过了一遍，也做了一些小例子，但总是感觉不能熟练的运用。为了巩固所学知识，增加实战经验，解锁更多知识点，本篇文章做了一次爬虫练习，通过具体的需求，明确爬虫的具体思路，掌握Python常用的数据结构，以此提高对Python学习的兴趣，加深基础知识的了解。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>OpenCV3.4&#43;VS2017&#43;Win7环境搭建</title>
+      <link>http://localhost:1313/2018/08/01/opencv-BuildEnv/</link>
+      <pubDate>Wed, 01 Aug 2018 14:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/01/opencv-BuildEnv/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;　　由于研究生选择的方向与计算机视觉有关，需要用到OpenCV和Matlab来处理图像，所以在这里先把环境搭建起来，然后通过一些小例子来逐渐熟悉OpenCV的使用。这算是一个学习系列的教程吧，也可以说是自己的学习总结，便于以后回顾。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的浅拷贝(copy)和深拷贝(deepcopy)</title>
+      <link>http://localhost:1313/2018/07/30/learning-python-CopyAndDeepCopy/</link>
+      <pubDate>Mon, 30 Jul 2018 18:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/30/learning-python-CopyAndDeepCopy/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;直接赋值：即对象的引用，其对象的&lt;code&gt;id&lt;/code&gt;不变。&lt;/li&gt;
+&lt;li&gt;浅拷贝（copy）：拷贝父对象，不会拷贝对象的内部的子对象。&lt;/li&gt;
+&lt;li&gt;深拷贝（deepcopy）：拷贝父对象及其子对象。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>C语言中main函数的参数</title>
+      <link>http://localhost:1313/2018/07/29/main_function_of_c/</link>
+      <pubDate>Sun, 29 Jul 2018 15:17:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/29/main_function_of_c/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/C/main_function.png&#34; alt=&#34;main_function&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——类和对象</title>
+      <link>http://localhost:1313/2018/07/16/learning-python-ClassesAndObjects/</link>
+      <pubDate>Mon, 16 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/16/learning-python-ClassesAndObjects/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/ClassesAndObjects/contents.png&#34; alt=&#34;ClassesAndObjects-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——数据结构</title>
+      <link>http://localhost:1313/2018/07/15/learning-python-DataStructure/</link>
+      <pubDate>Sun, 15 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/15/learning-python-DataStructure/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/DataStructure/contents.png&#34; alt=&#34;DataStructure-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——变量作用域</title>
+      <link>http://localhost:1313/2018/07/14/learning-python-VariableScope/</link>
+      <pubDate>Sat, 14 Jul 2018 14:50:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/14/learning-python-VariableScope/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/VariableScope/contents.png&#34; alt=&#34;VariableScope-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——函数</title>
+      <link>http://localhost:1313/2018/07/13/learning-python-Function/</link>
+      <pubDate>Fri, 13 Jul 2018 16:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/13/learning-python-Function/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Function/contents.png&#34; alt=&#34;Function-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——迭代器和生成器</title>
+      <link>http://localhost:1313/2018/07/13/learning-python-IteratorsAndGenerators/</link>
+      <pubDate>Fri, 13 Jul 2018 15:09:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/13/learning-python-IteratorsAndGenerators/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/IteratorsAndGenerators/contents.png&#34; alt=&#34;IteratorsAndGenerators-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——循环语句</title>
+      <link>http://localhost:1313/2018/07/09/learning-python-LoopStatement/</link>
+      <pubDate>Mon, 09 Jul 2018 15:51:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/09/learning-python-LoopStatement/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/LoopStatement/contents.png&#34; alt=&#34;LoopStatement-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——条件控制</title>
+      <link>http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/</link>
+      <pubDate>Mon, 09 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/ConditionalControl/contents.png&#34; alt=&#34;ConditionalControl-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——运算符</title>
+      <link>http://localhost:1313/2018/07/07/learning-python-Operator/</link>
+      <pubDate>Sat, 07 Jul 2018 17:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/07/learning-python-Operator/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Operator/contents.png&#34; alt=&#34;Operator-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——基本数据类型</title>
+      <link>http://localhost:1313/2018/07/06/learning-python-BasicDataType/</link>
+      <pubDate>Fri, 06 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/06/learning-python-BasicDataType/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/BasicDataType/contents.png&#34; alt=&#34;BasicGrammar-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——基础语法</title>
+      <link>http://localhost:1313/2018/07/05/learning-python-BasicGrammar/</link>
+      <pubDate>Thu, 05 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/05/learning-python-BasicGrammar/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;人生苦短，我用Python！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/python-logo.png&#34; alt=&#34;Python-logo&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2018毕业总结</title>
+      <link>http://localhost:1313/2018/06/21/2018-Graduation-Summary/</link>
+      <pubDate>Thu, 21 Jun 2018 17:12:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/06/21/2018-Graduation-Summary/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;时间过得真快，在学校的这两年什么事情都发生过，有开心的时刻，也有后悔和不舍。
+总之十分感谢学校，也不枉自己在学校里学到了许多东西。马上毕业了，在这里做一个总结。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>基于Vultr&#43;Ubuntu18.04&#43;BBR的ShadowsocksR配置教程</title>
+      <link>http://localhost:1313/2018/05/14/Build-VPS/</link>
+      <pubDate>Mon, 14 May 2018 21:41:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/05/14/Build-VPS/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/VPS/ShadowsocksR.jpg&#34; alt=&#34;ShadowsocksR&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2018年4月到8月规划</title>
+      <link>http://localhost:1313/2018/04/04/2018-4to8month-plan/</link>
+      <pubDate>Wed, 04 Apr 2018 11:46:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/04/04/2018-4to8month-plan/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;研究生复试工作也结束了，回到学校之后我想把接下来的几个月的时间好好利用起来。所以现在做一个简单的计划，这样可以引导我以后做什么、怎么做，而不会把时间浪费在其他的地方。
+另：已顺利被学校录取，9月份开学后就可以读研究生了。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>2017年总结</title>
+      <link>http://localhost:1313/2018/02/11/2017-summary/</link>
+      <pubDate>Sun, 11 Feb 2018 16:32:56 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/02/11/2017-summary/</guid>
+      <description>&lt;p&gt;马上就快过年了，考完研后回到家一直没写东西，拖到现在&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;今天正好有时间，总结一下吧。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2017下半年——给自己一个加油</title>
+      <link>http://localhost:1313/2017/07/12/2017-Second-half/</link>
+      <pubDate>Wed, 12 Jul 2017 19:56:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/07/12/2017-Second-half/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;考研就像是一场大家都蒙着眼睛的长跑，彼此看不见跑得有多快。你能做的就是尽可能的快的跑下去，等到终点你摘下眼罩一看，你可能就是第一名。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>20181206</title>
+      <link>http://localhost:1313/2017/07/12/20181206/</link>
+      <pubDate>Wed, 12 Jul 2017 19:56:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/07/12/20181206/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;上周末导师突然说不开例会了，重点复习六级和期末考试。这几天也没看论文，突然感觉好像少了点什么&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>数据结构——期末复习</title>
+      <link>http://localhost:1313/2017/06/29/DataStructure-FinalReview/</link>
+      <pubDate>Thu, 29 Jun 2017 12:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/29/DataStructure-FinalReview/</guid>
+      <description>一.算法应用复习要点 1.会用迪杰斯特拉算法解决最短路径问题 2.会求二叉树的各种遍历序列 3.会用哈希函数构造哈希表，会用开放定址法解决冲突，会</description>
+    </item>
+    
+    <item>
+      <title>C#——循环数组</title>
+      <link>http://localhost:1313/2017/06/25/LoopArray/</link>
+      <pubDate>Sun, 25 Jun 2017 12:13:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/25/LoopArray/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;del&gt; 其实是复习周，不用上课哒&lt;/del&gt;,把那个给跳水运动员打分的程序写在这里。&lt;del&gt; 当时没想出来，回去仔细想了一下，最终实现了= =！&lt;/del&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>网络综合布线(二)——工作区子系统设计过程</title>
+      <link>http://localhost:1313/2017/06/22/NetworkCabling-2/</link>
+      <pubDate>Thu, 22 Jun 2017 11:44:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/22/NetworkCabling-2/</guid>
+      <description>&lt;p&gt;一般步骤：
+- 需求分析：根据各楼层各房间的用途，确定工作区人员数量；
+- 与用户进行技术交流，分析业务需求；
+- 确定信息点数量，完成点数统计表；
+- 确定信息点安装位置，完成端口对应表；
+- 确定工作区材料的规格和数量，完成材料统计表；
+- 施工图设计。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>网络综合布线(一)——计算公式</title>
+      <link>http://localhost:1313/2017/06/22/NetworkCabling-1/</link>
+      <pubDate>Thu, 22 Jun 2017 09:18:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/22/NetworkCabling-1/</guid>
+      <description>&lt;h1 id=&#34;1-每个楼层的用线计算公式&#34;&gt;1.每个楼层的用线计算公式&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34; /&gt;
+- C为每个楼层用线量
+- F为最远的信息插座离楼层管理间的距离
+- N为最近的信息插座离楼层管理间的距离
+- M为每层楼的信息插座的数量
+- 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——查询数据库</title>
+      <link>http://localhost:1313/2017/06/19/Query-the-database/</link>
+      <pubDate>Mon, 19 Jun 2017 18:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/19/Query-the-database/</guid>
+      <description>&lt;h1 id=&#34;1-查询单个值&#34;&gt;1.查询单个值&lt;/h1&gt;
+
+&lt;p&gt;SQL语言使用select进行查询。查询返回结果有多有少，通常来说，会返回多行多列的一个结果集。&lt;/p&gt;
+
+&lt;h2 id=&#34;示例1-查询单个值&#34;&gt;示例1：查询单个值&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;	&lt;span class=&#34;n&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;student&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——修改数据库</title>
+      <link>http://localhost:1313/2017/06/19/Modify-the-database/</link>
+      <pubDate>Mon, 19 Jun 2017 18:31:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/19/Modify-the-database/</guid>
+      <description>&lt;h1 id=&#34;1-连接数据库&#34;&gt;1.连接数据库&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;应用程序（我们用C#编写的程序）与数据库程序（如SQL Server）是两个不同的程序，要想从应用程序中读取/修改数据库的数据，首先要建立二者的通信机制。为了在C#程序中使用（读取、修改等）数据库，必须首先连接到数据库。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——文件和目录操作</title>
+      <link>http://localhost:1313/2017/06/17/File-and-directory-operations/</link>
+      <pubDate>Sat, 17 Jun 2017 17:21:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/17/File-and-directory-operations/</guid>
+      <description>&lt;p&gt;说明：
+&amp;gt; 1.文件是保存到磁盘上的数据的集合。
+&amp;gt; 2.流可以看作连续的字节序列，形成“流”。
+&amp;gt; 3.文件是一种流。
+&amp;gt; 4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
+&amp;gt; 5.使用流读/写器对流进行读取/写入操作。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——菜单和消息</title>
+      <link>http://localhost:1313/2017/06/16/Menus-and-Messages/</link>
+      <pubDate>Fri, 16 Jun 2017 20:33:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/16/Menus-and-Messages/</guid>
+      <description>&lt;h1 id=&#34;1-显示新的窗体&#34;&gt;1.显示新的窗体&lt;/h1&gt;
+
+&lt;p&gt;步骤：
+- ①定义一个新窗体类型的变量
+- ②实例化新窗体变量
+- ③调用新窗体的Show方法显示&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——GDI&#43;屏幕绘图</title>
+      <link>http://localhost:1313/2017/06/16/GDI-ScreenDrawing/</link>
+      <pubDate>Fri, 16 Jun 2017 10:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/16/GDI-ScreenDrawing/</guid>
+      <description>&lt;h1 id=&#34;1-绘画工具&#34;&gt;1.绘画工具&lt;/h1&gt;
+
+&lt;p&gt;画笔和画刷
+- 画笔Pens:细，画线条和轮廓；
+- 画刷Brushes:粗，填充闭合区域。&lt;/p&gt;
+
+&lt;p&gt;Graphics类
+通过 &lt;code&gt;控件名.createGraphics()&lt;/code&gt; 取得某控件的屏幕区域作为画布。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——窗体编程</title>
+      <link>http://localhost:1313/2017/06/15/Form-programming/</link>
+      <pubDate>Thu, 15 Jun 2017 22:42:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/15/Form-programming/</guid>
+      <description>&lt;p&gt;main方法：位于&lt;code&gt;Program.cs&lt;/code&gt;文件，表示Windows窗体程序的入口。
+示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;namespace MyForm
+{
+	static class Program
+      {
+           //code
+           static void Main( )
+           {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form1());		//启动窗体
+           }
+      }
+}&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——控制台程序</title>
+      <link>http://localhost:1313/2017/06/14/Console-program/</link>
+      <pubDate>Wed, 14 Jun 2017 22:44:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/14/Console-program/</guid>
+      <description>&lt;h1 id=&#34;1-console类可实现输入输出功能&#34;&gt;1.Console类可实现输入输出功能&lt;/h1&gt;
+
+&lt;h1 id=&#34;2-write方法-控制台输出-屏幕输出&#34;&gt;2.Write方法：控制台输出(屏幕输出)&lt;/h1&gt;
+
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;n&#34;&gt;Console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“不明觉厉”&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows环境下配置DNS服务器</title>
+      <link>http://localhost:1313/2017/06/04/Windows-DNS/</link>
+      <pubDate>Sun, 04 Jun 2017 20:29:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/04/Windows-DNS/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
+环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;步骤：
+1.  配置虚拟机静态IP
+2.  安装DNS
+3.  创建正向查找区域
+4.  创建反向查找区域
+5.  测试&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows 环境下配置 Web 服务器</title>
+      <link>http://localhost:1313/2017/06/03/Windows-Web/</link>
+      <pubDate>Sat, 03 Jun 2017 22:46:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/03/Windows-Web/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
+环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;步骤：
+1.  配置虚拟机静态IP
+2.  安装
+3.  创建个人目录
+4.  创建虚拟目录
+5.  创建虚拟主机
+6.  使用域名访问web服务器&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows环境下配置FTP服务器</title>
+      <link>http://localhost:1313/2017/06/03/Windows-FTP/</link>
+      <pubDate>Sat, 03 Jun 2017 16:17:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/03/Windows-FTP/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
+环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;步骤：
+1.  配置虚拟机静态IP
+2.  安装Web服务器(IIS)，同时安装FTP服务器。
+3.  添加站点
+4.  用户名登录
+5.  下载、上传文件
+6.  隔离用户&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux环境下配置DNS服务器</title>
+      <link>http://localhost:1313/2017/06/03/Linux-DNS/</link>
+      <pubDate>Sat, 03 Jun 2017 13:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/03/Linux-DNS/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
+同时有两个软件包：
+- &lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
+- &lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;步骤：
+1.  软件包的安装（bind和caching）
+2.  配置DNS
+    2.1 配置虚拟机静态IP
+    2.2 修改/etc/named.conf配置文件
+    2.3 在/var/named下新建正向和反向解析文件，并修改配置信息
+3.  启动named服务，检测DNS是否配置成功&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux环境下配置DHCP服务器</title>
+      <link>http://localhost:1313/2017/06/03/Linux-DHCP/</link>
+      <pubDate>Sat, 03 Jun 2017 11:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/03/Linux-DHCP/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
+用到两个软件包：
+&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
+&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;步骤：
+1. 修改虚拟机静态IP
+2.  安装DHCP包。
+    ·dhcp:DHCP服务器安装包（在第二张镜像中）
+    ·dhclient:DHCP客户端软件包（在第一张镜像中）
+    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
+3.  修改配置文件
+4.  启动服务，并测试&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows环境下配置DHCP</title>
+      <link>http://localhost:1313/2017/06/03/Windows-DHCP/</link>
+      <pubDate>Sat, 03 Jun 2017 10:49:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/03/Windows-DHCP/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
+环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;步骤：
+1.  配置虚拟机静态IP
+2.  安装DHCP
+3.  配置DHCP
+4.  测试&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 环境下配置 Web 服务器</title>
+      <link>http://localhost:1313/2017/06/02/Linux-WebServer/</link>
+      <pubDate>Fri, 02 Jun 2017 21:41:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/02/Linux-WebServer/</guid>
+      <description>&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;2017/6/6 [更新]基于端口的虚拟主机&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux环境下配置FTP服务器</title>
+      <link>http://localhost:1313/2017/06/01/Linux-FTP/</link>
+      <pubDate>Thu, 01 Jun 2017 22:43:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
+      <description>&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;
+&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux环境下配置web服务器---通过域名访问主机</title>
+      <link>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</link>
+      <pubDate>Thu, 18 May 2017 14:37:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
+同时有三个软件包：
+- &lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
+- &lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;
+- &lt;strong&gt;shrike-i386-disc3.iso&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;安装步骤：
+1.  软件包的安装
+    1.1 DNS包的安装（bind和caching）
+    1.2 Httpd包的安装（httpd和httpd-manual）
+2.  配置DNS
+    2.1 配置虚拟机静态IP
+    2.2 修改/etc/named.conf配置文件
+    2.3 在/var/named下新建正向和反向解析文件，并修改配置信息
+    2.4 启动named服务，检测DNS是否配置成功
+3.  在/var/www下新建index.html文件，并输入网页信息
+4.  修改/etc/httpd/conf/下的httpd.conf配置文件
+5.  启动服务
+6.  在浏览器输入域名（网址），查看是否跳转成功&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——字符串格式化</title>
+      <link>http://localhost:1313/2017/04/27/StringFormatting/</link>
+      <pubDate>Thu, 27 Apr 2017 22:57:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/04/27/StringFormatting/</guid>
+      <description>前几天在上C#时，学到了使用Connection连接数据库这一功能。 当时我写的连接字符串语句： 1 String s = &amp;#34;Server=&amp;#34; + textBox1.Text + &amp;#34;;Database=&amp;#34; + textBox2.Text + &amp;#34;;User Id=&amp;#34; + textBox3.Text + &amp;#34;;Password=&amp;#34; + textBox4.Text + &amp;#34;&amp;#34;; 这</description>
+    </item>
+    
+    <item>
+      <title>《我的应用软件》</title>
+      <link>http://localhost:1313/2017/03/27/My-computer-application-software/</link>
+      <pubDate>Mon, 27 Mar 2017 20:51:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/03/27/My-computer-application-software/</guid>
+      <description>&lt;p&gt;从开始用电脑到现在，我也在自己的电脑上安装了不少的软件。有相关开发平台的软件，也有提升效率的各种小软件。想着以后有可能重装系统，在这里把我电脑上安装的软件做个记录，以后也许会用到。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>数据结构——静态链表</title>
+      <link>http://localhost:1313/2017/03/14/DataStructure-StaticList/</link>
+      <pubDate>Tue, 14 Mar 2017 22:03:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/03/14/DataStructure-StaticList/</guid>
+      <description>&lt;p&gt;题目：创建一个静态链表，将数组存入链表。查找第3个元素并输出该元素的值，然后释放该结点。&lt;/p&gt;
+
+&lt;p&gt;要求：实现静态链表的初始化、分配结点、释放结点功能。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

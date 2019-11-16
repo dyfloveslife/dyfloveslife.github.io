@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PyTorch on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/PyTorch/</link>
+    <description>Recent content in PyTorch on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 08 Apr 2019 08:04:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/PyTorch/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>用迁移学习来区分外星人和铁血战士</title>
+      <link>http://localhost:1313/2019/04/08/how-to-distinguish-Aliens-vs-Predators-with-transfer-learning/</link>
+      <pubDate>Mon, 08 Apr 2019 08:04:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/04/08/how-to-distinguish-Aliens-vs-Predators-with-transfer-learning/</guid>
+      <description>&lt;p&gt;不管是区分外星人和铁血战士，还是对图像进行分类的其他问题，都可以利用机器学习的方法来进行处理，而且使用起来更高效、更有趣。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

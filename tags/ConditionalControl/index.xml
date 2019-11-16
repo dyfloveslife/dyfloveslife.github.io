@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ConditionalControl on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/ConditionalControl/</link>
+    <description>Recent content in ConditionalControl on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 09 Jul 2018 14:24:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/ConditionalControl/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python学习笔记——条件控制</title>
+      <link>http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/</link>
+      <pubDate>Mon, 09 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/ConditionalControl/contents.png&#34; alt=&#34;ConditionalControl-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

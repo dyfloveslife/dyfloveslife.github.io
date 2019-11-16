@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Carol&#39;s blog</title>
+    <link>http://localhost:1313/categories/Linux/</link>
+    <description>Recent content in Linux on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 13 Nov 2019 07:52:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>情景再现 Linux 中的 IO 模型</title>
+      <link>http://localhost:1313/2019/11/13/linux-io/</link>
+      <pubDate>Wed, 13 Nov 2019 07:52:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/13/linux-io/</guid>
+      <description>&lt;p&gt;本文通过「情景再现」的方式解释 Linux 中的 IO 模型，这对于学习 &lt;strong&gt;Java 高并发&lt;/strong&gt;还是有些许帮助的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux环境下配置DNS服务器</title>
+      <link>http://localhost:1313/2017/06/03/Linux-DNS/</link>
+      <pubDate>Sat, 03 Jun 2017 13:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/03/Linux-DNS/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
+同时有两个软件包：
+- &lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
+- &lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;步骤：
+1.  软件包的安装（bind和caching）
+2.  配置DNS
+    2.1 配置虚拟机静态IP
+    2.2 修改/etc/named.conf配置文件
+    2.3 在/var/named下新建正向和反向解析文件，并修改配置信息
+3.  启动named服务，检测DNS是否配置成功&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux环境下配置DHCP服务器</title>
+      <link>http://localhost:1313/2017/06/03/Linux-DHCP/</link>
+      <pubDate>Sat, 03 Jun 2017 11:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/03/Linux-DHCP/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
+用到两个软件包：
+&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
+&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;步骤：
+1. 修改虚拟机静态IP
+2.  安装DHCP包。
+    ·dhcp:DHCP服务器安装包（在第二张镜像中）
+    ·dhclient:DHCP客户端软件包（在第一张镜像中）
+    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
+3.  修改配置文件
+4.  启动服务，并测试&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 环境下配置 Web 服务器</title>
+      <link>http://localhost:1313/2017/06/02/Linux-WebServer/</link>
+      <pubDate>Fri, 02 Jun 2017 21:41:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/02/Linux-WebServer/</guid>
+      <description>&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;2017/6/6 [更新]基于端口的虚拟主机&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux环境下配置FTP服务器</title>
+      <link>http://localhost:1313/2017/06/01/Linux-FTP/</link>
+      <pubDate>Thu, 01 Jun 2017 22:43:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
+      <description>&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;
+&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux环境下配置web服务器---通过域名访问主机</title>
+      <link>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</link>
+      <pubDate>Thu, 18 May 2017 14:37:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
+同时有三个软件包：
+- &lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
+- &lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;
+- &lt;strong&gt;shrike-i386-disc3.iso&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;安装步骤：
+1.  软件包的安装
+    1.1 DNS包的安装（bind和caching）
+    1.2 Httpd包的安装（httpd和httpd-manual）
+2.  配置DNS
+    2.1 配置虚拟机静态IP
+    2.2 修改/etc/named.conf配置文件
+    2.3 在/var/named下新建正向和反向解析文件，并修改配置信息
+    2.4 启动named服务，检测DNS是否配置成功
+3.  在/var/www下新建index.html文件，并输入网页信息
+4.  修改/etc/httpd/conf/下的httpd.conf配置文件
+5.  启动服务
+6.  在浏览器输入域名（网址），查看是否跳转成功&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

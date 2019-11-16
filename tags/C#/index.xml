@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C# on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/C#/</link>
+    <description>Recent content in C# on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 25 Jun 2017 12:13:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/C#/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>C#——循环数组</title>
+      <link>http://localhost:1313/2017/06/25/LoopArray/</link>
+      <pubDate>Sun, 25 Jun 2017 12:13:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/25/LoopArray/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;del&gt; 其实是复习周，不用上课哒&lt;/del&gt;,把那个给跳水运动员打分的程序写在这里。&lt;del&gt; 当时没想出来，回去仔细想了一下，最终实现了= =！&lt;/del&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——查询数据库</title>
+      <link>http://localhost:1313/2017/06/19/Query-the-database/</link>
+      <pubDate>Mon, 19 Jun 2017 18:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/19/Query-the-database/</guid>
+      <description>&lt;h1 id=&#34;1-查询单个值&#34;&gt;1.查询单个值&lt;/h1&gt;
+
+&lt;p&gt;SQL语言使用select进行查询。查询返回结果有多有少，通常来说，会返回多行多列的一个结果集。&lt;/p&gt;
+
+&lt;h2 id=&#34;示例1-查询单个值&#34;&gt;示例1：查询单个值&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;	&lt;span class=&#34;n&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;student&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——修改数据库</title>
+      <link>http://localhost:1313/2017/06/19/Modify-the-database/</link>
+      <pubDate>Mon, 19 Jun 2017 18:31:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/19/Modify-the-database/</guid>
+      <description>&lt;h1 id=&#34;1-连接数据库&#34;&gt;1.连接数据库&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;应用程序（我们用C#编写的程序）与数据库程序（如SQL Server）是两个不同的程序，要想从应用程序中读取/修改数据库的数据，首先要建立二者的通信机制。为了在C#程序中使用（读取、修改等）数据库，必须首先连接到数据库。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——文件和目录操作</title>
+      <link>http://localhost:1313/2017/06/17/File-and-directory-operations/</link>
+      <pubDate>Sat, 17 Jun 2017 17:21:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/17/File-and-directory-operations/</guid>
+      <description>&lt;p&gt;说明：
+&amp;gt; 1.文件是保存到磁盘上的数据的集合。
+&amp;gt; 2.流可以看作连续的字节序列，形成“流”。
+&amp;gt; 3.文件是一种流。
+&amp;gt; 4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
+&amp;gt; 5.使用流读/写器对流进行读取/写入操作。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——菜单和消息</title>
+      <link>http://localhost:1313/2017/06/16/Menus-and-Messages/</link>
+      <pubDate>Fri, 16 Jun 2017 20:33:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/16/Menus-and-Messages/</guid>
+      <description>&lt;h1 id=&#34;1-显示新的窗体&#34;&gt;1.显示新的窗体&lt;/h1&gt;
+
+&lt;p&gt;步骤：
+- ①定义一个新窗体类型的变量
+- ②实例化新窗体变量
+- ③调用新窗体的Show方法显示&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——GDI&#43;屏幕绘图</title>
+      <link>http://localhost:1313/2017/06/16/GDI-ScreenDrawing/</link>
+      <pubDate>Fri, 16 Jun 2017 10:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/16/GDI-ScreenDrawing/</guid>
+      <description>&lt;h1 id=&#34;1-绘画工具&#34;&gt;1.绘画工具&lt;/h1&gt;
+
+&lt;p&gt;画笔和画刷
+- 画笔Pens:细，画线条和轮廓；
+- 画刷Brushes:粗，填充闭合区域。&lt;/p&gt;
+
+&lt;p&gt;Graphics类
+通过 &lt;code&gt;控件名.createGraphics()&lt;/code&gt; 取得某控件的屏幕区域作为画布。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——窗体编程</title>
+      <link>http://localhost:1313/2017/06/15/Form-programming/</link>
+      <pubDate>Thu, 15 Jun 2017 22:42:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/15/Form-programming/</guid>
+      <description>&lt;p&gt;main方法：位于&lt;code&gt;Program.cs&lt;/code&gt;文件，表示Windows窗体程序的入口。
+示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;namespace MyForm
+{
+	static class Program
+      {
+           //code
+           static void Main( )
+           {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form1());		//启动窗体
+           }
+      }
+}&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——控制台程序</title>
+      <link>http://localhost:1313/2017/06/14/Console-program/</link>
+      <pubDate>Wed, 14 Jun 2017 22:44:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/14/Console-program/</guid>
+      <description>&lt;h1 id=&#34;1-console类可实现输入输出功能&#34;&gt;1.Console类可实现输入输出功能&lt;/h1&gt;
+
+&lt;h1 id=&#34;2-write方法-控制台输出-屏幕输出&#34;&gt;2.Write方法：控制台输出(屏幕输出)&lt;/h1&gt;
+
+&lt;p&gt;示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;n&#34;&gt;Console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“不明觉厉”&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>C#——字符串格式化</title>
+      <link>http://localhost:1313/2017/04/27/StringFormatting/</link>
+      <pubDate>Thu, 27 Apr 2017 22:57:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/04/27/StringFormatting/</guid>
+      <description>前几天在上C#时，学到了使用Connection连接数据库这一功能。 当时我写的连接字符串语句： 1 String s = &amp;#34;Server=&amp;#34; + textBox1.Text + &amp;#34;;Database=&amp;#34; + textBox2.Text + &amp;#34;;User Id=&amp;#34; + textBox3.Text + &amp;#34;;Password=&amp;#34; + textBox4.Text + &amp;#34;&amp;#34;; 这</description>
+    </item>
+    
+  </channel>
+</rss>

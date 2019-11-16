@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IO on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/IO/</link>
+    <description>Recent content in IO on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 13 Nov 2019 07:52:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/IO/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>情景再现 Linux 中的 IO 模型</title>
+      <link>http://localhost:1313/2019/11/13/linux-io/</link>
+      <pubDate>Wed, 13 Nov 2019 07:52:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/13/linux-io/</guid>
+      <description>&lt;p&gt;本文通过「情景再现」的方式解释 Linux 中的 IO 模型，这对于学习 &lt;strong&gt;Java 高并发&lt;/strong&gt;还是有些许帮助的。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/Python/</link>
+    <description>Recent content in Python on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 16 Aug 2018 16:51:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/Python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python中的logging</title>
+      <link>http://localhost:1313/2018/08/16/learning-python-logging/</link>
+      <pubDate>Thu, 16 Aug 2018 16:51:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/16/learning-python-logging/</guid>
+      <description>&lt;p&gt;日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。
+&lt;img src=&#34;http://localhost:1313/images/Python/Logging/log_picture.png&#34; alt=&#34;logging&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——模块</title>
+      <link>http://localhost:1313/2018/08/15/learning-python-Module/</link>
+      <pubDate>Wed, 15 Aug 2018 16:09:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/15/learning-python-Module/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Module/contents.png&#34; alt=&#34;Module-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的JSON数据解析</title>
+      <link>http://localhost:1313/2018/08/14/learning-python-JSON/</link>
+      <pubDate>Tue, 14 Aug 2018 10:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/14/learning-python-JSON/</guid>
+      <description>&lt;p&gt;JSON（JavaScript Object Notation）是一种使用JavaScript表示的轻量级数据格式。JSON数据包很小并且很快被浏览器解析。今天我们将探讨如何在Python中读取和编写JSON数据。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python实战——爬取酷狗音乐Top500</title>
+      <link>http://localhost:1313/2018/08/05/learning-python-KuGouTop500/</link>
+      <pubDate>Sun, 05 Aug 2018 21:27:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/05/learning-python-KuGouTop500/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;　　学习Python有一段时间了，基础的语法过了一遍，也做了一些小例子，但总是感觉不能熟练的运用。为了巩固所学知识，增加实战经验，解锁更多知识点，本篇文章做了一次爬虫练习，通过具体的需求，明确爬虫的具体思路，掌握Python常用的数据结构，以此提高对Python学习的兴趣，加深基础知识的了解。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的浅拷贝(copy)和深拷贝(deepcopy)</title>
+      <link>http://localhost:1313/2018/07/30/learning-python-CopyAndDeepCopy/</link>
+      <pubDate>Mon, 30 Jul 2018 18:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/30/learning-python-CopyAndDeepCopy/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;直接赋值：即对象的引用，其对象的&lt;code&gt;id&lt;/code&gt;不变。&lt;/li&gt;
+&lt;li&gt;浅拷贝（copy）：拷贝父对象，不会拷贝对象的内部的子对象。&lt;/li&gt;
+&lt;li&gt;深拷贝（deepcopy）：拷贝父对象及其子对象。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——类和对象</title>
+      <link>http://localhost:1313/2018/07/16/learning-python-ClassesAndObjects/</link>
+      <pubDate>Mon, 16 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/16/learning-python-ClassesAndObjects/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/ClassesAndObjects/contents.png&#34; alt=&#34;ClassesAndObjects-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——数据结构</title>
+      <link>http://localhost:1313/2018/07/15/learning-python-DataStructure/</link>
+      <pubDate>Sun, 15 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/15/learning-python-DataStructure/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/DataStructure/contents.png&#34; alt=&#34;DataStructure-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——变量作用域</title>
+      <link>http://localhost:1313/2018/07/14/learning-python-VariableScope/</link>
+      <pubDate>Sat, 14 Jul 2018 14:50:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/14/learning-python-VariableScope/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/VariableScope/contents.png&#34; alt=&#34;VariableScope-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——函数</title>
+      <link>http://localhost:1313/2018/07/13/learning-python-Function/</link>
+      <pubDate>Fri, 13 Jul 2018 16:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/13/learning-python-Function/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Function/contents.png&#34; alt=&#34;Function-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——迭代器和生成器</title>
+      <link>http://localhost:1313/2018/07/13/learning-python-IteratorsAndGenerators/</link>
+      <pubDate>Fri, 13 Jul 2018 15:09:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/13/learning-python-IteratorsAndGenerators/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/IteratorsAndGenerators/contents.png&#34; alt=&#34;IteratorsAndGenerators-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——循环语句</title>
+      <link>http://localhost:1313/2018/07/09/learning-python-LoopStatement/</link>
+      <pubDate>Mon, 09 Jul 2018 15:51:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/09/learning-python-LoopStatement/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/LoopStatement/contents.png&#34; alt=&#34;LoopStatement-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——条件控制</title>
+      <link>http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/</link>
+      <pubDate>Mon, 09 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/ConditionalControl/contents.png&#34; alt=&#34;ConditionalControl-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——运算符</title>
+      <link>http://localhost:1313/2018/07/07/learning-python-Operator/</link>
+      <pubDate>Sat, 07 Jul 2018 17:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/07/learning-python-Operator/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Operator/contents.png&#34; alt=&#34;Operator-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——基本数据类型</title>
+      <link>http://localhost:1313/2018/07/06/learning-python-BasicDataType/</link>
+      <pubDate>Fri, 06 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/06/learning-python-BasicDataType/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/BasicDataType/contents.png&#34; alt=&#34;BasicGrammar-contents&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python学习笔记——基础语法</title>
+      <link>http://localhost:1313/2018/07/05/learning-python-BasicGrammar/</link>
+      <pubDate>Thu, 05 Jul 2018 14:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/07/05/learning-python-BasicGrammar/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;人生苦短，我用Python！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/python-logo.png&#34; alt=&#34;Python-logo&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

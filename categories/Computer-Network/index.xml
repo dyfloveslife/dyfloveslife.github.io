@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computer Network on Carol&#39;s blog</title>
+    <link>http://localhost:1313/categories/Computer-Network/</link>
+    <description>Recent content in Computer Network on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 06 Nov 2019 19:23:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/Computer-Network/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>可变长子网掩码在子网划分中的应用「转」</title>
+      <link>http://localhost:1313/2019/11/06/VLSM/</link>
+      <pubDate>Wed, 06 Nov 2019 19:23:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/06/VLSM/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;本文转自 51CTO 的作者「百年求索」——《可变长度子网掩码（VLSM）在子网划分中的应用》。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>软考知识点总结</title>
+      <link>http://localhost:1313/2019/11/04/ruankao/</link>
+      <pubDate>Mon, 04 Nov 2019 20:01:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/04/ruankao/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;再有一段时间就软考了，这篇文章是为了将之前看过的、出现频率比较高的知识点总结一下，以便日后复习用。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>网络综合布线(二)——工作区子系统设计过程</title>
+      <link>http://localhost:1313/2017/06/22/NetworkCabling-2/</link>
+      <pubDate>Thu, 22 Jun 2017 11:44:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/22/NetworkCabling-2/</guid>
+      <description>&lt;p&gt;一般步骤：
+- 需求分析：根据各楼层各房间的用途，确定工作区人员数量；
+- 与用户进行技术交流，分析业务需求；
+- 确定信息点数量，完成点数统计表；
+- 确定信息点安装位置，完成端口对应表；
+- 确定工作区材料的规格和数量，完成材料统计表；
+- 施工图设计。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>网络综合布线(一)——计算公式</title>
+      <link>http://localhost:1313/2017/06/22/NetworkCabling-1/</link>
+      <pubDate>Thu, 22 Jun 2017 09:18:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/06/22/NetworkCabling-1/</guid>
+      <description>&lt;h1 id=&#34;1-每个楼层的用线计算公式&#34;&gt;1.每个楼层的用线计算公式&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34; /&gt;
+- C为每个楼层用线量
+- F为最远的信息插座离楼层管理间的距离
+- N为最近的信息插座离楼层管理间的距离
+- M为每层楼的信息插座的数量
+- 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

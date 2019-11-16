@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技巧 on Carol&#39;s blog</title>
+    <link>http://localhost:1313/categories/%E6%8A%80%E5%B7%A7/</link>
+    <description>Recent content in 技巧 on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 16 Nov 2019 10:32:56 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Matlab编译文件时出错，提示cl.exe不是内部或外部命令</title>
+      <link>http://localhost:1313/2019/11/16/compilienn-file/</link>
+      <pubDate>Sat, 16 Nov 2019 10:32:56 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/16/compilienn-file/</guid>
+      <description>&lt;p&gt;在用Matlab中的&lt;code&gt;vl_compilenn&lt;/code&gt;函数进行编译时，提示&lt;strong&gt;&amp;lsquo;cl.exe&amp;rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件。&lt;/strong&gt;的错误。现已找到解决办法，在这里记录下来。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>去掉 DropBox 桌面右键菜单——使用转移功能发送...</title>
+      <link>http://localhost:1313/2019/11/05/Delete-dropbox-right-click-menu/</link>
+      <pubDate>Tue, 05 Nov 2019 10:15:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/05/Delete-dropbox-right-click-menu/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;通过删除注册表的方式将鼠标右键菜单中的&lt;code&gt;使用转移功能发送...&lt;/code&gt;去掉。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>Chrome 浏览器使用小贴士</title>
+      <link>http://localhost:1313/2019/05/12/chrome-tips/</link>
+      <pubDate>Sun, 12 May 2019 13:12:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/05/12/chrome-tips/</guid>
+      <description>&lt;p&gt;本篇文章主要介绍以下内容：
+1. 开启 Chrome 浏览器多线程下载；
+2. 加速 Youtube、Netflix 等流媒体视频播放。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>加速Github的clone速度</title>
+      <link>http://localhost:1313/2019/03/05/accelerate-github-clone/</link>
+      <pubDate>Tue, 05 Mar 2019 08:27:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/03/05/accelerate-github-clone/</guid>
+      <description>&lt;p&gt;今天在Github上要clone一个感兴趣的库到本地，发现clone速度奇慢无比。于是在Github上搜索加速clone的方法，亲身体验后发现，clone速度提升巨大，你也赶快来试试吧！&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

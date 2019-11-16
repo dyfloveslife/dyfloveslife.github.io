@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenCV on Carol&#39;s blog</title>
+    <link>http://localhost:1313/categories/OpenCV/</link>
+    <description>Recent content in OpenCV on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 01 Aug 2018 14:28:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/OpenCV/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>OpenCV3.4&#43;VS2017&#43;Win7环境搭建</title>
+      <link>http://localhost:1313/2018/08/01/opencv-BuildEnv/</link>
+      <pubDate>Wed, 01 Aug 2018 14:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/01/opencv-BuildEnv/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;　　由于研究生选择的方向与计算机视觉有关，需要用到OpenCV和Matlab来处理图像，所以在这里先把环境搭建起来，然后通过一些小例子来逐渐熟悉OpenCV的使用。这算是一个学习系列的教程吧，也可以说是自己的学习总结，便于以后回顾。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>C#——文件和目录操作 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="说明： &amp;gt; 1.文件是保存到磁盘上的数据的集合。 &amp;gt; 2.流可以看作连续的字节序列，形成“流”。 &amp;gt; 3.文件是一种流。 &amp;gt; 4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。 &amp;gt; 5.使用流读/写器对流进行读取/写入操作。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2017/06/17/File-and-directory-operations/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="C#——文件和目录操作" />
+<meta property="og:description" content="说明：
+&gt; 1.文件是保存到磁盘上的数据的集合。
+&gt; 2.流可以看作连续的字节序列，形成“流”。
+&gt; 3.文件是一种流。
+&gt; 4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
+&gt; 5.使用流读/写器对流进行读取/写入操作。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2017/06/17/File-and-directory-operations/" />
+<meta property="article:published_time" content="2017-06-17T17:21:11+08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta itemprop="name" content="C#——文件和目录操作">
+<meta itemprop="description" content="说明：
+&gt; 1.文件是保存到磁盘上的数据的集合。
+&gt; 2.流可以看作连续的字节序列，形成“流”。
+&gt; 3.文件是一种流。
+&gt; 4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
+&gt; 5.使用流读/写器对流进行读取/写入操作。">
+
+
+<meta itemprop="datePublished" content="2017-06-17T17:21:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
+<meta itemprop="wordCount" content="1707">
+
+
+
+<meta itemprop="keywords" content="C#," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C#——文件和目录操作"/>
+<meta name="twitter:description" content="说明：
+&gt; 1.文件是保存到磁盘上的数据的集合。
+&gt; 2.流可以看作连续的字节序列，形成“流”。
+&gt; 3.文件是一种流。
+&gt; 4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
+&gt; 5.使用流读/写器对流进行读取/写入操作。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">C#——文件和目录操作</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-06-17 </span>
+        <div class="post-category">
+            <a href="/categories/C/"> C# </a>
+            </div>
+          <span class="more-meta"> 1707 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#一-文件操作">一、文件操作</a>
+<ul>
+<li><a href="#1-操作文件流的类">1.操作文件流的类</a></li>
+<li><a href="#2-读写文件的步骤">2.读写文件的步骤</a></li>
+<li><a href="#3-打开文件流">3.打开文件流</a></li>
+<li><a href="#4-关闭文件流">4.关闭文件流</a></li>
+<li><a href="#5-读取文本文件">5.读取文本文件</a></li>
+<li><a href="#6-写入文本文件">6.写入文本文件</a></li>
+<li><a href="#7-示例1-打开文件">7.示例1：打开文件</a></li>
+<li><a href="#8-示例2-保存文件">8.示例2：保存文件</a></li>
+</ul></li>
+<li><a href="#二-目录操作">二、目录操作</a>
+<ul>
+<li><a href="#说明">说明</a></li>
+<li><a href="#示例1-创建目录">示例1：创建目录</a></li>
+<li><a href="#示例2-删除目录">示例2：删除目录</a></li>
+<li><a href="#示例3-移动目录">示例3：移动目录</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>说明：
+&gt; 1.文件是保存到磁盘上的数据的集合。
+&gt; 2.流可以看作连续的字节序列，形成“流”。
+&gt; 3.文件是一种流。
+&gt; 4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
+&gt; 5.使用流读/写器对流进行读取/写入操作。</p>
+
+<h1 id="一-文件操作">一、文件操作</h1>
+
+<h2 id="1-操作文件流的类">1.操作文件流的类</h2>
+
+<p>①System.IO.FileStream：表示文件流
+②文本文件读写器
+StreamReader：用于读取文本文件
+StreamWriter：用于写入文本文件
+③二进制文件读写器
+BinaryReader：用于读取二进制文件
+BinaryWriter：用于写入二进制文件</p>
+
+<h2 id="2-读写文件的步骤">2.读写文件的步骤</h2>
+
+<ul>
+<li>打开文件流</li>
+<li>创建读/写器</li>
+<li>进行读/写操作</li>
+<li>关闭读/写器</li>
+<li>关闭文件流</li>
+</ul>
+
+<h2 id="3-打开文件流">3.打开文件流</h2>
+
+<p>打开文件，得到文件流。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">FileStream stream=File.Open(path,FileMode);</pre></td></tr></table>
+</div>
+</div>
+<p><strong>说明：</strong>
+<strong>第一个参数path表示文件路径，可以用绝对路径和相对路径。绝对路径是指以磁盘符号开头的路径，如<code>D:\my\test.cs</code>。注意符号\有特殊含义表示转义符，当写在字符串中时要写2个。相对路径是相对于可执行程序文件（而不是源代码文件）所在路径。相对路径中，<code>..</code>表示父目录,<code>.</code>表示当前目录（可省略），如<code>..\path1\test02.cs</code> <code>path2\test03.txt</code></strong>。
+<strong>第二个参数是FileMode枚举类型，可取以下枚举值：</strong>
+- <strong>FileMode.Open:打开现有文件</strong>
+- <strong>FileMode.OpenOrCreate:打开或创建文件</strong>
+- <strong>FileMode.Append:打开或创建文件，并向其中追加内容</strong>
+- <strong>FileMode.CreateNew:创建新文件（如果文件存在则抛出异常）</strong></p>
+
+<p><strong>注意：在写文件时，处Append模式外，均覆盖文件中原有的内容。</strong></p>
+
+<h2 id="4-关闭文件流">4.关闭文件流</h2>
+
+<p>直接调用FileStream类的Close方法关闭文件流即可。</p>
+
+<h2 id="5-读取文本文件">5.读取文本文件</h2>
+
+<p>①打开文件，得到文件流</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">FileStream</span> <span class="n">stream</span><span class="o">=</span><span class="n">File</span><span class="p">.</span><span class="n">Open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">FileMode</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>②创建读取器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">StreamReader</span> <span class="n">reader</span><span class="o">=</span><span class="n">new</span> <span class="n">StreamReader</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>③文件流用完后必须关闭</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">stream</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>④读取器用完后也要关闭</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">reader</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="6-写入文本文件">6.写入文本文件</h2>
+
+<p>①打开文件，得到文件流</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">FileStream</span> <span class="n">stream</span><span class="o">=</span><span class="n">File</span><span class="p">.</span><span class="n">Open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">FileMode</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>②创建写入器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">StreamWriter writer=new StreamWriter(stream);</pre></td></tr></table>
+</div>
+</div>
+<p>③写入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">writer.Write(“内容”);
+writer.WriteLine(“内容”);</pre></td></tr></table>
+</div>
+</div>
+<p>④关闭</p>
+
+<h2 id="7-示例1-打开文件">7.示例1：打开文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c">        <span class="n">private</span> <span class="kt">void</span> <span class="nf">button1_Click</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">OpenFileDialog</span> <span class="n">file</span> <span class="o">=</span> <span class="n">new</span> <span class="n">OpenFileDialog</span><span class="p">();</span>    <span class="c1">//打开文件
+</span><span class="c1"></span>            <span class="n">DialogResult</span> <span class="n">n</span> <span class="o">=</span> <span class="n">file</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">DialogResult</span><span class="p">.</span><span class="n">Cancel</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;已取消操作&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">FileStream</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FileStream</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">FileName</span><span class="p">,</span><span class="n">FileMode</span><span class="p">.</span><span class="n">Open</span><span class="p">);</span>
+                <span class="n">StreamReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="n">new</span> <span class="n">StreamReader</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+                <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">reader</span><span class="p">.</span><span class="n">ReadToEnd</span><span class="p">();</span>
+                <span class="n">textBox1</span><span class="p">.</span><span class="n">Text</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>          <span class="c1">//文件中的文字显示在textBox1上
+</span><span class="c1"></span>                <span class="n">textBox2</span><span class="p">.</span><span class="n">Text</span> <span class="o">=</span> <span class="n">file</span><span class="p">.</span><span class="n">FileName</span><span class="p">;</span>  <span class="c1">//该文件的路径显示在textBox2上
+</span><span class="c1"></span>                <span class="n">stream</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+                <span class="n">reader</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="8-示例2-保存文件">8.示例2：保存文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c">        <span class="n">private</span> <span class="kt">void</span> <span class="nf">button2_Click</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">SaveFileDialog</span> <span class="n">file</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SaveFileDialog</span><span class="p">();</span>      <span class="c1">//保存文件
+</span><span class="c1"></span>            <span class="n">DialogResult</span> <span class="n">n</span> <span class="o">=</span> <span class="n">file</span><span class="p">.</span><span class="n">ShowDialog</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">DialogResult</span><span class="p">.</span><span class="n">Cancel</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;已取消操作&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+            <span class="n">FileStream</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FileStream</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">FileName</span><span class="p">,</span><span class="n">FileMode</span><span class="p">.</span><span class="n">Append</span><span class="p">);</span>
+            <span class="n">StreamWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">new</span> <span class="n">StreamWriter</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span>
+            <span class="n">writer</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">textBox1</span><span class="p">.</span><span class="n">Text</span><span class="p">);</span>
+            <span class="n">writer</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+            <span class="n">stream</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+            <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;保存成功！&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="二-目录操作">二、目录操作</h1>
+
+<h2 id="说明">说明</h2>
+
+<p>1.<code>System.IO.Directory</code>：进行常见目录操作
+2.<code>Directory</code>是一个静态类
+- 静态类<code>static class</code>只包含静态成员
+- 通过类名而非实例名访问静态成员</p>
+
+<p>3.<code>Directory</code>类的常用方法
+- <code>Exists(string path)</code>:判断是否存在
+- <code>CreateDirectory(string path)</code>:创建目录
+- <code>Delete(string path)</code>:删除空目录
+- <code>Move(string src, string dest)</code>:移动目录（相同盘符）
+- <code>GetCurrentDirectory()</code>:得到当前路径</p>
+
+<h2 id="示例1-创建目录">示例1：创建目录</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">private</span> <span class="kt">void</span> <span class="nf">button1_Click</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">string</span> <span class="n">path</span> <span class="o">=</span> <span class="n">textBox1</span><span class="p">.</span><span class="n">Text</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">Directory</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">Directory</span><span class="p">.</span><span class="n">CreateDirectory</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+                <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;目录创建成功，路径为：&#34;</span> <span class="o">+</span> <span class="n">path</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+                <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;该目录已存在&#34;</span><span class="p">);</span>
+        <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="示例2-删除目录">示例2：删除目录</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">private</span> <span class="kt">void</span> <span class="nf">button2_Click</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">string</span> <span class="n">path</span> <span class="o">=</span> <span class="n">textBox2</span><span class="p">.</span><span class="n">Text</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">Directory</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">Directory</span><span class="p">.</span><span class="n">Delete</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+                <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s">&#34;目录已删除&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+                <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;该目录不存在&#34;</span><span class="p">);</span>
+        <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="示例3-移动目录">示例3：移动目录</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">private</span> <span class="kt">void</span> <span class="nf">button3_Click</span><span class="p">(</span><span class="n">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">string</span> <span class="n">path1</span> <span class="o">=</span> <span class="n">textBox3</span><span class="p">.</span><span class="n">Text</span><span class="p">;</span>
+            <span class="n">string</span> <span class="n">path2</span> <span class="o">=</span> <span class="n">textBox4</span><span class="p">.</span><span class="n">Text</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">Directory</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">path1</span><span class="p">))</span>
+            <span class="p">{</span>
+                <span class="n">Directory</span><span class="p">.</span><span class="n">Move</span><span class="p">(</span><span class="n">path1</span><span class="p">,</span> <span class="n">path2</span><span class="p">);</span>
+                <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;目录已从&#34;</span> <span class="o">+</span> <span class="n">path1</span> <span class="o">+</span> <span class="s">&#34;移动到&#34;</span> <span class="o">+</span> <span class="n">path2</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;移动失败&#34;</span><span class="p">);</span>
+        <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-11-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/C/">C#</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/2017/06/19/Modify-the-database/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">C#——修改数据库</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/2017/06/16/Menus-and-Messages/">
+            <span class="next-text nav-default">C#——菜单和消息</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

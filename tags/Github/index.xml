@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Github on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/Github/</link>
+    <description>Recent content in Github on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 05 Mar 2019 08:27:02 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/Github/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>加速Github的clone速度</title>
+      <link>http://localhost:1313/2019/03/05/accelerate-github-clone/</link>
+      <pubDate>Tue, 05 Mar 2019 08:27:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/03/05/accelerate-github-clone/</guid>
+      <description>&lt;p&gt;今天在Github上要clone一个感兴趣的库到本地，发现clone速度奇慢无比。于是在Github上搜索加速clone的方法，亲身体验后发现，clone速度提升巨大，你也赶快来试试吧！&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

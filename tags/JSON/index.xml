@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JSON on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/JSON/</link>
+    <description>Recent content in JSON on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 14 Aug 2018 10:28:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/JSON/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python中的JSON数据解析</title>
+      <link>http://localhost:1313/2018/08/14/learning-python-JSON/</link>
+      <pubDate>Tue, 14 Aug 2018 10:28:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/08/14/learning-python-JSON/</guid>
+      <description>&lt;p&gt;JSON（JavaScript Object Notation）是一种使用JavaScript表示的轻量级数据格式。JSON数据包很小并且很快被浏览器解析。今天我们将探讨如何在Python中读取和编写JSON数据。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

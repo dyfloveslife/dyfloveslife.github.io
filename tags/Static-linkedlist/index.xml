@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Static linkedlist on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/Static-linkedlist/</link>
+    <description>Recent content in Static linkedlist on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 14 Mar 2017 22:03:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/Static-linkedlist/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>数据结构——静态链表</title>
+      <link>http://localhost:1313/2017/03/14/DataStructure-StaticList/</link>
+      <pubDate>Tue, 14 Mar 2017 22:03:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2017/03/14/DataStructure-StaticList/</guid>
+      <description>&lt;p&gt;题目：创建一个静态链表，将数组存入链表。查找第3个元素并输出该元素的值，然后释放该结点。&lt;/p&gt;
+
+&lt;p&gt;要求：实现静态链表的初始化、分配结点、释放结点功能。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

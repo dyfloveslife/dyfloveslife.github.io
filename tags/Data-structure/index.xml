@@ -12,16 +12,16 @@
     
     
     <item>
-      <title>数据结构——期末复习</title>
+      <title>数据结构之 期末复习</title>
       <link>http://localhost:1313/2017/06/29/DataStructure-FinalReview/</link>
       <pubDate>Thu, 29 Jun 2017 12:35:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/29/DataStructure-FinalReview/</guid>
-      <description>一.算法应用复习要点 1.会用迪杰斯特拉算法解决最短路径问题 2.会求二叉树的各种遍历序列 3.会用哈希函数构造哈希表，会用开放定址法解决冲突，会</description>
+      <description>一.算法应用复习要点 会用迪杰斯特拉算法解决最短路径问题 会求二叉树的各种遍历序列 会用哈希函数构造哈希表，会用开放定址法解决冲突，会计算查找成功</description>
     </item>
     
     <item>
-      <title>数据结构——静态链表</title>
+      <title>数据结构之 静态链表</title>
       <link>http://localhost:1313/2017/03/14/DataStructure-StaticList/</link>
       <pubDate>Tue, 14 Mar 2017 22:03:11 +0800</pubDate>
       

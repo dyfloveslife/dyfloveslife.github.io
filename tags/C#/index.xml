@@ -12,18 +12,16 @@
     
     
     <item>
-      <title>C#——循环数组</title>
+      <title>C# 之 循环数组</title>
       <link>http://localhost:1313/2017/06/25/LoopArray/</link>
       <pubDate>Sun, 25 Jun 2017 12:13:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/25/LoopArray/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;del&gt; 其实是复习周，不用上课哒&lt;/del&gt;,把那个给跳水运动员打分的程序写在这里。&lt;del&gt; 当时没想出来，回去仔细想了一下，最终实现了= =！&lt;/del&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;del&gt; 其实是复习周，不用上课哒&lt;/del&gt;，把那个给跳水运动员打分的程序写在这里。&lt;del&gt; 当时没想出来，回去仔细想了一下，最终实现了= =！&lt;/del&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>C#——查询数据库</title>
+      <title>C# 之 查询数据库</title>
       <link>http://localhost:1313/2017/06/19/Query-the-database/</link>
       <pubDate>Mon, 19 Jun 2017 18:32:11 +0800</pubDate>
       
@@ -44,7 +42,7 @@
     </item>
     
     <item>
-      <title>C#——修改数据库</title>
+      <title>C# 之 修改数据库</title>
       <link>http://localhost:1313/2017/06/19/Modify-the-database/</link>
       <pubDate>Mon, 19 Jun 2017 18:31:11 +0800</pubDate>
       
@@ -57,7 +55,7 @@
     </item>
     
     <item>
-      <title>C#——文件和目录操作</title>
+      <title>C# 之 文件和目录操作</title>
       <link>http://localhost:1313/2017/06/17/File-and-directory-operations/</link>
       <pubDate>Sat, 17 Jun 2017 17:21:11 +0800</pubDate>
       
@@ -71,7 +69,7 @@
     </item>
     
     <item>
-      <title>C#——菜单和消息</title>
+      <title>C# 之 菜单和消息</title>
       <link>http://localhost:1313/2017/06/16/Menus-and-Messages/</link>
       <pubDate>Fri, 16 Jun 2017 20:33:11 +0800</pubDate>
       
@@ -85,7 +83,7 @@
     </item>
     
     <item>
-      <title>C#——GDI&#43;屏幕绘图</title>
+      <title>C# 之 GDI&#43; 屏幕绘图</title>
       <link>http://localhost:1313/2017/06/16/GDI-ScreenDrawing/</link>
       <pubDate>Fri, 16 Jun 2017 10:32:11 +0800</pubDate>
       
@@ -101,7 +99,7 @@
     </item>
     
     <item>
-      <title>C#——窗体编程</title>
+      <title>C# 之 窗体编程</title>
       <link>http://localhost:1313/2017/06/15/Form-programming/</link>
       <pubDate>Thu, 15 Jun 2017 22:42:11 +0800</pubDate>
       
@@ -143,7 +141,7 @@
     </item>
     
     <item>
-      <title>C#——控制台程序</title>
+      <title>C# 之 控制台程序</title>
       <link>http://localhost:1313/2017/06/14/Console-program/</link>
       <pubDate>Wed, 14 Jun 2017 22:44:11 +0800</pubDate>
       
@@ -164,7 +162,7 @@
     </item>
     
     <item>
-      <title>C#——字符串格式化</title>
+      <title>C# 之 字符串格式化</title>
       <link>http://localhost:1313/2017/04/27/StringFormatting/</link>
       <pubDate>Thu, 27 Apr 2017 22:57:11 +0800</pubDate>
       

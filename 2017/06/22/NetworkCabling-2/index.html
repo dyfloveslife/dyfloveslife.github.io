@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>网络综合布线(二)——工作区子系统设计过程 - Carol&#39;s blog</title>
+  <title>网络综合布线之 工作区子系统设计过程 - Carol&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,8 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content="一般步骤： - 需求分析：根据各楼层各房间的用途，确定工作区人员数量； - 与用户进行技术交流，分析业务需求； - 确定信息点数量，完成点数统计表； - 确定信息点安装位置，完成端口对应表； - 确定工作区材料的规格和数量，完成材料统计表； - 施工图设计。
-" /><meta name="keywords" content="Java, blog, carol" />
+<meta name="author" content="Carol" /><meta name="description" content="一般步骤：
+ 需求分析：根据各楼层各房间的用途，确定工作区人员数量； 与用户进行技术交流，分析业务需求； 确定信息点数量，完成点数统计表； 确定信息点安装位置，完成端口对应表； 确定工作区材料的规格和数量，完成材料统计表； 施工图设计。 " /><meta name="keywords" content="Java, blog, carol" />
 
 
 
@@ -39,44 +39,53 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="网络综合布线(二)——工作区子系统设计过程" />
+<meta property="og:title" content="网络综合布线之 工作区子系统设计过程" />
 <meta property="og:description" content="一般步骤：
-- 需求分析：根据各楼层各房间的用途，确定工作区人员数量；
-- 与用户进行技术交流，分析业务需求；
-- 确定信息点数量，完成点数统计表；
-- 确定信息点安装位置，完成端口对应表；
-- 确定工作区材料的规格和数量，完成材料统计表；
-- 施工图设计。" />
+
+
+需求分析：根据各楼层各房间的用途，确定工作区人员数量；
+与用户进行技术交流，分析业务需求；
+确定信息点数量，完成点数统计表；
+确定信息点安装位置，完成端口对应表；
+确定工作区材料的规格和数量，完成材料统计表；
+施工图设计。
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2017/06/22/NetworkCabling-2/" />
 <meta property="article:published_time" content="2017-06-22T11:44:11+08:00" />
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
-<meta itemprop="name" content="网络综合布线(二)——工作区子系统设计过程">
+<meta itemprop="name" content="网络综合布线之 工作区子系统设计过程">
 <meta itemprop="description" content="一般步骤：
-- 需求分析：根据各楼层各房间的用途，确定工作区人员数量；
-- 与用户进行技术交流，分析业务需求；
-- 确定信息点数量，完成点数统计表；
-- 确定信息点安装位置，完成端口对应表；
-- 确定工作区材料的规格和数量，完成材料统计表；
-- 施工图设计。">
+
+
+需求分析：根据各楼层各房间的用途，确定工作区人员数量；
+与用户进行技术交流，分析业务需求；
+确定信息点数量，完成点数统计表；
+确定信息点安装位置，完成端口对应表；
+确定工作区材料的规格和数量，完成材料统计表；
+施工图设计。
+">
 
 
 <meta itemprop="datePublished" content="2017-06-22T11:44:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="1070">
+<meta itemprop="wordCount" content="1064">
 
 
 
 <meta itemprop="keywords" content="Computer Network," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="网络综合布线(二)——工作区子系统设计过程"/>
+<meta name="twitter:title" content="网络综合布线之 工作区子系统设计过程"/>
 <meta name="twitter:description" content="一般步骤：
-- 需求分析：根据各楼层各房间的用途，确定工作区人员数量；
-- 与用户进行技术交流，分析业务需求；
-- 确定信息点数量，完成点数统计表；
-- 确定信息点安装位置，完成端口对应表；
-- 确定工作区材料的规格和数量，完成材料统计表；
-- 施工图设计。"/>
+
+
+需求分析：根据各楼层各房间的用途，确定工作区人员数量；
+与用户进行技术交流，分析业务需求；
+确定信息点数量，完成点数统计表；
+确定信息点安装位置，完成端口对应表；
+确定工作区材料的规格和数量，完成材料统计表；
+施工图设计。
+"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -143,14 +152,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">网络综合布线(二)——工作区子系统设计过程</h1>
+      <h1 class="post-title">网络综合布线之 工作区子系统设计过程</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2017-06-22 </span>
         <div class="post-category">
             <a href="/categories/Computer-Network/"> Computer Network </a>
             </div>
-          <span class="more-meta"> 1070 words </span>
+          <span class="more-meta"> 1064 words </span>
           <span class="more-meta"> 3 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -181,13 +190,16 @@
   </div>
 </div>
     <div class="post-content">
-      <p>一般步骤：
-- 需求分析：根据各楼层各房间的用途，确定工作区人员数量；
-- 与用户进行技术交流，分析业务需求；
-- 确定信息点数量，完成点数统计表；
-- 确定信息点安装位置，完成端口对应表；
-- 确定工作区材料的规格和数量，完成材料统计表；
-- 施工图设计。</p>
+      <p>一般步骤：</p>
+
+<ul>
+<li>需求分析：根据各楼层各房间的用途，确定工作区人员数量；</li>
+<li>与用户进行技术交流，分析业务需求；</li>
+<li>确定信息点数量，完成点数统计表；</li>
+<li>确定信息点安装位置，完成端口对应表；</li>
+<li>确定工作区材料的规格和数量，完成材料统计表；</li>
+<li>施工图设计。</li>
+</ul>
 
 <h1 id="一-信息点数统计表的绘制">一、信息点数统计表的绘制</h1>
 
@@ -349,11 +361,11 @@
       <nav class="post-nav">
         <a class="prev" href="/2017/06/25/LoopArray/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">C#——循环数组</span>
+            <span class="prev-text nav-default">C# 之 循环数组</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         <a class="next" href="/2017/06/22/NetworkCabling-1/">
-            <span class="next-text nav-default">网络综合布线(一)——计算公式</span>
+            <span class="next-text nav-default">网络综合布线之 计算公式</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

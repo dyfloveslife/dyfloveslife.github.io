@@ -21,7 +21,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——模块</title>
+      <title>Python 学习笔记之 模块</title>
       <link>http://localhost:1313/2018/08/15/learning-python-Module/</link>
       <pubDate>Wed, 15 Aug 2018 16:09:11 +0800</pubDate>
       
@@ -32,7 +32,7 @@
     </item>
     
     <item>
-      <title>Python中的JSON数据解析</title>
+      <title>Python 中的 JSON 数据解析</title>
       <link>http://localhost:1313/2018/08/14/learning-python-JSON/</link>
       <pubDate>Tue, 14 Aug 2018 10:28:11 +0800</pubDate>
       
@@ -41,7 +41,7 @@
     </item>
     
     <item>
-      <title>Python实战——爬取酷狗音乐Top500</title>
+      <title>Python 实战之 爬取酷狗音乐 Top500</title>
       <link>http://localhost:1313/2018/08/05/learning-python-KuGouTop500/</link>
       <pubDate>Sun, 05 Aug 2018 21:27:11 +0800</pubDate>
       
@@ -52,7 +52,7 @@
     </item>
     
     <item>
-      <title>Python中的浅拷贝(copy)和深拷贝(deepcopy)</title>
+      <title>Python 中的浅拷贝(copy)和深拷贝(deepcopy)</title>
       <link>http://localhost:1313/2018/07/30/learning-python-CopyAndDeepCopy/</link>
       <pubDate>Mon, 30 Jul 2018 18:24:11 +0800</pubDate>
       
@@ -65,7 +65,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——类和对象</title>
+      <title>Python 学习笔记之 类和对象</title>
       <link>http://localhost:1313/2018/07/16/learning-python-ClassesAndObjects/</link>
       <pubDate>Mon, 16 Jul 2018 14:24:11 +0800</pubDate>
       
@@ -78,7 +78,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——数据结构</title>
+      <title>Python 学习笔记之 数据结构</title>
       <link>http://localhost:1313/2018/07/15/learning-python-DataStructure/</link>
       <pubDate>Sun, 15 Jul 2018 14:24:11 +0800</pubDate>
       
@@ -91,7 +91,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——变量作用域</title>
+      <title>Python 学习笔记之 变量作用域</title>
       <link>http://localhost:1313/2018/07/14/learning-python-VariableScope/</link>
       <pubDate>Sat, 14 Jul 2018 14:50:11 +0800</pubDate>
       
@@ -104,7 +104,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——函数</title>
+      <title>Python 学习笔记之 函数</title>
       <link>http://localhost:1313/2018/07/13/learning-python-Function/</link>
       <pubDate>Fri, 13 Jul 2018 16:24:11 +0800</pubDate>
       
@@ -117,7 +117,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——迭代器和生成器</title>
+      <title>Python 学习笔记之 迭代器和生成器</title>
       <link>http://localhost:1313/2018/07/13/learning-python-IteratorsAndGenerators/</link>
       <pubDate>Fri, 13 Jul 2018 15:09:11 +0800</pubDate>
       
@@ -130,7 +130,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——循环语句</title>
+      <title>Python 学习笔记之 循环语句</title>
       <link>http://localhost:1313/2018/07/09/learning-python-LoopStatement/</link>
       <pubDate>Mon, 09 Jul 2018 15:51:11 +0800</pubDate>
       
@@ -143,7 +143,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——条件控制</title>
+      <title>Python 学习笔记之 条件控制</title>
       <link>http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/</link>
       <pubDate>Mon, 09 Jul 2018 14:24:11 +0800</pubDate>
       
@@ -156,7 +156,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——运算符</title>
+      <title>Python 学习笔记之 运算符</title>
       <link>http://localhost:1313/2018/07/07/learning-python-Operator/</link>
       <pubDate>Sat, 07 Jul 2018 17:24:11 +0800</pubDate>
       
@@ -169,7 +169,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——基本数据类型</title>
+      <title>Python 学习笔记之 基本数据类型</title>
       <link>http://localhost:1313/2018/07/06/learning-python-BasicDataType/</link>
       <pubDate>Fri, 06 Jul 2018 14:24:11 +0800</pubDate>
       
@@ -182,7 +182,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——基础语法</title>
+      <title>Python 学习笔记之 基础语法</title>
       <link>http://localhost:1313/2018/07/05/learning-python-BasicGrammar/</link>
       <pubDate>Thu, 05 Jul 2018 14:24:11 +0800</pubDate>
       

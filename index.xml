@@ -30,7 +30,7 @@
     </item>
     
     <item>
-      <title>Matlab编译文件时出错，提示cl.exe不是内部或外部命令</title>
+      <title>Matlab 编译文件时出错，提示 cl.exe 不是内部或外部命令</title>
       <link>http://localhost:1313/2019/11/16/compilienn-file/</link>
       <pubDate>Sat, 16 Nov 2019 10:32:56 +0800</pubDate>
       
@@ -57,7 +57,7 @@
     </item>
     
     <item>
-      <title>去掉 DropBox 桌面右键菜单——使用转移功能发送...</title>
+      <title>去掉 DropBox 桌面右键菜单</title>
       <link>http://localhost:1313/2019/11/05/Delete-dropbox-right-click-menu/</link>
       <pubDate>Tue, 05 Nov 2019 10:15:11 +0800</pubDate>
       
@@ -75,7 +75,7 @@
     </item>
     
     <item>
-      <title>剑指Offer-数组中重复的数字</title>
+      <title>剑指 Offer 之 数组中重复的数字</title>
       <link>http://localhost:1313/2019/09/11/offer-FindDuplicationInArray/</link>
       <pubDate>Wed, 11 Sep 2019 21:32:11 +0800</pubDate>
       
@@ -84,7 +84,7 @@
     </item>
     
     <item>
-      <title>剑指Offer-二叉树的下一个节点</title>
+      <title>剑指 Offer 之 二叉树的下一个节点</title>
       <link>http://localhost:1313/2019/09/11/offer-NextNodeInBinaryTrees/</link>
       <pubDate>Wed, 11 Sep 2019 16:26:11 +0800</pubDate>
       
@@ -93,7 +93,7 @@
     </item>
     
     <item>
-      <title>剑指Offer-从尾到头打印链表</title>
+      <title>剑指 Offer 之 从尾到头打印链表</title>
       <link>http://localhost:1313/2019/09/11/offer-PrintListInReversedOrder/</link>
       <pubDate>Wed, 11 Sep 2019 15:30:11 +0800</pubDate>
       
@@ -102,7 +102,7 @@
     </item>
     
     <item>
-      <title>剑指Offer-替换空格</title>
+      <title>剑指 Offer 之 替换空格</title>
       <link>http://localhost:1313/2019/09/11/offer-ReplaceSpaces/</link>
       <pubDate>Wed, 11 Sep 2019 14:57:11 +0800</pubDate>
       
@@ -111,7 +111,7 @@
     </item>
     
     <item>
-      <title>剑指Offer-二维数组中的查找</title>
+      <title>剑指 Offer 之 二维数组中的查找</title>
       <link>http://localhost:1313/2019/09/11/offer-FindInPartiallySortedMatrix/</link>
       <pubDate>Wed, 11 Sep 2019 14:31:11 +0800</pubDate>
       
@@ -120,7 +120,7 @@
     </item>
     
     <item>
-      <title>剑指Offer-重建二叉树</title>
+      <title>剑指 Offer 之 重建二叉树</title>
       <link>http://localhost:1313/2019/09/11/offer-ConstructBinaryTree/</link>
       <pubDate>Wed, 11 Sep 2019 10:48:11 +0800</pubDate>
       
@@ -221,6 +221,15 @@
     </item>
     
     <item>
+      <title>20181206</title>
+      <link>http://localhost:1313/2018/12/06/20181206/</link>
+      <pubDate>Thu, 06 Dec 2018 07:59:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2018/12/06/20181206/</guid>
+      <description>&lt;p&gt;上周末导师突然说不开例会了，重点复习六级和期末考试。这几天也没看论文，突然感觉好像少了点什么&amp;hellip;&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>20181126</title>
       <link>http://localhost:1313/2018/11/26/20181126/</link>
       <pubDate>Mon, 26 Nov 2018 07:59:11 +0800</pubDate>
@@ -287,7 +296,7 @@
     </item>
     
     <item>
-      <title>学会写作和英语吧！</title>
+      <title>学会写作和英语</title>
       <link>http://localhost:1313/2018/08/27/learning-writing-and-english/</link>
       <pubDate>Mon, 27 Aug 2018 20:16:11 +0800</pubDate>
       
@@ -305,7 +314,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——模块</title>
+      <title>Python 学习笔记之 模块</title>
       <link>http://localhost:1313/2018/08/15/learning-python-Module/</link>
       <pubDate>Wed, 15 Aug 2018 16:09:11 +0800</pubDate>
       
@@ -316,7 +325,7 @@
     </item>
     
     <item>
-      <title>Python中的JSON数据解析</title>
+      <title>Python 中的 JSON 数据解析</title>
       <link>http://localhost:1313/2018/08/14/learning-python-JSON/</link>
       <pubDate>Tue, 14 Aug 2018 10:28:11 +0800</pubDate>
       
@@ -325,7 +334,7 @@
     </item>
     
     <item>
-      <title>Python实战——爬取酷狗音乐Top500</title>
+      <title>Python 实战之 爬取酷狗音乐 Top500</title>
       <link>http://localhost:1313/2018/08/05/learning-python-KuGouTop500/</link>
       <pubDate>Sun, 05 Aug 2018 21:27:11 +0800</pubDate>
       
@@ -336,7 +345,7 @@
     </item>
     
     <item>
-      <title>OpenCV3.4&#43;VS2017&#43;Win7环境搭建</title>
+      <title>OpenCV3.4 &#43; VS2017 &#43; Win7 环境搭建</title>
       <link>http://localhost:1313/2018/08/01/opencv-BuildEnv/</link>
       <pubDate>Wed, 01 Aug 2018 14:28:11 +0800</pubDate>
       
@@ -347,7 +356,7 @@
     </item>
     
     <item>
-      <title>Python中的浅拷贝(copy)和深拷贝(deepcopy)</title>
+      <title>Python 中的浅拷贝(copy)和深拷贝(deepcopy)</title>
       <link>http://localhost:1313/2018/07/30/learning-python-CopyAndDeepCopy/</link>
       <pubDate>Mon, 30 Jul 2018 18:24:11 +0800</pubDate>
       
@@ -360,7 +369,7 @@
     </item>
     
     <item>
-      <title>C语言中main函数的参数</title>
+      <title>C 语言中 main 函数的参数</title>
       <link>http://localhost:1313/2018/07/29/main_function_of_c/</link>
       <pubDate>Sun, 29 Jul 2018 15:17:11 +0800</pubDate>
       
@@ -369,7 +378,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——类和对象</title>
+      <title>Python 学习笔记之 类和对象</title>
       <link>http://localhost:1313/2018/07/16/learning-python-ClassesAndObjects/</link>
       <pubDate>Mon, 16 Jul 2018 14:24:11 +0800</pubDate>
       
@@ -382,7 +391,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——数据结构</title>
+      <title>Python 学习笔记之 数据结构</title>
       <link>http://localhost:1313/2018/07/15/learning-python-DataStructure/</link>
       <pubDate>Sun, 15 Jul 2018 14:24:11 +0800</pubDate>
       
@@ -395,7 +404,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——变量作用域</title>
+      <title>Python 学习笔记之 变量作用域</title>
       <link>http://localhost:1313/2018/07/14/learning-python-VariableScope/</link>
       <pubDate>Sat, 14 Jul 2018 14:50:11 +0800</pubDate>
       
@@ -408,7 +417,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——函数</title>
+      <title>Python 学习笔记之 函数</title>
       <link>http://localhost:1313/2018/07/13/learning-python-Function/</link>
       <pubDate>Fri, 13 Jul 2018 16:24:11 +0800</pubDate>
       
@@ -421,7 +430,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——迭代器和生成器</title>
+      <title>Python 学习笔记之 迭代器和生成器</title>
       <link>http://localhost:1313/2018/07/13/learning-python-IteratorsAndGenerators/</link>
       <pubDate>Fri, 13 Jul 2018 15:09:11 +0800</pubDate>
       
@@ -434,7 +443,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——循环语句</title>
+      <title>Python 学习笔记之 循环语句</title>
       <link>http://localhost:1313/2018/07/09/learning-python-LoopStatement/</link>
       <pubDate>Mon, 09 Jul 2018 15:51:11 +0800</pubDate>
       
@@ -447,7 +456,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——条件控制</title>
+      <title>Python 学习笔记之 条件控制</title>
       <link>http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/</link>
       <pubDate>Mon, 09 Jul 2018 14:24:11 +0800</pubDate>
       
@@ -460,7 +469,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——运算符</title>
+      <title>Python 学习笔记之 运算符</title>
       <link>http://localhost:1313/2018/07/07/learning-python-Operator/</link>
       <pubDate>Sat, 07 Jul 2018 17:24:11 +0800</pubDate>
       
@@ -473,7 +482,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——基本数据类型</title>
+      <title>Python 学习笔记之 基本数据类型</title>
       <link>http://localhost:1313/2018/07/06/learning-python-BasicDataType/</link>
       <pubDate>Fri, 06 Jul 2018 14:24:11 +0800</pubDate>
       
@@ -486,7 +495,7 @@
     </item>
     
     <item>
-      <title>Python学习笔记——基础语法</title>
+      <title>Python 学习笔记之 基础语法</title>
       <link>http://localhost:1313/2018/07/05/learning-python-BasicGrammar/</link>
       <pubDate>Thu, 05 Jul 2018 14:24:11 +0800</pubDate>
       
@@ -499,19 +508,16 @@
     </item>
     
     <item>
-      <title>2018毕业总结</title>
+      <title>2018 毕业总结</title>
       <link>http://localhost:1313/2018/06/21/2018-Graduation-Summary/</link>
       <pubDate>Thu, 21 Jun 2018 17:12:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/06/21/2018-Graduation-Summary/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;时间过得真快，在学校的这两年什么事情都发生过，有开心的时刻，也有后悔和不舍。
-总之十分感谢学校，也不枉自己在学校里学到了许多东西。马上毕业了，在这里做一个总结。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;时间过得真快，在学校的这两年什么事情都发生过，有开心的时刻，也有后悔和不舍。总之十分感谢学校，也不枉自己在学校里学到了许多东西。马上毕业了，在这里做一个总结。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>基于Vultr&#43;Ubuntu18.04&#43;BBR的ShadowsocksR配置教程</title>
+      <title>基于 Vultr &#43; Ubuntu18.04 &#43; BBR 的 ShadowsocksR 配置教程</title>
       <link>http://localhost:1313/2018/05/14/Build-VPS/</link>
       <pubDate>Mon, 14 May 2018 21:41:11 +0800</pubDate>
       
@@ -520,19 +526,16 @@
     </item>
     
     <item>
-      <title>2018年4月到8月规划</title>
+      <title>2018 年 4 月到 8 月规划</title>
       <link>http://localhost:1313/2018/04/04/2018-4to8month-plan/</link>
       <pubDate>Wed, 04 Apr 2018 11:46:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/04/04/2018-4to8month-plan/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;研究生复试工作也结束了，回到学校之后我想把接下来的几个月的时间好好利用起来。所以现在做一个简单的计划，这样可以引导我以后做什么、怎么做，而不会把时间浪费在其他的地方。
-另：已顺利被学校录取，9月份开学后就可以读研究生了。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;研究生复试工作也结束了，回到学校之后我想把接下来的几个月的时间好好利用起来。所以现在做一个简单的计划，这样可以引导我以后做什么、怎么做，而不会把时间浪费在其他的地方。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>2017年总结</title>
+      <title>2017 年总结</title>
       <link>http://localhost:1313/2018/02/11/2017-summary/</link>
       <pubDate>Sun, 11 Feb 2018 16:32:56 +0800</pubDate>
       
@@ -543,64 +546,52 @@
     </item>
     
     <item>
-      <title>2017下半年——给自己一个加油</title>
+      <title>2017 下半年，给自己一个加油</title>
       <link>http://localhost:1313/2017/07/12/2017-Second-half/</link>
       <pubDate>Wed, 12 Jul 2017 19:56:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/07/12/2017-Second-half/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;考研就像是一场大家都蒙着眼睛的长跑，彼此看不见跑得有多快。你能做的就是尽可能的快的跑下去，等到终点你摘下眼罩一看，你可能就是第一名。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;考研就像是一场大家都蒙着眼睛的长跑，彼此看不见跑得有多快。你能做的就是尽可能的快的跑下去，等到终点你摘下眼罩一看，你可能就是第一名。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>20181206</title>
-      <link>http://localhost:1313/2017/07/12/20181206/</link>
-      <pubDate>Wed, 12 Jul 2017 19:56:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/07/12/20181206/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;上周末导师突然说不开例会了，重点复习六级和期末考试。这几天也没看论文，突然感觉好像少了点什么&amp;hellip;&amp;hellip;&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>数据结构——期末复习</title>
+      <title>数据结构之 期末复习</title>
       <link>http://localhost:1313/2017/06/29/DataStructure-FinalReview/</link>
       <pubDate>Thu, 29 Jun 2017 12:35:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/29/DataStructure-FinalReview/</guid>
-      <description>一.算法应用复习要点 1.会用迪杰斯特拉算法解决最短路径问题 2.会求二叉树的各种遍历序列 3.会用哈希函数构造哈希表，会用开放定址法解决冲突，会</description>
+      <description>一.算法应用复习要点 会用迪杰斯特拉算法解决最短路径问题 会求二叉树的各种遍历序列 会用哈希函数构造哈希表，会用开放定址法解决冲突，会计算查找成功</description>
     </item>
     
     <item>
-      <title>C#——循环数组</title>
+      <title>C# 之 循环数组</title>
       <link>http://localhost:1313/2017/06/25/LoopArray/</link>
       <pubDate>Sun, 25 Jun 2017 12:13:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/25/LoopArray/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;del&gt; 其实是复习周，不用上课哒&lt;/del&gt;,把那个给跳水运动员打分的程序写在这里。&lt;del&gt; 当时没想出来，回去仔细想了一下，最终实现了= =！&lt;/del&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;del&gt; 其实是复习周，不用上课哒&lt;/del&gt;，把那个给跳水运动员打分的程序写在这里。&lt;del&gt; 当时没想出来，回去仔细想了一下，最终实现了= =！&lt;/del&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>网络综合布线(二)——工作区子系统设计过程</title>
+      <title>网络综合布线之 工作区子系统设计过程</title>
       <link>http://localhost:1313/2017/06/22/NetworkCabling-2/</link>
       <pubDate>Thu, 22 Jun 2017 11:44:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/22/NetworkCabling-2/</guid>
-      <description>&lt;p&gt;一般步骤：
-- 需求分析：根据各楼层各房间的用途，确定工作区人员数量；
-- 与用户进行技术交流，分析业务需求；
-- 确定信息点数量，完成点数统计表；
-- 确定信息点安装位置，完成端口对应表；
-- 确定工作区材料的规格和数量，完成材料统计表；
-- 施工图设计。&lt;/p&gt;</description>
+      <description>&lt;p&gt;一般步骤：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;需求分析：根据各楼层各房间的用途，确定工作区人员数量；&lt;/li&gt;
+&lt;li&gt;与用户进行技术交流，分析业务需求；&lt;/li&gt;
+&lt;li&gt;确定信息点数量，完成点数统计表；&lt;/li&gt;
+&lt;li&gt;确定信息点安装位置，完成端口对应表；&lt;/li&gt;
+&lt;li&gt;确定工作区材料的规格和数量，完成材料统计表；&lt;/li&gt;
+&lt;li&gt;施工图设计。&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
-      <title>网络综合布线(一)——计算公式</title>
+      <title>网络综合布线之 计算公式</title>
       <link>http://localhost:1313/2017/06/22/NetworkCabling-1/</link>
       <pubDate>Thu, 22 Jun 2017 09:18:11 +0800</pubDate>
       
@@ -616,7 +607,7 @@
     </item>
     
     <item>
-      <title>C#——查询数据库</title>
+      <title>C# 之 查询数据库</title>
       <link>http://localhost:1313/2017/06/19/Query-the-database/</link>
       <pubDate>Mon, 19 Jun 2017 18:32:11 +0800</pubDate>
       
@@ -637,7 +628,7 @@
     </item>
     
     <item>
-      <title>C#——修改数据库</title>
+      <title>C# 之 修改数据库</title>
       <link>http://localhost:1313/2017/06/19/Modify-the-database/</link>
       <pubDate>Mon, 19 Jun 2017 18:31:11 +0800</pubDate>
       
@@ -650,7 +641,7 @@
     </item>
     
     <item>
-      <title>C#——文件和目录操作</title>
+      <title>C# 之 文件和目录操作</title>
       <link>http://localhost:1313/2017/06/17/File-and-directory-operations/</link>
       <pubDate>Sat, 17 Jun 2017 17:21:11 +0800</pubDate>
       
@@ -664,7 +655,7 @@
     </item>
     
     <item>
-      <title>C#——菜单和消息</title>
+      <title>C# 之 菜单和消息</title>
       <link>http://localhost:1313/2017/06/16/Menus-and-Messages/</link>
       <pubDate>Fri, 16 Jun 2017 20:33:11 +0800</pubDate>
       
@@ -678,7 +669,7 @@
     </item>
     
     <item>
-      <title>C#——GDI&#43;屏幕绘图</title>
+      <title>C# 之 GDI&#43; 屏幕绘图</title>
       <link>http://localhost:1313/2017/06/16/GDI-ScreenDrawing/</link>
       <pubDate>Fri, 16 Jun 2017 10:32:11 +0800</pubDate>
       
@@ -694,7 +685,7 @@
     </item>
     
     <item>
-      <title>C#——窗体编程</title>
+      <title>C# 之 窗体编程</title>
       <link>http://localhost:1313/2017/06/15/Form-programming/</link>
       <pubDate>Thu, 15 Jun 2017 22:42:11 +0800</pubDate>
       
@@ -736,7 +727,7 @@
     </item>
     
     <item>
-      <title>C#——控制台程序</title>
+      <title>C# 之 控制台程序</title>
       <link>http://localhost:1313/2017/06/14/Console-program/</link>
       <pubDate>Wed, 14 Jun 2017 22:44:11 +0800</pubDate>
       
@@ -757,7 +748,7 @@
     </item>
     
     <item>
-      <title>Windows环境下配置DNS服务器</title>
+      <title>Windows 环境下配置 DNS 服务器</title>
       <link>http://localhost:1313/2017/06/04/Windows-DNS/</link>
       <pubDate>Sun, 04 Jun 2017 20:29:11 +0800</pubDate>
       
@@ -796,7 +787,7 @@
     </item>
     
     <item>
-      <title>Windows环境下配置FTP服务器</title>
+      <title>Windows 环境下配置 FTP 服务器</title>
       <link>http://localhost:1313/2017/06/03/Windows-FTP/</link>
       <pubDate>Sat, 03 Jun 2017 16:17:11 +0800</pubDate>
       
@@ -816,7 +807,7 @@
     </item>
     
     <item>
-      <title>Linux环境下配置DNS服务器</title>
+      <title>Linux 环境下配置 DNS 服务器</title>
       <link>http://localhost:1313/2017/06/03/Linux-DNS/</link>
       <pubDate>Sat, 03 Jun 2017 13:24:11 +0800</pubDate>
       
@@ -838,7 +829,7 @@
     </item>
     
     <item>
-      <title>Linux环境下配置DHCP服务器</title>
+      <title>Linux 环境下配置 DHCP 服务器</title>
       <link>http://localhost:1313/2017/06/03/Linux-DHCP/</link>
       <pubDate>Sat, 03 Jun 2017 11:28:11 +0800</pubDate>
       
@@ -861,7 +852,7 @@
     </item>
     
     <item>
-      <title>Windows环境下配置DHCP</title>
+      <title>Windows 环境下配置 DHCP</title>
       <link>http://localhost:1313/2017/06/03/Windows-DHCP/</link>
       <pubDate>Sat, 03 Jun 2017 10:49:11 +0800</pubDate>
       
@@ -892,50 +883,34 @@
     </item>
     
     <item>
-      <title>Linux环境下配置FTP服务器</title>
+      <title>Linux 环境下配置 FTP 服务器</title>
       <link>http://localhost:1313/2017/06/01/Linux-FTP/</link>
       <pubDate>Thu, 01 Jun 2017 22:43:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
-      <description>&lt;hr /&gt;
+      <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;
-&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;</description>
+&lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Linux环境下配置web服务器---通过域名访问主机</title>
+      <title>Linux 环境下配置 Web 服务器之 通过域名访问主机</title>
       <link>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</link>
       <pubDate>Thu, 18 May 2017 14:37:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
-同时有三个软件包：
-- &lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
-- &lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;
-- &lt;strong&gt;shrike-i386-disc3.iso&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+      <description>&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
+同时有三个软件包：&lt;/p&gt;
 
-&lt;p&gt;安装步骤：
-1.  软件包的安装
-    1.1 DNS包的安装（bind和caching）
-    1.2 Httpd包的安装（httpd和httpd-manual）
-2.  配置DNS
-    2.1 配置虚拟机静态IP
-    2.2 修改/etc/named.conf配置文件
-    2.3 在/var/named下新建正向和反向解析文件，并修改配置信息
-    2.4 启动named服务，检测DNS是否配置成功
-3.  在/var/www下新建index.html文件，并输入网页信息
-4.  修改/etc/httpd/conf/下的httpd.conf配置文件
-5.  启动服务
-6.  在浏览器输入域名（网址），查看是否跳转成功&lt;/p&gt;</description>
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;shrike-i386-disc3.iso&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
-      <title>C#——字符串格式化</title>
+      <title>C# 之 字符串格式化</title>
       <link>http://localhost:1313/2017/04/27/StringFormatting/</link>
       <pubDate>Thu, 27 Apr 2017 22:57:11 +0800</pubDate>
       
@@ -953,7 +928,7 @@
     </item>
     
     <item>
-      <title>数据结构——静态链表</title>
+      <title>数据结构之 静态链表</title>
       <link>http://localhost:1313/2017/03/14/DataStructure-StaticList/</link>
       <pubDate>Tue, 14 Mar 2017 22:03:11 +0800</pubDate>
       

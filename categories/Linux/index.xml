@@ -21,7 +21,7 @@
     </item>
     
     <item>
-      <title>Linux环境下配置DNS服务器</title>
+      <title>Linux 环境下配置 DNS 服务器</title>
       <link>http://localhost:1313/2017/06/03/Linux-DNS/</link>
       <pubDate>Sat, 03 Jun 2017 13:24:11 +0800</pubDate>
       
@@ -43,7 +43,7 @@
     </item>
     
     <item>
-      <title>Linux环境下配置DHCP服务器</title>
+      <title>Linux 环境下配置 DHCP 服务器</title>
       <link>http://localhost:1313/2017/06/03/Linux-DHCP/</link>
       <pubDate>Sat, 03 Jun 2017 11:28:11 +0800</pubDate>
       
@@ -79,46 +79,30 @@
     </item>
     
     <item>
-      <title>Linux环境下配置FTP服务器</title>
+      <title>Linux 环境下配置 FTP 服务器</title>
       <link>http://localhost:1313/2017/06/01/Linux-FTP/</link>
       <pubDate>Thu, 01 Jun 2017 22:43:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
-      <description>&lt;hr /&gt;
+      <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;
-&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;</description>
+&lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Linux环境下配置web服务器---通过域名访问主机</title>
+      <title>Linux 环境下配置 Web 服务器之 通过域名访问主机</title>
       <link>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</link>
       <pubDate>Thu, 18 May 2017 14:37:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
-同时有三个软件包：
-- &lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
-- &lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;
-- &lt;strong&gt;shrike-i386-disc3.iso&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+      <description>&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
+同时有三个软件包：&lt;/p&gt;
 
-&lt;p&gt;安装步骤：
-1.  软件包的安装
-    1.1 DNS包的安装（bind和caching）
-    1.2 Httpd包的安装（httpd和httpd-manual）
-2.  配置DNS
-    2.1 配置虚拟机静态IP
-    2.2 修改/etc/named.conf配置文件
-    2.3 在/var/named下新建正向和反向解析文件，并修改配置信息
-    2.4 启动named服务，检测DNS是否配置成功
-3.  在/var/www下新建index.html文件，并输入网页信息
-4.  修改/etc/httpd/conf/下的httpd.conf配置文件
-5.  启动服务
-6.  在浏览器输入域名（网址），查看是否跳转成功&lt;/p&gt;</description>
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;shrike-i386-disc3.iso&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

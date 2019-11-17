@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>基于Vultr&#43;Ubuntu18.04&#43;BBR的ShadowsocksR配置教程 - Carol&#39;s blog</title>
+  <title>基于 Vultr &#43; Ubuntu18.04 &#43; BBR 的 ShadowsocksR 配置教程 - Carol&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -38,25 +38,25 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="基于Vultr&#43;Ubuntu18.04&#43;BBR的ShadowsocksR配置教程" />
+<meta property="og:title" content="基于 Vultr &#43; Ubuntu18.04 &#43; BBR 的 ShadowsocksR 配置教程" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2018/05/14/Build-VPS/" />
 <meta property="article:published_time" content="2018-05-14T21:41:11+08:00" />
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
-<meta itemprop="name" content="基于Vultr&#43;Ubuntu18.04&#43;BBR的ShadowsocksR配置教程">
+<meta itemprop="name" content="基于 Vultr &#43; Ubuntu18.04 &#43; BBR 的 ShadowsocksR 配置教程">
 <meta itemprop="description" content="">
 
 
 <meta itemprop="datePublished" content="2018-05-14T21:41:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="2514">
+<meta itemprop="wordCount" content="2510">
 
 
 
 <meta itemprop="keywords" content="VPS,ShadowsocksR," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="基于Vultr&#43;Ubuntu18.04&#43;BBR的ShadowsocksR配置教程"/>
+<meta name="twitter:title" content="基于 Vultr &#43; Ubuntu18.04 &#43; BBR 的 ShadowsocksR 配置教程"/>
 <meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
@@ -124,14 +124,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">基于Vultr&#43;Ubuntu18.04&#43;BBR的ShadowsocksR配置教程</h1>
+      <h1 class="post-title">基于 Vultr &#43; Ubuntu18.04 &#43; BBR 的 ShadowsocksR 配置教程</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2018-05-14 </span>
         <div class="post-category">
             <a href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"> 科学上网 </a>
             </div>
-          <span class="more-meta"> 2514 words </span>
+          <span class="more-meta"> 2510 words </span>
           <span class="more-meta"> 6 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -164,7 +164,7 @@
       <p><img src="/images/VPS/ShadowsocksR.jpg" alt="ShadowsocksR" /></p>
 
 <blockquote>
-<p>简单地说，本文会与你分享如何翻墙，即搭建自己的国外服务器（VPS），从而在不同设备（ios、Android、MacOS、Linux）下可以访问Google、YouTube、Twitter等国内受限网站。</p>
+<p>简单地说，本文会与你分享如何搭建自己的国外服务器（VPS），从而在不同设备（ios、Android、MacOS、Linux）下可以访问Google、YouTube、Twitter等国内受限网站。</p>
 </blockquote>
 
 <p><strong>摘要：本教程最终会实现*单服务器单用户*方式，可以在电脑、手机、平板不同设备登录，满足一个或者两个人日常使用，且没有流量管理功能！</strong></p>
@@ -178,7 +178,7 @@ Shadowsocks是由GitHub上知名的clowwindy开发的工具，该工具可以加
 
 <h2 id="gfw">GFW</h2>
 
-<p>防火长城（英文名称Great Firewall of China，缩写为GFW），我们平常说的“翻墙”，就是突破网络审查浏览境内外被屏蔽的网站或使用服务的行为。</p>
+<p>防火长城（英文名称Great Firewall of China，缩写为GFW），我们平常说的 <code>fq</code>，就是突破网络审查浏览境内外被屏蔽的网站或使用服务的行为。</p>
 
 <h2 id="vps">VPS</h2>
 
@@ -186,7 +186,7 @@ Shadowsocks是由GitHub上知名的clowwindy开发的工具，该工具可以加
 
 <h2 id="vultr">Vultr</h2>
 
-<p>Vultr是一家云基础架构提供商，面向软件开发人员提供虚拟专用服务器（VPS），具有许多性价比很高的服务器，按时计费。目前（2018年5月15日）价格为$5.00/月($0.007/小时)。</p>
+<p>Vultr是一家云基础架构提供商，面向软件开发人员提供虚拟专用服务器（VPS），具有许多性价比很高的服务器，按时计费。目前（2018年5月15日）价格为$5.00$/月($0.007$/小时)。</p>
 
 <blockquote>
 <p>基本的都介绍完了，下面开始进行VPS的搭建。</p>
@@ -361,11 +361,11 @@ Shadowsocks是由GitHub上知名的clowwindy开发的工具，该工具可以加
       <nav class="post-nav">
         <a class="prev" href="/2018/06/21/2018-Graduation-Summary/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">2018毕业总结</span>
+            <span class="prev-text nav-default">2018 毕业总结</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         <a class="next" href="/2018/04/04/2018-4to8month-plan/">
-            <span class="next-text nav-default">2018年4月到8月规划</span>
+            <span class="next-text nav-default">2018 年 4 月到 8 月规划</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

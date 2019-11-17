@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>技巧</title>
-      <link>http://localhost:1313/categories/%E6%8A%80%E5%B7%A7/</link>
-      <pubDate>Sat, 16 Nov 2019 10:32:56 +0800</pubDate>
-      
-      <guid>http://localhost:1313/categories/%E6%8A%80%E5%B7%A7/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Linux</title>
       <link>http://localhost:1313/categories/Linux/</link>
       <pubDate>Wed, 13 Nov 2019 07:52:11 +0800</pubDate>
@@ -44,6 +35,15 @@
       <pubDate>Wed, 06 Nov 2019 19:23:11 +0800</pubDate>
       
       <guid>http://localhost:1313/categories/Computer-Network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>技巧</title>
+      <link>http://localhost:1313/categories/%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Tue, 05 Nov 2019 10:15:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/categories/%E6%8A%80%E5%B7%A7/</guid>
       <description></description>
     </item>
     

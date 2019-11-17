@@ -6,19 +6,10 @@
     <description>Recent content in 技巧 on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 16 Nov 2019 10:32:56 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Nov 2019 10:15:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Matlab 编译文件时出错，提示 cl.exe 不是内部或外部命令</title>
-      <link>http://localhost:1313/2019/11/16/compilienn-file/</link>
-      <pubDate>Sat, 16 Nov 2019 10:32:56 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2019/11/16/compilienn-file/</guid>
-      <description>&lt;p&gt;在用Matlab中的 &lt;code&gt;vl_compilenn&lt;/code&gt; 函数进行编译时，提示 &lt;strong&gt;&amp;lsquo;cl.exe&amp;rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件&lt;/strong&gt; 的错误，现已找到解决办法，在这里记录下来。&lt;/p&gt;</description>
-    </item>
     
     <item>
       <title>去掉 DropBox 桌面右键菜单</title>
@@ -38,6 +29,15 @@
       <description>&lt;p&gt;本篇文章主要介绍以下内容：
 1. 开启 Chrome 浏览器多线程下载；
 2. 加速 Youtube、Netflix 等流媒体视频播放。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Matlab 编译文件时出错，提示 cl.exe 不是内部或外部命令</title>
+      <link>http://localhost:1313/2019/03/05/compilienn-file/</link>
+      <pubDate>Tue, 05 Mar 2019 15:18:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/03/05/compilienn-file/</guid>
+      <description>&lt;p&gt;在用Matlab中的 &lt;code&gt;vl_compilenn&lt;/code&gt; 函数进行编译时，提示 &lt;strong&gt;&amp;lsquo;cl.exe&amp;rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件&lt;/strong&gt; 的错误，现已找到解决办法，在这里记录下来。&lt;/p&gt;</description>
     </item>
     
     <item>

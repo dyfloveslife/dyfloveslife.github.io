@@ -17,7 +17,7 @@
       <pubDate>Sat, 03 Aug 2019 21:03:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/08/03/spring-di/</guid>
-      <description>&lt;p&gt;　　本篇文章主要对 Spring 框架中的核心功能之一&lt;strong&gt;依赖注入 (DI，Dependency Injection)&lt;/strong&gt; 进行介绍，也是采用 &lt;strong&gt;理论+实战&lt;/strong&gt; 的方式给大家阐述其中的原理以及明确需要注意的地方。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章主要对 Spring 框架中的核心功能之一&lt;strong&gt;依赖注入 (DI，Dependency Injection)&lt;/strong&gt; 进行介绍，也是采用 &lt;strong&gt;理论+实战&lt;/strong&gt; 的方式给大家阐述其中的原理以及明确需要注意的地方。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Sat, 03 Aug 2019 13:15:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/08/03/spring-framework-introduction/</guid>
-      <description>&lt;p&gt;　　本篇文章主要对 Spring 框架进行整体介绍，包括其核心功能模块与体系结构，让大家对该框架有个大体的认识。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章主要对 Spring 框架进行整体介绍，包括其核心功能模块与体系结构，让大家对该框架有个大体的认识。&lt;/p&gt;</description>
     </item>
     
     <item>

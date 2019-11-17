@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>加速Github的clone速度 - Carol&#39;s blog</title>
+  <title>加速 Github 的 clone 速度 - Carol&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -39,25 +39,25 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="加速Github的clone速度" />
+<meta property="og:title" content="加速 Github 的 clone 速度" />
 <meta property="og:description" content="今天在Github上要clone一个感兴趣的库到本地，发现clone速度奇慢无比。于是在Github上搜索加速clone的方法，亲身体验后发现，clone速度提升巨大，你也赶快来试试吧！" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2019/03/05/accelerate-github-clone/" />
 <meta property="article:published_time" content="2019-03-05T08:27:02+08:00" />
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
-<meta itemprop="name" content="加速Github的clone速度">
+<meta itemprop="name" content="加速 Github 的 clone 速度">
 <meta itemprop="description" content="今天在Github上要clone一个感兴趣的库到本地，发现clone速度奇慢无比。于是在Github上搜索加速clone的方法，亲身体验后发现，clone速度提升巨大，你也赶快来试试吧！">
 
 
 <meta itemprop="datePublished" content="2019-03-05T08:27:02&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="471">
+<meta itemprop="wordCount" content="423">
 
 
 
 <meta itemprop="keywords" content="技巧,Github," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="加速Github的clone速度"/>
+<meta name="twitter:title" content="加速 Github 的 clone 速度"/>
 <meta name="twitter:description" content="今天在Github上要clone一个感兴趣的库到本地，发现clone速度奇慢无比。于是在Github上搜索加速clone的方法，亲身体验后发现，clone速度提升巨大，你也赶快来试试吧！"/>
 
 <!--[if lte IE 9]>
@@ -125,14 +125,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">加速Github的clone速度</h1>
+      <h1 class="post-title">加速 Github 的 clone 速度</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2019-03-05 </span>
         <div class="post-category">
             <a href="/categories/%E6%8A%80%E5%B7%A7/"> 技巧 </a>
             </div>
-          <span class="more-meta"> 471 words </span>
+          <span class="more-meta"> 423 words </span>
           <span class="more-meta"> 1 min read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -147,9 +147,9 @@
     <div class="post-content">
       <p>今天在Github上要clone一个感兴趣的库到本地，发现clone速度奇慢无比。于是在Github上搜索加速clone的方法，亲身体验后发现，clone速度提升巨大，你也赶快来试试吧！</p>
 
-<p>因为自己使用了Shadowsocks，想看一下能不能用Shadowsocks代理来加速clone的速度。在网络上搜寻一番并配置之后，并没有起到什么加速的效果，于是继续搜寻其他的方法。</p>
+<p>因为自己使用了 Shadowsocks，想看一下能不能用 Shadowsocks 代理来加速 clone 的速度。在网络上搜寻一番并配置之后，并没有起到什么加速的效果，于是继续搜寻其他的方法。</p>
 
-<p>在<a href="https://github.com/chenxuhua/issues-blog/issues/3">这里</a>看到了可以通过修改Hosts文件来加速clone速度，其给出的Hosts如下：</p>
+<p>在 <a href="https://github.com/chenxuhua/issues-blog/issues/3">这里</a> 看到了可以通过修改 Hosts 文件来加速 clone 速度，其给出的 Hosts 如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
@@ -192,12 +192,13 @@
 # GitHub End</pre></td></tr></table>
 </div>
 </div>
-<p>得到Hosts以后，就可以修改Hosts文件了。你可以使用<a href="https://github.com/oldj/SwitchHosts/releases">SwitchHosts</a>来进行更改，使用起来十分方便。</p>
+<p>得到 Hosts 以后，就可以修改 Hosts 文件了。你可以使用 <a href="https://github.com/oldj/SwitchHosts/releases">SwitchHosts</a> 来进行更改，使用起来十分方便。</p>
 
-<p>下载好以后，双击<strong>SwitchHosts!.exe</strong>即可打开该软件，点击<strong>File</strong>-&gt;<strong>New</strong>，在<strong>Local</strong>的<strong>Hosts title</strong>可以填写上<strong>github</strong>，用于和其他Hosts进行区分，然后将上面的Hosts复制进去就可以了，如下图所示：
-<img src="/images/github/github-clone.png" alt="github-clone" /></p>
+<p>下载好以后，双击<strong>SwitchHosts!.exe</strong>即可打开该软件，点击<strong>File</strong>-&gt;<strong>New</strong>，在<strong>Local</strong>的<strong>Hosts title</strong>可以填写上<strong>github</strong>，用于和其他Hosts进行区分，然后将上面的Hosts复制进去就可以了，如下图所示：</p>
 
-<p>最后就可以进行快速的clone了~</p>
+<p><img src="https://i.loli.net/2019/11/17/iDOdQtqPbZyeplF.png" alt="image.png" /></p>
+
+<p>最后就可以进行快速的 clone 了~</p>
     </div>
 
     <div class="post-copyright">

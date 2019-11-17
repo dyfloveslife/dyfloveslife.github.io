@@ -125,7 +125,7 @@
       <pubDate>Sat, 03 Aug 2019 21:03:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/08/03/spring-di/</guid>
-      <description>&lt;p&gt;　　本篇文章主要对 Spring 框架中的核心功能之一&lt;strong&gt;依赖注入 (DI，Dependency Injection)&lt;/strong&gt; 进行介绍，也是采用 &lt;strong&gt;理论+实战&lt;/strong&gt; 的方式给大家阐述其中的原理以及明确需要注意的地方。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章主要对 Spring 框架中的核心功能之一&lt;strong&gt;依赖注入 (DI，Dependency Injection)&lt;/strong&gt; 进行介绍，也是采用 &lt;strong&gt;理论+实战&lt;/strong&gt; 的方式给大家阐述其中的原理以及明确需要注意的地方。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -134,7 +134,7 @@
       <pubDate>Sat, 03 Aug 2019 16:30:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/08/03/spring-ioc/</guid>
-      <description>&lt;p&gt;　　本篇文章主要对 Spring 框架中的核心功能之一&lt;strong&gt;控制反转 (IOC，Inversion of Control)&lt;/strong&gt; 进行介绍，采用 &lt;strong&gt;理论+实战&lt;/strong&gt; 的方式给大家阐述其中的原理以及明确需要注意的地方。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章主要对 Spring 框架中的核心功能之一&lt;strong&gt;控制反转 (IOC，Inversion of Control)&lt;/strong&gt; 进行介绍，采用 &lt;strong&gt;理论+实战&lt;/strong&gt; 的方式给大家阐述其中的原理以及明确需要注意的地方。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -143,7 +143,7 @@
       <pubDate>Sat, 03 Aug 2019 13:15:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/08/03/spring-framework-introduction/</guid>
-      <description>&lt;p&gt;　　本篇文章主要对 Spring 框架进行整体介绍，包括其核心功能模块与体系结构，让大家对该框架有个大体的认识。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章主要对 Spring 框架进行整体介绍，包括其核心功能模块与体系结构，让大家对该框架有个大体的认识。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -181,13 +181,11 @@
       <pubDate>Thu, 07 Mar 2019 16:39:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/03/07/some-of-my-thoughts/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;这些思考之前也有过，只不过被自然辩证法的老师给激发了出来，在这里记录一下。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;这些思考之前也有过，只不过被自然辩证法的老师给激发了出来，在这里记录一下。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>加速Github的clone速度</title>
+      <title>加速 Github 的 clone 速度</title>
       <link>http://localhost:1313/2019/03/05/accelerate-github-clone/</link>
       <pubDate>Tue, 05 Mar 2019 08:27:02 +0800</pubDate>
       
@@ -232,9 +230,7 @@
       <pubDate>Wed, 21 Nov 2018 08:06:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/11/21/read-books/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;研究生的生活多姿多彩，但又怎能少得了读书！&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;研究生的生活多姿多彩，但又怎能少得了读书！&lt;/p&gt;</description>
     </item>
     
     <item>

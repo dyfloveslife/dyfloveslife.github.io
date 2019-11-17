@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-11-16T13:56:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T13:56:56&#43;08:00" />
-<meta itemprop="wordCount" content="2127">
+<meta itemprop="wordCount" content="2240">
 
 
 
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/Blog/"> Blog </a>
             </div>
-          <span class="more-meta"> 2127 words </span>
+          <span class="more-meta"> 2240 words </span>
           <span class="more-meta"> 5 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -161,6 +161,7 @@
 <li><a href="#坑-3">坑 3</a></li>
 <li><a href="#部署">部署</a></li>
 </ul></li>
+<li><a href="#添加-disqus-评论">添加 Disqus 评论</a></li>
 </ul>
 </nav>
   </div>
@@ -465,6 +466,20 @@ git push upstream master</code></pre></td></tr></table>
 </div>
 </div>
 <p>然后执行 <code>./deploy.sh</code> 即可上传。</p>
+
+<h1 id="添加-disqus-评论">添加 Disqus 评论</h1>
+
+<p>虽然说国内有不少支持博客的评论系统，访问速度要快一些。但我还是使用之前在 Hexo 里面设置的 Disqus 评论系统，毕竟国内像 <a href="https://www.zhihu.com/question/57426274">多说</a> 这样的已经不能使用了。</p>
+
+<p>设置方法也很简单，直接修改 <code>config.toml</code> 文件中的 <code>disqusShortname</code> 字段设置为你在 Disqus 注册的名字即可，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">disqusShortname = &#34;SirCarol&#34;</pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">

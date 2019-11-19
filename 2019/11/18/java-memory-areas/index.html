@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java 内存区域概述 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="本篇文章是对 Java 内存区域的概述与总结，大部分参考自《深入理解 Java 虚拟机》1，以及自己对这部分的理解。记性不好就先把它记下来，以便日后复习使用。如果能帮助到你的话最好了。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2019/11/18/java-memory-areas/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java 内存区域概述" />
+<meta property="og:description" content="本篇文章是对 Java 内存区域的概述与总结，大部分参考自《深入理解 Java 虚拟机》1，以及自己对这部分的理解。记性不好就先把它记下来，以便日后复习使用。如果能帮助到你的话最好了。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2019/11/18/java-memory-areas/" />
+<meta property="article:published_time" content="2019-11-18T15:32:11+08:00" />
+<meta property="article:modified_time" content="2019-11-19T12:19:56+08:00" />
+<meta itemprop="name" content="Java 内存区域概述">
+<meta itemprop="description" content="本篇文章是对 Java 内存区域的概述与总结，大部分参考自《深入理解 Java 虚拟机》1，以及自己对这部分的理解。记性不好就先把它记下来，以便日后复习使用。如果能帮助到你的话最好了。">
+
+
+<meta itemprop="datePublished" content="2019-11-18T15:32:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-19T12:19:56&#43;08:00" />
+<meta itemprop="wordCount" content="2975">
+
+
+
+<meta itemprop="keywords" content="JVM," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java 内存区域概述"/>
+<meta name="twitter:description" content="本篇文章是对 Java 内存区域的概述与总结，大部分参考自《深入理解 Java 虚拟机》1，以及自己对这部分的理解。记性不好就先把它记下来，以便日后复习使用。如果能帮助到你的话最好了。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java 内存区域概述</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-18 </span>
+        <div class="post-category">
+            <a href="/categories/Java/"> Java </a>
+            </div>
+          <span class="more-meta"> 2975 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#为什么需要掌握-java-内存区域">为什么需要掌握 Java 内存区域？</a></li>
+<li><a href="#java-内存区域的组成">Java 内存区域的组成</a>
+<ul>
+<li><a href="#程序计数器">程序计数器</a>
+<ul>
+<li><a href="#为什么程序计数器是线程私有的">为什么程序计数器是线程私有的？</a></li>
+</ul></li>
+<li><a href="#虚拟机栈">虚拟机栈</a></li>
+<li><a href="#本地方法栈">本地方法栈</a></li>
+<li><a href="#堆">堆</a></li>
+<li><a href="#方法区">方法区</a></li>
+<li><a href="#运行时常量池">运行时常量池</a></li>
+<li><a href="#直接内存">直接内存</a></li>
+</ul></li>
+<li><a href="#jvm-内存中的细节">JVM 内存中的细节</a>
+<ul>
+<li><a href="#对象的创建">对象的创建</a></li>
+<li><a href="#对象的内存布局">对象的内存布局</a></li>
+<li><a href="#对象的访问定位">对象的访问定位</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本篇文章是对 Java 内存区域的概述与总结，大部分参考自<a href="https://book.douban.com/subject/24722612/">《深入理解 Java 虚拟机》</a><sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>，以及自己对这部分的理解。记性不好就先把它记下来，以便日后复习使用。如果能帮助到你的话最好了。</p>
+
+<h1 id="为什么需要掌握-java-内存区域">为什么需要掌握 Java 内存区域？</h1>
+
+<p>一句话：为了在程序出错时及时排错，根据 Java 内存区域的相关原理找到错误发生的位置以及明确是如何发生的。</p>
+
+<p>一般情况下，我们不需要像 C 或 C++ 一样去手动管理内存区域，反而是将该任务交给 JVM 去管理，让它自己去实现数据在内存中的分配以及对垃圾的回收。</p>
+
+<p>但对于 Java 程序员来说，理解 Java 内存区域对于能够帮助我们更好地掌握代码中数据的存放位置以及使用方式，对于以后框架的学习或者与 Java 有关的知识能够起到雪中送炭的作用，同时这部分内容也是面试必考的问题，不管是对校招的学生来说，还是对社招的跳槽人士来说，都显得十分重要。</p>
+
+<h1 id="java-内存区域的组成">Java 内存区域的组成</h1>
+
+<p>Java 虚拟机在执行程序的时候会把它所管理的内存划分为不同的区域，有的区域随着虚拟机进程的启动而存在，有的区域随着用户线程的启动和结束而相应的创建和销毁。Java 内存 <code>运行时数据区域</code> 的划分如下图<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>所示：</p>
+
+<p><img src="https://i.loli.net/2019/11/18/JLWOYUFnGbK83po.png" alt="image.png" /></p>
+
+<p>其中，由所有线程共享的数据区有：</p>
+
+<ul>
+<li>堆</li>
+<li>方法区</li>
+</ul>
+
+<p>线程私有或线程隔离的数据区有：</p>
+
+<ul>
+<li>程序计数器</li>
+<li>虚拟机栈</li>
+<li>本地方法栈</li>
+</ul>
+
+<h2 id="程序计数器">程序计数器</h2>
+
+<p>程序计数器（Program Counter Register）是当前线程所执行的字节码的行号指示器，它占用一块较小的内存空间。字节码解释器通过改变该计数器的值来选取下一条需要执行的字节码指令，其中包括分支、循环、跳转、异常处理、线程恢复等基础功能。</p>
+
+<p>如果线程正在执行的是一个 Java 方法，则该计数器记录的是正在执行的 <code>虚拟机字节码指令的地址</code>；如果正在执行的是一个 Native 方法，则该计数器为空（Undefinaed）。</p>
+
+<p>程序计数器是唯一一个在 Java 虚拟机规范中没有规定任何 OutOfMemoryError 情况的区域。</p>
+
+<blockquote>
+<p>关于 Native 方法？</p>
+
+<p>即被 native 关键字修饰的方法，这是一个非访问修饰符，用于访问以非 Java 语言（如 C/C++）实现的方法，该方法没有方法体并且以分号结束。它有如下的几个作用<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup>：</p>
+
+<ul>
+<li>通过使用其它编程语言编写的系统调用或库，来实现接口的功能；</li>
+<li>能够访问只能从其它语言访问的系统或硬件资源；</li>
+<li>能够将已经存在的用 C/C++ 编写的遗留代码集成到 Java 应用程序中；</li>
+<li>使用 Java 中的任意代码调用编译后的动态加载库</li>
+</ul>
+</blockquote>
+
+<h3 id="为什么程序计数器是线程私有的">为什么程序计数器是线程私有的？</h3>
+
+<p>因为 Java 虚拟机的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的，在任何一个确定的时刻，一个处理器都会只执行一条线程中的指令。</p>
+
+<p>因此，为了线程切换后能够恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各线程之间的计数器互不影响，独立存储。</p>
+
+<h2 id="虚拟机栈">虚拟机栈</h2>
+
+<p>Java 虚拟机栈（Java Virtual Machine Stacks）也就是我们平时所说的 <code>栈内存</code> ，或者指的就是虚拟机栈中的 <code>局部变量表</code> 部分。它描述的是 Java 方法执行的内存模型：即每个方法在执行的同时都会创建一个 <code>栈帧（Stack Frame）</code>，用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每个方法从调用到执行完毕的过程，就对应着一个栈帧在虚拟机栈中的入栈和出栈的过程。</p>
+
+<p>局部变量表存放了编译期的各种基本数据类型（byte、short、int、long、float、double、boolean、char）、对象引用类型和 returnAdderss 类型。局部变量表所需的内存空间是在编译期间完成分配的，当进入一个方法的时候，该方法需要在帧中分配多大的局部变量空间是完全确定的，<strong>在方法运行期间不会改变局部变量表的大小</strong>。</p>
+
+<blockquote>
+<p>对象引用类型，即 reference 类型。它不等同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是一个代表对象的句柄或其它与此对象相关的位置。</p>
+
+<p>returnAdderss 类型，即指向了一条字节码指令的地址。该类型会被 JVM 的 jsr、ret 和 jsr_w 指令所使用，该类型的值指向一条虚拟机指令的操作码，且该类型不存在 Java 语言中相应的类型，也无法在程序运行期间更改[^4]。</p>
+</blockquote>
+
+<p>对于虚拟机栈，在 JVM 中存在两种异常：</p>
+
+<ul>
+<li>StackOverflowError：若线程请求的栈深度大于虚拟机所允许的深度，将抛出该异常。</li>
+<li>OutOfMemoryError：对于可以动态扩展的虚拟机栈，如果扩展时无法申请到足够的内存，将抛出该异常。</li>
+</ul>
+
+<h2 id="本地方法栈">本地方法栈</h2>
+
+<p>本地方法栈（Native Method Stack）与虚拟机栈的作用是相似的。但本地方法栈为虚拟机使用到的 <code>Native</code> 方法提供服务。</p>
+
+<p>此外，对于此区域出现的异常，和虚拟机栈是相同的。</p>
+
+<h2 id="堆">堆</h2>
+
+<p>堆（Heap）区域对于 JVM 来说是非常重要的，它是 JVM 所管理的内存中最大的一块，虚拟机启动的时候就创建了堆。</p>
+
+<p>该内存区域的作用是为<strong>对象实例以及数组分配内存</strong>。同时 Java 堆也是垃圾回收器管理的主要区域，具体内存的分配方式如下图所示：</p>
+
+<p><img src="https://i.loli.net/2019/11/19/ck3ETjN6WUlMPQG.png" alt="image.png" /></p>
+
+<p>主要分为三部分：</p>
+
+<ul>
+<li>新生代（也叫年轻代），包括 Eden Space、Survivor 0 Space、Survivor 0 Space。对于后两者也有不同的叫法，即 From Survivor、To Survivor；</li>
+<li>老年代（Tenure Generation Space 或者 Old Space）；</li>
+<li>JDK 1.8 之前（不包括 1.8）使用的持久代（Permanent Space）；</li>
+<li>JDK 1.8 之后（包括 1.8）将持久代换成了元空间（Metaspace）。</li>
+</ul>
+
+<blockquote>
+<p>具体细节不展开，这里可以再写一篇文章。</p>
+</blockquote>
+
+<p>对于堆来说，它可以位于物理上不连续而逻辑上连续的内存空间中。在实际情况下也可以通过调整虚拟机参数的方式对堆进行扩展，即通过 <code>-Xmx</code> 和 <code>-Xms</code> 控制。</p>
+
+<p>如果在堆中没有内存完成实例分配，并且堆也没有办法再扩展的时候，会出现 OutOfMemoryError 异常。</p>
+
+<h2 id="方法区">方法区</h2>
+
+<p>方法区（Method Area）用于存储已被虚拟机加载的 <code>类信息</code>、<code>常量</code>、<code>静态变量</code>、<code>即时编译器编译后的代码</code> 等数据。</p>
+
+<p>在 HotSpot 虚拟机中，可以将方法区称为永久代（Permanent Generation）。因为当初在设计的时候，对于 GC 分代收集扩展到方法区了，即使用永久代来实现方法区，这样对于垃圾回收机制来说，垃圾收集器就可以像管理 Java 堆一样来管理这部分内存。但是也容易出现内存溢出的问题，所以在 JDK 1.7 中，已经把原本放在永久代的字符串常量池给移出了。</p>
+
+<p>此外，当方法区无法满足内存分配需求时，会出现 OutOfMemoryError 异常。</p>
+
+<h2 id="运行时常量池">运行时常量池</h2>
+
+<p>方法区中包含运行时常量池（Runtime Constant Pool），对于一个 Class 文件来说，除了有类的版本信息、字段、方法、接口等描述信息外，还有 <code>常量池（Constant Pool Table）</code>，该常量池用于存放编译期生成的各种字面量和符号引用，这部分内容将在类加载后进入方法区的运行时常量池中存放。</p>
+
+<p>这里有两个概念：<code>运行时常量池</code> 和 <code>Class 文件常量池</code>。运行时常量池具有动态性，即对于常量来说，并不一定只有在编译期才能产生常量，也就是说并非事先加载到 Class 文件中常量池的内容才能进入方法区的运行时常量池，而在运行期间也可能将新的常量放到池中（使用 String 类的 intern() 方法）。</p>
+
+<p>此外，当运行时常量池受到方法区内存大小限制的时候，即常量池无法再申请到内存的时候，会出现 OutOfMemoryError 异常。</p>
+
+<h2 id="直接内存">直接内存</h2>
+
+<p>你可以看到在 <code>Java 内存运行时数据区域</code> 划分图中没有<strong>直接内存</strong>这一部分，因为直接内存并不属于 Java 内存区域中的一员，但该部分也会出现 OutOfMemoryError 异常。</p>
+
+<p>由于本机直接内存的分配不会受到 Java 堆大小的限制，但还是会受到本机总内存（包括 RAM 及 SWAP 区或者分页文件）的大小及处理器寻址空间的限制。在进行虚拟机参数配置的时候，如果 Java 内存区域中的各部分内存的总和大于物理内存而忽略了直接内存的话，就会导致动态扩展时出现 OutOfMemoryError 异常。</p>
+
+<h1 id="jvm-内存中的细节">JVM 内存中的细节</h1>
+
+<h2 id="对象的创建">对象的创建</h2>
+
+<h2 id="对象的内存布局">对象的内存布局</h2>
+
+<h2 id="对象的访问定位">对象的访问定位</h2>
+
+<p>[^4]：<a href="https://www.javatt.com/p/48422">JVM 中的数据类型</a></p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><a href="https://book.douban.com/subject/24722612/">《深入理解 Java 虚拟机》</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2"><a href="https://blog.csdn.net/u011080472/article/details/51320300">深入理解 JVM：Java 内存区域</a>
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:3"><a href="https://www.baeldung.com/java-native">The Java Native Keyword and Methods</a>
+ <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
+</ol>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-11-19
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/JVM/">JVM</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2019/11/16/hexo-to-hugo/">
+            <span class="next-text nav-default">从 Hexo 到 Hugo 的配置与总结</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

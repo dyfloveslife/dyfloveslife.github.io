@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-11-18T15:32:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-19T17:19:56&#43;08:00" />
-<meta itemprop="wordCount" content="5415">
+<meta itemprop="wordCount" content="5414">
 
 
 
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 5415 words </span>
+          <span class="more-meta"> 5414 words </span>
           <span class="more-meta"> 11 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -264,7 +264,7 @@
 
 <p>堆（Heap）区域对于 JVM 来说是非常重要的，它是 JVM 所管理的内存中最大的一块，虚拟机启动的时候就创建了堆。</p>
 
-<p>该内存区域的作用是为<strong>对象实例以及数组分配内存</strong>。同时 Java 堆也是垃圾回收器管理的主要区域，具体内存的分配方式如下图所示：</p>
+<p>该内存区域的作用是为 <strong>对象实例以及数组分配内存</strong>。同时 Java 堆也是垃圾回收器管理的主要区域，具体内存的分配方式如下图所示：</p>
 
 <p><img src="https://i.loli.net/2019/11/19/ck3ETjN6WUlMPQG.png" alt="image.png" /></p>
 
@@ -309,8 +309,11 @@
 
 <h1 id="jvm-内存中的细节">JVM 内存中的细节</h1>
 
-<p>下面主要讨论在 HotSpot 虚拟机下的 Java 堆中，对象的分配、布局和访问的全过程。
-&gt; 以下仅限普通 Java 对象，不包括数组和 Class 对象等。</p>
+<p>下面主要讨论在 HotSpot 虚拟机下的 Java 堆中，对象的分配、布局和访问的全过程。</p>
+
+<blockquote>
+<p>以下仅限普通 Java 对象，不包括数组和 Class 对象等。</p>
+</blockquote>
 
 <h2 id="对象的创建">对象的创建</h2>
 
@@ -421,17 +424,17 @@
 
 <h3 id="对象头">对象头</h3>
 
-<p><code>对象头（Header）</code> 所包含的信息是与对象自身定义的数据无关的额外存储成本，其包括两部分信息：一部分是用于存储对象自身的<strong>运行时数据</strong>，另一部分是<strong>类型指针</strong>。</p>
+<p><code>对象头（Header）</code> 所包含的信息是与对象自身定义的数据无关的额外存储成本，其包括两部分信息：一部分是用于存储对象自身的 <strong>运行时数据</strong>，另一部分是 <strong>类型指针</strong>。</p>
 
 <p><strong>运行时数据</strong>包括哈希码（HashCode）、GC 分代年龄、锁状态标志、线程持有的锁、偏向线程 ID、偏向时间戳等，这部分数据长度在 32 位和 64 位的虚拟机中分别表示为 32 bit 和 64 bit，被称为 <code>“Mark Word”</code>。<code>Mark Word</code> 被设计成一个非固定的数据结构，以便在极小的空间内存储尽量多的信息，它会根据对象的状态复用自己的存储空间。</p>
 
-<p><strong>类型指针</strong>即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。</p>
+<p><strong>类型指针</strong> 即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。</p>
 
 <p>此外，如果对象是一个数组，则在对象头中还必须要有一块用于记录数组长度的数据，因为虚拟机可以通过普通的 Java 对象的元数据信息确定 Java 对象的大小，而不能通过数组的元数据来确定数组的大小。</p>
 
 <h3 id="实例数据">实例数据</h3>
 
-<p><strong>实例数据</strong>部分是对象真正存储的有效信息，无论是从父类继承下来的，还是子类中自己定义的，都需要记录起来。该部分的存储顺序收到虚拟机分配策略参数和字段在 Java 源码中定义顺序的影响。</p>
+<p><strong>实例数据</strong> 部分是对象真正存储的有效信息，无论是从父类继承下来的，还是子类中自己定义的，都需要记录起来。该部分的存储顺序收到虚拟机分配策略参数和字段在 Java 源码中定义顺序的影响。</p>
 
 <p>默认的分配策略<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">5</a></sup>如下：</p>
 <div class="highlight"><div class="chroma">
@@ -455,7 +458,7 @@
 
 <h3 id="对齐填充">对齐填充</h3>
 
-<p><strong>对齐填充</strong>可有可无，只是起到占位符的作用。对于 HotSpot 来说，其要求对象起始地址必须是 8 的整数倍，即对象的大小是 8 的整数倍。因此，如果对象实例数据部分没有对齐时，就需要通过对齐填充来补全。</p>
+<p><strong>对齐填充</strong> 可有可无，只是起到占位符的作用。对于 HotSpot 来说，其要求对象起始地址必须是 8 的整数倍，即对象的大小是 8 的整数倍。因此，如果对象实例数据部分没有对齐时，就需要通过对齐填充来补全。</p>
 
 <h2 id="对象的访问定位">对象的访问定位</h2>
 

@@ -44,14 +44,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2019/11/20/gc-and-memory-allocation-strategy/" />
 <meta property="article:published_time" content="2019-11-20T20:56:16+08:00" />
-<meta property="article:modified_time" content="2019-11-20T20:56:56+08:00" />
+<meta property="article:modified_time" content="2019-11-21T09:09:56+08:00" />
 <meta itemprop="name" content="JVM 垃圾收集与内存分配策略">
 <meta itemprop="description" content="本文是对《深入理解 Java 虚拟机》中第 3 章的回顾与总结，这部分也是 JVM 的重点。">
 
 
 <meta itemprop="datePublished" content="2019-11-20T20:56:16&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-20T20:56:56&#43;08:00" />
-<meta itemprop="wordCount" content="1149">
+<meta itemprop="dateModified" content="2019-11-21T09:09:56&#43;08:00" />
+<meta itemprop="wordCount" content="2103">
 
 
 
@@ -132,8 +132,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 1149 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 2103 words </span>
+          <span class="more-meta"> 5 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -151,6 +151,8 @@
 <li><a href="#可达性分析法-reachability-analysis">可达性分析法（Reachability Analysis）</a></li>
 <li><a href="#四种不同的引用方式">四种不同的引用方式</a></li>
 </ul></li>
+<li><a href="#finalize-方法">finalize() 方法</a></li>
+<li><a href="#方法区的回收">方法区的回收</a></li>
 <li><a href="#垃圾收集算法">垃圾收集算法</a></li>
 </ul></li>
 <li><a href="#内存分配策略">内存分配策略</a></li>
@@ -221,6 +223,52 @@
 
 <p><code>虚引用</code> 也称为 <code>幽灵引用</code> 或 <code>幻影引用</code>，是这四者中最弱的一种引用关系。如果一个对象关联了虚引用，则它仅仅是为了能够在这个对象被收集器回收时收到一个系统通知，因此也无法通过一个虚引用获得一个对象实例。</p>
 
+<h2 id="finalize-方法">finalize() 方法</h2>
+
+<p><code>可达性分析法</code> 在判断一个对象是否存活的时候，至少需要经过两次标记和筛选的过程：</p>
+
+<p><code>第一次标记和筛选</code>：如果对象在进行 <code>可达性分析法</code> 后发现没有与 GC Roots 相连接的引用链，即对象不可达，那它将会被第一次标记并进行筛选。此时，如果进行筛选，则将对象从 <strong>即将回收</strong> 的集合中取出；如果不进行筛选的话，对象就继续留在 <strong>即将回收</strong> 的集合里，等待被回收。</p>
+
+<blockquote>
+<p>筛选的条件是该对象是否有必要执行 <code>finalize()</code> 方法。</p>
+
+<ol>
+<li>如果有必要执行的话，则筛选出来，进入第二次标记和筛选阶段。</li>
+<li>如果没有必要执行的话，则不筛选，判定该对象死亡，并等待回收。</li>
+</ol>
+
+<p>当对象没有覆盖 <code>finalize()</code> 方法的时候，或 <code>finalize()</code> 方法已经被虚拟机调用过了，则虚拟机将这两种情况视为没有必要去执行。</p>
+</blockquote>
+
+<p><code>第二次标记和筛选</code>：当该对象被判定为有必要执行 <code>finalize()</code> 方法的时候，就会被放在一个叫 <code>F-Queue</code> 的队列里，并在稍后会被一个由虚拟机自动建立、低优先级的 <code>Finalizer</code> 线程去执行它。如果在这时 <strong>对象在 <code>finalize()</code> 过程中重新与引用链上的任何一个对象建立关联了（即：与 GC Roots 直接关联或者间接关联）</strong> ，则该对象就会被移出 <code>即将回收</code> 的集合，也就判断为该对象是
+ <code>存活</code> 状态。</p>
+
+<p>整个过程如下图<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>所示：（点击图片看大图）</p>
+
+<p><img src="https://i.loli.net/2019/11/21/KZxX2GvPn3i6DsT.png" alt="image.png" /></p>
+
+<p>值得注意的是，任何一个对象的 <code>finalize()</code> 方法只会被系统自动调用一次，如果对象面临下一次回收，则它的 <code>finalize()</code> 方法不会再次被执行。</p>
+
+<h2 id="方法区的回收">方法区的回收</h2>
+
+<p>方法区（或 HotSpot 虚拟机中的永久代）的垃圾收集效率是比较低的，其主要回收 <code>废弃常量</code> 和 <code>无用的类</code>。</p>
+
+<p>如何判断一个常量是不是 <code>废弃常量</code>？</p>
+
+<p>假如一个字符串 <code>abc</code> 已经进入到常量池中，如果当前没有任何一个 <code>String</code> 对象引用常量池中的 <code>abc</code>，同时其它地方也没有引用这个字面量 <code>abc</code>，则再进行内存回收的时候，就判定该常量是 <code>废弃常量</code>，即 <code>abc</code> 就会被系统清理出常量池。常量池中的其它 <code>类（接口）</code>、<code>方法</code>、<code>字段</code> 的符号引用也是类似的。</p>
+
+<p>如果判断一个类是不是 <code>无用的类</code>？</p>
+
+<p>如果一个类是 <code>无用的类</code>，则需要同时满足以下 3 个条件：</p>
+
+<ul>
+<li>Java 堆中不存在该类的任何实例，即该类的实例都已经被回收了。</li>
+<li>加载该类的类加载器（ClassLoader）已经被回收了。</li>
+<li>该类所所对应的 java.lang.Class 对象没有在任何地方被引用，也就是说，无法在任何地方通过反射的方式访问该类的方法。</li>
+</ul>
+
+<p>针对类来说，并不是满足以上三个条件就会被回收，也并不是像 <code>对象</code> 一样不使用了就必然会回收，而是说仅仅是处于 <strong>可被回收的状态</strong>，具体回不回收，可以通过配置虚拟机参数的方式进行。</p>
+
 <h2 id="垃圾收集算法">垃圾收集算法</h2>
 
 <h1 id="内存分配策略">内存分配策略</h1>
@@ -231,6 +279,8 @@
 <ol>
 <li id="fn:1"><a href="https://juejin.im/post/5d08bc84f265da1b8b2b60da">JVM 判断对象是否存活</a>
  <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2"><a href="https://www.jianshu.com/p/108ddab3ad3f">JVM: 判断一个Java对象是否存活</a>
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
 </ol>
 </div>
     </div>
@@ -243,7 +293,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2019-11-20
+        2019-11-21
         
     </span>
   </p>

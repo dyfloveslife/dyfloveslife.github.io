@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GC on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/GC/</link>
+    <description>Recent content in GC on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 20 Nov 2019 20:56:16 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/GC/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JVM 对象存活和垃圾收集算法</title>
+      <link>http://localhost:1313/2019/11/20/gc-and-memory-allocation-strategy/</link>
+      <pubDate>Wed, 20 Nov 2019 20:56:16 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/20/gc-and-memory-allocation-strategy/</guid>
+      <description>&lt;p&gt;本文是对《深入理解 Java 虚拟机》中第 3 章前半部分的回顾与总结，这部分也是 JVM 的重点。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

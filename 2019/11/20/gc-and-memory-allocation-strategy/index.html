@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>JVM 垃圾收集与内存分配策略 - Carol&#39;s blog</title>
+  <title>JVM 对象存活和垃圾收集算法 - Carol&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content="本文是对《深入理解 Java 虚拟机》中第 3 章的回顾与总结，这部分也是 JVM 的重点。
+<meta name="author" content="Carol" /><meta name="description" content="本文是对《深入理解 Java 虚拟机》中第 3 章前半部分的回顾与总结，这部分也是 JVM 的重点。
 " /><meta name="keywords" content="Java, blog, carol" />
 
 
@@ -39,26 +39,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="JVM 垃圾收集与内存分配策略" />
-<meta property="og:description" content="本文是对《深入理解 Java 虚拟机》中第 3 章的回顾与总结，这部分也是 JVM 的重点。" />
+<meta property="og:title" content="JVM 对象存活和垃圾收集算法" />
+<meta property="og:description" content="本文是对《深入理解 Java 虚拟机》中第 3 章前半部分的回顾与总结，这部分也是 JVM 的重点。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2019/11/20/gc-and-memory-allocation-strategy/" />
 <meta property="article:published_time" content="2019-11-20T20:56:16+08:00" />
 <meta property="article:modified_time" content="2019-11-21T09:09:56+08:00" />
-<meta itemprop="name" content="JVM 垃圾收集与内存分配策略">
-<meta itemprop="description" content="本文是对《深入理解 Java 虚拟机》中第 3 章的回顾与总结，这部分也是 JVM 的重点。">
+<meta itemprop="name" content="JVM 对象存活和垃圾收集算法">
+<meta itemprop="description" content="本文是对《深入理解 Java 虚拟机》中第 3 章前半部分的回顾与总结，这部分也是 JVM 的重点。">
 
 
 <meta itemprop="datePublished" content="2019-11-20T20:56:16&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-21T09:09:56&#43;08:00" />
-<meta itemprop="wordCount" content="2103">
+<meta itemprop="wordCount" content="3157">
 
 
 
-<meta itemprop="keywords" content="JVM," />
+<meta itemprop="keywords" content="JVM,GC," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JVM 垃圾收集与内存分配策略"/>
-<meta name="twitter:description" content="本文是对《深入理解 Java 虚拟机》中第 3 章的回顾与总结，这部分也是 JVM 的重点。"/>
+<meta name="twitter:title" content="JVM 对象存活和垃圾收集算法"/>
+<meta name="twitter:description" content="本文是对《深入理解 Java 虚拟机》中第 3 章前半部分的回顾与总结，这部分也是 JVM 的重点。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -125,15 +125,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">JVM 垃圾收集与内存分配策略</h1>
+      <h1 class="post-title">JVM 对象存活和垃圾收集算法</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2019-11-20 </span>
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 2103 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 3157 words </span>
+          <span class="more-meta"> 7 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -143,7 +143,7 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#垃圾收集">垃圾收集</a>
+<li><a href="#对象存活">对象存活</a>
 <ul>
 <li><a href="#判断对象是否存活的方法">判断对象是否存活的方法</a>
 <ul>
@@ -153,15 +153,20 @@
 </ul></li>
 <li><a href="#finalize-方法">finalize() 方法</a></li>
 <li><a href="#方法区的回收">方法区的回收</a></li>
-<li><a href="#垃圾收集算法">垃圾收集算法</a></li>
 </ul></li>
-<li><a href="#内存分配策略">内存分配策略</a></li>
+<li><a href="#垃圾收集算法">垃圾收集算法</a>
+<ul>
+<li><a href="#标记-清除算法">标记-清除算法</a></li>
+<li><a href="#复制算法">复制算法</a></li>
+<li><a href="#标记-整理算法">标记-整理算法</a></li>
+<li><a href="#分代收集算法">分代收集算法</a></li>
+</ul></li>
 </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p>本文是对《深入理解 Java 虚拟机》中第 3 章的回顾与总结，这部分也是 JVM 的重点。</p>
+      <p>本文是对《深入理解 Java 虚拟机》中第 3 章前半部分的回顾与总结，这部分也是 JVM 的重点。</p>
 
 <p>垃圾收集（Garbage Collection，GC）主要围绕以下三点进行展开：</p>
 
@@ -171,7 +176,7 @@
 <li>如何回收？</li>
 </ul>
 
-<h1 id="垃圾收集">垃圾收集</h1>
+<h1 id="对象存活">对象存活</h1>
 
 <p>垃圾收集器在对堆进行回收的之前，需要知道哪些对象还存在，哪些对象不可能再通过任何途径进行使用，即判断对象是否存活。</p>
 
@@ -267,11 +272,79 @@
 <li>该类所所对应的 java.lang.Class 对象没有在任何地方被引用，也就是说，无法在任何地方通过反射的方式访问该类的方法。</li>
 </ul>
 
-<p>针对类来说，并不是满足以上三个条件就会被回收，也并不是像 <code>对象</code> 一样不使用了就必然会回收，而是说仅仅是处于 <strong>可被回收的状态</strong>，具体回不回收，可以通过配置虚拟机参数的方式进行。</p>
+<p>针对类来说，并不是满足以上三个条件就会被回收，也并不是像 <code>对象</code> 一样不使用了就必然会回收，而是说仅仅是处于 <strong>可被回收的状态</strong>。具体回不回收，可以通过配置虚拟机参数的方式进行。</p>
 
-<h2 id="垃圾收集算法">垃圾收集算法</h2>
+<h1 id="垃圾收集算法">垃圾收集算法</h1>
 
-<h1 id="内存分配策略">内存分配策略</h1>
+<h2 id="标记-清除算法">标记-清除算法</h2>
+
+<p>标记-清除算法（Mark-Sweep）由 <code>标记</code> 和 <code>清除</code> 两个步骤组成：</p>
+
+<ul>
+<li>标记出所有需要回收的对象（标记方法如<a href="https://dyfloveslife.github.io/2019/11/20/gc-and-memory-allocation-strategy/#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E6%B3%95-reachability-analysis">上面</a>所示）</li>
+<li>在标记完成后统一清除（回收）所有被标记过的对象</li>
+</ul>
+
+<p>处理过程如下图<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup>所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2019/11/21/UcnzF9uhTIPaWJf.png" alt="image.png" />
+</center></p>
+
+<p>缺点：</p>
+
+<ul>
+<li>效率问题：标记和清除这两个过程的效率都不高。</li>
+<li>空间问题：标记清除后会产生大量不连续的内存碎片，这会导致以后再程序运行的过程中，如果需要分配较大内存的时候，无法找到足够的连续内存而不得不提前触发另外一次的垃圾收集动作。</li>
+</ul>
+
+<h2 id="复制算法">复制算法</h2>
+
+<p>为了解决上面出现的 <code>效率</code> 和 <code>空间</code> 问题，提出了一种 <code>复制算法</code>， 具体步骤如下：</p>
+
+<ul>
+<li>首先将 <code>可用内存</code> 按容量划分为大小相等的两块，每次只使用其中的一块；</li>
+<li>然后当这一块的内存用完了之后，就将还存活着的对象复制到另一块上面；</li>
+<li>最后在把已使用过的内存空间一次性清理掉。</li>
+</ul>
+
+<p>如下图<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup>所示：</p>
+
+<p><img src="https://i.loli.net/2019/11/21/LOvt5boEInjeFAX.png" alt="image.png" /></p>
+
+<p>该方法每次需要对整个半区进行内存回收，无须考虑内存碎片的问题，只需要移动堆顶指针，按顺序分配内存即可。</p>
+
+<p>由于该方法导致使用的内存变为原来的一半，在对象存活率较高时需要进行多次的复制操作，效率会变低。所以适用于对象存活率较低以及需要频繁进行垃圾回收的区域，如 <code>新生代</code> 区域。</p>
+
+<p>在上一篇文章 <a href="https://dyfloveslife.github.io/2019/11/18/java-memory-areas/#%E5%A0%86">Java 内存区域概述</a> 中，我们知道 <code>新生代</code> 包括 <code>Eden Space</code>、<code>Survivor 0 Space</code> 以及 <code>Survivor 0 Space</code>。</p>
+
+<p>当进行内存划分的时候，每次使用 <code>Eden Space</code> 和 <strong>其中一块 <code>Survivor</code></strong> 区域，当进行回收的时候，将 <code>Eden Space</code> 和 <code>Survivor</code> 中 <strong>还存活的对象</strong> 一次性复制到另一块 <code>Survivor</code> 区域，最后再清理掉 <code>Eden Space</code> 和刚才用过的 <code>Survivor</code> 区域。</p>
+
+<p>假如在 <strong>复制到另一块 <code>Survivor</code> 区域</strong> 的过程中该空间不够了，则需要依赖 <code>老年代</code> 来进行 <code>分配担保（Handle Promotion）</code>。即将 <strong>另一块 <code>Survivor</code> 区域</strong> 没有足够空间存放上一次新生代收集下来的存活对象，通过 <code>分配担保机制</code> 存储到 <code>老年代</code>。</p>
+
+<h2 id="标记-整理算法">标记-整理算法</h2>
+
+<p>标记-整理（Mark-Compact）算法适用于 <code>老年代</code>，具体步骤如下：</p>
+
+<ul>
+<li>标记出所有需要回收的对象</li>
+<li>将所有存活的对象都向一端移动</li>
+<li>清理掉端边界以外的内存</li>
+</ul>
+
+<p>如下图<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup>所示：</p>
+
+<p><img src="https://i.loli.net/2019/11/21/lUdE43bZn5V6cmy.png" alt="image.png" /></p>
+
+<p>该算法解决了 <code>标记-清除</code> 算法中存在的效率低、内存碎片问题。由于 <strong>将所有存活的对象都向一端移动</strong>，所以就减少了内存碎片，保留了较大内存空间；而通过 <strong>直接清理掉边界以外的区域</strong> 的方式实现了较高的效率。</p>
+
+<h2 id="分代收集算法">分代收集算法</h2>
+
+<p>分代收集算法（Generational Collection）就是根据 Java 堆中的不同区域的特点来使用适当的收集算法。</p>
+
+<p>针对 <code>新生代</code> 每次垃圾收集时都会有大量对象死去，少量对象存活的特点，适合采用 <code>复制算法</code>。因为只有少量的对象存活，所以其复制成本很低。</p>
+
+<p>针对 <code>老年代</code> 存活率高、没有额外空间进行分配担保的特点，则采用 <code>标记-清理</code> 或 <code>标记-整理</code> 的算法。</p>
 <div class="footnotes">
 
 <hr />
@@ -281,6 +354,8 @@
  <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
 <li id="fn:2"><a href="https://www.jianshu.com/p/108ddab3ad3f">JVM: 判断一个Java对象是否存活</a>
  <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:3"><a href="https://www.jianshu.com/p/0269237a229d">垃圾收集算法</a>
+ <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
 </ol>
 </div>
     </div>
@@ -320,6 +395,7 @@
 </div><footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/JVM/">JVM</a>
+          <a href="/tags/GC/">GC</a>
           </div>
       <nav class="post-nav">
         

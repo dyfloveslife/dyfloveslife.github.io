@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>GC</title>
+      <link>http://localhost:1313/tags/GC/</link>
+      <pubDate>Wed, 20 Nov 2019 20:56:16 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/GC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>JVM</title>
       <link>http://localhost:1313/tags/JVM/</link>
       <pubDate>Wed, 20 Nov 2019 20:56:16 +0800</pubDate>

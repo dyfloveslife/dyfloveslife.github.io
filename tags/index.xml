@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 20 Nov 2019 20:56:16 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 22 Nov 2019 08:55:16 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>GC</title>
       <link>http://localhost:1313/tags/GC/</link>
-      <pubDate>Wed, 20 Nov 2019 20:56:16 +0800</pubDate>
+      <pubDate>Fri, 22 Nov 2019 08:55:16 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/GC/</guid>
       <description></description>
@@ -23,7 +23,7 @@
     <item>
       <title>JVM</title>
       <link>http://localhost:1313/tags/JVM/</link>
-      <pubDate>Wed, 20 Nov 2019 20:56:16 +0800</pubDate>
+      <pubDate>Fri, 22 Nov 2019 08:55:16 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/JVM/</guid>
       <description></description>

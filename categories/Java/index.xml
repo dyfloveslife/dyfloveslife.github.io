@@ -6,17 +6,26 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 20 Nov 2019 20:56:16 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 22 Nov 2019 08:55:16 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/Java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>JVM 垃圾收集器与内存分配策略</title>
+      <link>http://localhost:1313/2019/11/22/gc-and-memory-allocation-strategy/</link>
+      <pubDate>Fri, 22 Nov 2019 08:55:16 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/22/gc-and-memory-allocation-strategy/</guid>
+      <description>上篇文章 [JVM 对象存活和垃圾收集算法]()</description>
+    </item>
+    
+    <item>
       <title>JVM 对象存活和垃圾收集算法</title>
-      <link>http://localhost:1313/2019/11/20/gc-and-memory-allocation-strategy/</link>
+      <link>http://localhost:1313/2019/11/20/object-survival-and-gc-algorithm/</link>
       <pubDate>Wed, 20 Nov 2019 20:56:16 +0800</pubDate>
       
-      <guid>http://localhost:1313/2019/11/20/gc-and-memory-allocation-strategy/</guid>
+      <guid>http://localhost:1313/2019/11/20/object-survival-and-gc-algorithm/</guid>
       <description>&lt;p&gt;本文是对《深入理解 Java 虚拟机》中第 3 章前半部分的回顾与总结，这部分也是 JVM 的重点。&lt;/p&gt;</description>
     </item>
     

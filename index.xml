@@ -26,7 +26,7 @@
       <pubDate>Fri, 22 Nov 2019 08:55:16 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/11/22/gc-and-memory-allocation-strategy/</guid>
-      <description>上篇文章 [JVM 对象存活和垃圾收集算法]()</description>
+      <description>&lt;p&gt;上篇文章 &lt;a href=&#34;https://dyfloveslife.github.io/2019/11/20/object-survival-and-gc-algorithm/&#34;&gt;《JVM 对象存活和垃圾收集算法》&lt;/a&gt; 对 JVM 中的对象是否存活以及几种垃圾收集算法进行了说明，而本文将对内存回收的具体实现，即对 &lt;code&gt;垃圾收集器&lt;/code&gt; 进行归类与总结。同时，也将介绍一个对象是如何在堆内存中的不同区域进行分配的。&lt;/p&gt;</description>
     </item>
     
     <item>

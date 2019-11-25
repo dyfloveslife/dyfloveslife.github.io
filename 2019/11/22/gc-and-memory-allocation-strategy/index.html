@@ -44,14 +44,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2019/11/22/gc-and-memory-allocation-strategy/" />
 <meta property="article:published_time" content="2019-11-22T08:55:16+08:00" />
-<meta property="article:modified_time" content="2019-11-22T08:56:56+08:00" />
+<meta property="article:modified_time" content="2019-11-25T10:03:56+08:00" />
 <meta itemprop="name" content="JVM 垃圾收集器与内存分配策略">
 <meta itemprop="description" content="上篇文章 《JVM 对象存活和垃圾收集算法》 对 JVM 中的对象是否存活以及几种垃圾收集算法进行了说明，而本文将对内存回收的具体实现，即对 垃圾收集器 进行归类与总结。同时，也将介绍一个对象是如何在堆内存中的不同区域进行分配的。">
 
 
 <meta itemprop="datePublished" content="2019-11-22T08:55:16&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-22T08:56:56&#43;08:00" />
-<meta itemprop="wordCount" content="3511">
+<meta itemprop="dateModified" content="2019-11-25T10:03:56&#43;08:00" />
+<meta itemprop="wordCount" content="4821">
 
 
 
@@ -132,8 +132,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 3511 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 4821 words </span>
+          <span class="more-meta"> 10 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -159,7 +159,13 @@
 </ul></li>
 <li><a href="#g1-收集器">G1 收集器</a></li>
 </ul></li>
-<li><a href="#内存分配策略">内存分配策略</a></li>
+<li><a href="#内存分配策略">内存分配策略</a>
+<ul>
+<li><a href="#对象优先在-eden-分配">对象优先在 Eden 分配</a></li>
+<li><a href="#大对象直接进入老年代">大对象直接进入老年代</a></li>
+<li><a href="#动态对象年龄判断">动态对象年龄判断</a></li>
+<li><a href="#空间分配担保">空间分配担保</a></li>
+</ul></li>
 <li><a href="#参考">参考</a></li>
 </ul>
 </nav>
@@ -304,7 +310,76 @@
 
 <h2 id="g1-收集器">G1 收集器</h2>
 
+<p><code>G1</code> 是面向服务端应用的垃圾收集器，其有以下特点：</p>
+
+<ul>
+<li>多线程高并行度，能与用户线程共存的并发能力。即使用多个 CPU 来缩短 <code>Stop The World</code> 停顿的时间，通过并发的方式让 Java 程序继续执行。</li>
+<li>分代收集，并且可以不与其他的收集器配合，独自管理整个堆。</li>
+<li>不会产生空间碎片。从整体上看，基于 <code>标记-整理</code> 算法；从局部上看，基于 <code>复制</code> 算法。</li>
+<li>可预测的停顿。<code>G1</code> 除了追求低停顿以外，还能建立 <code>可预测的停顿时间模型</code>，能然使用者明确指定一个长度在 M 毫秒的时间片段内，消耗在垃圾收集上的时间不得超过 N 毫秒。</li>
+</ul>
+
+<p>与其它收集器不同的是，<code>G1</code> 将内存划分为多个独立 <code>区域（Region）</code>，保留新生代、老生代概念，不过不再是物理隔绝，都只是一些 <code>Region</code> 的集合。</p>
+
+<p><code>G1</code> 收集器之所以能够建立 <code>可预测的停顿时间模型</code>，是因为其跟踪各个 Region 里面的垃圾堆积的价值大小，维护了一个 <code>优先列表</code>，保证在允许的收集时间优先回收价值最大的 Region。</p>
+
+<p>为了避免全堆扫描，在 <code>G1</code> 收集器的 Region 之间的对象引用以及其它收集器的新生代和老年代之间的对象引用，都使用的是 <code>Remembered Set</code>。对每个 Region 维护一个引用缓存 <code>Rememberd Set</code> 来提高 <code>GC Root Tracing</code> 的效率。</p>
+
+<p>如果没有 <code>Rememberd Set</code> 操作的话，<code>G1</code> 收集器的运作步骤如下：</p>
+
+<ul>
+<li>初始标记（Initial Marking），标记一下 GC Root 关联的对象，并且修改 <code>Next top at Mark Start</code> 的值。</li>
+<li>并发标记（Concurrent Marking），进行 <code>GC Roots Tracing</code>，即可达性分析。</li>
+<li>最终标记（Final Marking），修正并发标记期间因用户程序继续运作而导致标记的变动，更新记录在 <code>Remembered Set Logs</code> 中，需要合并到 <code>Remembered Set</code> 中。</li>
+<li>筛选回收（Live Data Counting and Evacuation），对 Region 进行回收价值和成本排序，根据用户制定的 GC 停顿时间来制定计划。</li>
+</ul>
+
+<p>运行示意图如下所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2019/11/25/7kvL1X9HYEbDeAS.png" alt="image.png" />
+</center></p>
+
 <h1 id="内存分配策略">内存分配策略</h1>
+
+<h2 id="对象优先在-eden-分配">对象优先在 Eden 分配</h2>
+
+<p>当 Eden 区域没有足够的空间进行分配的时候，虚拟机将进行一次 <code>Minor GC</code>，即进行一次发生在新生代的垃圾收集动作。</p>
+
+<h2 id="大对象直接进入老年代">大对象直接进入老年代</h2>
+
+<p>即 <strong>大量连续空间内存的 Java 对象</strong> 直接进入老年代，常见的大对象有很长的字符串和数组。</p>
+
+<p>虚拟机提供了 <code>-XX:PretenureSizeThreshold</code> 参数，大于这个参数的对象直接进入老年代，避免在 Eden 和两个 Survivor 之间发生大量的内存复制。</p>
+
+<p>##　长期存活的对象将进入老年代
+分代收集的思想就是能够分别哪些对象应该放在新生代，哪些对象应该放在老年代。可以通过个每个对象定义一个 <code>对象年龄计数器</code>。如果对象在 Eden 区域出生并经过一次 Minor GC 后仍然存活，并能被 Survivor 容纳的话，则将被移动到 Survivor 空间中，同时 <code>对象年龄</code> 置为 1。默认经过15次 Minor GC 就能进入老年代。</p>
+
+<p>可通过 <code>-XX:MaxTenuringThreshold</code> 参数设置晋升老年代的年龄阈值。</p>
+
+<h2 id="动态对象年龄判断">动态对象年龄判断</h2>
+
+<p>如果在 Survivor 空间中相同年龄所有对象大小的总和大于 Survivor 空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，无需等到 <code>MaxTenuringThreshold</code> 中要求的年龄。</p>
+
+<h2 id="空间分配担保">空间分配担保</h2>
+
+<p>在发生 Minor GC 之前，虚拟机会检查老年代最大可用的连续空间是否大于新生代所有的空间：</p>
+
+<ul>
+<li>如果大于，则 Minor GC 是安全的。</li>
+<li>如果不大于，则虚拟机会查看 <code>HandlePromotionFailure</code> 设置的值是否允许担保失败：
+
+<ul>
+<li>如果允许，则继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小：
+
+<ul>
+<li>如果大于，则尝试进行 Minor GC；</li>
+<li>如果小于或 <code>HandlePromotionFailure</code> 设置的值不允许冒这个险的话，则进行 Full GC。</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>但是，JDK6 Update 24 以后取消了该设置，即只要老年代连续空间大于新生代对象总大小或者历次晋升的平均大小就会进行 Minor GC，否则进行 Full GC。</p>
 
 <h1 id="参考">参考</h1>
 
@@ -322,7 +397,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2019-11-22
+        2019-11-25
         
     </span>
   </p>

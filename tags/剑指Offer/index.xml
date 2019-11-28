@@ -6,10 +6,19 @@
     <description>Recent content in 剑指Offer on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 11 Sep 2019 21:32:11 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 28 Nov 2019 15:26:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/%E5%89%91%E6%8C%87Offer/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>剑指 Offer 之 从整数 1 到 n 中 1 出现的次数</title>
+      <link>http://localhost:1313/2019/11/28/offer-NumberOf1Between1AndN/</link>
+      <pubDate>Thu, 28 Nov 2019 15:26:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/28/offer-NumberOf1Between1AndN/</guid>
+      <description>&lt;p&gt;该题是剑指 Offer 中一道考验分析数字规律的题，在 LeetCode 上看到一种十分巧妙的方法，为此在这里记录一下，以便日后复习。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>剑指 Offer 之 数组中重复的数字</title>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>剑指 Offer 之 数字序列中某一位的数字 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="这道题目和《剑指 Offer 之 从整数 1 到 n 中 1 出现的次数》是一样的，也是通过寻找数字序列的规律解决的。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2019/11/29/offer-DigitsInSequence/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="剑指 Offer 之 数字序列中某一位的数字" />
+<meta property="og:description" content="这道题目和《剑指 Offer 之 从整数 1 到 n 中 1 出现的次数》是一样的，也是通过寻找数字序列的规律解决的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2019/11/29/offer-DigitsInSequence/" />
+<meta property="article:published_time" content="2019-11-29T19:23:11+08:00" />
+<meta property="article:modified_time" content="2019-11-29T19:23:56+08:00" />
+<meta itemprop="name" content="剑指 Offer 之 数字序列中某一位的数字">
+<meta itemprop="description" content="这道题目和《剑指 Offer 之 从整数 1 到 n 中 1 出现的次数》是一样的，也是通过寻找数字序列的规律解决的。">
+
+
+<meta itemprop="datePublished" content="2019-11-29T19:23:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-29T19:23:56&#43;08:00" />
+<meta itemprop="wordCount" content="947">
+
+
+
+<meta itemprop="keywords" content="Algorithm,剑指Offer,Array," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="剑指 Offer 之 数字序列中某一位的数字"/>
+<meta name="twitter:description" content="这道题目和《剑指 Offer 之 从整数 1 到 n 中 1 出现的次数》是一样的，也是通过寻找数字序列的规律解决的。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">剑指 Offer 之 数字序列中某一位的数字</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-11-29 </span>
+        <div class="post-category">
+            <a href="/categories/Algorithm/"> Algorithm </a>
+            </div>
+          <span class="more-meta"> 947 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#题目描述">题目描述</a></li>
+<li><a href="#分析">分析</a></li>
+<li><a href="#代码">代码</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>这道题目和<a href="https://dyfloveslife.github.io/2019/11/28/offer-NumberOf1Between1AndN/">《剑指 Offer 之 从整数 1 到 n 中 1 出现的次数》</a>是一样的，也是通过寻找数字序列的规律解决的。</p>
+
+<h1 id="题目描述">题目描述</h1>
+
+<p>数字以 <code>0123456789101112131415......</code> 的格式序列化到一个字符序列中。在这个序列中，第 5 位（从 0 开始计数）对应的数字是 <code>5</code>，第 13 位对应的数字是 <code>1</code>，第 15 位对应的数字是 <code>2</code>。请写一个函数，求任意第 n 位对应的数字。</p>
+
+<h1 id="分析">分析</h1>
+
+<p>这里就不再重复剑指 Offer 中的方法了，而是直接通过数字的规律来解决这道题。</p>
+
+<p><strong>令</strong> $ f(x) $ <strong>表示从 <code>0</code> 到 <code>x 所占位数的最大数字</code> 的数字个数。（特别注意断句的含义！）</strong></p>
+
+<blockquote>
+<p>怎么理解这句话呢？举个栗子 <strong>: )</strong></p>
+</blockquote>
+
+<p>例如，$ f(1) $ 的计算过程如下：</p>
+
+<p>$$ f(1) = (0\sim9) $$
+$$ = (9-0+1)×1 $$
+$$ = 10 $$</p>
+
+<p>则数字的个数就是 10 个 <strong>（乘以 1 是因为从 0 到 9 每个数字对应的位数是 1 位）</strong>；</p>
+
+<p>同样的，$ f(2) $ 的计算过程如下：</p>
+
+<p>$$ f(2) =(0\sim9)+ (10\sim99) $$
+$$ = f(1) +(99-10+1)×2  $$
+$$ = 10 +90×2$$
+$$ = 190  $$</p>
+
+<p>则数字的个数就是 190 个 <strong>（乘以 2 是因为从 10 到 99 每个数字对应两位数，例如 11 是两个数，即 1 和 1；12 也是两个数，即 1 和 2；98 是两位数，即 9 和 8；99 是两位数，即 9 和 9）</strong>，190 就是将它们拆开，共同统计 <code>个数</code> 所得到的结果；</p>
+
+<p>同样的，$ f(3) $ 的计算过程如下：</p>
+
+<p>$$ f(3) =(0\sim9)+ (10\sim99)+ (100\sim999) $$
+$$ = f(2) + (999-100+1)×3   $$
+$$ = 190 + 900×3  $$
+$$ = 2890  $$</p>
+
+<p>同样的，$ f(4) $ 的计算过程如下：</p>
+
+<p>$$ f(4) =(0\sim9)+ (10\sim99)+ (100\sim999) + (1000\sim9999)$$
+$$ =f(3) + (9999-1000+1)×4 $$
+$$ = 2890 + 36000 $$
+$$ =38890 $$</p>
+
+<p><strong>因此，我们可以总结出以下规律：</strong></p>
+
+<p>$$ f(x)=f(x-1)+(9×10^{x-1}) × x $$</p>
+
+<p>明白了上面的关系之后，后面的计算就简单多了。</p>
+
+<p>对于数字 <code>n</code>，我们比较其与 <code>arr[]</code> 数组中的元素，如果 <code>f(m)&gt;=n</code>，则说明我们在数组中找到了第一个大于 <code>n</code> 的值，则 <code>n</code> 就在某个 <code>m</code> 位数的其中一位。</p>
+
+<p>所以，可以用 <code>n = n - f(m - 1 )</code>，根据 <code>n / m</code> 与 <code>n % m</code> 的值，就可以确定数字 <code>n</code> 所对应的数在哪个位置。</p>
+
+<h1 id="代码">代码</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Solution</span> <span class="p">{</span>
+    <span class="err">public int </span><span class="n">digitsInSequence</span><span class="p">(</span><span class="err">int arr</span><span class="p">[],</span> <span class="err">int n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="n">9</span><span class="p">)</span> <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+
+        <span class="err">int m </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">9</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">arr</span><span class="p">[</span><span class="n">m</span> <span class="o">-</span> <span class="n">1</span><span class="p">];</span>
+        <span class="err">int temp1 </span><span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="n">m</span><span class="p">;</span>
+        <span class="err">int temp2 </span><span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="n">m</span><span class="p">;</span>
+        <span class="err">int temp3 </span><span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="n">temp1</span> <span class="o">+</span> <span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">10</span><span class="p">,</span> <span class="n">m</span> <span class="o">-</span> <span class="n">1</span><span class="p">));</span>
+        <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="n">temp3</span> <span class="o">/</span> <span class="n">Math</span><span class="p">.</span><span class="na">pow</span><span class="p">(</span><span class="n">10</span><span class="p">,</span> <span class="n">m</span> <span class="o">-</span> <span class="n">temp2</span> <span class="o">-</span> <span class="n">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">10</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 由于 int 装不下 8888888890 这个数，所以没有将其放到数组里
+</span><span class="c1"></span>        <span class="err">int[] arr </span><span class="o">=</span> <span class="p">{</span><span class="n">0</span><span class="p">,</span> <span class="n">10</span><span class="p">,</span> <span class="n">190</span><span class="p">,</span> <span class="n">2890</span><span class="p">,</span> <span class="n">38890</span><span class="p">,</span> <span class="n">488890</span><span class="p">,</span> <span class="n">5888890</span><span class="p">,</span> <span class="n">68888890</span><span class="p">,</span> <span class="n">788888890</span><span class="p">};</span> 
+        <span class="err">Solution solution </span><span class="o">=</span> <span class="k">new</span> <span class="n">Solution</span><span class="p">();</span>
+        <span class="err">int i </span><span class="o">=</span> <span class="n">solution</span><span class="p">.</span><span class="na">digitsInSequence</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">1001</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>真是让人抓狂的一道题，不过理解了解题过程之后，心里也会有一丢丢的成就感~ 😄</p>
+
+<h1 id="参考">参考</h1>
+
+<p><a href="https://www.cnblogs.com/wangkundentisy/p/8920147.html">https://www.cnblogs.com/wangkundentisy/p/8920147.html</a></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-11-29
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Algorithm/">Algorithm</a>
+          <a href="/tags/%E5%89%91%E6%8C%87Offer/">剑指Offer</a>
+          <a href="/tags/Array/">Array</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2019/11/28/offer-NumberOf1Between1AndN/">
+            <span class="next-text nav-default">剑指 Offer 之 从整数 1 到 n 中 1 出现的次数</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,7 +6,7 @@
     <description>Recent content on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 28 Nov 2019 15:26:11 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 29 Nov 2019 19:23:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>http://localhost:1313/about/</guid>
       <description>博客刚刚迁移到 Hugo，一些文章中的图片可能已经失效，目前正在持续更新中&amp;hellip;&amp;hellip; 关于我 硕士 / 计算机技术。 自身没有任何</description>
+    </item>
+    
+    <item>
+      <title>剑指 Offer 之 数字序列中某一位的数字</title>
+      <link>http://localhost:1313/2019/11/29/offer-DigitsInSequence/</link>
+      <pubDate>Fri, 29 Nov 2019 19:23:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/11/29/offer-DigitsInSequence/</guid>
+      <description>&lt;p&gt;这道题目和&lt;a href=&#34;https://dyfloveslife.github.io/2019/11/28/offer-NumberOf1Between1AndN/&#34;&gt;《剑指 Offer 之 从整数 1 到 n 中 1 出现的次数》&lt;/a&gt;是一样的，也是通过寻找数字序列的规律解决的。&lt;/p&gt;</description>
     </item>
     
     <item>

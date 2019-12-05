@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-12-04T18:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-04T18:03:56&#43;08:00" />
-<meta itemprop="wordCount" content="3122">
+<meta itemprop="wordCount" content="3402">
 
 
 
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 3122 words </span>
+          <span class="more-meta"> 3402 words </span>
           <span class="more-meta"> 7 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -544,10 +544,60 @@ str3.equals(str4)</pre></td></tr></table>
 </div>
 <p>从结果可以看出，对于 <code>String str1 = &quot;abc&quot;;</code> 来说，首先在常量池中查看有没有已经存在的值和相应的对象，由于第一次创建，所以创建 <code>str1</code> 并指向 <code>abc</code>。执行到 <code>String str2 = &quot;abc&quot;;</code> 的时候，由于之前创建过了，所以 <code>str1</code> 和 <code>str2</code> 指向的地址都是同一个对象 <code>abc</code>。因此返回 <code>true</code>，即输出 <code>str1 == str2</code>。</p>
 
-<p>对于 <code>String str3 = new String(&quot;aaa&quot;);</code> 来说，其创建了一个名为 <code>str3</code> 的引用，然后执行到 <code>String str4 = new String(&quot;aaa&quot;);</code> 的时候，又创建了一个 <code>str4</code> 的引用，这两个引用的内容都是 <code>aaa</code>。由于 String 重写了 equals 方法，所以此时的 <code>str3.equals(str4)</code> 比较的是 <code>str3</code> 和 <code>str4</code> 的内容是否相等，此时的内容是相等的，所以返回 <code>true</code>。</p>
+<p>对于 <code>String str3 = new String(&quot;aaa&quot;);</code> 来说，一共会创建两个字符串对象，一个在堆中，另一个在常量池中（前提是常量池中还没有 <code>aaa</code>）。其创建了一个名为 <code>str3</code> 的引用，然后执行到 <code>String str4 = new String(&quot;aaa&quot;);</code> 的时候，又创建了一个 <code>str4</code> 的引用，这两个引用的内容都是 <code>aaa</code>。由于 String 重写了 equals 方法，所以此时的 <code>str3.equals(str4)</code> 比较的是 <code>str3</code> 和 <code>str4</code> 的内容是否相等，此时的内容是相等的，所以返回 <code>true</code>。</p>
 
 <p>关键就是看有没有重写 equals 方法。</p>
 
+<blockquote>
+<p>直接使用双引号声明的 String 对象会直接存储在常量池中。</p>
+
+<p><br></p>
+
+<p>可以直接使用 <code>intern</code> 方法声明 String 对象，其作用是：</p>
+
+<ul>
+<li><p>如果运行时常量池中已经包含一个等于此 String 对象内容的字符串，则返回常量池中该字符串的引用；</p></li>
+
+<li><p>如果没有，则在常量池中创建与此 String 内容相同的字符串，并返回常量池中创建的字符串的引用。</p></li>
+</ul>
+</blockquote>
+
+<p>如下列代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">String s1 </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">);</span>
+    <span class="err">String s2 </span><span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="na">intern</span><span class="p">();</span>
+    <span class="err">String s3 </span><span class="o">=</span> <span class="s">&#34;abc&#34;</span><span class="p">;</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span> <span class="c1">//abc
+</span><span class="c1"></span>    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">);</span> <span class="c1">//false，因为一个是堆内存中的 String 对象一个是常量池中的 String 对象
+</span><span class="c1"></span>    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s2</span> <span class="o">==</span> <span class="n">s3</span><span class="p">);</span> <span class="c1">//true， s1 和 s2指向常量池中的 abc
+</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">abc
+false
+true</pre></td></tr></table>
+</div>
+</div>
 <p>此外，equals 方法在非空对象上还存在一些引用上的特性：</p>
 
 <ul>

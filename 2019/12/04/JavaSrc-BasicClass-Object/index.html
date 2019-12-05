@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>JDK 源码之基础类 Object - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="主要介绍 Java 中 Object 类的常见方法，通过阅读源码的方式加深对各种方法的理解。如有错误，欢迎在评论中和我一起讨论交流。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2019/12/04/JavaSrc-BasicClass-Object/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="JDK 源码之基础类 Object" />
+<meta property="og:description" content="主要介绍 Java 中 Object 类的常见方法，通过阅读源码的方式加深对各种方法的理解。如有错误，欢迎在评论中和我一起讨论交流。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2019/12/04/JavaSrc-BasicClass-Object/" />
+<meta property="article:published_time" content="2019-12-04T18:02:11+08:00" />
+<meta property="article:modified_time" content="2019-12-04T18:03:56+08:00" />
+<meta itemprop="name" content="JDK 源码之基础类 Object">
+<meta itemprop="description" content="主要介绍 Java 中 Object 类的常见方法，通过阅读源码的方式加深对各种方法的理解。如有错误，欢迎在评论中和我一起讨论交流。">
+
+
+<meta itemprop="datePublished" content="2019-12-04T18:02:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-12-04T18:03:56&#43;08:00" />
+<meta itemprop="wordCount" content="3122">
+
+
+
+<meta itemprop="keywords" content="Java,JDK,Object," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JDK 源码之基础类 Object"/>
+<meta name="twitter:description" content="主要介绍 Java 中 Object 类的常见方法，通过阅读源码的方式加深对各种方法的理解。如有错误，欢迎在评论中和我一起讨论交流。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JDK 源码之基础类 Object</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-04 </span>
+        <div class="post-category">
+            <a href="/categories/Java/"> Java </a>
+            </div>
+          <span class="more-meta"> 3122 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#写在前面">写在前面</a></li>
+<li><a href="#总览">总览</a></li>
+<li><a href="#registernatives">registerNatives()</a></li>
+<li><a href="#getclass">getClass()</a></li>
+<li><a href="#hashcode">hashCode()</a></li>
+<li><a href="#equals">equals()</a></li>
+<li><a href="#clone">clone()</a></li>
+<li><a href="#tostring">toString()</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>主要介绍 Java 中 Object 类的常见方法，通过阅读源码的方式加深对各种方法的理解。如有错误，欢迎在评论中和我一起讨论交流。</p>
+
+<h1 id="写在前面">写在前面</h1>
+
+<p>为了方便在 IntelliJ IDEA 中查看源码，可以使用以下快捷键：</p>
+
+<ul>
+<li><code>Alt + 7</code> 或 <code>Ctrl + F12</code> 查看类中所有的属性和方法；</li>
+<li><code>Ctrl + H</code> 查看类的继承关系；</li>
+<li><code>Carl +　Alt + Shift + U</code> 查看继承关系图。</li>
+</ul>
+
+<p>通过 IDEA 中的各种不同的 <a href="https://www.jetbrains.com/help/idea/symbols.html">图标</a>，可以很快的看出其所代表的是类、抽象类、枚举、方法、属性、还是接口等等。</p>
+
+<h1 id="总览">总览</h1>
+
+<p>在 <code>java.lang</code> 下的 <code>Object</code> 是类层次体系中的根类，也就是说对于每个类都以 <code>Object</code> 类作为超类或父类。所有的对象（包括数组）都实现了此类中的方法。当我们在引用任何一个未知类型对象的时候，就可以使用 <code>Object</code> 类。</p>
+
+<blockquote>
+<p>父类引用指向子类对象，称为 <code>上转型</code>。例如 Person p = new Son();</p>
+</blockquote>
+
+<p>该类为对象提供了一些常见的方法，如下图所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2019/12/04/OIxpkAnswv8ZaCi.png" alt="image.png" />
+</center></p>
+
+<ul>
+<li>private static native void <strong>registerNatives()</strong>;</li>
+<li>public final native Class&lt;?&gt; <strong>getClass()</strong>;</li>
+<li>public native int <strong>hashCode()</strong>;</li>
+<li>public boolean <strong>equals(Object obj)</strong></li>
+<li>protected native Object <strong>clone()</strong> throws CloneNotSupportedException;</li>
+<li>public String <strong>toString()</strong></li>
+<li>public final native void <strong>notify()</strong>;</li>
+<li>public final native void <strong>notifyAll()</strong>;</li>
+<li>public final native void <strong>wait(long timeout)</strong> throws InterruptedException;</li>
+<li>public final void <strong>wait(long timeout, int nanos)</strong> throws InterruptedException</li>
+<li>public final void <strong>wait()</strong> throws InterruptedException</li>
+<li>protected void <strong>finalize()</strong> throws Throwable</li>
+</ul>
+
+<p>接下来看一下每个方法到底有什么用。</p>
+
+<h1 id="registernatives">registerNatives()</h1>
+
+<p>该方法在 <a href="https://stackoverflow.com/questions/1010645/what-does-the-registernatives-method-do">stackoverflow</a> 上有人回答的很赞。简单地说，作为一个被 <code>private static native</code> 修饰的方法，其在 <code>Object</code> 类加载的时候就会执行。被 <a href="https://www.geeksforgeeks.org/native-keyword-java/"><code>native</code></a> 修饰的方法通常是由 C/C++ 实现的，如果想在 Java 中调用其它语言，就必须按照 <a href="https://www.baeldung.com/jni"><code>JNI</code></a> 的规则实现。</p>
+
+<p><code>registerNatives()</code> 方法在向 JVM 注册本地方法的时候很有用，它可以将 Java 中的方法与本地方法对应起来，JVM 在执行字节码时根据这些映射关系来调用 C/C++ 方法，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">static JNINativeMethod </span><span class="n">methods</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">{</span><span class="s">&#34;hashCode&#34;</span><span class="p">,</span>    <span class="s">&#34;()I&#34;</span><span class="p">,</span>                    <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">JVM_IHashCode</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">&#34;wait&#34;</span><span class="p">,</span>        <span class="s">&#34;(J)V&#34;</span><span class="p">,</span>                   <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">JVM_MonitorWait</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">&#34;notify&#34;</span><span class="p">,</span>      <span class="s">&#34;()V&#34;</span><span class="p">,</span>                    <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">JVM_MonitorNotify</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">&#34;notifyAll&#34;</span><span class="p">,</span>   <span class="s">&#34;()V&#34;</span><span class="p">,</span>                    <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">JVM_MonitorNotifyAll</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">&#34;clone&#34;</span><span class="p">,</span>       <span class="s">&#34;()Ljava/lang/Object;&#34;</span><span class="p">,</span>   <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">JVM_Clone</span><span class="p">},</span>
+<span class="p">};</span>
+
+<span class="err">JNIEXPORT void JNICALL
+</span><span class="err">Java_java_lang_Object_registerNatives</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="err">jclass cls</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">RegisterNatives</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">cls</span><span class="p">,</span>
+                            <span class="n">methods</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">methods</span><span class="p">)</span><span class="o">/</span><span class="n">sizeof</span><span class="p">(</span><span class="n">methods</span><span class="p">[</span><span class="n">0</span><span class="p">]));</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>当调用 <code>java.lang.Object.registerNatives</code> 方法的时候，对应的本地方法为 <code>Java_java_lang_Object_registerNatives()</code>。假如在执行 <code>notifyAll</code> 方法的时候，通过之前指定的映射关系，可以查到对应 JVM 中的方法为 <code>JVM_MonitorNotifyAll</code>。由此可见，通过这种关联关系可以很好的实现 Java 语言与其它语言的“交互”，也就是说，<code>registerNatives</code> 方法可以将指定的本地方法绑定到指定函数。</p>
+
+<h1 id="getclass">getClass()</h1>
+
+<p>被 <code>final</code> 修饰的 <code>getClass()</code> 方法不允许被子类重写（Override），它用于返回当前 <strong>运行时</strong> 对象的 Class 对象，同时也可以获取类的信息。</p>
+
+<p>对于返回当前的 <strong>运行时</strong> 对象的 Class 对象，可以用如下代码来说明：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Demo</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Number n </span><span class="o">=</span> <span class="n">123</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="na">getClass</span><span class="p">());</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">class java.lang.Integer
+java.lang.Integer</pre></td></tr></table>
+</div>
+</div>
+<p><code>n</code> 一开始定义的是 <code>Number</code> 类型的，从输出结果可以看出，其在运行时输出的结果是 <code>Integer</code> 类型的。这是由于在 Java 中，对于像 <code>123</code> 这种数值来说默认是 <code>Integer</code> 类型的。其中 <code>getName()</code> 用于返回当前对象的实体名称。</p>
+
+<p>对于获取类的信息，可以用以下代码来说明：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Demo</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Person p </span><span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Tom&#34;</span><span class="p">,</span> <span class="n">25</span><span class="p">);</span>
+        <span class="n">Class</span><span class="o">&lt;?</span> <span class="err">extends Person</span><span class="o">&gt;</span> <span class="n">pClass</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="na">getClass</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pClass</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pClass</span><span class="p">.</span><span class="na">getPackage</span><span class="p">());</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pClass</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Person</span><span class="p">{</span>
+    <span class="err">String name</span><span class="p">;</span>
+    <span class="err">int age</span><span class="p">;</span>
+
+    <span class="err">public Person</span><span class="p">(</span><span class="err">String name</span><span class="p">,</span> <span class="err">int age</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"><span class="nx">class</span> <span class="nx">_01_BasicClass</span><span class="p">.</span><span class="nx">Person</span>
+<span class="kn">package</span> <span class="nx">_01_BasicClass</span>
+<span class="nx">_01_BasicClass</span><span class="p">.</span><span class="nx">Person</span></pre></td></tr></table>
+</div>
+</div>
+<p>可以看到，通过 <code>p.getClass()</code> 获得了 Class 对象，然后可以通过 <code>pClass.getPackage()</code> 来获取该对象所对应 <code>包</code> 的信息。</p>
+
+<h1 id="hashcode">hashCode()</h1>
+
+<p>该方法用于返回对象的 <code>哈希值</code>，在 <code>HashMap</code> 类中重写了此方法。</p>
+
+<p>它有如下的几个约定：</p>
+
+<ul>
+<li>在 Java 应用程序执行期间，在不修改当前对象的 equals 方法的时候，则在当前同一对象上多次调用 hashCode 方法会返回相同的整数值。 在不同的程序执行后，对象的哈希值不必保持一致。</li>
+<li>如果两个对象通过 equals 方法比较后 <strong>相等</strong> 的话，那么分别对这两个对象调用 hashCode 方法，则最后产生的结果（哈希值）是相同的。</li>
+<li>如果两个对象通过 equals 方法比较后 <strong>不相等</strong>，那么别对这两个对象调用 hashCode 方法的时候，不需要必须产生不同的结果。但是，为不相等的对象生成不同的哈希值可能会提高哈希表的性能。</li>
+</ul>
+
+<p>通常情况下，不同的对象产生的哈希码是不同的。默认情况下，对象的哈希码是通过将该对象的内部地址转换成一个整数来实现的。</p>
+
+<p>例如下面的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Demo</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Person</span><span class="p">,</span> <span class="err">String&gt; map </span><span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        <span class="err">Person p1 </span><span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;tom&#34;</span><span class="p">,</span> <span class="n">24</span><span class="p">);</span>
+        <span class="err">Person p2 </span><span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;tom&#34;</span><span class="p">,</span> <span class="n">25</span><span class="p">);</span>
+        <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="s">&#34;tom&#34;</span><span class="p">);</span>
+        <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span> <span class="s">&#34;tom&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">map</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Person</span><span class="p">{</span>
+    <span class="err">private String </span><span class="n">name</span><span class="p">;</span>
+    <span class="err">private int </span><span class="n">age</span><span class="p">;</span>
+
+    <span class="err">public Person</span><span class="p">(</span><span class="err">String name</span><span class="p">,</span> <span class="err">int age</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public int </span><span class="n">hashCode</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">name</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">name</span><span class="p">.</span><span class="na">hashCode</span><span class="p">()</span> <span class="o">:</span> <span class="n">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">{_01_BasicClass.Person@1c152=tom, _01_BasicClass.Person@1c152=tom}</pre></td></tr></table>
+</div>
+</div>
+<p>从结果可以看到，在仅重写 <code>hashCode</code> 方法的时候，<code>p1</code> 和 <code>p2</code> 都可以加入到 map 中。<strong>原因是 map 通过判断 <code>两个对象的哈希值相同</code> 并且 <code>这两个对象是同一个对象或者两个对象相等</code> 的时候才指出是重复的。</strong></p>
+
+<p>所以，如果在重写 <code>hashCode</code> 方法的前提下，又重写了 <code>equals</code> 方法，那就会被认为是相同的对象，则只能添加一个元素了。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="nd">@Override</span>
+    <span class="err">public boolean </span><span class="n">equals</span><span class="p">(</span><span class="err">Object o</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">o</span><span class="p">)</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">getClass</span><span class="p">()</span> <span class="o">!=</span> <span class="n">o</span><span class="p">.</span><span class="na">getClass</span><span class="p">())</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="err">Person person </span><span class="o">=</span> <span class="p">(</span><span class="n">Person</span><span class="p">)</span> <span class="n">o</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">name</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">name</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="na">name</span><span class="p">)</span> <span class="o">:</span> <span class="n">person</span><span class="p">.</span><span class="na">name</span> <span class="o">==</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">{_01_BasicClass.Person@1c152=tom}</pre></td></tr></table>
+</div>
+</div>
+<p>所以在实际开发中，这两个方法要一起重写。</p>
+
+<h1 id="equals">equals()</h1>
+
+<p>该方法用来判断 <strong>两个对象是否相等</strong>。直接使用 <code>==</code> 来判断两个对象的地址值是否相等，也就是判断这两个对象是不是同一个对象。其源码如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public boolean </span><span class="n">equals</span><span class="p">(</span><span class="err">Object obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">obj</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>Object 类中的 equals 方法就是用 <code>==</code> 来做比较的，对于基本数据类型，其比较的是具体的值；对于引用数据类型，比较的则是内存地址。</p>
+
+<p><br></p>
+
+<p>基本数据类型：</p>
+
+<ul>
+<li>byte、short、int、long、float、double、char、boolean</li>
+</ul>
+
+<p>引用数据类型：</p>
+
+<ul>
+<li>类、接口、数组</li>
+</ul>
+</blockquote>
+
+<p>看下面的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Demo</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">String str1 </span><span class="o">=</span> <span class="s">&#34;abc&#34;</span><span class="p">;</span>
+        <span class="err">String str2 </span><span class="o">=</span> <span class="s">&#34;abc&#34;</span><span class="p">;</span>
+        <span class="err">String str3 </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;aaa&#34;</span><span class="p">);</span>
+        <span class="err">String str4 </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;aaa&#34;</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">str1</span> <span class="o">==</span> <span class="n">str2</span><span class="p">)</span>  <span class="c1">// true
+</span><span class="c1"></span>            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;str1 == str2&#34;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">str3</span> <span class="o">==</span> <span class="n">str4</span><span class="p">)</span>  <span class="c1">// false
+</span><span class="c1"></span>            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;str3 == str4&#34;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">str1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">str2</span><span class="p">))</span>  <span class="c1">// true
+</span><span class="c1"></span>            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;str1.equals(str2)&#34;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">str3</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">str4</span><span class="p">))</span>  <span class="c1">// true
+</span><span class="c1"></span>            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;str3.equals(str4)&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">str1 == str2
+str1.equals(str2)
+str3.equals(str4)</pre></td></tr></table>
+</div>
+</div>
+<p>从结果可以看出，对于 <code>String str1 = &quot;abc&quot;;</code> 来说，首先在常量池中查看有没有已经存在的值和相应的对象，由于第一次创建，所以创建 <code>str1</code> 并指向 <code>abc</code>。执行到 <code>String str2 = &quot;abc&quot;;</code> 的时候，由于之前创建过了，所以 <code>str1</code> 和 <code>str2</code> 指向的地址都是同一个对象 <code>abc</code>。因此返回 <code>true</code>，即输出 <code>str1 == str2</code>。</p>
+
+<p>对于 <code>String str3 = new String(&quot;aaa&quot;);</code> 来说，其创建了一个名为 <code>str3</code> 的引用，然后执行到 <code>String str4 = new String(&quot;aaa&quot;);</code> 的时候，又创建了一个 <code>str4</code> 的引用，这两个引用的内容都是 <code>aaa</code>。由于 String 重写了 equals 方法，所以此时的 <code>str3.equals(str4)</code> 比较的是 <code>str3</code> 和 <code>str4</code> 的内容是否相等，此时的内容是相等的，所以返回 <code>true</code>。</p>
+
+<p>关键就是看有没有重写 equals 方法。</p>
+
+<p>此外，equals 方法在非空对象上还存在一些引用上的特性：</p>
+
+<ul>
+<li>自反性：对于任何非空的引用值 x，x.equals(x) 应该返回的是 true。</li>
+<li>对称性：对于任何非空的引用值 x 和 y，当且仅当 y.equals(x) 返回 true 的时候，x.equals(y) 才返回 true。</li>
+<li>传递性：对于任何非空的引用值 x、y 和 z，如果 x.equals(y) 返回 true 并且 y.equals(z) 也返回 true 时，那么 x.equals(z) 也应该返回 true。</li>
+<li>一致性：对于任何非空的引用值 x 和 y，如果 x.equals(y) 返回的是 true 或 false，不管重复调用多少次  x.equals(y)，其结果还是对应的 true 或 false。</li>
+<li>对于任何非空引用值 x，x.equals(null) 应该返回的是 false。也就是说，x.equals( <code>与x不同类型的对象</code> ) 返回的是 false。</li>
+</ul>
+
+<h1 id="clone">clone()</h1>
+
+<p>该方法是一个 <code>protected native</code> 的方法，用于创建并返回一个对象的拷贝。对于任意的对象 x 有如下说明：</p>
+
+<ul>
+<li>表达式 x.clone() != x 返回的是 true。</li>
+<li>表达式 x.clone().getClass() == x.getClass() 返回的是 true。</li>
+<li>表达式 x.clone().equls(x) 返回的是 true。</li>
+</ul>
+
+<p>这里涉及到 <code>浅拷贝</code> 和 <code>深拷贝</code> 的问题。如<a href="https://camo.githubusercontent.com/d6d8355e9c0cbde0bdf8a53d34b0e2b46bbaa5e7/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f6a6176612d646565702d616e642d7368616c6c6f772d636f70792e6a7067">下图</a>所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2019/12/05/dOLKF8byecxIiol.png" alt="image.png" />
+</center></p>
+
+<p>对于 <code>浅拷贝</code>，它是直接将原先对象的引用直接拷贝给新对象的，通过引用拷贝的方式适用于 <code>引用数据类型</code>。而对于基本数据类型来说，则是进行 <code>值传递</code> 的方式。</p>
+
+<p>对于 <code>深拷贝</code>，基本数据类型的拷贝方式也是通过 <code>值传递</code> 的方式，而对于引用数据类型来说，它是根据原先的对象又创建了一个新对象，然后再将内容复制到新对象。</p>
+
+<h1 id="tostring">toString()</h1>
+
+<p>该方法返回一个字符串，这个字符串的表示形式是由 <code>当前对象实例的类的名称</code> 、<code>符号 @</code> 以及 <code>该对象的无符号十六进制</code> 组成。建议所有子类都重写此方法。源代码如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;@&#34;</span> <span class="o">+</span> <span class="n">Integer</span><span class="p">.</span><span class="na">toHexString</span><span class="p">(</span><span class="n">hashCode</span><span class="p">());</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>下面通过一个例子来说明其用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Demo</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">String str </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">);</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span> <span class="c1">// 这里使用 toString() 是多余的，因为 String 中已经重写了 Object 中的 toString() 方法。
+</span><span class="c1"></span>
+    <span class="err">Person p </span><span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;tom&#34;</span><span class="p">,</span> <span class="n">25</span><span class="p">);</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span> <span class="c1">// 由于在 Person 类中没有重写 toString() 方法，所以这里使用的其实是 Object 中的 toString() 方法。
+</span><span class="c1"></span>    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="err">class Person </span><span class="p">{</span>
+    <span class="err">private String </span><span class="n">name</span><span class="p">;</span>
+    <span class="err">private int </span><span class="n">age</span><span class="p">;</span>
+
+    <span class="err">public Person</span><span class="p">(</span><span class="err">String name</span><span class="p">,</span> <span class="err">int age</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">abc
+_01_BasicClass.Person@1b6d3586</pre></td></tr></table>
+</div>
+</div>
+<h1 id="参考">参考</h1>
+
+<p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Java™ Platform, Standard Edition 8 API Specification</a></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-12-04
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Java/">Java</a>
+          <a href="/tags/JDK/">JDK</a>
+          <a href="/tags/Object/">Object</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2019/11/29/offer-DigitsInSequence/">
+            <span class="next-text nav-default">剑指 Offer 之 数字序列中某一位的数字</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

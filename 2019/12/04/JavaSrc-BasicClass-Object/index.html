@@ -44,14 +44,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2019/12/04/JavaSrc-BasicClass-Object/" />
 <meta property="article:published_time" content="2019-12-04T18:02:11+08:00" />
-<meta property="article:modified_time" content="2019-12-04T18:03:56+08:00" />
+<meta property="article:modified_time" content="2019-12-09T17:36:56+08:00" />
 <meta itemprop="name" content="JDK 源码之基础类 Object">
 <meta itemprop="description" content="主要介绍 Java 中 Object 类的常见方法，通过阅读源码的方式加深对各种方法的理解。如有错误，欢迎在评论中和我一起讨论交流。">
 
 
 <meta itemprop="datePublished" content="2019-12-04T18:02:11&#43;08:00" />
-<meta itemprop="dateModified" content="2019-12-04T18:03:56&#43;08:00" />
-<meta itemprop="wordCount" content="3402">
+<meta itemprop="dateModified" content="2019-12-09T17:36:56&#43;08:00" />
+<meta itemprop="wordCount" content="4630">
 
 
 
@@ -132,8 +132,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 3402 words </span>
-          <span class="more-meta"> 7 mins read </span>
+          <span class="more-meta"> 4630 words </span>
+          <span class="more-meta"> 10 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -151,6 +151,12 @@
 <li><a href="#equals">equals()</a></li>
 <li><a href="#clone">clone()</a></li>
 <li><a href="#tostring">toString()</a></li>
+<li><a href="#notify">notify()</a></li>
+<li><a href="#notifyall">notifyAll()</a></li>
+<li><a href="#wait-long-timeout">wait(long timeout)</a></li>
+<li><a href="#wait-long-timeout-int-nanos">wait(long timeout, int nanos)</a></li>
+<li><a href="#wait">wait()</a></li>
+<li><a href="#finalize">finalize()</a></li>
 <li><a href="#参考">参考</a></li>
 </ul>
 </nav>
@@ -666,16 +672,20 @@ true</pre></td></tr></table>
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Demo</span> <span class="p">{</span>
     <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
     <span class="err">String str </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">);</span>
-    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span> <span class="c1">// 这里使用 toString() 是多余的，因为 String 中已经重写了 Object 中的 toString() 方法。
-</span><span class="c1"></span>
+    <span class="c1">// 这里使用 toString() 是多余的，因为 String 中已经重写了 Object 中的 toString() 方法
+</span><span class="c1"></span>    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span> 
+
     <span class="err">Person p </span><span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;tom&#34;</span><span class="p">,</span> <span class="n">25</span><span class="p">);</span>
-    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span> <span class="c1">// 由于在 Person 类中没有重写 toString() 方法，所以这里使用的其实是 Object 中的 toString() 方法。
-</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="c1">// 由于在 Person 类中没有重写 toString() 方法，所以这里使用的其实是 Object 中的 toString() 方法
+</span><span class="c1"></span>    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span> 
+    <span class="p">}</span>
 
 <span class="p">}</span>
 
@@ -701,9 +711,109 @@ true</pre></td></tr></table>
 _01_BasicClass.Person@1b6d3586</pre></td></tr></table>
 </div>
 </div>
+<h1 id="notify">notify()</h1>
+
+<p>该方法用于唤醒在当前对象监视器上等待的 <code>单个</code> 线程。如果所有线程都在此对象上等待，则只会选择唤醒它们当中的一个线程。这种选择是 <code>任意的</code>，并且可以根据实现情况进行选择。一个线程可以通过调用 <code>wait()</code> 方法在对象监视器上等待。</p>
+
+<p>在当前线程放弃对象上的锁之前，被唤醒的线程将不能进行处理。被唤醒的线程将以常规方式与在该对象上主动同步的其他所有线程进行竞争。例如，唤醒的线程在作为锁定此对象的下一个线程方面没有可靠的特权或劣势。</p>
+
+<p><code>notify()</code> 方法只能被作为此对象监视器的所有者的线程来调用。一个线程要想成为对象监视器的所有者，可以使用以下 3 种方法：</p>
+
+<ul>
+<li>执行对象的同步实例方法。</li>
+<li>执行对对象进行同步的同步语句体，也就是 synchronized 内置锁。</li>
+<li>对于 Class 类型的对象来说，执行同步静态方法。</li>
+</ul>
+
+<p>一次只能有一个线程拥有对象的监视器。</p>
+
+<h1 id="notifyall">notifyAll()</h1>
+
+<p>该方法用于唤醒在当前对象监视器上等待的 <code>所有</code> 线程。</p>
+
+<p>单从字面意义上理解，<code>notify()</code> 方法唤醒单个线程，而 <code>notifyAll()</code> 唤醒所有线程。那这两个方法到底有什么区别呢？</p>
+
+<p>这里参考了其它博客，首先要知道两个概念：</p>
+
+<ul>
+<li><p><strong>锁池</strong>：如果线程 A 已经拥有了某个对象 B 的锁，而其它的线程想要调用这个对象 B 的某个 synchronized 方法或执行 synchronized 块的时候，由于其它线程在进入对象 B 的 synchronized 方法或 synchronized 块之前需要先获得对象 B 所持有的锁的拥有权。但是此时对象 B 的锁目前正在被线程 A 拥有，所以其它线程就调用不了对象 B 的 synchronized 方法或执行 synchronized 块，反而进入了对象 B 的 <code>锁池</code> 中。</p></li>
+
+<li><p><strong>等待池</strong>：如果线程 A 调用了某个对象 B 的 wait() 方法，则线程 A 就会释放对象 B 的锁，同时线程 A 就会进入对象 B 的 <code>等待池</code> 中。<strong>为什么？因为 wait() 方法是在 synchronized 中的，线程 A 在执行 wait() 方法之前其实就已经拥有了对象 B 的锁。</strong>此时，如果另外一个线程调用了对象 B 的 notifyAll() 方法，那么处于对象 B 的 <code>等待池</code> 中的线程就会全部进入对象 B 的 <code>锁池</code> 中，准备争夺锁的拥有权。如果另外一个线程调用了 notify() 方法，则仅有一个处于对象 B 的 <code>等待池</code> 中的线程会随机地进入对象 B 的 <code>锁池</code> 中。</p></li>
+</ul>
+
+<p><strong>所以，当某个线程调用 wait() 方法后，在释放锁的同时进入等待池中，不参与锁的竞争。而当调用 notify() 后，等待池中 <code>仅有一个线程</code> 会进入该对象的锁池中参与锁的竞争，如果竞争成功，则会获得锁，否则继续在锁池中等待下一次竞争。当调用 notifyAll() 后，等待池中的 <code>所有线程</code> 都会进入该对象的锁池中参与锁的竞争。</strong></p>
+
+<h1 id="wait-long-timeout">wait(long timeout)</h1>
+
+<p>该方法使当前线程等待，直到另一个线程为此对象调用 notify() 或 notifyAll() 方法或经过了指定的时间（timeout）。</p>
+
+<p>需要注意的是，如果将参数设置为 0 的话，则表示一直处于等待状态。</p>
+
+<h1 id="wait-long-timeout-int-nanos">wait(long timeout, int nanos)</h1>
+
+<p>该方法和 <code>wait(long timeout)</code> 是一样的，只不过多了一个参数 <code>nanos</code>。所以，超时时间还应该再加上这一额外的时间。其源码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final void wait</span><span class="p">(</span><span class="err">long timeout</span><span class="p">,</span> <span class="err">int nanos</span><span class="p">)</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">timeout</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;timeout value is negative&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">nanos</span> <span class="o">&lt;</span> <span class="n">0</span> <span class="o">||</span> <span class="n">nanos</span> <span class="o">&gt;</span> <span class="n">999999</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span>
+                            <span class="s">&#34;nanosecond timeout value out of range&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">nanos</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">timeout</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="wait">wait()</h1>
+
+<p>该方法通过查看源码可知：就是让当前线程一直处于等待的状态，即 <code>timeout</code> 置为 <code>0</code>。源码如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final void wait</span><span class="p">()</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
+    <span class="n">wait</span><span class="p">(</span><span class="n">0</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="finalize">finalize()</h1>
+
+<p>该方法与 JVM 中垃圾回收机制相关，当垃圾回收器确定不再有对该对象的引用时，由垃圾回收器在对象上调用此方法。</p>
+
 <h1 id="参考">参考</h1>
 
 <p><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html">Java™ Platform, Standard Edition 8 API Specification</a></p>
+
+<p><a href="https://blog.csdn.net/emailed/article/details/4689220">Java 中的锁池和等待池</a></p>
     </div>
 
     <div class="post-copyright">
@@ -714,7 +824,7 @@ _01_BasicClass.Person@1b6d3586</pre></td></tr></table>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2019-12-04
+        2019-12-09
         
     </span>
   </p>

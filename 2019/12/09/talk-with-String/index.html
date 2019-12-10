@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>再谈 String s1 = &#34;123&#34; 与 String s2 = new String(&#34;123&#34;) - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="之前在介绍 JDK 源码之基础类 Object 中 equals() 方法的时候，稍微提到了关于在声明一个 String 变量的时候，通过其内存地址或具体内容来比较两个变量是否相同。本篇文章是对之前文章的进一步理解。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2019/12/09/talk-with-String/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="再谈 String s1 = &#34;123&#34; 与 String s2 = new String(&#34;123&#34;)" />
+<meta property="og:description" content="之前在介绍 JDK 源码之基础类 Object 中 equals() 方法的时候，稍微提到了关于在声明一个 String 变量的时候，通过其内存地址或具体内容来比较两个变量是否相同。本篇文章是对之前文章的进一步理解。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2019/12/09/talk-with-String/" />
+<meta property="article:published_time" content="2019-12-09T20:24:11+08:00" />
+<meta property="article:modified_time" content="2019-12-10T20:24:56+08:00" />
+<meta itemprop="name" content="再谈 String s1 = &#34;123&#34; 与 String s2 = new String(&#34;123&#34;)">
+<meta itemprop="description" content="之前在介绍 JDK 源码之基础类 Object 中 equals() 方法的时候，稍微提到了关于在声明一个 String 变量的时候，通过其内存地址或具体内容来比较两个变量是否相同。本篇文章是对之前文章的进一步理解。">
+
+
+<meta itemprop="datePublished" content="2019-12-09T20:24:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-12-10T20:24:56&#43;08:00" />
+<meta itemprop="wordCount" content="2694">
+
+
+
+<meta itemprop="keywords" content="String," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="再谈 String s1 = &#34;123&#34; 与 String s2 = new String(&#34;123&#34;)"/>
+<meta name="twitter:description" content="之前在介绍 JDK 源码之基础类 Object 中 equals() 方法的时候，稍微提到了关于在声明一个 String 变量的时候，通过其内存地址或具体内容来比较两个变量是否相同。本篇文章是对之前文章的进一步理解。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">再谈 String s1 = &#34;123&#34; 与 String s2 = new String(&#34;123&#34;)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-09 </span>
+        <div class="post-category">
+            <a href="/categories/Java/"> Java </a>
+            </div>
+          <span class="more-meta"> 2694 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#深入-string">深入 String</a></li>
+<li><a href="#使用符号-连接字符串会发生什么">使用符号 &ldquo;+&rdquo; 连接字符串会发生什么？</a></li>
+<li><a href="#如何正确的连接字符串">如何正确的连接字符串？</a></li>
+<li><a href="#再来个例子">再来个例子</a></li>
+<li><a href="#最后一个例子">最后一个例子</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>之前在介绍 <a href="https://dyfloveslife.github.io/2019/12/04/JavaSrc-BasicClass-Object/#equals">JDK 源码之基础类 Object</a> 中 <code>equals()</code> 方法的时候，稍微提到了关于在声明一个 String 变量的时候，通过其内存地址或具体内容来比较两个变量是否相同。本篇文章是对之前文章的进一步理解。</p>
+
+<h1 id="深入-string">深入 String</h1>
+
+<p>先来个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">String s1 </span><span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="p">;</span>
+    <span class="err">String s2 </span><span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="p">;</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">);</span> <span class="c1">// true
+</span><span class="c1"></span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;----&#34;</span><span class="p">);</span>
+
+    <span class="err">String s3 </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">);</span>
+    <span class="err">String s4 </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">);</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s3</span> <span class="o">==</span> <span class="n">s4</span><span class="p">);</span> <span class="c1">// false
+</span><span class="c1"></span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>从输出结果可以看到，<code>s1 == s2</code> 此时比较的是这两个对象的引用是否相等，而不是比较具体的内容。</strong></p>
+
+<p><strong>对于 <code>s3 == s4</code> 来说虽然内容相等，但是 <code>s3</code> 和 <code>s4</code> 是两个不同的引用，因此返回 <code>false</code>。</strong></p>
+
+<p>在文章 <a href="https://dyfloveslife.github.io/2019/11/18/java-memory-areas/#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0">Java 内存区域概述</a> 里提到过，<code>常量池</code> 里存放的数据是 <strong>在编译期间生成的各种字面量和符号引用，这部分内容（基本数据类型、String、数组）将在类加载后进入方法区的运行时常量池中存放。</strong></p>
+
+<p>对于字面量，也就是说对于 <code>String s1 = &quot;123&quot;;</code> 来说，其中 <code>String</code> 表示引用的类型；<code>s1</code> 表示一个引用，<strong>该引用指向的是字面量 <code>123</code> 在常量池中的地址；</strong> <code>123</code> 表示在编译期间可被确定的内容，存放在 <code>常量池</code> 中。</p>
+
+<p>关于 <code>栈</code> 与 <code>常量池</code> 的区别，我也在网上搜集了不少文章，比如在知乎上的<a href="https://www.zhihu.com/question/26711836">回答</a>。同时，我也想起了 <a href="https://github.com/alibaba/p3c/blob/master/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%88%E5%8D%8E%E5%B1%B1%E7%89%88%EF%BC%89.pdf">阿里巴巴Java开发手册</a> 中 <code>编程规约 -&gt; OOP 规约</code> 下的第 7 条，如下所示：</p>
+
+<blockquote>
+<p><strong>所有的相同类型的包装类型对象之间 <code>值的比较</code>，全部使用 equals 方法。</strong></p>
+
+<p><br></p>
+
+<ul>
+<li>对于 Integer var = ? ，在 -128 至 127 范围内的赋值，Integer 对象是在 <code>IntegerCache.cache</code> 产生，<strong>会复用已有对象</strong>，这个区间内的 Integer 值可以直接使用 == 进行判断。</li>
+<li>但是 <strong>这个区间之外的所有数据，都会在 <code>堆</code> 上产生，并不会复用已有对象</strong>，这是一个大坑，推荐使用 equals 方法进行判断。</li>
+</ul>
+</blockquote>
+
+<p>对于这条约定，我们可以用以下代码说明：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Integer i1 </span><span class="o">=</span> <span class="n">100</span><span class="p">;</span>
+<span class="err">Integer i2 </span><span class="o">=</span> <span class="n">100</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i1</span> <span class="o">==</span> <span class="n">i2</span><span class="p">);</span> <span class="c1">// true
+</span><span class="c1"></span><span class="err">Integer i3 </span><span class="o">=</span> <span class="n">200</span><span class="p">;</span>
+<span class="err">Integer i4 </span><span class="o">=</span> <span class="n">200</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i3</span> <span class="o">==</span> <span class="n">i4</span><span class="p">);</span> <span class="o">//</span> <span class="kc">false</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>产生这种现象的原因是由于 <code>自动装箱</code> 造成的：</p>
+
+<ul>
+<li><code>Integer i1 = 100;</code> 产生了自动装箱，由基本数据类型 <code>int = 100</code> 自动装箱成了对应的包装类型 <code>Integer = 100</code>，具体转换过程就是在源码中对应的 <code>Integer i1 = Integer.valueOf(100);</code>。</li>
+<li>这里涉及到 <code>IntegerCache</code> 的大小，即 <code>IntegerCache.low</code> 默认为 <code>-128</code>，<code>IntegerCache.high</code> 默认为 <code>127</code>。</li>
+<li>这个容量大小表示：在此范围内的对象直接放到缓存中，等到下次再取这个对象的时候，直接复用即可。这种缓存机制可以提高程序的运行效率、节省内存空间。</li>
+<li>所以，<code>100</code> 是在这个区间范围里面的。而 <code>200</code> 不在此范围中，它会在堆中产生（new）新的对象，并不会复用原有的对象，这也是返回 <code>false</code> 的原因。</li>
+</ul>
+
+<blockquote>
+<p>好像有点扯远了。</p>
+</blockquote>
+
+<p>回到 <code>常量池</code> 具有 <code>数据共享</code> 这一特点，对于语句 <code>String s1 = &quot;123&quot;;</code>：</p>
+
+<ul>
+<li>JVM 首先会在 <code>常量池</code> 中查找该字符串是否已经存在，如果存在则直接返回该字符串对应的引用（也就是地址）；</li>
+<li>然后语句 <code>String s2 = &quot;123&quot;;</code> 也会在 <code>常量池</code> 中查看有没有这个字符串，结果发现已经存在了；</li>
+<li>由于 <code>数据共享</code>，所以 <code>s2</code> 就指向了 <code>123</code>，而不是再次创建一个 <code>123</code>。因此，此时返回的是 <code>true</code>。</li>
+</ul>
+
+<p>对于 <code>String s3 = new String(&quot;abc&quot;);</code> 来说：</p>
+
+<ul>
+<li>由于使用了 <code>new</code> 关键字，JVM 不会再查询 <code>常量池</code> 了，而是被 <code>new</code> 出来的对象会被放置在 <code>堆内存</code> 中，并用 <code>s3</code> 指向这块内存，即 <code>s3</code> 代表的是 <code>当前对象的引用</code>；</li>
+<li>每 <code>new</code> 一次，就从堆中开辟一块内存。由于是两块不同的内存，所代表的是两个完全不同的对象，所以 <code>s3</code> 和 <code>s4</code> 也就不相等了。</li>
+</ul>
+
+<h1 id="使用符号-连接字符串会发生什么">使用符号 &ldquo;+&rdquo; 连接字符串会发生什么？</h1>
+
+<p>我们首先使用 <code>javap -c Demo</code> 反编译 <code>Demo.class</code> 文件，得到 Java 编译器生成的字节码：</p>
+
+<p>源文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Demo</span><span class="p">{</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">String s </span><span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="p">;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#34;456&#34;</span><span class="p">;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#34;789&#34;</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>编译后的字节码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ javap -c Demo
+Compiled from &#34;Demo.java&#34;
+public class Demo {
+  public Demo();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+       4: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: ldc           #2                  // String 123
+       2: astore_1
+       3: new           #3                  // class java/lang/StringBuilder
+       6: dup
+       7: invokespecial #4                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+      10: aload_1
+      11: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      14: ldc           #6                  // String 456
+      16: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      19: invokevirtual #7                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      22: astore_1
+      23: new           #3                  // class java/lang/StringBuilder
+      26: dup
+      27: invokespecial #4                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+      30: aload_1
+      31: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      34: ldc           #8                  // String 789
+      36: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      39: invokevirtual #7                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      42: astore_1
+      43: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
+      46: aload_1
+      47: invokevirtual #10                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      50: return
+}</pre></td></tr></table>
+</div>
+</div>
+<p>通过编译结果可以看出，第 <code>16</code> 行对应的是源代码中的第 <code>#4</code> 行，也就是 <code>String s = &quot;123&quot;;</code>语句。在初始化 <code>s</code> 的时候，其实在内部使用了 <code>StringBuilder</code>。</p>
+
+<p>然后到了第 <code>18</code> 行，也就是对应源代码中的第 <code>#5</code> 行，再执行 <code>s += &quot;456&quot;;</code> 语句的时候，调用了 <code>StringBuilder</code> 的 <code>append</code> 方法，最后调用 <code>StringBuilder</code> 的 <code>toString</code> 方法生成字符串。</p>
+
+<p>然而 <code>StringBuilder</code> 的 <code>toString</code> 方法是创建一个新的 <code>String</code> 对象的拷贝，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Create a copy, don&#39;t share the array
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>所以说，每次在使用符号 “+” 的时候，都会 new 一个 <code>StringBuilder</code>，使用这种方式连接字符串无疑是一种对内存的浪费。</p>
+
+<h1 id="如何正确的连接字符串">如何正确的连接字符串？</h1>
+
+<p>我们可以使用 <code>StringBuilder</code> 或者 <code>StringBuffer</code> 的 <code>append</code> 方法连接字符串。它俩的区别在于，<code>StringBuffer</code> 是线程安全的，因为它里面的许多方法都是使用 <code>synchronized</code> 修饰的，而 <code>StringBuilder</code> 不是线程安全的。</p>
+
+<p><code>StringBuilder</code> 在底层维护了一个 <code>char</code> 类型的数组，每次调用 <code>append</code> 方法的时候就往数组里面存值，在调用 <code>toString</code> 方法的时候，将 <code>char</code> 数组中的字符转换成字符串。整个过程其实只使用了一个 <code>StringBuilder</code> 对象，这样的话可以节省内存。</p>
+
+<h1 id="再来个例子">再来个例子</h1>
+
+<p>如下面代码所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">IntegerDemo</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">String s1 </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;abc &#34;</span><span class="p">)</span> <span class="o">+</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;def&#34;</span><span class="p">);</span>
+        <span class="n">s1</span><span class="p">.</span><span class="na">intern</span><span class="p">();</span>
+        <span class="err">String s2 </span><span class="o">=</span> <span class="s">&#34;abc def&#34;</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">);</span> <span class="c1">// true
+</span><span class="c1"></span>    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果将 <code>s1.intern();</code> 语句注释掉后，结果则返回 <code>false</code>。为什么？</p>
+
+<p>来分析一下第 3 行语句 <code>String s1 = new String(&quot;abc &quot;) + new String(&quot;def&quot;);</code>：</p>
+
+<ul>
+<li>首先由于是 new 关键字，则直接在堆中生成两个字符串 <code>abc</code> 和 <code>def</code>；</li>
+<li>然后符号 “+” 在底层使用了 <code>StringBuilder</code> 进行字符串的拼接；</li>
+<li>拼接完成后产生新的 <code>abc def</code> 对象，并使用 <code>s1</code> 指向它。</li>
+</ul>
+
+<p>第 4 行语句 <code>s1.intern();</code> 的作用是：</p>
+
+<ul>
+<li>先去 <code>常量池</code> 中查看是否有当前字符串对应的引用：
+
+<ul>
+<li>如果有的话，就直接返回该字符串；</li>
+<li>如果没有的话，则在 <code>常量池</code> 中生成该字符串的引用，然后再返回该字符串。</li>
+</ul></li>
+</ul>
+
+<p><strong>由于字符串 <code>abc def</code> 是在 <code>堆</code> 中生成的，<code>常量池</code> 中没有对应的引用，所以它会在 <code>常量池</code> 中生成该字符串的引用。</strong></p>
+
+<p>第 5 行语句 <code>String s2 = &quot;abc def&quot;;</code> 就是前面讲过的，首先会在 <code>常量池</code> 中查找有没有当前字符串对应的引用，这时由于 <code>s1.intern();</code> 已经生成过引用了，再加上 <code>数据共享机制</code>，所以 <code>s2</code> 就和 <code>s1</code> 一样共同指向字符串 <code>abc def</code>，即 <code>s1</code> 和 <code>s2</code> 指向相同的对象，所以最后结果返回的是 <code>true</code>。</p>
+
+<p>如果没有 <code>s1.intern();</code> 这一语句，则 <code>s2</code> 会看到在 <code>常量池</code> 中没有当前字符串对应的引用，所以它会在 <code>常量池</code> 中生成 <code>abc def</code>，此时 <code>s1</code> 与 <code>s2</code> 指向的就是两个不同的对象了，这就是返回 <code>false</code> 的原因。</p>
+
+<h1 id="最后一个例子">最后一个例子</h1>
+
+<p>看下列代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">String s1 </span><span class="o">=</span> <span class="s">&#34;aaa &#34;</span><span class="p">;</span> <span class="c1">// 注意：aaa 后面有一个空格
+</span><span class="c1"></span>    <span class="err">String s2 </span><span class="o">=</span> <span class="s">&#34;bbb&#34;</span><span class="p">;</span>
+    <span class="err">String s3 </span><span class="o">=</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span><span class="p">;</span>
+    <span class="err">String s4 </span><span class="o">=</span> <span class="s">&#34;aaa bbb&#34;</span><span class="p">;</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s3</span> <span class="o">==</span> <span class="n">s4</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>经过前面的“修炼”，我想你应该知道上面代码最终的输出结果了。我们还是来分析一下最终的结果为什么是 <code>fasle</code>。</p>
+
+<ul>
+<li>首先，由于在 <code>常量池</code> 中没有创建过 <code>aaa</code>，则此时 <code>s1</code> 就指向的是 <code>aaa</code>，<code>s2</code> 同理指向 <code>bbb</code>；</li>
+<li>然后，由于符号 “+” 在底层使用的是 <code>StringBuilder</code> 进行字符串的拼接，其生成的字符串是调用 <code>toString</code> 方法在 <code>堆</code> 上 new 出来的 <code>aaa bbb</code>，然后 <code>s3</code> 指向 <code>堆</code> 中的字符串；</li>
+<li>一个在 <code>常量池</code> 中，另一个在 <code>堆</code> 中，结果自然就返回 <code>false</code> 了。</li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-12-10
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/String/">String</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2019/12/04/JavaSrc-BasicClass-Object/">
+            <span class="next-text nav-default">JDK 源码之基础类 Object</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

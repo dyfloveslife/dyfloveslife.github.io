@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 09 Dec 2019 20:24:11 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 11 Dec 2019 16:47:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>剑指 Offer 之 最长不含重复字符的子字符串</title>
+      <link>http://localhost:1313/2019/12/11/offer-longest-SubString-Without-Duplication/</link>
+      <pubDate>Wed, 11 Dec 2019 16:47:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/12/11/offer-longest-SubString-Without-Duplication/</guid>
+      <description>&lt;p&gt;本文是对解题思路的整理。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>再谈 String s1 = &#34;123&#34; 与 String s2 = new String(&#34;123&#34;)</title>

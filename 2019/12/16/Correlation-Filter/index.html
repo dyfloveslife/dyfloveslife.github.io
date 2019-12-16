@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>相关滤波器（Correlation Filters）的前世今生 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域。文章还对 MOSSE 和 KCF 算法进行了的介绍，并通过 KCF 的具体实现代码来加深对 相关滤波器 的理解。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2019/12/16/Correlation-Filter/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="相关滤波器（Correlation Filters）的前世今生" />
+<meta property="og:description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域。文章还对 MOSSE 和 KCF 算法进行了的介绍，并通过 KCF 的具体实现代码来加深对 相关滤波器 的理解。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2019/12/16/Correlation-Filter/" />
+<meta property="article:published_time" content="2019-12-16T17:44:11+08:00" />
+<meta property="article:modified_time" content="2019-12-16T17:45:56+08:00" />
+<meta itemprop="name" content="相关滤波器（Correlation Filters）的前世今生">
+<meta itemprop="description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域。文章还对 MOSSE 和 KCF 算法进行了的介绍，并通过 KCF 的具体实现代码来加深对 相关滤波器 的理解。">
+
+
+<meta itemprop="datePublished" content="2019-12-16T17:44:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-12-16T17:45:56&#43;08:00" />
+<meta itemprop="wordCount" content="1734">
+
+
+
+<meta itemprop="keywords" content="Correlation Filters," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="相关滤波器（Correlation Filters）的前世今生"/>
+<meta name="twitter:description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域。文章还对 MOSSE 和 KCF 算法进行了的介绍，并通过 KCF 的具体实现代码来加深对 相关滤波器 的理解。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">相关滤波器（Correlation Filters）的前世今生</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-16 </span>
+        <div class="post-category">
+            <a href="/categories/Visual-Trancking/"> Visual Trancking </a>
+            </div>
+          <span class="more-meta"> 1734 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#相关滤波器">相关滤波器</a></li>
+<li><a href="#mosse-算法">MOSSE 算法</a></li>
+<li><a href="#kcf-算法">KCF 算法</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本文将会从 <code>相关滤波器</code> 的相关理论进行展开，讲述如何将信号处理领域的 <code>相关滤波器</code> 融入到目前比较热门的 <code>目标追踪</code> 领域。文章还对 <code>MOSSE</code> 和 <code>KCF</code> 算法进行了的介绍，并通过 <code>KCF</code> 的具体实现代码来加深对 <code>相关滤波器</code> 的理解。</p>
+
+<blockquote>
+<p>若有错误，还请批评指出。</p>
+</blockquote>
+
+<h1 id="相关滤波器">相关滤波器</h1>
+
+<p>没错，这个滤波器的名字就叫做 <code>相关滤波器（Correlation filters）</code>，也叫 <code>判别相关滤波器（Discriminative correlation filters，DCF）</code>。它是将信号处理领域中的 <code>信号相关性理论</code> 引入到 <code>目标追踪</code> 领域中的一种方法。</p>
+
+<p><strong>具体思想是：通过使用信号的相关性来描述两个因素之间的联系，将 <code>目标区域</code> 与 <code>待检测的区域</code> 比作信号，并计算这两个区域之间的相关性，相关性越大，则滤波器得到的响应也就越大，最后得到相关性最大的区域就是目标区域，即跟踪区域。</strong></p>
+
+<p>实现步骤可分为如下三步：</p>
+
+<ul>
+<li>首先，对已经跟踪出的多个目标区域进行特征提取，通过训练这些特征得到一个滤波器模板；</li>
+<li>然后，用训练好的滤波器与下一帧中的待检测的区域进行相关性的计算，将相关性最大的区域（最大响应点所在的区域）设置为下一帧中目标预测的位置；</li>
+<li>最后，提取以目标位置为中心的特征，用新位置区域再次训练并更新相关滤波器，通过不断循环以上步骤进行预测，可达到实时跟踪的效果。</li>
+</ul>
+
+<p>这里有一个 <code>相关性</code> 的概念，可分为如下两种：</p>
+
+<ul>
+<li>互相关（<a href="https://en.wikipedia.org/wiki/Cross-correlation">cross-correlation</a>），在信号处理领域中，互相关是用来表示 <strong>两个信号之间相似性的一个度量</strong>，通过与已知信号的比较，以此用于寻找未知信号中的特性。</li>
+<li>自相关（<a href="https://en.wikipedia.org/wiki/Autocorrelation">auto-correlation</a>），也叫序列相关，<strong>是一个信号于其自身在不同时间点（频域）的互相关</strong>，也就是两次观察之间的相似度对它们之间的时间差的函数。</li>
+</ul>
+
+<p>对于 $ f $ 和 $ g $ 这两个信号量，它们之间的相关性如下所示：</p>
+
+<p>$$
+(f \otimes g)(\tau) = \int_ {\infty} ^ {-\infty}{f ^ *}(t)g(t + {\tau})dt  \qquad(1)
+$$</p>
+
+<p>$$
+(f \otimes g)(n) = \sum_{-\infty} ^ {\infty} {f ^ *} [m]g(m + n)  \qquad(2)
+$$</p>
+
+<p>式中，$ f ^ * $  表示 $ f $ 的<a href="https://en.wikipedia.org/wiki/Complex_conjugate">共轭复数</a>，这种相关性表示的就是两个函数在某个时刻 $ \tau $ 的相似程度。由于存在时间差，所以要想得到最大值，就需要将其中一个变量进行平移。而 $ g(t + {\tau}) $ 就表示将 $ g $ 平移 $ {\tau} $ 个时刻。</p>
+
+<p><code>相关滤波</code> 在 <code>目标跟踪</code> 方面主要是通过设计一个滤波器模板，使得当该模板作用在目标上时，得到最大的响应。</p>
+
+<p>目前针对视频的目标追踪方法有三大方向：<strong>深度学习方向</strong>、<strong>相关滤波方向</strong> 以及 <strong>其它传统方法</strong>。如<a href="https://github.com/foolwood/benchmark_results/blob/master/img/recent_Tracker_development.png">下图</a>所示：</p>
+
+<p><img src="https://i.loli.net/2019/12/16/v43pSLzyiXqoa91.png" alt="image.png" /></p>
+
+<p>基于 <strong>深度学习</strong> 的方法在训练神经网络的时候会产生较多的参数，从而导致训练时间较长，难以达到实时追踪的目的。</p>
+
+<p>基于 <strong>相关滤波</strong> 的方法速度快，并且追踪的效果好，逐步成为视频跟踪算法发展的主要方向。从图中可以看到，作为首次将 <code>Correlation Filters</code> 引入到 <code>目标追踪</code> 的 <code>MOSSE</code> 方法被称为该领域的 <em><strong>开山鼻祖</strong></em> 。</p>
+
+<h1 id="mosse-算法">MOSSE 算法</h1>
+
+<p>该算法是在 2010 年由 <a href="https://www.semanticscholar.org/paper/Visual-object-tracking-using-adaptive-correlation-Bolme-Beveridge/70c3c9b9a40ca55264e454586dca2a6cf416f6e0">《Visual object tracking using adaptive correlation filters》</a> 论文提出的，其使用 <code>MISSE（Minimum Output Sum of Squared Error filter，误差最小平方和滤波器）</code> 来训练一个最优的滤波器模板，使其在目标上的响应最大，如下所示：</p>
+
+<p>$$
+g = f \otimes h   \qquad(3)
+$$</p>
+
+<p>其中，$ g $ 表示响应输出，即相关输出，$ f $ 表示输入图像，$ h $ 表示滤波模板，$ \otimes $ 为卷积操作。式 $ (3) $ 可以进一步展开，如下所示：</p>
+
+<p>$$
+f \otimes h(\tau) = \int_ {\infty} ^ {-\infty}{f ^ *}(t)h(t + {\tau})dt  \qquad(4)
+$$</p>
+
+<p>由于输入图像 $ f $ 是固定的，这里只需要确定的是滤波器模板 $ h $。由于上式的卷积运算计算量很大，因此 <code>MOSSE</code> 方法利用 <code>快速傅里叶变换（FFT）</code> 的方式，将 $ f $ 和 $ h $ 在频域内进行表示，函数互相关的傅里叶变换等于函数傅里叶变换的乘积，将 <code>卷积</code> 操作转换为 <code>点乘</code> 操作，这样可以极大的减少计算量，如下所示：</p>
+
+<p>$$
+F(g) = F(f \otimes h)
+= F(f) \cdot {F(h) ^  *} \qquad(5)
+$$</p>
+
+<p>$ F $ 表示傅里叶变换，$ \cdot $ 表示点乘运算。可将 $ (5) $ 简写成如下所示：</p>
+
+<p>$$
+G = F \cdot {H^*} \qquad(6)
+$$</p>
+
+<p>也即：</p>
+
+<p>$$
+{H^*} =  \frac {G}{F} \qquad(7)
+$$</p>
+
+<p>好了，现在就只需要求 $ {H^*} $ 就可以了。</p>
+
+<p>在计算之前，对于实际的目标追踪技术，还需要考虑到 <strong>目标的外观变换</strong> 等因素的影响。所以需要考虑到以目标的 $ m $ 个图像作为参考，从而提高滤波器模板的鲁棒性，如下所示：</p>
+
+<p>$$
+min_ {H^*}= \sum_ {i=1}^{m} {\mid} H^*F_i - G_i {\mid}^{2}  \qquad(8)
+$$</p>
+
+<p>对于每个元素来说，要想找到最小的 $ min $，只需要将其中的每个元素的 MOSSE 都最小即可，如下所示：</p>
+
+<p>$$
+min_ {H_ {w,v}^*}= \sum_ {i=1}^{m} {\mid} H_ {w,v}^*F_{w,v,i} - G_{w,v,i} {\mid}^{2}  \qquad(9)
+$$</p>
+
+<p>要想得到最小的 $ {H_ {wv}^{*}} $，只需要将上式求偏导，并使偏导等于 $ 0 $ 即可，如下所示：</p>
+
+<blockquote>
+<p>这里要注意的是，在 <strong>复数域</strong> 的求导和在 <strong>实数域</strong> 求导是不同的。</p>
+</blockquote>
+
+<p>$$
+0 = \frac {\partial}{\partial H_ {w,v}^{*}} \sum_i {\mid} F_{i,w,v} H_{w,v} - G_{i,w,v} {\mid}^{2}
+$$</p>
+
+<h1 id="kcf-算法">KCF 算法</h1>
+
+<h1 id="参考">参考</h1>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-12-16
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Correlation-Filters/">Correlation Filters</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2019/12/13/JavaSrc-BasicClass-Integer/">
+            <span class="next-text nav-default">JDK 源码之基础类 Integer</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

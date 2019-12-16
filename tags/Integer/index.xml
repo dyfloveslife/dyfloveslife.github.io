@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Integer on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/Integer/</link>
+    <description>Recent content in Integer on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 13 Dec 2019 21:20:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/Integer/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JDK 源码之基础类 Integer</title>
+      <link>http://localhost:1313/2019/12/13/JavaSrc-BasicClass-Integer/</link>
+      <pubDate>Fri, 13 Dec 2019 21:20:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/12/13/JavaSrc-BasicClass-Integer/</guid>
+      <description>&lt;p&gt;本片文章主要介绍 Integer 类中一些比较常用的方法，并分析该类在 Java 中的作用。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

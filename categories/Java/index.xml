@@ -6,10 +6,19 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 09 Dec 2019 20:24:11 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 13 Dec 2019 21:20:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/Java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JDK 源码之基础类 Integer</title>
+      <link>http://localhost:1313/2019/12/13/JavaSrc-BasicClass-Integer/</link>
+      <pubDate>Fri, 13 Dec 2019 21:20:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/12/13/JavaSrc-BasicClass-Integer/</guid>
+      <description>&lt;p&gt;本片文章主要介绍 Integer 类中一些比较常用的方法，并分析该类在 Java 中的作用。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>再谈 String s1 = &#34;123&#34; 与 String s2 = new String(&#34;123&#34;)</title>

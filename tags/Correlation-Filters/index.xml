@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Correlation Filters on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/Correlation-Filters/</link>
+    <description>Recent content in Correlation Filters on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 16 Dec 2019 17:44:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/Correlation-Filters/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>相关滤波器（Correlation Filters）的前世今生</title>
+      <link>http://localhost:1313/2019/12/16/Correlation-Filter/</link>
+      <pubDate>Mon, 16 Dec 2019 17:44:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/12/16/Correlation-Filter/</guid>
+      <description>&lt;p&gt;本文将会从 &lt;code&gt;相关滤波器&lt;/code&gt; 的相关理论进行展开，讲述如何将信号处理领域的 &lt;code&gt;相关滤波器&lt;/code&gt; 融入到目前比较热门的 &lt;code&gt;目标追踪&lt;/code&gt; 领域。文章还对 &lt;code&gt;MOSSE&lt;/code&gt; 和 &lt;code&gt;KCF&lt;/code&gt; 算法进行了的介绍，并通过 &lt;code&gt;KCF&lt;/code&gt; 的具体实现代码来加深对 &lt;code&gt;相关滤波器&lt;/code&gt; 的理解。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

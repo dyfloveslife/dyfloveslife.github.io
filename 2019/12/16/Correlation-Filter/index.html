@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-12-16T17:44:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-17T19:28:56&#43;08:00" />
-<meta itemprop="wordCount" content="2343">
+<meta itemprop="wordCount" content="2359">
 
 
 
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/Visual-Trancking/"> Visual Trancking </a>
             </div>
-          <span class="more-meta"> 2343 words </span>
+          <span class="more-meta"> 2359 words </span>
           <span class="more-meta"> 5 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -214,7 +214,7 @@ $$</p>
 f \otimes h(\tau) = \int_ {\infty} ^ {-\infty}{f ^ *}(t)h(t + {\tau})dt  \qquad(4)
 $$</p>
 
-<p>由于输入图像 $ f $ 是固定的，这里只需要确定的是滤波器模板 $ h $。由于上式的卷积运算计算量很大，因此 <code>MOSSE</code> 方法利用 <code>快速傅里叶变换（FFT）</code> 的方式，将 $ f $ 和 $ h $ 在频域内进行表示，函数互相关的傅里叶变换等于函数傅里叶变换的乘积，将 <code>卷积</code> 操作转换为 <code>点乘</code> 操作，这样可以极大的减少计算量，如下所示：</p>
+<p>由于输入图像 $ f $ 是固定的，这里只需要确定的是滤波器模板 $ h $。由于上式的卷积运算计算量很大，因此 <code>MOSSE</code> 方法利用 <code>快速傅里叶变换（FFT）</code> 的方式，将 $ f $ 和 $ h $ 在频域内进行表示，函数互相关的傅里叶变换等于函数傅里叶变换的乘积（时域上的卷积等于频域上的乘积），将 <code>卷积</code> 操作转换为 <code>点乘</code> 操作，这样可以极大的减少计算量，如下所示：</p>
 
 <p>$$
 F(g) = F(f \otimes h)

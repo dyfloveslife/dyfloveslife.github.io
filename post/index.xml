@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>相关滤波器（Correlation Filters）的前世今生</title>
+      <title>基于相关滤波器（Correlation Filters）的 MOSSE 算法</title>
       <link>http://localhost:1313/2019/12/16/Correlation-Filter/</link>
       <pubDate>Mon, 16 Dec 2019 17:44:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/12/16/Correlation-Filter/</guid>
-      <description>&lt;p&gt;本文将会从 &lt;code&gt;相关滤波器&lt;/code&gt; 的相关理论进行展开，讲述如何将信号处理领域的 &lt;code&gt;相关滤波器&lt;/code&gt; 融入到目前比较热门的 &lt;code&gt;目标追踪&lt;/code&gt; 领域。文章还对 &lt;code&gt;MOSSE&lt;/code&gt; 和 &lt;code&gt;KCF&lt;/code&gt; 算法进行了的介绍，并通过 &lt;code&gt;KCF&lt;/code&gt; 的具体实现代码来加深对 &lt;code&gt;相关滤波器&lt;/code&gt; 的理解。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文将会从 &lt;code&gt;相关滤波器&lt;/code&gt; 的相关理论进行展开，讲述如何将信号处理领域的 &lt;code&gt;相关滤波器&lt;/code&gt; 融入到目前比较热门的 &lt;code&gt;目标追踪&lt;/code&gt; 领域。文章还对 &lt;code&gt;MOSSE&lt;/code&gt; 算法进行了的介绍，并通过的具体实现代码来加深对 &lt;code&gt;相关滤波器&lt;/code&gt; 的理解。&lt;/p&gt;</description>
     </item>
     
     <item>

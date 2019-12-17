@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-12-16T17:44:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-16T17:45:56&#43;08:00" />
-<meta itemprop="wordCount" content="1734">
+<meta itemprop="wordCount" content="2349">
 
 
 
@@ -132,8 +132,8 @@
         <div class="post-category">
             <a href="/categories/Visual-Trancking/"> Visual Trancking </a>
             </div>
-          <span class="more-meta"> 1734 words </span>
-          <span class="more-meta"> 4 mins read </span>
+          <span class="more-meta"> 2349 words </span>
+          <span class="more-meta"> 5 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -248,6 +248,10 @@ $$</p>
 min_ {H_ {w,v}^*}= \sum_ {i=1}^{m} {\mid} H_ {w,v}^*F_{w,v,i} - G_{w,v,i} {\mid}^{2}  \qquad(9)
 $$</p>
 
+<blockquote>
+<p>$ w $ 和 $ v $ 是 $ H^* $ 中每个元素的索引。</p>
+</blockquote>
+
 <p>要想得到最小的 $ {H_ {wv}^{*}} $，只需要将上式求偏导，并使偏导等于 $ 0 $ 即可，如下所示：</p>
 
 <blockquote>
@@ -255,12 +259,68 @@ $$</p>
 </blockquote>
 
 <p>$$
-0 = \frac {\partial}{\partial H_ {w,v}^{*}} \sum_i {\mid} F_{i,w,v} H_{w,v} - G_{i,w,v} {\mid}^{2}
+0 = \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} {\mid} H_{w,v}^*F_{w,v,i} - G_{w,v,i} {\mid}^{2} \qquad(10)
 $$</p>
+
+<p>$$
+\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i}-G_{w,v,i})(H_{w,v}^*F_{w,v,i}-G_{w,v,i}) ^ *
+$$</p>
+
+<p>$$
+\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i}-G_{w,v,i})(H_{w,v}F_{w,v,i} ^ * - G_{w,v,i} ^ *)
+$$</p>
+
+<p>$$
+\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i} {\cdot} H_{w,v}F_{w,v,i} ^ *- H_{w,v}^*F_{w,v,i} {\cdot} G_{w,v,i} ^ * - H_{w,v}F_{w,v,i} ^ * {\cdot} G_{w,v,i} + G_{w,v,i} {\cdot} G_{w,v,i} ^ *)
+$$</p>
+
+<p>$$
+\Rightarrow 0 = \sum_{i=1}^{m} (F_{w,v,i} {\cdot} H_{w,v}F_{w,v,i} ^ * - F_{w,v,i} {\cdot} G_{w,v,i} ^ *)
+$$</p>
+
+<p>$$
+\Rightarrow \sum_{i=1}^{m} F_{w,v,i} {\cdot} H_{w,v}F_{w,v,i} ^ * = \sum_{i=1}^{m}F_{w,v,i} {\cdot} G_{w,v,i} ^ *
+$$</p>
+
+<p>$$
+\Rightarrow H_{w,v} = \frac {\sum_{i=1}^{m}F_{w,v,i} G_{w,v,i} ^ *}{\sum_{i=1}^{m} F_{w,v,i} F_{w,v,i} ^ *}  \qquad(11)
+$$</p>
+
+<p>其中，$ (11) $ 表示的是每个元素的值，按以上方式处理所有 $ H $ 中的元素，可以得到 <strong>滤波器模型的公式</strong>：</p>
+
+<p>$$
+H = \frac {\sum_{i=1}^{m}F_{i} {\cdot} G_{i} ^ *}{\sum_{i=1}^{m} F_{i} {\cdot} F_{i} ^ *}  \qquad(12)
+$$</p>
+
+<p>在原文中，作者对跟踪框（GroundTruth）进行随机变换，获取一系列的训练样本 $ f_ {i} $，而 $ g_ {i} $ 是由高斯函数产生的，其峰值的位置就是在 $ f_ {i} $ 的中心位置。获得了一系列的训练样本和结果之后，就可以计算滤波器模板 $ h $ 的值了。</p>
+
+<p>然而，在目标跟踪过程中，只需要将 $ (12) $ 这一滤波器模板与当前帧的图像做 <code>相关操作</code> 即可，将得到的响应结果中最大的点所对应的坐标作为当前帧的位置（相当于在二维平面上移动模板）。考虑到想要让滤波器对形变、光照等外界因素的影响具有更好的鲁棒性，采取了以下模板更新策略：</p>
+
+<p>$$
+H_ {t} = \frac {A_ t}{B_ t} \qquad(13)
+$$</p>
+
+<p>$$
+A_ {t} = \eta F_ {t} \cdot G_ {t} ^ * + (1 - \eta) {A_ {t-1}} \qquad(14)
+$$</p>
+
+<p>$$
+B_ {t} = \eta F_ {t} \cdot F_ {t} ^ * + (1 - \eta) {B_ {t-1}} \qquad(15)
+$$</p>
+
+<p>$ H_ {t} $ 表示在第 $ t $ 帧求得的滤波模板，$ \eta $ 为经验常数。这里将滤波器模板被拆分为 <code>分子</code> 和 <code>分母</code> 两部分，分别对这两部分进行更新。其中 $ A_ {t} $ 和 $ A_ {t-1} $ 分别表示当前帧和上一帧。</p>
+
+<p>对于其他的部分，比如可以向 $ (12) $ 中引入正则化参数，或者分别求 $ H_ {i} $ 然后再取平均值等。</p>
 
 <h1 id="kcf-算法">KCF 算法</h1>
 
 <h1 id="参考">参考</h1>
+
+<ol>
+<li><a href="http://www4.comp.polyu.edu.hk/~cslzhang/STC/STC.htm">http://www4.comp.polyu.edu.hk/~cslzhang/STC/STC.htm</a></li>
+<li><a href="https://blog.csdn.net/sgfmby1994/article/details/68490903">https://blog.csdn.net/sgfmby1994/article/details/68490903</a></li>
+<li><a href="https://www.cnblogs.com/hanhuili/p/4266990.html">https://www.cnblogs.com/hanhuili/p/4266990.html</a></li>
+</ol>
     </div>
 
     <div class="post-copyright">

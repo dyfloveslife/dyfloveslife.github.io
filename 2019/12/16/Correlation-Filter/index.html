@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域。文章还对 MOSSE 算法进行了的介绍，并通过的具体实现代码来加深对 相关滤波器 的理解。
+<meta name="author" content="Carol" /><meta name="description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域，以及对 MOSSE 算法进行了介绍。
 " /><meta name="keywords" content="Java, blog, carol" />
 
 
@@ -40,25 +40,25 @@
 
 
 <meta property="og:title" content="基于相关滤波器（Correlation Filters）的 MOSSE 算法" />
-<meta property="og:description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域。文章还对 MOSSE 算法进行了的介绍，并通过的具体实现代码来加深对 相关滤波器 的理解。" />
+<meta property="og:description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域，以及对 MOSSE 算法进行了介绍。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2019/12/16/Correlation-Filter/" />
 <meta property="article:published_time" content="2019-12-16T17:44:11+08:00" />
 <meta property="article:modified_time" content="2019-12-18T15:43:56+08:00" />
 <meta itemprop="name" content="基于相关滤波器（Correlation Filters）的 MOSSE 算法">
-<meta itemprop="description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域。文章还对 MOSSE 算法进行了的介绍，并通过的具体实现代码来加深对 相关滤波器 的理解。">
+<meta itemprop="description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域，以及对 MOSSE 算法进行了介绍。">
 
 
 <meta itemprop="datePublished" content="2019-12-16T17:44:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-18T15:43:56&#43;08:00" />
-<meta itemprop="wordCount" content="2796">
+<meta itemprop="wordCount" content="2770">
 
 
 
 <meta itemprop="keywords" content="Correlation Filters," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="基于相关滤波器（Correlation Filters）的 MOSSE 算法"/>
-<meta name="twitter:description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域。文章还对 MOSSE 算法进行了的介绍，并通过的具体实现代码来加深对 相关滤波器 的理解。"/>
+<meta name="twitter:description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域，以及对 MOSSE 算法进行了介绍。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/Visual-Trancking/"> Visual Trancking </a>
             </div>
-          <span class="more-meta"> 2796 words </span>
+          <span class="more-meta"> 2770 words </span>
           <span class="more-meta"> 6 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -145,14 +145,14 @@
 <ul>
 <li><a href="#相关滤波器">相关滤波器</a></li>
 <li><a href="#mosse-算法">MOSSE 算法</a></li>
-<li><a href="#代码">代码</a></li>
+<li><a href="#2d-fft">2D-FFT</a></li>
 <li><a href="#参考">参考</a></li>
 </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p>本文将会从 <code>相关滤波器</code> 的相关理论进行展开，讲述如何将信号处理领域的 <code>相关滤波器</code> 融入到目前比较热门的 <code>目标追踪</code> 领域。文章还对 <code>MOSSE</code> 算法进行了的介绍，并通过的具体实现代码来加深对 <code>相关滤波器</code> 的理解。</p>
+      <p>本文将会从 <code>相关滤波器</code> 的相关理论进行展开，讲述如何将信号处理领域的 <code>相关滤波器</code> 融入到目前比较热门的 <code>目标追踪</code> 领域，以及对 <code>MOSSE</code> 算法进行了介绍。</p>
 
 <blockquote>
 <p>若有错误，还请批评指出。</p>
@@ -318,7 +318,7 @@ $$</p>
 
 <p>对于其他的部分，比如可以向 $ (12) $ 中引入正则化参数，或者分别求 $ H_ {i} $ 然后再取平均值等。</p>
 
-<h1 id="代码">代码</h1>
+<h1 id="2d-fft">2D-FFT</h1>
 
 <p>来看一下，在 Matlab 中 <code>二维傅里叶变换（fft2）</code> 是怎么进行的。</p>
 

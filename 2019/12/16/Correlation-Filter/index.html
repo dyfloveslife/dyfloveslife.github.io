@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-12-16T17:44:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-18T15:43:56&#43;08:00" />
-<meta itemprop="wordCount" content="2770">
+<meta itemprop="wordCount" content="2805">
 
 
 
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/Visual-Trancking/"> Visual Trancking </a>
             </div>
-          <span class="more-meta"> 2770 words </span>
+          <span class="more-meta"> 2805 words </span>
           <span class="more-meta"> 6 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -175,19 +175,23 @@
 <p>这里有一个 <code>相关性</code> 的概念，可分为如下两种：</p>
 
 <ul>
-<li>互相关（<a href="https://en.wikipedia.org/wiki/Cross-correlation">cross-correlation</a>），在信号处理领域中，互相关是用来表示 <strong>两个信号之间相似性的一个度量</strong>，通过与已知信号的比较，以此用于寻找未知信号中的特性。</li>
-<li>自相关（<a href="https://en.wikipedia.org/wiki/Autocorrelation">auto-correlation</a>），也叫序列相关，<strong>是一个信号于其自身在不同时间点（频域）的互相关</strong>，也就是两次观察之间的相似度对它们之间的时间差的函数。</li>
+<li><strong>互相关</strong>（<a href="https://en.wikipedia.org/wiki/Cross-correlation">cross-correlation</a>），在信号处理领域中，互相关是用来表示 <strong>两个信号之间相似性的一个度量</strong>，通过与已知信号的比较，以此用于寻找未知信号中的特性。</li>
+<li><strong>自相关</strong>（<a href="https://en.wikipedia.org/wiki/Autocorrelation">auto-correlation</a>），也叫序列相关，<strong>是一个信号于其自身在不同时间点（频域）的互相关</strong>，也就是两次观察之间的相似度对它们之间的时间差的函数。</li>
 </ul>
 
 <p>对于 $ f $ 和 $ g $ 这两个信号量，它们之间的相关性如下所示：</p>
 
 <p>$$
-(f \otimes g)(\tau) = \int_ {\infty} ^ {-\infty}{f ^ *}(t)g(t + {\tau})dt  \qquad(1)
+(f \star g)(\tau) = \int_ {\infty} ^ {-\infty}{f ^ *}(t)g(t + {\tau})dt  \qquad(1)
 $$</p>
 
 <p>$$
-(f \otimes g)(n) = \sum_{-\infty} ^ {\infty} {f ^ *} [m]g(m + n)  \qquad(2)
+(f \star g)(n) = \sum_{-\infty} ^ {\infty} {f ^ *} [m]g(m + n)  \qquad(2)
 $$</p>
+
+<blockquote>
+<p><strong>互相关</strong> 实质上类似于两个函数的卷积。</p>
+</blockquote>
 
 <p>式中，$ f ^ * $  表示 $ f $ 的<a href="https://en.wikipedia.org/wiki/Complex_conjugate">共轭复数</a>，这种相关性表示的就是两个函数在某个时刻 $ \tau $ 的相似程度。由于存在时间差，所以要想得到最大值，就需要将其中一个变量进行平移。而 $ g(t + {\tau}) $ 就表示将 $ g $ 平移 $ {\tau} $ 个时刻。</p>
 
@@ -206,23 +210,22 @@ $$</p>
 <p>该算法是在 2010 年由 <a href="https://www.semanticscholar.org/paper/Visual-object-tracking-using-adaptive-correlation-Bolme-Beveridge/70c3c9b9a40ca55264e454586dca2a6cf416f6e0">《Visual object tracking using adaptive correlation filters》</a> 论文提出的，其使用 <code>MISSE（Minimum Output Sum of Squared Error filter，误差最小平方和滤波器）</code> 来训练一个最优的滤波器模板，使其在目标上的响应最大，如下所示：</p>
 
 <p>$$
-g = f \otimes h   \qquad(3)
+g = f \star h   \qquad(3)
 $$</p>
 
 <p>其中，$ g $ 表示响应输出，即相关输出，$ f $ 表示输入图像，$ h $ 表示滤波模板，$ \otimes $ 为卷积操作。式 $ (3) $ 可以进一步展开，如下所示：</p>
 
 <p>$$
-f \otimes h(\tau) = \int_ {\infty} ^ {-\infty}{f ^ *}(t)h(t + {\tau})dt  \qquad(4)
+f \star h(\tau) = \int_ {\infty} ^ {-\infty}{f ^ *}(t)h(t + {\tau})dt  \qquad(4)
 $$</p>
 
-<p>由于输入图像 $ f $ 是固定的，这里只需要确定的是滤波器模板 $ h $。由于上式的卷积运算计算量很大，因此 <code>MOSSE</code> 方法利用 <code>快速傅里叶变换（FFT）</code> 的方式，将 $ f $ 和 $ h $ 在频域内进行表示，函数互相关的傅里叶变换等于函数傅里叶变换的乘积（时域上的卷积等于频域上的乘积），将 <code>卷积</code> 操作转换为 <code>点乘</code> 操作，这样可以极大的减少计算量。也就是说，在这里将输入图像和滤波器通过算法变换到频域后，直接进行相乘，然后再变回时域（即图像的空域）就可以得到响应结果了。如下所示：</p>
+<p>由于输入图像 $ f $ 是固定的，这里只需要确定的是滤波器模板 $ h $。由于上式的卷积运算计算量很大，因此 <code>MOSSE</code> 方法利用 <code>快速傅里叶变换（FFT）</code> 的方式，将 $ f $ 和 $ h $ 在频域内进行表示，函数互相关的傅里叶变换等于函数傅里叶变换的乘积（根据<a href="https://en.wikipedia.org/wiki/Convolution_theorem">卷积定理</a>可知：时域上的卷积等于频域上的乘积），将 <code>卷积</code> 操作转换为 <code>点乘</code> 操作，这样可以极大的减少计算量。也就是说，在这里将输入图像和滤波器通过算法变换到频域后，直接进行相乘，然后再变回时域（即图像的空域）就可以得到响应结果了。如下所示：</p>
 
 <p>$$
-F(g) = F(f \otimes h)
-= F(f) \odot {F(h) ^  *} \qquad(5)
+F(g) = F(f \star h) = F(f) \odot {F(h) ^  *} \qquad(5)
 $$</p>
 
-<p>$ F $ 表示傅里叶变换，$ \odot $ 表示点乘运算。可将 $ (5) $ 简写成如下所示：</p>
+<p>$ F $ 表示傅里叶变换，$ \odot $ 表示点乘运算（也就是点积运算）。可将 $ (5) $ 简写成如下所示：</p>
 
 <p>$$
 G = F \odot {H^*} \qquad(6)

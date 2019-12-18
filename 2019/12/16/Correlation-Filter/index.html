@@ -307,11 +307,11 @@ H_ {t} = \frac {A_ t}{B_ t} \qquad(13)
 $$</p>
 
 <p>$$
-A_ {t} = \eta F_ {t} \cdot G_ {t} ^ * + (1 - \eta) {A_ {t-1}} \qquad(14)
+A_ {t} = \eta F_ {t} \odot G_ {t} ^ * + (1 - \eta) {A_ {t-1}} \qquad(14)
 $$</p>
 
 <p>$$
-B_ {t} = \eta F_ {t} \cdot F_ {t} ^ * + (1 - \eta) {B_ {t-1}} \qquad(15)
+B_ {t} = \eta F_ {t} \odot F_ {t} ^ * + (1 - \eta) {B_ {t-1}} \qquad(15)
 $$</p>
 
 <p>$ H_ {t} $ 表示在第 $ t $ 帧求得的滤波模板，$ \eta $ 为经验常数。这里将滤波器模板被拆分为 <code>分子</code> 和 <code>分母</code> 两部分，分别对这两部分进行更新。其中 $ A_ {t} $ 和 $ A_ {t-1} $ 分别表示当前帧和上一帧。</p>

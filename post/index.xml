@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 24 Dec 2019 20:44:11 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 27 Dec 2019 09:02:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>剑指 Offer 之 圆圈中最后剩下的数字（约瑟夫环问题）</title>
+      <link>http://localhost:1313/2019/12/27/offer-Josephus/</link>
+      <pubDate>Fri, 27 Dec 2019 09:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2019/12/27/offer-Josephus/</guid>
+      <description>&lt;p&gt;《剑指 Offer》中涉及到了约瑟夫环问题，虽然下面文章中所描述的和书中的题目有些差异，但从总体上看，都涉及到了约瑟夫环问题。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>打好这一仗！</title>

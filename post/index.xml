@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 27 Dec 2019 09:02:11 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 12 Jan 2020 17:12:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>文章汇总</title>
+      <link>http://localhost:1313/2020/01/12/post_summary/</link>
+      <pubDate>Sun, 12 Jan 2020 17:12:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/01/12/post_summary/</guid>
+      <description>&lt;p&gt;「❤文章汇总」涵盖了笔者在准备秋招过程中所学习的知识点，内容较多，都是以 &lt;code&gt;笔记&lt;/code&gt; 的形式将它们全部罗列在下面。&lt;/p&gt;
+
+&lt;p&gt;如果你看完文章感觉有所收获的话，不妨在 &lt;a href=&#34;https://github.com/dyfloveslife/aewsome-technology-life-growth&#34;&gt;GitHub&lt;/a&gt; 上给个 $ Star $ ⭐ 吧~ 😄&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>剑指 Offer 之 圆圈中最后剩下的数字（约瑟夫环问题）</title>

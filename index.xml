@@ -21,12 +21,12 @@
     </item>
     
     <item>
-      <title>文章汇总</title>
+      <title>【文章汇总】</title>
       <link>http://localhost:1313/2020/01/12/post_summary/</link>
       <pubDate>Sun, 12 Jan 2020 17:12:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2020/01/12/post_summary/</guid>
-      <description>&lt;p&gt;「📚文章汇总」涵盖了笔者在准备秋招过程中所学习的知识点，内容较多，都是以 &lt;code&gt;笔记&lt;/code&gt; 的形式将它们全部罗列在下面。&lt;/p&gt;
+      <description>&lt;p&gt;「📚文章汇总」涵盖了笔者在准备秋招过程中所学习的知识点，以及对之前文章的统一整理，内容较多，都是以 &lt;code&gt;笔记&lt;/code&gt; 的形式将它们全部罗列在下面。&lt;/p&gt;
 
 &lt;p&gt;如果你看完文章感觉有所收获的话，不妨在 &lt;a href=&#34;https://github.com/dyfloveslife/aewsome-technology-life-growth&#34;&gt;GitHub&lt;/a&gt; 上给个 $ Star $ ⭐ 吧~ 😄&lt;/p&gt;</description>
     </item>
@@ -688,7 +688,7 @@
       <pubDate>Sun, 25 Jun 2017 12:13:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/25/LoopArray/</guid>
-      <description>&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;del&gt; 其实是复习周，不用上课哒&lt;/del&gt;，把那个给跳水运动员打分的程序写在这里。&lt;del&gt; 当时没想出来，回去仔细想了一下，最终实现了= =！&lt;/del&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;del&gt; 其实是复习周，不用上课哒&lt;/del&gt;，把那个给跳水运动员打分的程序写在这里。&lt;/p&gt;</description>
     </item>
     
     <item>

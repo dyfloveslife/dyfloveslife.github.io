@@ -44,14 +44,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2019/12/13/JavaSrc-BasicClass-Integer/" />
 <meta property="article:published_time" content="2019-12-13T21:20:11+08:00" />
-<meta property="article:modified_time" content="2019-12-14T17:36:56+08:00" />
+<meta property="article:modified_time" content="2020-01-14T17:36:56+08:00" />
 <meta itemprop="name" content="JDK 源码之基础类 Integer">
 <meta itemprop="description" content="本片文章主要介绍 Integer 类中一些比较常用的方法，并分析该类在 Java 中的作用。">
 
 
 <meta itemprop="datePublished" content="2019-12-13T21:20:11&#43;08:00" />
-<meta itemprop="dateModified" content="2019-12-14T17:36:56&#43;08:00" />
-<meta itemprop="wordCount" content="234">
+<meta itemprop="dateModified" content="2020-01-14T17:36:56&#43;08:00" />
+<meta itemprop="wordCount" content="1837">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 234 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 1837 words </span>
+          <span class="more-meta"> 4 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -148,6 +148,12 @@
     <nav id="TableOfContents">
 <ul>
 <li><a href="#总览">总览</a></li>
+<li><a href="#属性">属性</a></li>
+<li><a href="#内部类-integercache">内部类 IntegerCache</a></li>
+<li><a href="#常用方法">常用方法</a>
+<ul>
+<li><a href="#parseint-方法">parseInt 方法</a></li>
+</ul></li>
 </ul>
 </nav>
   </div>
@@ -157,11 +163,13 @@
 
 <h1 id="总览">总览</h1>
 
-<p>在 <code>java.lang</code> 下的 <code>Integer</code> 类是我们平时经常使用的类，首先总览一下该类的继承或实现关系，如下图所示：</p>
+<p>在 <code>java.lang</code> 下的 <code>Integer</code> 类是我们平时经常使用的类，首先看一下该类的继承或实现关系，如下图所示：</p>
 
-<p><img src="https://i.loli.net/2019/12/13/tGJUngeDqVvXl8S.png" alt="image.png" /></p>
+<p><center>
+<img src="https://i.loli.net/2019/12/13/tGJUngeDqVvXl8S.png" alt="image.png" />
+</center></p>
 
-<p>可以看到，<code>Integer</code> 类继承了 <code>Number</code> 这一抽象类，而实现了 <code>Comparable</code> 接口。</p>
+<p>可以看到，<code>Integer</code> 类继承了 <code>Number</code> 这一抽象类，又实现了 <code>Comparable</code> 接口。</p>
 
 <blockquote>
 <p>抽象类 <strong>Number</strong> 是 <code>BigDecimal</code>、<code>BigInteger</code>、<code>Byte</code>、<code>Double</code>、<code>Float</code>、<code>Integer</code>、<code>Long</code> 以及 <code>Short</code> 类的父类。</p>
@@ -169,7 +177,355 @@
 <p>而 <strong>Number</strong> 类的子类必须提供将所表示的数值转换为 <code>byte</code>、<code>double</code>、<code>float</code>、<code>int</code>、<code>long</code> 以及 <code>short</code> 的方法。</p>
 </blockquote>
 
-<p>比较两个 integer 的大小。</p>
+<p><code>Comparable</code> 接口中只有一个 <code>compareTo(T o)</code> 方法，用于比较元素之间的大小。</p>
+
+<h1 id="属性">属性</h1>
+
+<p>Integer 类中的重要属性（域）如下所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/01/14/2svbnk1h5xwuLSi.png" alt="image.png" />
+</center></p>
+
+<p>其中：</p>
+
+<ul>
+<li><code>MIN_VALUE = 0x80000000</code> 表示最小的常数值为 $ -2^{31} $，即 -2147483648；</li>
+<li><code>MAX_VALUE = 0x7fffffff</code> 表示最大的常数值为 $ 2^{31}-1 $，即 2147483647；</li>
+<li><code>SIZE</code> 用于表示 int 的二进制补码形式的值的比特位数；</li>
+<li><code>SIZES</code> 用于表示 int 的二进制补码形式的字节数，值为 <code>SIZE / Byte.SIZE = 32 / 8</code>，即等于 <code>4</code>；</li>
+<li><code>public static final Class&lt;Integer&gt;  TYPE</code> 表示原始类型 <code>int</code> 的 Class 实例。</li>
+</ul>
+
+<p>此外，<code>DigitTens</code> 与 <code>DigitOnes</code>如下所示：这俩用于获取从 0 到 99 之间某个数的 <code>个位</code> 和 <code>十位</code>。例如 12，从 <code>DigitOnes</code> 中取出 <code>2</code>，而从 <code>DigitTens</code> 中取出 <code>1</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">final static </span><span class="kt">char</span> <span class="p">[]</span> <span class="n">DigitTens</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;9&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="p">}</span> <span class="p">;</span>
+
+<span class="err">final static </span><span class="kt">char</span> <span class="p">[]</span> <span class="n">DigitOnes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">,</span> <span class="sc">&#39;2&#39;</span><span class="p">,</span> <span class="sc">&#39;3&#39;</span><span class="p">,</span> <span class="sc">&#39;4&#39;</span><span class="p">,</span> <span class="sc">&#39;5&#39;</span><span class="p">,</span> <span class="sc">&#39;6&#39;</span><span class="p">,</span> <span class="sc">&#39;7&#39;</span><span class="p">,</span> <span class="sc">&#39;8&#39;</span><span class="p">,</span> <span class="sc">&#39;9&#39;</span><span class="p">,</span>
+    <span class="p">}</span> <span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>digits</code> 用于将数字表示为字符串的所有可能字符，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">final static char[] digits </span><span class="o">=</span> <span class="p">{</span>
+    <span class="sc">&#39;0&#39;</span> <span class="p">,</span> <span class="sc">&#39;1&#39;</span> <span class="p">,</span> <span class="sc">&#39;2&#39;</span> <span class="p">,</span> <span class="sc">&#39;3&#39;</span> <span class="p">,</span> <span class="sc">&#39;4&#39;</span> <span class="p">,</span> <span class="sc">&#39;5&#39;</span> <span class="p">,</span>
+    <span class="sc">&#39;6&#39;</span> <span class="p">,</span> <span class="sc">&#39;7&#39;</span> <span class="p">,</span> <span class="sc">&#39;8&#39;</span> <span class="p">,</span> <span class="sc">&#39;9&#39;</span> <span class="p">,</span> <span class="sc">&#39;a&#39;</span> <span class="p">,</span> <span class="sc">&#39;b&#39;</span> <span class="p">,</span>
+    <span class="sc">&#39;c&#39;</span> <span class="p">,</span> <span class="sc">&#39;d&#39;</span> <span class="p">,</span> <span class="sc">&#39;e&#39;</span> <span class="p">,</span> <span class="sc">&#39;f&#39;</span> <span class="p">,</span> <span class="sc">&#39;g&#39;</span> <span class="p">,</span> <span class="sc">&#39;h&#39;</span> <span class="p">,</span>
+    <span class="sc">&#39;i&#39;</span> <span class="p">,</span> <span class="sc">&#39;j&#39;</span> <span class="p">,</span> <span class="sc">&#39;k&#39;</span> <span class="p">,</span> <span class="sc">&#39;l&#39;</span> <span class="p">,</span> <span class="sc">&#39;m&#39;</span> <span class="p">,</span> <span class="sc">&#39;n&#39;</span> <span class="p">,</span>
+    <span class="sc">&#39;o&#39;</span> <span class="p">,</span> <span class="sc">&#39;p&#39;</span> <span class="p">,</span> <span class="sc">&#39;q&#39;</span> <span class="p">,</span> <span class="sc">&#39;r&#39;</span> <span class="p">,</span> <span class="sc">&#39;s&#39;</span> <span class="p">,</span> <span class="sc">&#39;t&#39;</span> <span class="p">,</span>
+    <span class="sc">&#39;u&#39;</span> <span class="p">,</span> <span class="sc">&#39;v&#39;</span> <span class="p">,</span> <span class="sc">&#39;w&#39;</span> <span class="p">,</span> <span class="sc">&#39;x&#39;</span> <span class="p">,</span> <span class="sc">&#39;y&#39;</span> <span class="p">,</span> <span class="sc">&#39;z&#39;</span>
+<span class="p">};</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>sizeTable</code> 属性与 <code>stringSize(int x)</code> 方法一起使用。它们用于计算一个 int 型的数字所对应字符串的长度，例如 12 所对应的字符串的长度就是 2，而 123 所对应的字符串的长度就是 3。</p>
+
+<p>一般我们在计算一个数字有几位的时候，通常使用求余或除法进行计算，但这里使用了一个 <code>sizeTable</code> 数组来进行实现，也可以达到求位数的目的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">final static </span><span class="kt">int</span> <span class="p">[]</span> <span class="n">sizeTable</span> <span class="o">=</span> <span class="p">{</span> <span class="n">9</span><span class="p">,</span> <span class="n">99</span><span class="p">,</span> <span class="n">999</span><span class="p">,</span> <span class="n">9999</span><span class="p">,</span> <span class="n">99999</span><span class="p">,</span> <span class="n">999999</span><span class="p">,</span> <span class="n">9999999</span><span class="p">,</span>
+                                    <span class="n">99999999</span><span class="p">,</span> <span class="n">999999999</span><span class="p">,</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span> <span class="p">};</span>
+
+<span class="c1">// Requires positive x
+</span><span class="c1"></span><span class="err">static int </span><span class="n">stringSize</span><span class="p">(</span><span class="err">int x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="err">int i</span><span class="o">=</span><span class="n">0</span><span class="p">;</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">sizeTable</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">i</span><span class="o">+</span><span class="n">1</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="内部类-integercache">内部类 IntegerCache</h1>
+
+<p><code>IntegerCache</code> 作为 <code>Integer</code> 的内部类，从命名方式就可以很清晰的看出，它主要和 <strong>缓存</strong> 有关。先看源码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private static class IntegerCache </span><span class="p">{</span>
+        <span class="err">static final int low </span><span class="o">=</span> <span class="o">-</span><span class="n">128</span><span class="p">;</span>
+        <span class="err">static final int high</span><span class="p">;</span>
+        <span class="err">static final Integer cache</span><span class="p">[];</span>
+
+        <span class="kd">static</span> <span class="p">{</span>
+            <span class="c1">// high value may be configured by property
+</span><span class="c1"></span>            <span class="err">int h </span><span class="o">=</span> <span class="n">127</span><span class="p">;</span>
+            <span class="err">String integerCacheHighPropValue </span><span class="o">=</span>
+                <span class="n">sun</span><span class="p">.</span><span class="na">misc</span><span class="p">.</span><span class="na">VM</span><span class="p">.</span><span class="na">getSavedProperty</span><span class="p">(</span><span class="s">&#34;java.lang.Integer.IntegerCache.high&#34;</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">integerCacheHighPropValue</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">try</span> <span class="p">{</span>
+                    <span class="err">int i </span><span class="o">=</span> <span class="n">parseInt</span><span class="p">(</span><span class="n">integerCacheHighPropValue</span><span class="p">);</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">127</span><span class="p">);</span>
+                    <span class="c1">// Maximum array size is Integer.MAX_VALUE
+</span><span class="c1"></span>                    <span class="n">h</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="n">low</span><span class="p">)</span> <span class="o">-</span><span class="n">1</span><span class="p">);</span>
+                <span class="p">}</span> <span class="k">catch</span><span class="p">(</span> <span class="err">NumberFormatException nfe</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// If the property cannot be parsed into an int, ignore it.
+</span><span class="c1"></span>                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">high</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
+
+            <span class="n">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="p">[(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="p">)</span> <span class="o">+</span> <span class="n">1</span><span class="p">];</span>
+            <span class="err">int j </span><span class="o">=</span> <span class="n">low</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="err">int k </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cache</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
+                <span class="n">cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="p">(</span><span class="n">j</span><span class="o">++</span><span class="p">);</span>
+
+            <span class="c1">// range [-128, 127] must be interned (JLS7 5.1.7)
+</span><span class="c1"></span>            <span class="k">assert</span> <span class="n">IntegerCache</span><span class="p">.</span><span class="na">high</span> <span class="o">&gt;=</span> <span class="n">127</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="err">private IntegerCache</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>从第 <code>4</code> 行可以看到，该缓存是使用<code>Integer</code>类型的<code>cache[]</code>数组实现的，默认范围是<code>[-128, 127]</code>。</li>
+<li>从第 <code>23</code> 到第 <code>26</code> 行可以看出，默认实例化了 256 个 <code>Integer</code> 对象。</li>
+</ul>
+
+<blockquote>
+<p>为什么需要缓存呢？</p>
+</blockquote>
+
+<p>从文章开头你可以看到，<code>int</code> 的范围很大，将它们全部缓存起来的话代价很高。所以，当有一个新的 <code>Integer</code> 对象处于 [-128, 127] 中的时候，直接从缓存数组 <code>cache[]</code> 中取就好了，不用再重新实例化了，这样可以减小系统的开销。此外，在第 <code>7</code> 行的注释也说了，<code>h</code> 的值也可以通过设置虚拟机参数进行更改，即 <code>Djava.lang.Integer.IntegerCache.high=xxx</code>。</p>
+
+<h1 id="常用方法">常用方法</h1>
+
+<h2 id="parseint-方法">parseInt 方法</h2>
+
+<p>这里有两个 <code>parseInt()</code> 方法，这里主要看带有两个参数的方法即可，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 第一个 parseInt 方法
+</span><span class="c1"></span><span class="err">public static int parseInt</span><span class="p">(</span><span class="err">String s</span><span class="p">)</span> <span class="err">throws NumberFormatException </span><span class="p">{</span>
+    <span class="k">return</span> <span class="n">parseInt</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">10</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 第二个 parseInt 方法（主要看这个）
+</span><span class="c1"></span><span class="err">public static int parseInt</span><span class="p">(</span><span class="err">String s</span><span class="p">,</span> <span class="err">int radix</span><span class="p">)</span> <span class="err">throws NumberFormatException </span><span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">NumberFormatException</span><span class="p">(</span><span class="s">&#34;null&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">radix</span> <span class="o">&lt;</span> <span class="n">Character</span><span class="p">.</span><span class="na">MIN_RADIX</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">NumberFormatException</span><span class="p">(</span><span class="s">&#34;radix &#34;</span> <span class="o">+</span> <span class="n">radix</span> <span class="o">+</span>
+                                        <span class="s">&#34; less than Character.MIN_RADIX&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">radix</span> <span class="o">&gt;</span> <span class="n">Character</span><span class="p">.</span><span class="na">MAX_RADIX</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">NumberFormatException</span><span class="p">(</span><span class="s">&#34;radix &#34;</span> <span class="o">+</span> <span class="n">radix</span> <span class="o">+</span>
+                                        <span class="s">&#34; greater than Character.MAX_RADIX&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">int result </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span>
+    <span class="err">boolean negative </span><span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">,</span> <span class="n">len</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">();</span>
+    <span class="err">int limit </span><span class="o">=</span> <span class="o">-</span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">;</span>
+    <span class="err">int multmin</span><span class="p">;</span>
+    <span class="err">int digit</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">char firstChar </span><span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">0</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">firstChar</span> <span class="o">&lt;</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Possible leading &#34;+&#34; or &#34;-&#34;
+</span><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">firstChar</span> <span class="o">==</span> <span class="sc">&#39;-&#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">negative</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                <span class="n">limit</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MIN_VALUE</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">firstChar</span> <span class="o">!=</span> <span class="sc">&#39;+&#39;</span><span class="p">)</span>
+                <span class="k">throw</span> <span class="n">NumberFormatException</span><span class="p">.</span><span class="na">forInputString</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">==</span> <span class="n">1</span><span class="p">)</span> <span class="c1">// Cannot have lone &#34;+&#34; or &#34;-&#34;
+</span><span class="c1"></span>                <span class="k">throw</span> <span class="n">NumberFormatException</span><span class="p">.</span><span class="na">forInputString</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">multmin</span> <span class="o">=</span> <span class="n">limit</span> <span class="o">/</span> <span class="n">radix</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Accumulating negatively avoids surprises near MAX_VALUE
+</span><span class="c1"></span>            <span class="n">digit</span> <span class="o">=</span> <span class="n">Character</span><span class="p">.</span><span class="na">digit</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="o">++</span><span class="p">),</span><span class="n">radix</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">digit</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">throw</span> <span class="n">NumberFormatException</span><span class="p">.</span><span class="na">forInputString</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">&lt;</span> <span class="n">multmin</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">throw</span> <span class="n">NumberFormatException</span><span class="p">.</span><span class="na">forInputString</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">result</span> <span class="o">*=</span> <span class="n">radix</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">&lt;</span> <span class="n">limit</span> <span class="o">+</span> <span class="n">digit</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">throw</span> <span class="n">NumberFormatException</span><span class="p">.</span><span class="na">forInputString</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">result</span> <span class="o">-=</span> <span class="n">digit</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="n">NumberFormatException</span><span class="p">.</span><span class="na">forInputString</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">negative</span> <span class="o">?</span> <span class="n">result</span> <span class="o">:</span> <span class="o">-</span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>parseInt(String s, int radix)</code> 方法与《剑指 Offer》中的题目<a href="https://www.nowcoder.com/questionTerminal/1277c681251b4372bdef344468e4f26e">「把字符串转换成整数」</a>是类似的，都是将字符串转换成整数。</p>
     </div>
 
     <div class="post-copyright">
@@ -180,7 +536,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2019-12-14
+        2020-01-14
         
     </span>
   </p>

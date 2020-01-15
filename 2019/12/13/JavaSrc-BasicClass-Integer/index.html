@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-12-13T21:20:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-01-14T17:36:56&#43;08:00" />
-<meta itemprop="wordCount" content="3183">
+<meta itemprop="wordCount" content="3863">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 3183 words </span>
-          <span class="more-meta"> 7 mins read </span>
+          <span class="more-meta"> 3863 words </span>
+          <span class="more-meta"> 8 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -156,6 +156,9 @@
 <li><a href="#parseint-方法">parseInt() 方法</a></li>
 <li><a href="#getchars-方法">getChars() 方法</a></li>
 <li><a href="#tostring-方法">toString() 方法</a></li>
+<li><a href="#valueof-方法">valueOf() 方法</a></li>
+<li><a href="#equals-方法">equals() 方法</a></li>
+<li><a href="#compare-方法">compare() 方法</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -775,6 +778,104 @@
 <p>对于第二个 <code>toString()</code> 方法，首先用 <code>stringSize()</code> 方法得到数值 i 的位数，然后利用 <code>getChars()</code> 方法获取数值 i 所对应的 char 数组，最后再 new 一个 String 返回。</p>
 
 <p>对于第三个 <code>toString()</code> 方法，多了一个带有 <strong>进制</strong> 的参数。只要不在 2 到 36 进制之内的都会被处理成 <strong>十进制</strong>，这里首先将数值转换成 <strong>负数</strong> 进行处理，十进制转换成其它进制的方法就是不断的除以进制数，从而得到余数，然后将余数反过来，从而得到最后的结果。</p>
+
+<h2 id="valueof-方法">valueOf() 方法</h2>
+
+<p>这里有三个 <code>valueOf()</code> 方法，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 第一个 valueOf() 方法
+</span><span class="c1"></span><span class="err">public static Integer valueOf</span><span class="p">(</span><span class="err">int i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">IntegerCache</span><span class="p">.</span><span class="na">low</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">IntegerCache</span><span class="p">.</span><span class="na">high</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">IntegerCache</span><span class="p">.</span><span class="na">cache</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">IntegerCache</span><span class="p">.</span><span class="na">low</span><span class="p">)];</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">Integer</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 第二个 valueOf() 方法
+</span><span class="c1"></span><span class="err">public static Integer valueOf</span><span class="p">(</span><span class="err">String s</span><span class="p">)</span> <span class="err">throws NumberFormatException </span><span class="p">{</span>
+    <span class="k">return</span> <span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">parseInt</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">10</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// 第三个 valueOf() 方法
+</span><span class="c1"></span><span class="err">public static Integer valueOf</span><span class="p">(</span><span class="err">String s</span><span class="p">,</span> <span class="err">int radix</span><span class="p">)</span> <span class="err">throws NumberFormatException </span><span class="p">{</span>
+    <span class="k">return</span> <span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">parseInt</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">radix</span><span class="p">));</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>重点看第一个 <code>valueOf()</code> 方法，这里有个 <code>IntegerCache</code> 缓存，对于缓存范围内的 <code>Integer</code> 对象，直接从缓冲中取就可以了，否则就需要重新 <code>new</code> 一个 <code>Integer</code> 对象，即实例化一个 <code>Integer</code> 对象。</p>
+
+<p>这里涉及到了 <strong>自动装箱/自动拆箱</strong>，对于 <code>-128 &lt;= i &lt;= 127</code> 范围内的数值，返回的是缓存中的对象，并没有重新创建一个新对象，例如 <code>Integer a = 123;</code>，这里就实现了 <code>自动装箱</code>，将 <code>int</code> 类型的 <code>123</code> 转换成对应的包装类 <code>Integer</code>，反编译源码可以看到，执行的就是调用了 `<code>valueOf()</code> 方法，即 <code>Integer a = Integer.valueOf(123);</code>。</p>
+
+<p>而对于范围以外的数，比如 <code>128</code> 来说，则会直接返回一个 <code>Integer</code> 对象。</p>
+
+<p>而 <code>自动拆箱</code> 就是将 <code>包装类型</code> 转换成 <code>基本数据类型</code>，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Integer a </span><span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="p">(</span><span class="n">123</span><span class="p">);</span>
+<span class="err">int b </span><span class="o">=</span> <span class="n">a</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这里的 <code>int b = a;</code> 通过反编译源码后可以看到，其实是调用了 <code>intValue()</code> 方法，即 <code>int b = a.intValue();</code>。将 <code>Integer</code> 类型转换成 <code>int</code> 类型。</p>
+
+<h2 id="equals-方法">equals() 方法</h2>
+
+<p><code>equals()</code> 方法首先判断对象 <code>obj</code> 是不是 <code>Integer</code> 类型，如果是的话，再将 <code>obj</code> 强转为 <code>Integer</code>，通过 <strong>自动拆箱</strong> 再比较值是否相等。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public boolean </span><span class="n">equals</span><span class="p">(</span><span class="err">Object obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="err">obj instanceof </span><span class="n">Integer</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">value</span> <span class="o">==</span> <span class="p">((</span><span class="n">Integer</span><span class="p">)</span><span class="n">obj</span><span class="p">).</span><span class="na">intValue</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="compare-方法">compare() 方法</h2>
+
+<p>这里直接 return 了一个三目运算，还是嵌套的三目运算。如果 <code>x &lt; y</code>，则返回 <code>-1</code>；如果 <code>x == y</code>，则返回 <code>0</code>；如果 <code>x &gt; y</code>，则返回 <code>1</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static int compare</span><span class="p">(</span><span class="err">int x</span><span class="p">,</span> <span class="err">int y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">)</span> <span class="o">?</span> <span class="o">-</span><span class="n">1</span> <span class="o">:</span> <span class="p">((</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="n">1</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>除了以上的方法，其它的例如 <code>reverse(int i)</code>、<code>bitCount(int i)</code>、<code>xxxValue()</code> 等方法，在这里就不详细的展开了，你可以通过查看源码进行阅读。</p>
     </div>
 
     <div class="post-copyright">

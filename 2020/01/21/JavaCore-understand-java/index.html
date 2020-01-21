@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>如何理解 Java? - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="“一次编译，到处执行” 又能体现 Java 的哪些思想？
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2020/01/21/JavaCore-understand-java/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="如何理解 Java?" />
+<meta property="og:description" content="“一次编译，到处执行” 又能体现 Java 的哪些思想？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/01/21/JavaCore-understand-java/" />
+<meta property="article:published_time" content="2020-01-21T10:09:11+08:00" />
+<meta property="article:modified_time" content="2020-01-21T09:36:56+08:00" />
+<meta itemprop="name" content="如何理解 Java?">
+<meta itemprop="description" content="“一次编译，到处执行” 又能体现 Java 的哪些思想？">
+
+
+<meta itemprop="datePublished" content="2020-01-21T10:09:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-21T09:36:56&#43;08:00" />
+<meta itemprop="wordCount" content="1058">
+
+
+
+<meta itemprop="keywords" content="Java," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何理解 Java?"/>
+<meta name="twitter:description" content="“一次编译，到处执行” 又能体现 Java 的哪些思想？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/2020/01/12/post_summary/">
+        <li class="mobile-menu-item">❤文章汇总</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/2020/01/12/post_summary/">❤文章汇总</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">如何理解 Java?</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-21 </span>
+        <div class="post-category">
+            <a href="/categories/Java/"> Java </a>
+            </div>
+          <span class="more-meta"> 1058 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#分析">分析</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>“一次编译，到处执行” 又能体现 Java 的哪些思想？</p>
+
+<h1 id="分析">分析</h1>
+
+<p>这是一个比较笼统的问题，可以从很多方面进行回答。Java 作为一种面向对象的语言，一方面是具有 <code>“一次编译，到处执行”</code> 的跨平台能力，另一方面是具有垃圾回收机制，利用垃圾收集器回收内存，不用向 C++ 那样考虑 <code>那么多</code> 的内存分配问题。</p>
+
+<p><code>“Java 是解释执行”</code> 这句话如果细说的话，可以认为首先将 Java <code>源代码</code> 编译为 <code>字节码</code>，然后在运行时，通过 Java 虚拟机内嵌的解释器(Interpreter)将 <code>字节码</code> 转换成最终计算机能够识别的 <code>机器码</code>，从而让机器能够执行。但像 HotSpot 这样的虚拟机，为了 Java 程序执行的高效，还提供了一种 <code>JIT(Just In Time Compiler)</code> 编译器，即 <code>动态编译 或 即时编译</code>。该方式能够使得程序在 <strong>运行时</strong> 将 <code>热点代码(Hot Spot Code)</code> 编译成与平台相关的 <code>机器码</code>，并进行各种层次的优化。这种情况下，对于部分 <code>热点代码</code> 来说就属于 <code>编译执行</code> 而不是 <code>解释执行</code>。</p>
+
+<blockquote>
+<p>所谓的 <code>热点代码</code> 就是说：当虚拟机通过解释器执行字节码文件的时候，当虚拟机发现某个方法或者代码块的运行特别繁琐的时候，就会把这部分代码称为 <code>热点代码</code>。</p>
+</blockquote>
+
+<p>对于 “如何理解 Java?”，涉及了许多方面，如下所示：</p>
+
+<ul>
+<li>基本语言特性、面向对象、反射、泛型等；</li>
+<li>Java 类库
+
+<ul>
+<li>核心类库，如 IO/NIO、网络、工具类等；</li>
+<li>安全类库；</li>
+<li>JDK Management 类库；</li>
+<li>第三方类库；</li>
+</ul></li>
+<li>Java 虚拟机
+
+<ul>
+<li>GC；</li>
+<li>运行时；</li>
+<li>动态编译；</li>
+<li>辅助功能，如 JFR 等；</li>
+</ul></li>
+<li>工具
+
+<ul>
+<li>辅助工具，如 JLink、JAR、JDeps 等；</li>
+<li>编译器，如 javac、sjavac；</li>
+<li>诊断工具，如 jmap、jstack、jconsole、jhsdb、jcmd 等。</li>
+</ul></li>
+</ul>
+
+<p>我觉得对于这种范围涉及的比较广的问题，最好能把实现原理弄清楚。对于 <code>“一次编译，到处执行”</code> 说的是 Java 语言跨平台的特性，这种特性和 Java 虚拟机有关，由于不同平台下都含有对应的 JDK，这就为 Java 语言的运行提供了必要的环境。这里并不是说 Java 语言可以实现跨平台，只不过是说在不同的平台下都有可以让 Java 语言运行的环境而已，所以就有了一次编译，到处运行的效果。</p>
+
+<p>Java 分为 <code>编译期</code> 和 <code>运行时</code>，执行流程为 <code>编码-&gt;编译-&gt;运行</code>。</p>
+
+<p>对于 <code>编译期</code> 来说，是将 Java 源代码编译成 <code>.class</code> 文件，即 <code>字节码</code> 文件，这种文件就是可以到处运行的文件，这一步完成了第一次编译；然后 Java 字节码文件会被 JVM 编译为目标机器代码，这是 Java 的第二次编译。</p>
+
+<p>对于 <code>运行时</code> 来说，<code>“到处运行”</code> 需要的是 JVM，在任何可以运行 Java 程序的地方都含有一个 JVM 操作系统，因此实现了到处运行的效果。此外，在 JDK 9 中，引入了一种新的编译方式，即 <code>AOT(Ahead of Time Compliation)</code>，该方式可以将字节码编译成机器码。当然，这是围绕着虚拟机的效率问题进行展开的一些优化技术。</p>
+
+<h1 id="参考">参考</h1>
+
+<ul>
+<li><a href="https://time.geekbang.org/column/intro/82">极客时间</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-01-21
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Java/">Java</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/01/12/post_summary/">
+            <span class="next-text nav-default">【文章汇总】</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

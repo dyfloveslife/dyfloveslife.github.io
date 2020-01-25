@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 21 Jan 2020 10:09:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jan 2020 11:09:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何区分 Exception 和 Error?</title>
+      <link>http://localhost:1313/2020/01/21/JavaCore-difference-between-exception-and-error/</link>
+      <pubDate>Tue, 21 Jan 2020 11:09:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/01/21/JavaCore-difference-between-exception-and-error/</guid>
+      <description>&lt;p&gt;程序的异常处理在开发中很是常见，只有正确处理好意外情况，才能保证程序的可靠性。本文通过 Java 异常处理机制，详细的分析与解释 Java 中的 Exception 与 Error 之间的区别以及需要注意的点，以便更好的实现程序的可维护性。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>如何理解 Java?</title>

@@ -6,10 +6,19 @@
     <description>Recent content in Database on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 19 Jun 2017 18:32:11 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Feb 2020 19:33:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/Database/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MySQL 的基本概念与使用</title>
+      <link>http://localhost:1313/2020/02/02/mysql-basic-concepts-and-use/</link>
+      <pubDate>Sun, 02 Feb 2020 19:33:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/02/02/mysql-basic-concepts-and-use/</guid>
+      <description>&lt;p&gt;本文将介绍 MySQL（My Structured Query Language）数据库的基本概念与以及在日常开发中的使用，包括对数据的增删改查操作、子查询、联结表、组合查询、存储过程、游标、触发器、事务管理等知识的总结。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>C# 之 查询数据库</title>

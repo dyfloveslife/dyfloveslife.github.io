@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/MySQL/</link>
+    <description>Recent content in MySQL on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 02 Feb 2020 19:33:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/MySQL/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL 的基本概念与使用</title>
+      <link>http://localhost:1313/2020/02/02/mysql-basic-concepts-and-use/</link>
+      <pubDate>Sun, 02 Feb 2020 19:33:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/02/02/mysql-basic-concepts-and-use/</guid>
+      <description>&lt;p&gt;本文将介绍 MySQL（My Structured Query Language）数据库的基本概念与以及在日常开发中的使用，包括对数据的增删改查操作、子查询、联结表、组合查询、存储过程、游标、触发器、事务管理等知识的总结。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

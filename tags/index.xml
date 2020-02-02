@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 01 Feb 2020 19:00:11 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Feb 2020 19:33:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Database</title>
+      <link>http://localhost:1313/tags/Database/</link>
+      <pubDate>Sun, 02 Feb 2020 19:33:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Database/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MySQL</title>
+      <link>http://localhost:1313/tags/MySQL/</link>
+      <pubDate>Sun, 02 Feb 2020 19:33:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/MySQL/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Java</title>
@@ -557,15 +575,6 @@
       <pubDate>Sun, 25 Jun 2017 12:13:11 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/C-sharp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Database</title>
-      <link>http://localhost:1313/tags/Database/</link>
-      <pubDate>Mon, 19 Jun 2017 18:32:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/Database/</guid>
       <description></description>
     </item>
     

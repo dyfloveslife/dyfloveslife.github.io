@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>MySQL 的基本概念与使用 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="本文将介绍 MySQL（My Structured Query Language）数据库的基本概念与以及在日常开发中的使用，包括对数据的增删改查操作、子查询、联结表、组合查询、存储过程、游标、触发器、事务管理等知识的总结。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2020/02/02/mysql-basic-concepts-and-use/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="MySQL 的基本概念与使用" />
+<meta property="og:description" content="本文将介绍 MySQL（My Structured Query Language）数据库的基本概念与以及在日常开发中的使用，包括对数据的增删改查操作、子查询、联结表、组合查询、存储过程、游标、触发器、事务管理等知识的总结。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/02/02/mysql-basic-concepts-and-use/" />
+<meta property="article:published_time" content="2020-02-02T19:33:11+08:00" />
+<meta property="article:modified_time" content="2020-02-02T19:32:56+08:00" />
+<meta itemprop="name" content="MySQL 的基本概念与使用">
+<meta itemprop="description" content="本文将介绍 MySQL（My Structured Query Language）数据库的基本概念与以及在日常开发中的使用，包括对数据的增删改查操作、子查询、联结表、组合查询、存储过程、游标、触发器、事务管理等知识的总结。">
+
+
+<meta itemprop="datePublished" content="2020-02-02T19:33:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-02T19:32:56&#43;08:00" />
+<meta itemprop="wordCount" content="1866">
+
+
+
+<meta itemprop="keywords" content="MySQL,Database," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL 的基本概念与使用"/>
+<meta name="twitter:description" content="本文将介绍 MySQL（My Structured Query Language）数据库的基本概念与以及在日常开发中的使用，包括对数据的增删改查操作、子查询、联结表、组合查询、存储过程、游标、触发器、事务管理等知识的总结。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/2020/01/12/post_summary/">
+        <li class="mobile-menu-item">❤文章汇总</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/2020/01/12/post_summary/">❤文章汇总</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">MySQL 的基本概念与使用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-02-02 </span>
+        <div class="post-category">
+            <a href="/categories/MySQL/"> MySQL </a>
+            </div>
+          <span class="more-meta"> 1866 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#基本概念">基本概念</a></li>
+<li><a href="#基本命令">基本命令</a></li>
+<li><a href="#基本使用">基本使用</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>本文将介绍 MySQL（My Structured Query Language）数据库的基本概念与以及在日常开发中的使用，包括对数据的增删改查操作、子查询、联结表、组合查询、存储过程、游标、触发器、事务管理等知识的总结。</p>
+
+<h1 id="基本概念">基本概念</h1>
+
+<p><strong>数据库（database）</strong>：保存有组织的数据的容器，通常是一个文件或一组文件。</p>
+
+<p><strong>数据库管理系统（DBMS）</strong>：用于管理数据库的软件。所以，MySQL 是一种 DBMS，即它是一种数据库软件。</p>
+
+<p><strong>表（table）</strong>：某种特定类型数据的结构化清单，每个表都有一个名字唯一的表名。</p>
+
+<p><strong>列（column）</strong>：表中的一个字段，所有表都是由一个或多个列构成的，且每个表列都有相应的数据类型。</p>
+
+<p><strong>行（row）</strong>：表中的一个记录。</p>
+
+<p><strong>主键（primary key）</strong>：一列（或一组列），其值能够 <strong>唯一区分</strong> 表中的每个行，也称为 <code>码</code>。</p>
+
+<p>表中的任意列都可以作为主键，且满足以下条件：</p>
+
+<ul>
+<li>任意两行都不具有相同的主键值；</li>
+<li>每个行必须具有一个主键值（主键值不允许置为 NULL 值）。</li>
+</ul>
+
+<p><strong>外键（foreign key）</strong>：某个表中的一列，它包含另一个表的主键值，定义了两个表之间的关系。</p>
+
+<p><strong>关键字（key word）</strong>：即 MySQL 语言中的保留字，请不要使用关键字来命名一个表或列。</p>
+
+<p><strong>自动增量</strong>：通常用于当某些表中的列需要唯一值的时候。在每个行添加到表中时，MySQL 可以自动地为每个行分配下一个可用编号，不用在添加一行时手动分配唯一值。</p>
+
+<p><strong>子句（clause）</strong>：SQL 语句由子句构成，有些子句是必须的，而有些子句是可选的。一个子句通常由一个关键字和所提供的数据组成。</p>
+
+<p><strong>NULL（no value）</strong>：无值，它与字段包含 0、空字符串或仅仅包含空格不同。</p>
+
+<p><strong>操作符（operator）</strong>：用来联结或改变 WHERE 子句中的子句的关键字，也称逻辑操作符（logical operator）。</p>
+
+<h1 id="基本命令">基本命令</h1>
+
+<p>在 DOS 命令下使用 MySQL，以下命令分别指定了：用户名、密码、主机名以及端口号。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">username</span> <span class="o">-</span><span class="n">p</span> <span class="n">password</span> <span class="o">-</span><span class="n">h</span> <span class="n">myserver</span> <span class="o">-</span><span class="n">P</span> <span class="mi">9999</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>注意：每条命令在最后使用英文<code>;</code>或<code>\g</code>结束，使用<code>quit</code>或<code>exit</code>退出命令行程序。</p>
+
+<p>使用名为 crashcourse 的数据库：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">USE</span> <span class="n">crashcourse</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>显示所有数据库：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SHOW</span> <span class="n">DATABASES</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>显示 TABLES 数据库内的表的列表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SHOW</span> <span class="n">TABLES</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>显示 cuntomers 表中的列：（同<code>DESCRIBE customers;</code>语句）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SHOW</span> <span class="n">COLUMNS</span> <span class="k">FROM</span> <span class="n">customers</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="基本使用">基本使用</h1>
+
+<p><strong>注意：SQL 语句不区分大小写，一般将所有的 SQL 关键字使用大写，而对所有的列和表名使用小写，这样更易于阅读和调试。此外，在处理 SQL 语句时，其中所有的空格都被忽略，一般将 SQL 语句分成多行，以便于阅读和调试。</strong></p>
+
+<p>从 products 表中检索一个名为 prod_name 的列：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_name</span>
+<span class="k">FROM</span> <span class="n">products</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>检索<code>多个列</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span>
+<span class="k">FROM</span> <span class="n">products</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用通配符<code>*</code>检索<code>所有列</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">products</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用关键字<code>DISTINCT</code>检索<code>不同的行</code>该关键字必须放在列名之前：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">vend_id</span>
+<span class="k">FROM</span> <span class="n">products</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>LIMIT</code>指示 MySQL 返回不多于指定的行数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_name</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">LIMIT</span> <span class="mi">5</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>指定要检索的<code>开始行</code>和<code>行数</code>，第一个参数为<code>开始的位置</code>，第二个参数为<code>要检索的行数</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_name</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">LIMIT</span> <span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>完全限定</code>的表名和列名：</p>
+
+<blockquote>
+<p><code>products.prod_name</code>表示<code>products</code>表下的<code>prod_name</code>列；</p>
+
+<p><code>crashcourse.products</code>表示<code>crashcourse</code>数据库下的<code>products</code>表。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">products</span><span class="p">.</span><span class="n">prod_name</span>
+<span class="k">FROM</span> <span class="n">crashcourse</span><span class="p">.</span><span class="n">products</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>ORDER BY</code>子句对<code>prod_name</code>列中的数据进行排序：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_name</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">ORDER</span> <span class="k">by</span> <span class="n">prod_name</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>对多个列进行排序，首先按照<code>prod_price</code>进行排序，然后按照<code>prod_name</code>进行排序：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span><span class="p">,</span> <span class="n">prod_name</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">prod_price</span><span class="p">,</span> <span class="n">prod_name</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>DESC</code>关键字进行降序（Z~A），先对<code>prod_price</code>进行降序，再对<code>prod_name</code>进行升序排序：</p>
+
+<blockquote>
+<p>若不指定<code>DESC</code>关键字，则默认升序（A~Z）排序；升序排序的关键字为<code>ASC</code>。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span><span class="p">,</span> <span class="n">prod_name</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">prod_price</span> <span class="k">DESC</span> <span class="n">prod_name</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>ORDER BY</code>和<code>LIMIT</code>找出<code>prod_price</code>列中的最大值：</p>
+
+<blockquote>
+<p>注意：<code>ORDER BY</code>子句应在<code>FROM</code>语句之后，<code>LIMIT</code>应在<code>ORDER BY</code>子句之后。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_price</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">prod_price</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">1</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>WHERE</code>子句中指定的搜索条件对数据进行过滤：</p>
+
+<blockquote>
+<p>注意：<code>ORDER BY</code>子句应在<code>WHERE</code>之后。</p>
+
+<p>WHERE 子句操作符：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">=          等于
+&lt;&gt;         不等于
+!=         不等于
+&lt;          小于
+&lt;=         小于等于
+&gt;          大于
+&gt;=         大于等于
+BETWEEN    介于指定的两个值之间，与 AND 配合使用</pre></td></tr></table>
+</div>
+</div></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">WHERE</span> <span class="n">prod_price</span> <span class="o">=</span> <span class="mi">25</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>在<code>WHERE</code>子句中，如果是字符串类型的列，则需要用单引号<code>''</code>括起来，如果是数值类型的列，则不需要：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">WHERE</span> <span class="n">prod_name</span> <span class="o">=</span> <span class="s1">&#39;fuses&#39;</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用 <code>IS NULL</code> 子句返回没有价格（空的 <code>prod_price</code> 字段，而不是价格为 0）的所有产品：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_name</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">WHERE</span> <span class="n">prod_price</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用 <code>WHERE</code> 子句中的关键字 <code>AND</code> 来指示检索满足所有给定条件的行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span><span class="p">,</span> <span class="n">prod_name</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">WHERE</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="mi">1003</span> <span class="k">AND</span> <span class="n">prod_price</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用 <code>OR</code> 检索匹配任一条件的行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">WHERE</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="mi">1002</span> <span class="k">OR</span> <span class="n">vend_id</span> <span class="o">=</span> <span class="mi">1003</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>end of P42</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-02-02
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/MySQL/">MySQL</a>
+          <a href="/tags/Database/">Database</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/02/01/java-object-and-reference/">
+            <span class="next-text nav-default">Java 中的对象与引用</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

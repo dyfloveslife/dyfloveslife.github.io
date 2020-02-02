@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 01 Feb 2020 19:00:11 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Feb 2020 19:33:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MySQL</title>
+      <link>http://localhost:1313/categories/MySQL/</link>
+      <pubDate>Sun, 02 Feb 2020 19:33:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/categories/MySQL/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Java</title>

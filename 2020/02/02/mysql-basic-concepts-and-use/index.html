@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-02-02T19:33:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-02-03T20:41:56&#43;08:00" />
-<meta itemprop="wordCount" content="3611">
+<meta itemprop="wordCount" content="4031">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/MySQL/"> MySQL </a>
             </div>
-          <span class="more-meta"> 3611 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 4031 words </span>
+          <span class="more-meta"> 9 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -195,6 +195,10 @@
 <p><strong>搜索模式（seach pattern）</strong>：由字面值、通配符或两者组合构成的搜索条件。</p>
 
 <p><strong>聚集函数（aggregate function）</strong>：运行在行组上，计算和返回单个值的函数。</p>
+
+<p><strong>完全限定列名</strong>：在引用的列可能出现二义性时，必须使用完全限定列名（用一个点分隔表名和列名）。</p>
+
+<p><strong>笛卡尔积（cartesian priduct）</strong>：由没有联结条件的表关系返回的结果称为笛卡尔积。检索出的行的数目将是第一个表中的行数乘以第二个表中的行数。</p>
 
 <h1 id="基本命令">基本命令</h1>
 
@@ -862,7 +866,94 @@ LIMIT</pre></td></tr></table>
 </div>
 </div></blockquote>
 
-<p>end of P90</p>
+<p>使用<code>子查询</code>：</p>
+
+<blockquote>
+<p>子查询总是从内向外处理。其次，在 WHERE 子句中使用子查询，应该保证 SELECT 语句具有与 WHERE 子句中相同数目的列。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">cust_id</span>
+<span class="k">FROM</span> <span class="n">orders</span>
+<span class="k">WHERE</span> <span class="n">order_num</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">order_num</span>
+                    <span class="k">FROM</span> <span class="n">orderitems</span>
+                    <span class="k">WHERE</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>联结</code>的方式，确定要<code>联结</code>的所有表以及它们之间的关联关系：</p>
+
+<blockquote>
+<p>其中：<code>prod_name</code>和<code>prod_price</code>在同一个表中，而<code>vend_name</code>在另一个表中。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">vend_name</span><span class="p">,</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span>
+<span class="k">FROM</span> <span class="n">vendors</span><span class="p">,</span> <span class="n">products</span>
+<span class="k">WHERE</span> <span class="n">vendors</span><span class="p">.</span><span class="n">vend_id</span> <span class="o">=</span> <span class="n">products</span><span class="p">.</span><span class="n">vend_id</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">vend_name</span><span class="p">,</span> <span class="n">prod_name</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>INNER</code>、<code>JOIN</code>关键字进行<code>内部联结</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">vend_name</span><span class="p">,</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">prod_price</span>
+<span class="k">FROM</span> <span class="n">vendors</span> <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">products</span>
+<span class="k">ON</span> <span class="n">vendors</span><span class="p">.</span><span class="n">vend_id</span> <span class="o">=</span> <span class="n">products</span><span class="p">.</span><span class="n">vend_id</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>联结</code>多个表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">prod_name</span><span class="p">,</span> <span class="n">vend_name</span><span class="p">,</span> <span class="n">peod_price</span><span class="p">,</span> <span class="n">quantity</span>
+<span class="k">FROM</span> <span class="n">orderitems</span><span class="p">,</span> <span class="n">products</span><span class="p">,</span> <span class="n">vendors</span>
+<span class="k">WHERE</span> <span class="n">products</span><span class="p">.</span><span class="n">vend_id</span> <span class="o">=</span> <span class="n">vendors</span><span class="p">.</span><span class="n">vend_id</span>
+<span class="k">AND</span> <span class="n">orderitems</span><span class="p">.</span><span class="n">prod_id</span> <span class="o">=</span> <span class="n">products</span><span class="p">.</span><span class="n">prod_id</span>
+<span class="k">AND</span> <span class="n">order_num</span> <span class="o">=</span> <span class="mi">20005</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>给表名起别名</code>可以缩短 SQL 语句以便于在单条 SELECT 语句中多次使用相同的表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="n">orders</span> <span class="k">AS</span> <span class="n">o</span><span class="p">,</span> <span class="n">orderitems</span> <span class="k">AS</span> <span class="n">oi</span>
+<span class="k">WHERE</span> <span class="k">c</span><span class="p">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">cust_id</span>
+<span class="k">AND</span> <span class="n">oi</span><span class="p">.</span><span class="n">order_num</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">order_num</span>
+<span class="k">AND</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>end of P107.</p>
     </div>
 
     <div class="post-copyright">

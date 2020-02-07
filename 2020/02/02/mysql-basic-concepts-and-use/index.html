@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-02-02T19:33:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-02-03T20:41:56&#43;08:00" />
-<meta itemprop="wordCount" content="4031">
+<meta itemprop="wordCount" content="5578">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/MySQL/"> MySQL </a>
             </div>
-          <span class="more-meta"> 4031 words </span>
-          <span class="more-meta"> 9 mins read </span>
+          <span class="more-meta"> 5578 words </span>
+          <span class="more-meta"> 12 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -149,7 +149,24 @@
 <ul>
 <li><a href="#基本概念">基本概念</a></li>
 <li><a href="#基本命令">基本命令</a></li>
-<li><a href="#基本使用">基本使用</a></li>
+<li><a href="#基本使用">基本使用</a>
+<ul>
+<li><a href="#检索数据">检索数据</a></li>
+<li><a href="#过滤数据">过滤数据</a></li>
+<li><a href="#通配符">通配符</a></li>
+<li><a href="#数据处理函数">数据处理函数</a></li>
+<li><a href="#聚集函数">聚集函数</a></li>
+<li><a href="#分组数据">分组数据</a></li>
+<li><a href="#子查询">子查询</a></li>
+<li><a href="#联结表">联结表</a></li>
+<li><a href="#高级联结">高级联结</a></li>
+<li><a href="#组合查询">组合查询</a></li>
+<li><a href="#插入数据">插入数据</a></li>
+<li><a href="#更新数据">更新数据</a></li>
+<li><a href="#删除数据">删除数据</a></li>
+<li><a href="#创建和操作表">创建和操作表</a></li>
+<li><a href="#视图">视图</a></li>
+</ul></li>
 </ul>
 </nav>
   </div>
@@ -250,6 +267,8 @@
 </div>
 </div>
 <h1 id="基本使用">基本使用</h1>
+
+<h2 id="检索数据">检索数据</h2>
 
 <p><strong>注意：SQL 语句不区分大小写，一般将所有的 SQL 关键字使用大写，而对所有的列和表名使用小写，这样更易于阅读和调试。此外，在处理 SQL 语句时，其中所有的空格都被忽略，一般将 SQL 语句分成多行，以便于阅读和调试。</strong></p>
 
@@ -402,6 +421,8 @@
 <span class="k">LIMIT</span> <span class="mi">1</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
 </div>
+<h2 id="过滤数据">过滤数据</h2>
+
 <p>使用<code>WHERE</code>子句中指定的搜索条件对数据进行过滤：</p>
 
 <blockquote>
@@ -569,6 +590,8 @@ BETWEEN    介于指定的两个值之间，与 AND 配合使用</pre></td></tr>
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">prod_name</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
 </div>
+<h2 id="通配符">通配符</h2>
+
 <p>使用通配符<code>%</code>找出以词<code>jet</code>起头的产品：</p>
 
 <blockquote>
@@ -601,6 +624,8 @@ BETWEEN    介于指定的两个值之间，与 AND 配合使用</pre></td></tr>
 <span class="k">WHERE</span> <span class="n">prod_name</span> <span class="k">LIKE</span> <span class="s1">&#39;_ to anvil&#39;</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
 </div>
+<h2 id="数据处理函数">数据处理函数</h2>
+
 <p>使用<code>Concat()</code>函数拼接两个列，即将多个串连接起来形成一个较长的串：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -699,7 +724,11 @@ Soundex()       返回串的SOUNDEX值
 SubString()     返回子串的字符
 Upper()         将串转换成大写</pre></td></tr></table>
 </div>
-</div>
+</div></blockquote>
+
+<h2 id="聚集函数">聚集函数</h2>
+
+<blockquote>
 <p>常用<code>聚集</code>函数：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -742,6 +771,8 @@ SUM()          返回某列值之和，忽略列值为 NULL 的行</pre></td></t
 <span class="k">FROM</span> <span class="n">products</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
 </div>
+<h2 id="分组数据">分组数据</h2>
+
 <p>使用<code>GROUP BY</code>子句进行分组（对每个组进行聚集，而不是对整个结果进行聚集）：</p>
 
 <blockquote>
@@ -866,6 +897,8 @@ LIMIT</pre></td></tr></table>
 </div>
 </div></blockquote>
 
+<h2 id="子查询">子查询</h2>
+
 <p>使用<code>子查询</code>：</p>
 
 <blockquote>
@@ -887,6 +920,8 @@ LIMIT</pre></td></tr></table>
                     <span class="k">WHERE</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
 </div>
+<h2 id="联结表">联结表</h2>
+
 <p>使用<code>联结</code>的方式，确定要<code>联结</code>的所有表以及它们之间的关联关系：</p>
 
 <blockquote>
@@ -936,6 +971,8 @@ LIMIT</pre></td></tr></table>
 <span class="k">AND</span> <span class="n">order_num</span> <span class="o">=</span> <span class="mi">20005</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
 </div>
+<h2 id="高级联结">高级联结</h2>
+
 <p><code>给表名起别名</code>可以缩短 SQL 语句以便于在单条 SELECT 语句中多次使用相同的表：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -953,7 +990,309 @@ LIMIT</pre></td></tr></table>
 <span class="k">AND</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>end of P107.</p>
+<p>使用<code>自联结</code>进行查询：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">p1</span><span class="p">.</span><span class="n">prod_id</span><span class="p">,</span> <span class="n">p1</span><span class="p">.</span><span class="n">prod_name</span>
+<span class="k">FROM</span> <span class="n">products</span> <span class="k">AS</span> <span class="n">p1</span><span class="p">,</span> <span class="n">produvts</span> <span class="k">AS</span> <span class="n">p2</span>
+<span class="k">WHERE</span> <span class="n">p1</span><span class="p">.</span><span class="n">vend_id</span> <span class="o">=</span> <span class="n">p2</span><span class="p">.</span><span class="n">vend_id</span>
+<span class="k">AND</span> <span class="n">p2</span><span class="p">.</span><span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;DTNTR&#39;</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>自然联结</code>进行查询：</p>
+
+<blockquote>
+<p><code>内部联结</code>返回所有数据，甚至会多次出现相同的列。</p>
+
+<p><code>自然联结</code>排除多次出现，使每个列只返回一次，使用时仅能选择那些唯一的列。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">o</span><span class="p">.</span><span class="n">order_num</span><span class="p">,</span> <span class="n">o</span><span class="p">.</span><span class="n">order_date</span><span class="p">,</span>
+       <span class="n">oi</span><span class="p">.</span><span class="n">prod_id</span><span class="p">,</span> <span class="n">oi</span><span class="p">.</span><span class="n">quantity</span><span class="p">,</span> <span class="n">oi_item_price</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">AS</span> <span class="k">c</span><span class="p">,</span> <span class="n">orders</span> <span class="k">AS</span> <span class="n">o</span><span class="p">,</span> <span class="n">orderitems</span> <span class="k">AS</span> <span class="n">oi</span>
+<span class="k">WHERE</span> <span class="k">c</span><span class="p">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">cust_id</span>
+<span class="k">AND</span> <span class="n">oi</span><span class="p">.</span><span class="n">order_num</span> <span class="o">=</span> <span class="n">o</span><span class="p">.</span><span class="n">order_num</span>
+<span class="k">AND</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;FB&#39;</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>LEFT OUTER</code>关键字进行<code>外部联结</code>查询：</p>
+
+<blockquote>
+<p>如果联结包含了那些在相关表中没有关联行的行，则这种类型的联结称为<code>外部联结</code>。</p>
+
+<p>在使用<code>OUTER JOIN</code>时，必须使用<code>RIGHT</code>或<code>LEFT</code>关键字指定包括其所有行的表。</p>
+
+<p><code>RIGHT</code>指出的是<code>OUTER JOIN</code>右边的表，而<code>LEFT</code>指出的是<code>OUTER JOIN</code>左边的表。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">customers</span><span class="p">.</span><span class="n">cust_id</span><span class="p">,</span> <span class="n">orders</span><span class="p">.</span><span class="n">order_num</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">orders</span>
+<span class="k">ON</span> <span class="n">customers</span><span class="p">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">orders</span><span class="p">.</span><span class="n">cust_id</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="组合查询">组合查询</h2>
+
+<p>使用<code>UNION</code>操作符来组合数条 SQL 查询，即给出多条 SELECT 语句，将它们的结果组合成单个结果集：</p>
+
+<blockquote>
+<p>注意：</p>
+
+<ol>
+<li><p><code>UNION</code>必须由两条或两条以上的 SELECT 语句组成，语句之间用关键字<code>UNION</code>分隔。</p></li>
+
+<li><p><code>UNION</code>中的每个查询必须包含相同的列、表达式或聚集函数。</p></li>
+
+<li><p>列数据类型必须兼容，类型不必完全相同，但必须是 DBMS 可以隐含的转换的类型。</p></li>
+
+<li><p>使用<code>UNION</code>关键字能够将重复的行进行去除，而使用<code>UNION ALL</code>则显示所有重复的行。</p></li>
+
+<li><p>如果使用<code>ORDER BY</code>关键字进行排序，则该关键字只能处于最后一条 SELECT 语句之后。</p></li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">vend_id</span><span class="p">,</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">WHERE</span> <span class="n">prod_price</span> <span class="o">&lt;=</span> <span class="mi">5</span>
+<span class="k">UNION</span>
+<span class="k">SELECT</span> <span class="n">vend_id</span><span class="p">,</span> <span class="n">prod_id</span><span class="p">,</span> <span class="n">prod_price</span>
+<span class="k">FROM</span> <span class="n">products</span>
+<span class="k">WHERE</span> <span class="n">vend_id</span> <span class="k">IN</span><span class="p">(</span><span class="mi">1001</span><span class="p">,</span> <span class="mi">1002</span><span class="p">)</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">vend_id</span><span class="p">,</span> <span class="n">prod_price</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="插入数据">插入数据</h2>
+
+<p>使用<code>INSERT</code>语句插入完整的一行：</p>
+
+<blockquote>
+<p>注意：</p>
+
+<ol>
+<li><p>不管是否给出表中的列名，都必须给出 VALUES 的正确数目。</p></li>
+
+<li><p>如果想要使用<code>INSERT</code>语句插入完整的多行，可以使用多条<code>INSERT</code>语句，多条语句之间用分号间隔，从而一次提交它们。</p></li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Customers</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="k">NULL</span><span class="p">,</span> <span class="s1">&#39;Pep E. LaPew&#39;</span><span class="p">,</span> <span class="s1">&#39;100 Main Street&#39;</span><span class="p">,</span> <span class="s1">&#39;Los Angles&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">,</span> <span class="s1">&#39;90046&#39;</span><span class="p">,</span> <span class="s1">&#39;USA&#39;</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="k">NULL</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="更新数据">更新数据</h2>
+
+<p>使用<code>UPDATE</code>语句更新表中特定的行或所有的行：</p>
+
+<blockquote>
+<p>注意：</p>
+
+<ol>
+<li><p>在执行更新语句时，不要忘记使用<code>WHERE</code>语句，切记。</p></li>
+
+<li><p>在使用<code>UPDATE</code>语句更新多行时，假如在更新行中的一行或多行时出现一个错误，则整个<code>UPDATE</code>操作将被取消。此时可以使用<code>IGNORE</code>关键字，即使是发生了错误，也会继续更新。例如<code>UPDATE INGNORE customers...</code></p></li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">UPTATE</span> <span class="n">customers</span>
+<span class="k">SET</span> <span class="n">cust_email</span> <span class="o">=</span> <span class="s1">&#39;elemer@fudd.com&#39;</span>
+<span class="k">WHERE</span> <span class="n">cust_id</span> <span class="o">=</span> <span class="mi">10005</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="删除数据">删除数据</h2>
+
+<p>使用<code>DELETE</code>语句删除特定的行或多行：</p>
+
+<blockquote>
+<p>注意：</p>
+
+<ol>
+<li><p>在执行更新语句时，不要忘记使用<code>WHERE</code>语句，切记。</p></li>
+
+<li><p><code>DELETE</code>语句不需要列名或通配符，<code>DELETE</code>语句是删除整行而不是删除列。如果想要删除指定的列，则需使用<code>UPDATE</code>语句。</p></li>
+
+<li><p>如果想要删除表中的所有行，应使用<code>TRUNCATE TABLE</code>语句，因为<code>TRUNCATE</code>实际上是删除原来的表并重新创建一个表，而不是逐行删除表中的数据。</p></li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">customers</span>
+<span class="k">WHERE</span> <span class="n">cust_id</span> <span class="o">=</span> <span class="mi">10006</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="创建和操作表">创建和操作表</h2>
+
+<p>使用<code>CREATE TABLE</code>语句创建一张表：</p>
+
+<blockquote>
+<p><code>NULL</code>值是没有值或缺值，不是空串。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">customers</span>
+<span class="p">(</span>
+    <span class="n">cust_id</span>      <span class="nb">int</span>       <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+    <span class="n">cust_name</span>    <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">cust_address</span> <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">cust_city</span>    <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">cust_state</span>   <span class="nb">char</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>   <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">cust_zip</span>     <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">cust_country</span> <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">cust_contact</span> <span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">cust_email</span>   <span class="nb">char</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">cust_id</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>DEFAULT</code>关键字在创建表时指定默认的值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">orderitems</span>
+<span class="p">(</span>
+    <span class="n">order_num</span>  <span class="nb">int</span>           <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">order_item</span> <span class="nb">int</span>           <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">prod_id</span>    <span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>      <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">quantity</span>   <span class="nb">int</span>           <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">item_price</span> <span class="nb">decimal</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>  <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">order_num</span><span class="p">,</span> <span class="n">order_item</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>ENGINE=InnoDB</code>语句用于指定 MySQL 使用<code>InnoDB</code>内部引擎，如下：</p>
+
+<blockquote>
+<p><code>InnoDB</code>是一个可靠的事务处理引擎，它不支持全文本搜索。</p>
+
+<p><code>MEMORY</code>将数据存储在内存（而非磁盘）中，速度很快。</p>
+
+<p><code>MyISAM</code>是一个性能极高的引擎，支持全文本搜索，但不支持事务处理。</p>
+</blockquote>
+
+<p>使用<code>ALTER TABLE</code>语句更新表，增加一个名为<code>vend_phone</code>的列：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">vendors</span>
+<span class="k">ADD</span> <span class="n">vend_phone</span> <span class="nb">CHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>ALTER TABLE</code>语句删除表中的列：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">vendors</span>
+<span class="k">DROP</span> <span class="k">COLUMN</span> <span class="n">vend_phone</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>ALTER TABLE</code>语句更新外键：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">orderitems</span>
+<span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="n">fk_orderitems_orders</span>
+<span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">order_num</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">orders</span> <span class="p">(</span><span class="n">order_num</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>DROP TABLE</code>删除表（删除整个表而不是其内容）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">customers2</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>RENAME TABLE</code>语句重命名一个表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">RENAME</span> <span class="k">TABLE</span> <span class="n">customers2</span> <span class="k">TO</span> <span class="n">customers</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="视图">视图</h2>
     </div>
 
     <div class="post-copyright">

@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-02-02T19:33:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-02-03T20:41:56&#43;08:00" />
-<meta itemprop="wordCount" content="5578">
+<meta itemprop="wordCount" content="6480">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/MySQL/"> MySQL </a>
             </div>
-          <span class="more-meta"> 5578 words </span>
-          <span class="more-meta"> 12 mins read </span>
+          <span class="more-meta"> 6480 words </span>
+          <span class="more-meta"> 13 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -166,6 +166,10 @@
 <li><a href="#删除数据">删除数据</a></li>
 <li><a href="#创建和操作表">创建和操作表</a></li>
 <li><a href="#视图">视图</a></li>
+<li><a href="#存储过程">存储过程</a></li>
+<li><a href="#游标">游标</a></li>
+<li><a href="#触发器">触发器</a></li>
+<li><a href="#事务处理">事务处理</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -1293,6 +1297,285 @@ LIMIT</pre></td></tr></table>
 </div>
 </div>
 <h2 id="视图">视图</h2>
+
+<p><code>视图</code>是虚拟的表，与包含数据的表不同的是，视图是包含使用时动态检索数据的查询。</p>
+
+<p>视图的使用（好处）：</p>
+
+<ol>
+<li>重用 SQL 语句，简化复杂的 SQL 操作；</li>
+<li>使用表的组成部分而不是整个表；</li>
+<li>保护数据、更改数据格式和表示形式。</li>
+</ol>
+
+<p>视图的<code>增删改查</code>操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">viewname</span><span class="p">;</span>
+
+<span class="k">DROP</span> <span class="k">VIEW</span> <span class="n">viewname</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="k">VIEW</span> <span class="n">viewname</span><span class="p">;</span>
+
+<span class="k">SHOW</span> <span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">viewname</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>创建一个名为<code>productcustomers</code>的视图：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">productcustomers</span> <span class="k">AS</span>
+<span class="k">SELECT</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span><span class="p">,</span> <span class="n">prod_id</span>
+<span class="k">FROM</span> <span class="n">customers</span><span class="p">,</span> <span class="n">orders</span><span class="p">,</span> <span class="n">orderitems</span>
+<span class="k">WHERE</span> <span class="n">customers</span><span class="p">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">orders</span><span class="p">.</span><span class="n">cust_id</span>
+<span class="k">AND</span> <span class="n">orderitems</span><span class="p">.</span><span class="n">order_num</span> <span class="o">=</span> <span class="n">orders</span><span class="p">.</span><span class="n">order_num</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用刚才创建的视图：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">cust_name</span><span class="p">,</span> <span class="n">cust_contact</span>
+<span class="k">FROM</span> <span class="n">productcustomers</span>
+<span class="k">WHERE</span> <span class="n">prod_id</span> <span class="o">=</span> <span class="s1">&#39;TNT2&#39;</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="存储过程">存储过程</h2>
+
+<p><code>存储过程</code>是可以为以后的使用而保存的一条或多条 MySQL 语句的集合。</p>
+
+<p>使用<code>CALL</code>执行存储过程，需要给出变量名：</p>
+
+<blockquote>
+<p>查询时，使用类似于<code>SELECT @pricelow;</code>进行相应的查询。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CALL</span> <span class="n">productpricing</span><span class="p">(</span><span class="o">@</span><span class="n">pricelow</span><span class="p">,</span>
+                    <span class="o">@</span><span class="n">pricehigh</span><span class="p">,</span>
+                    <span class="o">@</span><span class="n">priceaverage</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>创建存储过程：</p>
+
+<blockquote>
+<p>其中，<code>BEGIN</code>和<code>END</code>用于限定存储过程体。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">productpricing</span><span class="p">()</span>
+<span class="k">BEGIN</span>
+    <span class="k">SELECT</span> <span class="k">Avg</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span> <span class="k">AS</span> <span class="n">priceaverage</span>
+    <span class="k">FROM</span> <span class="n">products</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>删除存储过程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DROP</span> <span class="k">PROCEDURE</span> <span class="n">productpricing</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>在存储过程使用变量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">productpricing</span><span class="p">(</span>
+    <span class="k">OUT</span> <span class="n">pl</span> <span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="k">OUT</span> <span class="n">ph</span> <span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="k">OUT</span> <span class="n">pa</span> <span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="k">BEGIN</span>
+    <span class="k">SELECT</span> <span class="k">Min</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span>
+    <span class="k">INTO</span> <span class="n">pl</span>
+    <span class="k">FROM</span> <span class="n">products</span><span class="p">;</span>
+    <span class="k">SELECT</span> <span class="k">Max</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span>
+    <span class="k">INTO</span> <span class="n">ph</span>
+    <span class="k">FROM</span> <span class="n">products</span><span class="p">;</span>
+    <span class="k">SELECT</span> <span class="k">Avg</span><span class="p">(</span><span class="n">prod_price</span><span class="p">)</span>
+    <span class="k">INTO</span> <span class="n">pa</span>
+    <span class="k">FROM</span> <span class="n">products</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="游标">游标</h2>
+
+<p>使用<code>游标</code>可以在检索出来的行中前进或后退一行或多行，<code>游标</code>仅能用于存储过程。</p>
+
+<p>使用<code>DECLARE</code>创建游标：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">processorders</span><span class="p">()</span>
+<span class="k">BEGIN</span>
+    <span class="k">DECLARE</span> <span class="n">ordernumbers</span> <span class="k">CURSOR</span>
+    <span class="k">FOR</span> 
+    <span class="k">SELECT</span> <span class="n">order_num</span> <span class="k">FROM</span> <span class="n">orders</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>打开与关闭游标：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">OPEN</span> <span class="n">ordernumbers</span><span class="p">;</span>
+
+<span class="k">CLOSE</span> <span class="n">ordernumbers</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="触发器">触发器</h2>
+
+<p><code>触发器</code>是 MySQL 响应<code>DELETE</code>、<code>INSERT</code>、<code>UPDATE</code>语句而自动执行（触发）的一条 MySQL 语句。</p>
+
+<p>使用<code>CREATE TRIGGER</code>语句创建触发器：</p>
+
+<blockquote>
+<p>该触发器在<code>INSERT</code>语句执行成功后才执行。</p>
+
+<p>视图不支持触发器。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TRIGGER</span> <span class="n">newproduct</span> <span class="k">AFTER</span> <span class="k">INSERT</span> <span class="k">ON</span> <span class="n">products</span>
+<span class="k">FOR</span> <span class="k">EACH</span> <span class="k">ROW</span> <span class="k">SELECT</span> <span class="s1">&#39;Product added&#39;</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>删除触发器：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">DROP</span> <span class="k">TRIGGER</span> <span class="n">newproduct</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="事务处理">事务处理</h2>
+
+<ol>
+<li>事务（transaction）：指一组 SQL 语句；</li>
+<li>回退（rollback）：指撤销指定 SQL 语句的过程；</li>
+<li>提交（commit）：指将未存储的 SQL 语句结果写入数据库表；</li>
+<li>保留点（savepoint）：指事务处理中设置的临时占位符，可以对它发布回退。</li>
+</ol>
+
+<p>使用<code>ROLLBACK</code>来撤销 SQL 语句：</p>
+
+<blockquote>
+<p>不能回退<code>SELECT</code>语句，不能回退<code>CREATE</code>或<code>DROP</code>操作。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">ordertotals</span><span class="p">;</span>
+<span class="k">START</span> <span class="k">TRANSACTION</span><span class="p">;</span>
+<span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">ordertotals</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">ordertotals</span><span class="p">;</span>
+<span class="k">ROLLBACK</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">ordertotals</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用<code>COMMIT</code>进行明确的提交：</p>
+
+<blockquote>
+<p><code>COMMIT</code>语句仅在不出错时写出更改。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">START</span> <span class="k">TRANSACTION</span><span class="p">;</span>
+<span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">orderitems</span> <span class="k">WHERE</span> <span class="n">order_num</span> <span class="o">=</span> <span class="mi">20010</span><span class="p">;</span>
+<span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">orders</span> <span class="k">WHERE</span> <span class="n">order_num</span> <span class="o">=</span> <span class="mi">20010</span><span class="p">;</span>
+<span class="k">COMMIT</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>创建保留点，以便在回退时，MySQL 知道要回到何处：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">SAVEPOINT</span> <span class="n">delete1</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上。</p>
     </div>
 
     <div class="post-copyright">

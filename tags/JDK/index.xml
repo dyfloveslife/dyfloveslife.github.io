@@ -6,10 +6,19 @@
     <description>Recent content in JDK on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 13 Dec 2019 21:20:11 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 12 Feb 2020 17:02:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/JDK/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 容器之 HashMap</title>
+      <link>http://localhost:1313/2020/02/12/JavaSrc-HashMap/</link>
+      <pubDate>Wed, 12 Feb 2020 17:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/02/12/JavaSrc-HashMap/</guid>
+      <description>&lt;p&gt;在日常开发中，我们可以使用 HapMap 中的 get 和 put 方法进行 O(1) 的操作，如此快速的方法到底是怎么实现的？本文将对 HashMap 中的主要方法（get、put、resize）进行说明，对应的版本为 JDK 1.8。不过，为了更加详细的了解 HashMap 的优化过程，同时也会与 JDK 1.7 中的 HashMap 进行比较，从而对 HashMap 有一个较为全面的认识。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>JDK 源码之基础类 Integer</title>

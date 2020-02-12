@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 02 Feb 2020 19:33:11 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 12 Feb 2020 17:02:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HashMap</title>
+      <link>http://localhost:1313/tags/HashMap/</link>
+      <pubDate>Wed, 12 Feb 2020 17:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/HashMap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>http://localhost:1313/tags/Java/</link>
+      <pubDate>Wed, 12 Feb 2020 17:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JDK</title>
+      <link>http://localhost:1313/tags/JDK/</link>
+      <pubDate>Wed, 12 Feb 2020 17:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/JDK/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Database</title>
@@ -26,15 +53,6 @@
       <pubDate>Sun, 02 Feb 2020 19:33:11 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/MySQL/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>http://localhost:1313/tags/Java/</link>
-      <pubDate>Sat, 01 Feb 2020 19:00:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/Java/</guid>
       <description></description>
     </item>
     
@@ -134,15 +152,6 @@
       <pubDate>Fri, 13 Dec 2019 21:20:11 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/Integer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JDK</title>
-      <link>http://localhost:1313/tags/JDK/</link>
-      <pubDate>Fri, 13 Dec 2019 21:20:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/JDK/</guid>
       <description></description>
     </item>
     

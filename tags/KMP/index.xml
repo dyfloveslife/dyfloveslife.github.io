@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KMP on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/KMP/</link>
+    <description>Recent content in KMP on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 18 Feb 2020 19:26:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/KMP/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>KMP 算法</title>
+      <link>http://localhost:1313/2020/02/18/kmp/</link>
+      <pubDate>Tue, 18 Feb 2020 19:26:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/02/18/kmp/</guid>
+      <description>&lt;p&gt;KMP 算法适用于求解字符串匹配的问题，网上有许多&lt;a href=&#34;https://www.google.com/search?q=Knuth-Morris-Pratt+algorithm&#34;&gt;文章&lt;/a&gt;对它都有详细的解释，之前在学习&lt;a href=&#34;https://book.douban.com/subject/1101779/&#34;&gt;数据结构&lt;/a&gt;的时候也对该算法有些了解，但一直没怎么总结。先将其进行回顾，并写下此文，以作备忘。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

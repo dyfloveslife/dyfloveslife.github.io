@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>JDK 源码之集合类 LinkedList</title>
+      <link>http://localhost:1313/2020/03/04/JavaSrc-LinkedList/</link>
+      <pubDate>Wed, 04 Mar 2020 15:20:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/03/04/JavaSrc-LinkedList/</guid>
+      <description>&lt;p&gt;本文是对 JDK1.8 中 LinkedList 的分析与总结，在阅读源码的同时加深对其提供的方法的使用，以便更好的理解。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>KMP 算法</title>
       <link>http://localhost:1313/2020/02/18/kmp/</link>
       <pubDate>Tue, 18 Feb 2020 19:26:11 +0800</pubDate>

@@ -6,10 +6,19 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 04 Mar 2020 15:20:11 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 07 Mar 2020 19:20:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/Java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JDK 源码之集合类 LinkedList</title>
+      <link>http://localhost:1313/2020/03/07/JavaSrc-LinkedList/</link>
+      <pubDate>Sat, 07 Mar 2020 19:20:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/03/07/JavaSrc-LinkedList/</guid>
+      <description>&lt;p&gt;本文是对 JDK1.8 中 LinkedList 的分析与总结，在阅读源码的同时加深对其提供的方法的使用，以便更好的理解。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>JDK 源码之集合类 ArrayList</title>
@@ -18,15 +27,6 @@
       
       <guid>http://localhost:1313/2020/03/04/JavaSrc-ArrayList/</guid>
       <description>&lt;p&gt;本文是对 JDK1.8 中 ArrayList 的分析与总结，在阅读源码的同时加深对其提供的方法的使用，以便更好的理解。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>JDK 源码之集合类 LinkedList</title>
-      <link>http://localhost:1313/2020/03/04/JavaSrc-LinkedList/</link>
-      <pubDate>Wed, 04 Mar 2020 15:20:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2020/03/04/JavaSrc-LinkedList/</guid>
-      <description>&lt;p&gt;本文是对 JDK1.8 中 LinkedList 的分析与总结，在阅读源码的同时加深对其提供的方法的使用，以便更好的理解。&lt;/p&gt;</description>
     </item>
     
     <item>

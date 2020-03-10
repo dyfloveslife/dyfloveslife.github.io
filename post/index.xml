@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 10 Mar 2020 15:09:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 10 Mar 2020 22:02:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 并发编程-更新中</title>
+      <link>http://localhost:1313/2020/03/10/Java_Concurrency/</link>
+      <pubDate>Tue, 10 Mar 2020 22:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/03/10/Java_Concurrency/</guid>
+      <description>&lt;p&gt;Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>JDK 源码之集合类 LinkedHashMap</title>

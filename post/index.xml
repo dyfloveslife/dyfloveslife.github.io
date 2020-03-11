@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 10 Mar 2020 22:02:11 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 11 Mar 2020 19:02:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 容器之 HashTable</title>
+      <link>http://localhost:1313/2020/03/11/JavaSrc-HashTable/</link>
+      <pubDate>Wed, 11 Mar 2020 19:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/03/11/JavaSrc-HashTable/</guid>
+      <description>&lt;p&gt;前文对 JDK1.8 中的 &lt;a href=&#34;https://dyfloveslife.github.io/2020/02/12/JavaSrc-HashMap/&#34;&gt;HashMap&lt;/a&gt; 的在原理实现以及相关操作进行了说明，介绍了基于&lt;code&gt;数组（Node）+链表（尾插）+红黑树&lt;/code&gt;的数据结构，以及&lt;code&gt;resize()&lt;/code&gt;的过程。而本文将介绍与 HashMap 较为相似的&lt;code&gt;HashTable&lt;/code&gt;，同样也是基于&lt;code&gt;数组（Entry）+链表&lt;/code&gt;实现的，同样也是线程同步的（synchroinzed），在某些方面又有一些区别，下面将分别介绍。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 并发编程-更新中</title>

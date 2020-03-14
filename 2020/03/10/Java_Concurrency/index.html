@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-03-10T22:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T22:19:56&#43;08:00" />
-<meta itemprop="wordCount" content="1055">
+<meta itemprop="wordCount" content="1195">
 
 
 
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 1055 words </span>
+          <span class="more-meta"> 1195 words </span>
           <span class="more-meta"> 3 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -302,6 +302,8 @@
 </span><span class="lnt">43
 </span><span class="lnt">44
 </span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="err">package Chapter_01</span><span class="p">;</span>
@@ -310,8 +312,10 @@
     <span class="err">private static final long </span><span class="n">count</span> <span class="o">=</span> <span class="n">2000000001</span><span class="p">;</span>
 
     <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
-        <span class="n">concurrency</span><span class="p">();</span>
-        <span class="n">serial</span><span class="p">();</span>
+        <span class="c1">// 调用并发执行的方法
+</span><span class="c1"></span>        <span class="n">concurrency</span><span class="p">();</span>
+        <span class="c1">// 调用串行执行的方法
+</span><span class="c1"></span>        <span class="n">serial</span><span class="p">();</span>
     <span class="p">}</span>
 
     <span class="err">private static void concurrency</span><span class="p">()</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
@@ -465,6 +469,8 @@
 </div>
 </div>
 <h1 id="4-volatile">4. volatile</h1>
+
+<p>volatile 是轻量级的 synchronized，其在多处理器中保证了<code>共享变量</code>的<code>可见性</code>，即当一个线程修改一个共享变量时，另一个线程会读到这个修改的值。被 volatile 所修饰的变量比 synchronized 所修饰的在使用上和执行的成本上更低，因为 volatile 不会引起线程之前的上下文切换和调度。</p>
 
 <h1 id="参考">参考</h1>
 

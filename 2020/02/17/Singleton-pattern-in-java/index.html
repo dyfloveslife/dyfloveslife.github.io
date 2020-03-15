@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-02-17T11:09:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-02-17T11:16:56&#43;08:00" />
-<meta itemprop="wordCount" content="1760">
+<meta itemprop="wordCount" content="1945">
 
 
 
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 1760 words </span>
+          <span class="more-meta"> 1945 words </span>
           <span class="more-meta"> 4 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -251,8 +251,6 @@
 <h1 id="双重检索">双重检索</h1>
 
 <p>双重检索（Double CheckLock）和懒汉式很相似，能够保证线程安全的同时进行延迟加载。与懒汉式不同的是，在<code>getInstance()</code>方法内部进行了两次判空操作，第二次判空是因为在多线程环境下其它的线程在调用<code>getInstance()</code>方法的时候，有可能在此之前<code>instance</code>已经被创建过了，所以需要再次进行判断。</p>
-
-<p>此外，使用<code>volatile</code>关键字修饰<code>instance</code>，这样可以避免在进行<code>instance = new SingletonThree();</code>时造成的<a href="http://ifeve.com/jmm-cookbook-reorderings/">指令重排</a>问题。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -291,6 +289,36 @@
         <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>此外，使用<code>volatile</code>关键字修饰<code>instance</code>，这样可以避免在进行<code>instance = new SingletonThree();</code>时造成的<a href="http://ifeve.com/jmm-cookbook-reorderings/">指令重排</a>问题。</p>
+
+<p>原本的指令<code>instance = new SingletonThree();</code>可分解为以下三步：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">memory</span> <span class="o">=</span> <span class="n">allocate</span><span class="p">();</span>  <span class="c1">// 1. 分配对象的内存空间
+</span><span class="c1"></span><span class="n">ctorInstance</span><span class="p">(</span><span class="n">memory</span><span class="p">);</span> <span class="c1">// 2. 初始化对象
+</span><span class="c1"></span><span class="n">instance</span> <span class="o">=</span> <span class="n">memory</span><span class="p">;</span>    <span class="o">//</span> <span class="err">3. 设置 instance 指向刚分配的内存空间。</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>假如不使用<code>volatile</code>关键字进行修饰，则有可能会在第 11 行发生指令重排，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">memory</span> <span class="o">=</span> <span class="n">allocate</span><span class="p">();</span>  <span class="c1">// 1. 分配对象的内存空间
+</span><span class="c1"></span><span class="n">instance</span> <span class="o">=</span> <span class="n">memory</span><span class="p">;</span>    <span class="c1">// 3. 设置 instance 指向刚分配的内存空间。
+</span><span class="c1"></span>                      <span class="c1">// 注意，此时对象还没有初始化！
+</span><span class="c1"></span><span class="n">ctorInstance</span><span class="p">(</span><span class="n">memory</span><span class="p">);</span> <span class="o">//</span> <span class="err">2. 初始化对象</span></code></pre></td></tr></table>
 </div>
 </div>
 <h1 id="静态内部类">静态内部类</h1>

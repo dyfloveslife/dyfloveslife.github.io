@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-03-10T22:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T22:19:56&#43;08:00" />
-<meta itemprop="wordCount" content="1195">
+<meta itemprop="wordCount" content="3324">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 1195 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 3324 words </span>
+          <span class="more-meta"> 7 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -151,6 +151,8 @@
 <li><a href="#2-线程的上下文切换">2. 线程的上下文切换</a></li>
 <li><a href="#3-死锁">3. 死锁</a></li>
 <li><a href="#4-volatile">4. volatile</a></li>
+<li><a href="#5-synchronized">5. synchronized</a></li>
+<li><a href="#6-原子操作">6. 原子操作</a></li>
 <li><a href="#参考">参考</a></li>
 </ul>
 </nav>
@@ -471,6 +473,221 @@
 <h1 id="4-volatile">4. volatile</h1>
 
 <p>volatile 是轻量级的 synchronized，其在多处理器中保证了<code>共享变量</code>的<code>可见性</code>，即当一个线程修改一个共享变量时，另一个线程会读到这个修改的值。被 volatile 所修饰的变量比 synchronized 所修饰的在使用上和执行的成本上更低，因为 volatile 不会引起线程之前的上下文切换和调度。</p>
+
+<p>在 Java 中，允许多个线程访问共享变量，但某线程在访问前需要通过<code>排他锁</code>单独的获得该变量。</p>
+
+<p>被 volatole 修饰的共享变量进行写操作时，会在汇编指令之前添加一个 lock 指令。有如下两个作用：</p>
+
+<ul>
+<li>Lock 前缀指令会将当前的处理器缓存的数据写回到系统内存；</li>
+<li>一个处理器的缓存写回到内存回导致其他处理器的缓存无效。</li>
+</ul>
+
+<h1 id="5-synchronized">5. synchronized</h1>
+
+<p>JDK1.6 之前称 synchronized 为重量级锁，但 JDK1.6 之后对其进行了优化，为了减少获得锁和释放锁带来的性能消耗而引入<code>偏向锁</code>和<code>轻量级锁</code>。</p>
+
+<p>synchronized 实现同步的方式：</p>
+
+<ul>
+<li>对于普通的同步方法，锁的是当前实例对象；</li>
+<li>对于静态的同步方法，锁的是当前类的 Class 对象；</li>
+<li>对于同步方法块，锁的是 synchronized 括号里面的对象。</li>
+</ul>
+
+<p>synchronized 用的锁是存储在 Java 对象头里面的。如果对象是数组类型，则使用 3 个字宽（Word）存储对象头，如果对象是非数组类型，则使用 2 个字宽存储对象头。</p>
+
+<p>Java 对象头里的 Mark Word 里默认存储对象的<code>HashCode</code>、<code>分代年龄</code>、<code>锁标记位</code>。</p>
+
+<p><strong>锁的状态</strong>：<strong>无锁、偏向锁、轻量级锁、重量级锁</strong>。</p>
+
+<blockquote>
+<p>锁只能升级而不能降级，目的是为了提高获得锁和释放锁的效率。</p>
+</blockquote>
+
+<p><strong>偏向锁</strong>：为了让线程获得锁的代价更低而引入了偏向锁，当一个线程访问同步块时并获取锁时，会在对象头和栈帧中的锁记录里存储锁偏向的线程 ID，以后该线程在进入和退出同步块时不需要进行 CAS 操作来加锁和解锁。只需要测试一下对象头的 Mark Word 里是否还存着指向当前线程的偏向锁，如下：</p>
+
+<ul>
+<li>若成功，则表示已经获得了锁；</li>
+<li>若失败，则还需测试偏向锁的标志位是否是 1：
+
+<ul>
+<li>若没有设置，则使用 CAS 竞争锁；</li>
+<li>若已设置，则使用 CAS 将对象头的偏向锁指向当前线程。</li>
+</ul></li>
+</ul>
+
+<p>撤销偏向锁时，只有当其他线程尝试竞争偏向锁时，持有偏向锁的线程才会释放锁。</p>
+
+<p><strong>轻量级锁</strong>：线程在执行同步之前，JVM 会在当前线程的栈帧中创建用于存储<code>锁记录</code>的空间，并将对象头中的 Mark Word 复制到<code>锁记录</code>中（Displaced Mark Word）。然后线程尝试使用 CAS 将对象头中的 Mark Word 替换为指向<code>锁记录</code>的指针。</p>
+
+<ul>
+<li>若成功，则当前线程获得锁；</li>
+<li>若失败，则其他线程竞争锁，当前线程使用<code>自旋</code>的方式获取锁。</li>
+</ul>
+
+<blockquote>
+<p>自旋锁（spinlock）：是指当一个线程在获取锁的时候，如果锁已经被其它线程获取，那么该线程将循环等待，然后不断的判断锁是否能够被成功获取，直到获取到锁才会退出循环。</p>
+</blockquote>
+
+<p>轻量级锁在进行解锁时，会使用原子的 CAS 操作将 Displaced Mark Word 替换回到对象头：</p>
+
+<ul>
+<li>若成功，则表示没有发生竞争；</li>
+<li>若失败，则表示当前存在竞争，锁就会膨胀成重量级锁。</li>
+</ul>
+
+<p>优缺点：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">锁类型</th>
+<th align="center">优点</th>
+<th align="center">缺点</th>
+<th align="center">使用场景</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">偏向锁</td>
+<td align="center">加锁和解锁不需要额外的消耗</td>
+<td align="center">如果线程之间存在锁竞争，则会出现锁撤销的消耗</td>
+<td align="center">只有一个线程访问同步块场景</td>
+</tr>
+
+<tr>
+<td align="center">轻量级锁</td>
+<td align="center">竞争的线程不会阻塞，提高了程序的响应速度</td>
+<td align="center">如果始终得不到锁竞争的线程，则会发生自旋</td>
+<td align="center">追求响应时间，同步块执行很快的场景</td>
+</tr>
+
+<tr>
+<td align="center">重量级锁</td>
+<td align="center">线程竞争不会自旋</td>
+<td align="center">线程阻塞，响应时间慢</td>
+<td align="center">追求吞吐量，同步块执行速度较长</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="6-原子操作">6. 原子操作</h1>
+
+<p>原子操作（atomic operation）：不可被中断的一个或一系列操作。</p>
+
+<p><strong>CAS（Compare And Swap）</strong>：比较并交换，需要的参数有：内存地址、旧值（期望操作前的值）、即将更新的值。在操作期间先比较旧值有没有发生变化，如果没有变化，才交换成新值，否则发生了变化则不交换。</p>
+
+<p><strong>处理器如何保证原子操作</strong>？</p>
+
+<ul>
+<li><strong>对总线加锁</strong>：
+
+<ul>
+<li>如果多个处理器同时对共享变量进行<code>读改写</code>操作（如 i++），则这样的<code>读改写</code>操作就不是原子的。</li>
+<li>原因是：多个处理器同时从各自的缓存中读取变量，分别进行加 1 操作，然后又分别写回了内存中。</li>
+<li>解决方法：使用<code>总线锁</code>，当一个处理器在总线是输出 LOCK # 信号时，则其他处理器的请求会被阻塞，那么当前处理器就可以独占共享内存了。</li>
+<li>缺点：在锁定期间，其他处理器不能操作其他内存地址的数据，所以总线锁定开销较大。</li>
+</ul></li>
+<li><strong>对缓存加锁</strong>：
+
+<ul>
+<li>内存区域如果被缓存在缓存行中，并在 LOCK 操作期间被锁定，那么当它执行锁操作回写到内存时，处理器不在总线上发送 LOCK # 信号，而是修改内部的内存地址，并允许它的缓存一致性机制来保证操作的原子性。</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>缓存一致性机制会阻止同时修改由两个以上处理器缓存的内存区域数据，当其他处理器同时回写已被锁定的缓存行中的数据时，会使缓存无效。</p>
+</blockquote>
+
+<p>不会使用缓存锁定的情况：</p>
+
+<ul>
+<li>当操作的数据不能被缓存在处理器内部时，或操作的数据跨越多个缓存行时，此时会使用总线锁定。</li>
+<li>某些处理器不支持缓存锁定。</li>
+</ul>
+
+<p>使用自旋 CAS 实现的基本思路是循环进行 CAS 操作直到成功为止。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">CASTest</span> <span class="p">{</span>
+    <span class="err">private AtomicInteger </span><span class="n">atomicInteger</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicInteger</span><span class="p">(</span><span class="n">0</span><span class="p">);</span>
+
+    <span class="c1">// 使用 CAS 实现线程安全的计数器
+</span><span class="c1"></span>    <span class="err">private void </span><span class="n">safeCount</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(;</span> <span class="p">;</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="err">int i </span><span class="o">=</span> <span class="n">atomicInteger</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
+            <span class="err">boolean suc </span><span class="o">=</span> <span class="n">atomicInteger</span><span class="p">.</span><span class="na">compareAndSet</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="o">++</span><span class="n">i</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">suc</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// 非线程安全计数器
+</span><span class="c1"></span>    <span class="err">private void </span><span class="n">unsafeCount</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>在调用<code>compareAndSet()</code>方法时，其实是调用了<code>compareAndSwapInt()</code>方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final boolean compareAndSet</span><span class="p">(</span><span class="err">int expect</span><span class="p">,</span> <span class="err">int update</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">unsafe</span><span class="p">.</span><span class="na">compareAndSwapInt</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">valueOffset</span><span class="p">,</span> <span class="n">expect</span><span class="p">,</span> <span class="n">update</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>使用自旋 CAS 存在的问题：</p>
+
+<ul>
+<li>ABA 问题：
+
+<ul>
+<li>如果一个值原来是 A，变成了 B，结果又变成了 A，在使用 CAS 操作该值的时候会检查它的值没有发生变化，但实际上是发生变化了。</li>
+<li>解决思路是：使用版本号。例如 A-&gt;B-&gt;A 变成 1A-&gt;2B-&gt;3A。</li>
+</ul></li>
+<li>循环时间长开销大：
+
+<ul>
+<li>自旋 CAS 会给 CPU 带来长时间的开销。如果 JVM 支持 pause 指令，则可以提升效率。</li>
+<li>pause 的作用：可以延迟流水线执行指令。还可以避免在退出循环的时候因内存顺序冲突而引起的 CPU 流水线被清空，从而提高 CPU 的执行效率。</li>
+</ul></li>
+<li>只能保证一个共享变量的原子操作：
+
+<ul>
+<li>循环 CAS 无法保证多个共享变量的操作。</li>
+<li>可将多个共享变量合并成一个共享变量。</li>
+</ul></li>
+</ul>
 
 <h1 id="参考">参考</h1>
 

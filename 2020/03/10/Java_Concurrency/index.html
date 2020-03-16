@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-03-10T22:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T22:19:56&#43;08:00" />
-<meta itemprop="wordCount" content="3324">
+<meta itemprop="wordCount" content="3924">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 3324 words </span>
-          <span class="more-meta"> 7 mins read </span>
+          <span class="more-meta"> 3924 words </span>
+          <span class="more-meta"> 8 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -153,6 +153,8 @@
 <li><a href="#4-volatile">4. volatile</a></li>
 <li><a href="#5-synchronized">5. synchronized</a></li>
 <li><a href="#6-原子操作">6. 原子操作</a></li>
+<li><a href="#7-并发编程的关键">7. 并发编程的关键</a></li>
+<li><a href="#8-等待-通知机制">8. 等待/通知机制</a></li>
 <li><a href="#参考">参考</a></li>
 </ul>
 </nav>
@@ -688,6 +690,60 @@
 <li>可将多个共享变量合并成一个共享变量。</li>
 </ul></li>
 </ul>
+
+<h1 id="7-并发编程的关键">7. 并发编程的关键</h1>
+
+<p>通信：指线程之间以何种机制来进行信息的交换。</p>
+
+<p>同步：程序中用于控制不同线程间操作发生相对顺序的机制。</p>
+
+<p>线程通信机制：<code>共享内存</code>和<code>消息传递</code>。</p>
+
+<ul>
+<li>线程通信
+
+<ul>
+<li>共享内存</li>
+<li>线程之间共享程序的公共状态，通过读/写内存中的公共状态进行隐式通信。（<strong>Java 中的线程采用共享内存的方式进行通信</strong>。）</li>
+<li>消息传递</li>
+<li>线程之间没有公共状态，线程之间必须通过发送消息来显式进行通信。</li>
+</ul></li>
+<li>线程同步
+
+<ul>
+<li>共享内存</li>
+<li>同步是显式进行的，必须显式的指定某个方法或某个代码段需要在线程之间互斥执行。</li>
+<li>消息传递</li>
+<li>消息发送必须在消息接收之前，该同步是隐式的。</li>
+</ul></li>
+</ul>
+
+<p>每个线程对应一个<code>本地内存</code>，假如线程 A 和线程 B 进行通信，则线程 A 先更新某个值临时存放在自己的本地内存 A 中。当进行通信时，线程 A 会把自己本地内存中修改后的值<code>刷新</code>到主内存中。随后，线程 B 到主内存中取读取线程 A 更新后的值，此时线程 B 的本地内存的值也就就被更新了。</p>
+
+<h1 id="8-等待-通知机制">8. 等待/通知机制</h1>
+
+<p>下面是不好的实现方式，难以保证实时性、难以降低开销：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">while</span> <span class="p">(</span><span class="n">value</span> <span class="o">!=</span> <span class="n">desire</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">1000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">doSomething</span><span class="p">();</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可使用 java.lang.Obejct 类中的 wait()、notify()、notifyAll()、方法解决上面的问题。</p>
+
+<blockquote>
+<p>注意：调用 wait 方法的线程会进入 WAITING 状态，只有等待另外线程的通知或被中断才会返回。调用该方法后，会释放对象的锁。</p>
+</blockquote>
+
+<p>等待/通知机制是指：一个线程 A 调用了对象 O 的 wait() 方法进入了等待状态，而另一个线程 B 调用了对象 O 的 notify() 或 notifyAll() 方法，线程 A 收到通知后从对象 O 的 wait() 方法返回，进而执行后序的操作。</p>
 
 <h1 id="参考">参考</h1>
 

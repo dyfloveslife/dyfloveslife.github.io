@@ -6,10 +6,28 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 11 Mar 2020 19:02:11 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Mar 2020 16:35:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/Java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 中的 ConcurrentHashMap</title>
+      <link>http://localhost:1313/2020/03/16/JavaSrc-ConcurrentHashMap/</link>
+      <pubDate>Mon, 16 Mar 2020 16:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/03/16/JavaSrc-ConcurrentHashMap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java 中的 volatile</title>
+      <link>http://localhost:1313/2020/03/16/Java-volatile/</link>
+      <pubDate>Mon, 16 Mar 2020 16:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/03/16/Java-volatile/</guid>
+      <description>&lt;p&gt;volatile 是轻量级的 synchronized，其在多处理器中保证了共享变量的&lt;code&gt;可见性&lt;/code&gt;，即当一个线程修改一个共享变量时，另一个线程会读到这个修改的值。但 volatile 不能保证&lt;code&gt;原子性&lt;/code&gt;（例如自增操作），详细的说明将会在下文进行展开。保证并发程序正确执行还需要做到&lt;code&gt;有序性&lt;/code&gt;，满足以上三个原则，才能够正确的执行并发程序。而本文将对 volatile 关键字进行详细解释，结合具体例子的同时说明 volatile 关键字的使用场景。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 容器之 HashTable</title>
@@ -26,7 +44,7 @@
       <pubDate>Tue, 10 Mar 2020 22:02:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2020/03/10/Java_Concurrency/</guid>
-      <description>&lt;p&gt;Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。&lt;/p&gt;</description>
+      <description>&lt;p&gt;Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。要想使并发程序能够正确的执行，必须要满足三条原则：原子性、可见性、有序性。&lt;/p&gt;</description>
     </item>
     
     <item>

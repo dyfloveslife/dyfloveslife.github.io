@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>volatile on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/volatile/</link>
+    <description>Recent content in volatile on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 16 Mar 2020 16:35:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/volatile/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java 中的 volatile</title>
+      <link>http://localhost:1313/2020/03/16/Java-volatile/</link>
+      <pubDate>Mon, 16 Mar 2020 16:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/03/16/Java-volatile/</guid>
+      <description>&lt;p&gt;volatile 是轻量级的 synchronized，其在多处理器中保证了共享变量的&lt;code&gt;可见性&lt;/code&gt;，即当一个线程修改一个共享变量时，另一个线程会读到这个修改的值。但 volatile 不能保证&lt;code&gt;原子性&lt;/code&gt;（例如自增操作），详细的说明将会在下文进行展开。保证并发程序正确执行还需要做到&lt;code&gt;有序性&lt;/code&gt;，满足以上三个原则，才能够正确的执行并发程序。而本文将对 volatile 关键字进行详细解释，结合具体例子的同时说明 volatile 关键字的使用场景。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

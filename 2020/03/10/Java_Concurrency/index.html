@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content="Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。
+<meta name="author" content="Carol" /><meta name="description" content="Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。要想使并发程序能够正确的执行，必须要满足三条原则：原子性、可见性、有序性。
 " /><meta name="keywords" content="Java, blog, carol" />
 
 
@@ -40,25 +40,25 @@
 
 
 <meta property="og:title" content="Java 并发编程-更新中" />
-<meta property="og:description" content="Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。" />
+<meta property="og:description" content="Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。要想使并发程序能够正确的执行，必须要满足三条原则：原子性、可见性、有序性。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2020/03/10/Java_Concurrency/" />
 <meta property="article:published_time" content="2020-03-10T22:02:11+08:00" />
 <meta property="article:modified_time" content="2020-03-10T22:19:56+08:00" />
 <meta itemprop="name" content="Java 并发编程-更新中">
-<meta itemprop="description" content="Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。">
+<meta itemprop="description" content="Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。要想使并发程序能够正确的执行，必须要满足三条原则：原子性、可见性、有序性。">
 
 
 <meta itemprop="datePublished" content="2020-03-10T22:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T22:19:56&#43;08:00" />
-<meta itemprop="wordCount" content="3924">
+<meta itemprop="wordCount" content="3961">
 
 
 
 <meta itemprop="keywords" content="JVM,Concurrency," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java 并发编程-更新中"/>
-<meta name="twitter:description" content="Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。"/>
+<meta name="twitter:description" content="Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。要想使并发程序能够正确的执行，必须要满足三条原则：原子性、可见性、有序性。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 3924 words </span>
+          <span class="more-meta"> 3961 words </span>
           <span class="more-meta"> 8 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -161,7 +161,7 @@
   </div>
 </div>
     <div class="post-content">
-      <p>Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。</p>
+      <p>Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。要想使并发程序能够正确的执行，必须要满足三条原则：原子性、可见性、有序性。</p>
 
 <h1 id="1-创建线程的方式">1. 创建线程的方式</h1>
 
@@ -482,7 +482,7 @@
 
 <ul>
 <li>Lock 前缀指令会将当前的处理器缓存的数据写回到系统内存；</li>
-<li>一个处理器的缓存写回到内存回导致其他处理器的缓存无效。</li>
+<li>一个处理器的缓存写回到内存会导致其他处理器的缓存无效。</li>
 </ul>
 
 <h1 id="5-synchronized">5. synchronized</h1>

@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>ConcurrentHashMap</title>
-      <link>http://localhost:1313/tags/ConcurrentHashMap/</link>
-      <pubDate>Mon, 16 Mar 2020 16:35:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/ConcurrentHashMap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Java</title>
       <link>http://localhost:1313/tags/Java/</link>
       <pubDate>Mon, 16 Mar 2020 16:35:11 +0800</pubDate>
@@ -48,11 +39,29 @@
     </item>
     
     <item>
+      <title>Thread</title>
+      <link>http://localhost:1313/tags/Thread/</link>
+      <pubDate>Mon, 16 Mar 2020 16:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Thread/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>volatile</title>
       <link>http://localhost:1313/tags/volatile/</link>
       <pubDate>Mon, 16 Mar 2020 16:35:11 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/volatile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>线程</title>
+      <link>http://localhost:1313/tags/%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Mon, 16 Mar 2020 16:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/%E7%BA%BF%E7%A8%8B/</guid>
       <description></description>
     </item>
     

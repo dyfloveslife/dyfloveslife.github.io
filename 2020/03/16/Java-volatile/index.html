@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-03-16T16:35:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-16T16:36:11&#43;08:00" />
-<meta itemprop="wordCount" content="2999">
+<meta itemprop="wordCount" content="5110">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 2999 words </span>
-          <span class="more-meta"> 6 mins read </span>
+          <span class="more-meta"> 5110 words </span>
+          <span class="more-meta"> 11 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -158,6 +158,7 @@
 <li><a href="#有序性">有序性</a></li>
 </ul></li>
 <li><a href="#volatile-关键字">volatile 关键字</a></li>
+<li><a href="#总结">总结</a></li>
 <li><a href="#参考">参考</a></li>
 </ul>
 </nav>
@@ -326,6 +327,288 @@
 <p>volatile 变量规则指：如果一个线程进行写一个变量，然后线程进行读取，那么写入操作肯定是会在读操作之前发生的。</p>
 
 <h1 id="volatile-关键字">volatile 关键字</h1>
+
+<p>volatile 关键字可以确保两方面的内容：</p>
+
+<ul>
+<li>保证了多个线程共同操作共享变量的可见性，即一个线程修改了共享变量的值，则对其它线程来说是立即可见的。</li>
+<li>禁止指令重排。</li>
+</ul>
+
+<p>下面通过一个例子进行说明。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 线程1
+</span><span class="c1"></span><span class="err">boolean stop </span><span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">stop</span><span class="p">){</span>
+    <span class="n">doSomething</span><span class="p">();</span>
+<span class="p">}</span>
+
+
+<span class="c1">// 线程2
+</span><span class="c1"></span><span class="n">stop</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>线程 1 在运行的时候，会将 stop 拷贝一份放进自己的本地内存中，等到线程 2 更改了 stop 后，可能会出现以下两种情况：</p>
+
+<ul>
+<li><strong>线程 2 对变量的修改没有立即刷新到主存中</strong>；</li>
+<li><strong>即使线程 2 对变量 2 进行了修改，并且也立即刷新到了主存中，但是线程 1 没有立即知道线程 2 对变量的更新而一直循环下去</strong>。</li>
+</ul>
+
+<p>这两种情况都会导致线程 1 发生死循环，而引入了 volatile 关键字后，就不会发生上面的问题，而是：</p>
+
+<ul>
+<li><strong>被 volatile 关键字修饰后的共享变量会强制修改的值立即写入主存</strong>；</li>
+<li><strong>使用 volatile 关键字的话，线程 2 对共享变量进行修改时，会导致线程 1 的本地内存中的变量 stop 缓存行无效</strong>；</li>
+<li><strong>由于线程 1 的本地内存中所缓存的 stop 变量无效，所以等到线程 1 想要再次读取变量 stop 的值的时候，会去主存中读取</strong>。</li>
+</ul>
+
+<p>看如下实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * 测试 volatile 的可见性
+</span><span class="cm"> */</span>
+<span class="err">public class </span><span class="n">TestVolatile</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">ThreadDemo td </span><span class="o">=</span> <span class="k">new</span> <span class="n">ThreadDemo</span><span class="p">();</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">td</span><span class="p">,</span> <span class="s">&#34;ThreadDemo&#34;</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 执行下面三条中的任意一条语句，程序都会正常结束
+</span><span class="c1"></span>            <span class="c1">//System.out.println(&#34;!!!&#34;);            // 语句 1
+</span><span class="c1"></span>            <span class="c1">//synchronized (TestVolatile.class){}   // 语句 2
+</span><span class="c1"></span>            <span class="c1">//TestVolatile.test2();                 // 语句 3
+</span><span class="c1"></span>            
+            <span class="c1">// 如果添加下面语句的话，则会出现死循环
+</span><span class="c1"></span>            <span class="c1">//TestVolatile.test1();                 // 语句 4
+</span><span class="c1"></span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">td</span><span class="p">.</span><span class="na">flag</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 即将跳出 while 循环体&#34;</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="err">public static void test1</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="err">public synchronized static void </span><span class="n">test2</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class ThreadDemo implements Runnable </span><span class="p">{</span>
+
+    <span class="err">public boolean </span><span class="n">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">2000</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">}</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕: &#34;</span> <span class="o">+</span> <span class="s">&#34;置 false = &#34;</span> <span class="o">+</span> <span class="n">flag</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>若直接执行上述程序，而不对共享变量<code>flag</code>使用 volatile 修饰的话，则等待两秒后，程序会出现死循环，如下所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/03/17/T43rGiJMjlftqu2.png" alt="image.png" />
+</center></p>
+
+<p>若在使用 volatile 关键字修饰<code>flag</code>的情况下运行此程序，由于保证了可见性，则程序可以正确结束，如下所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/03/17/ysPm8vk2E6VDIqp.png" alt="image.png" />
+</center></p>
+
+<p>若不适用关键字 volatile 修饰<code>flag</code>，而是分别添加语句 1、语句 2、语句 3，则得到的结果都是一样的，均可正常结束。也就是说：<strong>除了 volatile 可以保证可见性之外，synchronized 也可以保证可见性。因为每次运行 synchronized 块或者 synchronized 方法的时候，都会导致线程的本地内存与主存同步，使得其他线程可以取得共享变量的新值</strong>。即 synchronized 的语义范围不但包括 volatile 具有的可见性，也包含原子性，但不能禁止指令重排。</p>
+
+<blockquote>
+<p>对于语句 1 来说，其源码内部含有被 synchronized 修饰的同步操作。</p>
+</blockquote>
+
+<p>通过上面的例子，可以看到 volatile 关键字可以确保共享变量的可见性。下面再来看一看其是否支持原子性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * 测试 volatile 的原子性
+</span><span class="cm"> * volatile 无法保证操作的原子性
+</span><span class="cm"> */</span>
+<span class="err">class MyThread extends Thread </span><span class="p">{</span>
+    <span class="err">public static int count</span><span class="p">;</span>
+
+    <span class="c1">// 添加 synchronized 关键字即可实现 count 的原子性
+</span><span class="c1"></span>    <span class="err">public void </span><span class="n">addCount</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;count= &#34;</span> <span class="o">+</span> <span class="n">count</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">addCount</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">public class </span><span class="n">Run</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//  创建 100 个线程并启动
+</span><span class="c1"></span>        <span class="err">MyThread[] myThreads </span><span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="p">[</span><span class="n">100</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">myThreads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">myThreads</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="na">start</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>运行上述程序，得到的结果每次都是小于 10000 的数，这是因为：<strong>虽然 volatile 能够保证可见性，但不能保证原子性。可见性只能保证每次读取的是最新的值，但是 volatile 没法保证对变量操作的原子性</strong>。</p>
+
+<p>由于自增操作<code>count++;</code>不具备原子性，其包括<code>读取原始值</code>、<code>进行加 1 操作</code>和<code>写入本地内存</code>三个原子操作。因此可能会发生如下场景：</p>
+
+<ul>
+<li>假如某个时刻，count 的值为 10，线程 1 对变量进行自增操作；</li>
+<li>线程 1 读取了 count 的原始值为 10，然后线程 1 就被阻塞了；</li>
+<li>此时，线程 2 对 count 进行自增操作，线程 2 去读取 count 的原始值；</li>
+<li>由于线程 1 只对变量 count 进行读取操作，而没有对变量进行修改操作，所以不会导致线程 2 的本地内存中缓存的 count 缓存行无效，所以线程 2 直接去主存中读取 count 的值，发现 count 的值是 10，然后进行加 1 操作；</li>
+<li>此时，线程 2 只是执行了 count+1 操作，还没有将值写入到线程 2 的本地内存中；</li>
+<li>此时线程 2 被阻塞，线程 1 进行加 1 操作，由于 count 之前的值仍然是 10，所以线程 2 进行加 1 操作后变成 11 写入到本地内存中，然后刷新到主存中；</li>
+<li>虽然线程 1 能感受到线程 2 对 count 的修改，但是由于线程 1 只剩下对 count 的写操作了，而不需要进行读操作了；</li>
+<li>因此，线程 2 对 count 的修改并不能影响到线程 1。于是线程 1 也将 11 写入本地内存然后并刷新到主存中；</li>
+<li>此时的情况就是，两个线程分别进行了一次 自增操作后，count 只增加了 1。</li>
+</ul>
+
+<p>要想保证多个线程对 count++ 操作正常的执行，只需要在<code>addCount()</code> 方法上添加 synchronized 以及 static 即可。如下所示：</p>
+
+<blockquote>
+<p>添加 static 是为了确保 synchronized 与 static 锁的就是 Mythread.class 对象。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public synchronized static void </span><span class="n">addCount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;count= &#34;</span> <span class="o">+</span> <span class="n">count</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="总结">总结</h1>
+
+<p>通过具体的例子可以看到，volatile 无法替代 synchronized 关键字，因为 synchronized 能够防止多个线程同时执行一段代码段，而 volatile 仅能修饰共享变量而不能修饰代码段。其次，volatile 不能保证操作的原子性。</p>
+
+<p>因此，volatile 关键字能够保证操作的可见性，在多线程环境下能够及时感知共享变量的修改，使得其他线程可以立即得到变量的最新值。volatile 是 synchronized 的轻量级实现，比 synchronized 的性能要好。</p>
+
+<p>synchronized 能够保证操作的<code>原子性</code>以及<code>可见性</code>，但不能保证<code>有序性（禁止指令重排）</code>；volatile 能够保证操作的<code>可见性</code>以及<code>有序性（禁止指令重排）</code>，但不能保证操作的<code>原子性</code>。</p>
 
 <h1 id="参考">参考</h1>
 

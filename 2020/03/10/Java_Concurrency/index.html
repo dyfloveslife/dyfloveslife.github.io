@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-03-10T22:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-10T22:19:56&#43;08:00" />
-<meta itemprop="wordCount" content="3961">
+<meta itemprop="wordCount" content="4104">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 3961 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 4104 words </span>
+          <span class="more-meta"> 9 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -197,9 +197,11 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class MultiThreadDemo extends Thread </span><span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 继承 Thread 类
+</span><span class="c1"></span><span class="err">class MultiThreadDemo extends Thread </span><span class="p">{</span>
 
     <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Thread &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getId</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; is running.&#34;</span><span class="p">);</span>
@@ -234,9 +236,11 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class MultiThreadDemo extends Thread </span><span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 实现 Runnable 接口
+</span><span class="c1"></span><span class="err">class MultiThreadDemo implements Runnable </span><span class="p">{</span>
 
     <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Thread &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getId</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; is running.&#34;</span><span class="p">);</span>
@@ -252,6 +256,76 @@
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>当然也可以放在一个类中，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * 创建线程的两种方式
+</span><span class="cm"> * 程序的输出结果与代码的执行顺序或调用顺序无关
+</span><span class="cm"> */</span>
+<span class="err">public class </span><span class="n">TestThread</span> <span class="p">{</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nd">@Override</span>
+            <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Thread.&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}.</span><span class="na">start</span><span class="p">();</span>
+
+        <span class="err">Thread thread </span><span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nd">@Override</span>
+            <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Runnable.&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="n">thread</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;main.&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">main.
+</span><span class="err">Thread</span><span class="p">.</span>
+<span class="n">Runnable</span><span class="p">.</span></code></pre></td></tr></table>
 </div>
 </div>
 <h1 id="2-线程的上下文切换">2. 线程的上下文切换</h1>

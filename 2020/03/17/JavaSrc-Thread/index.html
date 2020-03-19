@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-03-17T16:35:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-18T22:40:11&#43;08:00" />
-<meta itemprop="wordCount" content="5736">
+<meta itemprop="wordCount" content="6003">
 
 
 
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 5736 words </span>
+          <span class="more-meta"> 6003 words </span>
           <span class="more-meta"> 12 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -979,6 +979,17 @@
 <p>对于 stop() 方法来说，它是一个不安全的方法，调用 stop() 方法会将正在运行的线程转换为消亡状态。该方法会抛出一个 ThreadDeath 错误，如果线程持有某个对象锁的话，会完全释放锁，导致对象状态不一致。所以 stop() 方法基本是不会被用到的。</p>
 
 <p>对于 suspend() 方法，字面意思是延迟、推迟，该方法可以暂停线程。而对于 resume() 方法，字面意思是重新开始、恢复，该方法可以恢复线程的执行。但这两个方法可能会造成死锁。</p>
+
+<p><strong>还有一些操作线程常用的方法</strong>：</p>
+
+<ul>
+<li>currentThread()：返回代码段正在被哪个线程调用的信息；</li>
+<li>isAlive()：判断调用该方法的线程是否处于活动状态；</li>
+<li>getId()：获得线程的唯一标识；</li>
+<li>getName() 和 setName()：得到或设置线程的名字；</li>
+<li>getPriority() 和 setPriority()：获得或设置线程的优先级；</li>
+<li>Daemon：Java 中的线程分为用户线程和守护线程，任何一个守护线程都是为整个 JVM 中所有非守护线程服务的，只要当前 JVM 实例中存在任何一个非守护线程没有结束，那么守护线程就在工作，只有当最后一个非守护线程结束的时候，守护线程才随着 JVM 一同结束工作。</li>
+</ul>
 
 <h1 id="参考">参考</h1>
 

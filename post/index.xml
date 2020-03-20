@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Mar 2020 16:35:11 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 20 Mar 2020 13:32:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 中的 final 和 static 关键字</title>
+      <link>http://localhost:1313/2020/03/20/Java-final-static/</link>
+      <pubDate>Fri, 20 Mar 2020 13:32:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/03/20/Java-final-static/</guid>
+      <description>之前对关键字 final 和 static 的具体使用场景很是模糊，什么时候使用 final，什么时候使用 static，当使用它们的时候会产生什么效果。本文将对 final 和 static 进</description>
+    </item>
     
     <item>
       <title>Java 中的 Thread</title>

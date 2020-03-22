@@ -6,10 +6,19 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 17 Mar 2020 16:35:11 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 21 Mar 2020 17:04:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/Java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 中的序列化和反序列化</title>
+      <link>http://localhost:1313/2020/03/21/Serialization-and-Deserialization-in-Java/</link>
+      <pubDate>Sat, 21 Mar 2020 17:04:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/03/21/Serialization-and-Deserialization-in-Java/</guid>
+      <description>&lt;p&gt;当在 Java 中创建对象的时候，只要我们需要这个对象，它就会一直存在。但是一旦程序终止，它们也就不复存在了。如果我们想让对象能够在程序不运行的状态下仍然能够保存它们的信息，那就需要用到&lt;code&gt;序列化机制&lt;/code&gt;。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 中的 Thread</title>

@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://localhost:1313/" />
 
-<meta property="og:updated_time" content="2020-03-20T13:32:11+08:00" />
+<meta property="og:updated_time" content="2020-03-21T17:04:11+08:00" />
 <meta itemprop="name" content="Carol&#39;s blog">
 <meta itemprop="description" content="Carol&#39;s blog.">
 
@@ -120,6 +120,62 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/2017/06/15/Form-programming/">C# 之 窗体编程</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-06-15 </span>
+      <div class="post-category">
+          <a href="/categories/C-sharp/"> C-sharp </a>
+          </div>
+        <span class="more-meta"> 1423 words </span>
+        <span class="more-meta"> 3 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>main方法：位于<code>Program.cs</code>文件，表示Windows窗体程序的入口。
+示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">namespace MyForm
+{
+	static class Program
+      {
+           //code
+           static void Main( )
+           {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form1());		//启动窗体
+           }
+      }
+}</pre></td></tr></table>
+</div>
+</div>
+    </div>
+    <div class="read-more">
+      <a href="/2017/06/15/Form-programming/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/2017/06/14/Console-program/">C# 之 控制台程序</a></h1>
@@ -409,36 +465,6 @@
     </div>
     <div class="read-more">
       <a href="/2017/06/01/Linux-FTP/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/">Linux 环境下配置 Web 服务器之 通过域名访问主机</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-05-18 </span>
-      <div class="post-category">
-          <a href="/categories/Linux/"> Linux </a>
-          </div>
-        <span class="more-meta"> 1111 words </span>
-        <span class="more-meta"> 3 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
-同时有三个软件包：</p>
-
-<ul>
-<li><strong>shrike-i386-disc1.iso</strong></li>
-<li><strong>shrike-i386-disc2.iso</strong></li>
-<li><strong>shrike-i386-disc3.iso</strong></li>
-</ul>
-    </div>
-    <div class="read-more">
-      <a href="/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

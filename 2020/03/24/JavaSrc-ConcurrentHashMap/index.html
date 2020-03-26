@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-03-24T14:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-24T14:42:56&#43;08:00" />
-<meta itemprop="wordCount" content="6686">
+<meta itemprop="wordCount" content="7550">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 6686 words </span>
-          <span class="more-meta"> 14 mins read </span>
+          <span class="more-meta"> 7550 words </span>
+          <span class="more-meta"> 16 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -620,6 +620,7 @@
 </span><span class="lnt">24
 </span><span class="lnt">25
 </span><span class="lnt">26
+</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private Segment</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="err">V&gt; ensureSegment</span><span class="p">(</span><span class="err">int k</span><span class="p">)</span> <span class="p">{</span>
@@ -647,7 +648,8 @@
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
-    <span class="k">return</span> <span class="n">seg</span><span class="p">;</span></code></pre></td></tr></table>
+    <span class="k">return</span> <span class="n">seg</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>之前的 put 方法是根据 key 定位到 Segment，而下面的方法是在确定 Segment 以后，在 Segment 内部进行 put 的方法。因此，下面的 put 方法是类 Segment 中的方法，首先会尝试获取锁，如果获取失败则很定有其它线程存在竞争，则利用 scanAndLockForPut() 自旋获取锁。如下所示：</p>
@@ -1030,9 +1032,206 @@
 <p>JDK1.8 中的 ConcurrentHashMap 与 JDK1.7 的不同点在于：</p>
 
 <ul>
-<li>抛弃了 JDK1.7 中 Segment 锁分段技术，而是采用 CAS + synchronized 的方式来保证并发的安全性；</li>
+<li>抛弃了 JDK1.7 中 Segment 锁分段技术，而是采用 CAS + synchronized 的方式来保证并发的安全性，体现在 put 操作的不同，在 JDK1.8 中则是对数组中单个位置加锁；</li>
 <li>将 JDK1.7 中用于存放数据的内部类 HashEntry 替换为内部类 Node，但作用相同。</li>
+<li>JDK1.8 的结构转换为数组+链表+红黑树。</li>
 </ul>
+
+<p>除此之外，JDK1.8 的 ConcurrentHashMap 也多了一个空参构造，首先看一下 put 方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public V </span><span class="n">put</span><span class="p">(</span><span class="err">K key</span><span class="p">,</span> <span class="err">V value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">putVal</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+<span class="err">final V </span><span class="n">putVal</span><span class="p">(</span><span class="err">K key</span><span class="p">,</span> <span class="err">V value</span><span class="p">,</span> <span class="err">boolean onlyIfAbsent</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 不允许存储空 key 和空 value
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="p">();</span>
+    <span class="err">int hash </span><span class="o">=</span> <span class="n">spread</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">hashCode</span><span class="p">());</span>
+    <span class="err">int binCount </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="err">V&gt;[] tab </span><span class="o">=</span> <span class="n">table</span><span class="p">;;)</span> <span class="p">{</span>
+        <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="err">V&gt; f</span><span class="p">;</span> 
+        <span class="err">int n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">fh</span><span class="p">;</span>
+        <span class="c1">// 判断是否要进行初始化工作，如果表为 null，则需要初始化表
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">tab</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="n">tab</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="o">==</span> <span class="n">0</span><span class="p">)</span>
+            <span class="n">tab</span> <span class="o">=</span> <span class="n">initTable</span><span class="p">();</span>
+        <span class="c1">// 在不需要进行初始化的情况下，通过 key 定位出 Node，也就是 f，
+</span><span class="c1"></span>        <span class="c1">// 如果 f 为 null，则说明当前位置可以写入数据，则利用 CAS 尝试写入，失败则自旋
+</span><span class="c1"></span>        <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">f</span> <span class="o">=</span> <span class="n">tabAt</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">hash</span><span class="p">))</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">casTabAt</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span>
+                            <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="kc">null</span><span class="p">)))</span>
+                <span class="k">break</span><span class="p">;</span>                   <span class="c1">// no lock when adding to empty bin
+</span><span class="c1"></span>        <span class="p">}</span>
+        <span class="c1">// 如果当前不需要初始化表，之前通过 key 定位的 Node 也不为 null，
+</span><span class="c1"></span>        <span class="c1">// 则再判断该位置的 Node 是否正在扩容，如果正在扩容，则调用 helpTransfer
+</span><span class="c1"></span>        <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">fh</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="na">hash</span><span class="p">)</span> <span class="o">==</span> <span class="n">MOVED</span><span class="p">)</span>
+            <span class="n">tab</span> <span class="o">=</span> <span class="n">helpTransfer</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+        <span class="c1">// 当前位置不为空
+</span><span class="c1"></span>        <span class="k">else</span> <span class="p">{</span>
+            <span class="err">V oldVal </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+            <span class="c1">// 对当前节点加锁
+</span><span class="c1"></span>            <span class="kd">synchronized</span> <span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">tabAt</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// 节点是链表的情况
+</span><span class="c1"></span>                    <span class="k">if</span> <span class="p">(</span><span class="n">fh</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">binCount</span> <span class="o">=</span> <span class="n">1</span><span class="p">;</span>
+                        <span class="c1">// 遍历整个链表
+</span><span class="c1"></span>                        <span class="k">for</span> <span class="p">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="err">V&gt; e </span><span class="o">=</span> <span class="n">f</span><span class="p">;;</span> <span class="o">++</span><span class="n">binCount</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="err">K ek</span><span class="p">;</span>
+                            <span class="c1">// 已存在，则替换旧值
+</span><span class="c1"></span>                            <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">hash</span> <span class="o">==</span> <span class="n">hash</span> <span class="o">&amp;&amp;</span>
+                                <span class="p">((</span><span class="n">ek</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="na">key</span><span class="p">)</span> <span class="o">==</span> <span class="n">key</span> <span class="o">||</span>
+                                    <span class="p">(</span><span class="n">ek</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">key</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">ek</span><span class="p">))))</span> <span class="p">{</span>
+                                <span class="n">oldVal</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="na">val</span><span class="p">;</span>
+                                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">onlyIfAbsent</span><span class="p">)</span>
+                                    <span class="n">e</span><span class="p">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+                                <span class="k">break</span><span class="p">;</span>
+                            <span class="p">}</span>
+                            <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="err">V&gt; pred </span><span class="o">=</span> <span class="n">e</span><span class="p">;</span>
+                            <span class="c1">// 如果是新加入的节点，则通过尾插法将其插入链表
+</span><span class="c1"></span>                            <span class="k">if</span> <span class="p">((</span><span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="na">next</span><span class="p">)</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="n">pred</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span>
+                                                            <span class="n">value</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+                                <span class="k">break</span><span class="p">;</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="c1">// 节点是红黑树的情况
+</span><span class="c1"></span>                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="err">f instanceof </span><span class="n">TreeBin</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="err">V&gt; p</span><span class="p">;</span>
+                        <span class="n">binCount</span> <span class="o">=</span> <span class="n">2</span><span class="p">;</span>
+                        <span class="c1">// 遍历红黑树
+</span><span class="c1"></span>                        <span class="k">if</span> <span class="p">((</span><span class="n">p</span> <span class="o">=</span> <span class="p">((</span><span class="n">TreeBin</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="p">)</span><span class="n">f</span><span class="p">).</span><span class="na">putTreeVal</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span>
+                                                        <span class="n">value</span><span class="p">))</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="n">oldVal</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="na">val</span><span class="p">;</span>
+                            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">onlyIfAbsent</span><span class="p">)</span>
+                                <span class="n">p</span><span class="p">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">binCount</span> <span class="o">!=</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// 链表中的节点个数超过 8，则转成红黑树
+</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">binCount</span> <span class="o">&gt;=</span> <span class="n">TREEIFY_THRESHOLD</span><span class="p">)</span>
+                    <span class="n">treeifyBin</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">oldVal</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">oldVal</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// 总结点数加一
+</span><span class="c1"></span>    <span class="n">addCount</span><span class="p">(</span><span class="n">1L</span><span class="p">,</span> <span class="n">binCount</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这里再看一眼 spread() 方法，用于根据 key 的 hashCode 计算 hash 值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">static final int HASH_BITS </span><span class="o">=</span> <span class="n">0x7fffffff</span><span class="p">;</span> 
+
+<span class="err">static final int spread</span><span class="p">(</span><span class="err">int h</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">h</span> <span class="o">^</span> <span class="p">(</span><span class="n">h</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">16</span><span class="p">))</span> <span class="o">&amp;</span> <span class="n">HASH_BITS</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>put 方法中的注释应该很容易就能看清楚，需要注意一点的是，在 put 方法中的最后 addCount 添加节点时可能会引起扩容（transfer），JDK1.8 的 ConcurrentHashMap 支持并发扩容，之前扩容是由一个线程将旧数组中的键值对转移到新的数组中，支持并发以后，转移的时间就缩短了，但处理逻辑也变复杂了。</p>
 
 <h1 id="参考">参考</h1>
 

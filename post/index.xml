@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 24 Mar 2020 14:02:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 31 Mar 2020 09:03:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>项目部署小结</title>
+      <link>http://localhost:1313/2020/03/31/project-deployment/</link>
+      <pubDate>Tue, 31 Mar 2020 09:03:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/03/31/project-deployment/</guid>
+      <description>之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑</description>
+    </item>
     
     <item>
       <title>Java 容器之 ConcurrentHashMap</title>

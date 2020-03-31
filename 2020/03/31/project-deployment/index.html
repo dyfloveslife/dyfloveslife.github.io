@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>项目部署小结 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2020/03/31/project-deployment/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="项目部署小结" />
+<meta property="og:description" content="之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/03/31/project-deployment/" />
+<meta property="article:published_time" content="2020-03-31T09:03:11+08:00" />
+<meta property="article:modified_time" content="2020-03-31T09:03:11+08:00" />
+<meta itemprop="name" content="项目部署小结">
+<meta itemprop="description" content="之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑">
+
+
+<meta itemprop="datePublished" content="2020-03-31T09:03:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-03-31T09:03:11&#43;08:00" />
+<meta itemprop="wordCount" content="3095">
+
+
+
+<meta itemprop="keywords" content="项目," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="项目部署小结"/>
+<meta name="twitter:description" content="之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/2020/01/12/post_summary/">
+        <li class="mobile-menu-item">❤文章汇总</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/2020/01/12/post_summary/">❤文章汇总</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">项目部署小结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-03-31 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A1%B9%E7%9B%AE/"> 项目 </a>
+            </div>
+          <span class="more-meta"> 3095 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#安装-java">安装 Java</a></li>
+<li><a href="#安装-tomcat">安装 Tomcat</a></li>
+<li><a href="#防火墙及端口">防火墙及端口</a></li>
+<li><a href="#测试">测试</a></li>
+<li><a href="#安装-maven">安装 Maven</a></li>
+<li><a href="#安装与设置-mysql">安装与设置 MySQL</a>
+<ul>
+<li><a href="#导入初始化数据">导入初始化数据</a></li>
+</ul></li>
+<li><a href="#安装-redis">安装 Redis</a></li>
+<li><a href="#安装-kafka">安装 Kafka</a></li>
+<li><a href="#安装-elasticsearch">安装 Elasticsearch</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑，仅供参考。</p>
+
+<h1 id="安装-java">安装 Java</h1>
+
+<p>首先需要在服务器上安装 Java，这样 Web 应用程序才能才其上面执行。由于使用的是 CentOS7，因此可以使用以下命令安装 OpenJDK 7：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">yum -y install java-1.8.0-openjdk-devel</code></pre></td></tr></table>
+</div>
+</div>
+<p>安装完以后，Java 以及 jre 就会被安装在以下目录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/bin/java
+
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/jre/bin/java</code></pre></td></tr></table>
+</div>
+</div>
+<p>现在需要配置环境变量<code>$PATH</code>，直接执行<code>vim /etc/profile</code>命令，编辑其中的<code>export</code>。需要修改的地方已在下方标出，其中<code>JAVA_HOME</code>就是上面的 Java 根路径，这里根据自己机器的情况而定。<code>PATH</code>指明 Java 根路径下面的<code>/bin</code> 和<code>/jre</code>文件，相应的也将<code>CLASSPATH</code>指定到<code>/lib</code>和<code>/jre</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">pathmunge <span class="o">()</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="s2">&#34;:</span><span class="si">${</span><span class="nv">PATH</span><span class="si">}</span><span class="s2">:&#34;</span> in
+        *:<span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>:*<span class="o">)</span>
+            <span class="p">;;</span>
+        *<span class="o">)</span>
+            <span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$2</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;after&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+                <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$1</span>
+            <span class="k">else</span>
+                <span class="nv">PATH</span><span class="o">=</span><span class="nv">$1</span>:<span class="nv">$PATH</span>
+            <span class="k">fi</span>
+    <span class="k">esac</span>
+<span class="o">}</span>
+
+
+<span class="k">if</span> <span class="o">[</span> -x /usr/bin/id <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$EUID</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="c1"># ksh workaround</span>
+        <span class="nv">EUID</span><span class="o">=</span><span class="sb">`</span>/usr/bin/id -u<span class="sb">`</span>
+        <span class="nv">UID</span><span class="o">=</span><span class="sb">`</span>/usr/bin/id -ru<span class="sb">`</span>
+    <span class="k">fi</span>
+    <span class="nv">USER</span><span class="o">=</span><span class="s2">&#34;`/usr/bin/id -un`&#34;</span>
+    <span class="nv">LOGNAME</span><span class="o">=</span><span class="nv">$USER</span>
+    <span class="nv">MAIL</span><span class="o">=</span><span class="s2">&#34;/var/spool/mail/</span><span class="nv">$USER</span><span class="s2">&#34;</span>
+<span class="k">fi</span>
+
+<span class="c1"># Path manipulation</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$EUID</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    pathmunge /usr/sbin
+    pathmunge /usr/local/sbin
+<span class="k">else</span>
+    pathmunge /usr/local/sbin after
+    pathmunge /usr/sbin after
+<span class="k">fi</span>
+
+<span class="nv">HOSTNAME</span><span class="o">=</span><span class="sb">`</span>/usr/bin/hostname <span class="m">2</span>&gt;/dev/null<span class="sb">`</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$HISTCONTROL</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;ignorespace&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+    <span class="nb">export</span> <span class="nv">HISTCONTROL</span><span class="o">=</span>ignoreboth
+<span class="k">else</span>
+    <span class="nb">export</span> <span class="nv">HISTCONTROL</span><span class="o">=</span>ignoredups
+<span class="k">fi</span>
+
+<span class="nb">export</span> PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>:<span class="nv">$PATH</span>:/opt/apache-maven-3.6.3/bin
+
+<span class="c1"># 需要编辑的地方--start</span>
+<span class="nb">export</span> <span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JAVA_HOME</span>/bin:<span class="nv">$JAVA_HOME</span>/jre/bin:<span class="nv">$PATH</span>
+<span class="nb">export</span> <span class="nv">CLASSPATH</span><span class="o">=</span>.:<span class="nv">$JAVA_HOME</span>/lib:<span class="nv">$JAVA_HOME</span>/jre/lib
+<span class="c1"># 需要编辑的地方--end</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$UID</span> -gt <span class="m">199</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> <span class="s2">&#34;`/usr/bin/id -gn`&#34;</span> <span class="o">=</span> <span class="s2">&#34;`/usr/bin/id -un`&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">umask</span> <span class="m">002</span>
+<span class="k">else</span>
+    <span class="nb">umask</span> <span class="m">022</span>
+<span class="k">fi</span>
+
+<span class="k">for</span> i in /etc/profile.d/*.sh /etc/profile.d/sh.local <span class="p">;</span> <span class="k">do</span>
+    <span class="k">if</span> <span class="o">[</span> -r <span class="s2">&#34;</span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="p">-#*i</span><span class="si">}</span><span class="s2">&#34;</span> !<span class="o">=</span> <span class="s2">&#34;</span><span class="nv">$-</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> 
+            . <span class="s2">&#34;</span><span class="nv">$i</span><span class="s2">&#34;</span>
+        <span class="k">else</span>
+            . <span class="s2">&#34;</span><span class="nv">$i</span><span class="s2">&#34;</span> &gt;/dev/null
+        <span class="k">fi</span>
+    <span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="nb">unset</span> i
+<span class="nb">unset</span> -f pathmunge</code></pre></td></tr></table>
+</div>
+</div>
+<p>编辑好文件后，需要执行<code>source /etc/profile</code>命令，以便更新<code>profile</code>文件。然后输入<code>java -version</code>即可看到 Java 安装成功：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># java -version</span>
+openjdk version <span class="s2">&#34;1.8.0_242&#34;</span>
+OpenJDK Runtime Environment <span class="o">(</span>build <span class="m">1</span>.8.0_242-b08<span class="o">)</span>
+OpenJDK <span class="m">64</span>-Bit Server VM <span class="o">(</span>build <span class="m">25</span>.242-b08, mixed mode<span class="o">)</span>
+<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span># </code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="安装-tomcat">安装 Tomcat</h1>
+
+<p>我这里选择的版本是<a href="https://tomcat.apache.org/download-80.cgi">Tomcat 8.5.53</a>，下载<code>tar.gz</code>文件后通过<a href="https://filezilla-project.org/">FileZilla</a>将安装包传输到云服务器。然后解压该文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">tar -zxvf apache-tomcat-8.5.53.tar.gz</code></pre></td></tr></table>
+</div>
+</div>
+<p>再将该文件重新命名为<code>tomcat</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">mv apache-tomcat-8.5.53.tar.gz tomcat</code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="防火墙及端口">防火墙及端口</h1>
+
+<p>这里需要注意的是：在防火墙开启之前，需要确认是否已经将<code>8080</code>端口打开。因为我们是通过<code>http://ip:8080</code>来访问网址，即通过 ip 地址加端口号的方式来访问。</p>
+
+<p>可使用如下命令查看当前所有的端口号：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">netstat -ntlp</code></pre></td></tr></table>
+</div>
+</div>
+<p>如果发现没有开启<code>8080</code>端口的话，则需要在防火墙设置一下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">firewall-cmd --zone<span class="o">=</span>public --permanent --add-port<span class="o">=</span><span class="m">8080</span>/tcp
+firewall-cmd --reload</code></pre></td></tr></table>
+</div>
+</div>
+<p>此外，还需要将云服务器安全组中的<code>8080</code>端口打开，如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/03/31/jWxFd9zip2s64OX.png" alt="image.png" /></p>
+
+<h1 id="测试">测试</h1>
+
+<p>在<code>tomcat</code>目录下的<code>bin</code>文件中，有启动和关闭 tomcat 服务的命令，分别为<code>startup.sh</code>和<code>shutdown.sh</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos bin<span class="o">]</span><span class="c1"># ll</span>
+total <span class="m">860</span>
+-rwxrwxrwx <span class="m">1</span> root root  <span class="m">35204</span> Mar <span class="m">11</span> <span class="m">18</span>:04 bootstrap.jar
+-rwxrwxrwx <span class="m">1</span> root root  <span class="m">15953</span> Mar <span class="m">11</span> <span class="m">18</span>:04 catalina.bat
+-rwxrwxrwx <span class="m">1</span> root root  <span class="m">23792</span> Mar <span class="m">11</span> <span class="m">18</span>:04 catalina.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1664</span> Mar <span class="m">11</span> <span class="m">18</span>:06 catalina-tasks.xml
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2123</span> Mar <span class="m">11</span> <span class="m">18</span>:04 ciphers.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1997</span> Mar <span class="m">11</span> <span class="m">18</span>:04 ciphers.sh
+-rwxrwxrwx <span class="m">1</span> root root  <span class="m">25197</span> Mar <span class="m">11</span> <span class="m">18</span>:04 commons-daemon.jar
+-rwxrwxrwx <span class="m">1</span> root root <span class="m">206895</span> Mar <span class="m">11</span> <span class="m">18</span>:04 commons-daemon-native.tar.gz
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2040</span> Mar <span class="m">11</span> <span class="m">18</span>:04 configtest.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1922</span> Mar <span class="m">11</span> <span class="m">18</span>:04 configtest.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">8675</span> Mar <span class="m">11</span> <span class="m">18</span>:04 daemon.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2091</span> Mar <span class="m">11</span> <span class="m">18</span>:04 digest.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1965</span> Mar <span class="m">11</span> <span class="m">18</span>:04 digest.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">3460</span> Mar <span class="m">11</span> <span class="m">18</span>:04 setclasspath.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">3708</span> Mar <span class="m">11</span> <span class="m">18</span>:04 setclasspath.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2020</span> Mar <span class="m">11</span> <span class="m">18</span>:04 shutdown.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1902</span> Mar <span class="m">11</span> <span class="m">18</span>:04 shutdown.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2022</span> Mar <span class="m">11</span> <span class="m">18</span>:04 startup.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1904</span> Mar <span class="m">11</span> <span class="m">18</span>:04 startup.sh
+-rwxrwxrwx <span class="m">1</span> root root  <span class="m">51264</span> Mar <span class="m">11</span> <span class="m">18</span>:04 tomcat-juli.jar
+-rwxrwxrwx <span class="m">1</span> root root <span class="m">419428</span> Mar <span class="m">11</span> <span class="m">18</span>:04 tomcat-native.tar.gz
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">4574</span> Mar <span class="m">11</span> <span class="m">18</span>:04 tool-wrapper.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">5540</span> Mar <span class="m">11</span> <span class="m">18</span>:04 tool-wrapper.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2026</span> Mar <span class="m">11</span> <span class="m">18</span>:04 version.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1908</span> Mar <span class="m">11</span> <span class="m">18</span>:04 version.sh</code></pre></td></tr></table>
+</div>
+</div>
+<p>此时，执行<code>./startup.sh</code>即可启动 tomcat 服务器，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos bin<span class="o">]</span><span class="c1"># ./startup.sh</span> 
+Using CATALINA_BASE:   /home/carol/tomcat
+Using CATALINA_HOME:   /home/carol/tomcat
+Using CATALINA_TMPDIR: /home/carol/tomcat/temp
+Using JRE_HOME:        /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre/bin/java
+Using CLASSPATH:       /home/carol/tomcat/bin/bootstrap.jar:/home/carol/tomcat/bin/tomcat-juli.jar
+Tomcat started.</code></pre></td></tr></table>
+</div>
+</div>
+<p>通过以下命令可以查看 tomcat 是否处于开启状态：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">ps -ef <span class="p">|</span> grep tomcat</code></pre></td></tr></table>
+</div>
+</div>
+<p>然后就可以通过<code>http://ip:8080</code>的方式在浏览器中打开 tomcat 默认的界面了，如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/03/31/eXPKVwFtYUqoShM.png" alt="image.png" /></p>
+
+<h1 id="安装-maven">安装 Maven</h1>
+
+<p>在 Maven 官网<a href="https://maven.apache.org/download.cgi">下载</a>相应的安装包，解压后即可。解压完成以后，需要在<code>/etc/profile</code>中配置 Maven 的环境变量，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>:<span class="nv">$PATH</span>:/opt/apache-maven-3.6.3/bin</code></pre></td></tr></table>
+</div>
+</div>
+<p>最后，使用<code>source /etc/profile</code>命令让文件生效。</p>
+
+<p>此时，使用<code>mvn --version</code>可以看到已经安装成功了，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># mvn --version</span>
+Apache Maven <span class="m">3</span>.6.3 <span class="o">(</span>cecedd343002696d0abb50b32b541b8a6ba2883f<span class="o">)</span>
+Maven home: /opt/apache-maven-3.6.3
+Java version: <span class="m">1</span>.8.0_242, vendor: Oracle Corporation, runtime: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: <span class="s2">&#34;linux&#34;</span>, version: <span class="s2">&#34;3.10.0-1062.1.2.el7.x86_64&#34;</span>, arch: <span class="s2">&#34;amd64&#34;</span>, family: <span class="s2">&#34;unix&#34;</span>
+<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span># </code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看到 Maven 被安装在<code>/opt/apache-maven-3.6.3</code>下，我们修改一下<code>/opt/apache-maven-3.6.3/conf</code>配置文件<code>settings.xml</code>中的镜像，使用阿里云的镜像，这样的话，Maven 会使用国内镜像来下载相关的依赖，速度要快一些。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="o">&lt;</span><span class="n">mirror</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">id</span><span class="o">&gt;</span><span class="n">alimaven</span><span class="o">&lt;/</span><span class="n">id</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">mirrorOf</span><span class="o">&gt;</span><span class="n">central</span><span class="o">&lt;/</span><span class="n">mirrorOf</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="err">name&gt;aliyun maven</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span><span class="n">https</span><span class="o">:</span><span class="c1">//maven.aliyun.com/repository/central&lt;/url&gt;
+</span><span class="c1"></span><span class="o">&lt;/</span><span class="n">mirror</span><span class="o">&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="安装与设置-mysql">安装与设置 MySQL</h1>
+
+<p>在 MySQL 官网<a href="https://dev.mysql.com/downloads/repo/yum/">下载</a>相应的安装包，我这里下载的是<code>mysql80-community-release-el7-3.noarch.rpm</code>。</p>
+
+<p>这里遇到了一些坑，主要是使用<code>yum install mysql80-community-release-el7-3.noarch.rpm</code>后，提示<code>Nothing to do.</code>。然后直接执行以下命令就可以安装 MySQL 的客户端和服务端了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">yum install mysql-server</code></pre></td></tr></table>
+</div>
+</div>
+<p>如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/03/31/HPBg3A1nNjrFTv9.png" alt="image.png" /></p>
+
+<p>当然，此过程网速很慢，因此我将<code>server</code>包单独下载下来，通过<a href="https://filezilla-project.org/">FileZilla</a>将安装包传输到云服务器之后，再执行<code>yum localinstall mysql-community-server.x86_64 0:8.0.19-1.el7</code>即可安装。</p>
+
+<p>安装好以后，通过<code>systemctl state mysqld</code>启动 MySQL 服务器，然后通过<code>systemctl status mysqld</code>查看 MySQL 的运行状态，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># systemctl start mysqld</span>
+<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># systemctl status mysqld</span>
+● mysqld.service - MySQL Server
+   Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/mysqld.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+   Active: active <span class="o">(</span>running<span class="o">)</span> since Tue <span class="m">2020</span>-03-31 <span class="m">16</span>:15:37 CST<span class="p">;</span> 22s ago
+     Docs: man:mysqld<span class="o">(</span><span class="m">8</span><span class="o">)</span>
+           http://dev.mysql.com/doc/refman/en/using-systemd.html
+  Process: <span class="m">2377</span> <span class="nv">ExecStartPre</span><span class="o">=</span>/usr/bin/mysqld_pre_systemd <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span><span class="m">0</span>/SUCCESS<span class="o">)</span>
+ Main PID: <span class="m">2491</span> <span class="o">(</span>mysqld<span class="o">)</span>
+   Status: <span class="s2">&#34;Server is operational&#34;</span>
+   CGroup: /system.slice/mysqld.service
+           └─2491 /usr/sbin/mysqld
+
+Mar <span class="m">31</span> <span class="m">16</span>:15:24 VM_0_4_centos systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Starting MySQL Server...
+Mar <span class="m">31</span> <span class="m">16</span>:15:37 VM_0_4_centos systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Started MySQL Server.
+<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span># </code></pre></td></tr></table>
+</div>
+</div>
+<p>启动成功后，通过以下命令查看 MySQL 默认的密码，准备将其进行修改。因为 MySQL 的默认密码是一串乱序的字符，所以这里最好修改其密码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">grep <span class="s1">&#39;password&#39;</span> /var/log/mysqld.log</code></pre></td></tr></table>
+</div>
+</div>
+<p>得到的密码为：<code>)egJaoLgh7pH</code>，然后登录到 MySQL 服务器，进行修改：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">mysql -u root -p</code></pre></td></tr></table>
+</div>
+</div>
+<p>然后输入以下命令设置一个新的密码，需要注意的是：这里的面应包含大小写字母、特殊符号以及数字，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">alter user root@localhost identified by <span class="s1">&#39;New_password123&#39;</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="导入初始化数据">导入初始化数据</h2>
+
+<p>这里使用自己<a href="https://github.com/dyfloveslife/SSM-nowcoder">项目</a>中的初始数据，将 MySQL 建表文件传输到云服务器，然后解压即可。</p>
+
+<p>通过<code>unzip</code>命令解压后缀为<code>*.zip</code>的压缩包，将其解压到<code>/root</code>目录下。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">unzip -d /root *.zip</code></pre></td></tr></table>
+</div>
+</div>
+<p>进入 MySQL 后创建一个数据库，然后使用该数据库，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">create databse community<span class="p">;</span>
+
+use community<span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行 sql 语句，将初始数据进行初始化：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">source</span> /root/community-init-sql-1.5/init_schema.sql<span class="p">;</span>
+
+<span class="nb">source</span> /root/community-init-sql-1.5/init_data.sql<span class="p">;</span>
+
+<span class="nb">source</span> /root/community-init-sql-1.5/tables_mysql_innodb.sql<span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>通过<code>show tables;</code>查看已创建的表数据。</p>
+
+<h1 id="安装-redis">安装 Redis</h1>
+
+<p>通过<code>yum list redis*</code>查看可用的 Redis 版本，选择<code>redis.x86_64</code>进行安装即可。安装完成后，启动 Redis，并查看其运行状态。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">systemctl start redis<span class="p">;</span>
+
+systemctl status redis<span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># systemctl start redis</span>
+<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># systemctl status redis</span>
+¡ñ redis.service - Redis persistent key-value database
+   Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/redis.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+  Drop-In: /etc/systemd/system/redis.service.d
+           ©¸©¤limit.conf
+   Active: active <span class="o">(</span>running<span class="o">)</span> since Tue <span class="m">2020</span>-03-31 <span class="m">16</span>:53:48 CST<span class="p">;</span> 9s ago
+ Main PID: <span class="m">10234</span> <span class="o">(</span>redis-server<span class="o">)</span>
+   CGroup: /system.slice/redis.service
+           ©¸©¤10234 /usr/bin/redis-server <span class="m">127</span>.0.0.1:6379
+
+Mar <span class="m">31</span> <span class="m">16</span>:53:48 VM_0_4_centos systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Starting Redis persistent key-value database...
+Mar <span class="m">31</span> <span class="m">16</span>:53:48 VM_0_4_centos systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Started Redis persistent key-value database.
+<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span># </code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="安装-kafka">安装 Kafka</h1>
+
+<p>将压缩包<code>kafka_2.12-2.2.0.tgz</code>进行加压到<code>/opt</code>下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">tar -zxvf kafka_2.12-2.2.0.tgz -C /opt</code></pre></td></tr></table>
+</div>
+</div>
+<p>通过后台的方式先启动 zookeeper，再启动 Kafa：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">bin/zookeeper-server-start.sh -daemon config/zookeeper.properties 
+
+nohup bin/kafka-server-start.sh config/server.properties <span class="m">1</span>&gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>通过查看 Kafka 下的主题，来判断是否启动成功：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">./bin/kafka-topics.sh --list --bootstrap-server localhost:9092</code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="安装-elasticsearch">安装 Elasticsearch</h1>
+
+<p>将压缩包解压到<code>/opt</code>目录下，然后将插件放到<code>/plugins/ik</code>目录下即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">tar -zxvf elasticsearch-6.4.3.tar.gz -C /opt/
+
+unzip -d /opt/elasticsearch-6.4.3/plugins/ik elasticsearch-analysis-ik-6.4.3.zip </code></pre></td></tr></table>
+</div>
+</div>
+<p>修改 Elasticsearch 的配置文件<code>elasticsearch.yml</code>，修改<code>cluster.name</code>、<code>path.data</code>以及<code>path.logs</code>，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cluster.name: nowcoder
+
+path.data: /tmp/elastic/data
+
+path.logs: /tmp/elastic/logs</code></pre></td></tr></table>
+</div>
+</div>
+<p>修改<code>jvm.options</code>文件，指定 Elasticsearch 启动内存：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">-Xms128m
+-Xmx256m</code></pre></td></tr></table>
+</div>
+</div>
+<p>创建新的用户，使用新的用户启动 Elasticsearch：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos config<span class="o">]</span><span class="c1"># groupadd nowcoder</span>
+<span class="o">[</span>root@VM_0_4_centos config<span class="o">]</span><span class="c1"># useradd nowcoder1 -p 123456 -g nowcoder</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>给<code>/opt</code>和<code>/tmp</code>目录设置权限，使其<code>nowcoder1</code>能够访问到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos opt<span class="o">]</span><span class="c1"># chown -R nowcoder1:nowcoder *</span>
+<span class="o">[</span>root@VM_0_4_centos tmp<span class="o">]</span><span class="c1"># chown -R nowcoder1:nowcoder *</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>切换到 nowcoder1 用户后，启动 Elasticsearch：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos /<span class="o">]</span><span class="c1"># su - nowcoder1</span>
+<span class="o">[</span>nowcoder1@VM_0_4_centos ~<span class="o">]</span>$ <span class="nb">cd</span> /opt/elasticsearch-6.4.3/
+<span class="o">[</span>nowcoder1@VM_0_4_centos elasticsearch-6.4.3<span class="o">]</span>$ ./bin/elasticsearch -d</code></pre></td></tr></table>
+</div>
+</div>
+<p>进行到这里的时候，我的云服务器的内存（1G）就已经被使用满了。因此，后序的话会在虚拟机里安装。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-03-31
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/03/24/JavaSrc-ConcurrentHashMap/">
+            <span class="next-text nav-default">Java 容器之 ConcurrentHashMap</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

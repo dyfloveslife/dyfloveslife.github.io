@@ -1197,16 +1197,5 @@
       <description>&lt;p&gt;从开始用电脑到现在，我也在自己的电脑上安装了不少的软件。有相关开发平台的软件，也有提升效率的各种小软件。想着以后有可能重装系统，在这里把我电脑上安装的软件做个记录，以后也许会用到。&lt;/p&gt;</description>
     </item>
     
-    <item>
-      <title>数据结构之 静态链表</title>
-      <link>http://localhost:1313/2017/03/14/DataStructure-StaticList/</link>
-      <pubDate>Tue, 14 Mar 2017 22:03:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/03/14/DataStructure-StaticList/</guid>
-      <description>&lt;p&gt;题目：创建一个静态链表，将数组存入链表。查找第3个元素并输出该元素的值，然后释放该结点。&lt;/p&gt;
-
-&lt;p&gt;要求：实现静态链表的初始化、分配结点、释放结点功能。&lt;/p&gt;</description>
-    </item>
-    
   </channel>
 </rss>

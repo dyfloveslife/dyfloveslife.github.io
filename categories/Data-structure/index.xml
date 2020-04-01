@@ -20,16 +20,5 @@
       <description>一.算法应用复习要点 会用迪杰斯特拉算法解决最短路径问题 会求二叉树的各种遍历序列 会用哈希函数构造哈希表，会用开放定址法解决冲突，会计算查找成功</description>
     </item>
     
-    <item>
-      <title>数据结构之 静态链表</title>
-      <link>http://localhost:1313/2017/03/14/DataStructure-StaticList/</link>
-      <pubDate>Tue, 14 Mar 2017 22:03:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/03/14/DataStructure-StaticList/</guid>
-      <description>&lt;p&gt;题目：创建一个静态链表，将数组存入链表。查找第3个元素并输出该元素的值，然后释放该结点。&lt;/p&gt;
-
-&lt;p&gt;要求：实现静态链表的初始化、分配结点、释放结点功能。&lt;/p&gt;</description>
-    </item>
-    
   </channel>
 </rss>

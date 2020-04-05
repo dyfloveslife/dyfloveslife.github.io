@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java 中的 synchronized - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="在多线程并发的情况下，多线程同时访问的资源叫做临界资源（如变量、对象、文件等），当多个线程同时访问对象并要求操作相同资源时，其操作可能存在数据不一致或数据不完整的情况。为了避免这种情况的发生，需要采取同步互斥机制，以确保在某一时刻，方法内只允许一个线程对该资源进行操作，而其它线程只能等待。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2020/04/05/Java-Synchronized/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java 中的 synchronized" />
+<meta property="og:description" content="在多线程并发的情况下，多线程同时访问的资源叫做临界资源（如变量、对象、文件等），当多个线程同时访问对象并要求操作相同资源时，其操作可能存在数据不一致或数据不完整的情况。为了避免这种情况的发生，需要采取同步互斥机制，以确保在某一时刻，方法内只允许一个线程对该资源进行操作，而其它线程只能等待。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/04/05/Java-Synchronized/" />
+<meta property="article:published_time" content="2020-04-05T14:35:11+08:00" />
+<meta property="article:modified_time" content="2020-04-05T14:36:11+08:00" />
+<meta itemprop="name" content="Java 中的 synchronized">
+<meta itemprop="description" content="在多线程并发的情况下，多线程同时访问的资源叫做临界资源（如变量、对象、文件等），当多个线程同时访问对象并要求操作相同资源时，其操作可能存在数据不一致或数据不完整的情况。为了避免这种情况的发生，需要采取同步互斥机制，以确保在某一时刻，方法内只允许一个线程对该资源进行操作，而其它线程只能等待。">
+
+
+<meta itemprop="datePublished" content="2020-04-05T14:35:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-05T14:36:11&#43;08:00" />
+<meta itemprop="wordCount" content="4475">
+
+
+
+<meta itemprop="keywords" content="Java,Concurrent,synchronized," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java 中的 synchronized"/>
+<meta name="twitter:description" content="在多线程并发的情况下，多线程同时访问的资源叫做临界资源（如变量、对象、文件等），当多个线程同时访问对象并要求操作相同资源时，其操作可能存在数据不一致或数据不完整的情况。为了避免这种情况的发生，需要采取同步互斥机制，以确保在某一时刻，方法内只允许一个线程对该资源进行操作，而其它线程只能等待。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/2020/01/12/post_summary/">
+        <li class="mobile-menu-item">❤文章汇总</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/2020/01/12/post_summary/">❤文章汇总</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java 中的 synchronized</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-05 </span>
+        <div class="post-category">
+            <a href="/categories/Java/"> Java </a>
+            </div>
+          <span class="more-meta"> 4475 words </span>
+          <span class="more-meta"> 9 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#实现方式">实现方式</a>
+<ul>
+<li><a href="#普通同步方法">普通同步方法</a></li>
+<li><a href="#同步代码块">同步代码块</a></li>
+<li><a href="#静态同步方法">静态同步方法</a></li>
+</ul></li>
+<li><a href="#可重入锁">可重入锁</a></li>
+<li><a href="#同步代码块的注意事项">同步代码块的注意事项</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在多线程并发的情况下，多线程同时访问的资源叫做临界资源（如变量、对象、文件等），当多个线程同时访问对象并要求操作相同资源时，其操作可能存在数据不一致或数据不完整的情况。为了避免这种情况的发生，需要采取同步互斥机制，以确保在某一时刻，方法内只允许一个线程对该资源进行操作，而其它线程只能等待。</p>
+
+<h1 id="概述">概述</h1>
+
+<p>上面提到的处理方式其实是采用了<code>序列化访问临界资源</code>手段，也就是同一时刻，只能有一个线程去访问临界资源，等到该线程执行完以后，其它线程才可以对该临界资源进行操作。但由于多个线程在访问临界资源的过程是不可控的，因此需要采用同步机制来协同对象可变状态的访问。</p>
+
+<blockquote>
+<p>这里的<code>临界资源</code>可称为共享、可变的资源，<code>共享</code>意味着该资源是可以由多个线程同时访问的，而<code>可变</code>指的是该资源在其生命周期内是可以被修改的。</p>
+</blockquote>
+
+<p>在 Java 中可以通过<code>synchronized</code>和<code>Lock</code>实现这种同步互斥访问机制，如果不采用这种同步机制的话，则在多线程环境下会出现线程安全问题，即多个线程同时访问同一个资源时，得到的运行结果往往与真实的结果不同。但这里需要注意一点的是：<strong>当多个线程执行一个方法时，该方法内部的局部变量并不是临界资源，因为这些局部变量属于每个线程私有的，因此不会共享，不会导致线程安全问题</strong>。</p>
+
+<p>本文主要介绍<code>synchronized</code>的实现方式，然后再给出一些使用<code>synchronized</code>的注意事项。</p>
+
+<h1 id="实现方式">实现方式</h1>
+
+<p>Java 中的每一个对象都可以作为锁，synchronized 关键字可以用作以下三种形式：</p>
+
+<ul>
+<li>对于普通同步方法，锁是当前实例对象；</li>
+<li>对于静态同步方法，锁是当前类的 Class 对象；</li>
+<li>对于同步代码块，锁是 synchronized 括号里配置的对象。</li>
+</ul>
+
+<p>也就是说，使用 synchronized 关键字来标记一个方法或者代码块时，当某个线程调用该对象的 synchronized 方法或者访问 synchronized 代码块时，这个线程便获得了该对象的锁，而其它线程如果想访问该方法或代码块时，则只能等待这个方法执行完毕或代码块执行完毕以后，这个线程才会释放该对象的锁，其它线程才能执行这个方法或代码块。</p>
+
+<h2 id="普通同步方法">普通同步方法</h2>
+
+<p>下面演示一个在不使用 synchronized 关键字时，两个线程同时对临界资源进行操作的例子，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">SynchronizedTest</span> <span class="p">{</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">final InsertData </span><span class="n">insertData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InsertData</span><span class="p">();</span>
+        <span class="c1">// 启动第一个线程
+</span><span class="c1"></span>        <span class="k">new</span> <span class="n">Thread</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="n">insertData</span><span class="p">.</span><span class="na">insert</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">())).</span><span class="na">start</span><span class="p">();</span>
+
+        <span class="c1">// 启动第二个线程
+</span><span class="c1"></span>        <span class="k">new</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nd">@Override</span>
+            <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+                <span class="n">insertData</span><span class="p">.</span><span class="na">insert</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">());</span>
+            <span class="p">}</span>
+        <span class="p">}.</span><span class="na">start</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="err">class InsertData </span><span class="p">{</span>
+    <span class="c1">// 临界资源
+</span><span class="c1"></span>    <span class="err">private List</span><span class="o">&lt;</span><span class="err">Integer&gt; list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="err">public void </span><span class="n">insert</span> <span class="p">(</span><span class="err">Thread thread</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">thread</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Thread-0正在插入数据: 0
+Thread-1正在插入数据: 0
+Thread-1正在插入数据: 1
+Thread-1正在插入数据: 2
+Thread-1正在插入数据: 3
+Thread-1正在插入数据: 4
+Thread-1正在插入数据: 5
+Thread-1正在插入数据: 6
+Thread-1正在插入数据: 7
+Thread-0正在插入数据: 1
+Thread-1正在插入数据: 8
+Thread-0正在插入数据: 2
+Thread-0正在插入数据: 3
+Thread-0正在插入数据: 4
+Thread-0正在插入数据: 5
+Thread-0正在插入数据: 6
+Thread-1正在插入数据: 9
+Thread-0正在插入数据: 7
+Thread-0正在插入数据: 8
+Thread-0正在插入数据: 9</pre></td></tr></table>
+</div>
+</div>
+<p>通过结果可以看出，这两个线程在同时执行 insert 方法，而如果将 insert 方法用 synchronized 进行修饰，则会出现以下执行结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class InsertData </span><span class="p">{</span>
+
+    <span class="c1">// 临界资源
+</span><span class="c1"></span>    <span class="err">private  List</span><span class="o">&lt;</span><span class="err">Integer&gt; list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="c1">// 使用 synchronized 修饰
+</span><span class="c1"></span>    <span class="err">public synchronized void insert</span><span class="p">(</span><span class="err">Thread thread</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">thread</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>执行结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Thread-0正在插入数据: 0
+Thread-0正在插入数据: 1
+Thread-0正在插入数据: 2
+Thread-0正在插入数据: 3
+Thread-0正在插入数据: 4
+Thread-0正在插入数据: 5
+Thread-0正在插入数据: 6
+Thread-0正在插入数据: 7
+Thread-0正在插入数据: 8
+Thread-0正在插入数据: 9
+Thread-1正在插入数据: 0
+Thread-1正在插入数据: 1
+Thread-1正在插入数据: 2
+Thread-1正在插入数据: 3
+Thread-1正在插入数据: 4
+Thread-1正在插入数据: 5
+Thread-1正在插入数据: 6
+Thread-1正在插入数据: 7
+Thread-1正在插入数据: 8
+Thread-1正在插入数据: 9</pre></td></tr></table>
+</div>
+</div>
+<p>不管执行多少次，都是第一个线程（Thread-0）先获得 insert 方法的锁对象，等到第一个线程执行完并释放锁以后，第二个线程（Thread-1）才会获取锁，继而执行 insert 方法。</p>
+
+<p>synchronized 关键字让线程顺序执行成为了可能，但在使用时应<strong>注意以下几点</strong>：</p>
+
+<ul>
+<li>当一个线程正在访问一个对象的 synchronized 方法时，那么其它线程不能访问该对象的其它 synchronized 方法。因为一个对象只有一把锁，当一个线程获取了该对象的锁之后，则其它线程无法获取该对象的锁，也就无法访问该对象的其它 synchronized 方法。</li>
+<li>当一个线程正在访问一个对象的 synchronized 方法时，那么其它线程可以访问该对象的非 synchronized 方法。因为该对象的非 synchronized 方法不需要获得该对象的锁，如果一个方法没有被 synchronized 关键字修饰，则说明它不会使用到临界资源，所以其它线程是可以访问到的。</li>
+<li>如果一个线程 A 需要访问对象 object1 的 synchronized 方法 fun1()，而另一个线程 B 需要访问对象 object2 的 synchronized 方法 fun1()，即使 object1 和 object2 是同一类型，那么也不会产生线程安全问题，因为它们访问的是不同的对象，所以不存在同步互斥问题。</li>
+</ul>
+
+<h2 id="同步代码块">同步代码块</h2>
+
+<p>可用以下形式让 synchronized 修饰同步代码块：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">synchronized</span> <span class="p">(</span><span class="n">object</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 访问临界资源的代码
+</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>此时，锁的是 synchronized 括号里配置的对象，也就是 object。当然，括号里面的也可以是<code>this</code>，其表示获取当前对象的锁。但需要注意的是：普通的同步方法与 synchronized(this) 同步代码块是<code>互斥的</code>，因为它们锁的是同一个对象，而普通的同步方法与 synchronized(非 this) 同步代码块是异步的，因为它们锁的是不同的对象。</p>
+
+<p>括号里面是<code>this</code>监视器的情况：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class InsertData </span><span class="p">{</span>
+    <span class="c1">// 临界资源
+</span><span class="c1"></span>    <span class="err">private List</span><span class="o">&lt;</span><span class="err">Integer&gt; list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="err">public void </span><span class="n">insert</span><span class="p">(</span><span class="err">Thread thread</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">synchronized</span> <span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">thread</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+                <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>括号里面是<code>对象</code>监视器的情况：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class InsertData </span><span class="p">{</span>
+    <span class="c1">// 临界资源
+</span><span class="c1"></span>    <span class="err">private List</span><span class="o">&lt;</span><span class="err">Integer&gt; list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="err">private Object </span><span class="n">object</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="p">();</span>
+
+    <span class="err">public void </span><span class="n">insert</span><span class="p">(</span><span class="err">Thread thread</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">synchronized</span> <span class="p">(</span><span class="n">object</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">thread</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+                <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>对比普通同步方法和同步代码块可以看到，使用 synchronized 修饰的代码块比 synchronized 修饰的同步方法在锁粒度方面要细一些，也就是说锁定对象的范文更小了，从而减小了锁发生冲突的可能性，继而提高了系统的并发能力。</p>
+
+<p>如果我们想要在一个方法中将其中的一部分代码进行同步的话，如果此时使用 synchronized 来修饰整个方法，则会影响程序的执行效率，而使用同步代码快只对这部分代码进行同步的话，效果会好一些。</p>
+
+<p>从 JVM 层面来看，synchronized 修饰代码块的底层是通过进入和退出 Monitor 对象来实现的，即 monitorenter 和 monitorexit。monitorenter 指令是在编译后插入到同步代码块的开始位置，而 monitorexit 插入到方法结束处或异常处，JVM 要保证每个 monitorenter 必须有对应的 monitorexit 与之配对。任何对象都有一个 monitor 与之关联，当一个 monitor 被持有后，它将处于锁定状态。线程执行到 monitorenter 指令时，将会尝试获取对象所对应的 monitor 的所有权，即尝试获得对象的锁。</p>
+
+<h2 id="静态同步方法">静态同步方法</h2>
+
+<p>静态方法（被 static 修饰的方法）与当前类有关，因此每个类也会有一个锁，而静态的 synchronized 方法是以 Class 对象作为锁。而且，它还可以用来控制对 static 数据成员的并发访问，但需要注意的是，static 数据成员不属于任何一个对象，它属于类成员。</p>
+
+<p>同时也需要注意的是，如果一个线程执行一个对象的非 static synchronized 方法，另外一个线程想要执行这个对象所属类的 static synchronized 方法时，是不会发生互斥的现象。因为访问 static synchronized 方法占用的是类的锁，而访问非 static synchronized 方法占用的是对象的锁，所以不存在互斥的现象。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">SynchronizedTest2</span> <span class="p">{</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="err">final InsertData2 </span><span class="n">insertData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InsertData2</span><span class="p">();</span>
+        <span class="c1">// 分别启动两个线程
+</span><span class="c1"></span>        <span class="k">new</span> <span class="n">Thread</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="n">insertData</span><span class="p">.</span><span class="na">insert1</span><span class="p">()).</span><span class="na">start</span><span class="p">();</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nd">@Override</span>
+            <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+                <span class="n">insertData</span><span class="p">.</span><span class="na">insert2</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}.</span><span class="na">start</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class InsertData2 </span><span class="p">{</span>
+    <span class="c1">// 非 static 修饰的 synchronized 方法
+</span><span class="c1"></span>    <span class="err">public synchronized void insert1</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;执行 insert1&#34;</span><span class="p">);</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">5000</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;执行 insert1 完毕&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// static 修饰的 synchronized 方法
+</span><span class="c1"></span>    <span class="err">public static synchronized void </span><span class="n">insert2</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;执行 insert2&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;执行 insert2 完毕&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">执行 insert1
+</span><span class="err">执行 insert2
+</span><span class="err">执行 insert2 完毕
+</span><span class="err">执行 insert1 完毕</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看到，第一个线程执行的是 insert1 方法，不会导致第二个线程执行 insert2 方法时发生阻塞现象。最后需要注意的是，对于 synchronized 修饰的同步方法和 synchronized 修饰的同步代码快来说，当出现异常时，JVM 会自动释放当前线程占用的锁，因此不会出现由于异常而导致的死锁现象。</p>
+
+<h1 id="可重入锁">可重入锁</h1>
+
+<p>一般情况下，当某个线程请求一个由其它线程只有的锁时，发起请求的线程就会阻塞。<strong>而如果某个线程试图获得一个已经由它自己持有的锁时，那么这个请求就会成功，因此也称为可重入锁</strong>。Java 中的 ReentrantLock 和 synchronized 都属于可重入锁。其作用是可以在一定上避免死锁。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class SynchronizedTest3 implements </span><span class="n">Runnable</span> <span class="p">{</span>
+
+    <span class="err">public synchronized void get</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+        <span class="c1">// 注意这里调用了被 synchronized 修饰的 set 方法
+</span><span class="c1"></span>        <span class="n">set</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="err">public synchronized void set</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;run start...&#34;</span><span class="p">);</span>
+        <span class="n">get</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;run end...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">SynchronizedTest3 test </span><span class="o">=</span> <span class="k">new</span> <span class="n">SynchronizedTest3</span><span class="p">();</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="s">&#34;Thread-0&#34;</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="s">&#34;Thread-1&#34;</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="s">&#34;Thread-2&#34;</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">run start</span><span class="p">...</span>
+<span class="n">Thread</span><span class="o">-</span><span class="err">0
+</span><span class="err">Thread</span><span class="o">-</span><span class="err">0
+</span><span class="err">run end...
+</span><span class="err">run start...
+</span><span class="err">Thread</span><span class="o">-</span><span class="err">2
+</span><span class="err">Thread</span><span class="o">-</span><span class="err">2
+</span><span class="err">run end...
+</span><span class="err">run start...
+</span><span class="err">Thread</span><span class="o">-</span><span class="err">1
+</span><span class="err">Thread</span><span class="o">-</span><span class="err">1
+</span><span class="err">run </span><span class="n">end</span><span class="p">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="同步代码块的注意事项">同步代码块的注意事项</h1>
+
+<p>需要注意的是：由于存在字符串常量池的原因，在使用同步代码块时<strong>不能</strong>使用 String 作为锁的对象，可以实例化 Object 对象，因为它并不会被放入缓存中。</p>
+
+<p>由于字符串是存储在常量池中的，有两种类型的字符串数据会存储在常量池中：</p>
+
+<ul>
+<li>编译期就可以确定的字符串，也就是字面量。比如<code>String str1 = &quot;abc123&quot;;</code>，而对于<code>String str2 = &quot;1&quot; + A.getDataFromDB() + &quot;c&quot;;</code>来说，其中的<code>1</code>和<code>c</code>都是可以在编译期确定的字符串，而<code>A.getDataFromDB()</code>无法在编译期确定，因此它们是分配在堆上的。</li>
+<li>使用 String 的 intern() 方法操作的字符串。比如<code>String str3 = A.getDataFromDB().intern();</code>，虽然<code>A.getDataFromDB()</code>是在堆上拿到的字符串，但由于使用了<code>intern()</code>方法，因此每次会将<code>A.getDataFromDB()</code>的结果写入常量池中。</li>
+</ul>
+
+<p>因此，常量池在操作 String 类型的数据时，在每次获取数据的值时，如果常量池中已经有了，则直接使用常量池中的值；如果常量池中没有的话，则会将数据写入常量池中并返回常量池中的数据。</p>
+
+<p>此外，synchronized 锁的是对象而非引用，即它是一种<strong>对象锁</strong>，作用的目标是<strong>对象</strong>，而不是将一段代码或方法当做锁，或者说锁的粒度是处于<strong>对象</strong>级别的。哪个线程先执行带有 synchronized 关键字的方法，<strong>哪个线程就持有该方法所属对象的锁</strong>，其它线程只能处于等待状态。</p>
+
+<p>既然是对象锁，那就肯定和对象有关，所以多线程访问的必须是同一个对象。如果多线程访问的是多个对象，那么 JVM 就会创建多个锁，每个对象持有的是自己的锁，则会分别执行自己的代码。</p>
+
+<h1 id="参考">参考</h1>
+
+<ul>
+<li><a href="http://ifeve.com/synchronized-blocks/">http://ifeve.com/synchronized-blocks/</a></li>
+<li><a href="https://blog.csdn.net/justloveyou_/article/details/54381099">https://blog.csdn.net/justloveyou_/article/details/54381099</a></li>
+<li><a href="https://blog.csdn.net/ns_code/article/details/17199201">https://blog.csdn.net/ns_code/article/details/17199201</a></li>
+<li><a href="https://www.cnblogs.com/xrq730/p/6662232.html">https://www.cnblogs.com/xrq730/p/6662232.html</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-04-05
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Java/">Java</a>
+          <a href="/tags/Concurrent/">Concurrent</a>
+          <a href="/tags/synchronized/">synchronized</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/03/31/project-deployment/">
+            <span class="next-text nav-default">项目部署小结</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

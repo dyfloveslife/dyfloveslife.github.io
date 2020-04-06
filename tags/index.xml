@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 05 Apr 2020 14:35:11 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 05 Apr 2020 18:35:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Concurrent</title>
       <link>http://localhost:1313/tags/Concurrent/</link>
-      <pubDate>Sun, 05 Apr 2020 14:35:11 +0800</pubDate>
+      <pubDate>Sun, 05 Apr 2020 18:35:11 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/Concurrent/</guid>
       <description></description>
@@ -23,9 +23,27 @@
     <item>
       <title>Java</title>
       <link>http://localhost:1313/tags/Java/</link>
-      <pubDate>Sun, 05 Apr 2020 14:35:11 +0800</pubDate>
+      <pubDate>Sun, 05 Apr 2020 18:35:11 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/Java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lock</title>
+      <link>http://localhost:1313/tags/Lock/</link>
+      <pubDate>Sun, 05 Apr 2020 18:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Lock/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ReentrantLock</title>
+      <link>http://localhost:1313/tags/ReentrantLock/</link>
+      <pubDate>Sun, 05 Apr 2020 18:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/ReentrantLock/</guid>
       <description></description>
     </item>
     

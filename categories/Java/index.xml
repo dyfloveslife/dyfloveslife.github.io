@@ -6,10 +6,19 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 05 Apr 2020 14:35:11 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 05 Apr 2020 18:35:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/Java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 中的 Lock 及各种锁的概念</title>
+      <link>http://localhost:1313/2020/04/05/Java-Lock/</link>
+      <pubDate>Sun, 05 Apr 2020 18:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/04/05/Java-Lock/</guid>
+      <description>&lt;p&gt;上节 &lt;a href=&#34;https://dyfloveslife.github.io/2020/04/05/Java-Synchronized/&#34;&gt;《Java 中的 synchronized》&lt;/a&gt;介绍了能够在多线程访问临界资源的情况下，使用 synchronized 关键字可以保证线程之间的顺序执行（序列化访问临界资源），即同一时刻只能由一个线程获得当前对象的锁。可以看到 synchronized 是在 JVM 层面实现了对临界资源的同步互斥访问，但锁的粒度较大。本文将介绍并发包下的 Lock 接口，同样也可以实现锁的功能。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 中的 synchronized</title>

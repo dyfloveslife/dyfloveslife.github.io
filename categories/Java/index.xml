@@ -6,10 +6,19 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 05 Apr 2020 18:35:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 07 Apr 2020 22:10:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/Java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>线程间的通信机制</title>
+      <link>http://localhost:1313/2020/04/07/Java-Inter-thread-communication/</link>
+      <pubDate>Tue, 07 Apr 2020 22:10:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/04/07/Java-Inter-thread-communication/</guid>
+      <description>之前的文章，比如 synchronized 和 [Lock]()</description>
+    </item>
     
     <item>
       <title>Java 中的 Lock 及各种锁的概念</title>

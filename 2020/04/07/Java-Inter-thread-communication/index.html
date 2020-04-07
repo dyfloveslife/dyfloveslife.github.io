@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Java · Carol&#39;s blog</title>
+  <title>线程间的通信机制 - Carol&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content="Carol&#39;s blog." /><meta name="keywords" content="Java, blog, carol" />
+<meta name="author" content="Carol" /><meta name="description" content="之前的文章，比如 synchronized 和 [Lock]()" /><meta name="keywords" content="Java, blog, carol" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/categories/Java/" />
-  <link href="http://localhost:1313/categories/Java/index.xml" rel="alternate" type="application/rss+xml" title="Carol&#39;s blog" />
-  <link href="http://localhost:1313/categories/Java/index.xml" rel="feed" type="application/rss+xml" title="Carol&#39;s blog" />
+<link rel="canonical" href="http://localhost:1313/2020/04/07/Java-Inter-thread-communication/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,18 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Java" />
-<meta property="og:description" content="Carol&#39;s blog." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://localhost:1313/categories/Java/" />
+<meta property="og:title" content="线程间的通信机制" />
+<meta property="og:description" content="之前的文章，比如 synchronized 和 [Lock]()" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/04/07/Java-Inter-thread-communication/" />
+<meta property="article:published_time" content="2020-04-07T22:10:11+08:00" />
+<meta property="article:modified_time" content="2020-04-07T22:11:11+08:00" />
+<meta itemprop="name" content="线程间的通信机制">
+<meta itemprop="description" content="之前的文章，比如 synchronized 和 [Lock]()">
 
-<meta property="og:updated_time" content="2020-04-07T22:10:11+08:00" />
-<meta itemprop="name" content="Java">
-<meta itemprop="description" content="Carol&#39;s blog.">
 
+<meta itemprop="datePublished" content="2020-04-07T22:10:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-07T22:11:11&#43;08:00" />
+<meta itemprop="wordCount" content="11">
+
+
+
+<meta itemprop="keywords" content="Java,Concurrent,wait,notify,notifyAll," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Java"/>
-<meta name="twitter:description" content="Carol&#39;s blog."/>
+<meta name="twitter:title" content="线程间的通信机制"/>
+<meta name="twitter:description" content="之前的文章，比如 synchronized 和 [Lock]()"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -119,57 +125,102 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="archive" class="archive">
-  
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">线程间的通信机制</h1>
 
-  <div class="archive-post">
-      <span class="archive-post-time">
-        2019-12-04
-      </span>
-      <span class="archive-post-title">
-        <a href="/2019/12/04/JavaSrc-BasicClass-Object/" class="archive-post-link">
-          JDK 源码之基础类 Object
-        </a>
-      </span>
-    </div><div class="archive-post">
-      <span class="archive-post-time">
-        2019-11-22
-      </span>
-      <span class="archive-post-title">
-        <a href="/2019/11/22/gc-and-memory-allocation-strategy/" class="archive-post-link">
-          JVM 垃圾收集器与内存分配策略
-        </a>
-      </span>
-    </div><div class="archive-post">
-      <span class="archive-post-time">
-        2019-11-20
-      </span>
-      <span class="archive-post-title">
-        <a href="/2019/11/20/object-survival-and-gc-algorithm/" class="archive-post-link">
-          JVM 对象存活和垃圾收集算法
-        </a>
-      </span>
-    </div><div class="archive-post">
-      <span class="archive-post-time">
-        2019-11-18
-      </span>
-      <span class="archive-post-title">
-        <a href="/2019/11/18/java-memory-areas/" class="archive-post-link">
-          Java 内存区域概述
-        </a>
-      </span>
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-07 </span>
+        <div class="post-category">
+            <a href="/categories/Java/"> Java </a>
+            </div>
+          <span class="more-meta"> 11 words </span>
+          <span class="more-meta"> 1 min read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <p>之前的文章，比如 <a href="https://dyfloveslife.github.io/2020/04/05/Java-Synchronized/">synchronized</a> 和 [Lock]()</p>
+
     </div>
-</section>
 
-<nav class="pagination">
-  <a class="prev" href="/categories/Java/">
-      <i class="iconfont icon-left"></i>
-      <span class="prev-text">Prev</span>
-    </a>
-  
-</nav>
-        </div>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-04-07
         
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Java/">Java</a>
+          <a href="/tags/Concurrent/">Concurrent</a>
+          <a href="/tags/wait/">wait</a>
+          <a href="/tags/notify/">notify</a>
+          <a href="/tags/notifyAll/">notifyAll</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/04/05/Java-Lock/">
+            <span class="next-text nav-default">Java 中的 Lock 及各种锁的概念</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
 
       </div>
     </main>
@@ -218,6 +269,14 @@
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 
 
 

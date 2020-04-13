@@ -6,10 +6,19 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 07 Apr 2020 22:10:11 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2020 15:35:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/Java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 中的 ThreadLocal</title>
+      <link>http://localhost:1313/2020/04/13/Java-ThreadLocal/</link>
+      <pubDate>Mon, 13 Apr 2020 15:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/04/13/Java-ThreadLocal/</guid>
+      <description>&lt;p&gt;使用 Java 中的 ThreadLocal 类可以创建只能由同一个线程读写的变量。也就是说，即使两个线程在执行相同的代码，并且代码中都有对同一个 ThreadLocal 变量的引用，那么这两个线程也不会看到对方的 ThreadLocal 变量。因此，Java 中的 ThreadLocal 类提供了一种简单的方式来使代码中的线程变得更加安全。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>线程间的通信机制</title>

@@ -6,10 +6,19 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 13 Apr 2020 15:35:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 14 Apr 2020 13:35:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/Java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 中的线程池</title>
+      <link>http://localhost:1313/2020/04/14/Java-ThreadPool/</link>
+      <pubDate>Tue, 14 Apr 2020 13:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/04/14/Java-ThreadPool/</guid>
+      <description>&lt;p&gt;在多线程并发的环境下创建多个线程去执行任务，每当有一个任务到来的时候都需要创建一个线程去执行。这种方式虽然是可行的，但如果线程并发的数量很多，并且每个线程都是执行一个时间很短的任务就结束掉了，这样频繁的创建线程就会大大降低系统的运行效率，因为频繁的创建和销毁线程需要消耗额外的时间。对于这种情况，我们可以使用线程池技术让线程达到复用的目的。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 中的 ThreadLocal</title>

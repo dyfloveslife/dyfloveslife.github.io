@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Concurrency on Carol&#39;s blog</title>
-    <link>http://localhost:1313/tags/Concurrency/</link>
-    <description>Recent content in Concurrency on Carol&#39;s blog</description>
+    <title>BlockingQueue on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/BlockingQueue/</link>
+    <description>Recent content in BlockingQueue on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 16 Apr 2020 16:02:11 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/Concurrency/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/tags/BlockingQueue/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>http://localhost:1313/2020/04/16/Java-BlockingQueue/</guid>
       <description>&lt;p&gt;在之前的《&lt;a href=&#34;https://dyfloveslife.github.io/2020/04/14/Java-ThreadPool/&#34;&gt;Java 中的线程池&lt;/a&gt;》一文中，在介绍线程池参数的时候，其中&lt;code&gt;BlockingQueue&amp;lt;Runnable&amp;gt; workQueue&lt;/code&gt;用于存储等待执行的任务，提到了几种不同类型的等待队列。本文将详细的介绍阻塞队列的实现原理以及各自的使用方法。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java 并发编程-更新中</title>
-      <link>http://localhost:1313/2020/03/10/Java_Concurrency/</link>
-      <pubDate>Tue, 10 Mar 2020 22:02:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2020/03/10/Java_Concurrency/</guid>
-      <description>&lt;p&gt;Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。要想使并发程序能够正确的执行，必须要满足三条原则：原子性、可见性、有序性。&lt;/p&gt;</description>
     </item>
     
   </channel>

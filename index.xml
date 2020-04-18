@@ -6,7 +6,7 @@
     <description>Recent content on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 14 Apr 2020 13:35:11 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 16 Apr 2020 16:02:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -18,6 +18,15 @@
       
       <guid>http://localhost:1313/about/</guid>
       <description>$ &amp;ldquo; Dare \; \; to \; \; dream, \; Dare \; \; to \; \; do \; ! \;&amp;rdquo; $ 关于我 硕士 / 计算机技术。 自身始终保持着对技术、书籍、写作的热爱。 学会学习，也要学会分享。 我会分享一</description>
+    </item>
+    
+    <item>
+      <title>Java 中的阻塞队列</title>
+      <link>http://localhost:1313/2020/04/16/Java-BlockingQueue/</link>
+      <pubDate>Thu, 16 Apr 2020 16:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/04/16/Java-BlockingQueue/</guid>
+      <description>&lt;p&gt;在之前的《&lt;a href=&#34;https://dyfloveslife.github.io/2020/04/14/Java-ThreadPool/&#34;&gt;Java 中的线程池&lt;/a&gt;》一文中，在介绍线程池参数的时候，其中&lt;code&gt;BlockingQueue&amp;lt;Runnable&amp;gt; workQueue&lt;/code&gt;用于存储等待执行的任务，提到了几种不同类型的等待队列。本文将详细的介绍阻塞队列的实现原理以及各自的使用方法。&lt;/p&gt;</description>
     </item>
     
     <item>

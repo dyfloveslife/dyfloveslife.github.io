@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java 中的阻塞队列 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="在之前的《Java 中的线程池》一文中，在介绍线程池参数的时候，其中BlockingQueue&amp;lt;Runnable&amp;gt; workQueue用于存储等待执行的任务，提到了几种不同类型的等待队列。本文将详细的介绍阻塞队列的实现原理以及各自的使用方法。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2020/04/16/Java-BlockingQueue/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java 中的阻塞队列" />
+<meta property="og:description" content="在之前的《Java 中的线程池》一文中，在介绍线程池参数的时候，其中BlockingQueue&lt;Runnable&gt; workQueue用于存储等待执行的任务，提到了几种不同类型的等待队列。本文将详细的介绍阻塞队列的实现原理以及各自的使用方法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/04/16/Java-BlockingQueue/" />
+<meta property="article:published_time" content="2020-04-16T16:02:11+08:00" />
+<meta property="article:modified_time" content="2020-04-18T19:19:56+08:00" />
+<meta itemprop="name" content="Java 中的阻塞队列">
+<meta itemprop="description" content="在之前的《Java 中的线程池》一文中，在介绍线程池参数的时候，其中BlockingQueue&lt;Runnable&gt; workQueue用于存储等待执行的任务，提到了几种不同类型的等待队列。本文将详细的介绍阻塞队列的实现原理以及各自的使用方法。">
+
+
+<meta itemprop="datePublished" content="2020-04-16T16:02:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-18T19:19:56&#43;08:00" />
+<meta itemprop="wordCount" content="4192">
+
+
+
+<meta itemprop="keywords" content="JVM,Concurrency,BlockingQueue," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java 中的阻塞队列"/>
+<meta name="twitter:description" content="在之前的《Java 中的线程池》一文中，在介绍线程池参数的时候，其中BlockingQueue&lt;Runnable&gt; workQueue用于存储等待执行的任务，提到了几种不同类型的等待队列。本文将详细的介绍阻塞队列的实现原理以及各自的使用方法。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/2020/01/12/post_summary/">
+        <li class="mobile-menu-item">❤文章汇总</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/2020/01/12/post_summary/">❤文章汇总</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java 中的阻塞队列</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-16 </span>
+        <div class="post-category">
+            <a href="/categories/Java/"> Java </a>
+            </div>
+          <span class="more-meta"> 4192 words </span>
+          <span class="more-meta"> 9 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#阻塞队列">阻塞队列</a></li>
+<li><a href="#阻塞队列的种类">阻塞队列的种类</a>
+<ul>
+<li><a href="#1-arrayblockingqueue">1.ArrayBlockingQueue</a></li>
+<li><a href="#2-linkedblockingqueue">2.LinkedBlockingQueue</a></li>
+<li><a href="#3-priorityblockingqueue">3.PriorityBlockingQueue</a></li>
+<li><a href="#4-delayqueue">4.DelayQueue</a></li>
+<li><a href="#5-synchronousqueue">5.SynchronousQueue</a></li>
+<li><a href="#6-linkedtransferqueue">6.LinkedTransferQueue</a></li>
+<li><a href="#7-linkedblockingdeque">7.LinkedBlockingDeque</a></li>
+</ul></li>
+<li><a href="#阻塞队列的应用">阻塞队列的应用</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在之前的《<a href="https://dyfloveslife.github.io/2020/04/14/Java-ThreadPool/">Java 中的线程池</a>》一文中，在介绍线程池参数的时候，其中<code>BlockingQueue&lt;Runnable&gt; workQueue</code>用于存储等待执行的任务，提到了几种不同类型的等待队列。本文将详细的介绍阻塞队列的实现原理以及各自的使用方法。</p>
+
+<h1 id="概述">概述</h1>
+
+<p>在并发编程中，有时候需要使用到线程安全的队列。实现一个线程安全的队列有两种方式：<code>阻塞算法</code>和<code>非阻塞算法</code>。</p>
+
+<ul>
+<li><strong>阻塞算法</strong>：通过使用一个锁（出队和入队使用同一把锁）或者两个锁（出队和入队使用不同的锁）等方式来实现，如 BlockingQueue。</li>
+<li><strong>非阻塞算法</strong>：使用循环 CAS 的方式实现，如 ConcurrentLinkedMap。</li>
+</ul>
+
+<p>非阻塞队列的缺点在于：它不会对当前线程产生阻塞，例如在面对消费者/生产者模型的时候，就必须额外的实现同步策略和线程间的唤醒策略。而阻塞队列不同，它会对当前线程产生阻塞，例如某线程从一个空的阻塞队列中准备取元素，由于此时的队列中没有元素，因此该线程就会处于阻塞状态。当队列中有了元素之后，被阻塞的线程会自动被唤醒，这样就极大的提高了方便性。</p>
+
+<p>本文将会介绍 7 种不同的 BlockingQueue，以及在 Java 中阻塞队列的 4 种不同的处理方式，最后结合具体的实例来分析 BlockingQueue 的原理及其使用场景。</p>
+
+<h1 id="阻塞队列">阻塞队列</h1>
+
+<p>队列是一种先进先出（FIFO）的数据结构，具有在队尾插入元素以及在队头删除元素的功能。而阻塞队列就是在队列的基础上，又支持了两个附加的操作，可以支持<code>阻塞式</code>的插入元素和删除元素操作。即：</p>
+
+<ul>
+<li>当队列为满的时候，队列会阻塞想要插入元素的线程，直到队列不满；</li>
+<li>当队列为空的时候，获取元素的线程会等待队列变为非空。</li>
+</ul>
+
+<p>那么如何实现上面的功能呢？这里需要介绍一些常用的方法。对于非阻塞队列来说，例如 PriorityQueue、LinkedList，它们常用的方法有：</p>
+
+<ul>
+<li><strong>add(E e)：将元素 e 插入到队列的尾部</strong>。如果插入成功，则返回 true；如果插入失败（即队列已满），则抛出异常。</li>
+<li><strong>remove()：移除队首元素</strong>。若移除成功，则返回 true；如果移除失败（即队列为空），则抛出异常。</li>
+<li><strong>offer(E e)：将元素 e 插入到队列的尾部</strong>。如果插入成功，则返回 true；如果插入失败（即队列已满），则返回 false。</li>
+<li><strong>poll()：移除并获取队首元素</strong>。如果成功，则返回队首元素，否则返回 null。</li>
+<li><strong>peek()：获取队首元素</strong>。如果成功，则返回队首元素，否则返回 null。</li>
+</ul>
+
+<p>以上都是非阻塞队列的方法，这里推荐使用 offer、poll、peek 方法，因为这三个方法可以通过返回值来判断相应的操作是否成功，而使用 add、remove 方法则得不到这种效果。还需要注意的是：非阻塞队列中的方法都不具有同步措施。</p>
+
+<p>阻塞队列除了具有以上方法外，还将以上方法实现了同步。除此之外，阻塞队列还提供了另外 4 个常用的方法：</p>
+
+<ul>
+<li><strong>put(E e)：向队尾添加元素</strong>。如果队列是满的，则等待。</li>
+<li><strong>take()：从队首取元素</strong>。如果队列是空的，则等待。</li>
+<li><strong>offer（E e, long timeout, TimeUnit unit）：向队尾插入元素</strong>。如果队列是满的，则等待一段 timeout 时间。当时间的期限达到时，如果还没有插入成功，则返回 false，否则返回 true。</li>
+<li><strong>poll(long timeout, TimeUnit unit)：取队首元素</strong>。如果队列为空，则等待一段 timeout 时间。当时间的期限达到时，如果取不到，则返回 null，否则返回取得的元素。</li>
+</ul>
+
+<p>可以看到，以上方法的处理方式，有的是抛出异常，有的是带有返回值，有的是一直阻塞，还有的是超时退出。这里需要注意的是：如果是无界阻塞队列，则队列不可能出现满的情况，所以使用 put 或者 offer 方法永远不会被阻塞，而且使用 offer 方法时，永远返回 true。</p>
+
+<h1 id="阻塞队列的种类">阻塞队列的种类</h1>
+
+<p>在 JDK1.5 及其以后的版本中，java.util.concurrent 包下的阻塞队列的种类如下图所示：</p>
+
+<p><img src="https://i.loli.net/2020/04/16/H1sgT6OtDvpCMwL.png" alt="image.png" /></p>
+
+<h2 id="1-arrayblockingqueue">1.ArrayBlockingQueue</h2>
+
+<p>基于<strong>数组</strong>实现的有界阻塞队列，在创建时必须指定容量大小，即在调用 ArrayBlockingQueue(int capacity) 时，需要指定 capacity 的大小。此外，还可以通过调用 ArrayBlockingQueue(int capacity, boolean fair) 指定公平性和非公平性。默认情况下为 fasle，即以<code>非公平</code>的方式访问队列。此外，这是一个先进先出的队列。</p>
+
+<blockquote>
+<p>公平与非公平的区别：</p>
+
+<p><code>公平的访问队列</code>是指阻塞的线程可以按照阻塞的先后顺序访问队列，即先阻塞线程先访问队列；</p>
+
+<p><code>非公平访问队列</code>是指对先等待的线程是非公平的，当队列可用时，阻塞的线程都可以争夺访问队列的资源，有可能先阻塞的线程最后才访问队列。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public ArrayBlockingQueue</span><span class="p">(</span><span class="err">int capacity</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">(</span><span class="n">capacity</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="err">public ArrayBlockingQueue</span><span class="p">(</span><span class="err">int capacity</span><span class="p">,</span> <span class="err">boolean fair</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">capacity</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="p">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">items</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="p">[</span><span class="n">capacity</span><span class="p">];</span>
+    <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="p">(</span><span class="n">fair</span><span class="p">);</span>
+    <span class="n">notEmpty</span> <span class="o">=</span> <span class="n">lock</span><span class="p">.</span><span class="na">newCondition</span><span class="p">();</span>
+    <span class="n">notFull</span> <span class="o">=</span>  <span class="n">lock</span><span class="p">.</span><span class="na">newCondition</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="2-linkedblockingqueue">2.LinkedBlockingQueue</h2>
+
+<p>基于<strong>链表</strong>实现的有界阻塞队列，在创建 LinkedBlockingQueue 时如果不指定具体的容量大小，则默认的大小为 Integer.MAX_VALUE。此外，这也是一个先进先出的队列。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public LinkedBlockingQueue</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">(</span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="err">public LinkedBlockingQueue</span><span class="p">(</span><span class="err">int capacity</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">capacity</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">capacity</span> <span class="o">=</span> <span class="n">capacity</span><span class="p">;</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="3-priorityblockingqueue">3.PriorityBlockingQueue</h2>
+
+<p>支持<strong>优先级</strong>排序的无界阻塞队列，默认情况下采取自然顺序升序排序，按照元素的优先级顺序出队，每次出队的元素都是优先级最高的。此外，该阻塞队列的容量没有上限，亦成为无界阻塞队列。如果不指定参数的话，那么 PriorityBlockingQueue 默认的初始化容量为 11，如果在添加元素的过程中超过了该容量，则 PriorityBlockingQueue 会动态的改变容量大小。正是因为其容量没有限制，所以在添加元素的时候有可能会添加失败，因为不停地添加元素有可能导致资源耗尽并且会发生内存溢出。</p>
+
+<p>需要注意的是，PriorityBlockingQueue 中不可以插入 null 对象，这是因为在插入元素时会对该元素进行判空检查，如果该元素是 null，则会抛出 NullPointerException。源码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm">  * Default array capacity.
+</span><span class="cm">  */</span>
+<span class="err">private static final int </span><span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="n">11</span><span class="p">;</span>
+
+
+<span class="err">public PriorityBlockingQueue</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">(</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="err">public PriorityBlockingQueue</span><span class="p">(</span><span class="err">int initialCapacity</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">(</span><span class="n">initialCapacity</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="err">public PriorityBlockingQueue</span><span class="p">(</span><span class="err">int initialCapacity</span><span class="p">,</span> <span class="n">Comparator</span><span class="o">&lt;?</span> <span class="err">super E</span><span class="o">&gt;</span> <span class="n">comparator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">initialCapacity</span> <span class="o">&lt;</span> <span class="n">1</span><span class="p">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="na">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">notEmpty</span> <span class="o">=</span> <span class="n">lock</span><span class="p">.</span><span class="na">newCondition</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">comparator</span> <span class="o">=</span> <span class="n">comparator</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="p">[</span><span class="n">initialCapacity</span><span class="p">];</span>
+<span class="p">}</span>
+
+
+<span class="err">public boolean </span><span class="n">offer</span><span class="p">(</span><span class="err">E e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">e</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="p">();</span>
+    <span class="c1">//...
+</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>当然也可以根据 PriorityBlockingQueue 不同的构造函数，通过使用自定义实现类 compareTo() 方法来指定元素的排序规则，或者初始化 PriorityBlockingQueue 时。指定参数 Comparator 来对元素进行排序。但是对于排序的元素也要注意：PriorityBlockingQueue 不能保证同优先级元素的顺序。</p>
+
+<h2 id="4-delayqueue">4.DelayQueue</h2>
+
+<p>使用优先级队列 PriorityQueue 实现的一个<strong>支持延时获取元素</strong>的无界阻塞队列。DelayQueue 中的元素只有当其指定的延迟时间到了，才能够从队列中获取元素。如果元素没有达到延时时间，则会阻塞当前线程。由于属于无界阻塞队列，因此往队列中插入元素的时永远不会阻塞，而获取元素时有可能会发生阻塞。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public DelayQueue</span><span class="p">()</span> <span class="p">{}</span>
+
+
+<span class="err">public DelayQueue</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="err">extends E</span><span class="o">&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>正是因为 DelayQueue 具有延时的效果，因此可以适用于以下场景：</p>
+
+<ul>
+<li>设计缓存系统：使用 DelayQueue 存储缓存元素的有效期，使用一个线程循环查询 DelayQueue，一旦能够从 DelayQueue 中获取到元素，则说明缓存的有效期到了。</li>
+<li>定时任务调度：使用 DelayQueue 保存当天将会执行的任务和执行时间，一旦从 DelayQueue 中获取到任务就开始执行。</li>
+</ul>
+
+<h2 id="5-synchronousqueue">5.SynchronousQueue</h2>
+
+<p>不存储元素的阻塞队列，每个 put 操作必须等待每个 take 操作，否则不能继续添加元素。此外，SynchronousQueue 默认情况下采用非公平性策略访问队列。并且，该队列不允许 null 元素。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public SynchronousQueue</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="err">public SynchronousQueue</span><span class="p">(</span><span class="err">boolean fair</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">transferer</span> <span class="o">=</span> <span class="n">fair</span> <span class="o">?</span> <span class="k">new</span> <span class="n">TransferQueue</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">:</span> <span class="k">new</span> <span class="n">TransferStack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="6-linkedtransferqueue">6.LinkedTransferQueue</h2>
+
+<p>由链表结构组成的无界阻塞队列，基于 TransferQueue 实现的。相对于其它阻塞队列，LinkedTransferQueue 提供了 tryTransfer 和 transfer 方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public boolean </span><span class="n">tryTransfer</span><span class="p">(</span><span class="err">E e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">xfer</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="n">NOW</span><span class="p">,</span> <span class="n">0</span><span class="p">)</span> <span class="o">==</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="err">public void </span><span class="n">transfer</span><span class="p">(</span><span class="err">E e</span><span class="p">)</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">xfer</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="n">SYNC</span><span class="p">,</span> <span class="n">0</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Thread</span><span class="p">.</span><span class="na">interrupted</span><span class="p">();</span> <span class="c1">// failure possible only due to interrupt
+</span><span class="c1"></span>        <span class="k">throw</span> <span class="k">new</span> <span class="n">InterruptedException</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>transfer 方法的逻辑是：如果当前有消费者正在等待接收元素，通过 transfer 方法可以把生产者传入的元素立刻传输给消费者。如果没有消费者在等待接收元素，则 transfer 方法会将元素存放在队列的 tail 节点，并等到该元素被消费者消费了才返回。</p>
+
+<p>而 tryTransfer 方法用来试探生产者传入的元素是否能够直接传输给消费者。如果没有消费者等待接收元素，则返回 fase。和 transfer 方法的区别在于：tryTransfer 方法无论消费者是否接收，则方法会立即返回，而 transfer 方法必须等到消费者消费了才返回。</p>
+
+<h2 id="7-linkedblockingdeque">7.LinkedBlockingDeque</h2>
+
+<p>基于链表实现的双向阻塞队列，可以实现在队头进行插入、删除操作，也可以在队尾进行插入、删除操作。与其它阻塞队列的区别在于：LinkedBlockingDeque 新增了 addFirst、addLast、offerFirst、offerLast、peekFirst、peekLast 方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public LinkedBlockingDeque</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">(</span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="err">public LinkedBlockingDeque</span><span class="p">(</span><span class="err">int capacity</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">capacity</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">capacity</span> <span class="o">=</span> <span class="n">capacity</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="err">public LinkedBlockingDeque</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="err">extends E</span><span class="o">&gt;</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">(</span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">);</span>
+    <span class="err">final ReentrantLock </span><span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">lock</span><span class="p">;</span>
+    <span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span> <span class="c1">// Never contended, but necessary for visibility
+</span><span class="c1"></span>    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">E e </span><span class="o">:</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">e</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">linkLast</span><span class="p">(</span><span class="k">new</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&#34;Deque full&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+        <span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="阻塞队列的应用">阻塞队列的应用</h1>
+
+<p>下面以阻塞队列 ArrayListBlockingQueue 实现一个生产者/消费者模型：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Test</span> <span class="p">{</span>
+
+    <span class="err">private int </span><span class="n">queueSize</span> <span class="o">=</span> <span class="n">10</span><span class="p">;</span>
+    <span class="err">private ArrayBlockingQueue</span><span class="o">&lt;</span><span class="err">Integer&gt; blockingQueue </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayBlockingQueue</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">queueSize</span><span class="p">);</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Test test </span><span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="p">();</span>
+
+        <span class="err">Producer producer </span><span class="o">=</span> <span class="err">test.new Producer</span><span class="p">();</span>
+        <span class="err">Consumer consumer </span><span class="o">=</span> <span class="err">test.new Consumer</span><span class="p">();</span>
+
+        <span class="n">producer</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+        <span class="n">consumer</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="err">class Consumer extends Thread </span><span class="p">{</span>
+        <span class="nd">@Override</span>
+        <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">consume</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="err">private void </span><span class="n">consume</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">try</span> <span class="p">{</span>
+                    <span class="n">blockingQueue</span><span class="p">.</span><span class="na">take</span><span class="p">();</span>
+                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;从队列中取出元素，队列剩余: &#34;</span> <span class="o">+</span> <span class="n">blockingQueue</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 个元素...&#34;</span><span class="p">);</span>
+                <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="err">class Producer extends Thread </span><span class="p">{</span>
+        <span class="nd">@Override</span>
+        <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">produce</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="err">private void </span><span class="n">produce</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">try</span> <span class="p">{</span>
+                    <span class="n">blockingQueue</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
+                    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;向队列中添加元素，队列剩余: &#34;</span> <span class="o">+</span> <span class="n">blockingQueue</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 个元素...&#34;</span><span class="p">);</span>
+                <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">向队列中添加元素，队列剩余: 1 个元素...
+向队列中添加元素，队列剩余: 2 个元素...
+向队列中添加元素，队列剩余: 3 个元素...
+向队列中添加元素，队列剩余: 4 个元素...
+向队列中添加元素，队列剩余: 5 个元素...
+向队列中添加元素，队列剩余: 6 个元素...
+向队列中添加元素，队列剩余: 7 个元素...
+向队列中添加元素，队列剩余: 8 个元素...
+向队列中添加元素，队列剩余: 9 个元素...
+向队列中添加元素，队列剩余: 10 个元素...
+从队列中取出元素，队列剩余: 0 个元素...
+从队列中取出元素，队列剩余: 9 个元素...
+从队列中取出元素，队列剩余: 9 个元素...
+从队列中取出元素，队列剩余: 8 个元素...
+从队列中取出元素，队列剩余: 7 个元素...
+从队列中取出元素，队列剩余: 6 个元素...
+从队列中取出元素，队列剩余: 5 个元素...
+从队列中取出元素，队列剩余: 4 个元素...
+从队列中取出元素，队列剩余: 3 个元素...
+从队列中取出元素，队列剩余: 2 个元素...
+从队列中取出元素，队列剩余: 1 个元素...
+从队列中取出元素，队列剩余: 0 个元素...
+向队列中添加元素，队列剩余: 10 个元素...
+(以下省略)</pre></td></tr></table>
+</div>
+</div>
+<h1 id="参考">参考</h1>
+
+<ul>
+<li><a href="https://book.douban.com/subject/26591326/">https://book.douban.com/subject/26591326/</a></li>
+<li><a href="https://www.infoq.cn/article/java-blocking-queue">https://www.infoq.cn/article/java-blocking-queue</a></li>
+<li><a href="https://juejin.im/post/5b5038c66fb9a04fc03104d1">https://juejin.im/post/5b5038c66fb9a04fc03104d1</a></li>
+<li><a href="https://www.cnblogs.com/dolphin0520/p/3932906.html">https://www.cnblogs.com/dolphin0520/p/3932906.html</a></li>
+<li><a href="https://www.hangge.com/blog/cache/detail_2848.html">https://www.hangge.com/blog/cache/detail_2848.html</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-04-18
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/JVM/">JVM</a>
+          <a href="/tags/Concurrency/">Concurrency</a>
+          <a href="/tags/BlockingQueue/">BlockingQueue</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/04/14/Java-ThreadPool/">
+            <span class="next-text nav-default">Java 中的线程池</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

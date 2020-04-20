@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-04-14T13:35:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-15T23:04:11&#43;08:00" />
-<meta itemprop="wordCount" content="5981">
+<meta itemprop="wordCount" content="6197">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 5981 words </span>
-          <span class="more-meta"> 12 mins read </span>
+          <span class="more-meta"> 6197 words </span>
+          <span class="more-meta"> 13 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -806,6 +806,21 @@ list 中元素的数量: 19984</pre></td></tr></table>
 <p>无界线程池采用了没有容量的 SynchronousQueue，这意味着如果主线程提交任务的速度高于 maximumPoolSize 中的线程处理速度时，CachedThreadPool 会不断的创建线程，即只要添加进去的线程就会被拿去用。极端情况下，CachedThreadPool 会因为创建过多的线程而耗尽 CPU 和内存资源。</p>
 
 <p>需要注意的是：单线程线程池和固定大小的线程池都不会进行自动回收，而无界线程池设置了回收时间，由于 corePoolSize 为 0，所以只要 60 秒内没有被使用到的线程都会被直接移除。</p>
+
+<p>最后，在《<a href="https://github.com/alibaba/p3c">阿里巴巴 Java 开发手册</a>》中不推荐不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样的处理方式可以让程序员更加明确线程池的运行规则，避免资源耗尽的风险。Executors 返回的线程池对象的<strong>弊端</strong>如下：</p>
+
+<ul>
+<li>FixedThreadPool 和 SingleThreadPool:
+
+<ul>
+<li>允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求，从而导致 OOM。</li>
+</ul></li>
+<li>CachedThreadPool 和 ScheduledThreadPool：
+
+<ul>
+<li>允许的创建线程数量为 Integer.MAX_VALUE，可能会创建大量的线程，从而导致 OOM。</li>
+</ul></li>
+</ul>
 
 <h1 id="参考">参考</h1>
 

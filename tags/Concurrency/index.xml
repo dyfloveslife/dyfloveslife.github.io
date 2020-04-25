@@ -6,10 +6,19 @@
     <description>Recent content in Concurrency on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 Apr 2020 16:02:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Apr 2020 18:02:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/Concurrency/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 中的并发工具类</title>
+      <link>http://localhost:1313/2020/04/21/Java-Concurrent-Tool-Class/</link>
+      <pubDate>Tue, 21 Apr 2020 18:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/04/21/Java-Concurrent-Tool-Class/</guid>
+      <description>&lt;p&gt;在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 中的阻塞队列</title>

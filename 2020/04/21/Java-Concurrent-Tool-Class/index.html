@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java 中的并发工具类 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2020/04/21/Java-Concurrent-Tool-Class/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java 中的并发工具类" />
+<meta property="og:description" content="在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/04/21/Java-Concurrent-Tool-Class/" />
+<meta property="article:published_time" content="2020-04-21T18:02:11+08:00" />
+<meta property="article:modified_time" content="2020-04-21T19:19:56+08:00" />
+<meta itemprop="name" content="Java 中的并发工具类">
+<meta itemprop="description" content="在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。">
+
+
+<meta itemprop="datePublished" content="2020-04-21T18:02:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-21T19:19:56&#43;08:00" />
+<meta itemprop="wordCount" content="2529">
+
+
+
+<meta itemprop="keywords" content="JVM,Concurrency,CountDownLatch,CyclicBarrier,Semaphore,Exchanger," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java 中的并发工具类"/>
+<meta name="twitter:description" content="在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/2020/01/12/post_summary/">
+        <li class="mobile-menu-item">❤文章汇总</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/2020/01/12/post_summary/">❤文章汇总</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Java 中的并发工具类</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-21 </span>
+        <div class="post-category">
+            <a href="/categories/Java/"> Java </a>
+            </div>
+          <span class="more-meta"> 2529 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#countdownlatch">CountDownLatch</a></li>
+<li><a href="#cyclicbarrier">CyclicBarrier</a></li>
+<li><a href="#semaphore">Semaphore</a></li>
+<li><a href="#exchanger">Exchanger</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。</p>
+
+<h1 id="countdownlatch">CountDownLatch</h1>
+
+<p>CountDownLatch 可以允许一个或多个线程等待其它线程完成操作。通俗的说，假如有一个任务 A，它需要等待其它多个任务执行完之后才能执行。对于这样的场景，我们就可以使用 CountDownLatch 实现。我们不妨将 CountDownLatch 这几个单词拆开来看，count down 相当于倒数的意思，latch 相当于门闩（读作 shuan，一声）。可以理解为：在创建 CountDownLatch 对象的时候需要传入一个 count 参数，在这个 count “倒数”到 0 之前，主线程需要等在门口，而这个“倒数”的动作需要执行中的线程来驱动，每个线程执行完一次就“倒数”一次，等到这些执行中的线程都执行完之后，再将结果汇总（非必须），然后主线程才可以继续往下执行。</p>
+
+<p>这里首先使用线程的 join 方法来实现类似于上面的功能，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">JoinTest</span> <span class="p">{</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;主线程 main 开始执行...&#34;</span><span class="p">);</span>
+        <span class="err">Thread t1 </span><span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nd">@Override</span>
+            <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 t1 完成...&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+
+        <span class="err">Thread t2 </span><span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nd">@Override</span>
+            <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 t2 完成...&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+
+        <span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+        <span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+
+        <span class="n">t1</span><span class="p">.</span><span class="na">join</span><span class="p">();</span>
+        <span class="n">t2</span><span class="p">.</span><span class="na">join</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;t1 和 t2 均执行完毕...&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;继续执行主线程 main...&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;主线程 main 执行完毕...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">主线程 main 开始执行...
+</span><span class="err">线程 t1 完成</span><span class="p">...</span>
+<span class="err">线程 t2 完成...
+</span><span class="err">t1 和 t2 均执行完毕...
+</span><span class="err">继续执行主线程 main...
+</span><span class="err">主线程 main 执行完毕</span><span class="p">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>需要注意的是，第 2 行和第 3 行输出语句的顺序可能是不同的，因为当运行程序以后，有可能是 t1 先获得 CPU 时间片，则 t1 先执行，也有可能是 t2 先获得 CPU 时间片，t2 先执行，因此输出结果就有可能不同了。</p>
+
+<p>以上实现的功能是，通过使用 join 方法让<code>当前执行的线程</code>等待<code>join 线程</code>执行结束后再执行。也就是说，join 方法让主线程 main 等待线程 t1 和线程 t2 执行完以后再执行。实现的原理是，不停的检查 join 线程是否存活，如果 join 线程存活则让当前线程永远等待。</p>
+
+<p>join 方法内部调用了 wait(0) 方法，等待 join 线程执行完以后，线程的 notifyAll() 方法就会被调用，此调用方式是在 JVM 层面实现的。核心源码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final void join</span><span class="p">()</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
+    <span class="n">join</span><span class="p">(</span><span class="n">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="err">public final synchronized void </span><span class="n">join</span><span class="p">(</span><span class="err">long millis</span><span class="p">)</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
+    <span class="p">...</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">millis</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">millis</span> <span class="o">==</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">isAlive</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">wait</span><span class="p">(</span><span class="n">0</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>以上稍微提到了一些 join 方法的使用与注意事项，当然，我们也可以使用 CountDownLatch 来实现 join 的功能，而且功能比 join 更多，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">CountDownLatchTest</span> <span class="p">{</span>
+
+    <span class="err">private static CountDownLatch latch </span><span class="o">=</span> <span class="k">new</span> <span class="n">CountDownLatch</span><span class="p">(</span><span class="n">2</span><span class="p">);</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
+
+        <span class="k">new</span> <span class="n">Thread</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="p">{</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 正在执行...&#34;</span><span class="p">);</span>
+                <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">3000</span><span class="p">);</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕...&#34;</span><span class="p">);</span>
+                <span class="c1">// 将 latch 减 1
+</span><span class="c1"></span>                <span class="n">latch</span><span class="p">.</span><span class="na">countDown</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">},</span> <span class="s">&#34;t1&#34;</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+
+        <span class="k">new</span> <span class="n">Thread</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="p">{</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 正在执行...&#34;</span><span class="p">);</span>
+                <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">3000</span><span class="p">);</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕...&#34;</span><span class="p">);</span>
+                <span class="c1">// 将 latch 减 1
+</span><span class="c1"></span>                <span class="n">latch</span><span class="p">.</span><span class="na">countDown</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">},</span> <span class="s">&#34;t2&#34;</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;等待两个子线程执行完毕...&#34;</span><span class="p">);</span>
+        <span class="c1">// 如果 latch 中的 count 值还没有减到 0 的话，
+</span><span class="c1"></span>        <span class="c1">// 则调用 await 方法的宿主线程将会一直处于阻塞状态，
+</span><span class="c1"></span>        <span class="c1">// 直到 count 的值减为 0，则宿主线程才会继续执行下去
+</span><span class="c1"></span>        <span class="n">latch</span><span class="p">.</span><span class="na">await</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;两个子线程已经执行完毕...&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;继续执行主线程 main...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">子线程 t1 正在执行...
+等待两个子线程执行完毕...
+子线程 t2 正在执行...
+子线程 t1 执行完毕...
+子线程 t2 执行完毕...
+两个子线程已经执行完毕...
+继续执行主线程 main...</pre></td></tr></table>
+</div>
+</div>
+<p>以上代码的逻辑是：首先创建了一个给定 count 值为 2 的 CountDownLatch 对象，然后开启了两个线程，这两个线程所完成的工作都是一样的，这里用<code>Thread.sleep(3000);</code>模拟线程正在工作（当然有些不恰当，但将其理解成线程正在处理任务即可），当执行完以后调用 countDown() 方法，表示将 count 减 1，在最后调用了 await() 方法表示使调用该方法的线程处于等待状态，这里就是主线程 mian 调用了 await() 方法从而阻塞了，一直等到 t1 和 t2 都执行完之后，主线程 main 才继续执行。</p>
+
+<p>countDown() 方法一般由执行任务的线程调用，同一个线程可以调用多次，即每次都会使计数器减 1。既可以将该方法在多个线程内执行，也可以属于 1 个线程的多个执行步骤。</p>
+
+<p>await() 方法一般由主线程调用，但也没有规定 await() 方法只能由一个线程执行该方法，如果多个线程同时执行 await() 方法，那么这几个线程都将处于等待状态，以共享模式享有同一把锁。此外，如果不想让主线程一直等待其它线程执行完毕，还可以使用 await(long timeout, TimeUnit unit) 方法，表明等待特定的时间后，就不再阻塞主线程了。</p>
+
+<p><strong>CountDownLatch 的使用场景</strong>：</p>
+
+<p>CountDownLatch 特别适合将一个问题分成 N 个子部分的场景，将 N 个子部分交给 N 个线程去处理，等到所有的子部分都完成以后再交给主线程处理。由此可见，总的执行时间取决于执行最慢的任务，但平均来看，可谓是大大减少了总的执行时间。例如某个列表页面需要获取许多图片，如果使用的单个线程顺序获取的话，那么等待时间会很长。而使用 CountDownLatch 的话，可以对获取图片的操作进行拆分，并行的获取图片，这样就缩短了总的获取时间。</p>
+
+<p>主要源码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public CountDownLatch</span><span class="p">(</span><span class="err">int count</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;count &lt; 0&#34;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">sync</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sync</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="err">public void </span><span class="n">await</span><span class="p">()</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
+    <span class="n">sync</span><span class="p">.</span><span class="na">acquireSharedInterruptibly</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="err">public boolean </span><span class="n">await</span><span class="p">(</span><span class="err">long timeout</span><span class="p">,</span> <span class="err">TimeUnit unit</span><span class="p">)</span>
+    <span class="err">throws InterruptedException </span><span class="p">{</span>
+    <span class="k">return</span> <span class="n">sync</span><span class="p">.</span><span class="na">tryAcquireSharedNanos</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">unit</span><span class="p">.</span><span class="na">toNanos</span><span class="p">(</span><span class="n">timeout</span><span class="p">));</span>
+<span class="p">}</span>
+
+
+<span class="err">public void </span><span class="n">countDown</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">sync</span><span class="p">.</span><span class="na">releaseShared</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>需要注意的是，CountDownLatch 是基于 AbstractQueuedSynchronizer 实现的，即 CountDownLatch 的内部类 Sync 继承了 AbstractQueuedSynchronizer。对于 AbstractQueuedSynchronizer 的分析，可以查看文章<a href="https://dyfloveslife.github.io/">AbstractQueuedSynchronizer（待办）</a>。</p>
+
+<h1 id="cyclicbarrier">CyclicBarrier</h1>
+
+<h1 id="semaphore">Semaphore</h1>
+
+<h1 id="exchanger">Exchanger</h1>
+
+<h1 id="参考">参考</h1>
+
+<ul>
+<li><a href="https://book.douban.com/subject/26591326/">https://book.douban.com/subject/26591326/</a></li>
+<li><a href="https://www.cnblogs.com/dolphin0520/p/3920397.html">https://www.cnblogs.com/dolphin0520/p/3920397.html</a></li>
+<li><a href="https://www.jianshu.com/p/128476015902">https://www.jianshu.com/p/128476015902</a></li>
+<li><a href="https://www.cnblogs.com/xrq730/p/4869671.html">https://www.cnblogs.com/xrq730/p/4869671.html</a></li>
+<li><a href="https://www.cnblogs.com/xrq730/p/4872722.html">https://www.cnblogs.com/xrq730/p/4872722.html</a></li>
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/CountDownLatch.html">https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/CountDownLatch.html</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-04-21
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/JVM/">JVM</a>
+          <a href="/tags/Concurrency/">Concurrency</a>
+          <a href="/tags/CountDownLatch/">CountDownLatch</a>
+          <a href="/tags/CyclicBarrier/">CyclicBarrier</a>
+          <a href="/tags/Semaphore/">Semaphore</a>
+          <a href="/tags/Exchanger/">Exchanger</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/04/16/Java-BlockingQueue/">
+            <span class="next-text nav-default">Java 中的阻塞队列</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

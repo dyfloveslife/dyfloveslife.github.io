@@ -6,10 +6,64 @@
     <description>Recent content in Tags on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 16 Apr 2020 16:02:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Apr 2020 18:02:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Concurrency</title>
+      <link>http://localhost:1313/tags/Concurrency/</link>
+      <pubDate>Tue, 21 Apr 2020 18:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Concurrency/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CountDownLatch</title>
+      <link>http://localhost:1313/tags/CountDownLatch/</link>
+      <pubDate>Tue, 21 Apr 2020 18:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/CountDownLatch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CyclicBarrier</title>
+      <link>http://localhost:1313/tags/CyclicBarrier/</link>
+      <pubDate>Tue, 21 Apr 2020 18:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/CyclicBarrier/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exchanger</title>
+      <link>http://localhost:1313/tags/Exchanger/</link>
+      <pubDate>Tue, 21 Apr 2020 18:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Exchanger/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JVM</title>
+      <link>http://localhost:1313/tags/JVM/</link>
+      <pubDate>Tue, 21 Apr 2020 18:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/JVM/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Semaphore</title>
+      <link>http://localhost:1313/tags/Semaphore/</link>
+      <pubDate>Tue, 21 Apr 2020 18:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/Semaphore/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>BlockingQueue</title>
@@ -17,24 +71,6 @@
       <pubDate>Thu, 16 Apr 2020 16:02:11 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/BlockingQueue/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Concurrency</title>
-      <link>http://localhost:1313/tags/Concurrency/</link>
-      <pubDate>Thu, 16 Apr 2020 16:02:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/Concurrency/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JVM</title>
-      <link>http://localhost:1313/tags/JVM/</link>
-      <pubDate>Thu, 16 Apr 2020 16:02:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/JVM/</guid>
       <description></description>
     </item>
     

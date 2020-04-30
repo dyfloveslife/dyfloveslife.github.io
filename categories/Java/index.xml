@@ -6,10 +6,19 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 27 Apr 2020 15:02:11 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 29 Apr 2020 15:02:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/Java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 中的 Atomic 包</title>
+      <link>http://localhost:1313/2020/04/29/Java-Atomic/</link>
+      <pubDate>Wed, 29 Apr 2020 15:02:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/04/29/Java-Atomic/</guid>
+      <description>&lt;p&gt;为了在多线程并发的情况下能够保证多个线程对数据进行合理的访问，避免出现并发情况下的线程安全问题，Java 从 JDK1.5 开始提供了 java.util.concurrent.atomic 包，它可以通过&lt;code&gt;原子操作类&lt;/code&gt;来对某个变量实现更加简单、线程安全的更新操作。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 中的 CopyOnWrite 容器</title>
@@ -135,15 +144,6 @@
       
       <guid>http://localhost:1313/2020/03/11/JavaSrc-HashTable/</guid>
       <description>&lt;p&gt;前文对 JDK1.8 中的 &lt;a href=&#34;https://dyfloveslife.github.io/2020/02/12/JavaSrc-HashMap/&#34;&gt;HashMap&lt;/a&gt; 的在原理实现以及相关操作进行了说明，介绍了基于&lt;code&gt;数组（Node）+链表（尾插）+红黑树&lt;/code&gt;的数据结构，以及&lt;code&gt;resize()&lt;/code&gt;的过程。而本文将介绍与 HashMap 较为相似的&lt;code&gt;HashTable&lt;/code&gt;，同样也是基于&lt;code&gt;数组（Entry）+链表&lt;/code&gt;实现的，但&lt;code&gt;HashTable&lt;/code&gt;是线程同步的（synchroinzed），在某些方面又有一些区别，下面将分别介绍。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java 并发编程-更新中</title>
-      <link>http://localhost:1313/2020/03/10/Java_Concurrency/</link>
-      <pubDate>Tue, 10 Mar 2020 22:02:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2020/03/10/Java_Concurrency/</guid>
-      <description>&lt;p&gt;Java 并发编程是为了让程序更快的执行，编写并发程序需要理解计算机的底层知识，对细节的理解、锁机制的掌握要求较高，只有清楚的认识并理解并发编程的实质，才能够写出安全、可靠的多线程并发程序。要想使并发程序能够正确的执行，必须要满足三条原则：原子性、可见性、有序性。&lt;/p&gt;</description>
     </item>
     
     <item>

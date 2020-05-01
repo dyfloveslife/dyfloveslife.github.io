@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-04-29T15:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-29T19:19:56&#43;08:00" />
-<meta itemprop="wordCount" content="5159">
+<meta itemprop="wordCount" content="5784">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 5159 words </span>
-          <span class="more-meta"> 11 mins read </span>
+          <span class="more-meta"> 5784 words </span>
+          <span class="more-meta"> 12 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -798,10 +798,136 @@ lisi
 
 <p><strong>解决 ABA 问题</strong>：</p>
 
-<p>这里可以使用 AtomicStampedReference 来解决 ABA 问题，当然也可以使用 AtomicMarkableReference。它们在实现 compareAndSet()</p>
-
+<p>这里可以使用 AtomicStampedReference 来解决 ABA 问题，当然也可以使用 AtomicMarkableReference。它们在实现 compareAndSet() 方法的时候除了要比较当前对象的值和预期值以外，还需要比较当前的戳值和预期戳值，只有全部相同时，CAS 才能操作成功。每次更新的时候，戳值都会发生变化，我们可以自己设置该戳值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public boolean </span><span class="n">compareAndSet</span><span class="p">(</span><span class="err">V expectedReference</span><span class="p">,</span> <span class="err">V newReference</span><span class="p">,</span> <span class="err">int expectedStamp</span><span class="p">,</span> <span class="err">int newStamp</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">Pair&lt;V&gt; current </span><span class="o">=</span> <span class="n">pair</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">expectedReference</span> <span class="o">==</span> <span class="n">current</span><span class="p">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
+            <span class="n">expectedStamp</span> <span class="o">==</span> <span class="n">current</span><span class="p">.</span><span class="na">stamp</span> <span class="o">&amp;&amp;</span>
+            <span class="p">((</span><span class="n">newReference</span> <span class="o">==</span> <span class="n">current</span><span class="p">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
+            <span class="n">newStamp</span> <span class="o">==</span> <span class="n">current</span><span class="p">.</span><span class="na">stamp</span><span class="p">)</span> <span class="o">||</span> <span class="n">casPair</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">Pair</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">newReference</span><span class="p">,</span> <span class="n">newStamp</span><span class="p">)));</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="属性-字段-类型的原子操作">属性（字段）类型的原子操作</h2>
 
+<p>这里以 AtomicIntegerFieldUpdater 为例，它属于以原子的方式更新整型字段的更新器。要想原子的更新字段类，首先由于原子更新类都是抽象类，因此使用的时候必须使用静态方法 newUpdater() 创建一个更新器，并且需要设置想要更新的类和属性，然后在更新类的字段或属性的时候需要使用 public volatile 进行修饰。如以下示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">AtomicIntegerFieldUpdaterTest</span> <span class="p">{</span>
+    <span class="err">private static AtomicIntegerFieldUpdater&lt;User&gt; atomicIntegerFieldUpdater </span><span class="o">=</span> 
+                    <span class="n">AtomicIntegerFieldUpdater</span><span class="p">.</span><span class="na">newUpdater</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="s">&#34;age&#34;</span><span class="p">);</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">User user </span><span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="p">(</span><span class="s">&#34;zhangsan&#34;</span><span class="p">,</span> <span class="n">25</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">atomicIntegerFieldUpdater</span><span class="p">.</span><span class="na">getAndIncrement</span><span class="p">(</span><span class="n">user</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">atomicIntegerFieldUpdater</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">user</span><span class="p">));</span>
+    <span class="p">}</span>
+
+
+    <span class="err">static class </span><span class="n">User</span> <span class="p">{</span>
+        <span class="err">private String </span><span class="n">name</span><span class="p">;</span>
+        <span class="c1">// 注意这里需要使用 public volatile 修饰 age
+</span><span class="c1"></span>        <span class="err">public volatile int age</span><span class="p">;</span>
+
+        <span class="err">public User</span><span class="p">(</span><span class="err">String name</span><span class="p">,</span> <span class="err">int age</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="err">public String </span><span class="n">getName</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">name</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="err">public int </span><span class="n">getAge</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">age</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">25
+26</pre></td></tr></table>
+</div>
+</div>
+<p>首先创建了用于原子操作的更新器 AtomicIntegerFieldUpdater，并指明了需要更新的对象类以及对象的属性，这里指定属性<code>age</code>作为需要更新的属性，但前提是需要在 User 类中将 age 属性使用 public volatile 修饰。然后通过 getAndIncrement() 方法将 age 字段进行加 1 操作，但需要注意的是，该方法返回的是更新之前的值，即 25，最后通过调用 get() 方法给定对象的当前 age 的值，也就是更新后的值，即 26。</p>
+
+<p>这里的 getAndIncrement() 方法也是通过 CAS 进行不断的自旋进行操作的，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public int </span><span class="n">getAndIncrement</span><span class="p">(</span><span class="err">T obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">int prev</span><span class="p">,</span> <span class="n">next</span><span class="p">;</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+        <span class="n">next</span> <span class="o">=</span> <span class="n">prev</span> <span class="o">+</span> <span class="n">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">compareAndSet</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">prev</span><span class="p">,</span> <span class="n">next</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">prev</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="err">public abstract int get</span><span class="p">(</span><span class="err">T obj</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
 <h1 id="参考">参考</h1>
 
 <ul>

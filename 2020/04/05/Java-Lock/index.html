@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-04-05T18:35:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-06T19:50:11&#43;08:00" />
-<meta itemprop="wordCount" content="7030">
+<meta itemprop="wordCount" content="7205">
 
 
 
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 7030 words </span>
+          <span class="more-meta"> 7205 words </span>
           <span class="more-meta"> 15 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -315,6 +315,8 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
+<p><strong>需要注意的是：最好不要将获取锁的过程（lock.lock()）放在 try 块中，因为如果在<code>获取锁</code>时发生了异常，那么异常抛出的同时也会导致锁无故释放。<code>获取锁</code>的这个操作可以使用 ReentrantLock 中的 lock，也可以自定义锁的实现。因此，假如我们使用自定义锁的时候，如果在实现的过程中发生了异常，那么就会导致锁的无故释放。也就是说，我还没加上锁，就要执行解锁，这显然是不合理的</strong>。</p>
+
 <h2 id="trylock">tryLock()</h2>
 
 <p>tryLock() 方法表示尝试获取锁，当调用此方法的时候，如果当前锁可用，也就是处于空闲状态，则会获取该锁，并返回 true；如果获取失败，即锁已经被其它线程获取的话，则返回 false。需要注意一点的是，该方法无论如何都会返回，即不管是获取到锁还是没有获取到锁，都会立即返回，在拿不到锁时不会一直等待。</p>

@@ -6,10 +6,28 @@
     <description>Recent content in Java on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 14 Apr 2020 13:35:11 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 07 May 2020 15:35:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/Java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 中的 ReentrantLock</title>
+      <link>http://localhost:1313/2020/05/07/Java-ReentrantLock/</link>
+      <pubDate>Thu, 07 May 2020 15:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/05/07/Java-ReentrantLock/</guid>
+      <description>&lt;p&gt;虽然之前的文章&lt;a href=&#34;https://dyfloveslife.github.io/2020/04/05/Java-Lock/&#34;&gt;《Java 中的 Lock 及各种锁的概念》&lt;/a&gt;介绍了 lock()、tryLock()、lockInterruptibly()、ReadWriteLock 以及 ReentrantReadWriteLock 的使用方法，但是如果想要真正理解 ReentrantLock 是怎么实现同步的，包括加锁和释放锁的具体实现，那么还需要更深入的了解底层的源码。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Java 中的 AQS</title>
+      <link>http://localhost:1313/2020/05/01/Java-AQS/</link>
+      <pubDate>Fri, 01 May 2020 11:35:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/05/01/Java-AQS/</guid>
+      <description>&lt;p&gt;之前的&lt;a href=&#34;https://dyfloveslife.github.io/2020/04/05/Java-Lock/&#34;&gt;《Java 中的 Lock 及各种锁的概念》&lt;/a&gt;简单介绍了 Lock 的使用以及 Lock 的唯一实现类 ReentrantLock 中的方法。我们一般会拿 &lt;a href=&#34;https://dyfloveslife.github.io/2020/04/05/Java-Synchronized/&#34;&gt;synchronized&lt;/a&gt; 和 ReentrantLock 做比较。而在了解 ReentrantLock 之前需要理解 AQS 的实现。因此，本文分析了 AQS 中主要的源码，包括独占模式与共享模式，为更好的认识 ReentrantLock 打下基础。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 中的线程池</title>

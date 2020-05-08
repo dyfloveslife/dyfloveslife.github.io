@@ -17,7 +17,7 @@
       <pubDate>Thu, 07 May 2020 15:35:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2020/05/07/Java-ReentrantLock/</guid>
-      <description>&lt;p&gt;虽然之前的文章&lt;a href=&#34;https://dyfloveslife.github.io/2020/04/05/Java-Lock/&#34;&gt;《Java 中的 Lock 及各种锁的概念》&lt;/a&gt;介绍了 lock()、tryLock()、lockInterruptibly()、ReadWriteLock 以及 ReentrantReadWriteLock 的使用方法，但是如果想要真正理解 ReentrantLock 是怎么实现同步的，包括加锁和释放锁的具体实现，那么还需要更深入的了解底层的源码。&lt;/p&gt;</description>
+      <description>&lt;p&gt;上篇文章&lt;a href=&#34;https://dyfloveslife.github.io/2020/05/01/Java-AQS/&#34;&gt;《Java 中的 AQS》&lt;/a&gt; 对 AbstractQueuedSynchronizer 中的方法及实现方式做了详细的解释。有了 AQS 和 &lt;a href=&#34;https://dyfloveslife.github.io/2020/04/29/Java-Atomic/#cas&#34;&gt;CAS&lt;/a&gt; 的基础以后，我们再来分析 ReentrantLock 就会更加容易一些。&lt;/p&gt;</description>
     </item>
     
     <item>

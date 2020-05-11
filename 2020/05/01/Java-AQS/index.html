@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-05-01T11:35:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-01T14:36:11&#43;08:00" />
-<meta itemprop="wordCount" content="9668">
+<meta itemprop="wordCount" content="9676">
 
 
 
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 9668 words </span>
+          <span class="more-meta"> 9676 words </span>
           <span class="more-meta"> 20 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -814,7 +814,7 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>release() 方法被 final 修饰，因此不能重写，但我们可以重写 tryRelease() 方法。该方法在独占模式下通过设置 state 的状态来尝试释放资源。由于是独占模式，因此如果某个线程要释放资源的话，那么它肯定已经拿到独占的资源了，直接通过 state-=arg 减掉相应的资源即可。如果已经将资源彻底释放了（state=0），则返回 true，否则返回 false。</p>
+<p>release() 方法被 final 修饰，因此不能重写，但我们可以重写 tryRelease() 方法。该方法在独占模式下通过设置 state 的状态来尝试释放资源。由于是独占模式，因此如果某个线程要释放资源的话，那么它肯定已经拿到独占的资源了，直接通过<code>state -= arg</code>减掉相应的资源即可。如果已经将资源彻底释放了（state=0），则返回 true，否则返回 false。</p>
 
 <h3 id="unparksuccessor-node-node">unparkSuccessor(Node node)</h3>
 

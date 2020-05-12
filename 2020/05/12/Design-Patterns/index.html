@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>设计模式汇总 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="之前或多或少接触过几种设计模式，只不过没有好好的总结。本文用于记录自己在设计模式方面的学习过程，在学习期间阅读了有关设计模式的书籍，挑选了博客园中优秀的文章，搜集网上的资料并进行了筛选，也看过别人对设计模式的总结。只是单纯看的话，会容易忘记。因此，我一般喜欢“输出式学习”，将学过的知识与自己对知识的理解整理下来，构建一套属于自己的知识体系。即便以后忘记了，也会通过浏览对原有知识的总结，很快重新拾起这部分的知识。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2020/05/12/Design-Patterns/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="设计模式汇总" />
+<meta property="og:description" content="之前或多或少接触过几种设计模式，只不过没有好好的总结。本文用于记录自己在设计模式方面的学习过程，在学习期间阅读了有关设计模式的书籍，挑选了博客园中优秀的文章，搜集网上的资料并进行了筛选，也看过别人对设计模式的总结。只是单纯看的话，会容易忘记。因此，我一般喜欢“输出式学习”，将学过的知识与自己对知识的理解整理下来，构建一套属于自己的知识体系。即便以后忘记了，也会通过浏览对原有知识的总结，很快重新拾起这部分的知识。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/05/12/Design-Patterns/" />
+<meta property="article:published_time" content="2020-05-12T11:43:11+08:00" />
+<meta property="article:modified_time" content="2020-05-12T11:44:56+08:00" />
+<meta itemprop="name" content="设计模式汇总">
+<meta itemprop="description" content="之前或多或少接触过几种设计模式，只不过没有好好的总结。本文用于记录自己在设计模式方面的学习过程，在学习期间阅读了有关设计模式的书籍，挑选了博客园中优秀的文章，搜集网上的资料并进行了筛选，也看过别人对设计模式的总结。只是单纯看的话，会容易忘记。因此，我一般喜欢“输出式学习”，将学过的知识与自己对知识的理解整理下来，构建一套属于自己的知识体系。即便以后忘记了，也会通过浏览对原有知识的总结，很快重新拾起这部分的知识。">
+
+
+<meta itemprop="datePublished" content="2020-05-12T11:43:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-12T11:44:56&#43;08:00" />
+<meta itemprop="wordCount" content="646">
+
+
+
+<meta itemprop="keywords" content="Java,Desgin Patterns," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="设计模式汇总"/>
+<meta name="twitter:description" content="之前或多或少接触过几种设计模式，只不过没有好好的总结。本文用于记录自己在设计模式方面的学习过程，在学习期间阅读了有关设计模式的书籍，挑选了博客园中优秀的文章，搜集网上的资料并进行了筛选，也看过别人对设计模式的总结。只是单纯看的话，会容易忘记。因此，我一般喜欢“输出式学习”，将学过的知识与自己对知识的理解整理下来，构建一套属于自己的知识体系。即便以后忘记了，也会通过浏览对原有知识的总结，很快重新拾起这部分的知识。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/2020/01/12/post_summary/">
+        <li class="mobile-menu-item">❤文章汇总</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/2020/01/12/post_summary/">❤文章汇总</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">设计模式汇总</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-12 </span>
+        <div class="post-category">
+            <a href="/categories/Java/"> Java </a>
+            </div>
+          <span class="more-meta"> 646 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#设计原则">设计原则</a></li>
+<li><a href="#创建型模式-5-种">创建型模式（5 种）</a></li>
+<li><a href="#构建型模式-11-种">构建型模式（11 种）</a></li>
+<li><a href="#结构型模式-7-种">结构型模式（7 种）</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>之前或多或少接触过几种设计模式，只不过没有好好的总结。本文用于记录自己在设计模式方面的学习过程，在学习期间阅读了有关设计模式的书籍，挑选了博客园中优秀的文章，搜集网上的资料并进行了筛选，也看过别人对设计模式的总结。只是单纯看的话，会容易忘记。因此，我一般喜欢“输出式学习”，将学过的知识与自己对知识的理解整理下来，构建一套属于自己的知识体系。即便以后忘记了，也会通过浏览对原有知识的总结，很快重新拾起这部分的知识。</p>
+
+<h1 id="概述">概述</h1>
+
+<p>“前人栽树，后人乘凉”，下图罗列出了与设计模式相关的所有内容，包括<code>设计原则</code>、<code>创建型模式</code>、<code>构建型模式</code>以及<code>结构型模式</code>这四个部分。其中，<code>设计原则</code>是设计模式的基础，是程序员在编码时应遵守的原则，它解释了设计模式为什么要这么设计，同时也是设计模式的依据；而<code>后三个部分</code>是对设计模式的分类，根据不同的设计模式所实现的方式、呈现的不同特点、执行的不同行为所划分出不同的类别。</p>
+
+<ul>
+<li>设计原则
+
+<ul>
+<li>单一职责原则</li>
+<li>里氏替换原则</li>
+<li>依赖导致原则</li>
+<li>接口隔离原则</li>
+<li>迪米特法则</li>
+<li>开闭原则</li>
+</ul></li>
+<li>创建型的设计模式
+
+<ul>
+<li>单例模式</li>
+<li>工厂方法模式</li>
+<li>抽象工厂模式</li>
+<li>建造者模式</li>
+<li>原型模式</li>
+</ul></li>
+<li>结构型的设计模式
+
+<ul>
+<li>适配器模式</li>
+<li>桥接模式</li>
+<li>组合模式</li>
+<li>装饰模式</li>
+<li>外观模式</li>
+<li>享元模式</li>
+<li>代理模式</li>
+</ul></li>
+<li>行为型的设计模式
+
+<ul>
+<li>模板方法模式</li>
+<li>中介者模式</li>
+<li>命令模式</li>
+<li>责任链模式</li>
+<li>策略模式</li>
+<li>迭代器模式</li>
+<li>观察者模式</li>
+<li>状态模式</li>
+<li>备忘录模式</li>
+<li>解释器模式</li>
+<li>访问者模式</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>图片大小约为 4.6M，由于网络原因可能会出现加载过慢的情况，请耐心等待。</p>
+</blockquote>
+
+<p><center>
+<img src="https://i.loli.net/2020/05/12/MKBF2Wnbc7C5P81.png" alt="image.png" />
+</center></p>
+
+<p>下面分别对以上内容进行展开。</p>
+
+<h1 id="设计原则">设计原则</h1>
+
+<h1 id="创建型模式-5-种">创建型模式（5 种）</h1>
+
+<h1 id="构建型模式-11-种">构建型模式（11 种）</h1>
+
+<h1 id="结构型模式-7-种">结构型模式（7 种）</h1>
+
+<h1 id="参考">参考</h1>
+
+<ul>
+<li><a href="https://www.cnblogs.com/java-my-life/p/?page=4">https://www.cnblogs.com/java-my-life/p/?page=4</a></li>
+<li><a href="https://www.iteye.com/blog/smallbug-vip-2276470">https://www.iteye.com/blog/smallbug-vip-2276470</a></li>
+<li><a href="https://www.cnblogs.com/pony1223/p/7594803.html">https://www.cnblogs.com/pony1223/p/7594803.html</a></li>
+<li><a href="http://c.biancheng.net/view/1317.html">http://c.biancheng.net/view/1317.html</a></li>
+<li><a href="https://www.runoob.com/design-pattern/design-pattern-intro.html">https://www.runoob.com/design-pattern/design-pattern-intro.html</a></li>
+<li><a href="https://book.douban.com/subject/2334288/">https://book.douban.com/subject/2334288/</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-05-12
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Java/">Java</a>
+          <a href="/tags/Desgin-Patterns/">Desgin Patterns</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/05/07/Java-ReentrantLock/">
+            <span class="next-text nav-default">Java 中的 ReentrantLock</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

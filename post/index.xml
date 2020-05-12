@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 07 May 2020 15:35:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 12 May 2020 11:43:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>设计模式汇总</title>
+      <link>http://localhost:1313/2020/05/12/Design-Patterns/</link>
+      <pubDate>Tue, 12 May 2020 11:43:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/05/12/Design-Patterns/</guid>
+      <description>&lt;p&gt;之前或多或少接触过几种设计模式，只不过没有好好的总结。本文用于记录自己在设计模式方面的学习过程，在学习期间阅读了有关设计模式的书籍，挑选了博客园中优秀的文章，搜集网上的资料并进行了筛选，也看过别人对设计模式的总结。只是单纯看的话，会容易忘记。因此，我一般喜欢“输出式学习”，将学过的知识与自己对知识的理解整理下来，构建一套属于自己的知识体系。即便以后忘记了，也会通过浏览对原有知识的总结，很快重新拾起这部分的知识。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Java 中的 ReentrantLock</title>

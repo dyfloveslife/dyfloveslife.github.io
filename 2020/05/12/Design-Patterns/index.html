@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-05-12T11:43:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-12T11:44:56&#43;08:00" />
-<meta itemprop="wordCount" content="646">
+<meta itemprop="wordCount" content="3864">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 646 words </span>
-          <span class="more-meta"> 2 mins read </span>
+          <span class="more-meta"> 3864 words </span>
+          <span class="more-meta"> 8 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -148,7 +148,15 @@
     <nav id="TableOfContents">
 <ul>
 <li><a href="#概述">概述</a></li>
-<li><a href="#设计原则">设计原则</a></li>
+<li><a href="#设计原则">设计原则</a>
+<ul>
+<li><a href="#单一职责原则">单一职责原则</a></li>
+<li><a href="#里氏替换原则">里氏替换原则</a></li>
+<li><a href="#依赖倒置原则">依赖倒置原则</a></li>
+<li><a href="#接口隔离原则">接口隔离原则</a></li>
+<li><a href="#迪米特法则">迪米特法则</a></li>
+<li><a href="#开闭原则">开闭原则</a></li>
+</ul></li>
 <li><a href="#创建型模式-5-种">创建型模式（5 种）</a></li>
 <li><a href="#构建型模式-11-种">构建型模式（11 种）</a></li>
 <li><a href="#结构型模式-7-种">结构型模式（7 种）</a></li>
@@ -170,7 +178,7 @@
 <ul>
 <li>单一职责原则</li>
 <li>里氏替换原则</li>
-<li>依赖导致原则</li>
+<li>依赖倒置原则</li>
 <li>接口隔离原则</li>
 <li>迪米特法则</li>
 <li>开闭原则</li>
@@ -223,6 +231,446 @@
 <p>下面分别对以上内容进行展开。</p>
 
 <h1 id="设计原则">设计原则</h1>
+
+<h2 id="单一职责原则">单一职责原则</h2>
+
+<p>从字面意思上看，<code>单一职责原则（Single Responsibility Principle，SRP）</code>就是对于接口、方法、类来说，必须保证只有一个引起它变化的原因，否则类应该被拆分。如果一个类有一个以上的职责，这些职责就耦合在一起了，这就不满足单一职责的设计，这就会造成当一个职责发生变化的时候，可能会影响其它职责。此外，多个职责耦合在一起会影响其复用性。</p>
+
+<p>基于以上的说明，你可以看到<code>单一职责原则</code>其实又称为<code>单一功能原则</code>，其核心就是控制类的粒度大小、将对象解耦、提高其内聚性。你可以想象一下，一个类只负责一项职责，其逻辑肯定要比负责多项职责简单得多。此外，单一职责原则也适用于方法，一个方法应该尽可能做好一件事情，如果一个方法处理的事情太多，那么其粒度就会变得很粗，不利于重用。</p>
+
+<p>看下一个不满足单一职责原则的例子，首先声明了一个交通工具类 Vehicle，其中的 run() 方法接收不同类型的交通工具，而在主函数中创建了三个不同的对象，它们都使用了同一个 run() 方法，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_01_1_SingleResponsibilityPrinciple</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Vehicle vehicle </span><span class="o">=</span> <span class="k">new</span> <span class="n">Vehicle</span><span class="p">();</span>
+        <span class="n">vehicle</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="s">&#34;汽车&#34;</span><span class="p">);</span>
+        <span class="n">vehicle</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="s">&#34;飞机&#34;</span><span class="p">);</span>
+        <span class="n">vehicle</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="s">&#34;潜艇&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Vehicle </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">run</span> <span class="p">(</span><span class="err">String vehicle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">vehicle</span> <span class="o">+</span> <span class="s">&#34; 在公路上运行...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">汽车 在公路上运行</span><span class="p">...</span>
+<span class="err">飞机 在公路上运行</span><span class="p">...</span>
+<span class="err">潜艇 在公路上运行</span><span class="p">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>从结果可以看到，<code>飞机 在公路上运行...</code>以及<code>潜艇 在公路上运行...</code>这显然是不合适的，这是因为它们都使用了 Vehicle 中的 run() 方法，这里了违反了<code>单一职责原则</code>。解决方法也很简单，可以根据交通工具运行方式的不同，分解成不同的类即可。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_01_2_SingleResponsibilityPrinciple</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">RoadVehicle roadVehicle </span><span class="o">=</span> <span class="k">new</span> <span class="n">RoadVehicle</span><span class="p">();</span>
+        <span class="n">roadVehicle</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="s">&#34;汽车&#34;</span><span class="p">);</span>
+
+        <span class="err">AirVehicle airVehicle </span><span class="o">=</span> <span class="k">new</span> <span class="n">AirVehicle</span><span class="p">();</span>
+        <span class="n">airVehicle</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="s">&#34;飞机&#34;</span><span class="p">);</span>
+
+        <span class="err">WaterVehicle waterVehicle </span><span class="o">=</span> <span class="k">new</span> <span class="n">WaterVehicle</span><span class="p">();</span>
+        <span class="n">waterVehicle</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="s">&#34;潜艇&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class RoadVehicle </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">run</span><span class="p">(</span><span class="err">String vehicle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">vehicle</span> <span class="o">+</span> <span class="s">&#34; 在路上跑...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class AirVehicle </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">run</span> <span class="p">(</span><span class="err">String vehicle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">vehicle</span> <span class="o">+</span> <span class="s">&#34; 在空中飞...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class WaterVehicle </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">run</span> <span class="p">(</span><span class="err">String vehicle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">vehicle</span> <span class="o">+</span> <span class="s">&#34; 在水里游...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">汽车 在路上跑...
+飞机 在空中飞...
+潜艇 在水里游...</pre></td></tr></table>
+</div>
+</div>
+<p>可以看到，以上的方式是可以满足<code>单一职责原则的</code>，即每个类都做自己分内的事。但需要注意的是，以上的方式在修改的过程中，它的改动是很大的，即将类进行了分解，又修改了客户端（例如 main 方法中创建对象的过程）。因此，还可以对第一种方法中的 Vehicle 类修改为以下的形式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_01_3_SingleResponsibilityPrinciple</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Vehicle vehicle </span><span class="o">=</span> <span class="k">new</span> <span class="n">Vehicle</span><span class="p">();</span>
+        <span class="n">vehicle</span><span class="p">.</span><span class="na">runRoad</span><span class="p">(</span><span class="s">&#34;汽车&#34;</span><span class="p">);</span>
+        <span class="n">vehicle</span><span class="p">.</span><span class="na">runAir</span><span class="p">(</span><span class="s">&#34;飞机&#34;</span><span class="p">);</span>
+        <span class="n">vehicle</span><span class="p">.</span><span class="na">runWater</span><span class="p">(</span><span class="s">&#34;潜艇&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Vehicle </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">runRoad</span><span class="p">(</span><span class="err">String vehicle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">vehicle</span> <span class="o">+</span> <span class="s">&#34; 在路上跑...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">runAir</span><span class="p">(</span><span class="err">String vehicle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">vehicle</span> <span class="o">+</span> <span class="s">&#34; 在空中飞...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">runWater</span><span class="p">(</span><span class="err">String vehicle</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">vehicle</span> <span class="o">+</span> <span class="s">&#34; 在水里游...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">汽车 在路上跑</span><span class="p">...</span>
+<span class="err">飞机 在空中飞</span><span class="p">...</span>
+<span class="err">潜艇 在水里游</span><span class="p">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>可以看到，以上修改方式虽然也违背了<code>单一职责原则</code>，对原来的类做了修改，但只是增加了几个方法。从方法层面上看，它是符合<code>单一职责原则</code>的，因为没有改动原来方法中的代码，每个方法分别有自己的职责，完成自己的任务，不干涉其它方法的任务。</p>
+
+<p>最后，需要注意的是：通常情况下，应当遵守<code>单一职责原则</code>，只有逻辑足够简单，才可以在代码级别违反单一职责原则（就像上述对类的修改那样，添加了几个方法）。只有类中方法数量足够少的时候，可以在方法级别保证<code>单一职责原则</code>。</p>
+
+<h2 id="里氏替换原则">里氏替换原则</h2>
+
+<p><code>里氏替换原则（Liskov Substitution Principle，LSP）</code>与继承相关，即在子类继承父类的时候，必须保证父类所拥有的性质在子类中仍然成立。也就是说，<strong>子类可以扩展父类的功能，但不能改变父类原有的功能，除了添加新的方法用于完成新功能之外，尽量不要重写父类中的方法</strong>。这是因为，当通过重写父类中的方法来完成新的功能时，这样写起来虽然简单，但是整个继承体系的可复用性会比较差，在使用多态特性的场景下十分明显。</p>
+
+<p><code>里氏替换原则</code>事实上主要阐述了与继承有关的一些原则，即什么时候应该使用继承，怎么使用继承，使用继承的时候需要注意的地方。该原则反应了子类和父类之间的关系，是开闭原则的补充。</p>
+
+<p>回顾继承的概念可以发现，继承在最初设计的时候，能够带来许多便利，但也带来了一些弊端。例如，使用继承会给程序带来侵入性，程序的可移植性降低，增加了对象之间的耦合性。耦合性体现在：如果一个类 A 都被其它类继承，那么当类 A 需要修改的时候，必须考虑到所有的子类，并且类 A 修改后，所有涉及到的子类中的功能都有可能发生故障。</p>
+
+<p>因此，<code>里氏替换原则</code>告诉我们：我们在进行编码的时候应尽量做到高内聚、低耦合，而继承实际上让类与类之间的耦合性提高了，所以，可以在适当的情况下通过<code>聚合</code>、<code>组合</code>、<code>依赖</code>的方式来解决问题。</p>
+
+<p>例如，类 C 继承了类 B，类 B 继承了类 A，那么我们可以让类 C 去继承类 A，将其中某些通用的方法更加抽象地在类 A 中实现，这样的话，类 C 和类 B 之间就没有耦合关系了。</p>
+
+<p>请看以下示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_02_1_LiskovSubstitutionPrinciple</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">A a </span><span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="p">.</span><span class="na">func1</span><span class="p">(</span><span class="n">3</span><span class="p">,</span> <span class="n">1</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;8 - 2 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="p">.</span><span class="na">func1</span><span class="p">(</span><span class="n">8</span><span class="p">,</span> <span class="n">2</span><span class="p">));</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;==============&#34;</span><span class="p">);</span>
+
+        <span class="err">B b </span><span class="o">=</span> <span class="k">new</span> <span class="n">B</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="na">func1</span><span class="p">(</span><span class="n">3</span><span class="p">,</span> <span class="n">1</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;8 - 2 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="na">func1</span><span class="p">(</span><span class="n">8</span><span class="p">,</span> <span class="n">2</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;3 + 1 + 10 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="na">func2</span><span class="p">(</span><span class="n">3</span><span class="p">,</span> <span class="n">1</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class A </span><span class="p">{</span>
+    <span class="err">public int </span><span class="n">func1</span><span class="p">(</span><span class="err">int num1</span><span class="p">,</span> <span class="err">int num2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">num1</span> <span class="o">-</span> <span class="n">num2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class B extends A </span><span class="p">{</span>
+    <span class="err">public int </span><span class="n">func1</span><span class="p">(</span><span class="err">int value1</span><span class="p">,</span> <span class="err">int value2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">value1</span> <span class="o">+</span> <span class="n">value2</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public int </span><span class="n">func2</span><span class="p">(</span><span class="err">int value1</span><span class="p">,</span> <span class="err">int value2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">func1</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">value2</span><span class="p">)</span> <span class="o">+</span> <span class="n">10</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">3</span> <span class="o">-</span> <span class="n">1</span> <span class="o">=</span> <span class="err">2
+</span><span class="err">8 </span><span class="o">-</span> <span class="n">2</span> <span class="o">=</span> <span class="n">6</span>
+<span class="o">==============</span>
+<span class="n">3</span> <span class="o">-</span> <span class="n">1</span> <span class="o">=</span> <span class="err">4
+</span><span class="err">8 </span><span class="o">-</span> <span class="n">2</span> <span class="o">=</span> <span class="err">10
+</span><span class="err">3 </span><span class="o">+</span> <span class="n">1</span> <span class="o">+</span> <span class="n">10</span> <span class="o">=</span> <span class="n">14</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>先不着急看运行结果，我们先看一下类 A 和类 B 所实现的功能。类 A 中的 func1() 方法用于返回两数之差，类 B 继承了类 A，但是由于需要在类 B 中新添加一个功能：即完成两数相加，然后再和 10 求和的功能。也就是说，类 B 无意间重写了类 A 中的 func1() 方法。</p>
+
+<p>从结果中可以看出，分割线上面的输出结果是正确的，因为都是调用了类 A 中的 func1() 方法。而分割线下面的输出结果是错误的。我的本意是求出<code>3-1</code>和<code>8-2</code>的结果，而由于子类 B 进行了重写（我可能没注意到），其实执行的是求和逻辑，也就违背了我想要执行求差的逻辑。因此，以上代码违背了<code>里氏替换原则</code>。</p>
+
+<p><strong>如何解决这种问题呢</strong>？</p>
+
+<p>通过示例可以看出，原先运行正常的求差功能出现了错误，原因是类 B <strong>无意间</strong>重写了父类的方法。因此，可以让原来的父类和子类都继承一个更加通俗的基类，原有的继承关系去掉，采用依赖、聚合、组合等关系代替。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_02_2_LiskovSubstitutionPrinciple</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">A a </span><span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="p">.</span><span class="na">func1</span><span class="p">(</span><span class="n">3</span><span class="p">,</span> <span class="n">1</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;8 - 2 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="p">.</span><span class="na">func1</span><span class="p">(</span><span class="n">8</span><span class="p">,</span> <span class="n">2</span><span class="p">));</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;==============&#34;</span><span class="p">);</span>
+
+        <span class="err">B b </span><span class="o">=</span> <span class="k">new</span> <span class="n">B</span><span class="p">();</span>
+        <span class="c1">// 由于类 B 不再继承类 A，因此调用者就会很明确该函数完成的功能
+</span><span class="c1"></span>        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;3 + 1 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="na">func1</span><span class="p">(</span><span class="n">3</span><span class="p">,</span> <span class="n">1</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;8 + 2 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="na">func1</span><span class="p">(</span><span class="n">8</span><span class="p">,</span> <span class="n">2</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;3 + 1 + 10 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="na">func2</span><span class="p">(</span><span class="n">3</span><span class="p">,</span> <span class="n">1</span><span class="p">));</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;==============&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="na">func3</span><span class="p">(</span><span class="n">3</span><span class="p">,</span> <span class="n">1</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Base </span><span class="p">{</span>
+    <span class="c1">// 把更加基础的方法和成员放到 Base 类中
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="err">class A extends Base </span><span class="p">{</span>
+    <span class="err">public int </span><span class="n">func1</span><span class="p">(</span><span class="err">int num1</span><span class="p">,</span> <span class="err">int num2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">num1</span> <span class="o">-</span> <span class="n">num2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class B extends Base </span><span class="p">{</span>
+    <span class="c1">// 使用到了组合关系
+</span><span class="c1"></span>    <span class="err">private A </span><span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">();</span>
+
+    <span class="err">public int </span><span class="n">func1</span><span class="p">(</span><span class="err">int value1</span><span class="p">,</span> <span class="err">int value2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">value1</span> <span class="o">+</span> <span class="n">value2</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public int </span><span class="n">func2</span><span class="p">(</span><span class="err">int value1</span><span class="p">,</span> <span class="err">int value2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">func1</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">value2</span><span class="p">)</span> <span class="o">+</span> <span class="n">10</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 调用类 A 中的求差方法
+</span><span class="c1"></span>    <span class="err">public int </span><span class="n">func3</span><span class="p">(</span><span class="err">int value1</span><span class="p">,</span> <span class="err">int value2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="na">func1</span><span class="p">(</span><span class="n">value1</span><span class="p">,</span> <span class="n">value2</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">3 - 1 = 2
+8 - 2 = 6
+==============
+3 + 1 = 4
+8 + 2 = 10
+3 + 1 + 10 = 14
+==============
+3 - 1 = 2</pre></td></tr></table>
+</div>
+</div>
+<p>可以看到，类 A 和类 B 都继承了基类 Base，现在类 A 中的 func1() 方法就很明确了，就是专门求差的方法。而类 B 中的方法也很明确，就是专门用来求和的方法。此外，如果类 B 想要用到类 A 中的方法，那么直接在类 B 中创建对象即可。并且，还可以使用类 A 中的 fun1() 方法，用于求两数之差。</p>
+
+<p>通过以上的示例可以看到，<code>里氏替换原则</code>所说的就是子类可以扩展父类的功能，但不能改变父类原有的功能。</p>
+
+<h2 id="依赖倒置原则">依赖倒置原则</h2>
+
+<h2 id="接口隔离原则">接口隔离原则</h2>
+
+<h2 id="迪米特法则">迪米特法则</h2>
+
+<h2 id="开闭原则">开闭原则</h2>
 
 <h1 id="创建型模式-5-种">创建型模式（5 种）</h1>
 

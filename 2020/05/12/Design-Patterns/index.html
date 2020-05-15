@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-05-12T11:43:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-12T11:44:56&#43;08:00" />
-<meta itemprop="wordCount" content="3864">
+<meta itemprop="wordCount" content="10106">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 3864 words </span>
-          <span class="more-meta"> 8 mins read </span>
+          <span class="more-meta"> 10106 words </span>
+          <span class="more-meta"> 21 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -172,6 +172,10 @@
 
 <p>“前人栽树，后人乘凉”，下图罗列出了与设计模式相关的所有内容，包括<code>设计原则</code>、<code>创建型模式</code>、<code>构建型模式</code>以及<code>结构型模式</code>这四个部分。其中，<code>设计原则</code>是设计模式的基础，是程序员在编码时应遵守的原则，它解释了设计模式为什么要这么设计，同时也是设计模式的依据；而<code>后三个部分</code>是对设计模式的分类，根据不同的设计模式所实现的方式、呈现的不同特点、执行的不同行为所划分出不同的类别。</p>
 
+<blockquote>
+<p>红色内容表示常用设计模式。</p>
+</blockquote>
+
 <ul>
 <li>设计原则
 
@@ -186,34 +190,34 @@
 <li>创建型的设计模式
 
 <ul>
-<li>单例模式</li>
-<li>工厂方法模式</li>
-<li>抽象工厂模式</li>
-<li>建造者模式</li>
+<li><font color='red'>单例模式</font></li>
+<li><font color='red'>工厂方法模式</font></li>
+<li><font color='red'>抽象工厂模式</font></li>
+<li><font color='red'>建造者模式</font></li>
 <li>原型模式</li>
 </ul></li>
 <li>结构型的设计模式
 
 <ul>
-<li>适配器模式</li>
-<li>桥接模式</li>
+<li><font color='red'>代理模式</font></li>
+<li><font color='red'>适配器模式</font></li>
+<li><font color='red'>桥接模式</font></li>
+<li><font color='red'>装饰模式</font></li>
 <li>组合模式</li>
-<li>装饰模式</li>
 <li>外观模式</li>
 <li>享元模式</li>
-<li>代理模式</li>
 </ul></li>
 <li>行为型的设计模式
 
 <ul>
-<li>模板方法模式</li>
-<li>中介者模式</li>
+<li><font color='red'>模板方法模式</font></li>
+<li><font color='red'>责任链模式</font></li>
+<li><font color='red'>策略模式</font></li>
+<li><font color='red'>迭代器模式</font></li>
+<li><font color='red'>观察者模式</font></li>
+<li><font color='red'>状态模式</font></li>
 <li>命令模式</li>
-<li>责任链模式</li>
-<li>策略模式</li>
-<li>迭代器模式</li>
-<li>观察者模式</li>
-<li>状态模式</li>
+<li>中介者模式</li>
 <li>备忘录模式</li>
 <li>解释器模式</li>
 <li>访问者模式</li>
@@ -666,11 +670,1199 @@
 
 <h2 id="依赖倒置原则">依赖倒置原则</h2>
 
+<p><code>依赖倒置原则（Dependence Inversion Principe，DIP）</code>指高层模块不应该依赖低层模块，两者都应该以来其抽象。模块之间的依赖通过抽象发生，实现类之间不发生直接的依赖关系，其依赖关系是通过接口或抽象类产生的。</p>
+
+<p><code>抽象</code>在这里指的是接口或者抽象类，<code>细节</code>指的是具体的实现类。因此，该原则指出抽象不应该依赖细节，而细节应该依赖抽象。换句话说，就是接口或者抽象类不应该依赖实现类，而实现类应该依赖接口或者抽象类。核心在于：要面向接口编程，而不是面向实现编程。</p>
+
+<p>为什么这么说？这是因为在软件设计中，具体的细节具有多变性，而抽象层则相对稳定，因此以抽象为基础搭建起来的架构要比以细节为基础搭建起来的架构要稳定得多。使用接口或者抽象类的目的就是制定好规范和标准，而不去涉及任何具体的操作，而把展现细节的任务交给它们的实现类去完成。</p>
+
+<p>看一下示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_03_1_DependenceInversionPrincipe</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Person person </span><span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">();</span>
+        <span class="n">person</span><span class="p">.</span><span class="na">receive</span><span class="p">(</span><span class="k">new</span> <span class="n">Email</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Email </span><span class="p">{</span>
+    <span class="err">public String </span><span class="n">getInfo</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;邮件信息：Hello...&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Person </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">receive</span><span class="p">(</span><span class="err">Email email</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">email</span><span class="p">.</span><span class="na">getInfo</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">邮件信息：Hello...</pre></td></tr></table>
+</div>
+</div>
+<p>以上示例实现的功能是能够让 Person 类接收消息。实现起来很简单，但这里只实现了接收邮箱 Email 的消息，而如果我们想要实现让 Person 接收短信消息、微信消息的话，则需要新添加短信类或者微信类，同时 Person 类也需要增加对应的方法才可以。你可以看到 Person 类中的 receive() 方法和 Email 类耦合在了一起，不利于以后业务的扩展。那如何解决呢？</p>
+
+<p>可以引入一个接口 IReceiver 表示接收者，让邮箱、微信、短信都各自实现该接口即可。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_03_2_DependenceInversionPrincipe</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Person person </span><span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">();</span>
+        <span class="n">person</span><span class="p">.</span><span class="na">receive</span><span class="p">(</span><span class="k">new</span> <span class="n">Email</span><span class="p">());</span>
+        <span class="n">person</span><span class="p">.</span><span class="na">receive</span><span class="p">(</span><span class="k">new</span> <span class="n">WeChat</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">interface IReceiver </span><span class="p">{</span>
+    <span class="err">String getInfo</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="err">class Email implements IReceiver </span><span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public String </span><span class="n">getInfo</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;邮件信息：Hello...&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class WeChat implements IReceiver </span><span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public String </span><span class="n">getInfo</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&#34;微信消息：Hi...&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Person </span><span class="p">{</span>
+    <span class="c1">// receive 依赖了接口 IReceiver
+</span><span class="c1"></span>    <span class="err">public void </span><span class="n">receive</span><span class="p">(</span><span class="err">IReceiver receiver</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">receiver</span><span class="p">.</span><span class="na">getInfo</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">邮件信息：Hello...
+微信消息：Hi...</pre></td></tr></table>
+</div>
+</div>
+<p>可以看到，在以上的示例中定义了一个接口 IReceiver，其中的 Email 和 WeChat 类都实现了该接口，并且都在自己的类中重写了自己的方法。Person 类中只依赖了接口 IReceiver，而没有依赖具体的实现类（如 Email）。</p>
+
+<p>因此，<code>依赖倒置原则</code>的目的是<strong>通过面向接口编程的方式来降低类间的耦合性</strong>，在使用该原则的时候，应给每个类尽量提供接口或抽象类，或者两者都具备。</p>
+
 <h2 id="接口隔离原则">接口隔离原则</h2>
+
+<p><code>接口隔离原则（Interface Segregation Principle，ISP）</code>字面意思上理解是尽量将多个接口或者复杂的接口拆分成更小并且更具体的接口。要为每个类建立它们需要的专用接口，而不是试图去建立一个复杂而庞大的接口供所有依赖它的类去调用。</p>
+
+<p>我自己的理解是这样的，比如说类 A 由于需要使用到接口 Ⅰ 的部分方法（注意不是全部的方法）而实现了该接口，但是类 A 不得不需要重写接口 Ⅰ 中的所有方法，但类 A 只是需要其中的几个方法而却重写了接口中的全部方法，这对于类 A 来说无异于显得有些臃肿。所以，可以将接口 Ⅰ 拆分成多个接口，例如先将类 A 需要的方法拆分出来，封装成一个接口，然后将接口 Ⅰ 剩下的接口再放到一起，供其它类使用。</p>
+
+<p>看以下示例，该示例展示的是定义了一个接口，在该接口中一共含有 5 个方法，此外，类 A 通过该接口依赖了类 B，类 C 通过该接口依赖了类 D。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_04_1_InterfaceSegregationPrinciple</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">interface Interface1 </span><span class="p">{</span>
+    <span class="err">void method1</span><span class="p">();</span>
+    <span class="err">void method2</span><span class="p">();</span>
+    <span class="err">void method3</span><span class="p">();</span>
+    <span class="err">void method4</span><span class="p">();</span>
+    <span class="err">void method5</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="err">class B implements Interface1 </span><span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method1</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 B 中实现了 method1()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method2</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 B 中实现了 method2()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method3</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 B 中实现了 method3()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method4</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 B 中实现了 method4()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method5</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 B 中实现了 method5()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class D implements Interface1 </span><span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method1</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 D 中实现了 method1()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method2</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 D 中实现了 method2()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method3</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 D 中实现了 method3()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method4</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 D 中实现了 method4()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method5</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 D 中实现了 method5()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 类 A 通过接口 Interface1 依赖了 B 类，但只使用了 method1()、method2()、method3() 三个方法
+</span><span class="c1"></span><span class="err">class A </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">dependence1</span><span class="p">(</span><span class="err">Interface1 interface1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">interface1</span><span class="p">.</span><span class="na">method1</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">dependence2</span><span class="p">(</span><span class="err">Interface1 interface1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">interface1</span><span class="p">.</span><span class="na">method2</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">dependence3</span><span class="p">(</span><span class="err">Interface1 interface1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">interface1</span><span class="p">.</span><span class="na">method3</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 类 C 通过接口 Interface1 依赖了 D 类，但只使用了 method1()、method4()、method5()三个方法
+</span><span class="c1"></span><span class="err">class C </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">dependence1</span><span class="p">(</span><span class="err">Interface1 interface1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">interface1</span><span class="p">.</span><span class="na">method1</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">dependence4</span><span class="p">(</span><span class="err">Interface1 interface1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">interface1</span><span class="p">.</span><span class="na">method4</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">dependence5</span><span class="p">(</span><span class="err">Interface1 interface1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">interface1</span><span class="p">.</span><span class="na">method5</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>你可以看到，类 B 和类 D 都实现了接口 Interface1 中的方法，但是类 A 只用到了其中的三个方法，类 C 也只用到了其中的是哪个方法。即使是用到了三个方法，就需要将全部的方法进行实现，这无异于显得有些累赘。因此，根据<code>接口隔离原则</code>可以将该接口拆分成独立的几个接口，让类 A 和类 C 分别与它们需要的接口建立依赖关系即可。接口的分解如下所示：</p>
+
+<ul>
+<li>Interface1：
+
+<ul>
+<li>method1()</li>
+</ul></li>
+<li>Interface2：
+
+<ul>
+<li>method2()</li>
+<li>method3()</li>
+</ul></li>
+<li>Interface3：
+
+<ul>
+<li>method4()</li>
+<li>method5()</li>
+</ul></li>
+</ul>
+
+<p>如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_04_1_InterfaceSegregationPrinciple</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">A a </span><span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">();</span>
+        <span class="c1">// 类 A 通过接口依赖类 B
+</span><span class="c1"></span>        <span class="n">a</span><span class="p">.</span><span class="na">dependence1</span><span class="p">(</span><span class="k">new</span> <span class="n">B</span><span class="p">());</span>
+        <span class="n">a</span><span class="p">.</span><span class="na">dependence2</span><span class="p">(</span><span class="k">new</span> <span class="n">B</span><span class="p">());</span>
+        <span class="n">a</span><span class="p">.</span><span class="na">dependence3</span><span class="p">(</span><span class="k">new</span> <span class="n">B</span><span class="p">());</span>
+
+        <span class="err">C c </span><span class="o">=</span> <span class="k">new</span> <span class="n">C</span><span class="p">();</span>
+        <span class="c1">// 类 C 通过接口依赖类 D
+</span><span class="c1"></span>        <span class="n">c</span><span class="p">.</span><span class="na">dependence1</span><span class="p">(</span><span class="k">new</span> <span class="n">D</span><span class="p">());</span>
+        <span class="n">c</span><span class="p">.</span><span class="na">dependence4</span><span class="p">(</span><span class="k">new</span> <span class="n">D</span><span class="p">());</span>
+        <span class="n">c</span><span class="p">.</span><span class="na">dependence5</span><span class="p">(</span><span class="k">new</span> <span class="n">D</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">interface Interface1 </span><span class="p">{</span>
+    <span class="err">void method1</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="err">interface Interface2 </span><span class="p">{</span>
+    <span class="err">void method2</span><span class="p">();</span>
+    <span class="err">void method3</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="err">interface Interface3 </span><span class="p">{</span>
+    <span class="err">void method4</span><span class="p">();</span>
+    <span class="err">void method5</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="err">class B implements Interface1</span><span class="p">,</span> <span class="n">Interface2</span> <span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method1</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 B 中实现了 method1()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method2</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 B 中实现了 method2()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method3</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 B 中实现了 method3()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class D implements Interface1</span><span class="p">,</span> <span class="n">Interface3</span> <span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method1</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 D 中实现了 method1()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method4</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 D 中实现了 method4()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">method5</span><span class="p">()</span> <span class="p">{</span> <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;类 D 中实现了 method5()...&#34;</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 类 A 通过接口 Interface1、Interface2 依赖了 B 类，使用到了 method1()、method2()、method3() 三个方法
+</span><span class="c1"></span><span class="err">class A </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">dependence1</span><span class="p">(</span><span class="err">Interface1 interface1</span><span class="p">)</span> <span class="p">{</span> <span class="n">interface1</span><span class="p">.</span><span class="na">method1</span><span class="p">();</span> <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">dependence2</span><span class="p">(</span><span class="err">Interface2 interface2</span><span class="p">)</span> <span class="p">{</span> <span class="n">interface2</span><span class="p">.</span><span class="na">method2</span><span class="p">();</span> <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">dependence3</span><span class="p">(</span><span class="err">Interface2 interface2</span><span class="p">)</span> <span class="p">{</span> <span class="n">interface2</span><span class="p">.</span><span class="na">method3</span><span class="p">();</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 类 C 通过接口 Interface1、Interface3 依赖了 D 类，使用到了 method1()、method4()、method5()三个方法
+</span><span class="c1"></span><span class="err">class C </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">dependence1</span><span class="p">(</span><span class="err">Interface1 interface1</span><span class="p">)</span> <span class="p">{</span> <span class="n">interface1</span><span class="p">.</span><span class="na">method1</span><span class="p">();</span> <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">dependence4</span><span class="p">(</span><span class="err">Interface3 interface3</span><span class="p">)</span> <span class="p">{</span> <span class="n">interface3</span><span class="p">.</span><span class="na">method4</span><span class="p">();</span> <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">dependence5</span><span class="p">(</span><span class="err">Interface3 interface3</span><span class="p">)</span> <span class="p">{</span> <span class="n">interface3</span><span class="p">.</span><span class="na">method5</span><span class="p">();</span> <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">类 B 中实现了 method1</span><span class="p">()...</span>
+<span class="err">类 B 中实现了 method2</span><span class="p">()...</span>
+<span class="err">类 B 中实现了 method3</span><span class="p">()...</span>
+<span class="err">类 D 中实现了 method1</span><span class="p">()...</span>
+<span class="err">类 D 中实现了 method4</span><span class="p">()...</span>
+<span class="err">类 D 中实现了 method5</span><span class="p">()...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>通过改进可以看出，这里对之前的接口进行了改进，将其分解成多个接口，尽量做到接口的细化，接口中的方法尽量少，为每个类设计专用的接口。</p>
+
+<p><code>接口隔离原则</code>与之前的<code>单一职责原则</code>都是为了提高类的内聚性、降低它们之间的耦合性，都体现了封装的思想，不同点在于：</p>
+
+<ul>
+<li>前者注重对<code>接口</code>的依赖隔离，后者注重的是<code>职责</code>；</li>
+<li>前者主要对<code>接口</code>进行约束，针对抽象和程序整体框架的构建，后者主要对<code>类</code>进行约束，针对的是程序中的实现和细节。</li>
+</ul>
 
 <h2 id="迪米特法则">迪米特法则</h2>
 
+<p><code>迪米特法则（Law of Demeter，LoD）</code>又称最少知道原则，指的是一个对象应该对其它对象保持最少的了解。也就是说，一个类对自己所依赖的类知道的越少越好。例如，类 A 依赖了类 B，那么对于被依赖的类 B 来说，不管它的内部再怎么复杂，都尽量将其逻辑封装在类的内部，除了对外提供公共的 public 方法以外，不对外泄漏任何信息。</p>
+
+<p>可以将以上的内容概括为：<strong>只与直接朋友通信</strong>。这里的<code>直接朋友</code>指的是：一般情况下，每个对象都会与其它对象建立耦合关系（例如，依赖、关联、组合、聚合），只要两个对象之间存在耦合关系，就称这两个对象之间是朋友关系。这里将成员变量、方法参数、方法返回值中的类称为直接朋友，而出现在局部变量中的类不是直接朋友。因此，对于那些陌生的类来说，最好不要以局部变量的形式出现在类的内部。</p>
+
+<p>下面看一个违反<code>迪米特法则</code>的示例，该示例表示的是有一个学校，其下属部门有各个学院以及学校的总部，现要求打印出学校总部员工的 ID 和学院员工的 ID。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_05_1_LawOfDemeter</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">SchoolManager manager </span><span class="o">=</span> <span class="k">new</span> <span class="n">SchoolManager</span><span class="p">();</span>
+        <span class="n">manager</span><span class="p">.</span><span class="na">printAllEmployee</span><span class="p">(</span><span class="k">new</span> <span class="n">CollegeManager</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 学校总部的员工类
+</span><span class="c1"></span><span class="err">class Employee </span><span class="p">{</span>
+    <span class="err">private String </span><span class="n">id</span><span class="p">;</span>
+
+    <span class="err">public void </span><span class="n">setId</span><span class="p">(</span><span class="err">String id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public String </span><span class="n">getId</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">id</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 学院的员工类
+</span><span class="c1"></span><span class="err">class CollegeEmployee </span><span class="p">{</span>
+    <span class="err">private String </span><span class="n">id</span><span class="p">;</span>
+
+    <span class="err">public void </span><span class="n">setId</span><span class="p">(</span><span class="err">String id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public String </span><span class="n">getId</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">id</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 用于管理学院员工的类
+</span><span class="c1"></span><span class="err">class CollegeManager </span><span class="p">{</span>
+    <span class="c1">// 返回学院所有的员工 id
+</span><span class="c1"></span>    <span class="err">public List</span><span class="o">&lt;</span><span class="err">CollegeEmployee&gt; getAllEmployee</span><span class="p">()</span> <span class="p">{</span>
+        <span class="err">List&lt;CollegeEmployee&gt; list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="err">CollegeEmployee emp </span><span class="o">=</span> <span class="k">new</span> <span class="n">CollegeEmployee</span><span class="p">();</span>
+            <span class="n">emp</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="s">&#34;学院员工 id = &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">emp</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 用于管理学校的类
+</span><span class="c1"></span><span class="err">class SchoolManager </span><span class="p">{</span>
+    <span class="c1">// 返回学校总部的所有员工的 id
+</span><span class="c1"></span>    <span class="err">public List</span><span class="o">&lt;</span><span class="err">Employee&gt; getAllEmployee</span><span class="p">()</span> <span class="p">{</span>
+        <span class="err">List&lt;Employee&gt; list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="err">Employee emp </span><span class="o">=</span> <span class="k">new</span> <span class="n">Employee</span><span class="p">();</span>
+            <span class="n">emp</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="s">&#34;学校总部员工 id = &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">emp</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 用于输出学院员工 id 和学校总部员工 id
+</span><span class="c1"></span>    <span class="err">public void </span><span class="n">printAllEmployee</span><span class="p">(</span><span class="err">CollegeManager manager</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// CollegeEmployee 属于局部变量，
+</span><span class="c1"></span>        <span class="c1">// 因此违反了迪米特法则
+</span><span class="c1"></span>        <span class="err">List&lt;CollegeEmployee&gt; list1 </span><span class="o">=</span> <span class="n">manager</span><span class="p">.</span><span class="na">getAllEmployee</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;========学院员工 id ========&#34;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">CollegeEmployee e </span><span class="o">:</span> <span class="n">list1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+        <span class="p">}</span>
+
+        <span class="err">List&lt;Employee&gt; list2 </span><span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">getAllEmployee</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;========学校总部员工 id ========&#34;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">Employee e </span><span class="o">:</span> <span class="n">list2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">========学院员工 id ========
+学院员工 id = 0
+学院员工 id = 1
+学院员工 id = 2
+学院员工 id = 3
+学院员工 id = 4
+学院员工 id = 5
+学院员工 id = 6
+学院员工 id = 7
+学院员工 id = 8
+学院员工 id = 9
+========学校总部员工 id ========
+学校总部员工 id = 0
+学校总部员工 id = 1
+学校总部员工 id = 2
+学校总部员工 id = 3
+学校总部员工 id = 4</pre></td></tr></table>
+</div>
+</div>
+<p>main 函数中首先创建了一个 SchoolManager 对象，然后调用了其 printAllEmployee() 方法用于输出学院员工的 id 以及学校总部员工的 id。</p>
+
+<p>这里以 SchoolManager 类为例，分析其直接朋友有哪些。由于 Employee 属于方法的返回值，因此属于 SchoolManager 类的直接朋友。然后 CollegeManager 也属于 SchoolManager 类的直接朋友，因为它位于方法的参数上。但需要注意的是，CollegeEmployee 不是直接朋友，因为它不属于 SchoolManager 类的成员变量，也不属于方法参数，更不属于方法的返回值。因此，CollegeEmployee 违反了<code>迪米特法则</code>。那么如何改进呢？</p>
+
+<p>之前说到：<strong>类 A 依赖了类 B，那么对于被依赖的类 B 来说，不管它的内部再怎么复杂，都尽量将其逻辑封装在类的内部，除了对外提供公共的 public 方法以外，不对外泄漏任何信息。</strong>因此，我们可以将 printAllEmployee() 方法中获取学院员工 id 的部分代码封装到 CollegeManager 类中，然后在 printAllEmployee() 方法中调用即可。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class CollegeManager </span><span class="p">{</span>
+    <span class="err">public List</span><span class="o">&lt;</span><span class="err">CollegeEmployee&gt; getAllEmployee</span><span class="p">()</span> <span class="p">{</span>
+        <span class="err">List&lt;CollegeEmployee&gt; list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="err">CollegeEmployee emp </span><span class="o">=</span> <span class="k">new</span> <span class="n">CollegeEmployee</span><span class="p">();</span>
+            <span class="n">emp</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="s">&#34;学院员工 id = &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">emp</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 新添加的方法
+</span><span class="c1"></span>    <span class="err">public void </span><span class="n">printEmployee</span><span class="p">()</span> <span class="p">{</span>
+        <span class="err">List&lt;CollegeEmployee&gt; list1 </span><span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">getAllEmployee</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;========学院员工 id ========&#34;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">CollegeEmployee e </span><span class="o">:</span> <span class="n">list1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class SchoolManager </span><span class="p">{</span>
+    <span class="err">public List</span><span class="o">&lt;</span><span class="err">Employee&gt; getAllEmployee</span><span class="p">()</span> <span class="p">{</span>
+        <span class="err">List&lt;Employee&gt; list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="err">Employee emp </span><span class="o">=</span> <span class="k">new</span> <span class="n">Employee</span><span class="p">();</span>
+            <span class="n">emp</span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="s">&#34;学校总部员工 id = &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">emp</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">printAllEmployee</span><span class="p">(</span><span class="err">CollegeManager manager</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 直接调用即可
+</span><span class="c1"></span>        <span class="n">manager</span><span class="p">.</span><span class="na">printEmployee</span><span class="p">();</span>
+
+        <span class="err">List&lt;Employee&gt; list2 </span><span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">getAllEmployee</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;========学校总部员工 id ========&#34;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">Employee e </span><span class="o">:</span> <span class="n">list2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这里将输出<code>学院员工 id</code>的代码封装到了 printEmployee() 方法中，并且该方法是 public 的，可以对外使用。因此，在 printAllEmployee() 方法中直接调用了 printEmployee() 方法，此时便符合了<code>迪米特法则</code>。</p>
+
+<p>该法则强调的是降低类与类之间的耦合性，但需要注意的是，由于每个类都减少了不必要的依赖，因此<code>迪米特法则</code>只是要求降低类间耦合，并不是要求完全没有依赖关系。</p>
+
 <h2 id="开闭原则">开闭原则</h2>
+
+<p><code>开闭原则（Open Closed Principle，OCP）</code>一句话总结：<strong>对扩展开放，对修改关闭</strong>。这里所操作的实体可以是项目中的模块，或者类、接口、方法。由于可以扩展模块的功能，因此该原则可以提高软件的可复用性以及可维护性。</p>
+
+<p><strong>用抽象构建框架，用实现扩展细节。</strong>这是开闭原则的实现方式。因为抽象灵活性好，适应性广，只要抽象的合理，可以基本保持软件架构的稳定。而软件中容易变化的细节可以通过具体的实现类进行扩展。也就是说，当软件需要变化的时候，尽量通过扩展软件实体的方式来实现变化，而不是通过修改已有的代码来实现变化。</p>
+
+<p>看如下示例，该示例通过创建不同的对象，输出不同的绘制图形的形状。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_06_1_OpenClosedPrinciple</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">GraphicEditor editor </span><span class="o">=</span> <span class="k">new</span> <span class="n">GraphicEditor</span><span class="p">();</span>
+        <span class="n">editor</span><span class="p">.</span><span class="na">drawShape</span><span class="p">(</span><span class="k">new</span> <span class="n">Rectangle</span><span class="p">());</span>
+        <span class="n">editor</span><span class="p">.</span><span class="na">drawShape</span><span class="p">(</span><span class="k">new</span> <span class="n">Circle</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class GraphicEditor </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">drawShape</span><span class="p">(</span><span class="err">Shape s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">type</span> <span class="o">==</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">drawRectangle</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">type</span> <span class="o">==</span> <span class="n">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">drawCircle</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">drawRectangle</span><span class="p">(</span><span class="err">Shape s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;绘制矩形&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">drawCircle</span><span class="p">(</span><span class="err">Shape s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;绘制圆形&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Shape </span><span class="p">{</span>
+    <span class="err">int type</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="err">class Rectangle extends Shape </span><span class="p">{</span>
+    <span class="n">Rectangle</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">type</span> <span class="o">=</span> <span class="n">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Circle extends Shape </span><span class="p">{</span>
+    <span class="n">Circle</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">type</span> <span class="o">=</span> <span class="n">2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">绘制矩形
+绘制圆形</pre></td></tr></table>
+</div>
+</div>
+<p>在 main 函数中，通过 GraphicEditor 的 drawShape() 接收不同的对象，根据每个对象中的 type 来判断其调用的具体方法。这种实现方式比较简单，易于理解。但如果想要再扩展新的功能的话，那么修改的地方就比较多了。例如，想要新添加一个图形的种类，将会进行如下修改：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_06_1_OpenClosedPrinciple</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">GraphicEditor editor </span><span class="o">=</span> <span class="k">new</span> <span class="n">GraphicEditor</span><span class="p">();</span>
+        <span class="n">editor</span><span class="p">.</span><span class="na">drawShape</span><span class="p">(</span><span class="k">new</span> <span class="n">Rectangle</span><span class="p">());</span>
+        <span class="n">editor</span><span class="p">.</span><span class="na">drawShape</span><span class="p">(</span><span class="k">new</span> <span class="n">Circle</span><span class="p">());</span>
+
+        <span class="c1">// 绘制三角形
+</span><span class="c1"></span>        <span class="n">editor</span><span class="p">.</span><span class="na">drawShape</span><span class="p">(</span><span class="k">new</span> <span class="n">Triangle</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class GraphicEditor </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">drawShape</span><span class="p">(</span><span class="err">Shape s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">type</span> <span class="o">==</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">drawRectangle</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">type</span> <span class="o">==</span> <span class="n">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">drawCircle</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+            <span class="c1">// 这里增加了判断
+</span><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">type</span> <span class="o">==</span> <span class="n">3</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">drawTriangle</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">drawRectangle</span><span class="p">(</span><span class="err">Shape s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;绘制矩形&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">drawCircle</span><span class="p">(</span><span class="err">Shape s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;绘制圆形&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 这里增加了方法
+</span><span class="c1"></span>    <span class="err">public void </span><span class="n">drawTriangle</span> <span class="p">(</span><span class="err">Shape s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;绘制三角形&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Shape </span><span class="p">{</span>
+    <span class="err">int type</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="err">class Rectangle extends Shape </span><span class="p">{</span>
+    <span class="n">Rectangle</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">type</span> <span class="o">=</span> <span class="n">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Circle extends Shape </span><span class="p">{</span>
+    <span class="n">Circle</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">type</span> <span class="o">=</span> <span class="n">2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 这里增加了新的类
+</span><span class="c1"></span><span class="err">class Triangle extends Shape </span><span class="p">{</span>
+    <span class="n">Triangle</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">type</span> <span class="o">=</span> <span class="n">3</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">绘制矩形
+绘制圆形
+绘制三角形</pre></td></tr></table>
+</div>
+</div>
+<p>上面的修改就违反了<code>开闭原则</code>，那么如何解决呢？这里可以通过将 Shape 类构建成抽象类，然后提供一个抽象的 draw() 方法，让子类去实现该方法即可。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">_06_1_OpenClosedPrinciple</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">GraphicEditor editor </span><span class="o">=</span> <span class="k">new</span> <span class="n">GraphicEditor</span><span class="p">();</span>
+        <span class="n">editor</span><span class="p">.</span><span class="na">drawShape</span><span class="p">(</span><span class="k">new</span> <span class="n">Rectangle</span><span class="p">());</span>
+        <span class="n">editor</span><span class="p">.</span><span class="na">drawShape</span><span class="p">(</span><span class="k">new</span> <span class="n">Circle</span><span class="p">());</span>
+
+        <span class="n">editor</span><span class="p">.</span><span class="na">drawShape</span><span class="p">(</span><span class="k">new</span> <span class="n">Triangle</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class GraphicEditor </span><span class="p">{</span>
+    <span class="err">public void </span><span class="n">drawShape</span><span class="p">(</span><span class="err">Shape s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 直接调用 draw() 方法
+</span><span class="c1"></span>       <span class="n">s</span><span class="p">.</span><span class="na">draw</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 抽象类
+</span><span class="c1"></span><span class="err">abstract class </span><span class="n">Shape</span> <span class="p">{</span>
+    <span class="err">int type</span><span class="p">;</span>
+
+    <span class="c1">// 抽象方法
+</span><span class="c1"></span>    <span class="err">public abstract void draw</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="err">class Rectangle extends Shape </span><span class="p">{</span>
+    <span class="n">Rectangle</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">type</span> <span class="o">=</span> <span class="n">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">draw</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;绘制矩形&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Circle extends Shape </span><span class="p">{</span>
+    <span class="n">Circle</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">type</span> <span class="o">=</span> <span class="n">2</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">draw</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;绘制圆形&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">class Triangle extends Shape </span><span class="p">{</span>
+    <span class="n">Triangle</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">type</span> <span class="o">=</span> <span class="n">3</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">draw</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;绘制三角形&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果还是一样的，这里将 Shape 类用 abstract 修饰，然后提供了一个公共的抽象方法 draw()，在 GraphicEditor 类中直接调用了该方法。如果再次扩展功能的话，直接再新添加一个类即可，例如画五角星图形的类，让它继承 Shape 类，而 Shape 类是不用修改的。</p>
 
 <h1 id="创建型模式-5-种">创建型模式（5 种）</h1>
 

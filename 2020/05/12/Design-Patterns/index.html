@@ -44,14 +44,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2020/05/12/Design-Patterns/" />
 <meta property="article:published_time" content="2020-05-12T11:43:11+08:00" />
-<meta property="article:modified_time" content="2020-05-12T11:44:56+08:00" />
+<meta property="article:modified_time" content="2020-05-22T17:24:56+08:00" />
 <meta itemprop="name" content="设计模式汇总">
 <meta itemprop="description" content="之前或多或少接触过几种设计模式，只不过没有好好的总结。本文用于记录自己在设计模式方面的学习过程，在学习期间阅读了有关设计模式的书籍，挑选了博客园中优秀的文章，搜集网上的资料并进行了筛选，也看过别人对设计模式的总结。只是单纯看的话，会容易忘记。因此，我一般喜欢“输出式学习”，将学过的知识与自己对知识的理解整理下来，构建一套属于自己的知识体系。即便以后忘记了，也会通过浏览对原有知识的总结，很快重新拾起这部分的知识。">
 
 
 <meta itemprop="datePublished" content="2020-05-12T11:43:11&#43;08:00" />
-<meta itemprop="dateModified" content="2020-05-12T11:44:56&#43;08:00" />
-<meta itemprop="wordCount" content="10106">
+<meta itemprop="dateModified" content="2020-05-22T17:24:56&#43;08:00" />
+<meta itemprop="wordCount" content="14229">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 10106 words </span>
-          <span class="more-meta"> 21 mins read </span>
+          <span class="more-meta"> 14229 words </span>
+          <span class="more-meta"> 29 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -157,7 +157,14 @@
 <li><a href="#迪米特法则">迪米特法则</a></li>
 <li><a href="#开闭原则">开闭原则</a></li>
 </ul></li>
-<li><a href="#创建型模式-5-种">创建型模式（5 种）</a></li>
+<li><a href="#创建型模式-5-种">创建型模式（5 种）</a>
+<ul>
+<li><a href="#单例模式">单例模式</a></li>
+<li><a href="#工厂方法模式">工厂方法模式</a></li>
+<li><a href="#抽象工厂模式">抽象工厂模式</a></li>
+<li><a href="#建造者模式">建造者模式</a></li>
+<li><a href="#原型模式">原型模式</a></li>
+</ul></li>
 <li><a href="#构建型模式-11-种">构建型模式（11 种）</a></li>
 <li><a href="#结构型模式-7-种">结构型模式（7 种）</a></li>
 <li><a href="#参考">参考</a></li>
@@ -1866,6 +1873,869 @@
 
 <h1 id="创建型模式-5-种">创建型模式（5 种）</h1>
 
+<p>创建型模式主要关注的是“如何创建对象”，即将对象的创建与使用进行分离，降低系统耦合度的同时无需关心对象的创建细节，对象的创建由相关的工厂来完成。</p>
+
+<p>对于以下 5 种创建型模式，除了工厂方法模式属于<code>类创建型</code>，其它的方法全部属于<code>对象创建型</code>。</p>
+
+<h2 id="单例模式">单例模式</h2>
+
+<p><code>单例模式（Singleton）</code>在之前的文章中提到过，即 <a href="https://dyfloveslife.github.io/2020/02/17/Singleton-pattern-in-java/">《Java 单例模式[备忘]》</a>，其思想为：保证一个类只有一个实例，并提供一个访问该示例的全局访问点，也就是对外提供一个 public 方法即可。</p>
+
+<p>通常情况下，普通类的构造函数是 public 的，外部类可通过 new 关键字来生成多个实例。但如果将类的构造函数设置为 private 的，则外部类就无法调用该构造函数，也就无法生成多个实例了。因此，如果想要满足<code>单例模式</code>，该类自身就需要定义一个静态私有实例，然后向外提供一个静态的共有（public）函数，用于创建或获取该静态私有的实例。</p>
+
+<p>详细内容请见 <a href="https://dyfloveslife.github.io/2020/02/17/Singleton-pattern-in-java/">《Java 单例模式[备忘]》</a>一文。</p>
+
+<h2 id="工厂方法模式">工厂方法模式</h2>
+
+<p><code>工厂方法（FactoryMethod）模式</code>通过定义一个创建产品对象的工厂接口，将产品对象的实际创建工作推迟到具体子工厂类中完成。其中，被创建出来的东西称为<code>产品</code>，创建产品的东西称为<code>工厂</code>。如果要创建的产品不多，只需要一个工厂类就可以完成的话，这种称为<code>简单工厂模式</code>。</p>
+
+<p>在介绍<code>简单工厂模式</code>之前，先通过以下示例展示在不使用设计模式的情况下，如何实现以下需求。在该示例中，我们的需求是要生产披萨，而成产披萨的环节有准备原材料（prepare）、烘焙（bake）、将披萨切开（cut）以及装盒（box）四个操作，其中可以生产 CheesePizza 和 GreekPizza 两种披萨。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Pizza.java
+</span><span class="c1"></span><span class="err">public abstract class Pizza </span><span class="p">{</span>
+    <span class="err">public String </span><span class="n">name</span><span class="p">;</span>
+
+    <span class="err">public abstract void prepare</span><span class="p">();</span>
+
+    <span class="err">public void </span><span class="n">back</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&#34; backing...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">cut</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&#34; cutting...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">box</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&#34; boxing...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">setName</span><span class="p">(</span><span class="err">String name</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// GreekPizza.java
+</span><span class="c1"></span><span class="err">public class GreekPizza extends </span><span class="n">Pizza</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">prepare</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;给 GreekPizza 准备原材料...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// CheesePizza.java
+</span><span class="c1"></span><span class="err">public class CheesePizza extends </span><span class="n">Pizza</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">prepare</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;给 CheessPizza 准备原材料...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// OrderPizza.java
+</span><span class="c1">// 用于订购披萨
+</span><span class="c1"></span><span class="err">public class </span><span class="n">OrderPizza</span> <span class="p">{</span>
+
+    <span class="err">public OrderPizza</span><span class="p">()</span> <span class="p">{</span>
+        <span class="err">Pizza pizza </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="err">String orderType</span><span class="p">;</span>
+
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="n">orderType</span> <span class="o">=</span> <span class="n">getType</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;greek&#34;</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GreekPizza</span><span class="p">();</span>
+                <span class="n">pizza</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&#34;GreekPizza&#34;</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;cheese&#34;</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CheesePizza</span><span class="p">();</span>
+                <span class="n">pizza</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&#34;CheesePizza&#34;</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="c1">// 输出披萨的制作过程
+</span><span class="c1"></span>            <span class="n">pizza</span><span class="p">.</span><span class="na">prepare</span><span class="p">();</span>
+            <span class="n">pizza</span><span class="p">.</span><span class="na">back</span><span class="p">();</span>
+            <span class="n">pizza</span><span class="p">.</span><span class="na">cut</span><span class="p">();</span>
+            <span class="n">pizza</span><span class="p">.</span><span class="na">box</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">private String </span><span class="n">getType</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="err">BufferedReader reader </span><span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">));</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;请输入披萨类型：&#34;</span><span class="p">);</span>
+            <span class="err">String str </span><span class="o">=</span> <span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span>
+            <span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">IOException e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// PizzaStore.java
+</span><span class="c1">// 相当于客户端，即用于发出订购披萨的订单
+</span><span class="c1"></span><span class="err">public class </span><span class="n">PizzaStore</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">new</span> <span class="n">OrderPizza</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">请输入披萨类型：
+greek
+给 GreekPizza 准备原材料...
+GreekPizza backing...
+GreekPizza cutting...
+GreekPizza boxing...
+请输入披萨类型：
+abc
+
+Process finished with exit code 0</pre></td></tr></table>
+</div>
+</div>
+<p>以上代码流程为：</p>
+
+<ul>
+<li>首先定义了一个抽象的 Pizza 类，并声明了四个制作披萨的过程；</li>
+<li>其次又定义了 CheesePizza 和 GreekPizza，都继承了 Pizza 类；然后定义了 OrderPizza 类，用于订购披萨，在该类中又根据输入不同的披萨类型进而创建不同的对象，但由于只声明了两种类型的披萨，如果输入的是其它类型的披萨，则会执行 break，即退出 while 循环；</li>
+<li>最后定义了 PizzaStore 类用于发起订购披萨的订单。</li>
+</ul>
+
+<p><strong>会出现什么问题</strong>？</p>
+
+<p>以上这种传统的方式虽然实现简单，但是违背了<code>开闭原则</code>。假如现在想要新增一个披萨的种类，例如新增<code>ChicagoPizza</code>，则需要新创建一个 ChicagoPizza 类，再继承 Pizza 类，并且还需要在 OrderPizza 类的构造函数中添加<code>else if</code>语句。这种方法显然没有按照“扩展开放，修改关闭”的原则进行设计。</p>
+
+<p><strong>那么如何改进呢？</strong></p>
+
+<p>可以把创建 Pizza 对象封装到一个类中，当新增披萨种类的时候，只需要修改该类就可以，其它在创建 Pizza 对象的地方就不需要修改了。因此，这种方式也被称为<code>简单工厂模式</code>。</p>
+
+<p><code>简单工厂模式</code>属于工厂模式的一种，它由一个工厂对象来决定创建出哪一种产品类的实例。也就是定义了一个创建对象的类，由这个类来<strong>封装实例化对象的行为</strong>。该模式在大量的创建某种、某类或某批对象的时候较为常用。</p>
+
+<p>原先<code>创建对象的行为</code>属于 OrderPizza 类中，现在可以创建一个<code>SimpleFactory</code>类，将该类和 OrderPizza 类进行关联，如果想要订购某种类型的披萨，那么直接让<code>SimpleFactory</code>类去处理就可以了，然后返回给用户。</p>
+
+<p>使用<code>简单工厂模式</code>进行改进，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// SimpleFactory.java
+</span><span class="c1">// 声明一个简单工厂
+</span><span class="c1"></span><span class="err">public class </span><span class="n">SimpleFactory</span> <span class="p">{</span>
+
+    <span class="c1">// 根据 orderType 返回对应的 Pizza 对象
+</span><span class="c1"></span>    <span class="err">public Pizza </span><span class="n">createPizza</span><span class="p">(</span><span class="err">String orderType</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Pizza pizza </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;greek&#34;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GreekPizza</span><span class="p">();</span>
+            <span class="n">pizza</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&#34;GreekPizza&#34;</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;cheese&#34;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CheesePizza</span><span class="p">();</span>
+            <span class="n">pizza</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&#34;CheesePizza&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">pizza</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// OrderPizza.java
+</span><span class="c1"></span><span class="err">public class </span><span class="n">OrderPizza</span> <span class="p">{</span>
+    <span class="err">SimpleFactory simpleFactory</span><span class="p">;</span>
+    <span class="err">Pizza pizza </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="err">public OrderPizza </span><span class="p">(</span><span class="err">SimpleFactory simpleFactory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">setSimpleFactory</span><span class="p">(</span><span class="n">simpleFactory</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">setSimpleFactory</span><span class="p">(</span><span class="err">SimpleFactory simpleFactory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">simpleFactory</span> <span class="o">=</span> <span class="n">simpleFactory</span><span class="p">;</span>
+
+        <span class="err">String orderType </span><span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="n">orderType</span> <span class="o">=</span> <span class="n">getType</span><span class="p">();</span>
+            <span class="c1">// 已经把创建对象的细节封装在了 createPizza 中
+</span><span class="c1"></span>            <span class="n">pizza</span> <span class="o">=</span> <span class="n">simpleFactory</span><span class="p">.</span><span class="na">createPizza</span><span class="p">(</span><span class="n">orderType</span><span class="p">);</span>
+
+            <span class="c1">// 披萨订购成功，输出相应信息
+</span><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">pizza</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">pizza</span><span class="p">.</span><span class="na">prepare</span><span class="p">();</span>
+                <span class="n">pizza</span><span class="p">.</span><span class="na">back</span><span class="p">();</span>
+                <span class="n">pizza</span><span class="p">.</span><span class="na">cut</span><span class="p">();</span>
+                <span class="n">pizza</span><span class="p">.</span><span class="na">box</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;订购失败...&#34;</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="err">private String </span><span class="n">getType</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="err">BufferedReader reader </span><span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">));</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;请输入披萨类型：&#34;</span><span class="p">);</span>
+            <span class="err">String str </span><span class="o">=</span> <span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span>
+            <span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">IOException e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// PizzaStore.java
+</span><span class="c1"></span><span class="err">public class </span><span class="n">PizzaStore</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">new</span> <span class="n">OrderPizza</span><span class="p">(</span><span class="k">new</span> <span class="n">SimpleFactory</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">请输入披萨类型：
+greek
+给 GreekPizza 准备原材料...
+GreekPizza backing...
+GreekPizza cutting...
+GreekPizza boxing...
+请输入披萨类型：
+12
+订购失败...
+
+Process finished with exit code 0</pre></td></tr></table>
+</div>
+</div>
+<p>这里通过 SimpleFactory 实现了一个简单工厂，然后将创建对象的逻辑封装在 createPizza() 方法中。将来如果新增了一种类型的披萨，那么直接修改 SimpleFactory 即可，这样实现更加灵活。需要提到的是，如果将 createPizza() 方法声明为 static，即静态的，则将以上的方法称为<code>静态简单工厂</code>。</p>
+
+<p>但如果又有一个新的需求，即客户在点披萨的时候，可以点不同地区、不同口味的披萨。例如，北京的 GreekPizza、北京的 CheesePizza，上海的 GreekPizza、上海的 CheesePizza。</p>
+
+<p>对于这种需求，也可以使用简单工厂模式，例如 BJPizzaSimpleFactory、SHPizzaSimpleFactory，但如果还有其它地区的披萨，则需要不断地进行创建。考虑到项目的规模，这种方式实现起来不易维护、不易扩展。</p>
+
+<p>因此，可以使用<code>工厂方法模式</code>。即将披萨项目的实例化功能抽象成抽象方法，在不同的子类中进行实现。也就是说，<code>工厂方法模式</code>定义了一个创建对象的抽象方法，由子类决定要实例化的类，将对象的实例化推迟到子类中。</p>
+
+<p>下面通过使用<code>工厂方法模式</code>来实现以上需求，在 OrderPizza 类中实现一个抽象的 createPizza() 方法，然后让 BJOrderPizza 和 SHOrderPizza 去继承 OrderPizza 类，然后在各自的子类中去实现不同地区口味的披萨。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// OrderPizza.java
+</span><span class="c1"></span><span class="err">public abstract class OrderPizza </span><span class="p">{</span>
+    <span class="c1">// 该抽象方法由各个工厂子类自己实现
+</span><span class="c1"></span>    <span class="err">abstract Pizza </span><span class="n">createPizza</span><span class="p">(</span><span class="err">String orderType</span><span class="p">);</span>
+
+    <span class="err">public OrderPizza</span><span class="p">()</span> <span class="p">{</span>
+        <span class="err">Pizza pizza </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="err">String orderType </span><span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="n">orderType</span> <span class="o">=</span> <span class="n">getType</span><span class="p">();</span>
+            <span class="c1">// 重要：根据不同的 orderType 实现不同类型或者口味的披萨
+</span><span class="c1"></span>            <span class="n">pizza</span> <span class="o">=</span> <span class="n">createPizza</span><span class="p">(</span><span class="n">orderType</span><span class="p">);</span>
+            <span class="n">pizza</span><span class="p">.</span><span class="na">prepare</span><span class="p">();</span>
+            <span class="n">pizza</span><span class="p">.</span><span class="na">back</span><span class="p">();</span>
+            <span class="n">pizza</span><span class="p">.</span><span class="na">cut</span><span class="p">();</span>
+            <span class="n">pizza</span><span class="p">.</span><span class="na">box</span><span class="p">();</span>
+
+        <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">private String </span><span class="n">getType</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="err">BufferedReader reader </span><span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">));</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;请输入披萨类型：&#34;</span><span class="p">);</span>
+            <span class="err">String str </span><span class="o">=</span> <span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span>
+            <span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">IOException e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// BJOrderPizza.java
+</span><span class="c1"></span><span class="err">public class BJOrderPizza extends </span><span class="n">OrderPizza</span><span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">Pizza createPizza</span><span class="p">(</span><span class="err">String orderType</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Pizza pizza </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;greek&#34;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BJGreekPizza</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;cheese&#34;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BJCheesePizza</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">pizza</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// SHOrderPizza.java
+</span><span class="c1"></span><span class="err">public class SHOrderPizza extends </span><span class="n">OrderPizza</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">Pizza createPizza</span><span class="p">(</span><span class="err">String orderType</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Pizza pizza </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;greek&#34;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SHGreekPizza</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;cheese&#34;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SHCheesePizza</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">pizza</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// BJCheesePizza.java
+</span><span class="c1"></span><span class="err">public class BJCheesePizza extends </span><span class="n">Pizza</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">prepare</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">setName</span><span class="p">(</span><span class="s">&#34;北京的 CheesePizza...&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;给 BJCheesePizza 准备原材料...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// BJGreekPizza.java
+</span><span class="c1"></span><span class="err">public class BJGreekPizza extends </span><span class="n">Pizza</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">prepare</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">setName</span><span class="p">(</span><span class="s">&#34;北京的 GreekPizza...&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;给 BJGreekPizza 准备原材料...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// SHCheesePizza.java
+</span><span class="c1"></span><span class="err">public class SHCheesePizza extends </span><span class="n">Pizza</span><span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">prepare</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">setName</span><span class="p">(</span><span class="s">&#34;上海的 GreekPizza...&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;给 SHGreekPizza 准备原材料...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// SHGreekPizza.java
+</span><span class="c1"></span><span class="err">public class SHGreekPizza extends </span><span class="n">Pizza</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">prepare</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">setName</span><span class="p">(</span><span class="s">&#34;上海的 GreekPizza...&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;给 SHGreekPizza 准备原材料...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// PizzaStore.java
+</span><span class="c1"></span><span class="err">public class </span><span class="n">PizzaStore</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">new</span> <span class="n">BJOrderPizza</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">请输入披萨类型：
+greek
+给 BJGreekPizza 准备原材料...
+北京的 GreekPizza... backing...
+北京的 GreekPizza... cutting...
+北京的 GreekPizza... boxing...
+请输入披萨类型：
+cheese
+给 BJCheesePizza 准备原材料...
+北京的 CheesePizza... backing...
+北京的 CheesePizza... cutting...
+北京的 CheesePizza... boxing...</pre></td></tr></table>
+</div>
+</div>
+<p>由于在主函数中创建的是<code>北京</code>地区的披萨，所以最终结果输出的都是与<code>北京</code>相关的。以上代码首先定义了一个抽象的 OrderPizza 类，里面有一个抽象的 createPizza() 方法，这个方法去交给子类 BJOrderPizza 和 SHOrderPizza 实现，它们返回的都是一个 Pizza 对象。</p>
+
+<h2 id="抽象工厂模式">抽象工厂模式</h2>
+
+<p>在<code>工厂方法模式</code>中的两个示例分别展示了<code>简单工厂模式</code>和<code>工厂方法模式</code>，此外还有一种是<code>抽象工厂模式</code>，该模式可以将前两种进行整合。<code>抽象工厂模式</code>定义了一个接口，可以看做是对<code>简单工厂模式</code>的进一步封装。</p>
+
+<p>下面使用<code>抽象工厂模式</code>来对订购披萨的需求进行实现，各类之间的关系如下所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/05/22/VuoRTJeFgD7E3NY.png" alt="image.png" />
+</center></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// AbsFactory.java
+</span><span class="c1">// 抽象模式的接口层
+</span><span class="c1"></span><span class="err">public interface </span><span class="n">AbsFactory</span> <span class="p">{</span>
+
+    <span class="c1">// 让工厂子类去具体实现
+</span><span class="c1"></span>    <span class="err">Pizza createPizza</span><span class="p">(</span><span class="err">String orderType</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// BJFactory.java
+</span><span class="c1"></span><span class="err">public class BJFactory implements </span><span class="n">AbsFactory</span><span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">public Pizza </span><span class="n">createPizza</span><span class="p">(</span><span class="err">String orderType</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Pizza pizza </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;greek&#34;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BJGreekPizza</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;cheese&#34;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BJCheesePizza</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">pizza</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// SHFactory.java
+</span><span class="c1"></span><span class="err">public class SHFactory implements </span><span class="n">AbsFactory</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">public Pizza </span><span class="n">createPizza</span><span class="p">(</span><span class="err">String orderType</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Pizza pizza </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;greek&#34;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SHGreekPizza</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">orderType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&#34;cheese&#34;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SHCheesePizza</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">pizza</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// OrderPizza.java
+</span><span class="c1"></span><span class="err">public class </span><span class="n">OrderPizza</span> <span class="p">{</span>
+
+    <span class="err">AbsFactory factory</span><span class="p">;</span>
+
+    <span class="err">public OrderPizza </span><span class="p">(</span><span class="err">AbsFactory factory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">setFactory</span><span class="p">(</span><span class="n">factory</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">private void </span><span class="n">setFactory</span><span class="p">(</span><span class="err">AbsFactory factory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">factory</span> <span class="o">=</span> <span class="n">factory</span><span class="p">;</span>
+        <span class="err">Pizza pizza </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="err">String orderType </span><span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="n">orderType</span> <span class="o">=</span> <span class="n">getType</span><span class="p">();</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="n">factory</span><span class="p">.</span><span class="na">createPizza</span><span class="p">(</span><span class="n">orderType</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pizza</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">pizza</span><span class="p">.</span><span class="na">prepare</span><span class="p">();</span>
+                <span class="n">pizza</span><span class="p">.</span><span class="na">back</span><span class="p">();</span>
+                <span class="n">pizza</span><span class="p">.</span><span class="na">cut</span><span class="p">();</span>
+                <span class="n">pizza</span><span class="p">.</span><span class="na">box</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;订购失败...&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="err">private String </span><span class="n">getType</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="err">BufferedReader reader </span><span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">));</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;请输入披萨类型：&#34;</span><span class="p">);</span>
+            <span class="err">String str </span><span class="o">=</span> <span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span>
+            <span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">IOException e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// PizzaStore.java
+</span><span class="c1"></span><span class="err">public class </span><span class="n">PizzaStore</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">new</span> <span class="n">OrderPizza</span><span class="p">(</span><span class="k">new</span> <span class="n">BJFactory</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>最后的结果与之前是一样的，这里就不再展开了。</p>
+
+<p>在 JDK 中，Calendar 类使用到了简单工厂模式。从以上三个示例可以看出，<code>抽象工厂模式</code>的这种<strong>依赖抽象</strong>的原则是：在创建对象实例的时候，不直接使用 new 创建对象，而是把创建对象的动作放在一个工厂的方法中，然后再返回。并且，这里也不是让类继承具体的类，而是继承抽象类或实现接口。</p>
+
+<h2 id="建造者模式">建造者模式</h2>
+
+<h2 id="原型模式">原型模式</h2>
+
 <h1 id="构建型模式-11-种">构建型模式（11 种）</h1>
 
 <h1 id="结构型模式-7-种">结构型模式（7 种）</h1>
@@ -1890,7 +2760,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2020-05-12
+        2020-05-22
         
     </span>
   </p>

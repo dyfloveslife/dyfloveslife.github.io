@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-12-27T09:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-27T09:36:56&#43;08:00" />
-<meta itemprop="wordCount" content="2050">
+<meta itemprop="wordCount" content="2637">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Algorithm/"> Algorithm </a>
             </div>
-          <span class="more-meta"> 2050 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 2637 words </span>
+          <span class="more-meta"> 6 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -148,8 +148,16 @@
     <nav id="TableOfContents">
 <ul>
 <li><a href="#题目描述">题目描述</a></li>
+<li><a href="#方法一">方法一</a>
+<ul>
 <li><a href="#分析">分析</a></li>
 <li><a href="#代码">代码</a></li>
+</ul></li>
+<li><a href="#方法二">方法二</a>
+<ul>
+<li><a href="#代码-1">代码</a></li>
+</ul></li>
+<li><a href="#参考">参考</a></li>
 </ul>
 </nav>
   </div>
@@ -174,7 +182,9 @@
 
 <p>时间复杂度：O(N)</p>
 
-<h1 id="分析">分析</h1>
+<h1 id="方法一">方法一</h1>
+
+<h2 id="分析">分析</h2>
 
 <p>首先根据题目的描述，走一遍这个流程。假如报数的值 <code>m = 3</code>，也就是需要删除的编号，如下图左侧所示。删除 <code>3</code> 后，则将原来的 <code>4</code> 置为 <code>1</code>， <code>5</code> 置为 <code>2</code>， <code>1</code> 置为 <code>3</code>， <code>2</code> 置为 <code>4</code>，如下图右侧所示：</p>
 
@@ -446,7 +456,7 @@ $$</p>
 
 <p>假设 $ k=c \cdot i + t $，其中 $ t $ 表示余数，则有 $ (a+k \% i) \%i = (a+t) \% i $。而 $ (a+k) \%i = (a+t) \% i $，所以 $ (a+k \% i) \%i = (a+k) \%i $。</p>
 
-<h1 id="代码">代码</h1>
+<h2 id="代码">代码</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -534,6 +544,73 @@ $$</p>
 <p>对代码的详细解释：</p>
 
 <p><a href="https://github.com/dyfloveslife/LeetCodeAndSwordToOffer/blob/master/src/SwordToOfferSolution/_62_LastNumberInCircle/Solution.java">https://github.com/dyfloveslife/LeetCodeAndSwordToOffer/blob/master/src/SwordToOfferSolution/_62_LastNumberInCircle/Solution.java</a></p>
+
+<h1 id="方法二">方法二</h1>
+
+<p>这是在力扣的解答区看到的方法，讲得比较清晰，因此在这里做一个梳理。</p>
+
+<p>该方法的核心在于：<strong>只关心最终活着的那个人的序号变化情况，从最终结果反推出规律</strong>。</p>
+
+<p>例如一共有 n=8 个人，每当数到 m=3 的时候就将该人给杀掉，我们用 F(n, m) 来表示最后剩下的那个人的序号。整个流程如下图所示：</p>
+
+<blockquote>
+<p>图片均来自【参考】文章。</p>
+</blockquote>
+
+<p><img src="https://i.loli.net/2020/05/24/p6lzsfCYA8BVM7X.png" alt="image.png" /></p>
+
+<p>从上图可以看到，我们将这 8 个人用字母代替，在每一轮中，红色的方格表示当前需要被杀掉的人，绿色的方格表示最终存活下来的人。N=8 时，将 C 杀掉，则下一轮（N=7）将会从 D 开始报数，然后往右数 m=3 个数，再将 F 杀掉，以此类推。</p>
+
+<p>此外，注意观察每一轮中最后活下来的 G 的索引变化情况。当最后只剩下一个人的时候，这个人的编号（索引号）一定是 0。</p>
+
+<p>接下来我们看看如何进行反推，例如如何从 N=7 反推出 N=8 时的情况，如下图所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/24/SyDhFk73qVYsxaG.png" alt="image.png" /></p>
+
+<p>在从 N=7 回到 N=8 的过程中，先将被杀掉的 C 补充回去，即黄色方格；然后将 N=7 右移 m 个单位，由于多出 3 个人（A、B、C）越界了，因此将它们移到前面；最后得到的结果就和 N=8 一样了。</p>
+
+<p>因此，从 N=7 到 N=8 的递推公式为：$f(8, 3)=[f(7, 3) + 3] \% 8$，而将此公式推广到一般情况，则有：$f(N, m)=[f(N-1, 3) + 3] \% N$。</p>
+
+<p>最后整理得到的递推公式：</p>
+
+<p>$$
+当 n=1 时，f(N, m) = 0
+$$</p>
+
+<p>$$
+当 n &gt; 1 时，f(N, m) = [f(N-1, m) + m] \% N
+$$</p>
+
+<h2 id="代码-1">代码</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public int </span><span class="n">lastRemaining</span><span class="p">(</span><span class="err">int n</span><span class="p">,</span> <span class="err">int m</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 最终活下来的那个人的初始位置
+</span><span class="c1"></span>    <span class="err">int pos </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">m</span><span class="p">)</span> <span class="o">%</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">pos</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="参考">参考</h1>
+
+<ul>
+<li><a href="https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/huan-ge-jiao-du-ju-li-jie-jue-yue-se-fu-huan-by-as/">https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/huan-ge-jiao-du-ju-li-jie-jue-yue-se-fu-huan-by-as/</a></li>
+</ul>
     </div>
 
     <div class="post-copyright">

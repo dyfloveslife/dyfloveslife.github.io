@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-05-12T11:43:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-05-22T17:24:56&#43;08:00" />
-<meta itemprop="wordCount" content="14229">
+<meta itemprop="wordCount" content="17572">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 14229 words </span>
-          <span class="more-meta"> 29 mins read </span>
+          <span class="more-meta"> 17572 words </span>
+          <span class="more-meta"> 36 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -2734,7 +2734,516 @@ cheese
 
 <h2 id="建造者模式">建造者模式</h2>
 
+<p><code>建造者（Builder）模式</code>创建的是<strong>复杂对象</strong>，将复杂对象的构造方式和它的表示方式进行分离，使同样的构建过程可以创建不同的表示。可以简单的将<strong>复杂对象</strong>理解为在创建对象 new XXX() 的时候，还需要设置许多属性，而相对应的<strong>简单对象</strong>就只需要在创建对象的时候通过 new XXX() 即可，不需要设置属性。</p>
+
+<p>在创建复杂对象的时候，该对象通常由多个子部件按照一定的步骤组合而成，在没有组成之前，该对象不能作为一个完整的产品使用。例如电子邮件所包含的发件人、收件人、主题、内容等等。电子邮件由这么多的子部件组成，而最起码在收件人地址填写之前，该邮件是不能发送的，也即在产品没有组装完成之前是不能使用的。</p>
+
+<p>因此，<strong>建造者模式</strong>可以将一个产品的内部表象与产品的生产过程分割开来，从而可以使一个建造过程生成具有不同的内部表象的产品对象。这里的<strong>内部表象</strong>是指：一个产品由不同的组成成分作为该产品的零件，我们把这些零件叫做产品的内部表象。不同的产品可以有不同的内部表象，也就是有不同的零件。使用<strong>建造者模式</strong>可以使客户端不需要知道所生产的产品有哪些零件，也不需要让客户端知道每个产品对应的零件彼此有何不同、怎么创建出来的、怎么组成的。</p>
+
+<p>其实，它的核心思想就是：将<code>产品的创建过程</code>与<code>产品</code>进行解耦。也就是说，如果把<code>产品</code>和<code>产品的创建过程</code>封装在一起的话，就会增强它们之间的耦合性，不利于以后程序的扩展和维护。</p>
+
+<p>下面通过使用传统的实现方式来完成<strong>建造房子</strong>的需求，我们可以将建造房子的过程分为打桩、砌墙、封顶。而可以创建的房子也有很多类型，如普通的房子、高楼大厦或者是别墅。这些房子的创建过程虽然一样，但是具体的要求是不同的。例如，对于打桩这一步骤来说，不同的房子所打桩的深度也是不同的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// AbstractHouse.java
+</span><span class="c1"></span><span class="err">public abstract class AbstractHouse </span><span class="p">{</span>
+    <span class="c1">// 打桩
+</span><span class="c1"></span>    <span class="err">public abstract void buildBasic</span><span class="p">();</span>
+
+    <span class="c1">// 砌墙
+</span><span class="c1"></span>    <span class="err">public abstract void buildWalls</span><span class="p">();</span>
+
+    <span class="c1">// 封顶
+</span><span class="c1"></span>    <span class="err">public abstract void roofed</span><span class="p">();</span>
+
+    <span class="c1">// 盖房子
+</span><span class="c1"></span>    <span class="err">public void </span><span class="n">build</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">buildBasic</span><span class="p">();</span>
+        <span class="n">buildWalls</span><span class="p">();</span>
+        <span class="n">roofed</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 普通房子
+</span><span class="c1"></span><span class="err">public class CommonHouse extends </span><span class="n">AbstractHouse</span> <span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">buildBasic</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;普通房子打桩...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">buildWalls</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;普通房子砌墙...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">roofed</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;普通房子封顶...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 高楼
+</span><span class="c1"></span><span class="err">public class HighHouse extends </span><span class="n">AbstractHouse</span> <span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">buildBasic</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;高楼打桩...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">buildWalls</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;高楼砌墙...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">roofed</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;高楼封顶...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 客户端
+</span><span class="c1"></span><span class="err">public class </span><span class="n">Client</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">CommonHouse commonHouse </span><span class="o">=</span> <span class="k">new</span> <span class="n">CommonHouse</span><span class="p">();</span>
+        <span class="err">HighHouse highHouse </span><span class="o">=</span> <span class="k">new</span> <span class="n">HighHouse</span><span class="p">();</span>
+
+        <span class="n">commonHouse</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+        <span class="n">highHouse</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">普通房子打桩...
+普通房子砌墙...
+普通房子封顶...
+高楼打桩...
+高楼砌墙...
+高楼封顶...</pre></td></tr></table>
+</div>
+</div>
+<p>对于以上的代码，首先定义了一个抽象类 AbstractHouse，该类是对房子的抽象，其中包括建造房子的步骤；然后定义了 HighHouse 和 CommonHouse 两个类，均继承了 AbstractHouse，并重写了里面的方法；最后定义了一个客户端 Client 来创建这两个房子。</p>
+
+<p>这种传统的设计方式虽然便于理解，设计简单，但不利于程序的维护和扩展。例如，这种设计方式把产品（房子）和创建产品的过程（建造房子的流程）封装在了一起，增加了耦合性。因此，对于这种情况，可以通过<strong>建造者模式</strong>进行修改。</p>
+
+<p>在修改之前，<strong>建造者模式</strong>还涉及到以下四种角色：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/05/26/eFHUoxh3wbuWraD.png" alt="image.png" />
+</center></p>
+
+<ul>
+<li><strong>产品（Product）角色</strong>：指一个具体的产品对象，也即建造中的复杂对象。一般来说，一个系统中会有一个以上的产品类，而这些产品类并不一定有共同的接口，完全可以是不相关联的。</li>
+<li><strong>抽象建造者（Builder）角色</strong>：指创建一个 Product 对象的各个部件指定的接口（也可以是抽象类）。它主要用于给出一个抽象接口，用来规范产品对象的各个组成部分的建造。</li>
+<li><strong>具体建造者（ConcreteBuilder）角色</strong>：该角色是与应用程序密切相关的一个类，它用于在应用程序的调用下创建产品的实例。也就是用于直接创建产品对象。该角色需要实现<code>抽象建造者角色</code>接口中的方法（如 buildPart1() 和 buildPart2() 方法），这些方法就是一步一步地完成创建产品实例的操作。并且在建造完成后，需要提供产品的实例（如 retrieveResult() 方法）。</li>
+<li><strong>指挥者（Director）角色</strong>：构建一个使用 Builder 接口的对象以创建产品对象。该角色没有产品类的具体知识，真正拥有产品类的具体知识的是具体建造者角色。</li>
+</ul>
+
+<p>下面用<strong>建造者模式</strong>来重新设计建造房子的需求：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 产品
+</span><span class="c1"></span><span class="err">public class </span><span class="n">House</span> <span class="p">{</span>
+    <span class="err">private String </span><span class="n">basic</span><span class="p">;</span>
+    <span class="err">private String </span><span class="n">wall</span><span class="p">;</span>
+    <span class="err">private String </span><span class="n">roofed</span><span class="p">;</span>
+
+    <span class="err">public String </span><span class="n">getBasic</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">basic</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">setBasic</span><span class="p">(</span><span class="err">String basic</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">basic</span> <span class="o">=</span> <span class="n">basic</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public String </span><span class="n">getWall</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">wall</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">setWall</span><span class="p">(</span><span class="err">String wall</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">wall</span> <span class="o">=</span> <span class="n">wall</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public String </span><span class="n">getRoofed</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">roofed</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">setRoofed</span><span class="p">(</span><span class="err">String roofed</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">roofed</span> <span class="o">=</span> <span class="n">roofed</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 抽象的建造者
+</span><span class="c1"></span><span class="err">public abstract class HouseBuilder </span><span class="p">{</span>
+
+    <span class="err">House house </span><span class="o">=</span> <span class="k">new</span> <span class="n">House</span><span class="p">();</span>
+
+    <span class="c1">// 打桩
+</span><span class="c1"></span>    <span class="err">public abstract void buildBasic</span><span class="p">();</span>
+
+    <span class="c1">// 砌墙
+</span><span class="c1"></span>    <span class="err">public abstract void buildWalls</span><span class="p">();</span>
+
+    <span class="c1">// 封顶
+</span><span class="c1"></span>    <span class="err">public abstract void roofed</span><span class="p">();</span>
+
+    <span class="c1">// 建造完房子以后，将产品（房子）返回
+</span><span class="c1"></span>    <span class="err">public House </span><span class="n">buildHouse</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">house</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 普通房子
+</span><span class="c1"></span><span class="err">public class CommonHouse extends </span><span class="n">HouseBuilder</span> <span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">buildBasic</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;普通房子打桩 5 米...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">buildWalls</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;普通房子砌墙 2 米...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">roofed</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;普通房子封顶 1 米...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 高楼
+</span><span class="c1"></span><span class="err">public class HighHouse extends </span><span class="n">HouseBuilder</span> <span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">buildBasic</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;高楼打桩 10 米...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">buildWalls</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;高楼砌墙 5 米...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">roofed</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;高楼封顶 10 米...&#34;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 指挥者
+</span><span class="c1"></span><span class="err">public class </span><span class="n">HouseDirector</span> <span class="p">{</span>
+
+    <span class="err">HouseBuilder houseBuilder </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="err">public HouseDirector</span><span class="p">(</span><span class="err">HouseBuilder houseBuilder</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">houseBuilder</span> <span class="o">=</span> <span class="n">houseBuilder</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="err">public void </span><span class="n">setHouseBuilder</span><span class="p">(</span><span class="err">HouseBuilder houseBuilder</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">houseBuilder</span> <span class="o">=</span> <span class="n">houseBuilder</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 如何建造房子的流程交给指挥者
+</span><span class="c1"></span>    <span class="err">public House </span><span class="n">constructHouse</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">houseBuilder</span><span class="p">.</span><span class="na">buildBasic</span><span class="p">();</span>
+        <span class="n">houseBuilder</span><span class="p">.</span><span class="na">buildWalls</span><span class="p">();</span>
+        <span class="n">houseBuilder</span><span class="p">.</span><span class="na">roofed</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="n">houseBuilder</span><span class="p">.</span><span class="na">buildHouse</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 客户端
+</span><span class="c1"></span><span class="err">public class </span><span class="n">Client</span> <span class="p">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 现在想要建造普通的房子
+</span><span class="c1"></span>        <span class="err">CommonHouse commonHouse </span><span class="o">=</span> <span class="k">new</span> <span class="n">CommonHouse</span><span class="p">();</span>
+        <span class="c1">// 准备建造房子的指挥者
+</span><span class="c1"></span>        <span class="err">HouseDirector houseDirector </span><span class="o">=</span> <span class="k">new</span> <span class="n">HouseDirector</span><span class="p">(</span><span class="n">commonHouse</span><span class="p">);</span>
+        <span class="c1">// 完成盖房子，返回产品（房子）
+</span><span class="c1"></span>        <span class="n">houseDirector</span><span class="p">.</span><span class="na">constructHouse</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;=================&#34;</span><span class="p">);</span>
+
+        <span class="err">HighHouse highHouse </span><span class="o">=</span> <span class="k">new</span> <span class="n">HighHouse</span><span class="p">();</span>
+        <span class="n">houseDirector</span><span class="p">.</span><span class="na">setHouseBuilder</span><span class="p">(</span><span class="n">highHouse</span><span class="p">);</span>
+        <span class="n">houseDirector</span><span class="p">.</span><span class="na">constructHouse</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">普通房子打桩 5 米...
+</span><span class="err">普通房子砌墙 2 米</span><span class="p">...</span>
+<span class="err">普通房子封顶 1 </span><span class="n">米</span><span class="p">...</span>
+<span class="o">=================</span>
+<span class="err">高楼打桩 10 米...
+</span><span class="err">高楼砌墙 5 米</span><span class="p">...</span>
+<span class="err">高楼封顶 10 </span><span class="n">米</span><span class="p">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><center>
+<img src="https://i.loli.net/2020/05/26/lP57vCsbKWAT3qh.png" alt="image.png" />
+</center></p>
+
+<p>通过 UML 图可以看出以上类之间的关系，具体要建造高楼还是普通的房子，可以通过<strong>具体建造者角色</strong>来指定（如 CommonHouse、HighHouse），而<strong>抽象的建造者角色</strong>（HouseBuilder）包含了建造房子的抽象方法，以及用于返回产品的方法。而指挥者（HouseDirector）是与客户端（Client）打交道的的角色。指挥者将客户端创建产品的请求划分为对各个零件的建造请求，再将这些请求委派给具体建造者角色。最后，具体建造者角色是做具体建造工作的，但是却不为客户端所知。</p>
+
+<p>当然，在 JDK 的源码中，StringBuilder 也使用到了建造者模式。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final class StringBuilder extends AbstractStringBuilder
+</span><span class="err">                                implements java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">Serializable</span><span class="p">,</span> <span class="n">CharSequence</span> <span class="p">{...}</span>
+
+<span class="err">abstract class AbstractStringBuilder implements </span><span class="n">Appendable</span><span class="p">,</span> <span class="n">CharSequence</span> <span class="p">{...}</span>
+
+<span class="err">public interface </span><span class="n">Appendable</span> <span class="p">{...}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>StringBuilder 继承了 AbstractStringBuilder，而 AbstractStringBuilder 实现了 Appendable 接口。在 Appendable 接口中定义的方法都是抽象的。因此，这里的 Appendable 充当了<strong>抽象建造者角色</strong>。而 AbstractStringBuilder 类已经把 Appendable 接口中的方法实现了，因此 AbstractStringBuilder 类在这里充当的是<strong>具体建造者角色</strong>，只不过不能实例化，因为它是抽象的。最后，StringBuilder 充当了<strong>具体建造者角色</strong>，同时也充当了<strong>指挥者角色</strong>，建造方法的实现是由 AbstractStringBuilder 完成的，而 StringBuilder 继承了 AbstractStringBuilder。</p>
+
+<p>可以看到，虽然 StringBuilder 的源码结构与建造者模式有些出入，但其实也是满足建造者模式的。最后再总结一下<code>建造者模式</code>的细节：</p>
+
+<ul>
+<li>客户端（应用程序）不需要知道产品的内部组成细节，通过将产品本身与产品的创建过程解耦，使得相同的创建过程可以创建不同的产品对象；</li>
+<li>每一个<strong>具体创造者角色</strong>都是相对独立的，与其它<strong>具体创造者角色</strong>无关，用户使用不同的<strong>具体创造者角色</strong>可以得到不同的产品对象；</li>
+<li>可以更加精细的控制产品的创建过程；</li>
+<li>增加新的<strong>具体创造者角色</strong>无需修改原有类库的代码，而<strong>指挥者</strong>针对<strong>抽象建造者</strong>类进行编程。</li>
+</ul>
+
 <h2 id="原型模式">原型模式</h2>
+
+<p>TODO</p>
 
 <h1 id="构建型模式-11-种">构建型模式（11 种）</h1>
 
@@ -2749,6 +3258,7 @@ cheese
 <li><a href="http://c.biancheng.net/view/1317.html">http://c.biancheng.net/view/1317.html</a></li>
 <li><a href="https://www.runoob.com/design-pattern/design-pattern-intro.html">https://www.runoob.com/design-pattern/design-pattern-intro.html</a></li>
 <li><a href="https://book.douban.com/subject/2334288/">https://book.douban.com/subject/2334288/</a></li>
+<li><a href="https://www.cnblogs.com/java-my-life/archive/2012/04/07/2433939.html">https://www.cnblogs.com/java-my-life/archive/2012/04/07/2433939.html</a></li>
 </ul>
     </div>
 

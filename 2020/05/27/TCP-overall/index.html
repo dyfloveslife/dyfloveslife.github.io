@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>TCP 总览 - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="TCP 和 UDP 是 TCP/IP 协议簇中十分重要的两个协议，它们均位于运输层。之前的文章《三次握手和四次挥手》介绍了 TCP 中建立连接和释放连接的过程，解释了详细的步骤。但由于意外或者其它原因，TCP 在传输的过程中并不是一帆风顺的。所以，本文主要介绍 TCP 和 UDP 的区别、TCP 流量控制、拥塞控制、超时重传、可靠传输的实现过程，分析在各种意外情况下 TCP 是如何保证可靠传输的。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2020/05/27/TCP-overall/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="TCP 总览" />
+<meta property="og:description" content="TCP 和 UDP 是 TCP/IP 协议簇中十分重要的两个协议，它们均位于运输层。之前的文章《三次握手和四次挥手》介绍了 TCP 中建立连接和释放连接的过程，解释了详细的步骤。但由于意外或者其它原因，TCP 在传输的过程中并不是一帆风顺的。所以，本文主要介绍 TCP 和 UDP 的区别、TCP 流量控制、拥塞控制、超时重传、可靠传输的实现过程，分析在各种意外情况下 TCP 是如何保证可靠传输的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/05/27/TCP-overall/" />
+<meta property="article:published_time" content="2020-05-27T20:00:11+08:00" />
+<meta property="article:modified_time" content="2020-05-27T20:46:56+08:00" />
+<meta itemprop="name" content="TCP 总览">
+<meta itemprop="description" content="TCP 和 UDP 是 TCP/IP 协议簇中十分重要的两个协议，它们均位于运输层。之前的文章《三次握手和四次挥手》介绍了 TCP 中建立连接和释放连接的过程，解释了详细的步骤。但由于意外或者其它原因，TCP 在传输的过程中并不是一帆风顺的。所以，本文主要介绍 TCP 和 UDP 的区别、TCP 流量控制、拥塞控制、超时重传、可靠传输的实现过程，分析在各种意外情况下 TCP 是如何保证可靠传输的。">
+
+
+<meta itemprop="datePublished" content="2020-05-27T20:00:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-27T20:46:56&#43;08:00" />
+<meta itemprop="wordCount" content="7116">
+
+
+
+<meta itemprop="keywords" content="Network," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TCP 总览"/>
+<meta name="twitter:description" content="TCP 和 UDP 是 TCP/IP 协议簇中十分重要的两个协议，它们均位于运输层。之前的文章《三次握手和四次挥手》介绍了 TCP 中建立连接和释放连接的过程，解释了详细的步骤。但由于意外或者其它原因，TCP 在传输的过程中并不是一帆风顺的。所以，本文主要介绍 TCP 和 UDP 的区别、TCP 流量控制、拥塞控制、超时重传、可靠传输的实现过程，分析在各种意外情况下 TCP 是如何保证可靠传输的。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a><a href="/2020/01/12/post_summary/">
+        <li class="mobile-menu-item">❤文章汇总</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/2020/01/12/post_summary/">❤文章汇总</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">TCP 总览</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-27 </span>
+        <div class="post-category">
+            <a href="/categories/Network/"> Network </a>
+            </div>
+          <span class="more-meta"> 7116 words </span>
+          <span class="more-meta"> 15 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#tcp-与-udp-的区别">TCP 与 UDP 的区别</a></li>
+<li><a href="#tcp-流量控制">TCP 流量控制</a></li>
+<li><a href="#tcp-拥塞控制">TCP 拥塞控制</a></li>
+<li><a href="#tcp-超时重传的选择">TCP 超时重传的选择</a></li>
+<li><a href="#tcp-可靠传输的实现">TCP 可靠传输的实现</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>TCP 和 UDP 是 TCP/IP 协议簇中十分重要的两个协议，它们均位于运输层。之前的文章<a href="https://dyfloveslife.github.io/2020/05/27/TCP-3-way-and-4-way-handshake/">《三次握手和四次挥手》</a>介绍了 TCP 中建立连接和释放连接的过程，解释了详细的步骤。但由于意外或者其它原因，TCP 在传输的过程中并不是一帆风顺的。所以，本文主要介绍 TCP 和 UDP 的区别、TCP 流量控制、拥塞控制、超时重传、可靠传输的实现过程，分析在各种意外情况下 TCP 是如何保证可靠传输的。</p>
+
+<h1 id="tcp-与-udp-的区别">TCP 与 UDP 的区别</h1>
+
+<p>在 TCP/IP 网络协议中，TCP（Transmission Control Protocol，传输控制协议） 与 UDP（User Datagram Protocol，用户数据报协议）是具有代表性的传输层协议，下面给出两者协议之前的区别。</p>
+
+<p><img src="https://i.loli.net/2020/05/27/EhPHDXxY9Z8kiFS.png" alt="image.png" /></p>
+
+<ul>
+<li>UDP 在传输的过程中是面向无连接的；TCP 是面向连接的，需要进行建立连接 → 传输数据 → 释放连接三个步骤。</li>
+<li>UDP 支持单播、多播以及广播；TCP 仅支持单播。</li>
+<li>UDP 是面向应用报文的；TCP 是面向字节流的。</li>
+<li>UDP 向上层（应用层）提供无连接不可靠的传输服务，如 IP 电话、视频会议等实时应用；TCP 向上层（应用层）提供面向连接的可靠的传输服务，如文件传输等要求可靠传输的应用。</li>
+<li>UDP 用户数据报的首部仅 8 字节，分别为源端口、目的端口、长度、检验和，每个字段分别占 2 字节；TCP 报文段的首部最小 20 字节，最大 60 字节。</li>
+</ul>
+
+<h1 id="tcp-流量控制">TCP 流量控制</h1>
+
+<p><strong>问题</strong>：一般来说，我们总是希望数据传输得更快一些。但如果发送方把数据发送得过快，接收方就可能来不及接收，这就会造成数据的丢失。</p>
+
+<p>而<font color='red'>流量控制（Flow control）</font>就是让发送方的发送速率不要太快，要让接收方来得及接收。利用<font color='red'>滑动窗口</font>可以很方便的在 TCP 连接上实现对发送方的流量控制。实现方式为：</p>
+
+<ul>
+<li>TCP 接收方利用自己<font color='red'>接收窗口</font>的大小来限制发送方<font color='red'>发送窗口</font>的大小；</li>
+<li>TCP 发送方收到接收方的<font color='red'>零窗口通知</font>后，应启动持续计时器。持续计时器超时后，向接收方发送<font color='red'>零窗口探测报文</font>。</li>
+</ul>
+
+<p>下面结合具体的场景来说明 TCP 的流量控制。</p>
+
+<p><strong>1.</strong> 初始时，假设主机 A （以下简称“A”）和主机 B （以下简称“B”）已经建立了 TCP 连接，A 向B 发送数据，B 对 A 进行流量控制。此时，B 告诉 A：“我的接收窗口为 400”。因此，A 将自己的发送窗口设置为 400，这意味着 A 在未收到 B 发来的确认时，可将序号落入发送窗口中的全部数据发送出去。如下图所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/9zNmltJ2uVdWCPw.png" alt="image.png" /></p>
+
+<p><strong>2.</strong> 然后，A 将发送窗口内序号 1~100 的数据封装成一个 TCP 报文段发送出去，发送窗口内还有 300 字节可以发送。如下所示：</p>
+
+<blockquote>
+<p>这里的 seq 表示 TCP 报文段首部中的序号字段，取值 1 表示 TCP 报文段数据载荷的第一个字节的序号是 1。这里的 DATA 表示当前是 TCP 数据报文段。</p>
+</blockquote>
+
+<p><img src="https://i.loli.net/2020/05/27/TXxUVYgt6BFrEbM.png" alt="image.png" /></p>
+
+<p><strong>3.</strong> 然后，A 将发送窗口内序号 101~200 的数据封装成一个 TCP 报文段发送出去，发送窗口内还有 200 字节可以发送。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/57WqHtAQdnRVyJ6.png" alt="image.png" /></p>
+
+<p><strong>4.</strong> 注意此时，A 将发送窗口内序号 201~300 的数据封装成一个 TCP 报文段发送出去，<font color='red'>但该报文段在传输过程中丢失了</font>，发送窗口内还有 100 字节可以发送。如下图所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/ZtP6jWe9AIgbw8F.png" alt="image.png" /></p>
+
+<p><strong>5.</strong> B 对 A 所发送的 201 号以前的数据进行累计确认，并在该累计确认中将窗口字段的值调整为 300，也就是对 A 进行<font color='red'>流量控制</font>。如下所示：</p>
+
+<blockquote>
+<ul>
+<li>大写 ACK 是 TCP 报文段首部的标志位，取值 1 表示这是一个 TCP 确认报文段；</li>
+<li>小写 ack 是 TCP 报文段首部的确认号字段，取值 201 表示序号 201 之前的数据已全部正确接收，现在希望收到序号 201 及其后续数据；</li>
+<li>rwnd 是 TCP 报文段首部的窗口字段，取值 300 表示自己的接收窗口大小为 300。</li>
+</ul>
+</blockquote>
+
+<p><img src="https://i.loli.net/2020/05/27/zJshv7wLIHRlPpy.png" alt="image.png" /></p>
+
+<p><strong>6.</strong> A 收到该累计确认后，<font color='red'>将发送窗口向前滑动，使已发送并收到确认的这些数据的序号移出发送窗口</font>（注意此时发送窗口大小为还是原来的 400）。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/g5txToN72eZK1kB.png" alt="image.png" /></p>
+
+<p>由于 B 在该累计确认中将自己的接收窗口调整为了 300，因此 A 相应的将自己的发送窗口调整为 300。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/2vSDm78nsAMj6by.png" alt="image.png" /></p>
+
+<p><strong>7.</strong> 现在 A 还可以发送 201~500 号共 300 字节的数据，其中 201~300 号是已发送的数据，若重传计时器超时，则它们会被重传。301~400 号字节以及 401~500 号字节还未被发送，可被分别封装在一个 TCP 报文段中发送。</p>
+
+<p>A 现在可以将发送缓存中序号 1~200 的字节数据全部删除了，因为已经收到了 B 对他们的累计确认。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/dvJQiwneGAMNuEF.png" alt="image.png" /></p>
+
+<p><strong>8.</strong> 现在 A 将发送窗口内序号 301~400 的数据封装成一个 TCP 报文段发送出去，发送窗口内还有 100 字节可以发送。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/nJEGUAfVdWzk369.png" alt="image.png" /></p>
+
+<p><strong>9.</strong> A 将发送窗口内序号 401~500 的数据封装成一个 TCP 报文段发送出去，至此，序号落在发送窗口内的数据已经全部发送出去了，不能再发送新数据了。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/5w7y4CUJMLDgatA.png" alt="image.png" /></p>
+
+<p><strong>10.</strong>  现在发送窗口内序号 200~300 这 100 个字节数据的重传计时器超时了，A 将它们重新封装成一个 TCP 报文段发送出去，暂时不能发送其它数据。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/JKaZoMcNvq9T8ls.png" alt="image.png" /></p>
+
+<p><strong>11.</strong> B 收到该重传的 TCP 报文段后，对 A 所发送的 501 号以前的数据进行累计确认，并在该累计确认中将窗口字段的值调整为 100，这是 B 对 A 进行的<font color='red'>第二次流量控制</font>。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/u81HbifZqBKyItk.png" alt="image.png" /></p>
+
+<p><strong>12.</strong> A 在收到该累计确认后，将发送窗口向前滑动，使已发送并收到确认的这些数据的序号移出发送窗口。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/KoJuthBybpOVNFa.png" alt="image.png" /></p>
+
+<p>由于 B 在该累计确认中将自己的接收窗口调整为了 100，因此 A 相应的也将自己的发送窗口调整为 100。目前，A 发送窗口内的序号为 501~600，A 还可以发送 100 字节数据。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/27/8ahkYRrL23jpAND.png" alt="image.png" /></p>
+
+<p><strong>13.</strong> A 现在可以将发送缓存中序号 201~500 的字节数据全部删除了，因为已经收到了 B 对它们的累计确认。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/ZwFRifqJa7NT89u.png" alt="image.png" /></p>
+
+<p><strong>14.</strong> A 将发送窗口内序号为 501~600 的数据封装成一个 TCP 报文段发送出去，至此，序号落在发送窗口内的数据已经全部发送出去了，不能再发送新数据了。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/KUByVwcQr8b23fz.png" alt="image.png" /></p>
+
+<p><strong>15.</strong> B 对 A 发送的 601 号以前的数据进行累计确认，并在该累计确认中将窗口字段的值调整为 0，这是 B 对 A 进行的<font color='red'>第三次流量控制</font>。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/3EMTGpUtg8HxF7Z.png" alt="image.png" /></p>
+
+<p><strong>16.</strong>  A 收到该累计确认后，将发送窗口向前滑动，使已发送并收到确认的这些数据的序号移出发送窗口。由于 B 在该累计确认中将自己的接收窗口调整为 0，因此，A 相应的将自己的发送窗口调整为 0。</p>
+
+<p>至此，A 不能再发送一般的 TCP 报文段了（注意是一般、普通的）。A 现在可以将发送缓存中序号 501~600 的字节数据全部删除了，因为已经收到了 B 对他们的累计确认。</p>
+
+<p><strong>可能会出现的问题</strong>：</p>
+
+<p>假设 B 向 A 发送了 0 窗口的报文段后不久，B 的接收缓存又有了一些存储空间。于是，B 向 A 发送了接收窗口等于 300 的报文段。然而，<font color='red'>这个报文段在传输过程中丢失了</font>，A 一直等待 B 发送的非零窗口的通知，而 B 也一直等待 A 发送的数据。如果不采取措施，这种互相等待而形成的<font color='red'>死锁</font>局面将一直持续下去。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/XG2s7ozt8EyHdja.png" alt="image.png" /></p>
+
+<p><strong>如何解决以上问题</strong>？</p>
+
+<p>为了解决这个问题，TCP 为每一个连接设有一个<font color='red'>持续计时器</font>，只要 TCP 连接的一方收到对方的零窗口通知，就启动持续计时器。若持续计时器超时，就发送一个<font color='red'>零窗口探测报文</font>，仅携带一字节的数据。而对方在确认这个探测报文段时，给出自己现在的接收窗口值，如果接收窗口仍然是 0，则收到这个报文段的一方就重新启动持续计时器；如果接收窗口不是 0，那么死锁的局面就可以打破了。</p>
+
+<p>本例中，A 收到零窗口通知时，就启动一个持续计时器。当持续计时器超时，<font color='red'>A 立刻发送一个仅携带一字节的零窗口探测报文段</font>。假设 B 此时的接收窗口又为 0 了，B 就在确认这个零窗口探测报文段时，给出自己现在的接收窗口值为 0。A 再次收到零窗口通知，就再次启动一个持续计时器。当持续计时器超时，A 立即发送一个零窗口探测报文段。假设 B 此时的接收缓存又有了一些存储空间，于是将自己的接收窗口调整为了 300，B 就在确认这个零窗口探测报文段时，给出自己现在的接收窗口值为 300，这样就打破了死锁的局面。如下所示：</p>
+
+<blockquote>
+<p>需要注意的是：TCP 规定，即使接收窗口为 0，也必须接收零窗口探测报文段、确认报文段、以及携带有紧急数据的报文段。</p>
+</blockquote>
+
+<p><img src="https://i.loli.net/2020/05/28/2FmkApPBSu7Hzj1.png" alt="image.png" /></p>
+
+<p><strong>即使是这样，就一定会打破死锁局面吗？假如零窗口探测报文段也丢失了呢</strong>？</p>
+
+<p>是可以的，因为零窗口探测报文段也有<font color='red'>重传计时器</font>，当该重传计时器超时后，零窗口探测报文段会被重传。</p>
+
+<h1 id="tcp-拥塞控制">TCP 拥塞控制</h1>
+
+<p>在某段时间，若对网络中某一资源的需求超过了该资源所能提供的可用部分，那么网络性能就要下降，称这种情况为</font color='red'>拥塞（Congestion）</font>。如果出现了拥塞而不进行控制，那么整个网络的吞吐量将随输入负荷的增大而下降。</p>
+
+<blockquote>
+<p>这里的资源可以是网络中的链路容量（带宽）、交换节点的缓存和处理机等。</p>
+</blockquote>
+
+<p><img src="https://i.loli.net/2020/05/28/X5EWDvjy9zdF2nw.png" alt="image.png" /></p>
+
+<p>TCP 的拥塞控制算法分为：<font color='red'>慢开始（slow start）、拥塞避免（congestion avoidance）、快重传（fast retransmit）以及快恢复（fast recovery）</font>。下面将分别介绍。</p>
+
+<p>为了方便描述以上四种拥塞控制的方法，这里给出以下假设条件：</p>
+
+<ul>
+<li>数据是单方向发送的，另一个方向只传送确认；</li>
+<li>接收方总是有足够大的缓存空间，因而发送方发送窗口的大小由网络的拥塞程度决定；</li>
+<li>以最大报文段 MSS 的个数为讨论问题单位，而不是以字节为单位。</li>
+</ul>
+
+<p><img src="https://i.loli.net/2020/05/28/sB5IEMUOh7fdxGH.png" alt="image.png" /></p>
+
+<p>如上图所示，发送方维护一个<font color='red'>拥塞窗口 cwnd </font>状态变量，它的值取决于网络拥塞程度，并且是动态变化的。其维护的原则是：只要网络中没有出现拥塞，那么拥塞窗口 cwnd 就再增大一些。但只要网络出现了拥塞，那么拥塞窗口 cwnd 就减小一些。可以根据有没有按时收到应当到达的确认报文（即发生超时重传）来判断是否出现了网络拥塞。</p>
+
+<p>发送方将拥塞窗口作为<font color='red'>发送窗口 swnd</font>，即 swnd = cwnd。</p>
+
+<p>同时，发送方还需要维护一个<font color='red'>慢开始门限 ssthresh</font> 状态变量：</p>
+
+<ul>
+<li>当 cwnd &lt; ssthresh 时，使用慢开始算法；</li>
+<li>当 cwnd &gt; ssthresh 时，停止使用慢开始算法，而改用拥塞避免算法；</li>
+<li>当 cwnd = ssthresh 时，既可以使用慢开始算法，也可以使用拥塞避免算法。</li>
+</ul>
+
+<p>下面通过具体的步骤来说明<font color='red'>慢开始</font>和<font color='red'>拥塞避免</font>的执行逻辑。</p>
+
+<p><strong>1.</strong> 初始时，拥塞窗口 cwnd = 1 表示传输轮次为 0 时的拥塞窗口，慢开始门限 ssthresh = 16。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/o1ZrjcBALQEFdhO.png" alt="image.png" /></p>
+
+<p><strong>2.</strong> 在执行慢开始算法时，发送方每收到一个对新报文段的确认时，就把拥塞窗口值加 1，然后开始下一轮的传输。当拥塞窗口值增长到慢开始门限时，就改为执行拥塞避免算法。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/xTIBEKAGkziutUv.png" alt="image.png" /></p>
+
+<p><img src="https://i.loli.net/2020/05/28/itEkcbRU6XZA5ND.png" alt="image.png" /></p>
+
+<p><strong>3.</strong> <font color='red'>假如部分报文段丢失了，这必然会造成发送方对这些丢失报文段的超时重传</font>。因此，可以推断出网络出现了拥塞。当网络中出现了拥塞的时候，根据拥塞避免算法，<font color='red'>会将慢开始门限 ssthresh 的值更新为发生拥塞时的一半，拥塞窗口 cwnd 的值减至为 1，并重新开始执行慢开始算法</font>。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/B2gVXbSMHnazNyw.png" alt="image.png" /></p>
+
+<p><img src="https://i.loli.net/2020/05/28/a8duUqirSAEOyDZ.png" alt="image.png" /></p>
+
+<p><strong>4.</strong> 如果再次来到慢开始门限，则再次执行拥塞避免算法。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/h6rIpKcQC3nx8Zi.png" alt="image.png" /></p>
+
+<p><strong>5.</strong> 整体流程如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/pQqPIVwtrBLk196.png" alt="image.png" /></p>
+
+<p>慢开始和拥塞避免算法是 1988 年提出的 TCP 拥塞控制算法，1990 年为了改进 TCP 的性能，又增加了快重传和快恢复。</p>
+
+<p>存在这么一种情况，在之前使用慢开始和拥塞避免算法的时候，如果个别的报文段在网络中丢失了，这将导致发送方的超时重传，并误以为网络发生了阻塞，发送方会把拥塞窗口 cwnd 设置为 1，并错误的启动慢开始算法，因而降低了传输效率，<font color='red'>但事实上网络并未发生拥塞</font>。</p>
+
+<p>采用快重传算法可以让发送方尽早知道在网络传输的过程中发生了个别报文段的丢失，让发送方尽快进行重传，而不是等到超时重传计时器超时后再重传。具体为：</p>
+
+<ul>
+<li>要求接收方不要等待发送方发送数据时才进行捎带确认，而是要立即发送确认；</li>
+<li>即使收到了失序的报文段也要立即发出对已收到的报文段的重复确认；</li>
+<li>发送方一旦收到 3 个连续的重复确认，就将相应丢失的报文段立即重传，而不是等该报文段的超时重传计时器超时再重传。</li>
+</ul>
+
+<p>如下图所示，M3 丢失的情况下，如果发送方发送了 M4，接收方发现不是按序发送的报文段，则会重复发送确认 M2，表明“我现在希望收到的是 3 号报文段，但是我没有收到 3 号报文段，而是收到了未按序到达的报文段”。如果此时发送方又发送了 M5、M6，则由于不是按序到达的，所以接收方会再次发送 M2 的重复确认。<font color='red'>发送方收到了 3 个连续的重复确认，就将之前丢失的 M3 进行重传</font>。接收方会发送针对 6 号报文段的确认，表明序号到 6 为止的报文段都正常接收了。</p>
+
+<p><img src="https://i.loli.net/2020/05/28/9FnLIHp7dSa6GAY.png" alt="image.png" /></p>
+
+<p>从上图可知，对于个别丢失的报文段，发送方不会出现超时重传，也就不会误以为出现了拥塞（进而设置拥塞窗口 cwnd 为 1）。因此，使用快重传可以使整个网络的吞吐量提高约 20%。</p>
+
+<p><strong>什么情况下才执行快恢复算法呢</strong>？</p>
+
+<p>根据上面的例子，发送方一旦收到 3 个重复确认，就知道现在只是丢失了个别的报文段，于是不启动慢开始算法，而是执行<font color='red'>快恢复</font>算法。实现方式为：发送方将慢开始门限 ssthresh 的值和拥塞窗口 cwnd 的值调整为当前窗口的一半，此过程称为快恢复，随后再进行拥塞避免算法。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/9jg8ZzQS6RkJiMY.png" alt="image.png" /></p>
+
+<p>此外，有的快恢复的实现方式是：把快恢复开始时的拥塞窗口 cwnd 再增大一些，即等于新的 ssthresh + 3，既然发送方收到 3 个重复的确认，就表明有 3 个数据报文段已经离开了网络。这 3 个报文段不再消耗网络资源而是停留在接收方的接收缓存中。可见现在网络中不是堆积了报文段而是减少了 3 个报文段，因此可以适当把拥塞窗口扩大一些。</p>
+
+<h1 id="tcp-超时重传的选择">TCP 超时重传的选择</h1>
+
+<p>TCP 的超时重传是保证数据可靠性的一种重要机制，发送方在发送数据以后就开启一个重传计时器，在一定时间内如果没有得到接收方发送的确认报文段，那么就重新发送数据，直到发送成功为止。</p>
+
+<p>但存在这么一种情况：如果将超时重传时间（Retransmission time-Out，RTO）设置的比往返时间（RTT）小的话，则会引起不必要的重传操作，使得网络负荷增大。如下所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/05/28/foKTDZ9qRvzJlIr.png" alt="image.png" />
+</center></p>
+
+<p>但如果将超时重传时间 RTO 设置的比往返时间 RTT 大的多的话，则会使网络的空闲时间增大，降低传输效率。如下所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/05/28/nhriM648OYybESx.png" alt="image.png" />
+</center></p>
+
+<p>因此，最好的情况是，超时重传时间 RTO 应设置为略大于往返时间 RTT。如下所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/05/28/yhjYqfUacMZk7E2.png" alt="image.png" />
+</center></p>
+
+<p>但由于往返时间 RTT 可能是不同的，如果使用同样的超时重传时间 RTO，则同样会造成<font color='red'>重传报文段 1 </font>的情况，因为每个报文段在因特网上传输的时间不一定总是小于 RTO 的。如下所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/05/28/SIfiGd3zvc6PFwp.png" alt="image.png" />
+</center></p>
+
+<p>所以，<font color='red'>不能直接使用某次测量得到的 RTT 样本来计算超时重传时间 RTO</font>。但可以利用每次测量得到的 RTT 样本，计算<font color='red'>加权平均往返时间 $RTT_{S}$，又称为平滑往返时间</font>。</p>
+
+<p>$$
+RTT_{s1}=RTT_1
+$$</p>
+
+<p>$$
+新的RTT_{s}=(1-\alpha)×旧的RTT_{s}+\alpha×新的RTT样本，其中 0≤\alpha≤1。
+$$</p>
+
+<p>若 $\alpha$ 越接近于 0，则新 $RTT$ 样本对 $RTT_{s}$ 的影响不大；若 $\alpha$ 越接近于 1，则新 $RTT$ 样本对 $RTT_{s}$ 的影响较大。因此，<font color='red'>超时重传时间 $RTO$ 应略大于加权平均往返时间 $RTT_{s}$</font>。</p>
+
+<p>然而，TCP 报文段在网络中传输的时候并不像我们想象的那么简单，下图展示了往返时间 RTT 的测量比较复杂的情况：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/a6NW2KpwrHtlgcP.png" alt="image.png" /></p>
+
+<p>针对以上问题，Karn 提出了一个算法：<font color='red'>在计算加权平均往返时间 $RTT_{s}$ 时，只要报文段重传了，那么就不采用其往返时间 $RTT$ 样本</font>。也就是出现重传时，不重新计算 $RTT_{s}$，进而超时重传时间 $RTO$ 也不会重新计算了。</p>
+
+<p>但设想如下问题：报文段的时延突然增大了许多，并且之后很长的一段时间都会保持这种时延。因此在原来得出的重传时间内，不会收到确认报文段。于是就重传报文段。但根据 Karn 算法，不考虑重传的报文段的往返时间样本。这样，超时重传时间就无法更新，这将会导致报文段反复被重传。</p>
+
+<p>因此，这里对 Karn 算法的改进是：<font color='red'>报文段每重传一次，就把超时重传时间 $RTO$ 增大一些，典型的做法是将新 $RTO$ 的值取为旧 $RTO$ 值的 2 倍</font>。</p>
+
+<h1 id="tcp-可靠传输的实现">TCP 可靠传输的实现</h1>
+
+<p>TCP 基于<font color='red'>以字节为单位的滑动窗口</font>来实现可靠传输，假设以下场景：发送方收到了接收方发来的确认报文段，窗口大小为 20，确认号字段为 31，表示序号 31 之前的数据已全部正确接收，现在希望收到需要为 31 及以后的数据。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/WKZjy4XVhC8tmgN.png" alt="image.png" /></p>
+
+<p><img src="https://i.loli.net/2020/05/28/p7rHXOicRStxL51.png" alt="image.png" /></p>
+
+<p>既然使用到了滑动窗口，就需要确定<font color='red'>窗口前沿</font>和<font color='red'>窗口后沿</font>的运动规则。下图给出了它们之间的运动方式，需要注意的是，如果发送方收到了来自接收方的窗口大小（也就是进行了流量控制），那么必然会导致 TCP 的传输效率下降，因为滑动窗口变小了，所能承载或传输的信息也就少了。</p>
+
+<p><img src="https://i.loli.net/2020/05/28/TJxudY8wWaLpVN5.png" alt="image.png" /></p>
+
+<p><strong>那么如何描述发送窗口的状态呢</strong>？</p>
+
+<p>这里使用三个指针 P1、P3、P3 分别指向相应的字节序号，如下图所示：</p>
+
+<ul>
+<li>小于 P1 的是已发送并已收到确认的部分；</li>
+<li>大于等于 P3 的是不允许发送的部分；</li>
+<li>P3 - P1 = 发送窗口的大小；</li>
+<li>P2 - P1 = 已发送但尚未收到确认的字节数；</li>
+<li>P3 - P2 = 允许发送但当前尚未发送的字节数，又称为可用窗口或有效窗口。</li>
+</ul>
+
+<p><img src="https://i.loli.net/2020/05/28/4EKisvH9nuoUyTG.png" alt="image.png" /></p>
+
+<p>假设发送方之前发送的封装有 32 和 33 号数据的报文段到达了接收方，由于数据序号落在接收窗口内，所以接收方接受它们，并将它们存入接收缓存。但是它们是未按序到达的数据，因为 31 号数据还没有到达，有可能丢了，也有可能滞留在了网络中的某处。</p>
+
+<p>需要注意的是，接收方只能对按序收到的数据中的最高序号给出确认。因此，接收方发出的确认报文段中的确认序号仍然是 31，也就是需要收到 31 号数据。发送方收到该确认报文段后，发现这是一个针对 31 号数据的重复确认，就知道<font color='red'>接收方收到了未按序到达的数据</font>。由于这是针对 31 号数据的第一个重复确认，因此不会引起发送方针对该数据的快重传。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/sLSEFxrwmT7Yv1O.png" alt="image.png" /></p>
+
+<p>假设封装有 31 号数据的报文段到达了接收方，接收方接受该报文段，将其封装的 31 号数据写入接收缓存中。接收方现在可以将接收到的 31~33 号数据交付给应用进程。然后将接收窗口向前移动 3 个序号，并给发送方发送确认报文段。如下所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/05/28/uDWtLsH1bOpI2qA.png" alt="image.png" />
+</center></p>
+
+<p>这里的确认号字段的值是 34，表明接收方已经收到了序号 33 为止的全部数据。假设又有序号为 37、38、40 的数据封装成报文段发送给了接收方，接收方一看，可以将这些数据放入接收窗口内，但由于它们是未按序到达的数据，只能先暂存在接收缓存中。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/R2oIOfXuSx83bQn.png" alt="image.png" /></p>
+
+<p>假设接收方先前发送的确认报文段到达了发送方，发送方接收后，将发送窗口向前滑动 3 个序号。这样就有新的序号落入发送窗口中，然后可以将 31、32、33 从发送窗口中删除了，因为已经收到了接收方针对它们的确认。接下来，假如封装了 42~53 的数据报文段发送到接收方，之前留在接收窗口内已发送的数据如果迟迟收不到接收方的确认，则会产生超时重传。如下所示：</p>
+
+<p><img src="https://i.loli.net/2020/05/28/uDVRkzY62PyTpda.png" alt="image.png" /></p>
+
+<p>此外，虽然发送方的发送窗口是根据接收窗口设置的，但在同一时刻，发送方的发送窗口并不是总和接收方的接收窗口一样大的，这是因为网络传送窗口值需要经历一定的时间滞后。<font color='red'>对于不按序到达的数据</font>，TCP 通常会先将不按序到达的数据暂时存放在接收窗口中，等到字节流中所缺少的字节收到后，再按序交付给上层的应用进程。</p>
+
+<p>TCP 要求接收方必须有<font color='red'>累积确认</font>和<font color='red'>捎带确认机制</font>，这样可以减小传输开销。但是，接收方不应该过分推迟发送确认，否则会导致发送方不必要的超时重传，这反而浪费了网络资源。最后，TCP 属于<font color='red'>全双工通信</font>，通信中的双方都在发送和接收报文段。因此，每一方都有自己的发送窗口和接收窗口。</p>
+
+<h1 id="参考">参考</h1>
+
+<ul>
+<li><a href="https://coolshell.cn/articles/11564.html">https://coolshell.cn/articles/11564.html</a></li>
+<li><a href="https://juejin.im/post/5a069b6d51882509e5432656">https://juejin.im/post/5a069b6d51882509e5432656</a></li>
+<li><a href="https://www.bilibili.com/video/av50251501">https://www.bilibili.com/video/av50251501</a></li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-05-27
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Network/">Network</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/05/27/TCP-3-way-and-4-way-handshake/">
+            <span class="next-text nav-default">三次握手和四次挥手</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

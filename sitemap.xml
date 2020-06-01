@@ -9,22 +9,57 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/categories/Algorithm/</loc>
+    <lastmod>2020-06-01T08:09:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/Algorithm/</loc>
+    <lastmod>2020-06-01T08:09:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2020-05-27T20:46:56+08:00</lastmod>
+    <lastmod>2020-06-01T08:09:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2020-05-27T20:46:56+08:00</lastmod>
+    <lastmod>2020-06-01T08:09:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Network/</loc>
-    <lastmod>2020-05-27T20:46:56+08:00</lastmod>
+    <loc>http://localhost:1313/post/</loc>
+    <lastmod>2020-06-01T08:09:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/Sort/</loc>
+    <lastmod>2020-06-01T08:09:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2020-06-01T08:09:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2020/06/01/sort-algorithm/</loc>
+    <lastmod>2020-06-01T08:09:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -37,14 +72,7 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
-    <lastmod>2020-05-27T20:46:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>http://localhost:1313/categories/Network/</loc>
     <lastmod>2020-05-27T20:46:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -492,20 +520,6 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Algorithm/</loc>
-    <lastmod>2020-02-18T19:32:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/Algorithm/</loc>
-    <lastmod>2020-02-18T19:32:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://localhost:1313/tags/KMP/</loc>
     <lastmod>2020-02-18T19:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -856,14 +870,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Computer-Network/</loc>
+    <loc>http://localhost:1313/tags/Computer-Network/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Computer-Network/</loc>
+    <loc>http://localhost:1313/categories/Computer-Network/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -891,14 +905,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E6%8A%80%E5%B7%A7/</loc>
+    <loc>http://localhost:1313/tags/%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E6%8A%80%E5%B7%A7/</loc>
+    <loc>http://localhost:1313/categories/%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1052,14 +1066,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Machine-learning/</loc>
+    <loc>http://localhost:1313/categories/Machine-learning/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Machine-learning/</loc>
+    <loc>http://localhost:1313/tags/Machine-learning/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1192,14 +1206,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Python/</loc>
+    <loc>http://localhost:1313/categories/Python/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Python/</loc>
+    <loc>http://localhost:1313/tags/Python/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1619,14 +1633,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Windows/</loc>
+    <loc>http://localhost:1313/categories/Windows/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Windows/</loc>
+    <loc>http://localhost:1313/tags/Windows/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

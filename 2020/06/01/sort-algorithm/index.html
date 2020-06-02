@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-06-01T08:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-01T08:09:56&#43;08:00" />
-<meta itemprop="wordCount" content="4564">
+<meta itemprop="wordCount" content="7420">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Algorithm/"> Algorithm </a>
             </div>
-          <span class="more-meta"> 4564 words </span>
-          <span class="more-meta"> 10 mins read </span>
+          <span class="more-meta"> 7420 words </span>
+          <span class="more-meta"> 15 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -152,6 +152,15 @@
 <li><a href="#插入排序">插入排序</a></li>
 <li><a href="#归并排序">归并排序</a></li>
 <li><a href="#快速排序">快速排序</a></li>
+<li><a href="#堆排序">堆排序</a>
+<ul>
+<li><a href="#建堆过程">建堆过程</a></li>
+<li><a href="#调整过程">调整过程</a></li>
+</ul></li>
+<li><a href="#希尔排序">希尔排序</a></li>
+<li><a href="#计数排序">计数排序</a></li>
+<li><a href="#基数排序">基数排序</a></li>
+<li><a href="#桶排序">桶排序</a></li>
 <li><a href="#总结">总结</a></li>
 </ul>
 </nav>
@@ -576,8 +585,10 @@
 <ul>
 <li>基本快排：将元素都划分到了枢纽的一侧，可能会造成递归树的倾斜；</li>
 <li>双指针快排：将元素等概率的划分到了枢纽的两侧，递归树相对平衡。也就是将数组中小于枢纽的元素放在枢纽的左边，大于枢纽的元素放在枢纽的右边；</li>
+<li>三指针快排：将数组中小于枢纽的元素放在枢纽的左边，大于枢纽的元素放在枢纽的右边，<font color='red'>等于枢纽的元素放在中间</font>。</li>
+</ul>
 
-<li><p>三指针快排：将数组中小于枢纽的元素放在枢纽的左边，大于枢纽的元素放在枢纽的右边，<font color='red'>等于枢纽的元素放在中间</font>。</p>
+<p>如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -640,81 +651,452 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public int</span><span class="p">[]</span> <span class="n">quickSort</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">)</span> <span class="p">{</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">nums</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">&lt;</span> <span class="n">2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">0</span><span class="p">];</span>
-<span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">nums</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">&lt;</span> <span class="n">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">0</span><span class="p">];</span>
+    <span class="p">}</span>
 
-<span class="n">quickSortCore</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
-<span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
+    <span class="n">quickSortCore</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="err">private void </span><span class="n">quickSortCore</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">,</span> <span class="err">int left</span><span class="p">,</span> <span class="err">int right</span><span class="p">)</span> <span class="p">{</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// 随机快排
-</span><span class="c1"></span>    <span class="err">Random random </span><span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>
-    <span class="c1">// 从数组中随机选择一个索引，将该索引上的数与数组中最后一个数进行交换
-</span><span class="c1"></span>    <span class="c1">// int randomIndex = (int) (left + Math.random() * (right - left + 1));
-</span><span class="c1"></span>    <span class="err">int randomIndex </span><span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="n">random</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span> <span class="o">+</span> <span class="n">1</span><span class="p">);</span>
-    <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">randomIndex</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 随机快排
+</span><span class="c1"></span>        <span class="err">Random random </span><span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="p">();</span>
+        <span class="c1">// 从数组中随机选择一个索引，将该索引上的数与数组中最后一个数进行交换
+</span><span class="c1"></span>        <span class="c1">// int randomIndex = (int) (left + Math.random() * (right - left + 1));
+</span><span class="c1"></span>        <span class="err">int randomIndex </span><span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="n">random</span><span class="p">.</span><span class="na">nextInt</span><span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span> <span class="o">+</span> <span class="n">1</span><span class="p">);</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">randomIndex</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
 
-    <span class="err">int[] p </span><span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
-    <span class="n">quickSortCore</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
-    <span class="n">quickSortCore</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">1</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
-<span class="p">}</span>
+        <span class="err">int[] p </span><span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+        <span class="n">quickSortCore</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
+        <span class="n">quickSortCore</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="n">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">1</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 荷兰国旗问题（稍微有些不同）
 </span><span class="c1">// 该函数返回的是等于数组最后一个元素 x 范围内的左右边界
 </span><span class="c1">// p[0] 代表等于 x 的左边界，p[1] 代表等于 x 的右边界
 </span><span class="c1"></span><span class="err">private int</span><span class="p">[]</span> <span class="n">partition</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">,</span> <span class="err">int left</span><span class="p">,</span> <span class="err">int right</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">int less </span><span class="o">=</span> <span class="n">left</span> <span class="o">-</span> <span class="n">1</span><span class="p">;</span>
-<span class="c1">// 这里将大于 x 的区域的范围直接定位到 right
-</span><span class="c1"></span><span class="err">int more </span><span class="o">=</span> <span class="n">right</span><span class="p">;</span>
+    <span class="err">int less </span><span class="o">=</span> <span class="n">left</span> <span class="o">-</span> <span class="n">1</span><span class="p">;</span>
+    <span class="c1">// 这里将大于 x 的区域的范围直接定位到 right
+</span><span class="c1"></span>    <span class="err">int more </span><span class="o">=</span> <span class="n">right</span><span class="p">;</span>
 
-<span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">more</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// 小于 num 的情况
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">right</span><span class="p">])</span> <span class="p">{</span>
-        <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="o">++</span><span class="n">less</span><span class="p">,</span> <span class="n">left</span><span class="o">++</span><span class="p">);</span>
-        <span class="c1">// 大于 num 的情况，此时 left 需要留在原地，继续考察与 num 的大小关系
-</span><span class="c1"></span>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">right</span><span class="p">])</span> <span class="p">{</span>
-        <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="o">--</span><span class="n">more</span><span class="p">,</span> <span class="n">left</span><span class="p">);</span>
-        <span class="c1">// 等于 num 的情况
-</span><span class="c1"></span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">left</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">more</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 小于 num 的情况
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">right</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="o">++</span><span class="n">less</span><span class="p">,</span> <span class="n">left</span><span class="o">++</span><span class="p">);</span>
+            <span class="c1">// 大于 num 的情况，此时 left 需要留在原地，继续考察与 num 的大小关系
+</span><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">right</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="o">--</span><span class="n">more</span><span class="p">,</span> <span class="n">left</span><span class="p">);</span>
+            <span class="c1">// 等于 num 的情况
+</span><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">left</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span>
-<span class="c1">// 由于改进后的 partition 函数，初始的时候大于 x 的区域是包含 x 的，所以在划分完之后，
-</span><span class="c1">// 需要将最后一个 x 的位置与 大于 x 区域的第一个数交换，这样就实现了小于 x 的在左边，
-</span><span class="c1">// 等于 x 的在中间，大于 x 的在右边
-</span><span class="c1">// 也就是说 x 一开始就不参与遍历，最后通过 swap 让其归位
-</span><span class="c1"></span><span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">more</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
-<span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[]{</span><span class="n">less</span> <span class="o">+</span> <span class="n">1</span><span class="p">,</span> <span class="n">more</span><span class="p">};</span>
+    <span class="c1">// 由于改进后的 partition 函数，初始的时候大于 x 的区域是包含 x 的，所以在划分完之后，
+</span><span class="c1"></span>    <span class="c1">// 需要将最后一个 x 的位置与 大于 x 区域的第一个数交换，这样就实现了小于 x 的在左边，
+</span><span class="c1"></span>    <span class="c1">// 等于 x 的在中间，大于 x 的在右边
+</span><span class="c1"></span>    <span class="c1">// 也就是说 x 一开始就不参与遍历，最后通过 swap 让其归位
+</span><span class="c1"></span>    <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">more</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[]{</span><span class="n">less</span> <span class="o">+</span> <span class="n">1</span><span class="p">,</span> <span class="n">more</span><span class="p">};</span>
 <span class="p">}</span>
 
 <span class="err">private void </span><span class="n">swap</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">,</span> <span class="err">int i</span><span class="p">,</span> <span class="err">int j</span><span class="p">)</span> <span class="p">{</span>
-<span class="err">int temp </span><span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-<span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+    <span class="err">int temp </span><span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div></li>
-
-<li><p>快速排序与输入的数据规模有关，最坏的情况下，如果输入的序列是有序的，例如 [1, 2, 3, 4, 5]，如果每次都选择最后一个数进行划分，那么对于每一个数都需要 $O(n)$ 的时间，因此时间复杂度就是 $O(n^{2})$。</p></li>
-
-<li><p>最好的情况下，如果划分的好，划分的均匀，左右部分的数据规模大体相同的话，时间复杂度就是 $O(nlogn)$。</p></li>
-
-<li><p>对于随机快排，也就是<font color='red'>每次从数组中随机选择一个数之后，与数组中最后一个数进行交换，用这个随机选择的数进行划分</font>。这就变成了一个概率问题，因此长期期望是 $O(nlogn)$。</p></li>
-
-<li><p>由于在递归的过程中，使用到了递归函数的栈空间，取决于递归树的深度，即空间复杂度为 $O(logn)$。</p></li>
-
-<li><p>快速排序是不稳定的，不稳定性发生在枢纽元素与最后一个元素交换的时刻。例如 [1, 3, 4, 2, 8, 9, 8, 7, 5]，枢纽元素是 5，在一次划分后 5 需要和第一个 8 进行交换，从而改变了两个 8 的相对次序。</p>
+</div>
+<ul>
+<li>快速排序与输入的数据规模有关，最坏的情况下，如果输入的序列是有序的，例如 [1, 2, 3, 4, 5]，如果每次都选择最后一个数进行划分，那么对于每一个数都需要 $O(n)$ 的时间，因此时间复杂度就是 $O(n^{2})$。</li>
+<li>最好的情况下，如果划分的好，划分得均匀，左右部分的数据规模大体相同的话，时间复杂度就是 $O(nlogn)$。</li>
+<li>对于随机快排，也就是<font color='red'>每次从数组中随机选择一个数之后，与数组中最后一个数进行交换，用这个随机选择的数进行划分</font>。这就变成了一个概率问题，因此长期期望是 $O(nlogn)$。</li>
+<li>由于在递归过程中使用到了递归函数的栈空间，因此空间复杂度取决于递归树的深度，即 $O(logn)$。</li>
+<li>快速排序是<font color='red'>不稳定</font>的，不稳定性发生在枢纽元素与最后一个元素交换的时刻。例如 [1, 3, 4, 2, 8, 9, 8, 7, 5]，枢纽元素是 5，在一次划分后 5 需要和第一个 8 进行交换，从而改变了两个 8 的相对次序。
 
 <ul>
-<li>这里多一句嘴，Java 中的 Arrays.sort() 函数，它对于基础类型，底层使用的是快速排序，而对于非基础类型，底层使用的是归并排序。</li>
+<li>这里多说一句，Java 中的 Arrays.sort() 函数，它对于基础类型，底层使用的是快速排序，而对于非基础类型，底层使用的是归并排序。</li>
 <li>这是因为对于基础类型，相同的值是无差别的，排序前后相同值的相对位置并不重要，因此使用了不稳定的快速排序；</li>
 <li>而对于非基础类型，排序前后相同实例的相对位置不宜改变，因此选择稳定的归并排序。</li>
 </ul></li>
 </ul>
+
+<h1 id="堆排序">堆排序</h1>
+
+<p>很多情况下会有这种需求：在收集一些元素的同时，处理当前最大的元素，然后再收集更多的元素，再处理当前最大的元素，如此循环。而优先队列就可以实现这种功能，它可以实现<font color='red'>删除最大元素操作</font>以及<font color='red'>插入元素操作</font>。</p>
+
+<p>二叉堆类似于一个完全二叉树，通过某个节点可以找到它的父节点以及孩子节点。例如，如果位置 $k$ 的节点的父节点为对 $k/2$ 进行下取整，而位置 $k$ 节点的的左右孩子分别为 $2k$、$2k+1$。因此，得到它们之间的关系之后，就可以将它们放在数组中，使用数组来实现堆结构。</p>
+
+<p>对于一个大根堆来说，需要满足<font color='red'>子节点的值总是小于它的父节点的值</font>这一定义。在建立大根堆的时候，需要实现一个不断向堆中放入元素的过程中，称之为 heapInsert。该元素插入到堆中之后，如果不满足堆的定义，则需要进行堆化处理，称之为 heapify，也就是将原本不满足堆定义的结构调整成堆结构。</p>
+
+<p>但是，当我们具体实现的时候，当前节点与父节点和孩子节点之间的关系可能会有所不同。虽说是不同，但实现方式是一样的。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">+---+---+---+---+---+---+---+
+|   |   |   |   |   |   |   |
++---+---+---+---+---+---+---+
+  0   1   2   3   4   5   6  
+
+               0
+            /    \
+           1      2
+         /  \    /  \
+        3    4  5    6</pre></td></tr></table>
+</div>
+</div>
+<p>将二叉树中的每个节点放到数组中，满足节点 $i$ 的左孩子为 $2*i+1$，右孩子为 $2*i+2$，父节点为 $(i-1)/2$。需要注意的是，下面的这棵二叉树是我们想象出来的结构，而真正使用到的是上面的数组。也就是说，当我们实现堆排序时，归根到底还是使用数组来模拟堆排序的过程。</p>
+
+<p><strong>给定一个乱序数组，如果将其建立成大根堆（或小根堆）</strong>？</p>
+
+<p>建立大根堆的过程就是不断交换节点的过程，<font color='red'>当某个元素放入到堆中以后，如果该节点比它的父节点大，则此时不满足大根堆的定义，因此需要将该节点与父节点进行交换。如果交换之后还不满足大根堆的定义，那么就一直向上交换，直到满足定义为止（相等的时候则不进行交换）</font>。而找父节点的过程就是通过上面提到的通过索引进行实现的，实际的<code>交换节点操作</code>就是在数组中通过交换元素实现的。</p>
+
+<h2 id="建堆过程">建堆过程</h2>
+
+<p>假如 $0$ 到 $i-1$ 位置是已经建立好的大根堆，现在需要将 $i$ 位置上的数放进大根堆中，其实现逻辑如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">heapInsert</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">,</span> <span class="err">int i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 如果新插入进来的元素 nums[i] 比它的父节点大，
+</span><span class="c1"></span>    <span class="c1">// 则进行交换，然后当前元素的索引就来到了父节点的索引位置。（也就是说，当前节点要向上跑）
+</span><span class="c1"></span>    <span class="c1">// 直到当前节点小于它的父节点，while 循环才停止
+</span><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[(</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">2</span><span class="p">]</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">2</span><span class="p">);</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果 $i$ 来到了 $nums[0]$ 位置，那么它的父节点就是 $nums[0 -1]/2=nums[0]$ 位置，因此 while 循环也会停止。以上通过将数组建立成一个大根堆的时间复杂度是 $O(n)$ 的。怎么分析？</p>
+
+<p>如果向一棵二叉堆（完全二叉树）中插入一个元素，那么该元素只需要与它沿途的节点进行比较即可，也就是与树的高度有关。当第 $i$ 个节点加入到完全二叉树中的时候，它的时间复杂度是 $O(log(i - 1))$ 的。以此类推，当第 $i-1$ 个节点加入到完全二叉树中的时候，它的时间复杂度是 $O(log(i))$ 的。因此，可以得到 $log(1)+log(2)+log(3)+&hellip;+log(n-1)$，即时间复杂度为 $O(n)$。</p>
+
+<h2 id="调整过程">调整过程</h2>
+
+<p>假如已经给定了一个大根堆，此时每个节点都是满足大根堆的定义的，即每个节点都大于它的所有的孩子节点。如果此时有一个节点的值变小了，那么就不满足大根堆的定义了，因此，我们需要一个重新调整的过程，让这个堆重新调整成大根堆，该过程称之为<code>heapify</code>。</p>
+
+<p><strong>如果某个节点的值变小了，那么如何进行调整，使之成为大根堆呢</strong>？</p>
+
+<p>如果节点 A 变小了，那么需要找到它的左右孩子节点，先从左右孩子节点中选出最大的，然后将这个最大值与节点 A 进行比较：</p>
+
+<ul>
+<li>如果这个最大值大于节点 A，则将它们进行交换（对应到数组中就是将元素进行交换），也就是让节点 A 往下沉；</li>
+<li>如果这个最大值小于节点 A，则不进行交换。</li>
+</ul>
+
+<p>过程如下所示，<font color='red'>以下函数表示的是：从 $0$ 到 $heapSize$ 已经建立好了大根堆，但是 $i$ 上的元素变小了，因此我需要进行一系列调整的过程，也就是让 $i$ 往下沉的过程</font>。</p>
+
+<blockquote>
+<p>其中<code>headSize</code>表示堆中节点的数量，这个数量有可能小于等于数组中元素的个数，但肯定不会大于数组中元素的个数。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">heapify</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">,</span> <span class="err">int i</span><span class="p">,</span> <span class="err">int heapSize</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 拿到 i 的左孩子
+</span><span class="c1"></span>    <span class="err">int left </span><span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">2</span> <span class="o">+</span> <span class="n">1</span><span class="p">;</span>
+    <span class="c1">// 保证 left 不越界
+</span><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">heapSize</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 右孩子不越界，并且右孩子的值比左孩子的值大
+</span><span class="c1"></span>        <span class="err">int largest </span><span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="n">1</span> <span class="o">&lt;</span> <span class="n">heapSize</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span> <span class="o">+</span> <span class="n">1</span><span class="p">]</span> <span class="o">?</span> <span class="n">left</span> <span class="o">+</span> <span class="n">1</span> <span class="o">:</span> <span class="n">left</span><span class="p">;</span>
+        <span class="c1">// 上面的过程已经找到了左右两个孩子中较大的那个，
+</span><span class="c1"></span>        <span class="c1">// 接下来需要和索引为 i 的进行比较
+</span><span class="c1"></span>        <span class="n">largest</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">largest</span><span class="p">]</span> <span class="o">?</span> <span class="n">i</span> <span class="o">:</span> <span class="n">largest</span><span class="p">;</span>
+        <span class="c1">// 如果在比较之后发现，最大值其实还是我自己，
+</span><span class="c1"></span>        <span class="c1">// 说明 i 就不用往下沉了
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">largest</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">largest</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="c1">// i 就变成了较大的那个孩子的下标
+</span><span class="c1"></span>        <span class="n">i</span> <span class="o">=</span> <span class="n">largest</span><span class="p">;</span>
+        <span class="c1">// 然后再拿到 i 的左孩子，进行下一次 while
+</span><span class="c1"></span>        <span class="n">left</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">2</span> <span class="o">+</span> <span class="n">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>以上就是建立堆以及调整堆的过程，那么如何进行堆排序呢</strong>？</p>
+
+<p>每次将堆顶的元素与堆中的最后一个元素进行交换，一直到等个堆的大小减到 0 为止。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">heapSort</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">nums</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">heapInsert</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 当大根堆建立好以后，堆的大小就来等于数组的长度
+</span><span class="c1"></span>    <span class="err">int heapSize </span><span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="c1">// 将堆顶和堆中的最后一个元素进行交换
+</span><span class="c1"></span>    <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="o">--</span><span class="n">heapSize</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">headSize</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 由于堆中的最后一个元素被换到了堆顶，有可能不满足大根堆的定义，
+</span><span class="c1"></span>        <span class="c1">// 因此需要堆化处理
+</span><span class="c1"></span>        <span class="n">heapfiy</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="n">heapSize</span><span class="p">);</span>
+        <span class="c1">// 在继续交换节点
+</span><span class="c1"></span>        <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="o">--</span><span class="n">heapSize</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>堆排序是不稳定的，不稳定性发生在堆顶和其它节点交换的过程；</li>
+<li>平均时间复杂度为 $O(nlogn)$；</li>
+<li>由于只使用到了几个辅助变量，因此空间复杂度为 $O(1)$；</li>
+</ul>
+
+<p>堆排序整体代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public int</span><span class="p">[]</span> <span class="n">sortArray</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">nums</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">0</span><span class="p">];</span>
+    <span class="p">}</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">heapInsert</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="err">int heapSize </span><span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="o">--</span><span class="n">heapSize</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">heapSize</span> <span class="o">&gt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">heapify</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="n">heapSize</span><span class="p">);</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="o">--</span><span class="n">heapSize</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="err">private void </span><span class="n">heapInsert</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">,</span> <span class="err">int i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[(</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">)</span>  <span class="o">/</span> <span class="n">2</span><span class="p">])</span> <span class="p">{</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">2</span><span class="p">);</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">private void </span><span class="n">heapify</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">,</span> <span class="err">int i</span><span class="p">,</span> <span class="err">int heapSize</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">int left </span><span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">2</span> <span class="o">+</span> <span class="n">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">heapSize</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">int largest </span><span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="n">1</span> <span class="o">&lt;</span> <span class="n">heapSize</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span> <span class="o">+</span> <span class="n">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span> <span class="o">?</span> <span class="n">left</span> <span class="o">+</span> <span class="n">1</span> <span class="o">:</span> <span class="n">left</span><span class="p">;</span>
+        <span class="n">largest</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">largest</span><span class="p">]</span> <span class="o">?</span> <span class="n">i</span> <span class="o">:</span> <span class="n">largest</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">largest</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">largest</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">largest</span><span class="p">;</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">2</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">private void </span><span class="n">swap</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">,</span> <span class="err">int i</span><span class="p">,</span> <span class="err">int j</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">int temp </span><span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span> </code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="希尔排序">希尔排序</h1>
+
+<p>希尔排序的核心思想是：通过<code>增量</code>来将数组中的元素元素划分为不同的<code>组</code>，每个<code>组</code>内先进行排序，随着排序的进行，<code>组</code>会慢慢减少，而<code>组</code>内的元素会越来越多，数组整体也会越来越有序。</p>
+
+<p>希尔排序是改进版的插入排序，与插入排序不同的是，它会优先比较距离较远的元素。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public int</span><span class="p">[]</span> <span class="n">shellSort</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">nums</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">0</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="err">int h </span><span class="o">=</span> <span class="n">1</span><span class="p">;</span>
+    <span class="c1">// 找增量的最大值
+</span><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="n">3</span> <span class="o">*</span> <span class="n">h</span> <span class="o">+</span> <span class="n">1</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">3</span> <span class="o">*</span> <span class="n">h</span> <span class="o">+</span> <span class="n">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">h</span> <span class="o">&gt;=</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">h</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 插入排序
+</span><span class="c1"></span>            <span class="n">insertionSort</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">h</span> <span class="o">/</span> <span class="n">3</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 这里的排序方法和插入排序相同
+</span><span class="c1"></span><span class="err">private void </span><span class="n">insertionSort</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">,</span> <span class="err">int h</span><span class="p">,</span> <span class="err">int i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">int get </span><span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="err">int j </span><span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span><span class="n">0</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">get</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">nums</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+        <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">nums</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">get</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>由于只使用到了几个辅助变量，因此空间复杂度为 $O(1)$；</li>
+<li>在时间复杂度方面，根据步长选择的不同而不同。最差的情况是 $O(n^{2})$，最好的情况是 $O(n)$；</li>
+<li>此外，希尔排序也不是稳定的，因为这种元素间远距离的交换一般很难保证相同元素的相对位置。</li>
+</ul>
+
+<h1 id="计数排序">计数排序</h1>
+
+<h1 id="基数排序">基数排序</h1>
+
+<h1 id="桶排序">桶排序</h1>
 
 <h1 id="总结">总结</h1>
 

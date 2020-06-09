@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-05-12T11:43:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-07T17:24:56&#43;08:00" />
-<meta itemprop="wordCount" content="20439">
+<meta itemprop="wordCount" content="22484">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 20439 words </span>
-          <span class="more-meta"> 41 mins read </span>
+          <span class="more-meta"> 22484 words </span>
+          <span class="more-meta"> 45 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -173,7 +173,13 @@
 <li><a href="#动态代理">动态代理</a></li>
 <li><a href="#cglib-代理">CGlib 代理</a></li>
 </ul></li>
-<li><a href="#适配器模式">适配器模式</a></li>
+<li><a href="#适配器模式">适配器模式</a>
+<ul>
+<li><a href="#类适配器模式">类适配器模式</a></li>
+<li><a href="#对象适配器模式">对象适配器模式</a></li>
+<li><a href="#接口适配器模式">接口适配器模式</a></li>
+<li><a href="#小结">小结</a></li>
+</ul></li>
 <li><a href="#桥接模式">桥接模式</a></li>
 <li><a href="#装饰模式">装饰模式</a></li>
 <li><a href="#组合模式">组合模式</a></li>
@@ -3698,9 +3704,338 @@ CGlib 代理结束...</pre></td></tr></table>
 </div>
 <p><code>proxyInstance.teach();</code>方法执行的时候，会被<code>intercept()</code>方法拦截，进而执行输出语句，而<code>method.invoke(target, args)</code>中的 method 就是 TeacherDao 中的 teach() 方法。最后如果又返回值的话就返回，没有的话就返回 null。</p>
 
+<p>这里需要注意的是：<font color='red'>代理模式和接下来要讲到的适配器模式的区别，在代理模式下的静态代理，它的代理对象和目标对象都实现了相同的接口，而适配器模式中的对象适配，只是将目标对象委派到了适配器对象中，目标对象和适配器对象并没有实现相同的接口</font>。</p>
+
 <h2 id="适配器模式">适配器模式</h2>
 
+<p><code>适配器（Adapter）模式</code>也很好理解，想象以下场景。在现实生活中，经常会出现两个对象因接口不兼容而不能在一起工作的案例，此时需要第三者进行适配。例如将笔记本的画面投影到投影仪上，笔记本的接口是 HDMI 的，而投影仪的接口是 VGA 的，此时需要一个从 HDMI 到 VGA 的转换器（适配器），使用该适配器对两者（HDMI 接口和 VGA 接口）进行适配。</p>
+
+<p>而在软件设计上，如果需要开发的具有某种业务功能的组件在现有的组件库中已经存在，但它们与当前系统的接口规范不兼容，而重新开发这些组件的成本又很高，此时可以使用适配器模式可以很好的解决该问题。也就是说，<font color='red'>将某个类的接口转换成所希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能够进行工作</font>。</p>
+
+<p>适配器的角色有三个：</p>
+
+<ul>
+<li>目标接口：即当前系统所期待的接口；</li>
+<li>适配者类：即被访问或被适配的现存组件库中的组件接口；</li>
+<li>适配器类：即我们在上面提到的适配器。</li>
+</ul>
+
+<p>它们之间的调用关系是：用户调用适配器转换出来的<code>目标接口</code>方法，<code>适配器类</code>再调用<code>适配者类</code>的相关接口方法。适配器模式又细分为<font color='red'>类适配器模式、对象适配器模式以及接口适配器模式</font>。</p>
+
+<h3 id="类适配器模式">类适配器模式</h3>
+
+<p>在类适配器模式下，首先会有一个<code>适配器类（Adapter）</code>，它通过继承适<code>配者类</code>来实现<code>目标类</code>，目标量通过接口来使用。下面通过一个示例来说明类适配器的使用。该示例描述的是通过使用电源适配器给手机充电，由于插排所提供的电压是 220V 的，而手机只能接受 5V，因此需要第三者电源适配器来进行电压的转换。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 适配者类
+</span><span class="c1"></span><span class="err">public class </span><span class="n">Voltage220V</span> <span class="p">{</span>
+
+    <span class="err">public int </span><span class="n">output220V</span><span class="p">()</span> <span class="p">{</span>
+        <span class="err">int src </span><span class="o">=</span> <span class="n">220</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;电压 = &#34;</span> <span class="o">+</span> <span class="n">src</span> <span class="o">+</span> <span class="s">&#34;V...&#34;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">src</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// IVoltage5V.java
+</span><span class="c1"></span><span class="err">public interface </span><span class="n">IVoltage5V</span> <span class="p">{</span>
+    <span class="err">int output5V</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// 适配器类
+</span><span class="c1"></span><span class="err">public class VoltageAdapter extends Voltage220V implements </span><span class="n">IVoltage5V</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">public int </span><span class="n">output5V</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 拿到 220V 电压之后将其处理成 5V 电压，然后返回
+</span><span class="c1"></span>        <span class="err">int src </span><span class="o">=</span> <span class="n">output220V</span><span class="p">();</span>
+        <span class="err">int dst </span><span class="o">=</span> <span class="n">src</span> <span class="o">/</span> <span class="n">44</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">dst</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Phone.java
+</span><span class="c1"></span><span class="err">public class </span><span class="n">Phone</span> <span class="p">{</span>
+
+    <span class="err">public void </span><span class="n">charging</span><span class="p">(</span><span class="err">IVoltage5V iVoltage5V</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">iVoltage5V</span><span class="p">.</span><span class="na">output5V</span><span class="p">()</span> <span class="o">==</span> <span class="n">5</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;电压为 5V，手机开始充电...&#34;</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;电压不为 5V，不适合手机充电...&#34;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Client.java
+</span><span class="c1"></span><span class="err">public class </span><span class="n">Client</span> <span class="p">{</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Phone phone </span><span class="o">=</span> <span class="k">new</span> <span class="n">Phone</span><span class="p">();</span>
+        <span class="n">phone</span><span class="p">.</span><span class="na">charging</span><span class="p">(</span><span class="k">new</span> <span class="n">VoltageAdapter</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">电压 = 220V...
+电压为 5V，手机开始充电...</pre></td></tr></table>
+</div>
+</div>
+<p>在适配者类（Voltage220V）中，它提供的电压是 220V，我们需要通过适配器类（VoltageAdapter）将 220V 转换成手机能够充电的 5V，适配器类通过继承与实现接口的方式进行电压的转换。</p>
+
+<p>需要注意的是，以上的这种类适配器模式有一定的局限性，因为 Java 只支持单继承。此外，适配者类中的<code>output220V()</code>方法也在适配器类（VoltageAdapter）中暴露了出来，增加了使用成本。但正因为继承了适配者类，所以它可以根据需求重写适配者类中的方法，使得适配器类的灵活性增强了。</p>
+
+<h3 id="对象适配器模式">对象适配器模式</h3>
+
+<p>与类适配器不同的是，对象适配器不是使用继承关系连接到适配者类，而是通过<code>委派</code>关系连接到适配者类，即持有适配者类的实例。对象适配器模式是适配器模式常用的一种设计模式。</p>
+
+<p>实现的方式也很简单，直接修改适配器类即可，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 适配器类
+</span><span class="c1"></span><span class="err">public class VoltageAdapter implements </span><span class="n">IVoltage5V</span> <span class="p">{</span>
+
+    <span class="err">private Voltage220V </span><span class="n">voltage220V</span><span class="p">;</span>
+
+    <span class="err">public VoltageAdapter</span><span class="p">(</span><span class="err">Voltage220V voltage220V</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">voltage220V</span> <span class="o">=</span> <span class="n">voltage220V</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public int </span><span class="n">output5V</span><span class="p">()</span> <span class="p">{</span>
+        <span class="err">int dst </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">voltage220V</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="err">int src </span><span class="o">=</span> <span class="n">voltage220V</span><span class="p">.</span><span class="na">output220V</span><span class="p">();</span>
+            <span class="n">dst</span> <span class="o">=</span> <span class="n">src</span> <span class="o">/</span> <span class="n">44</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">dst</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 客户端也进行了些许的改变
+</span><span class="c1"></span><span class="err">public class </span><span class="n">Client</span> <span class="p">{</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="err">Phone phone </span><span class="o">=</span> <span class="k">new</span> <span class="n">Phone</span><span class="p">();</span>
+        <span class="n">phone</span><span class="p">.</span><span class="na">charging</span><span class="p">(</span><span class="k">new</span> <span class="n">VoltageAdapter</span><span class="p">(</span><span class="k">new</span> <span class="n">Voltage220V</span><span class="p">()));</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="接口适配器模式">接口适配器模式</h3>
+
+<p>当不需要全部实现接口提供的方法时，可以设计一个抽象类去实现该接口，并为该接口中每个方法提供一个默认实现（空方法），那么该抽象类的子类就可以有选择性的覆盖父类的某些方法来实现需求。该适配器模式适用于一个接口不想使用其所有方法的情况。如下所示。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// InterfaceDemo.java
+</span><span class="c1"></span><span class="err">public interface </span><span class="n">InterfaceDemo</span> <span class="p">{</span>
+
+    <span class="c1">// 只关注 fun1() 方法的使用
+</span><span class="c1"></span>    <span class="err">void fun1</span><span class="p">();</span>
+
+    <span class="err">void fun2</span><span class="p">();</span>
+
+    <span class="err">void fun3</span><span class="p">();</span>
+
+    <span class="err">void fun4</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// AbsAdapter.java
+</span><span class="c1"></span><span class="err">public abstract class AbsAdapter implements InterfaceDemo</span><span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">fun1</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">fun2</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">fun3</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="err">public void </span><span class="n">fun4</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Client.java
+</span><span class="c1"></span><span class="err">public class </span><span class="n">Client</span> <span class="p">{</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="err">AbsAdapter absAdapter </span><span class="o">=</span> <span class="k">new</span> <span class="n">AbsAdapter</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// 真正想要适配的是 fun1() 方法
+</span><span class="c1"></span>            <span class="nd">@Override</span>
+            <span class="err">public void </span><span class="n">fun1</span><span class="p">()</span> <span class="p">{</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;使用了 fun1 方法&#34;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+        <span class="n">absAdapter</span><span class="p">.</span><span class="na">fun1</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">使用了 fun1 方法</pre></td></tr></table>
+</div>
+</div>
+<p>在 main 方法中我们只关注的是 fun1() 方法的使用，因此可以直接对 fun1() 方法进行重写即可。</p>
+
+<h3 id="小结">小结</h3>
+
+<p>在 Spring MVC 的源码中，HandlerAdapter 使用到了适配器模式，为什么需要使用适配器模式？</p>
+
+<p>这与 Spring MVC 的处理请求的流程有关，Handler 的类型不同，有多重实现方式，那么调用方式就是不确定的。如果需要直接调用 Controller 方法，那么在调用的时候就需要使用 if-else 的方式来判断是哪一个子类然后去执行，如果后面想要对 Controller 进行扩展，就需要修改原来的代码，不易维护。</p>
+
 <h2 id="桥接模式">桥接模式</h2>
+
+<p>TODO</p>
 
 <h2 id="装饰模式">装饰模式</h2>
 

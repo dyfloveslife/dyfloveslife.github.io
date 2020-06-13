@@ -1209,19 +1209,14 @@
       
       <guid>http://localhost:1313/2017/06/03/Linux-DNS/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
-同时有两个软件包：
-- &lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
-- &lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
+同时有两个软件包：&lt;/p&gt;
 
-&lt;p&gt;步骤：
-1.  软件包的安装（bind和caching）
-2.  配置DNS
-    2.1 配置虚拟机静态IP
-    2.2 修改/etc/named.conf配置文件
-    2.3 在/var/named下新建正向和反向解析文件，并修改配置信息
-3.  启动named服务，检测DNS是否配置成功&lt;/p&gt;</description>
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>

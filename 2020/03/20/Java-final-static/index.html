@@ -374,7 +374,7 @@
 </ul>
 </blockquote>
 
-<p>对于<code>静态变量</code>，其在内存中只有一份拷贝，JVM 只为静态变量分配一次内存，在加载类的过程中完成静态变量的内存分配。而对于<code>实例变量</code>来说，每创建一个实例，就会为实例变量分配一次内存，实例变量在内存中可以有多份拷贝，补补影响。</p>
+<p>对于<code>静态变量</code>，其在内存中只有一份拷贝，JVM 只为静态变量分配一次内存，在加载类的过程中完成静态变量的内存分配。而对于<code>实例变量</code>来说，每创建一个实例，就会为实例变量分配一次内存，实例变量在内存中可以有多份拷贝，互不影响。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1

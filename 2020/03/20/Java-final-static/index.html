@@ -50,7 +50,7 @@
 
 <meta itemprop="datePublished" content="2020-03-20T13:32:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-20T20:07:11&#43;08:00" />
-<meta itemprop="wordCount" content="4115">
+<meta itemprop="wordCount" content="4342">
 
 
 
@@ -135,7 +135,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 4115 words </span>
+          <span class="more-meta"> 4342 words </span>
           <span class="more-meta"> 9 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -159,6 +159,7 @@
 <li><a href="#static-修饰变量">static 修饰变量</a></li>
 <li><a href="#static-修饰方法">static 修饰方法</a></li>
 <li><a href="#static-修饰代码块">static 修饰代码块</a></li>
+<li><a href="#static-修饰内部类">static 修饰内部类</a></li>
 <li><a href="#static-小结">static 小结</a></li>
 </ul></li>
 <li><a href="#代码块的访问顺序">代码块的访问顺序</a></li>
@@ -494,6 +495,55 @@
 </div>
 <p>可以看出，由于静态代码块是在类的初始化阶段完成的，因此在创建类的第二个对象<code>test1</code>的时候，该类的静态代码块就不会执行了。</p>
 
+<h2 id="static-修饰内部类">static 修饰内部类</h2>
+
+<p>非静态内部类依赖于外部类的实例，也就是说：<font color='red'>需要先创建外部类的实例，才能用这个实例去创建非静态内部类</font>。而静态内部类不需要，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">OuterClass</span> <span class="p">{</span>
+
+    <span class="err">class InnerClass </span><span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="err">static class </span><span class="n">StaticInnerClass</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 下面这行被注释的代码是错误的，因为非静态内部类依赖于外部类的实例
+</span><span class="c1"></span>        <span class="c1">// InnerClass innerClass = new InnerClass(); 
+</span><span class="c1"></span>
+        <span class="c1">// 首先需要创建外部类的实例，然后用这个实例去创建非静态内部类
+</span><span class="c1"></span>        <span class="err">OuterClass outerClass </span><span class="o">=</span> <span class="k">new</span> <span class="n">OuterClass</span><span class="p">();</span>
+        <span class="err">InnerClass innerClass </span><span class="o">=</span> <span class="err">outerClass.new InnerClass</span><span class="p">();</span>
+        
+        <span class="c1">// 而静态内部类就厉害了，人家自己就可以创建对象，而不用管外部类
+</span><span class="c1"></span>        <span class="err">StaticInnerClass staticInnerClass </span><span class="o">=</span> <span class="k">new</span> <span class="n">StaticInnerClass</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="static-小结">static 小结</h2>
 
 <ul>

@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-04-14T13:35:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-15T23:04:11&#43;08:00" />
-<meta itemprop="wordCount" content="6197">
+<meta itemprop="wordCount" content="7507">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 6197 words </span>
-          <span class="more-meta"> 13 mins read </span>
+          <span class="more-meta"> 7507 words </span>
+          <span class="more-meta"> 15 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -155,6 +155,7 @@
 <li><a href="#任务的执行">任务的执行</a></li>
 </ul></li>
 <li><a href="#executors">Executors</a></li>
+<li><a href="#如何设置线程池参数">如何设置线程池参数？</a></li>
 <li><a href="#参考">参考</a></li>
 </ul>
 </nav>
@@ -469,7 +470,7 @@ list 中元素的数量: 19984</pre></td></tr></table>
 
 <ul>
 <li>在创建完线程池之后，默认情况下是没有任何线程的，而是等到有任务来到的时候才开始创建线程去执行任务。<br /></li>
-<li>除非调用了 prestartAllCoreThreads() 或者 prestartAllCoreThread() 方法进行<code>预创建线程</code>，即在没有任务来到之前就创建 corePoolSize 个线程或 1 个线程。</li>
+<li>除非调用了 prestartAllCoreThreads() 或者 prestartAllCoreThread() 方法进行<code>预创建线程</code>，即在没有任务来到之前就创建 corePoolSize 个线程或 1 个线程，这种方式称为“预热”，在抢购系统中经常会用到。</li>
 <li>也就是说，当提交一个任务到线程池时，线程池会创建一个线程来执行该任务，即使其它空闲的线程能够执行该任务，但也是会创建新线程的，等到需要执行的任务数量大于线程池基本大小时就不会再创建。</li>
 </ul></li>
 <li><strong>2. maximumPoolSize：线程池允许创建的最大线程数量</strong>。
@@ -639,9 +640,9 @@ list 中元素的数量: 19984</pre></td></tr></table>
 </div>
 <p><code>COUNT_BITS</code>参数与线程池状态有关，对于线程池的每个状态，都是通过将 -1、0、1、2、3 向左移 COUNT_BITS 个位置，也就是说使用的是高位的信息。其中<code>Integer.SIZE</code>为 32，因此<code>COUNT_BITS</code>的值为 29，<code>CAPACITY</code>的值为 536870911。</p>
 
-<p>注意这里的 corePoolSize、maximumPoolSize 以及 largestPoolSize 三个参数。这里的<code>corePoolSize</code>就是线程池的基本大小，默认为 0。<code>maximumPoolSize</code>表示池中允许的最大线程数，如果池中的线程数量大于<code>corePoolSize</code>，则会将任务添加到队列 workQueue 中，如果 workQueue 队列满了，但线程数小于<code>maximumPoolSize</code>，则会添加新的线程来处理被天津爱的任务。<code>largestPoolSize</code>用于记录线程池中曾经有过的最大线程数目。</p>
+<p>注意这里的 corePoolSize、maximumPoolSize 以及 largestPoolSize 三个参数。这里的<code>corePoolSize</code>就是线程池的基本大小，默认为 0。<code>maximumPoolSize</code>表示池中允许的最大线程数，如果池中的线程数量大于<code>corePoolSize</code>，则会将任务添加到队列 workQueue 中，如果 workQueue 队列满了，但线程数小于<code>maximumPoolSize</code>，则会添加新的线程来处理被添加的任务。<code>largestPoolSize</code>用于记录线程池中曾经有过的最大线程数目。</p>
 
-<p><strong>为了弄清楚 corePoolSize 和 maximumPoolSize 之间的关系</strong>，以下给出几种场景：</p>
+<p><strong>为了弄清楚 corePoolSize 和 maximumPoolSize 之间的关系</strong>，以下给出几种场景，<font color='red'>这同时也是线程池执行的流程</font>：</p>
 
 <ul>
 <li>池中线程数小于 corePoolSize，则新任务不排队，而是直接创建新线程；</li>
@@ -649,6 +650,12 @@ list 中元素的数量: 19984</pre></td></tr></table>
 <li>池中线程数大于等于 corePoolSize，workQueue 满了，但线程数量小于 maximumPoolSize，则添加新的线程来处理被添加的任务；</li>
 <li>池中线程数大于等于 corePoolSize，workQueue 满了，并且线程数量大于等于 maximumPoolSize，则新任务会被拒绝，使用 handler 处理被拒绝的任务。</li>
 </ul>
+
+<p>如<a href="https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html">下图</a>所示：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/07/21/WgcRe54UAhtzqCJ.png" alt="image.png" />
+</center></p>
 
 <p>注意：以上的<code>池中线程数</code>具体指的就是<code>workerCount</code>，详细的解释可以通过 execute 方法了解到。而以上四种场景就是对 execute 方法的小结，如下所示：</p>
 <div class="highlight"><div class="chroma">
@@ -754,7 +761,9 @@ list 中元素的数量: 19984</pre></td></tr></table>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>可以看到，这种创建线程池的方式已经将 corePoolSize 和 maximumPoolSize 都设置为 1，并且使用的队列也是无界的 LinkedBlockingQueue，即不管有多少任务都需要排队，等到前面一个任务执行完毕，才能执行队列中的线程。newSingleThreadExecutor 主要适用于需要保证顺序执行各个任务，并且在任意时间点，不会有多个线程是活动的应用场景。</p>
+<p>可以看到，这种创建线程池的方式已经将 corePoolSize 和 maximumPoolSize 都设置为 1，并且使用的队列也是无界的 LinkedBlockingQueue，即不管有多少任务都需要排队，等到前面一个任务执行完毕，才能执行队列中的线程。</p>
+
+<p>newSingleThreadExecutor 主要适用于需要保证顺序执行（FIFO）各个任务，并且在任意时间点，不会有多个线程是活动的应用场景。</p>
 
 <p><strong>2.newFixedThreadPool(int nThreads)：创建固定大小的线程池</strong></p>
 <div class="highlight"><div class="chroma">
@@ -773,7 +782,9 @@ list 中元素的数量: 19984</pre></td></tr></table>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>这里的 corePoolSize 和 maximumPoolSize 两个参数需要手动指定，并且队列类型适用的也是 LinkedBlockingQueue。由于 keepAliveTime 表示当线程数量大于 corePoolSize 时，多余的空闲线程在终止前等待新任务的最大时间，由于设置为 0，这意味着多余的空闲线程会被立即执行。newFixedThreadPool 主要适用于为了满足资源管理的需求，而需要限制当前线程数量的应用场景，它适用于负载比较中的服务器。</p>
+<p>固定大小的线程池，当有新的任务提交时，线程池中如果有空闲线程，则立即执行。否则新的任务会被缓存在一个任务队列中，等待线程池释放空闲线程。</p>
+
+<p>这里的 corePoolSize 和 maximumPoolSize 两个参数需要手动指定，并且队列类型适用的也是 LinkedBlockingQueue。由于 keepAliveTime 表示当线程数量大于 corePoolSize 时，多余的空闲线程在终止前等待新任务的最大时间，由于设置为 0，这意味着多余的空闲线程会被立即执行。newFixedThreadPool 主要适用于为了满足资源管理的需求，而需要限制当前线程数量的应用场景，它适用于负载比重的服务器。</p>
 
 <p>需要注意的是，由于使用了无界队列 LinkedBlockingQueue（队列的容量为 Integer.MAX_VALUE），则会对线程池带来如下的影响：</p>
 
@@ -801,13 +812,32 @@ list 中元素的数量: 19984</pre></td></tr></table>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
+<p>线程池的大小不固定，可灵活回收空闲线程，若无可回收，则新建线程。</p>
+
 <p>无界线程池的 corePoolSize 被设置为 0，maximumPoolSize 被近似地设置为整数的最大值，keepAliveTime 被设置为 60 秒。这种方式就是说，不管提交了多少任务，都直接运行。</p>
 
 <p>无界线程池采用了没有容量的 SynchronousQueue，这意味着如果主线程提交任务的速度高于 maximumPoolSize 中的线程处理速度时，CachedThreadPool 会不断的创建线程，即只要添加进去的线程就会被拿去用。极端情况下，CachedThreadPool 会因为创建过多的线程而耗尽 CPU 和内存资源。</p>
 
 <p>需要注意的是：单线程线程池和固定大小的线程池都不会进行自动回收，而无界线程池设置了回收时间，由于 corePoolSize 为 0，所以只要 60 秒内没有被使用到的线程都会被直接移除。</p>
 
-<p>最后，在《<a href="https://github.com/alibaba/p3c">阿里巴巴 Java 开发手册</a>》中不推荐不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样的处理方式可以让程序员更加明确线程池的运行规则，避免资源耗尽的风险。Executors 返回的线程池对象的<strong>弊端</strong>如下：</p>
+<p><strong>4.newScheduledThreadPool()：定时线程池</strong></p>
+
+<p>表示定时线程池，支持定时以及周期性任务的执行。注意：与其他方法不同的是，newScheduledThreadPool() 使用 ScheduledThreadPoolExecutor() 进行实现。而其他的方法使用 ThreadPoolExecutor() 进行实现。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static ScheduledExecutorService newScheduledThreadPool</span><span class="p">(</span><span class="err">int corePoolSize</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">ScheduledThreadPoolExecutor</span><span class="p">(</span><span class="n">corePoolSize</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>最后，在《<a href="https://github.com/alibaba/p3c">阿里巴巴 Java 开发手册</a>》中不推荐不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样的处理方式可以让程序员更加明确线程池的运行规则，避免资源耗尽的风险。<font color='red'>也就是说，如果选择使用 Executors 提供的工厂类，将会忽略很多线程池的参数设置，工厂类一旦选择设置默认的参数，就不容易调优参数设置，从而产生性能问题或者浪费资源。</font></p>
+
+<p>Executors 返回的线程池对象的<strong>弊端</strong>如下：</p>
 
 <ul>
 <li>FixedThreadPool 和 SingleThreadPool:
@@ -822,6 +852,47 @@ list 中元素的数量: 19984</pre></td></tr></table>
 </ul></li>
 </ul>
 
+<h1 id="如何设置线程池参数">如何设置线程池参数？</h1>
+
+<p>总的来说，具体问题具体分析。由于环境是多变的，因此不可能设置一个绝对精确的线程数，但可以通过一些实际操作因素来计算出一个合理的线程数，避免由于线程池设置不合理导致的性能问题。</p>
+
+<p>下面分为<code>CPU 密集型</code>和<code>IO 密集型</code>这两种类型来考虑：</p>
+
+<p>对于<code>CPU 密集型</code>来说，可以将线程数设置为<code>CPU 核心数 + 1</code>。比 CPU 核心数多一个线程的目的是：为了防止线程偶尔发生的缺页中断，或者其它原因导致的任务暂停而带来的影响。一旦任务暂停，CPU 就会处于空闲状态，在这种情况下多出的一个线程就可以充分利用 CPU 的空闲时间。</p>
+
+<p>对于<code>IO密集型</code>来说，系统的大部分时间用来进行 IO 交互，而线程在处理 IO 的时间段内不会占用 CPU 来处理，这时可以将 CPU 交出给其它线程使用。因此在 IO 密集型任务中，可以多配置一些线程，即<code>2 * CPU 核心数</code>。</p>
+
+<p>而对于平常的应用场景，可以通过以下方法来计算线程数：</p>
+
+<p>$$
+线程数= N * ((1 + WT) / ST)
+$$</p>
+
+<p>其中，N 表示 CPU 核心数，WT 表示线程等待时间，ST 表示线程运行时间。</p>
+
+<p>因此，从整体上看，我们可以根据不同的业务场景，从<code>N+1</code>和<code>2*N</code>中选择一个合适的计算方式，计算大概的线程数量，然后通过实际的压测，逐渐往“增大线程数量”和“减少线程数量”两个方面进行调整，从而最终确定一个比较理想的线程数。</p>
+
+<p>顺便一提的是，通过查看<a href="https://tech.meituan.com/2020/04/02/java-pooling-pratice-in-meituan.html">《Java线程池实现原理及其在美团业务中的实践》</a>一文发现，<font color='red'>还可以将线程池的参数进行动态化。</font>并且给出了三种设计方案：</p>
+
+<ul>
+<li><strong>简化线程池的配置</strong>：线程池的核心参数有 3 个，即 corePoolSize、maximumPoolSize 以及 workQueue。而考虑到实际的应用场景，可以分为两类：
+
+<ul>
+<li>一种是并行执行子任务，提高响应速度的场景。该场景下应该使用同步队列，没有什么任务应该被缓存下来，而是应该立即执行。</li>
+<li>另一种是执行大批次任务，提升吞吐量的场景。该场景下，应该使用有界队列去缓冲大批量的任务，并且队列的容量必须声明，防止任务无限制的堆积。</li>
+</ul></li>
+<li><strong>参数可动态修改</strong>：为了解决大多数情况下参数不易配置、参数修改成本高等缺点，在 Java 线程池的高扩展性的基础上，实现对线程池封装。也就是允许线程池监听同步外部的消息，根据消息进行修改配置。
+
+<ul>
+<li>对于该方式，可以通过 ThreadPoolExecutor 类中的 setter 方法，对参数进行调整。</li>
+</ul></li>
+<li><strong>增加线程池监控</strong>：也就是在线程池执行任务的生命周期中添加监控能力，帮助开发人员了解线程状态。
+
+<ul>
+<li>对于该方式，可以通过 ThreadPoolExecutor 类中的 getter 方法读取到当前线程池的运行状态以及参数。</li>
+</ul></li>
+</ul>
+
 <h1 id="参考">参考</h1>
 
 <ul>
@@ -832,6 +903,7 @@ list 中元素的数量: 19984</pre></td></tr></table>
 <li><a href="https://blog.csdn.net/fuyuwei2015/article/details/72758179">https://blog.csdn.net/fuyuwei2015/article/details/72758179</a></li>
 <li><a href="https://github.com/crossoverJie/JCSprout/blob/master/docs/thread/thread-gone2.md">https://github.com/crossoverJie/JCSprout/blob/master/docs/thread/thread-gone2.md</a></li>
 <li><a href="https://juejin.im/entry/58fada5d570c350058d3aaad">https://juejin.im/entry/58fada5d570c350058d3aaad</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1632213">https://cloud.tencent.com/developer/article/1632213</a></li>
 </ul>
     </div>
 

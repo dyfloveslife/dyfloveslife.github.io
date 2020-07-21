@@ -510,7 +510,7 @@
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>从代码中可以看出，HashMap 底层采用 Entry 数组（桶）来存储<code>键值对</code>，当进行 get 操作取出一个 Entry 时，先通过 hash 算法计算其在桶（数组）中的位置，然后通过 equals 方法在红黑树或者链表中进行查找。</p>
+<p>从代码中可以看出，HashMap 底层采用 Node 数组（桶）来存储<code>键值对</code>，当进行 get 操作取出一个 Node 时，先通过 hash 算法计算其在桶（数组）中的位置，然后通过 equals 方法在红黑树或者链表中进行查找。</p>
 
 <p>其中，对于<code>获得桶（数组）的位置</code>，也就是计算数组中的索引，如下：</p>
 <div class="highlight"><div class="chroma">

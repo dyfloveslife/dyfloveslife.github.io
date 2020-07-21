@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/07/09/alg-re-space-LCCI/" />
@@ -47,13 +47,16 @@
 <meta property="article:modified_time" content="2020-07-09T21:24:56+08:00" />
 <meta itemprop="name" content="算法题：恢复空格">
 <meta itemprop="description" content="本文详细解释《程序员面试金典》中的《恢复空格》一题。">
+
+
 <meta itemprop="datePublished" content="2020-07-09T21:24:02&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-09T21:24:56&#43;08:00" />
-<meta itemprop="wordCount" content="1450">
+<meta itemprop="wordCount" content="1454">
 
 
 
-<meta itemprop="keywords" content="Algorithm,LeetCode," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Algorithm,LeetCode," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="算法题：恢复空格"/>
 <meta name="twitter:description" content="本文详细解释《程序员面试金典》中的《恢复空格》一题。"/>
 
@@ -133,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/Algorithm/"> Algorithm </a>
             </div>
-          <span class="more-meta"> 1450 words </span>
+          <span class="more-meta"> 1454 words </span>
           <span class="more-meta"> 3 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -143,60 +146,96 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#题目描述">题目描述</a></li>
-    <li><a href="#分析">分析</a></li>
-    <li><a href="#代码">代码</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#题目描述">题目描述</a></li>
+<li><a href="#分析">分析</a></li>
+<li><a href="#代码">代码</a></li>
+</ul></li>
+</ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>本文详细解释《程序员面试金典》中的<a href="https://leetcode-cn.com/problems/re-space-lcci/">《恢复空格》</a>一题。</p>
+
 <h2 id="题目描述">题目描述</h2>
-<p>哦，不！你不小心把一个长篇文章中的空格、标点都删掉了，并且大写也弄成了小写。像句子<code>I reset the computer. It still didn’t boot! </code>已经变成了<code>iresetthecomputeritstilldidntboot</code>。在处理标点符号和大小写之前，你得先把它断成词语。当然了，你有一本厚厚的词典<code>dictionary</code>，不过，有些词没在词典里。假设文章用<code>sentence</code>表示，设计一个算法，把文章断开，要求未识别的字符最少，返回未识别的字符数。</p>
+
+<p>哦，不！你不小心把一个长篇文章中的空格、标点都删掉了，并且大写也弄成了小写。像句子<code>I reset the computer. It still didn’t boot!</code>已经变成了<code>iresetthecomputeritstilldidntboot</code>。在处理标点符号和大小写之前，你得先把它断成词语。当然了，你有一本厚厚的词典<code>dictionary</code>，不过，有些词没在词典里。假设文章用<code>sentence</code>表示，设计一个算法，把文章断开，要求未识别的字符最少，返回未识别的字符数。</p>
+
 <blockquote>
 <p>注意：本题相对原题稍作改动，只需返回未识别的字符数</p>
 </blockquote>
+
 <p><strong>输入</strong>：</p>
+
 <p><code>dictionary = [&quot;looked&quot;,&quot;just&quot;,&quot;like&quot;,&quot;her&quot;,&quot;brother&quot;]</code></p>
+
 <p><code>sentence = &quot;jesslookedjustliketimherbrother&quot;</code></p>
+
 <p><strong>输出</strong>：</p>
+
 <p>7</p>
+
 <p><strong>解释</strong>：</p>
+
 <p>断句后为<code>jess looked just like tim her brother</code>，共 7 个未识别字符。</p>
+
 <p><strong>提示</strong>：</p>
+
 <ul>
 <li>0 &lt;= len(sentence) &lt;= 1000</li>
 <li>dictionary 中总字符数不超过 150000。</li>
 <li>你可以认为 dictionary 和 sentence 中只包含小写字母。</li>
 </ul>
+
 <h2 id="分析">分析</h2>
+
 <p>我们可以使用动态规划来解决这道题，dp[i] 表示在以索引 i 结尾的字符串中，它之前最多能匹配单词的数量。</p>
+
 <p>需要注意的是，最后需要返回的是未识别的字符数，也就是没有匹配成功的字符数。因此，我们用字符串的总长度减去已经匹配完成的字符串长度，那么最后剩下的就是未识别的字符数。</p>
+
 <p>如下所示：</p>
+
 <ul>
 <li>刚开始来到索引为 0 的<code>L</code>位置，由于<code>L</code>不在字典中，因此，dp[0]=0。</li>
 <li>来到索引为 1 的<code>e</code>位置，由于字符串<code>e</code>和<code>Le</code>都不在字典中，因此，dp[1]=0。</li>
 <li>来到索引为 2 的<code>e</code>位置，由于字符串<code>Lee</code>、<code>ee</code>、<code>e</code>都不在字典中，因此，dp[2]=0。</li>
 <li>来到索引为 3 的<code>t</code>位置，由于字符串<code>Leet</code>在字典中，并且还是最长的，因此，dp[3]=4。</li>
 </ul>
-<p><img src="https://i.loli.net/2020/07/09/Q4WTBwJt1bhXGx8.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2020/07/09/Q4WTBwJt1bhXGx8.png" alt="image.png" /></p>
+
 <p>接下来是索引为 4 的<code>C</code>位置，在以<code>C</code>结尾的字符串中，只有除了<code>Leet</code>可以从字典中匹配到以外，<code>etc</code>也是可以匹配到的。因此，dp[4]=3+dp[1]=3，其中，这里的 3 指的是<code>etc</code>字符串的长度，后面的 dp[1] 指的是以<code>e</code>结尾所能最多匹配单词的数量。虽然，我们看到 dp[4] 在当前是等于 3 的，但是仍然不能取，我们还应该考虑到字符串<code>Leet</code>，它的长度是 4，虽然不是以<code>c</code>结尾的，但是它出现在了字典中，并且当前的长度最长。所以，我们在这里需要取最大值，即 dp[4]=Math.max(3+dp[1], 4)。如下所示：</p>
-<p><img src="https://i.loli.net/2020/07/09/frjIUpwqehxGBls.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2020/07/09/frjIUpwqehxGBls.png" alt="image.png" /></p>
+
 <p>接下来是索引为 5 的<code>o</code>位置以及索引为 6 的<code>d</code>，它们的取值只能取到最大值 4。如下所示：</p>
-<p><img src="https://i.loli.net/2020/07/09/maQvwzknBORN1sM.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2020/07/09/maQvwzknBORN1sM.png" alt="image.png" /></p>
+
 <p>接下来是索引为 7 的<code>e</code>，此时<code>code</code>可以在字典中进行匹配。此时，dp[7]=Math.max(4, 4+dp[7-4])=8。其中，前面的 4 表示前一个位置所能表示的最大长度，而 4+dp[7-4] 表示以<code>e</code>结尾的、在字典中能够匹配的字符串<code>code</code>的长度为 4，<code>e</code>的当前位置是 7，然后将去<code>code</code>的长度，就是 dp[7-4]。如下图所示：</p>
-<p><img src="https://i.loli.net/2020/07/09/TDd61am9AjIFk7l.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2020/07/09/TDd61am9AjIFk7l.png" alt="image.png" /></p>
+
 <p>接下来是索引为 8 的<code>g</code>（题目说明已经忽略大小写），很容易看出，当前 dp[8] 的值依赖于前面的值，也就是 8。如下所示：</p>
-<p><img src="https://i.loli.net/2020/07/09/6gerofzRYclautp.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2020/07/09/6gerofzRYclautp.png" alt="image.png" /></p>
+
 <p>接下来是索引为 9 的<code>o</code>，由于<code>go</code>可以在字典中找到，因此，2+dp[9-2] 表示<code>go</code>的字符串长度为 2，在加上 dp[7] 位置上的数，然后再与<code>o</code>的前一位（也就是 8）取最大值，最终 dp[9] 就等于 10。如下图所示：</p>
-<p><img src="https://i.loli.net/2020/07/09/iIV2Bhj6nlD8U4d.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2020/07/09/iIV2Bhj6nlD8U4d.png" alt="image.png" /></p>
+
 <p>接下来是索引为 10 的<code>o</code>以及索引为 11 的<code>d</code>，它们都不在字典中，因此，都为 10。如下所示：</p>
-<p><img src="https://i.loli.net/2020/07/09/ZwyQ1fBcA83vEqs.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2020/07/09/ZwyQ1fBcA83vEqs.png" alt="image.png" /></p>
+
 <p>最后，12（字符串长度） 减 10（已经匹配的字符串长度） 得 2（没有匹配的字符串长度）。因此，最终返回 2 即可。</p>
+
 <h2 id="代码">代码</h2>
-<p>参见：https://github.com/dyfloveslife/LeetCodeAndSwordToOffer/blob/master/src/LeetCodeSolution/AlgorithmThought/_02_DP/_17_13_ReSpaceLCCI/Solution.java</p>
+
+<p>参见：<a href="https://github.com/dyfloveslife/LeetCodeAndSwordToOffer/blob/master/src/LeetCodeSolution/AlgorithmThought/_02_DP/_17_13_ReSpaceLCCI/Solution.java">https://github.com/dyfloveslife/LeetCodeAndSwordToOffer/blob/master/src/LeetCodeSolution/AlgorithmThought/_02_DP/_17_13_ReSpaceLCCI/Solution.java</a></p>
     </div>
 
     <div class="post-copyright">
@@ -237,11 +276,7 @@
           <a href="/tags/LeetCode/">LeetCode</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/2020/07/21/test/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">test</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
+        
         <a class="next" href="/2020/06/01/sort-algorithm/">
             <span class="next-text nav-default">排序算法</span>
             <span class="next-text nav-mobile">Next</span>

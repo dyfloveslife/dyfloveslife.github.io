@@ -16,15 +16,15 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content="1.显示新的窗体 步骤：
- ①定义一个新窗体类型的变量 ②实例化新窗体变量 ③调用新窗体的Show方法显示 " /><meta name="keywords" content="Java, blog, carol" />
+<meta name="author" content="Carol" /><meta name="description" content="1.显示新的窗体 步骤： - ①定义一个新窗体类型的变量 - ②实例化新窗体变量 - ③调用新窗体的Show方法显示
+" /><meta name="keywords" content="Java, blog, carol" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/16/Menus-and-Messages/" />
@@ -41,39 +41,39 @@
 
 <meta property="og:title" content="C# 之 菜单和消息" />
 <meta property="og:description" content="1.显示新的窗体
-步骤：
 
-①定义一个新窗体类型的变量
-②实例化新窗体变量
-③调用新窗体的Show方法显示
-" />
+步骤：
+- ①定义一个新窗体类型的变量
+- ②实例化新窗体变量
+- ③调用新窗体的Show方法显示" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2017/06/16/Menus-and-Messages/" />
 <meta property="article:published_time" content="2017-06-16T20:33:11+08:00" />
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="C# 之 菜单和消息">
 <meta itemprop="description" content="1.显示新的窗体
-步骤：
 
-①定义一个新窗体类型的变量
-②实例化新窗体变量
-③调用新窗体的Show方法显示
-">
+步骤：
+- ①定义一个新窗体类型的变量
+- ②实例化新窗体变量
+- ③调用新窗体的Show方法显示">
+
+
 <meta itemprop="datePublished" content="2017-06-16T20:33:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="980">
+<meta itemprop="wordCount" content="988">
 
 
 
-<meta itemprop="keywords" content="C-sharp," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="C-sharp," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="C# 之 菜单和消息"/>
 <meta name="twitter:description" content="1.显示新的窗体
-步骤：
 
-①定义一个新窗体类型的变量
-②实例化新窗体变量
-③调用新窗体的Show方法显示
-"/>
+步骤：
+- ①定义一个新窗体类型的变量
+- ②实例化新窗体变量
+- ③调用新窗体的Show方法显示"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -151,7 +151,7 @@
         <div class="post-category">
             <a href="/categories/C-sharp/"> C-sharp </a>
             </div>
-          <span class="more-meta"> 980 words </span>
+          <span class="more-meta"> 988 words </span>
           <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -160,69 +160,81 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#1-显示新的窗体">1.显示新的窗体</a></li>
+<li><a href="#2-消息框">2.消息框</a></li>
+<li><a href="#3-消息框的返回值">3.消息框的返回值</a></li>
+<li><a href="#4-打开文件对话框">4.打开文件对话框</a></li>
+<li><a href="#5-保存文件对话框">5.保存文件对话框</a></li>
+<li><a href="#6-文件复制">6.文件复制</a></li>
+<li><a href="#7-其他通用对话框">7.其他通用对话框</a></li>
+</ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
-      <h1 id="1显示新的窗体">1.显示新的窗体</h1>
-<p>步骤：</p>
-<ul>
-<li>①定义一个新窗体类型的变量</li>
-<li>②实例化新窗体变量</li>
-<li>③调用新窗体的Show方法显示</li>
-</ul>
+      <h1 id="1-显示新的窗体">1.显示新的窗体</h1>
+
+<p>步骤：
+- ①定义一个新窗体类型的变量
+- ②实例化新窗体变量
+- ③调用新窗体的Show方法显示</p>
+
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">from2</span> <span class="n">f</span> <span class="o">=</span> <span class="n">new</span> <span class="n">from2</span><span class="p">();</span>
-<span class="n">f</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
-</code></pre></td></tr></table>
+<span class="n">f</span><span class="p">.</span><span class="n">show</span><span class="p">();</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="2消息框">2.消息框</h1>
+</div>
+<h1 id="2-消息框">2.消息框</h1>
+
 <p>作用：消息框MessageBox用于向用户显示提示信息。
 示例1：最简单的消息框</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;消息内容&#34;</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;消息内容&#34;</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
-</div><p>示例2：带标题的消息框</p>
+</div>
+<p>示例2：带标题的消息框</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;消息内容&#34;</span><span class="p">,</span><span class="err">“标题”</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;消息内容&#34;</span><span class="p">,</span><span class="err">“标题”</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
-</div><p>示例3：带标题、指定按钮的消息框</p>
+</div>
+<p>示例3：带标题、指定按钮的消息框</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;消息内容&#34;</span><span class="p">,</span><span class="s">&#34;标题&#34;</span><span class="p">,</span><span class="n">MessageBoxButtons</span><span class="p">.</span><span class="n">OKCancel</span><span class="p">);</span> <span class="c1">//包含&#34;确定&#34;和&#34;取消&#34;按钮。
-</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;消息内容&#34;</span><span class="p">,</span><span class="s">&#34;标题&#34;</span><span class="p">,</span><span class="n">MessageBoxButtons</span><span class="p">.</span><span class="n">OKCancel</span><span class="p">);</span> <span class="o">//</span><span class="err">包含</span><span class="s">&#34;确定&#34;</span><span class="err">和</span><span class="s">&#34;取消&#34;</span><span class="err">按钮。</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="3消息框的返回值">3.消息框的返回值</h1>
+</div>
+<h1 id="3-消息框的返回值">3.消息框的返回值</h1>
+
 <p><strong>当消息框有多个按钮（确定取消、是否）时，如何判断用户点了哪个按钮？</strong>
-办法：</p>
-<ul>
-<li>可通过MessageBox.Show方法的返回值；</li>
-<li>返回DialogResult枚举类型。
-DialogResult.OK
-DialogResult.Cancel
-DialogResult.Yes
-DialogResult.No</li>
-</ul>
-<h1 id="4打开文件对话框">4.打开文件对话框</h1>
+办法：
+- 可通过MessageBox.Show方法的返回值；
+- 返回DialogResult枚举类型。
+     DialogResult.OK
+     DialogResult.Cancel
+     DialogResult.Yes
+     DialogResult.No</p>
+
+<h1 id="4-打开文件对话框">4.打开文件对话框</h1>
+
 <ul>
 <li><code>OpenFileDialog</code>：打开文件对话框</li>
 <li><code>ShowDialog</code>：显示对话框</li>
@@ -231,16 +243,18 @@ DialogResult.No</li>
 <li><code>FileName</code>：获取在文件对话框中选定打开的文件的完整路径</li>
 <li><code>SafeFileName</code>：获取在文件对话框中选定的文件名</li>
 </ul>
+
 <p>示例1：过滤文件类型</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="err">“文本文件</span><span class="o">|*</span><span class="p">.</span><span class="n">txt</span><span class="o">|</span><span class="err">图片文件</span><span class="o">|*</span><span class="p">.</span><span class="n">jpg</span><span class="p">;</span><span class="o">*</span><span class="p">.</span><span class="n">png</span><span class="p">;</span><span class="o">*</span><span class="p">.</span><span class="n">bmp</span><span class="o">|</span><span class="err">所有文件</span><span class="o">|*</span><span class="p">.</span><span class="o">*</span><span class="s">&#34;</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="err">“文本文件</span><span class="o">|*</span><span class="p">.</span><span class="n">txt</span><span class="o">|</span><span class="err">图片文件</span><span class="o">|*</span><span class="p">.</span><span class="n">jpg</span><span class="p">;</span><span class="o">*</span><span class="p">.</span><span class="n">png</span><span class="p">;</span><span class="o">*</span><span class="p">.</span><span class="n">bmp</span><span class="o">|</span><span class="err">所有文件</span><span class="o">|*</span><span class="p">.</span><span class="o">*</span><span class="s">&#34;</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="5保存文件对话框">5.保存文件对话框</h1>
+</div>
+<h1 id="5-保存文件对话框">5.保存文件对话框</h1>
+
 <ul>
 <li><code>SaveFileDialog</code>：保存文件对话框</li>
 <li><code>ShowDialog</code>：该方法显示对话框</li>
@@ -250,23 +264,25 @@ DialogResult.No</li>
 <li><code>DefaultExt</code>：获取或设置默认文件扩展名</li>
 <li><code>AddExtension</code>：设置如果用户省略扩展名，对话框是否自动在文件名中添加扩展名。（默认为true)</li>
 </ul>
-<h1 id="6文件复制">6.文件复制</h1>
-<p>步骤：</p>
-<ul>
-<li>1.先显示一个打开对话框，选择源文件，</li>
-<li>2.再显示一个保存对话框，选择目标文件，</li>
-<li>3.再把源复制到目标。</li>
-</ul>
+
+<h1 id="6-文件复制">6.文件复制</h1>
+
+<p>步骤：
+- 1.先显示一个打开对话框，选择源文件，
+- 2.再显示一个保存对话框，选择目标文件，
+- 3.再把源复制到目标。</p>
+
 <p>示例1：文件复制</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="n">Copy</span><span class="p">(</span><span class="err">源路径</span><span class="p">,</span><span class="err">目的路径）</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">System</span><span class="p">.</span><span class="n">IO</span><span class="p">.</span><span class="n">File</span><span class="p">.</span><span class="n">Copy</span><span class="p">(</span><span class="err">源路径</span><span class="p">,</span><span class="err">目的路径）</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="7其他通用对话框">7.其他通用对话框</h1>
+</div>
+<h1 id="7-其他通用对话框">7.其他通用对话框</h1>
+
 <ul>
 <li>ShowDialog方法：显示对话框</li>
 <li>返回DialogResult为OK或者Cancel</li>

@@ -17,15 +17,15 @@
 
 
 <meta name="author" content="Carol" /><meta name="description" content=" 软件： VMware Workstation Pro 环境： Windows 2008 R2
- 步骤：
- 配置虚拟机静态IP 安装 创建个人目录 创建虚拟目录 创建虚拟主机 使用域名访问web服务器 " /><meta name="keywords" content="Java, blog, carol" />
+ 步骤： 1. 配置虚拟机静态IP 2. 安装 3. 创建个人目录 4. 创建虚拟目录 5. 创建虚拟主机 6. 使用域名访问web服务器
+" /><meta name="keywords" content="Java, blog, carol" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/03/Windows-Web/" />
@@ -45,15 +45,14 @@
 软件： VMware Workstation Pro
 环境： Windows 2008 R2
 
-步骤：
 
-配置虚拟机静态IP
-安装
-创建个人目录
-创建虚拟目录
-创建虚拟主机
-使用域名访问web服务器
-" />
+步骤：
+1.  配置虚拟机静态IP
+2.  安装
+3.  创建个人目录
+4.  创建虚拟目录
+5.  创建虚拟主机
+6.  使用域名访问web服务器" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2017/06/03/Windows-Web/" />
 <meta property="article:published_time" content="2017-06-03T22:46:11+08:00" />
@@ -63,36 +62,37 @@
 软件： VMware Workstation Pro
 环境： Windows 2008 R2
 
-步骤：
 
-配置虚拟机静态IP
-安装
-创建个人目录
-创建虚拟目录
-创建虚拟主机
-使用域名访问web服务器
-">
+步骤：
+1.  配置虚拟机静态IP
+2.  安装
+3.  创建个人目录
+4.  创建虚拟目录
+5.  创建虚拟主机
+6.  使用域名访问web服务器">
+
+
 <meta itemprop="datePublished" content="2017-06-03T22:46:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="1430">
+<meta itemprop="wordCount" content="1436">
 
 
 
-<meta itemprop="keywords" content="Windows,Web," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Windows,Web," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Windows 环境下配置 Web 服务器"/>
 <meta name="twitter:description" content="
 软件： VMware Workstation Pro
 环境： Windows 2008 R2
 
-步骤：
 
-配置虚拟机静态IP
-安装
-创建个人目录
-创建虚拟目录
-创建虚拟主机
-使用域名访问web服务器
-"/>
+步骤：
+1.  配置虚拟机静态IP
+2.  安装
+3.  创建个人目录
+4.  创建虚拟目录
+5.  创建虚拟主机
+6.  使用域名访问web服务器"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -170,7 +170,7 @@
         <div class="post-category">
             <a href="/categories/Windows/"> Windows </a>
             </div>
-          <span class="more-meta"> 1430 words </span>
+          <span class="more-meta"> 1436 words </span>
           <span class="more-meta"> 3 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -180,12 +180,20 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#1-相同ip地址不同tcp端口">1. 相同IP地址，不同TCP端口</a></li>
-    <li><a href="#2不同ip地址相同tcp端口">2.不同IP地址，相同TCP端口</a></li>
-    <li><a href="#1-添加ip地址">1. 添加IP地址</a></li>
-    <li><a href="#2-绑定ip地址">2. 绑定IP地址</a></li>
-  </ul>
+<ul>
+<li><a href="#一-配置虚拟机静态ip">一.配置虚拟机静态IP</a></li>
+<li><a href="#二-安装">二.安装</a></li>
+<li><a href="#三-个人目录">三.个人目录</a></li>
+<li><a href="#四-虚拟目录">四.虚拟目录</a></li>
+<li><a href="#五-创建虚拟主机">五.创建虚拟主机</a>
+<ul>
+<li><a href="#1-相同ip地址-不同tcp端口">1. 相同IP地址，不同TCP端口</a></li>
+<li><a href="#2-不同ip地址-相同tcp端口">2.不同IP地址，相同TCP端口</a></li>
+<li><a href="#1-添加ip地址">1. 添加IP地址</a></li>
+<li><a href="#2-绑定ip地址">2. 绑定IP地址</a></li>
+</ul></li>
+<li><a href="#六-使用域名访问web服务器">六.使用域名访问web服务器</a></li>
+</ul>
 </nav>
   </div>
 </div>
@@ -194,91 +202,109 @@
 <p>软件： <code>VMware Workstation Pro</code>
 环境： <code>Windows 2008 R2</code></p>
 </blockquote>
-<p>步骤：</p>
-<ol>
-<li>配置虚拟机静态IP</li>
-<li>安装</li>
-<li>创建个人目录</li>
-<li>创建虚拟目录</li>
-<li>创建虚拟主机</li>
-<li>使用域名访问web服务器</li>
-</ol>
-<h1 id="一配置虚拟机静态ip">一.配置虚拟机静态IP</h1>
+
+<p>步骤：
+1.  配置虚拟机静态IP
+2.  安装
+3.  创建个人目录
+4.  创建虚拟目录
+5.  创建虚拟主机
+6.  使用域名访问web服务器</p>
+
+<h1 id="一-配置虚拟机静态ip">一.配置虚拟机静态IP</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></code></pre></td>
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">IP地址：192.168.1.2
+<pre class="chroma">IP地址：192.168.1.2
 子网掩码：255.255.255.0
 默认网关：192.168.1.1
-首选DNS服务器：192.168.1.254
-</code></pre></td></tr></table>
+首选DNS服务器：192.168.1.254</pre></td></tr></table>
 </div>
-</div><h1 id="二安装">二.安装</h1>
+</div>
+<h1 id="二-安装">二.安装</h1>
+
 <p>打开 <code>服务器管理器</code> ，右击 <code>角色</code> ，然后 <code>添加角色</code> 。选中 <code>Web服务器(IIS)</code>。如下图：
-<img src="/images/ftp1.png" alt="ftp">
+<img src="/images/ftp1.png" alt="ftp" />
 然后一直下一步，直至安装完成。</p>
-<h1 id="三个人目录">三.个人目录</h1>
+
+<h1 id="三-个人目录">三.个人目录</h1>
+
 <ol>
 <li>打开 <code>Internet 信息服务(IIS)管理器</code>，选中 <code>网站</code> 下的 <code>Default Web Site</code>，在右侧 <code>操作</code>中，选择 <code>基本设置</code>。物理路径设置为：<code>c:\inetpub\wwwroot</code>即可。如下图：
-<img src="/images/windows_web1.png" alt="web"></li>
+<img src="/images/windows_web1.png" alt="web" /></li>
 <li>右击 <code>Default Web Site</code>,选择 <code>网站绑定</code>-&gt; <code>添加</code>。IP地址选择已经配置的静态IP：<code>192.168.1.2</code>,主机名随意填写：<code>www.dyf.com</code>.如下图：
-<img src="/images/windows_web2.png" alt="web"></li>
+<img src="/images/windows_web2.png" alt="web" /></li>
 <li>在浏览器输入：<code>http://localhost</code>。如下图：
-<img src="/images/windows_web3.png" alt="web"></li>
+<img src="/images/windows_web3.png" alt="web" /></li>
 <li>在C盘下，新建 <code>dyf.com</code> 文件夹，并在该文件夹下新建<code>myindex.html</code> 文件，填入内容。</li>
 <li>打开 <code>Internet 信息服务(IIS)管理器</code>，右击 <code>网站</code>-&gt; <code>添加网站</code>，填入<code>网站名称</code>、<code>物理路径</code>、<code>IP地址</code> 。如下图：
-<img src="/images/windows_web4.png" alt="web"></li>
+<img src="/images/windows_web4.png" alt="web" /></li>
 </ol>
+
 <blockquote>
 <p>注意：<strong>接下来是很重要的一步</strong>。
 注意：<strong>接下来是很重要的一步</strong>。
 注意：<strong>接下来是很重要的一步</strong>。
 (重要的事情说三遍！)</p>
 </blockquote>
+
 <p>6.在 <code>dyf</code> 的中间一栏，有 <code>目录浏览</code> ，双击它。在右侧 <code>操作</code>，单击 <code>启用</code>。如下图：
-<img src="/images/windows_web5.png" alt="web">
-<img src="/images/windows_web6.png" alt="web">
+<img src="/images/windows_web5.png" alt="web" />
+<img src="/images/windows_web6.png" alt="web" />
 7.在浏览器输入： <code>http://192.168.1.2</code> 即可。</p>
-<h1 id="四虚拟目录">四.虚拟目录</h1>
+
+<h1 id="四-虚拟目录">四.虚拟目录</h1>
+
 <ol>
 <li>在c盘的<code>dyf.com</code>文件夹下,新建<code>爱好</code>文件夹，并在该文件夹下创建 <code>myindex.html</code> 文件，写入任意文字。</li>
 <li>打开 <code>Internet 信息服务(IIS)管理器</code>，右击 <code>dyf</code>-&gt; <code>添加虚拟目录</code>。在别名一栏填入 <code>爱好</code>，物理路径为： <code>c:\dyf.com\爱好</code>。如下图：
-<img src="/images/windows_web7.png" alt="web"></li>
+<img src="/images/windows_web7.png" alt="web" /></li>
 <li>在浏览器输入： <code>http://192.168.1.2</code> 即可看到 <code>爱好</code> 一栏。</li>
 </ol>
-<h1 id="五创建虚拟主机">五.创建虚拟主机</h1>
-<h2 id="1-相同ip地址不同tcp端口">1. 相同IP地址，不同TCP端口</h2>
+
+<h1 id="五-创建虚拟主机">五.创建虚拟主机</h1>
+
+<h2 id="1-相同ip地址-不同tcp端口">1. 相同IP地址，不同TCP端口</h2>
+
 <blockquote>
 <p>我们之前已经用 <code>http://192.168.1.2</code> 这一IP地址添加了网站，其默认端口号是<code>80</code>。所以，当我们在浏览器访问 <code>http://192.168.1.2</code>时，就相当于访问<code>http://192.168.1.2:80</code> ,也就是说默认端口号 <code>80</code> 是可以省略的。
 接下来我们也是用<code>http://192.168.1.2</code> 这一IP地址添加网站。只不过将其端口号设置成 <code>8080</code>，在访问时，应访问 <code>http://192.168.1.2:8080</code>。</p>
 </blockquote>
+
 <ol>
-<li>先在C盘下，新建<code>webB </code>文件夹，并在里面新建 <code>myindex.html</code> 文件，写入任意文字。如下图：
-<img src="/images/windows_web9.png" alt="web"></li>
+<li>先在C盘下，新建<code>webB</code>文件夹，并在里面新建 <code>myindex.html</code> 文件，写入任意文字。如下图：
+<img src="/images/windows_web9.png" alt="web" /></li>
 <li>打开 <code>Internet 信息服务(IIS)管理器</code>，右击 <code>网站</code>-&gt; <code>添加网站</code>。网站名称可随意填写: <code>web_B</code>,物理路径：<code>c:\webB</code>,IP地址：<code>192.168.1.2</code>,<strong>端口： <code>8080</code></strong>.如下图：
-<img src="/images/windows_web8.png" alt="web"></li>
+<img src="/images/windows_web8.png" alt="web" /></li>
 <li>在 <code>web_B</code> 的中间一栏，有 <code>目录浏览</code> ，双击它。在右侧 <code>操作</code>，单击 <code>启用</code>。</li>
 <li>在浏览器输入:<code>http://192.168.1.2:8080</code> ,即可访问。
-<img src="/images/windows_web10.png" alt="web"></li>
+<img src="/images/windows_web10.png" alt="web" /></li>
 </ol>
-<h2 id="2不同ip地址相同tcp端口">2.不同IP地址，相同TCP端口</h2>
+
+<h2 id="2-不同ip地址-相同tcp端口">2.不同IP地址，相同TCP端口</h2>
+
 <h2 id="1-添加ip地址">1. 添加IP地址</h2>
+
 <p>单击 <code>开始</code>-&gt;<code>控制面板</code>-&gt;<code>网络和共享中心</code>-&gt;<code>本地连接</code>-&gt;<code>属性</code>-&gt;<code>Internet 协议版本4（TCP/IPv4）</code>-&gt; <code>高级</code>-&gt; <code>IP设置</code>—&gt; <code>添加</code>，IP地址为:<code>192.168.1.3</code>,子网掩码为：<code>255.255.255.0</code>。最后点击 <code>添加</code> 即可。如下图：
-<img src="/images/windows_web11.png" alt="web"></p>
+<img src="/images/windows_web11.png" alt="web" /></p>
+
 <h2 id="2-绑定ip地址">2. 绑定IP地址</h2>
+
 <ol>
 <li>打开 <code>Internet 信息服务(IIS)管理器</code>，右击 <code>dyf</code>-&gt; <code>网站绑定</code>。点击 <code>添加</code> 。IP地址选择为：<code>192.168.1.3</code>。如下图;
-<img src="/images/windows_web12.png" alt="web"></li>
+<img src="/images/windows_web12.png" alt="web" /></li>
 <li>重新启动该网站。</li>
 <li>在浏览器输入 <code>http://192.168.1.3</code>，即可访问。如下图：
-<img src="/images/windows_web13.png" alt="web"></li>
+<img src="/images/windows_web13.png" alt="web" /></li>
 </ol>
-<h1 id="六使用域名访问web服务器">六.使用域名访问web服务器</h1>
+
+<h1 id="六-使用域名访问web服务器">六.使用域名访问web服务器</h1>
+
 <p>先配置DNS，进行正向、反向解析的配置，再添加主机名，进行相应配置即可。</p>
     </div>
 

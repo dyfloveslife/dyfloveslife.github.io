@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/13/learning-python-IteratorsAndGenerators/" />
@@ -43,6 +43,7 @@
 <meta property="og:description" content="
 要点概括：
 
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2018/07/13/learning-python-IteratorsAndGenerators/" />
@@ -52,17 +53,22 @@
 <meta itemprop="description" content="
 要点概括：
 
+
 ">
+
+
 <meta itemprop="datePublished" content="2018-07-13T15:09:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="1045">
 
 
 
-<meta itemprop="keywords" content="Python,IteratorAndGenerators," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python,IteratorAndGenerators," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python 学习笔记之 迭代器和生成器"/>
 <meta name="twitter:description" content="
 要点概括：
+
 
 "/>
 
@@ -151,16 +157,25 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#1-迭代器">1.迭代器</a></li>
+<li><a href="#2-生成器">2.生成器</a></li>
+</ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
       <blockquote>
 <p><strong>要点概括：</strong></p>
 </blockquote>
-<p><img src="/images/Python/IteratorsAndGenerators/contents.png" alt="IteratorsAndGenerators-contents"></p>
-<hr>
-<h1 id="1迭代器">1.迭代器</h1>
+
+<p><img src="/images/Python/IteratorsAndGenerators/contents.png" alt="IteratorsAndGenerators-contents" /></p>
+
+<hr />
+
+<h1 id="1-迭代器">1.迭代器</h1>
+
 <p>迭代是Python最强大的功能之一，是访问集合元素的一种方式。
 迭代器是一个可以记住遍历的位置的对象。
 迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。
@@ -168,7 +183,7 @@
 字符串，列表或元组对象都可用于创建迭代器，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -177,34 +192,34 @@
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 <span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>  <span class="c1"># 创建迭代器对象</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>  <span class="c1"># 输出迭代器的下一个元素</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
-</code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span></code></pre></td></tr></table>
 </div>
-</div><p>输出结果如下：</p>
+</div>
+<p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="mi">1</span>
-<span class="mi">2</span>
-</code></pre></td></tr></table>
+<span class="mi">2</span></code></pre></td></tr></table>
 </div>
-</div><p>对于上面的<code>next()</code>函数，它用于返回迭代器的下一个项目。详细的语法格式如下所示：</p>
+</div>
+<p>对于上面的<code>next()</code>函数，它用于返回迭代器的下一个项目。详细的语法格式如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">[,</span> <span class="n">default</span><span class="p">])</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">[,</span> <span class="n">default</span><span class="p">])</span></code></pre></td></tr></table>
 </div>
-</div><p>其中，<code>iterator</code>表示可迭代对象，在<code>[, default]</code>中，中括号<code>[]</code>表示该项是可选内容，<code>default</code>用于设置在没有下一个元素时返回该默认值，如果不设置且又没有下一个元素，则会触发<code>StopIteration</code>异常。
+</div>
+<p>其中，<code>iterator</code>表示可迭代对象，在<code>[, default]</code>中，中括号<code>[]</code>表示该项是可选内容，<code>default</code>用于设置在没有下一个元素时返回该默认值，如果不设置且又没有下一个元素，则会触发<code>StopIteration</code>异常。
 此外，迭代器对象可以使用<code>for</code>语句进行遍历，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -213,22 +228,22 @@
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 <span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
-</div><p>输出结果如下：</p>
+</div>
+<p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span></code></pre></td></tr></table>
 </div>
-</div><p>也可以用<code>next()</code>函数实现上面的功能，如下所示：</p>
+</div>
+<p>也可以用<code>next()</code>函数实现上面的功能，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -247,10 +262,11 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
     <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
-</code></pre></td></tr></table>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="2生成器">2.生成器</h1>
+</div>
+<h1 id="2-生成器">2.生成器</h1>
+
 <p>在Python中，使用了<code>yield</code>的函数被称为生成器（generator）。
 跟普通函数不同的是，生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器。
 在调用生成器运行的过程中，每次遇到<code>yield</code>时函数会暂停并保存当前所有的运行信息，返回<code>yield</code>的值, 并在下一次执行<code>next()</code>方法时从当前位置继续运行。
@@ -258,7 +274,7 @@
 下面用<code>yield</code>实现斐波那契数列，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -295,19 +311,19 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&#34; &#34;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
-</code></pre></td></tr></table>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span></code></pre></td></tr></table>
 </div>
-</div><p>输出结果如下：</p>
+</div>
+<p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">5</span> <span class="mi">8</span> <span class="mi">13</span> <span class="mi">21</span> <span class="mi">34</span> <span class="mi">55</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">5</span> <span class="mi">8</span> <span class="mi">13</span> <span class="mi">21</span> <span class="mi">34</span> <span class="mi">55</span></code></pre></td></tr></table>
 </div>
-</div><p>什么情况下需要使用<code>yield</code>？
+</div>
+<p>什么情况下需要使用<code>yield</code>？
 1.一个函数<code>f</code>，<code>f</code>返回一个<code>list</code>，这个<code>list</code>是动态计算出来的，并且这个<code>list</code>会占用很大内存。这个时候，我们希望每次调用这个函数并使用迭代器进行循环的时候一个一个的得到每个<code>list</code>元素而不是直接得到一个完整的<code>list</code>，通过这种方法可以节省内存，这个时候<code>yield</code>就很有用。
 2.<code>yield</code>就像断点，加了<code>yield</code>的函数，每次执行到有<code>yield</code>的时候，会返回<code>yield</code>后面的值并且函数会暂停，直到下次调用或迭代终止。
 3.<code>yield</code>后面可以加多个数值（可以是任意类型），但返回的值是元组类型的。</p>

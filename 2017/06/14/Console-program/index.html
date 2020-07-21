@@ -17,14 +17,14 @@
 
 
 <meta name="author" content="Carol" /><meta name="description" content="1.Console类可实现输入输出功能 2.Write方法：控制台输出(屏幕输出) 示例：
-1  Console.Write(“不明觉厉”);   " /><meta name="keywords" content="Java, blog, carol" />
+1  Console.Write(“不明觉厉”);  " /><meta name="keywords" content="Java, blog, carol" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/14/Console-program/" />
@@ -41,7 +41,9 @@
 
 <meta property="og:title" content="C# 之 控制台程序" />
 <meta property="og:description" content="1.Console类可实现输入输出功能
+
 2.Write方法：控制台输出(屏幕输出)
+
 示例：
 
 
@@ -49,7 +51,6 @@
 
 
 Console.Write(“不明觉厉”);
-
 
 " />
 <meta property="og:type" content="article" />
@@ -58,7 +59,9 @@ Console.Write(“不明觉厉”);
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="C# 之 控制台程序">
 <meta itemprop="description" content="1.Console类可实现输入输出功能
+
 2.Write方法：控制台输出(屏幕输出)
+
 示例：
 
 
@@ -66,19 +69,23 @@ Console.Write(“不明觉厉”);
 
 
 Console.Write(“不明觉厉”);
-
 
 ">
+
+
 <meta itemprop="datePublished" content="2017-06-14T22:44:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="1148">
+<meta itemprop="wordCount" content="1146">
 
 
 
-<meta itemprop="keywords" content="C-sharp," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="C-sharp," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="C# 之 控制台程序"/>
 <meta name="twitter:description" content="1.Console类可实现输入输出功能
+
 2.Write方法：控制台输出(屏幕输出)
+
 示例：
 
 
@@ -86,7 +93,6 @@ Console.Write(“不明觉厉”);
 
 
 Console.Write(“不明觉厉”);
-
 
 "/>
 
@@ -166,7 +172,7 @@ Console.Write(“不明觉厉”);
         <div class="post-category">
             <a href="/categories/C-sharp/"> C-sharp </a>
             </div>
-          <span class="more-meta"> 1148 words </span>
+          <span class="more-meta"> 1146 words </span>
           <span class="more-meta"> 3 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -176,91 +182,104 @@ Console.Write(“不明觉厉”);
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#1输入十个学生成绩按照从小到大排序后输出同时求平均成绩并输出">1.输入十个学生成绩，按照从小到大排序后输出，同时求平均成绩并输出。</a></li>
-    <li><a href="#2输入随机数的个数生成1001000内的随机数进行排序">2.输入随机数的个数，生成100~1000内的随机数进行排序。</a></li>
-  </ul>
+<ul>
+<li><a href="#1-console类可实现输入输出功能">1.Console类可实现输入输出功能</a></li>
+<li><a href="#2-write方法-控制台输出-屏幕输出">2.Write方法：控制台输出(屏幕输出)</a></li>
+<li><a href="#3-writeline方法-控制台输出并换行">3.WriteLine方法：控制台输出并换行</a></li>
+<li><a href="#4-格式化输出">4.格式化输出</a></li>
+<li><a href="#5-console类输入输出">5.Console类输入输出</a></li>
+<li><a href="#6-console输入">6.Console输入</a></li>
+<li><a href="#7-题目设计">7.题目设计</a>
+<ul>
+<li><a href="#1-输入十个学生成绩-按照从小到大排序后输出-同时求平均成绩并输出">1.输入十个学生成绩，按照从小到大排序后输出，同时求平均成绩并输出。</a></li>
+<li><a href="#2-输入随机数的个数-生成100-1000内的随机数进行排序">2.输入随机数的个数，生成100~1000内的随机数进行排序。</a></li>
+</ul></li>
+</ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h1 id="1console类可实现输入输出功能">1.Console类可实现输入输出功能</h1>
-<h1 id="2write方法控制台输出屏幕输出">2.Write方法：控制台输出(屏幕输出)</h1>
+      <h1 id="1-console类可实现输入输出功能">1.Console类可实现输入输出功能</h1>
+
+<h1 id="2-write方法-控制台输出-屏幕输出">2.Write方法：控制台输出(屏幕输出)</h1>
+
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="err">“不明觉厉”</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="err">“不明觉厉”</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="3writeline方法控制台输出并换行">3.WriteLine方法：控制台输出并换行</h1>
+</div>
+<h1 id="3-writeline方法-控制台输出并换行">3.WriteLine方法：控制台输出并换行</h1>
+
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Console.WriteLine(“我后面一个换行符”);
-</code></pre></td></tr></table>
+<pre class="chroma">Console.WriteLine(“我后面一个换行符”);</pre></td></tr></table>
 </div>
-</div><h1 id="4格式化输出">4.格式化输出</h1>
+</div>
+<h1 id="4-格式化输出">4.格式化输出</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="err">“格式化字符串”</span><span class="p">,</span><span class="err">值</span><span class="mi">0</span><span class="p">,</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="err">“格式化字符串”</span><span class="p">,</span><span class="err">值</span><span class="mi">0</span><span class="p">,</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
-</div><blockquote>
+</div>
+<blockquote>
 <p><strong>注意①：格式化输出第一个参数是格式字符串，它个字符串，必须在引号中。</strong>
 <strong>注意②：格式字符串后面是参数，用逗号与格式字符串隔开，一定不能和格式字符串包含在一个引号中。</strong></p>
 </blockquote>
+
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span><span class="lnt">2
-</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">30</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">“</span><span class="n">one</span><span class="p">{</span><span class="mi">0</span><span class="p">}</span><span class="n">two</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="n">three</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="err">”</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
-
-</code></pre></td></tr></table>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">“</span><span class="n">one</span><span class="p">{</span><span class="mi">0</span><span class="p">}</span><span class="n">two</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="n">three</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="err">”</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="5console类输入输出">5.Console类输入输出</h1>
+</div>
+<h1 id="5-console类输入输出">5.Console类输入输出</h1>
+
 <p>Console.ReadLine( )从键盘输入一行字符串。可以是0到多个字符，直到遇到回车键。一般将其保存到一个变量中以便使用。
-示例：</p>
+    示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">(</span> <span class="p">);</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">(</span> <span class="p">);</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="6console输入">6.Console输入</h1>
+</div>
+<h1 id="6-console输入">6.Console输入</h1>
+
 <p>如果要输入一个整数（或者其他如DateTime类型），则先输入一个字符串，再进行类型转换。用int.Parse可以将string转成整数。
 示例1：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">string</span> <span class="n">s</span><span class="o">=</span><span class="err">“</span><span class="mi">123</span><span class="err">”</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-<span class="n">i</span><span class="o">=</span><span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<span class="n">i</span><span class="o">=</span><span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">s</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
-</div><p>示例2：输入一个整数。</p>
+</div>
+<p>示例2：输入一个整数。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -269,14 +288,15 @@ Console.Write(“不明觉厉”);
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">string</span> <span class="n">s</span><span class="o">=</span><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">(</span> <span class="p">);</span>
 <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
 <span class="c1">//或者2个步骤合并,如下：
-</span><span class="c1"></span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">(</span> <span class="p">));</span>
-</code></pre></td></tr></table>
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">(</span> <span class="p">));</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="7题目设计">7.题目设计</h1>
-<h2 id="1输入十个学生成绩按照从小到大排序后输出同时求平均成绩并输出">1.输入十个学生成绩，按照从小到大排序后输出，同时求平均成绩并输出。</h2>
+</div>
+<h1 id="7-题目设计">7.题目设计</h1>
+
+<h2 id="1-输入十个学生成绩-按照从小到大排序后输出-同时求平均成绩并输出">1.输入十个学生成绩，按照从小到大排序后输出，同时求平均成绩并输出。</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -320,7 +340,6 @@ Console.Write(“不明觉厉”);
 </span><span class="lnt">42
 </span><span class="lnt">43
 </span><span class="lnt">44
-</span><span class="lnt">45
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-c" data-lang="c"><span class="n">using</span> <span class="n">System</span><span class="p">;</span>
@@ -366,14 +385,13 @@ Console.Write(“不明觉厉”);
 </span><span class="c1"></span>        <span class="p">}</span>
 
     <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></td></tr></table>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2输入随机数的个数生成1001000内的随机数进行排序">2.输入随机数的个数，生成100~1000内的随机数进行排序。</h2>
+</div>
+<h2 id="2-输入随机数的个数-生成100-1000内的随机数进行排序">2.输入随机数的个数，生成100~1000内的随机数进行排序。</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -446,8 +464,7 @@ Console.Write(“不明觉厉”);
                     <span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="s">&#34;{0}</span><span class="se">\t</span><span class="s">&#34;</span><span class="p">,</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
                 <span class="p">}</span>
                 <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
-        <span class="p">}</span>
-</code></pre></td></tr></table>
+        <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
     </div>

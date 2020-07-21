@@ -23,16 +23,15 @@
 &lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
 &lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;步骤：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;修改虚拟机静态IP&lt;/li&gt;
-&lt;li&gt;安装DHCP包。
-·dhcp:DHCP服务器安装包（在第二张镜像中）
-·dhclient:DHCP客户端软件包（在第一张镜像中）
-·dhcp-devel:DHCP开发工具（在第二张镜像中）&lt;/li&gt;
-&lt;li&gt;修改配置文件&lt;/li&gt;
-&lt;li&gt;启动服务，并测试&lt;/li&gt;
-&lt;/ol&gt;</description>
+
+&lt;p&gt;步骤：
+1. 修改虚拟机静态IP
+2.  安装DHCP包。
+    ·dhcp:DHCP服务器安装包（在第二张镜像中）
+    ·dhclient:DHCP客户端软件包（在第一张镜像中）
+    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
+3.  修改配置文件
+4.  启动服务，并测试&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -45,13 +44,12 @@
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
 环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;步骤：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;配置虚拟机静态IP&lt;/li&gt;
-&lt;li&gt;安装DHCP&lt;/li&gt;
-&lt;li&gt;配置DHCP&lt;/li&gt;
-&lt;li&gt;测试&lt;/li&gt;
-&lt;/ol&gt;</description>
+
+&lt;p&gt;步骤：
+1.  配置虚拟机静态IP
+2.  安装DHCP
+3.  配置DHCP
+4.  测试&lt;/p&gt;</description>
     </item>
     
   </channel>

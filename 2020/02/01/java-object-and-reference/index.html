@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/02/01/java-object-and-reference/" />
@@ -47,13 +47,16 @@
 <meta property="article:modified_time" content="2020-02-01T19:00:56+08:00" />
 <meta itemprop="name" content="Java 中的对象与引用">
 <meta itemprop="description" content="更好的理解 Java 中的 对象 和 引用 是面向对象技术的前提，本文旨在讨论如何理解它们的含义以及它们之间的关系。如有错误，还请指出。">
+
+
 <meta itemprop="datePublished" content="2020-02-01T19:00:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-02-01T19:00:56&#43;08:00" />
-<meta itemprop="wordCount" content="1755">
+<meta itemprop="wordCount" content="1751">
 
 
 
-<meta itemprop="keywords" content="Java,object,reference," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Java,object,reference," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java 中的对象与引用"/>
 <meta name="twitter:description" content="更好的理解 Java 中的 对象 和 引用 是面向对象技术的前提，本文旨在讨论如何理解它们的含义以及它们之间的关系。如有错误，还请指出。"/>
 
@@ -133,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 1755 words </span>
+          <span class="more-meta"> 1751 words </span>
           <span class="more-meta"> 4 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -143,114 +146,143 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#创建一个对象">创建一个对象</a></li>
-    <li><a href="#创建两个对象">创建两个对象</a></li>
-  </ul>
+<ul>
+<li><a href="#对象">对象</a></li>
+<li><a href="#引用">引用</a></li>
+<li><a href="#例子">例子</a>
+<ul>
+<li><a href="#创建一个对象">创建一个对象</a></li>
+<li><a href="#创建两个对象">创建两个对象</a></li>
+</ul></li>
+<li><a href="#参考">参考</a></li>
+</ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>更好的理解 Java 中的 <code>对象</code> 和 <code>引用</code> 是面向对象技术的前提，本文旨在讨论如何理解它们的含义以及它们之间的关系。如有错误，还请指出。</p>
+
 <h1 id="对象">对象</h1>
-<p>在<a href="https://book.douban.com/subject/2130190/">《编程思想》</a>中说到：**对象是某个类（class）的一个实例（instance）。**如果单纯的理解这句话，我们可以说：对象是类所产生的实例。例如对于 <code>人类</code> 这一类别来说，<code>小明</code> 这一具体的对象就是 <code>人类</code> 产生的 <code>实例</code>。</p>
+
+<p>在<a href="https://book.douban.com/subject/2130190/">《编程思想》</a>中说到：<strong>对象是某个类（class）的一个实例（instance）。</strong>如果单纯的理解这句话，我们可以说：对象是类所产生的实例。例如对于 <code>人类</code> 这一类别来说，<code>小明</code> 这一具体的对象就是 <code>人类</code> 产生的 <code>实例</code>。</p>
+
 <p>为了便于理解，我们首先定义一个简单的类：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">class Person </span><span class="p">{</span>
+    <span class="err">private String </span><span class="n">name</span><span class="p">;</span>
+    <span class="err">private int </span><span class="n">age</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>然后可以使用以下语句创建对象：</p>
+</div>
+<p>然后可以使用以下语句创建对象：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Person p </span><span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">();</span></code></pre></td></tr></table>
 </div>
-</div><p>这是我初次学习 Java 面向对象的时候，视频中的老师给出的引子。对于一个 <code>类</code> 来说，它是构造对象的模板和蓝图。而通过 <code>类</code> 来构造对象的过程称为 <code>创建类的实例</code>，也叫 <code>实例化</code>。</p>
+</div>
+<p>这是我初次学习 Java 面向对象的时候，视频中的老师给出的引子。对于一个 <code>类</code> 来说，它是构造对象的模板和蓝图。而通过 <code>类</code> 来构造对象的过程称为 <code>创建类的实例</code>，也叫 <code>实例化</code>。</p>
+
 <p>上面的语句创建了一个对象，有如下几步：</p>
+
 <ul>
 <li><code>new Person</code> 是以 <code>Person</code> 类为模板或者蓝图，在堆空间中创建了一个 <code>Person</code> 类对象；</li>
 <li>后面的 <code>()</code> 表示在创建对象后，调用了 <code>Person</code> 类中的构造函数，对刚刚创建的对象进行初始化操作；</li>
 </ul>
+
 <p>此时，我们再看如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Person</span> <span class="n">p</span><span class="o">;</span>
-<span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Person p</span><span class="p">;</span>
+<span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">();</span></code></pre></td></tr></table>
 </div>
-</div><p>这看似和上面的代码没有什么差别，但更方便理解。这里首先创建了一个 <code>Person</code> 类型的引用变量 <code>p</code>，然后用对象的引用 <code>p</code> 通过 <code>=</code> 操作符指向刚才创建的 <code>Person</code> 对象。</p>
+</div>
+<p>这看似和上面的代码没有什么差别，但更方便理解。这里首先创建了一个 <code>Person</code> 类型的引用变量 <code>p</code>，然后用对象的引用 <code>p</code> 通过 <code>=</code> 操作符指向刚才创建的 <code>Person</code> 对象。</p>
+
 <p>很显然，这里的 <code>p</code> 是对象的一个引用，是一个可以指向 <code>Person</code> 类的对象的引用，而不是所创建的对象，真正创建对象的语句是 <code>new Person()</code>。</p>
+
 <h1 id="引用">引用</h1>
+
 <p>一个 <code>Person</code> 类可以创建出无数的对象，我们只能通过 <code>对象引用</code> 来间接访问对象。这里做一个形象的比喻：一根绳子系住气球。我们将 <code>对象</code> 比作气球，将 <code>引用变量</code> 比作绳子。</p>
+
 <p>如果仅执行 <code>Person p;</code> 语句的话，此时创建的一个引用变量 <code>p</code> 还没有指向任何一个对象，其默认是 <code>null</code>。这就相当于一根还没有系住任何气球的绳子。如果执行了 <code>p = new Person();</code> 语句，则就可以说明对象引用 <code>p</code> 指向了一个对象，也就是绳子系住了气球。</p>
+
 <p>此时，再声明一个 <code>Person</code> 类型的引用，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Person</span> <span class="n">p1</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Person p1</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
-</div><p>表示又做了一根绳子，但是还没有系上气球。如果再加上一句 <code>p1 = p;</code>，则说明系上了气球。因为这里对象没有被复制，而是对象的引用被复制了，所以 <code>p1</code> 也指向了 <code>p</code> 所指的对象。两根绳子（p 引用 和 p1 引用）系上的是同一个气球（对象）。</p>
+</div>
+<p>表示又做了一根绳子，但是还没有系上气球。如果再加上一句 <code>p1 = p;</code>，则说明系上了气球。因为这里对象没有被复制，而是对象的引用被复制了，所以 <code>p1</code> 也指向了 <code>p</code> 所指的对象。两根绳子（p 引用 和 p1 引用）系上的是同一个气球（对象）。</p>
+
 <p>如果执行了以下语句：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="p">();</span></code></pre></td></tr></table>
 </div>
-</div><p>则说明 <code>p1</code> 这一引用指向了另外一个对象，即另一个气球。</p>
+</div>
+<p>则说明 <code>p1</code> 这一引用指向了另外一个对象，即另一个气球。</p>
+
 <p>此时，可以得到：</p>
+
 <ul>
 <li>一个引用可以指向 0 个或 1 个对象，即一根绳子可以不系住气球，也可以系住一个气球；</li>
 <li>一个对象可以被多个引用指向，即一个气球可以被多个绳子系住。</li>
 </ul>
+
 <p>此时，再执行下面的语句：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">p</span> <span class="o">=</span> <span class="n">p1</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">p</span> <span class="o">=</span> <span class="n">p1</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
-</div><p>同理，<code>p</code> 指向了第二个对象，也就是说，<code>p</code> 指向了 <code>p1</code> 所指的对象。那么第一个对象去哪儿了呢？第一个气球没有绳子了，它往哪儿飞了呢？其实，第一个对象被 Java 中的垃圾回收机制给回收了。</p>
+</div>
+<p>同理，<code>p</code> 指向了第二个对象，也就是说，<code>p</code> 指向了 <code>p1</code> 所指的对象。那么第一个对象去哪儿了呢？第一个气球没有绳子了，它往哪儿飞了呢？其实，第一个对象被 Java 中的垃圾回收机制给回收了。</p>
+
 <p>好了，现在我们不看上面的语句，只看下面的语句：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">new</span> <span class="n">Person</span><span class="p">();</span></code></pre></td></tr></table>
 </div>
-</div><p>这样写也是合法的，表明生成一个临时对象，只是没有引用变量来引用它而已。</p>
+</div>
+<p>这样写也是合法的，表明生成一个临时对象，只是没有引用变量来引用它而已。</p>
+
 <h1 id="例子">例子</h1>
+
 <h2 id="创建一个对象">创建一个对象</h2>
+
 <p>为了更详细的说明 Java 创建对象的过程，可以参考以下图像：</p>
-<p><img src="https://i.loli.net/2020/02/01/1PiaXnwQGLcIM9y.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2020/02/01/1PiaXnwQGLcIM9y.png" alt="image.png" /></p>
+
 <p>如上图所示，左侧表示代码，右侧表示其在 Java 虚拟机中具体的表现形式。关于 JVM 的内存区域这里不再做详细的解释，你可以查看笔者的<a href="https://dyfloveslife.github.io/2019/11/18/java-memory-areas/">《Java 内存区域概述》</a>这篇文章。</p>
+
 <p>这里解释一下代码执行的流程：</p>
+
 <ul>
 <li>首先 <code>Demo1_Car</code> 类中的 main 方法进入方法区，当遇到 <code>Car c1 = new Car();</code> 语句的时候，<code>Car</code> 类及其内部的成员变量和成员方法也进入到方法区；</li>
 <li>然后开始在堆中创建对象，并且 <code>对象引用 c1</code> 指向堆中的地址为 <code>0x0011</code>；</li>
@@ -259,17 +291,25 @@
 <li>最后在栈中，也就是 main 函数的上面压入一个 <code>run()</code> 方法（图中未画出）；</li>
 <li>这里最重要的就是 <code>c1</code> 是对象的一个引用，就像绳子一样。</li>
 </ul>
+
 <h2 id="创建两个对象">创建两个对象</h2>
+
 <p>下面给出创建两个对象，具有三个引用的示例：</p>
-<p><img src="https://i.loli.net/2020/02/01/1CmJUqDPZ3YrRKe.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2020/02/01/1CmJUqDPZ3YrRKe.png" alt="image.png" /></p>
+
 <p>流程和上面的大体相同：</p>
+
 <ul>
 <li>在执行到 <code>Car c1 = new Car();</code> 语句的时候，堆中先创建了一个地址为 <code>0x0011</code> 的对象，并且栈中的 <code>c1</code> 指向第一个对象的地址，即 <code>0x0011</code>；</li>
 <li>执行到 <code>Car c2 = new Car();</code> 语句的时候，堆中也是先创建了另外一个地址为 <code>0x0022</code> 的对象，栈中的 <code>c2</code> 指向第二个对象的地址，即 <code>0x0022</code>；</li>
 <li>执行到 <code>Car c3 = c2;</code> 的时候，先生成一个对象引用 <code>c3</code>，然后 <code>c3</code> 指向和 <code>c2</code> 同样的地址，即 <code>0x0022</code>，此时 <code>c2</code> 和 <code>c3</code> 指向的就是同一个对象。</li>
 </ul>
+
 <p>以上就是对 Java 中的 <code>对象</code> 以及 <code>对象的引用</code> 进行的总结，理解这些对于 Java 中的值传递是非常有意义的。</p>
+
 <h1 id="参考">参考</h1>
+
 <ul>
 <li><a href="https://www.iteye.com/blog/zwmf-1738574">JAVA 对象引用以及对象赋值</a></li>
 </ul>

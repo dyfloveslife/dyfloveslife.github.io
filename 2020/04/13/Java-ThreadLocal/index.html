@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/13/Java-ThreadLocal/" />
@@ -47,13 +47,16 @@
 <meta property="article:modified_time" content="2020-04-13T15:35:11+08:00" />
 <meta itemprop="name" content="Java 中的 ThreadLocal">
 <meta itemprop="description" content="使用 Java 中的 ThreadLocal 类可以创建只能由同一个线程读写的变量。也就是说，即使两个线程在执行相同的代码，并且代码中都有对同一个 ThreadLocal 变量的引用，那么这两个线程也不会看到对方的 ThreadLocal 变量。因此，Java 中的 ThreadLocal 类提供了一种简单的方式来使代码中的线程变得更加安全。">
+
+
 <meta itemprop="datePublished" content="2020-04-13T15:35:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-13T15:35:11&#43;08:00" />
-<meta itemprop="wordCount" content="6892">
+<meta itemprop="wordCount" content="6898">
 
 
 
-<meta itemprop="keywords" content="Java,Concurrent,ThreadLocal," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Java,Concurrent,ThreadLocal," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java 中的 ThreadLocal"/>
 <meta name="twitter:description" content="使用 Java 中的 ThreadLocal 类可以创建只能由同一个线程读写的变量。也就是说，即使两个线程在执行相同的代码，并且代码中都有对同一个 ThreadLocal 变量的引用，那么这两个线程也不会看到对方的 ThreadLocal 变量。因此，Java 中的 ThreadLocal 类提供了一种简单的方式来使代码中的线程变得更加安全。"/>
 
@@ -133,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 6892 words </span>
+          <span class="more-meta"> 6898 words </span>
           <span class="more-meta"> 14 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -143,62 +146,82 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#entry">Entry</a></li>
-    <li><a href="#成员变量">成员变量</a></li>
-    <li><a href="#成员方法">成员方法</a></li>
-    <li><a href="#构造函数">构造函数</a></li>
-    <li><a href="#getentry">getEntry()</a></li>
-    <li><a href="#set">set()</a></li>
-    <li><a href="#remove">remove()</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#get">get()</a></li>
-    <li><a href="#set-1">set()</a></li>
-    <li><a href="#remove-1">remove()</a></li>
-  </ul>
+<ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#基本使用">基本使用</a></li>
+<li><a href="#threadlocalmap-类">ThreadLocalMap 类</a>
+<ul>
+<li><a href="#entry">Entry</a></li>
+<li><a href="#成员变量">成员变量</a></li>
+<li><a href="#成员方法">成员方法</a></li>
+<li><a href="#构造函数">构造函数</a></li>
+<li><a href="#getentry">getEntry()</a></li>
+<li><a href="#set">set()</a></li>
+<li><a href="#remove">remove()</a></li>
+</ul></li>
+<li><a href="#threadlocal-类">ThreadLocal 类</a>
+<ul>
+<li><a href="#get">get()</a></li>
+<li><a href="#set-1">set()</a></li>
+<li><a href="#remove-1">remove()</a></li>
+</ul></li>
+<li><a href="#threadlocal-小结">ThreadLocal 小结</a></li>
+<li><a href="#内存泄漏问题">内存泄漏问题</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>使用 Java 中的 ThreadLocal 类可以创建只能由同一个线程读写的变量。也就是说，即使两个线程在执行相同的代码，并且代码中都有对同一个 ThreadLocal 变量的引用，那么这两个线程也不会看到对方的 ThreadLocal 变量。因此，Java 中的 ThreadLocal 类提供了一种简单的方式来使代码中的线程变得更加安全。</p>
+
 <h1 id="概述">概述</h1>
+
 <p>在多线程并发的情况下，需要考虑到线程安全的问题，例如同步、互斥等。一般采用以下三种方式来实现线程安全：</p>
+
 <ul>
 <li>互斥同步：通过加锁来实现对临界资源的访问，如 synchronized 和 Lock；</li>
 <li>非阻塞同步：上面的互斥同步属于悲观锁机制，而非阻塞同步属于乐观锁机制，典型的实现方式是 CAS；</li>
 <li>无同步：要保证线程安全，并不一定就需要同步。同步只是保证共享数据争用时正确的手段。如果一个方法本来就不涉及共享数据，那它就不需要任何同步措施去保证正确性。因此就引出了 ThreadLocal 的概念。</li>
 </ul>
+
 <p>从字面上看，ThreadLocal 就是<code>线程本地</code>或<code>线程局部</code>的意思，但该类提供了线程本地变量（thread-local variables），这种变量与普通变量的不同之处在于：<strong>每个访问 ThreadLocal 变量的线程都有自己、独立的变量副本，并且每个线程都可以独立的改变自己的副本，不会与其它线程中的副本发生冲突</strong>。</p>
+
 <p>也就是说，如果想要将某些共享数据的可见范围限制在同一个线程之内，并且想要达到无需同步也能保证线程之间不会出现数据争用的问题，此时就可以使用 ThreadLocal。即如果某个变量想要被某个线程独享，则可以使用 ThreadLocal 来实现线程本地的功能。</p>
+
 <p>从另一方面想，只要线程还存活，并且被 ThreadLocal 变量可以访问，则每个线程都会有一个引用到该线程本地变量的副本。当线程结束执行后，它的所有的线程本地实例的副本就会被垃圾回收。</p>
+
 <p>JDK1.8 中的 ThreadLocal 定义如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadLocal</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{...}</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">ThreadLocal</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{...}</span></code></pre></td></tr></table>
 </div>
-</div><p>从定义来看，ThreadLocal 在声明变量时可以自定义变量所属的类型，在其附带的说明文档中，需要注意以下几点：</p>
+</div>
+<p>从定义来看，ThreadLocal 在声明变量时可以自定义变量所属的类型，在其附带的说明文档中，需要注意以下几点：</p>
+
 <ul>
 <li>每个线程都有关于该 ThreadLocal 变量的私有值，即每个线程都有一个独立于其它线程的变量值，并且对其它线程是不可见的；</li>
 <li>该 ThreadLocal 变量的<code>初始值</code>也是相互独立的，即 ThreadLocal 可以给定一个初始值，这样每个线程就会获得这个初始值的一个拷贝，并且就每个线程对这个值的改变这一动作来说，对其它线程也是不可见的；</li>
 <li>ThreadLocal 的作用就是将类的状态和线程关联起来，此时可以通过声明一个 private static ThreadLocal 实例进行实现。</li>
 </ul>
+
 <p>综上所述，这里大体概括一下 ThreadLocal 的实现思路：</p>
+
 <ul>
 <li><strong>在 Thrad 类中有一个类型为 ThreadLocal.ThreadLocalMap 的实例变量 threadLocals，即每个线程都拥有一个自己的 ThreadLocalMap</strong>；</li>
 <li><strong>ThreadLocalMap 位于 ThreadLocal 类中，并且有自己具体的实现方式，可以将它的 key 视为 ThreadLocal，value 视为代码中放入的值，但实际上 key 并不是 ThreadLocal 本身，而是它的一个弱引用</strong>；</li>
 <li><strong>每个线程在往某个 ThreadLocal 里放入值的时候，都会往自己的 ThreadLocalMap 里存，读的时候也是以某个 ThreadLocal 作为引用，在自己的 map 里找对应的 key，从而实现线程隔离</strong>。</li>
 </ul>
+
 <h1 id="基本使用">基本使用</h1>
+
 <p>下面通过一个具体的实例，来说明 ThreadLocal 的基本还是用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -235,70 +258,76 @@
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">ThreadLocal</span> <span class="n">local</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Test</span> <span class="p">{</span>
+    <span class="err">private static int a </span><span class="o">=</span> <span class="n">10</span><span class="p">;</span>
+    <span class="err">private static ThreadLocal local</span><span class="p">;</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
 
-        <span class="n">Thread</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">ThreadA</span><span class="o">());</span>
-        <span class="n">a</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="err">Thread a </span><span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="k">new</span> <span class="n">ThreadA</span><span class="p">());</span>
+        <span class="n">a</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 
-        <span class="n">ThreadB</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ThreadB</span><span class="o">();</span>
-        <span class="n">b</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
+        <span class="err">ThreadB b </span><span class="o">=</span> <span class="k">new</span> <span class="n">ThreadB</span><span class="p">();</span>
+        <span class="n">b</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+    <span class="p">}</span>
 
-    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">ThreadA</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
-
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">local</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ThreadLocal</span><span class="o">();</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;set 方法执行前: &#34;</span> <span class="o">+</span> <span class="n">local</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
-            <span class="n">local</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">10</span><span class="o">);</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;set 方法执行后: &#34;</span> <span class="o">+</span> <span class="n">local</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;remove 方法执行前: &#34;</span> <span class="o">+</span> <span class="n">local</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
-            <span class="n">local</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;remove 方法执行后: &#34;</span> <span class="o">+</span> <span class="n">local</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">ThreadB</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+    <span class="err">static class ThreadA implements </span><span class="n">Runnable</span> <span class="p">{</span>
 
         <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;另一个线程中的值: &#34;</span> <span class="o">+</span> <span class="n">local</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+        <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">local</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ThreadLocal</span><span class="p">();</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;set 方法执行前: &#34;</span> <span class="o">+</span> <span class="n">local</span><span class="p">.</span><span class="na">get</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+            <span class="n">local</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">10</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;set 方法执行后: &#34;</span> <span class="o">+</span> <span class="n">local</span><span class="p">.</span><span class="na">get</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;remove 方法执行前: &#34;</span> <span class="o">+</span> <span class="n">local</span><span class="p">.</span><span class="na">get</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+            <span class="n">local</span><span class="p">.</span><span class="na">remove</span><span class="p">();</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;remove 方法执行后: &#34;</span> <span class="o">+</span> <span class="n">local</span><span class="p">.</span><span class="na">get</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="err">static class ThreadB extends </span><span class="n">Thread</span> <span class="p">{</span>
+
+        <span class="nd">@Override</span>
+        <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;另一个线程中的值: &#34;</span> <span class="o">+</span> <span class="n">local</span><span class="p">.</span><span class="na">get</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>输出结果（顺序不唯一）如下所示：</p>
+</div>
+<p>输出结果（顺序不唯一）如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span></code></pre></td>
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">set 方法执行前: null Thread-0
+<pre class="chroma">set 方法执行前: null Thread-0
 set 方法执行后: 20 Thread-0
 remove 方法执行前: 20 Thread-0
 remove 方法执行后: null Thread-0
-另一个线程中的值: null Thread-1
-</code></pre></td></tr></table>
+另一个线程中的值: null Thread-1</pre></td></tr></table>
 </div>
-</div><p>实例中，ThreadA 类的 run 方法中初始化了 ThreadLocal 变量，调用 set(a + 10) 方法将其设置成了 20，随后执行了 remove 方法，此时该变量的值就为 null 了。然而，当 ThreadB 线程想要获得该值时，由于每个线程都有自己的一份变量，因此 ThreadB 线程获得的值也是 null，这个 null 值与 ThreadA 中的 remove 方法是没有关系的，也就是说，ThreadA 的 remove 只是删除了它自己的值，而不能删除其它线程中的值。</p>
+</div>
+<p>实例中，ThreadA 类的 run 方法中初始化了 ThreadLocal 变量，调用 set(a + 10) 方法将其设置成了 20，随后执行了 remove 方法，此时该变量的值就为 null 了。然而，当 ThreadB 线程想要获得该值时，由于每个线程都有自己的一份变量，因此 ThreadB 线程获得的值也是 null，这个 null 值与 ThreadA 中的 remove 方法是没有关系的，也就是说，ThreadA 的 remove 只是删除了它自己的值，而不能删除其它线程中的值。</p>
+
 <p>我们先从<code>总体</code>再到<code>局部</code>，通过这种方式来分析 ThreadLocal 类。从总体上来说，ThreadLocal 类中有一个静态内部类 ThreadLocalMap，这个 ThreadLocalMap 是自定义的哈希表，用于维护线程本地值。哈希表里面的每个位置就对应一个 Entry 对象，而每个 Entry 对象中存放了键值对，其中 key 表示的是 ThreadLocal 实例，而 value 表示的是该 ThreadLocal 所对应的值。</p>
+
 <p>下面先看 内部类 ThreadLocalMap。</p>
+
 <h1 id="threadlocalmap-类">ThreadLocalMap 类</h1>
+
 <p><strong>ThreadLocalMap 是 ThreadLocal 的重点，它专门为 ThreadLocal 定制了一种高效的实现，并且自带一种基于弱引用的垃圾回收机制</strong>。</p>
+
 <h2 id="entry">Entry</h2>
+
 <p>ThreadLocalMap 中的 map 是概念上的 map，因此它也会有 key 和value。但需要注意的是：为了便于理解，我们可以将 key 视为 ThreadLocal，将 value 视为 实际放入的值。但实际上，ThreadLocal 中存放的是 ThreadLocal 的弱引用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -310,57 +339,62 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span> <span class="kd">extends</span> <span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;&gt;</span> <span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">static class Entry extends </span><span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;&gt;</span> <span class="p">{</span>
     <span class="c1">// 这里的 value 与 ThreadLocal 有关，
 </span><span class="c1"></span>    <span class="c1">// 即 value 就是往 ThreadLocal 实际塞入的值
-</span><span class="c1"></span>    <span class="n">Object</span> <span class="n">value</span><span class="o">;</span>
+</span><span class="c1"></span>    <span class="err">Object value</span><span class="p">;</span>
 
-    <span class="n">Entry</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">k</span><span class="o">,</span> <span class="n">Object</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">k</span><span class="o">);</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+    <span class="n">Entry</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">k</span><span class="p">,</span> <span class="err">Object v</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">super</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>Entry 是 ThreadLocalMap 中定义的节点，它继承了 WeakReference 类，然后定义了一个 Object 类型的 value，用于存放塞到 ThreadLocal 里的值。</p>
+</div>
+<p>Entry 是 ThreadLocalMap 中定义的节点，它继承了 WeakReference 类，然后定义了一个 Object 类型的 value，用于存放塞到 ThreadLocal 里的值。</p>
+
 <p><strong>需要注意的是，为什么 Entry 要继承弱引用</strong>？</p>
+
 <p>在垃圾回收机制中，JVM 针对不同对象存在着不同的引用形式，具体在 <a href="https://dyfloveslife.github.io/2019/11/20/object-survival-and-gc-algorithm/#%E5%9B%9B%E7%A7%8D%E4%B8%8D%E5%90%8C%E7%9A%84%E5%BC%95%E7%94%A8%E6%96%B9%E5%BC%8F">《JVM 对象存活和垃圾收集算法》</a>中提到过四种引用方式。如果这里使用普通的 key-value 形式来定义存储结构，实际上就会造成节点的生命周期与线程之间的强绑定。只要线程没有被销毁，那么节点在 GC 分析的时候就一直处于引用状态，没办法被回收，同时程序本身也无法判断是否可以清理这个节点。</p>
+
 <p>在四种引用类型（强引用、软引用、弱引用、虚引用）中，弱引用比软引用还要弱一些，如果一个对象没有被强引用，那么一般活不过下次 GC。也就是说，只要一个对象被强引用绑定，那么垃圾收集器就不会回收掉该对象。而一个对象被软引用、弱引用、虚引用绑定后，会被下次垃圾收集器进行回收。<strong>当某个 ThreadLocal 已经没有绑定强引用的时候，随着它被垃圾收集器回收，在 ThreadLocalMap 里对应的 Entry 的键值就会失效，这位 ThreadLocalMap 本身的垃圾清理提供了便利</strong>。</p>
+
 <h2 id="成员变量">成员变量</h2>
+
 <p>静态内部类 ThreadLocalMap 中定义了用于存储键值对的 Entry 数组，即 table，它的长度必须是 2 的次幂。既然是哈希表，肯定会涉及到初始化容量以及扩容的概念，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">INITIAL_CAPACITY</span> <span class="o">=</span> <span class="n">16</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private static final int </span><span class="n">INITIAL_CAPACITY</span> <span class="o">=</span> <span class="n">16</span><span class="p">;</span>
 
-<span class="kd">private</span> <span class="n">Entry</span><span class="o">[]</span> <span class="n">table</span><span class="o">;</span>
+<span class="err">private Entry</span><span class="p">[]</span> <span class="n">table</span><span class="p">;</span>
 
-<span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+<span class="err">private int </span><span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span>
 
-<span class="kd">private</span> <span class="kt">int</span> <span class="n">threshold</span><span class="o">;</span>
-
-</code></pre></td></tr></table>
+<span class="err">private int </span><span class="n">threshold</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>INITIAL_CAPACITY：表示哈希表的初始化容量为 16，必须保证是 2 的次幂；</li>
 <li>table：表示用于存储键值对的 Entry 数组，它的长度也必须是 2 的次幂；</li>
 <li>size：表示当前数组中 entry 的个数；</li>
 <li>threshold：表示当数组中的元素超过了该值时，则进行扩容，再进行扩容时，重新分配 Entry 数组大小的阈值，默认为 0；</li>
 </ul>
+
 <h2 id="成员方法">成员方法</h2>
+
 <p>可以通过 setThreshold() 方法来设置负载因子的大小，负载因子的概念在 HashMap 中已经很熟悉了。然后 ThreadLocal 通过两个方法用来获得上一个或下一个索引。需要注意的是，ThreadLocalMap 使用<code>线性探测</code>法来解决散列的冲突，所以实际上 Entry 数组在程序逻辑上是以<strong>环状数组</strong>存在的。数组中元素 Entry 的 key 存储的是某个 ThreadLocal 对象，即指向该 ThreadLocal 对象的弱引用，value 表示往 ThreadLocal 变量实际塞入的值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -377,26 +411,27 @@ remove 方法执行后: null Thread-0
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 设置 resize 阈值以维护最坏情况下的 2/3 的负载因子
-</span><span class="c1"></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">setThreshold</span><span class="o">(</span><span class="kt">int</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">threshold</span> <span class="o">=</span> <span class="n">len</span> <span class="o">*</span> <span class="n">2</span> <span class="o">/</span> <span class="n">3</span><span class="o">;</span>
-<span class="o">}</span>
+</span><span class="c1"></span><span class="err">private void </span><span class="n">setThreshold</span><span class="p">(</span><span class="err">int len</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="n">len</span> <span class="o">*</span> <span class="n">2</span> <span class="o">/</span> <span class="n">3</span><span class="p">;</span>
+<span class="p">}</span>
 
 <span class="c1">// 获取下一个索引
-</span><span class="c1"></span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">nextIndex</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="o">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">1</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">?</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span> <span class="o">:</span> <span class="n">0</span><span class="o">);</span>
-<span class="o">}</span>
+</span><span class="c1"></span><span class="err">private static int nextIndex</span><span class="p">(</span><span class="err">int i</span><span class="p">,</span> <span class="err">int len</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">1</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">)</span> <span class="o">?</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span> <span class="o">:</span> <span class="n">0</span><span class="p">);</span>
+<span class="p">}</span>
 
 <span class="c1">// 获取上一个索引
-</span><span class="c1"></span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">prevIndex</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="o">((</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">?</span> <span class="n">i</span> <span class="o">-</span> <span class="n">1</span> <span class="o">:</span> <span class="n">len</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+</span><span class="c1"></span><span class="err">private static int prevIndex</span><span class="p">(</span><span class="err">int i</span><span class="p">,</span> <span class="err">int len</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="p">)</span> <span class="o">?</span> <span class="n">i</span> <span class="o">-</span> <span class="n">1</span> <span class="o">:</span> <span class="n">len</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><h2 id="构造函数">构造函数</h2>
+</div>
+<h2 id="构造函数">构造函数</h2>
+
 <p>该构造函数在初始化的时候，会构造一个包含 firstKey 和 firstValue 的 map。ThreadLocalMap 是通过惰性的方式构造的，所以只有当至少要往里面放一个元素的时候才会构造它。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -411,27 +446,29 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">ThreadLocalMap</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">firstKey</span><span class="o">,</span> <span class="n">Object</span> <span class="n">firstValue</span><span class="o">)</span> <span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">ThreadLocalMap</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">firstKey</span><span class="p">,</span> <span class="err">Object firstValue</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 构造 table 数组
-</span><span class="c1"></span>    <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">[</span><span class="n">INITIAL_CAPACITY</span><span class="o">];</span>
+</span><span class="c1"></span>    <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="p">[</span><span class="n">INITIAL_CAPACITY</span><span class="p">];</span>
     <span class="c1">// 需要注意的是，以下的计算方式在 HashMap 中也有存在，
 </span><span class="c1"></span>    <span class="c1">// 表示通过计算 firstKey 的 threadLocalHashCode 与初始容量 16 进行模运算，得到 firstKey 的哈希值
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">firstKey</span><span class="o">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">INITIAL_CAPACITY</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+</span><span class="c1"></span>    <span class="err">int i </span><span class="o">=</span> <span class="n">firstKey</span><span class="p">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">INITIAL_CAPACITY</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
     <span class="c1">// 将 ThreadLocal 实例和要保存的值存到对应的位置上
-</span><span class="c1"></span>    <span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">(</span><span class="n">firstKey</span><span class="o">,</span> <span class="n">firstValue</span><span class="o">);</span>
+</span><span class="c1"></span>    <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="p">(</span><span class="n">firstKey</span><span class="p">,</span> <span class="n">firstValue</span><span class="p">);</span>
     <span class="c1">// 设置数组的大小
-</span><span class="c1"></span>    <span class="n">size</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span><span class="c1"></span>    <span class="n">size</span> <span class="o">=</span> <span class="n">1</span><span class="p">;</span>
     <span class="c1">// 设置扩容阈值
-</span><span class="c1"></span>    <span class="n">setThreshold</span><span class="o">(</span><span class="n">INITIAL_CAPACITY</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+</span><span class="c1"></span>    <span class="n">setThreshold</span><span class="p">(</span><span class="n">INITIAL_CAPACITY</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>在计算 firstKey 的哈希值的时候，使用了<code>hashCode &amp; (size - 1)</code>的方法，这相当于取模运算<code>hashCode % size</code>的一个更高效的实现，HashMap 中也采用了类似的方法。正是因为这种方法，所以我们要求 size 必须是 2 的次幂，因为这样可以使得 hash 发生冲突的次数减小。</p>
+</div>
+<p>在计算 firstKey 的哈希值的时候，使用了<code>hashCode &amp; (size - 1)</code>的方法，这相当于取模运算<code>hashCode % size</code>的一个更高效的实现，HashMap 中也采用了类似的方法。正是因为这种方法，所以我们要求 size 必须是 2 的次幂，因为这样可以使得 hash 发生冲突的次数减小。</p>
+
 <h2 id="getentry">getEntry()</h2>
+
 <p>该方法的作用是返回与 key 关联的 entry 对象，也就是获取 map 中某个 ThreadLocal 存放的值，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -466,47 +503,49 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="n">Entry</span> <span class="nf">getEntry</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private Entry </span><span class="n">getEntry</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 根据 key 获取索引
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">table</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
-    <span class="n">Entry</span> <span class="n">e</span> <span class="o">=</span> <span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+</span><span class="c1"></span>    <span class="err">int i </span><span class="o">=</span> <span class="n">key</span><span class="p">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
+    <span class="err">Entry e </span><span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
     <span class="c1">// 对应的 entry 存在且未失效，并且弱引用指向的 ThreadLocal 就是这个 key，则将其返回
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">==</span> <span class="n">key</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">e</span><span class="o">;</span>
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">.</span><span class="na">get</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">e</span><span class="p">;</span>
     <span class="k">else</span>
         <span class="c1">// 否则如果在散列槽中找不到对应的 key 时，采用线性探测的方式往后找
-</span><span class="c1"></span>        <span class="k">return</span> <span class="n">getEntryAfterMiss</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
-<span class="o">}</span>
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">getEntryAfterMiss</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
 
 <span class="c1">// 当调用 getEntry() 方法未命中时，则调用下列方法
-</span><span class="c1"></span><span class="kd">private</span> <span class="n">Entry</span> <span class="nf">getEntryAfterMiss</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">Entry</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Entry</span><span class="o">[]</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span><span class="c1"></span><span class="err">private Entry </span><span class="n">getEntryAfterMiss</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="p">,</span> <span class="err">int i</span><span class="p">,</span> <span class="err">Entry e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">Entry[] tab </span><span class="o">=</span> <span class="n">table</span><span class="p">;</span>
+    <span class="err">int len </span><span class="o">=</span> <span class="n">tab</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
 
     <span class="c1">// 使用线性探测法不断向后探测，直到遇到空的 entry
-</span><span class="c1"></span>    <span class="k">while</span> <span class="o">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+</span><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
         <span class="c1">// 找到目标就返回
-</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">key</span><span class="o">)</span>
-            <span class="k">return</span> <span class="n">e</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">e</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>
             <span class="c1">// 该 entry 对应的 ThreadLocal 已经被回收了，调用以下方法来清理无效的 entry
-</span><span class="c1"></span>            <span class="n">expungeStaleEntry</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span><span class="c1"></span>            <span class="n">expungeStaleEntry</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
         <span class="k">else</span>
             <span class="c1">// 继续向后探测
-</span><span class="c1"></span>            <span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
-        <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+</span><span class="c1"></span>            <span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>因此，ThreadLocal 在读一个值的时候，首先需要根据 key 的 threadLocalHashCode 对数组容量取模得到 index，如果 index 对应的位置就是要读的 ThreadLocal,，则直接返回结果。否则调用 getEntryAfterMiss() 方法进行线性探测，在探测的过程中每次碰到无效的位置，则调用 expungeStaleEntry() 进行清理。如果找到了 key，则返回对应的 entry，没有找到 key，则返回 null。</p>
+</div>
+<p>因此，ThreadLocal 在读一个值的时候，首先需要根据 key 的 threadLocalHashCode 对数组容量取模得到 index，如果 index 对应的位置就是要读的 ThreadLocal,，则直接返回结果。否则调用 getEntryAfterMiss() 方法进行线性探测，在探测的过程中每次碰到无效的位置，则调用 expungeStaleEntry() 进行清理。如果找到了 key，则返回对应的 entry，没有找到 key，则返回 null。</p>
+
 <h2 id="set">set()</h2>
+
 <p>set() 的作用是设置与 key 对应的 value，这里的 key 就是线程本地对象（thread local object），value 就是准备要设置的值，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -538,50 +577,54 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="o">,</span> <span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Entry</span><span class="o">[]</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">len</span><span class="o">-</span><span class="n">1</span><span class="o">);</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private void </span><span class="n">set</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="p">,</span> <span class="err">Object value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">Entry[] tab </span><span class="o">=</span> <span class="n">table</span><span class="p">;</span>
+    <span class="err">int len </span><span class="o">=</span> <span class="n">tab</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="err">int i </span><span class="o">=</span> <span class="n">key</span><span class="p">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">len</span><span class="o">-</span><span class="n">1</span><span class="p">);</span>
 
     <span class="c1">// 线性探测
-</span><span class="c1"></span>    <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">len</span><span class="o">)])</span> <span class="o">{</span>
-        <span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+</span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="err">Entry e </span><span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">len</span><span class="p">)])</span> <span class="p">{</span>
+        <span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
         <span class="c1">// 找到对应的 entry 并设置为 value
-</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
-            <span class="k">return</span><span class="o">;</span>
-        <span class="o">}</span>
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
         <span class="c1">// 替换失效的 entry
-</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// 用给定 key 所对应的 entry 去替换在探测过程中遇到的第一个旧的 entry，
 </span><span class="c1"></span>            <span class="c1">// i 表示在查抄 key 时遇到的第一个旧的 entry 的索引
-</span><span class="c1"></span>            <span class="n">replaceStaleEntry</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
-            <span class="k">return</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+</span><span class="c1"></span>            <span class="n">replaceStaleEntry</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    <span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
-    <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="o">++</span><span class="n">size</span><span class="o">;</span>
+    <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+    <span class="err">int sz </span><span class="o">=</span> <span class="o">++</span><span class="n">size</span><span class="p">;</span>
     <span class="c1">// cleanSomeSlots() 表示启发式地扫描某些位置，寻找旧的 entry，
 </span><span class="c1"></span>    <span class="c1">// 当添加了一个新的元素或者另一个旧的元素被删除时，此方法会被调用。
 </span><span class="c1"></span>    <span class="c1">// 在扫描的过程中，如果有任何 entry 被删除的话，则返回 true
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(!</span><span class="n">cleanSomeSlots</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">sz</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">sz</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="o">)</span>
-        <span class="n">rehash</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">cleanSomeSlots</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sz</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">sz</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">)</span>
+        <span class="n">rehash</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>整体流程为：</p>
+</div>
+<p>整体流程为：</p>
+
 <ul>
 <li>在探测过程中，solt（即数组中的每个位置）都不是无效的，并且能够顺利的找到 key 所在的 solt，则直接通过 set() 替换即可。</li>
 <li>如果在探测过程中，发现 solt 存在无效的情况，则调用 replaceStaleEntry() 把 key 和 value 放在这个 solt 上；</li>
 <li>如果在探测的过程中没有发现 key，则在连续末尾的后一个空位置上放置一个 entry，然后做一次启发式的清理，即 cleanSomeSlots()。如果没有将 key 清理掉，并且当前 table 的大小已经超过了阈值，则需要进行 rehash() 操作。</li>
 </ul>
+
 <p>需要注意的是，由于需要保证 table 的容量为 2 的次幂，因此 rehash() 里面的 resize() 方法在扩容的时候将会扩大 2 倍，即<code>newLen = oldLen * 2</code>。</p>
+
 <h2 id="remove">remove()</h2>
+
 <p>删除 key 所对应的 entry，也就是从 map 中删除 ThreadLocal。即直接在 table 数组中找 key，如果找到了，那就把弱引用断开，然后做一次段清理。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -599,30 +642,32 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Entry</span><span class="o">[]</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">len</span><span class="o">-</span><span class="n">1</span><span class="o">);</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-            <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
-            <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">len</span><span class="o">)])</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">==</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private void </span><span class="n">remove</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">Entry[] tab </span><span class="o">=</span> <span class="n">table</span><span class="p">;</span>
+    <span class="err">int len </span><span class="o">=</span> <span class="n">tab</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="err">int i </span><span class="o">=</span> <span class="n">key</span><span class="p">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">len</span><span class="o">-</span><span class="n">1</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="err">Entry e </span><span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">;</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">len</span><span class="p">)])</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">get</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// 显式地断开弱引用
-</span><span class="c1"></span>            <span class="n">e</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
+</span><span class="c1"></span>            <span class="n">e</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
             <span class="c1">// 进行段清理
-</span><span class="c1"></span>            <span class="n">expungeStaleEntry</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="k">return</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+</span><span class="c1"></span>            <span class="n">expungeStaleEntry</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="threadlocal-类">ThreadLocal 类</h1>
+</div>
+<h1 id="threadlocal-类">ThreadLocal 类</h1>
+
 <h2 id="get">get()</h2>
+
 <p>get 方法将会返回当前线程的<code>线程本地变量值</code>，如果对于当前线程来说没有对应的值，则会调用 setInitialValue() 方法并返回此方法的值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -640,28 +685,28 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">T</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public T </span><span class="n">get</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 获取当前线程对象
-</span><span class="c1"></span>    <span class="n">Thread</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+</span><span class="c1"></span>    <span class="err">Thread t </span><span class="o">=</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">();</span>
     <span class="c1">// 获取当前线程的成员变量 threadLocals
-</span><span class="c1"></span>    <span class="n">ThreadLocalMap</span> <span class="n">map</span> <span class="o">=</span> <span class="n">getMap</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">map</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="c1"></span>    <span class="err">ThreadLocalMap map </span><span class="o">=</span> <span class="n">getMap</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">map</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// 从当前线程的 ThreadLocalMap 中获得该线程本地变量对应的 entry 
-</span><span class="c1"></span>        <span class="n">ThreadLocalMap</span><span class="o">.</span><span class="na">Entry</span> <span class="n">e</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">getEntry</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="c1"></span>        <span class="err">ThreadLocalMap.Entry e </span><span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">getEntry</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// 获取对应的值并进行返回
-</span><span class="c1"></span>            <span class="n">T</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="n">T</span><span class="o">)</span><span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
-            <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">setInitialValue</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+</span><span class="c1"></span>            <span class="err">T result </span><span class="o">=</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">e</span><span class="p">.</span><span class="na">value</span><span class="p">;</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">setInitialValue</span><span class="p">();</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>从上面可以看到，再进行 get 时，如果从当前线程获取到的成员变量不为空的话，则会调用 map.getEntry(this) 去找到对应的值并进行返回。而如果 map 为空，则会调用 setInitialValue() 方法来设置一个初始化值，下面看一下这个方法：</p>
+</div>
+<p>从上面可以看到，再进行 get 时，如果从当前线程获取到的成员变量不为空的话，则会调用 map.getEntry(this) 去找到对应的值并进行返回。而如果 map 为空，则会调用 setInitialValue() 方法来设置一个初始化值，下面看一下这个方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -687,37 +732,38 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="n">T</span> <span class="nf">setInitialValue</span><span class="o">()</span> <span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private T </span><span class="n">setInitialValue</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 默认的返回值就是 null
-</span><span class="c1"></span>    <span class="n">T</span> <span class="n">value</span> <span class="o">=</span> <span class="n">initialValue</span><span class="o">();</span>
+</span><span class="c1"></span>    <span class="err">T value </span><span class="o">=</span> <span class="n">initialValue</span><span class="p">();</span>
     <span class="c1">// 获取当前线程
-</span><span class="c1"></span>    <span class="n">Thread</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+</span><span class="c1"></span>    <span class="err">Thread t </span><span class="o">=</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">();</span>
     <span class="c1">// 得到当前线程 ThreadLocalMap 类型的 threadLocals 
-</span><span class="c1"></span>    <span class="n">ThreadLocalMap</span> <span class="n">map</span> <span class="o">=</span> <span class="n">getMap</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">map</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class="c1"></span>    <span class="err">ThreadLocalMap map </span><span class="o">=</span> <span class="n">getMap</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">map</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
         <span class="c1">// 该 map 的键是当前 ThreadLocal 对象
-</span><span class="c1"></span>        <span class="n">map</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+</span><span class="c1"></span>        <span class="n">map</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
     <span class="k">else</span>
-        <span class="n">createMap</span><span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
-<span class="o">}</span>
+        <span class="n">createMap</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">}</span>
 
 
-<span class="kd">protected</span> <span class="n">T</span> <span class="nf">initialValue</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span>
+<span class="err">protected T </span><span class="n">initialValue</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
 
 
-<span class="kt">void</span> <span class="nf">createMap</span><span class="o">(</span><span class="n">Thread</span> <span class="n">t</span><span class="o">,</span> <span class="n">T</span> <span class="n">firstValue</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">t</span><span class="o">.</span><span class="na">threadLocals</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ThreadLocalMap</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">firstValue</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<span class="err">void createMap</span><span class="p">(</span><span class="err">Thread t</span><span class="p">,</span> <span class="err">T firstValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">t</span><span class="p">.</span><span class="na">threadLocals</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ThreadLocalMap</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">firstValue</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>可以看出，如果 map 为空，则会对 threadLocals 进行初始化，以当前 ThreadLocal 变量为 key，以 ThreadLocal 要保存的值为 value，存储到 threadLocals。get 方法会获得当前线程的 threadLocals，然后以该 ThreadLocal 对象作为键从而取得其对应的值，也就是 ThreadLocal 对象中所存储的值。</p>
+</div>
+<p>可以看出，如果 map 为空，则会对 threadLocals 进行初始化，以当前 ThreadLocal 变量为 key，以 ThreadLocal 要保存的值为 value，存储到 threadLocals。get 方法会获得当前线程的 threadLocals，然后以该 ThreadLocal 对象作为键从而取得其对应的值，也就是 ThreadLocal 对象中所存储的值。</p>
+
 <p>然后是 ThreadLocalMap 中的 getEntry 方法，以及 getEntryAfterMiss 方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -745,67 +791,61 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="n">Entry</span> <span class="nf">getEntry</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">table</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
-    <span class="n">Entry</span> <span class="n">e</span> <span class="o">=</span> <span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">==</span> <span class="n">key</span><span class="o">)</span>
-        <span class="k">return</span> <span class="n">e</span><span class="o">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private Entry </span><span class="n">getEntry</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">int i </span><span class="o">=</span> <span class="n">key</span><span class="p">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
+    <span class="err">Entry e </span><span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">.</span><span class="na">get</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">e</span><span class="p">;</span>
     <span class="k">else</span>
-        <span class="k">return</span> <span class="n">getEntryAfterMiss</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
-<span class="o">}</span>
+        <span class="k">return</span> <span class="n">getEntryAfterMiss</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
 
 
-<span class="kd">private</span> <span class="n">Entry</span> <span class="nf">getEntryAfterMiss</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="n">Entry</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Entry</span><span class="o">[]</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+<span class="err">private Entry </span><span class="n">getEntryAfterMiss</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="p">,</span> <span class="err">int i</span><span class="p">,</span> <span class="err">Entry e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">Entry[] tab </span><span class="o">=</span> <span class="n">table</span><span class="p">;</span>
+    <span class="err">int len </span><span class="o">=</span> <span class="n">tab</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
 
-    <span class="k">while</span> <span class="o">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">key</span><span class="o">)</span>
-            <span class="k">return</span> <span class="n">e</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-            <span class="n">expungeStaleEntry</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">e</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span>
+            <span class="n">expungeStaleEntry</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
         <span class="k">else</span>
-            <span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
-        <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>get 方法的总体流程：</p>
+</div>
+<p>get 方法的总体流程：</p>
+
 <ul>
-<li>
-<ol>
-<li>首先获取当前线程；</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>尝试去当前线程中获得它的 ThreadLocal.ThreadLocalMap；</li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li>判断当前线程中是否有 ThreadLocal.ThreadLocalMap：</li>
-</ol>
+<li>1. 首先获取当前线程；</li>
+<li>2. 尝试去当前线程中获得它的 ThreadLocal.ThreadLocalMap；</li>
+<li>3. 判断当前线程中是否有 ThreadLocal.ThreadLocalMap：
+
 <ul>
 <li>3.1 如果有，则根据当前 ThreadLocal 的 threadLocalHashCode 取模去 table 中取值。有值的话就返回，没有的话就给模加 1 继续找；</li>
 <li>3.2 如果没有，则调用 setInitialValue 方法给当前线程 ThreadLocal.ThreadLocalMap 设置一个初始值。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h2 id="set-1">set()</h2>
+
 <p>set() 方法的大体流程是：</p>
+
 <ul>
 <li>首先获得当前的线程；</li>
 <li>然后获得当前线程中的 ThreadLocal.ThreadLocalMap；</li>
 <li>判断该 ThreadLocal.ThreadLocalMap 是否存在，如果存在则设置一个值，如果不存在就给线程创建一个 ThreadLocal.ThreadLocalMap。</li>
 </ul>
+
 <p>源码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -824,29 +864,29 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">(</span><span class="n">T</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Thread</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
-    <span class="n">ThreadLocalMap</span> <span class="n">map</span> <span class="o">=</span> <span class="n">getMap</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">map</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">map</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">set</span><span class="p">(</span><span class="err">T value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">Thread t </span><span class="o">=</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">();</span>
+    <span class="err">ThreadLocalMap map </span><span class="o">=</span> <span class="n">getMap</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">map</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
+        <span class="n">map</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
     <span class="k">else</span>
-        <span class="n">createMap</span><span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
-<span class="o">}</span>
+        <span class="n">createMap</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
 
 
-<span class="n">ThreadLocalMap</span> <span class="nf">getMap</span><span class="o">(</span><span class="n">Thread</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="na">threadLocals</span><span class="o">;</span>
-<span class="o">}</span>
+<span class="err">ThreadLocalMap getMap</span><span class="p">(</span><span class="err">Thread t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">.</span><span class="na">threadLocals</span><span class="p">;</span>
+<span class="p">}</span>
 
 <span class="cm">/* ThreadLocal values pertaining to this thread. This map is maintained
 </span><span class="cm">* by the ThreadLocal class. */</span>
-<span class="n">ThreadLocal</span><span class="o">.</span><span class="na">ThreadLocalMap</span> <span class="n">threadLocals</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<span class="err">ThreadLocal.ThreadLocalMap threadLocals </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span></code></pre></td></tr></table>
 </div>
-</div><p>再看一下这里的 createMap 方法：</p>
+</div>
+<p>再看一下这里的 createMap 方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -870,35 +910,36 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">void</span> <span class="nf">createMap</span><span class="o">(</span><span class="n">Thread</span> <span class="n">t</span><span class="o">,</span> <span class="n">T</span> <span class="n">firstValue</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">t</span><span class="o">.</span><span class="na">threadLocals</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ThreadLocalMap</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">firstValue</span><span class="o">);</span>
-<span class="o">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">void createMap</span><span class="p">(</span><span class="err">Thread t</span><span class="p">,</span> <span class="err">T firstValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">t</span><span class="p">.</span><span class="na">threadLocals</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ThreadLocalMap</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">firstValue</span><span class="p">);</span>
+<span class="p">}</span>
 
- <span class="n">ThreadLocalMap</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">firstKey</span><span class="o">,</span> <span class="n">Object</span> <span class="n">firstValue</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">[</span><span class="n">INITIAL_CAPACITY</span><span class="o">];</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">firstKey</span><span class="o">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">INITIAL_CAPACITY</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
-    <span class="n">table</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">(</span><span class="n">firstKey</span><span class="o">,</span> <span class="n">firstValue</span><span class="o">);</span>
-    <span class="n">size</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
-    <span class="n">setThreshold</span><span class="o">(</span><span class="n">INITIAL_CAPACITY</span><span class="o">);</span>
-<span class="o">}</span>
-
-
-<span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">threadLocalHashCode</span> <span class="o">=</span> <span class="n">nextHashCode</span><span class="o">();</span>
+ <span class="n">ThreadLocalMap</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">firstKey</span><span class="p">,</span> <span class="err">Object firstValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="p">[</span><span class="n">INITIAL_CAPACITY</span><span class="p">];</span>
+    <span class="err">int i </span><span class="o">=</span> <span class="n">firstKey</span><span class="p">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">INITIAL_CAPACITY</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
+    <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="p">(</span><span class="n">firstKey</span><span class="p">,</span> <span class="n">firstValue</span><span class="p">);</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">1</span><span class="p">;</span>
+    <span class="n">setThreshold</span><span class="p">(</span><span class="n">INITIAL_CAPACITY</span><span class="p">);</span>
+<span class="p">}</span>
 
 
-<span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">nextHashCode</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">nextHashCode</span><span class="o">.</span><span class="na">getAndAdd</span><span class="o">(</span><span class="n">HASH_INCREMENT</span><span class="o">);</span>
-<span class="o">}</span>
+<span class="err">private final int threadLocalHashCode </span><span class="o">=</span> <span class="n">nextHashCode</span><span class="p">();</span>
 
 
-<span class="kd">private</span> <span class="kd">static</span> <span class="n">AtomicInteger</span> <span class="n">nextHashCode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicInteger</span><span class="o">();</span>
-</code></pre></td></tr></table>
+<span class="err">private static int nextHashCode</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">nextHashCode</span><span class="p">.</span><span class="na">getAndAdd</span><span class="p">(</span><span class="n">HASH_INCREMENT</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="err">private static AtomicInteger nextHashCode </span><span class="o">=</span> <span class="k">new</span> <span class="n">AtomicInteger</span><span class="p">();</span></code></pre></td></tr></table>
 </div>
-</div><p>这里需要注意的是，虽然 Entry 中存储的是键值对，但当 table 中已经有了数据的时候，则采用的是<strong>开放地址法</strong>，也就是会采用加 1 的方式来到下一个位置继续进行判断。</p>
+</div>
+<p>这里需要注意的是，虽然 Entry 中存储的是键值对，但当 table 中已经有了数据的时候，则采用的是<strong>开放地址法</strong>，也就是会采用加 1 的方式来到下一个位置继续进行判断。</p>
+
 <p>再来看一下静态内部类 ThreadLocalMap 中的 set 方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -930,99 +971,93 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="o">,</span> <span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private void </span><span class="n">set</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="p">,</span> <span class="err">Object value</span><span class="p">)</span> <span class="p">{</span>
 
-    <span class="n">Entry</span><span class="o">[]</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">len</span><span class="o">-</span><span class="n">1</span><span class="o">);</span>
+    <span class="err">Entry[] tab </span><span class="o">=</span> <span class="n">table</span><span class="p">;</span>
+    <span class="err">int len </span><span class="o">=</span> <span class="n">tab</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="err">int i </span><span class="o">=</span> <span class="n">key</span><span class="p">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">len</span><span class="o">-</span><span class="n">1</span><span class="p">);</span>
 
-    <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">len</span><span class="o">)])</span> <span class="o">{</span>
-        <span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="err">Entry e </span><span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">len</span><span class="p">)])</span> <span class="p">{</span>
+        <span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">k</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
-            <span class="k">return</span><span class="o">;</span>
-        <span class="o">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">k</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">replaceStaleEntry</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
-            <span class="k">return</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">replaceStaleEntry</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    <span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
-    <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="o">++</span><span class="n">size</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(!</span><span class="n">cleanSomeSlots</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">sz</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">sz</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="o">)</span>
-        <span class="n">rehash</span><span class="o">();</span>
-<span class="o">}</span>
+    <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+    <span class="err">int sz </span><span class="o">=</span> <span class="o">++</span><span class="n">size</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">cleanSomeSlots</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sz</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">sz</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">)</span>
+        <span class="n">rehash</span><span class="p">();</span>
+<span class="p">}</span>
 
 <span class="c1">// 开放地址法
-</span><span class="c1"></span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">nextIndex</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="o">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">1</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">?</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span> <span class="o">:</span> <span class="n">0</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+</span><span class="c1"></span><span class="err">private static int nextIndex</span><span class="p">(</span><span class="err">int i</span><span class="p">,</span> <span class="err">int len</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">1</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">)</span> <span class="o">?</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span> <span class="o">:</span> <span class="n">0</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>set 方法小结：</p>
+</div>
+<p>set 方法小结：</p>
+
 <ul>
 <li>首先对 ThreadLocal 里面的 threadLocalHashCode 取模得到一个 table 中的位置；</li>
 <li>如果这个位置上有数据，则获取该位置上的 ThreadLocal：
+
 <ul>
 <li>判断该位置上的 ThreadLocal 和当前的 ThreadLocal 是不是同一个，如果是的话就覆盖，然后返回；</li>
-<li>如果不是同一个的话，<strong>再判断一下该位置上的 ThreadLocal 是不是为空。因为 Entry 是 ThreadLocal 的弱引用，即 static class Entry extends WeakReference&lt;ThreadLocal&lt;?&raquo; 有可能这个 ThreadLocal 被垃圾回收了，这个时候把新设置的 value 替换到当前位置上，然后返回。</strong></li>
+<li>如果不是同一个的话，<strong>再判断一下该位置上的 ThreadLocal 是不是为空。因为 Entry 是 ThreadLocal 的弱引用，即 static class Entry extends WeakReference<ThreadLocal<?>&gt; 有可能这个 ThreadLocal 被垃圾回收了，这个时候把新设置的 value 替换到当前位置上，然后返回。</strong></li>
 <li>如果上面都没有返回，则使用开放地址法进行加 1 操作，即来到下一个 table 的位置。在加 1 操作之后需要判断新的 table 位置是不是为空，如果为空则再次进行加 1 操作，一直找到一个 table 上不是空的为止，然后放入一个 value。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
+
 <h2 id="remove-1">remove()</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">ThreadLocalMap</span> <span class="n">m</span> <span class="o">=</span> <span class="n">getMap</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">m</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">m</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">remove</span><span class="p">()</span> <span class="p">{</span>
+    <span class="err">ThreadLocalMap m </span><span class="o">=</span> <span class="n">getMap</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">());</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
+        <span class="n">m</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><p>在 remove 方法中，同样也是获取到当前线程的 ThreadLocal.ThreadLocalMap，如果有的话则找到对应的 Entry 然后删除即可。</p>
+</div>
+<p>在 remove 方法中，同样也是获取到当前线程的 ThreadLocal.ThreadLocalMap，如果有的话则找到对应的 Entry 然后删除即可。</p>
+
 <h1 id="threadlocal-小结">ThreadLocal 小结</h1>
+
 <ul>
-<li>
-<ol>
-<li>线程里面当前的 ThreadLocal.ThreadLocalMap 是通过开放地址法实现的；</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>每次 set 的时候往线程里面的 ThreadLocal.ThreadLocalMap 中的 table 数组中某一个位置上放一个值，该位置由 ThreadLocal 中的 threadLocaltHashCode 取模得到。如果该位置上已经有数据了，则往后一直找，从而找到没有数据的一个位置；</li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li>每次 get 的时候也是根据 ThreadLocal 中的 threadLocaltHashCode 取模得到 ThreadLocal.ThreadLocalMap 中的 table 数组中对应的位置，如果有数据则返回该数据，没有的话就来到下一个位置找；</li>
-</ol>
-</li>
-<li>
-<ol start="4">
-<li>如果想要往 ThreadLocal 中存放不同类型的数据，则需要使用泛型，如 ThreadLocal<!-- raw HTML omitted -->、ThreadLocal<!-- raw HTML omitted --> 等。</li>
-</ol>
-</li>
+<li>1. 线程里面当前的 ThreadLocal.ThreadLocalMap 是通过开放地址法实现的；</li>
+<li>2. 每次 set 的时候往线程里面的 ThreadLocal.ThreadLocalMap 中的 table 数组中某一个位置上放一个值，该位置由 ThreadLocal 中的 threadLocaltHashCode 取模得到。如果该位置上已经有数据了，则往后一直找，从而找到没有数据的一个位置；</li>
+<li>3. 每次 get 的时候也是根据 ThreadLocal 中的 threadLocaltHashCode 取模得到 ThreadLocal.ThreadLocalMap 中的 table 数组中对应的位置，如果有数据则返回该数据，没有的话就来到下一个位置找；</li>
+<li>4. 如果想要往 ThreadLocal 中存放不同类型的数据，则需要使用泛型，如 ThreadLocal<String>、ThreadLocal<Integer> 等。</li>
 </ul>
+
 <h1 id="内存泄漏问题">内存泄漏问题</h1>
+
 <p>ThreadLocal 类解决的是变量在不同线程间的通信问题。常见的使用场景，如多线程场景下每个线程需要单独的变量实例、数据库连接问题、存储用户的 Session 等。</p>
+
 <p>需要注意的是，如果使用 ThreadLocal 不当的话，则有可能出现<code>内存泄漏</code>的问题。其中<code>内存泄漏</code>指的是由于疏忽或者错误造成程序未能释放已经不再使用的内存，这些不再使用的内存会占用着内存空间，从而导致内存泄漏。也就是说，内存泄漏并非指的是内存在物理上的消失，而是应用程序分配某段内存后，由于错误设计，导致在释放该内存之前就失去了对该段内存的控制，从而造成了内存的浪费。</p>
+
 <p>ThreadLocal 造成内存泄漏的原因分为两种场景：主线程仍然对 ThreadLocal 具有引用和主线程不存在对 ThreadLocal 的引用。第一种场景因为主线程仍然在运行，所以还是具有对 ThreadLocal 的引用，那么 ThreadLocal 变量的引用和对应的 value 是不会被回收的。第二种场景是虽然主线程不存在对 ThreadLocal 的引用，并且该引用属于弱引用，所以在 GC 的时候会被回收，但是对应的 value 不是弱引用，不会被回收，因此会造成内存泄漏的问题。</p>
+
 <p><strong>如何解决内存泄漏问题</strong>？</p>
+
 <p>既然 ThreadLocalMap 中存在 key 为 null 的 Entry 对象，从而导致内存泄漏，那么只要把这些 Entry 都给删除掉就可以了。因此，<strong>可以调用 remove 方法，根据 key 删除掉对应的 Entry 即可</strong>。上面提到的 remove 方法里面调用了 ThreadLocalMap 中的 remove 方法，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1038,23 +1073,24 @@ remove 方法执行后: null Thread-0
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Entry</span><span class="o">[]</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">len</span><span class="o">-</span><span class="n">1</span><span class="o">);</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
-            <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
-            <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">len</span><span class="o">)])</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">==</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
-            <span class="n">expungeStaleEntry</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="k">return</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private void </span><span class="n">remove</span><span class="p">(</span><span class="n">ThreadLocal</span><span class="o">&lt;?&gt;</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">Entry[] tab </span><span class="o">=</span> <span class="n">table</span><span class="p">;</span>
+    <span class="err">int len </span><span class="o">=</span> <span class="n">tab</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="err">int i </span><span class="o">=</span> <span class="n">key</span><span class="p">.</span><span class="na">threadLocalHashCode</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">len</span><span class="o">-</span><span class="n">1</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="err">Entry e </span><span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">;</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="n">i</span> <span class="o">=</span> <span class="n">nextIndex</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">len</span><span class="p">)])</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">get</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+            <span class="n">expungeStaleEntry</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
-</div><h1 id="参考">参考</h1>
+</div>
+<h1 id="参考">参考</h1>
+
 <ul>
 <li><a href="http://tutorials.jenkov.com/java-concurrency/threadlocal.html">http://tutorials.jenkov.com/java-concurrency/threadlocal.html</a></li>
 <li><a href="https://blog.csdn.net/justloveyou_/article/details/54613085">https://blog.csdn.net/justloveyou_/article/details/54613085</a></li>

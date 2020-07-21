@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/03/05/compilienn-file/" />
@@ -47,13 +47,16 @@
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="Matlab 编译文件时出错，提示 cl.exe 不是内部或外部命令">
 <meta itemprop="description" content="在用Matlab中的 vl_compilenn 函数进行编译时，提示 &lsquo;cl.exe&rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件 的错误，现已找到解决办法，在这里记录下来。">
+
+
 <meta itemprop="datePublished" content="2019-03-05T15:18:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="170">
 
 
 
-<meta itemprop="keywords" content="技巧,MATLAB," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="技巧,MATLAB," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Matlab 编译文件时出错，提示 cl.exe 不是内部或外部命令"/>
 <meta name="twitter:description" content="在用Matlab中的 vl_compilenn 函数进行编译时，提示 &lsquo;cl.exe&rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件 的错误，现已找到解决办法，在这里记录下来。"/>
 
@@ -142,30 +145,31 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    
   </div>
 </div>
     <div class="post-content">
       <p>在用Matlab中的 <code>vl_compilenn</code> 函数进行编译时，提示 <strong>&lsquo;cl.exe&rsquo; 不是内部或外部命令，也不是可运行的程序 或批处理文件</strong> 的错误，现已找到解决办法，在这里记录下来。</p>
+
 <p>打开 <code>vl_compilenn.m</code> 文件后，在第 650 行左右，会有如下语句：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cl_path = fullfile(cc.Location, &#39;VC&#39;, &#39;bin&#39;, &#39;amd64&#39;);
-</code></pre></td></tr></table>
+<pre class="chroma">cl_path = fullfile(cc.Location, &#39;VC&#39;, &#39;bin&#39;, &#39;amd64&#39;);</pre></td></tr></table>
 </div>
-</div><p>这是系统默认的位置，但是查看自己电脑的 <code>cl.exe</code> 不在这里，是在 <code>D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64</code> 目录下，于是可以更改其路径，如下所示：</p>
+</div>
+<p>这是系统默认的位置，但是查看自己电脑的 <code>cl.exe</code> 不在这里，是在 <code>D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64</code> 目录下，于是可以更改其路径，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cl_path = fullfile(cc.Location, &#39;VC&#39;, &#39;Tools&#39;, &#39;MSVC&#39;, &#39;14.16.27023&#39;, &#39;bin&#39;, &#39;Hostx64&#39;, &#39;x64&#39;);
-</code></pre></td></tr></table>
+<pre class="chroma">cl_path = fullfile(cc.Location, &#39;VC&#39;, &#39;Tools&#39;, &#39;MSVC&#39;, &#39;14.16.27023&#39;, &#39;bin&#39;, &#39;Hostx64&#39;, &#39;x64&#39;);</pre></td></tr></table>
 </div>
-</div><p>更改完之后，再次执行 <code>vl_compilenn</code> 命令即可。</p>
+</div>
+<p>更改完之后，再次执行 <code>vl_compilenn</code> 命令即可。</p>
     </div>
 
     <div class="post-copyright">

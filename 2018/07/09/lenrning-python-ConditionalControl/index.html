@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/" />
@@ -43,6 +43,7 @@
 <meta property="og:description" content="
 要点概括：
 
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/" />
@@ -52,17 +53,22 @@
 <meta itemprop="description" content="
 要点概括：
 
+
 ">
+
+
 <meta itemprop="datePublished" content="2018-07-09T14:24:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="722">
+<meta itemprop="wordCount" content="724">
 
 
 
-<meta itemprop="keywords" content="Python,ConditionalControl," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python,ConditionalControl," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python 学习笔记之 条件控制"/>
 <meta name="twitter:description" content="
 要点概括：
+
 
 "/>
 
@@ -142,7 +148,7 @@
         <div class="post-category">
             <a href="/categories/Python/"> Python </a>
             </div>
-          <span class="more-meta"> 722 words </span>
+          <span class="more-meta"> 724 words </span>
           <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -151,20 +157,29 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#1-if语句">1.if语句</a></li>
+<li><a href="#2-if嵌套">2.if嵌套</a></li>
+</ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
       <blockquote>
 <p><strong>要点概括：</strong></p>
 </blockquote>
-<p><img src="/images/Python/ConditionalControl/contents.png" alt="ConditionalControl-contents"></p>
-<hr>
-<h1 id="1if语句">1.if语句</h1>
+
+<p><img src="/images/Python/ConditionalControl/contents.png" alt="ConditionalControl-contents" /></p>
+
+<hr />
+
+<h1 id="1-if语句">1.if语句</h1>
+
 <p><code>if</code>语句的格式如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -177,18 +192,17 @@
 <span class="k">elif</span> <span class="n">condition_2</span><span class="p">:</span>
     <span class="n">statement_block_2</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">statement_block_3</span>
-</code></pre></td></tr></table>
+    <span class="n">statement_block_3</span></code></pre></td></tr></table>
 </div>
-</div><p>在Python中，用<code>elif</code>代替了其他语言（C、Java）中的<code>else if</code>，具体为：</p>
-<ul>
-<li>如果<code>condition_1</code>为<code>True</code>，则执行<code>statement_block_1</code>内的语句；如果<code>condition_1</code>为<code>False</code>，则判断<code>condition_2</code>；</li>
-<li>如果<code>condition_2</code>为<code>True</code>，则执行<code>statement_block_2</code>内的语句；如果<code>condition_2</code>为<code>False</code>，则执行<code>statement_block_3</code>内语句。</li>
-</ul>
+</div>
+<p>在Python中，用<code>elif</code>代替了其他语言（C、Java）中的<code>else if</code>，具体为：
+- 如果<code>condition_1</code>为<code>True</code>，则执行<code>statement_block_1</code>内的语句；如果<code>condition_1</code>为<code>False</code>，则判断<code>condition_2</code>；
+- 如果<code>condition_2</code>为<code>True</code>，则执行<code>statement_block_2</code>内的语句；如果<code>condition_2</code>为<code>False</code>，则执行<code>statement_block_3</code>内语句。</p>
+
 <p>下面展示一个简单的例子，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -203,25 +217,25 @@
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;a is less than b&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;a is not less than b&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;outside the if block&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;outside the if block&#39;</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
-</div><p>输出结果如下：</p>
+</div>
+<p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">a</span> <span class="ow">is</span> <span class="n">less</span> <span class="n">than</span> <span class="n">b</span>
-<span class="n">outside</span> <span class="n">the</span> <span class="k">if</span> <span class="n">block</span>
-</code></pre></td></tr></table>
+<span class="n">outside</span> <span class="n">the</span> <span class="k">if</span> <span class="n">block</span></code></pre></td></tr></table>
 </div>
-</div><p>可以看到，由于<code>a</code>小于<code>b</code>，所以判断条件<code>a &lt; b</code>的结果为<code>True</code>，接着输出<code>a is less than b</code>。因为最后一条语句<code>print('outside the if block')</code>在<code>if</code>语句之外，或者说与<code>if</code>语句没有关系，所以自然就输出了<code>outside the if block</code>。
+</div>
+<p>可以看到，由于<code>a</code>小于<code>b</code>，所以判断条件<code>a &lt; b</code>的结果为<code>True</code>，接着输出<code>a is less than b</code>。因为最后一条语句<code>print('outside the if block')</code>在<code>if</code>语句之外，或者说与<code>if</code>语句没有关系，所以自然就输出了<code>outside the if block</code>。
 接下来看下面一个例子，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -242,24 +256,26 @@
 <span class="k">elif</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># 此时d的值为18</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;c is greater than d by more than 10&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;c is greater than f&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;c is greater than f&#39;</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
-</div><p>输出结果如下：</p>
+</div>
+<p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">c</span> <span class="ow">is</span> <span class="n">greater</span> <span class="n">than</span> <span class="n">d</span> <span class="n">by</span> <span class="n">more</span> <span class="n">than</span> <span class="mi">10</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">c</span> <span class="ow">is</span> <span class="n">greater</span> <span class="n">than</span> <span class="n">d</span> <span class="n">by</span> <span class="n">more</span> <span class="n">than</span> <span class="mi">10</span></code></pre></td></tr></table>
 </div>
-</div><p>你也可以通过给<code>c</code>或<code>d</code>不同的值来得出不同的结果。</p>
-<h1 id="2if嵌套">2.if嵌套</h1>
+</div>
+<p>你也可以通过给<code>c</code>或<code>d</code>不同的值来得出不同的结果。</p>
+
+<h1 id="2-if嵌套">2.if嵌套</h1>
+
 <p>下面给出<code>嵌套的if语句</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -278,19 +294,19 @@
     <span class="k">if</span> <span class="n">e</span> <span class="o">==</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;e is equal to f&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;e is greater than f&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;e is greater than f&#39;</span><span class="p">)</span></code></pre></td></tr></table>
 </div>
-</div><p>输出结果如下：</p>
+</div>
+<p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">e</span> <span class="ow">is</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">f</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">e</span> <span class="ow">is</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">f</span></code></pre></td></tr></table>
 </div>
-</div><p>首先判断<code>e &lt; f</code>是否成立，因为<code>9 &lt; 8</code>不成立，所以返回结果为<code>False</code>，之后不执行<code>print('e is less than f')</code>，反而进入<code>else</code>代码块中，在这里面接着判断<code>e == f</code>，结果为<code>True</code>，所以最终输出<code>e is equal to f</code>。</p>
+</div>
+<p>首先判断<code>e &lt; f</code>是否成立，因为<code>9 &lt; 8</code>不成立，所以返回结果为<code>False</code>，之后不执行<code>print('e is less than f')</code>，反而进入<code>else</code>代码块中，在这里面接着判断<code>e == f</code>，结果为<code>True</code>，所以最终输出<code>e is equal to f</code>。</p>
     </div>
 
     <div class="post-copyright">

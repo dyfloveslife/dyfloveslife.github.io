@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/" />
@@ -44,9 +44,12 @@
 <meta property="og:description" content="Carol&#39;s blog." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://localhost:1313/" />
-<meta property="og:updated_time" content="2020-07-21T09:32:56+08:00" />
+
+<meta property="og:updated_time" content="2020-07-09T21:24:02+08:00" />
 <meta itemprop="name" content="Carol&#39;s blog">
-<meta itemprop="description" content="Carol&#39;s blog."><meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="Carol&#39;s blog.">
+
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Carol&#39;s blog"/>
 <meta name="twitter:description" content="Carol&#39;s blog."/>
 
@@ -119,29 +122,6 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/2017/06/25/LoopArray/">C# 之 循环数组</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-06-25 </span>
-      <div class="post-category">
-          <a href="/categories/C-sharp/"> C-sharp </a>
-          </div>
-        <span class="more-meta"> 527 words </span>
-        <span class="more-meta"> 2 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末<!-- raw HTML omitted --> 其实是复习周，不用上课哒<!-- raw HTML omitted -->，把那个给跳水运动员打分的程序写在这里。</p>
-    </div>
-    <div class="read-more">
-      <a href="/2017/06/25/LoopArray/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/2017/06/22/NetworkCabling-2/">网络综合布线之 工作区子系统设计过程</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-06-22 </span>
@@ -156,6 +136,7 @@
   <div class="post-content">
     <div class="post-summary">
       <p>一般步骤：</p>
+
 <ul>
 <li>需求分析：根据各楼层各房间的用途，确定工作区人员数量；</li>
 <li>与用户进行技术交流，分析业务需求；</li>
@@ -179,22 +160,21 @@
       <div class="post-category">
           <a href="/categories/Computer-Network/"> Computer Network </a>
           </div>
-        <span class="more-meta"> 891 words </span>
+        <span class="more-meta"> 915 words </span>
         <span class="more-meta"> 2 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="1每个楼层的用线计算公式">1.每个楼层的用线计算公式</h1>
-<p><img src="/images/zhbx/gs2.png" alt="zhbx"></p>
-<ul>
-<li>C为每个楼层用线量</li>
-<li>F为最远的信息插座离楼层管理间的距离</li>
-<li>N为最近的信息插座离楼层管理间的距离</li>
-<li>M为每层楼的信息插座的数量</li>
-<li>6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)</li>
-</ul>
+      <h1 id="1-每个楼层的用线计算公式">1.每个楼层的用线计算公式</h1>
+
+<p><img src="/images/zhbx/gs2.png" alt="zhbx" />
+- C为每个楼层用线量
+- F为最远的信息插座离楼层管理间的距离
+- N为最近的信息插座离楼层管理间的距离
+- M为每层楼的信息插座的数量
+- 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)</p>
     </div>
     <div class="read-more">
       <a href="/2017/06/22/NetworkCabling-1/" class="read-more-link">Read more...</a>
@@ -210,23 +190,24 @@
       <div class="post-category">
           <a href="/categories/C-sharp/"> C-sharp </a>
           </div>
-        <span class="more-meta"> 2431 words </span>
+        <span class="more-meta"> 2461 words </span>
         <span class="more-meta"> 5 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="1查询单个值">1.查询单个值</h1>
+      <h1 id="1-查询单个值">1.查询单个值</h1>
+
 <p>SQL语言使用select进行查询。查询返回结果有多有少，通常来说，会返回多行多列的一个结果集。</p>
-<h2 id="示例1查询单个值">示例1：查询单个值</h2>
+
+<h2 id="示例1-查询单个值">示例1：查询单个值</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c">	<span class="n">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">student</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c">	<span class="n">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">student</span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -244,14 +225,15 @@
       <div class="post-category">
           <a href="/categories/C-sharp/"> C-sharp </a>
           </div>
-        <span class="more-meta"> 866 words </span>
+        <span class="more-meta"> 889 words </span>
         <span class="more-meta"> 2 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="1连接数据库">1.连接数据库</h1>
+      <h1 id="1-连接数据库">1.连接数据库</h1>
+
 <blockquote>
 <p>应用程序（我们用C#编写的程序）与数据库程序（如SQL Server）是两个不同的程序，要想从应用程序中读取/修改数据库的数据，首先要建立二者的通信机制。为了在C#程序中使用（读取、修改等）数据库，必须首先连接到数据库。</p>
 </blockquote>
@@ -270,21 +252,19 @@
       <div class="post-category">
           <a href="/categories/C-sharp/"> C-sharp </a>
           </div>
-        <span class="more-meta"> 1691 words </span>
+        <span class="more-meta"> 1707 words </span>
         <span class="more-meta"> 4 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <p>说明：</p>
-<blockquote>
-<p>1.文件是保存到磁盘上的数据的集合。
-2.流可以看作连续的字节序列，形成“流”。
-3.文件是一种流。
-4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
-5.使用流读/写器对流进行读取/写入操作。</p>
-</blockquote>
+      <p>说明：
+&gt; 1.文件是保存到磁盘上的数据的集合。
+&gt; 2.流可以看作连续的字节序列，形成“流”。
+&gt; 3.文件是一种流。
+&gt; 4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
+&gt; 5.使用流读/写器对流进行读取/写入操作。</p>
     </div>
     <div class="read-more">
       <a href="/2017/06/17/File-and-directory-operations/" class="read-more-link">Read more...</a>
@@ -300,20 +280,19 @@
       <div class="post-category">
           <a href="/categories/C-sharp/"> C-sharp </a>
           </div>
-        <span class="more-meta"> 980 words </span>
+        <span class="more-meta"> 988 words </span>
         <span class="more-meta"> 2 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="1显示新的窗体">1.显示新的窗体</h1>
-<p>步骤：</p>
-<ul>
-<li>①定义一个新窗体类型的变量</li>
-<li>②实例化新窗体变量</li>
-<li>③调用新窗体的Show方法显示</li>
-</ul>
+      <h1 id="1-显示新的窗体">1.显示新的窗体</h1>
+
+<p>步骤：
+- ①定义一个新窗体类型的变量
+- ②实例化新窗体变量
+- ③调用新窗体的Show方法显示</p>
     </div>
     <div class="read-more">
       <a href="/2017/06/16/Menus-and-Messages/" class="read-more-link">Read more...</a>
@@ -329,19 +308,19 @@
       <div class="post-category">
           <a href="/categories/C-sharp/"> C-sharp </a>
           </div>
-        <span class="more-meta"> 856 words </span>
+        <span class="more-meta"> 869 words </span>
         <span class="more-meta"> 2 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="1绘画工具">1.绘画工具</h1>
-<p>画笔和画刷</p>
-<ul>
-<li>画笔Pens:细，画线条和轮廓；</li>
-<li>画刷Brushes:粗，填充闭合区域。</li>
-</ul>
+      <h1 id="1-绘画工具">1.绘画工具</h1>
+
+<p>画笔和画刷
+- 画笔Pens:细，画线条和轮廓；
+- 画刷Brushes:粗，填充闭合区域。</p>
+
 <p>Graphics类
 通过 <code>控件名.createGraphics()</code> 取得某控件的屏幕区域作为画布。</p>
     </div>
@@ -359,7 +338,7 @@
       <div class="post-category">
           <a href="/categories/C-sharp/"> C-sharp </a>
           </div>
-        <span class="more-meta"> 1413 words </span>
+        <span class="more-meta"> 1423 words </span>
         <span class="more-meta"> 3 mins read </span>
     </div>
   </header>
@@ -370,7 +349,7 @@
 示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -383,9 +362,9 @@
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
-</span></code></pre></td>
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">namespace MyForm
+<pre class="chroma">namespace MyForm
 {
 	static class Program
       {
@@ -397,8 +376,7 @@
                 Application.Run(new Form1());		//启动窗体
            }
       }
-}
-</code></pre></td></tr></table>
+}</pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -416,28 +394,62 @@
       <div class="post-category">
           <a href="/categories/C-sharp/"> C-sharp </a>
           </div>
-        <span class="more-meta"> 1148 words </span>
+        <span class="more-meta"> 1146 words </span>
         <span class="more-meta"> 3 mins read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="1console类可实现输入输出功能">1.Console类可实现输入输出功能</h1>
-<h1 id="2write方法控制台输出屏幕输出">2.Write方法：控制台输出(屏幕输出)</h1>
+      <h1 id="1-console类可实现输入输出功能">1.Console类可实现输入输出功能</h1>
+
+<h1 id="2-write方法-控制台输出-屏幕输出">2.Write方法：控制台输出(屏幕输出)</h1>
+
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="err">“不明觉厉”</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="err">“不明觉厉”</span><span class="p">);</span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
     <div class="read-more">
       <a href="/2017/06/14/Console-program/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/2017/06/04/Windows-DNS/">Windows 环境下配置 DNS 服务器</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-06-04 </span>
+      <div class="post-category">
+          <a href="/categories/Windows/"> Windows </a>
+          </div>
+        <span class="more-meta"> 617 words </span>
+        <span class="more-meta"> 2 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <blockquote>
+<p>软件： <code>VMware Workstation Pro</code>
+环境： <code>Windows 2008 R2</code></p>
+</blockquote>
+
+<p>步骤：
+1.  配置虚拟机静态IP
+2.  安装DNS
+3.  创建正向查找区域
+4.  创建反向查找区域
+5.  测试</p>
+    </div>
+    <div class="read-more">
+      <a href="/2017/06/04/Windows-DNS/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

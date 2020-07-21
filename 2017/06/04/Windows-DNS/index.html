@@ -17,15 +17,15 @@
 
 
 <meta name="author" content="Carol" /><meta name="description" content=" 软件： VMware Workstation Pro 环境： Windows 2008 R2
- 步骤：
- 配置虚拟机静态IP 安装DNS 创建正向查找区域 创建反向查找区域 测试 " /><meta name="keywords" content="Java, blog, carol" />
+ 步骤： 1. 配置虚拟机静态IP 2. 安装DNS 3. 创建正向查找区域 4. 创建反向查找区域 5. 测试
+" /><meta name="keywords" content="Java, blog, carol" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/04/Windows-DNS/" />
@@ -45,14 +45,13 @@
 软件： VMware Workstation Pro
 环境： Windows 2008 R2
 
-步骤：
 
-配置虚拟机静态IP
-安装DNS
-创建正向查找区域
-创建反向查找区域
-测试
-" />
+步骤：
+1.  配置虚拟机静态IP
+2.  安装DNS
+3.  创建正向查找区域
+4.  创建反向查找区域
+5.  测试" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2017/06/04/Windows-DNS/" />
 <meta property="article:published_time" content="2017-06-04T20:29:11+08:00" />
@@ -62,34 +61,35 @@
 软件： VMware Workstation Pro
 环境： Windows 2008 R2
 
-步骤：
 
-配置虚拟机静态IP
-安装DNS
-创建正向查找区域
-创建反向查找区域
-测试
-">
+步骤：
+1.  配置虚拟机静态IP
+2.  安装DNS
+3.  创建正向查找区域
+4.  创建反向查找区域
+5.  测试">
+
+
 <meta itemprop="datePublished" content="2017-06-04T20:29:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="612">
+<meta itemprop="wordCount" content="617">
 
 
 
-<meta itemprop="keywords" content="Windows,DNS," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Windows,DNS," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Windows 环境下配置 DNS 服务器"/>
 <meta name="twitter:description" content="
 软件： VMware Workstation Pro
 环境： Windows 2008 R2
 
-步骤：
 
-配置虚拟机静态IP
-安装DNS
-创建正向查找区域
-创建反向查找区域
-测试
-"/>
+步骤：
+1.  配置虚拟机静态IP
+2.  安装DNS
+3.  创建正向查找区域
+4.  创建反向查找区域
+5.  测试"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -167,7 +167,7 @@
         <div class="post-category">
             <a href="/categories/Windows/"> Windows </a>
             </div>
-          <span class="more-meta"> 612 words </span>
+          <span class="more-meta"> 617 words </span>
           <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -176,7 +176,16 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#一-配置虚拟机静态ip">一.配置虚拟机静态IP</a></li>
+<li><a href="#二-安装">二.安装</a></li>
+<li><a href="#三-正向查找区域">三.正向查找区域</a></li>
+<li><a href="#四-正向测试">四.正向测试</a></li>
+<li><a href="#五-反向查找区域">五.反向查找区域</a></li>
+<li><a href="#六-反向测试">六.反向测试</a></li>
+</ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
@@ -184,56 +193,65 @@
 <p>软件： <code>VMware Workstation Pro</code>
 环境： <code>Windows 2008 R2</code></p>
 </blockquote>
-<p>步骤：</p>
-<ol>
-<li>配置虚拟机静态IP</li>
-<li>安装DNS</li>
-<li>创建正向查找区域</li>
-<li>创建反向查找区域</li>
-<li>测试</li>
-</ol>
-<h1 id="一配置虚拟机静态ip">一.配置虚拟机静态IP</h1>
+
+<p>步骤：
+1.  配置虚拟机静态IP
+2.  安装DNS
+3.  创建正向查找区域
+4.  创建反向查找区域
+5.  测试</p>
+
+<h1 id="一-配置虚拟机静态ip">一.配置虚拟机静态IP</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></code></pre></td>
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">IP地址：192.168.1.2
+<pre class="chroma">IP地址：192.168.1.2
 子网掩码：255.255.255.0
-首选DNS服务器：192.168.1.2
-</code></pre></td></tr></table>
+首选DNS服务器：192.168.1.2</pre></td></tr></table>
 </div>
-</div><h1 id="二安装">二.安装</h1>
+</div>
+<h1 id="二-安装">二.安装</h1>
+
 <p>打开 <code>服务器管理器</code> ，右击 <code>角色</code> ，然后 <code>添加角色</code> 。选中 <code>DNS服务器</code>。如下图：
-<img src="/images/windows_dns1.png" alt="dns">
+<img src="/images/windows_dns1.png" alt="dns" />
 然后一直下一步，直至安装完成。</p>
-<h1 id="三正向查找区域">三.正向查找区域</h1>
+
+<h1 id="三-正向查找区域">三.正向查找区域</h1>
+
 <ol>
 <li>点击 <code>开始</code>-&gt;<code>管理工具</code>-&gt;<code>DNS</code>，右击<code>正向查找区域</code>-&gt;<code>新建区域</code>.选择 <code>主要区域</code>，然后填入区域名称：<code>dyf.com</code>。下一步，选择： <code>不允许动态更新</code>。如下图：
-<img src="/images/windows_dns2.png" alt="dns">
-<img src="/images/windows_dns3.png" alt="dns">
-<img src="/images/windows_dns4.png" alt="dns">
-<img src="/images/windows_dns5.png" alt="dns">
+<img src="/images/windows_dns2.png" alt="dns" />
+<img src="/images/windows_dns3.png" alt="dns" />
+<img src="/images/windows_dns4.png" alt="dns" />
+<img src="/images/windows_dns5.png" alt="dns" />
 最后单击 <code>完成</code>即可。</li>
 <li>右击 <code>正向查找区域</code>下的<code>dyf.com</code>,选择<code>新建主机</code>,名称为：<code>www</code>，IP地址为你的虚拟机的静态IP地址。</li>
 </ol>
-<h1 id="四正向测试">四.正向测试</h1>
+
+<h1 id="四-正向测试">四.正向测试</h1>
+
 <p><code>开始</code>-&gt;<code>运行</code>，键入 <code>cmd</code>.在dos界面下，输入<code>nslookup</code>.接着输入<code>www.dyf.com</code>，若出现对应IP地址，即可完成。如下图：
-<img src="/images/windows_dns6.png" alt="dns"></p>
-<h1 id="五反向查找区域">五.反向查找区域</h1>
+<img src="/images/windows_dns6.png" alt="dns" /></p>
+
+<h1 id="五-反向查找区域">五.反向查找区域</h1>
+
 <ol>
 <li>右击<code>反向查找区域</code>-&gt;<code>新建区域</code>.选择 <code>主要区域</code>，选择 <code>IPv4 反向查找区域</code>，网络填写：<code>192.168.1</code>,一直下一步，直至完成即可。</li>
 <li>右击<code>反向查找区域</code>下的<code>1.168.192.in-addr.arpa</code>,选择<code>新建指针</code>。在<code>主机名</code>一栏，点击<code>浏览</code>。如下图：
-<img src="/images/windows_dns7.png" alt="dns"></li>
+<img src="/images/windows_dns7.png" alt="dns" /></li>
 <li><strong>一直双击下图红框区域</strong>，直至完成。
-<img src="/images/windows_dns8.png" alt="dns">
-<img src="/images/windows_dns9.png" alt="dns"></li>
+<img src="/images/windows_dns8.png" alt="dns" />
+<img src="/images/windows_dns9.png" alt="dns" /></li>
 </ol>
-<h1 id="六反向测试">六.反向测试</h1>
+
+<h1 id="六-反向测试">六.反向测试</h1>
+
 <p><code>开始</code>-&gt;<code>运行</code>，键入 <code>cmd</code>.在dos界面下，输入<code>nslookup</code>。接着输入<code>192.168.1.2</code>，若出现对应域名，即可完成。如下图：
-<img src="/images/windows_dns10.png" alt="dns"></p>
+<img src="/images/windows_dns10.png" alt="dns" /></p>
     </div>
 
     <div class="post-copyright">

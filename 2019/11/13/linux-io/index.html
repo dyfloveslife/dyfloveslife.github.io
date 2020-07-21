@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.2 with theme even" />
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/11/13/linux-io/" />
@@ -47,13 +47,16 @@
 <meta property="article:modified_time" content="2019-11-20T15:32:56+08:00" />
 <meta itemprop="name" content="情景再现 Linux 中的 IO 模型">
 <meta itemprop="description" content="本文通过「情景再现」的方式解释 Linux 中的 IO 模型，这对于学习 Java 高并发 还是有些许帮助的。">
+
+
 <meta itemprop="datePublished" content="2019-11-13T07:52:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-20T15:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="2581">
 
 
 
-<meta itemprop="keywords" content="Linux,IO," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Linux,IO," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="情景再现 Linux 中的 IO 模型"/>
 <meta name="twitter:description" content="本文通过「情景再现」的方式解释 Linux 中的 IO 模型，这对于学习 Java 高并发 还是有些许帮助的。"/>
 
@@ -142,12 +145,25 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents"></nav>
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#阻塞-io-bloking-io">阻塞 IO（bloking IO）</a></li>
+<li><a href="#非阻塞-io-non-bloking-io">非阻塞 IO（non-bloking IO）</a></li>
+<li><a href="#多路复用-io-multiplexing-io">多路复用 IO（multiplexing IO）</a></li>
+<li><a href="#信号驱动式-io-signal-driven-io">信号驱动式 IO（signal-driven IO）</a></li>
+<li><a href="#异步-io-asynchronous-io">异步 IO（asynchronous IO）</a></li>
+<li><a href="#模型对比">模型对比</a></li>
+<li><a href="#总结">总结</a></li>
+<li><a href="#参考">参考</a></li>
+</ul>
+</nav>
   </div>
 </div>
     <div class="post-content">
       <p>本文通过「情景再现」的方式解释 Linux 中的 IO 模型，这对于学习 <strong>Java 高并发</strong> 还是有些许帮助的。</p>
+
 <p>网络 IO 模型有以下几类：</p>
+
 <ul>
 <li>阻塞 IO（bloking IO）</li>
 <li>非阻塞 IO（non-bloking IO）</li>
@@ -156,46 +172,84 @@
 <li>异步 IO（asynchronous IO）</li>
 <li>信号驱动式 IO（signal-driven IO）</li>
 </ul>
+
 <p>这里仅对以上 IO 模型做一个浅显的认识与说明，也算是自己在学习过程中的一个记录，若有错误或者描述不准确的地方，还请留言指出。</p>
-<h1 id="阻塞-iobloking-io">阻塞 IO（bloking IO）</h1>
+
+<h1 id="阻塞-io-bloking-io">阻塞 IO（bloking IO）</h1>
+
 <p>　　阻塞 IO 就是说：当我去银行办理业务的时候，前面有很多人，这时我需要排队，然后就一直等着前面的人办完业务后才轮到我（在等待的过程中不能去办其他的事情，比如去吃饭），最后我才能办理业务。IO 模型如下图所示：</p>
-<p><img src="https://i.loli.net/2019/11/13/XkNqQHARho6gsyG.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2019/11/13/XkNqQHARho6gsyG.png" alt="image.png" /></p>
+
 <p>　　你可以看到 <code>应用进程</code> 在进行 <code>系统调用</code> 的时候，由于 <code>内核</code> 中的 <code>数据报</code> 还没有准备好，所以这时一直处于 <code>等待数据</code> 的状态，这种状态就对应我去银行办理业务时的 <code>等待</code> 情况。然后直到 <code>数据报</code> 准备好了，这时才会 <code>将数据从内核复制到用户空间</code>，最后返回给 <code>应用进程</code>。</p>
+
 <p>　　所以对于这两个阶段（红色方框中的内容），由于需要 <code>等待数据</code>，所以对于等待中的用户来说性能低下，因为它在一直等着，也不能做别的事情。</p>
-<h1 id="非阻塞-ionon-bloking-io">非阻塞 IO（non-bloking IO）</h1>
+
+<h1 id="非阻塞-io-non-bloking-io">非阻塞 IO（non-bloking IO）</h1>
+
 <p>　　非阻塞 IO 就是说：我还是要去银行办理业务，但是这次不会一直等着了，而是做其他的事情（比如，吃饭），在吃饭的过程中我来来回回地往银行跑，去 <code>询问</code> 业务员什么时候轮到我，这种方式就属于非阻塞。IO 模型如下所示：</p>
-<p><img src="https://i.loli.net/2019/11/13/sPTvrZKdJcB9iSn.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2019/11/13/sPTvrZKdJcB9iSn.png" alt="image.png" /></p>
+
 <p>　　正如所描述的那样，该 IO 模型采用的是 <code>轮询</code> 的方式。也就是说，当 <code>应用进程</code> 进行 <code>系统调用</code> 的时候，会发现内核中的数据没有准备好，然后这时会返回一个信息，即 <code>EWOULDBLOCK</code>。<code>应用进程</code> 不需要等待，而是马上得到了一个信息。得到信息后就会知道数据还没有准备好，于是就会再次进行 <code>系统调用</code>，直到 <code>数据报准备好</code> 后，通过 <code>将数据报从内核复制到用户空间</code> 才会返回成功。</p>
+
 <p>　　所以，通过以上两种不同 IO 方式的对比你可以看出：非阻塞 IO 可以去干别的事情，但是整体数据的吞吐量降低了，因为需要不断的来回进行 <code>系统调用</code>，也就是 <code>轮询</code> 操作，任务完成的响应延迟增大了。</p>
-<h1 id="多路复用-iomultiplexing-io">多路复用 IO（multiplexing IO）</h1>
+
+<h1 id="多路复用-io-multiplexing-io">多路复用 IO（multiplexing IO）</h1>
+
 <p>　　多路复用 IO 就是说：我在去银行办理业务的时候，还是想要做其他的事情（还是去吃饭），但是现在可以使用银行提供的 <code>应用软件</code> 查看当前是否轮到我了，这样我就不用再来来回回地跑到银行问业务员了。IO 模型如下所示：</p>
-<p><img src="https://i.loli.net/2019/11/13/RtKS3pQrdqLv1jc.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2019/11/13/RtKS3pQrdqLv1jc.png" alt="image.png" /></p>
+
 <p>　　由于这部分涉及到许多知识点，详细内容可以查看 <code>参考</code> 部分的文章，这里只是简单的解释一下。我的理解是这样的：图中的 <code>应用进程</code> 中的 <code>select</code> 就相当于银行提供的 <code>应用软件</code> ，通过 <code>select</code> 可以看到内核中的数据有没有准备好，一旦准备好后就会 <code>返回可读条件</code>，也就是通知 <code>应用进程</code> 可以去进行 <code>系统调用</code> 了（相当于我查看手机上的软件看到终于轮到我了），这时再从内核中 <code>复制数据报</code>，然后将数据从内核复制到用户空间，最后复制完成返回结果。</p>
+
 <p>　　<strong>通过以上三种 IO 模型可以看到，在 <code>等待数据</code> 过程中，这几种 IO 模型处理的方式是不同的。有的是直接等待，有的是轮询，还有的是使用 <code>select</code> 方式。从整个 IO 过程来看，由于都是 <code>顺序执行</code> 的，所以都属于 <code>同步模型</code>，即都是通过进程主动等待且向内核检查状态的方式进行的。</strong></p>
-<h1 id="信号驱动式-iosignal-driven-io">信号驱动式 IO（signal-driven IO）</h1>
+
+<h1 id="信号驱动式-io-signal-driven-io">信号驱动式 IO（signal-driven IO）</h1>
+
 <p>　　对于信号驱动式 IO，这里仅给出IO 模型，然后简单解释一下。如下所示：</p>
-<p><img src="https://i.loli.net/2019/11/13/e7y3uEhFDq8pHGJ.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2019/11/13/e7y3uEhFDq8pHGJ.png" alt="image.png" /></p>
+
 <p>　　这种方式是先建立一个 <code>sigio</code> 信号处理程序，通过 <code>系统调用</code> 的方式交给内核，然后当 <code>数据报准备好</code> 时再将 <code>sigio</code> 提交给 <code>信号处理程序</code>。这时就会告知 <code>应用程序</code> 可以进行 <code>recvfrom</code> 系统调用了，然后在内核中 <code>将数据从内核拷贝到用户空间</code>，最后返回。你可以看到，后半段的处理方式和前几种方式是一样的。</p>
-<h1 id="异步-ioasynchronous-io">异步 IO（asynchronous IO）</h1>
+
+<h1 id="异步-io-asynchronous-io">异步 IO（asynchronous IO）</h1>
+
 <p>　　异步 IO 就是说：我仍然得去银行办理业务，但是我太懒了，不想去，我就找人帮我去，这个时候我就自由了，闲下来想干嘛就干嘛，他帮我办完业务后就把银行提供的那些材料再交给我。IO 模型图如下所示：</p>
-<p><img src="https://i.loli.net/2019/11/13/m3Id7rPjLNV6CxS.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2019/11/13/m3Id7rPjLNV6CxS.png" alt="image.png" /></p>
+
 <p>　　这种方式比较有意思，当 <code>应用进程</code> 进行 <code>系统调用</code> 的时候，无论内核中的数据准没准备好，都会给 <code>应用进程</code> 一个 <code>返回</code>，然后 <code>应用进程</code> 可以去做别的事情。等到数据准备好后，内核直接将数据复制给进程，然后再从内核发送消息给 <code>应用程序</code>。</p>
+
 <h1 id="模型对比">模型对比</h1>
+
 <p>　　最后将这几种 IO 模型进行对比，如下所示：</p>
-<p><img src="https://i.loli.net/2019/11/13/i6J3K1lwdqPTL4k.png" alt="image.png"></p>
+
+<p><img src="https://i.loli.net/2019/11/13/i6J3K1lwdqPTL4k.png" alt="image.png" /></p>
+
 <h1 id="总结">总结</h1>
+
 <p><code>阻塞</code> 和 <code>非阻塞</code> 指的是执行一个操作是等操作结束再返回，还是马上返回。</p>
+
 <p>比如餐馆的服务员为用户点菜，当有用户点完菜后，服务员将菜单给后台厨师，此时有两种方式：</p>
+
 <ul>
 <li>阻塞方式：就在出菜窗口等待，直到厨师炒完菜后将菜送到窗口，然后服务员再将菜送到用户手中；</li>
 <li>非阻塞方式：等一会再到窗口来问厨师，某个菜好了没？如果没有先处理其他事情，等会再去问一次。</li>
 </ul>
+
 <p><code>同步</code> 和 <code>异步</code> 又是另外一个概念，它是事件本身的一个属性。还拿前面点菜为例，服务员直接跟厨师打交道，菜出来没出来，服务员直接指导，但只有当厨师将菜送到服务员手上，这个过程才算正常完成，这就是 <code>同步</code> 的事件。同样是点菜，有些餐馆有专门的传菜人员，当厨师炒好菜后，传菜员将菜送到传菜窗口，并通知服务员，这就变成 <code>异步</code>的了。其实异步还可以分为两种：<code>带通知</code> 和 <code>不带通知</code>。前面说的那种属于带通知的。有些传菜员干活可能主动性不是很够，不会主动通知你，你就需要时不时的去关注一下状态，这种就是不带通知的异步。</p>
+
 <p>对于 <code>同步</code> 的事件，你只能以 <code>阻塞</code> 的方式去做。而对于 <code>异步</code> 的事件，<code>阻塞</code> 和 <code>非阻塞</code>都是可以的。</p>
+
 <p><code>非阻塞</code> 又有两种方式：<code>主动查询</code> 和 <code>被动接收消息</code>。被动不意味着一定不好，在这里它恰恰是效率更高的，因为在主动查询里绝大部分的查询是在做无用功。对于带通知的异步事件，两者皆可。而对于不带通知的，则只能用主动查询。</p>
+
 <p>但是对于 <code>非阻塞</code> 和 <code>异步</code> 的概念有点混淆，<code>非阻塞</code> 只是意味着方法调用不阻塞，就是说作为服务员的你不用一直在窗口等，<code>非阻塞</code> 的逻辑是 <strong>“等可以读（写）了告诉你”</strong>，但是完成读（写）工作的还是调用者（线程）服务员的你等菜到窗口了还是要你亲自去拿。而 <code>异步</code> 意味这你可以不用亲自去做读（写）这件事，你的工作让别人（别的线程）来做，你只需要发起调用，别人把工作做完以后，或许再通知你，它的逻辑是 <strong>“我做完了之后告诉或不告诉你”</strong>，它和非阻塞的区别在于一个是“已经做完”另一个是“可以去做”。</p>
+
 <h1 id="参考">参考</h1>
+
 <p>　　非常推荐这两篇文章，看完之后受益匪浅。</p>
+
 <ul>
 <li><a href="https://my.oschina.net/xianggao/blog/661085">聊聊同步、异步、阻塞与非阻塞</a></li>
 <li><a href="https://www.jianshu.com/p/486b0965c296">聊聊Linux 五种IO模型</a></li>

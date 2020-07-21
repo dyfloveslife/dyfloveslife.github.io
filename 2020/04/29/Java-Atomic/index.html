@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-04-29T15:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-29T19:19:56&#43;08:00" />
-<meta itemprop="wordCount" content="5784">
+<meta itemprop="wordCount" content="6319">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 5784 words </span>
-          <span class="more-meta"> 12 mins read </span>
+          <span class="more-meta"> 6319 words </span>
+          <span class="more-meta"> 13 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -154,7 +154,10 @@
 <li><a href="#种类">种类</a></li>
 <li><a href="#基本类型的原子操作">基本类型的原子操作</a></li>
 <li><a href="#数组类型的原子操作">数组类型的原子操作</a></li>
-<li><a href="#引用类型的原子操作">引用类型的原子操作</a></li>
+<li><a href="#引用类型的原子操作">引用类型的原子操作</a>
+<ul>
+<li><a href="#解决-aba-问题">解决 ABA 问题</a></li>
+</ul></li>
 <li><a href="#属性-字段-类型的原子操作">属性（字段）类型的原子操作</a></li>
 </ul></li>
 <li><a href="#参考">参考</a></li>
@@ -796,9 +799,9 @@ lisi
 
 <p>如果将<code>ar.set(user);</code>语句进行注释，则 compareAndSet() 方法会返回 false，因为 AtomicReference 中的 value 没有被设置任务值，当通过 compareAndSet() 进行比较的时候，当前值不等于预期值，因此将会返回 false。</p>
 
-<p><strong>解决 ABA 问题</strong>：</p>
+<h3 id="解决-aba-问题">解决 ABA 问题</h3>
 
-<p>这里可以使用 AtomicStampedReference 来解决 ABA 问题，当然也可以使用 AtomicMarkableReference。它们在实现 compareAndSet() 方法的时候除了要比较当前对象的值和预期值以外，还需要比较当前的戳值和预期戳值，只有全部相同时，CAS 才能操作成功。每次更新的时候，戳值都会发生变化，我们可以自己设置该戳值。</p>
+<p>这里可以使用 AtomicStampedReference 来解决 ABA 问题，<font color='red'>它在实现 compareAndSet() 方法的时候除了要比较当前对象的值和预期值以外，还需要比较当前的戳值和预期戳值，只有全部相同时，CAS 才能操作成功。</font>每次更新的时候，戳值都会发生变化，我们可以自己设置该戳值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
@@ -819,6 +822,93 @@ lisi
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
+<p>以上就是使用 AtomicStampedReference 来解决 ABA 问题的主要方法，但是你会发现，这里的 Pair 又是什么呢？这里的 Pair 其实是 AtomicStampedReference 的一个内部类，它将元素值和版本号绑定在了一起，存储在 Pair 的 reference 和 stamp 中，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">private static class Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="err">final T </span><span class="n">reference</span><span class="p">;</span>
+    <span class="err">final int </span><span class="n">stamp</span><span class="p">;</span>
+    <span class="err">private Pair</span><span class="p">(</span><span class="err">T reference</span><span class="p">,</span> <span class="err">int stamp</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">reference</span> <span class="o">=</span> <span class="n">reference</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">stamp</span> <span class="o">=</span> <span class="n">stamp</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">static</span> <span class="o">&lt;</span><span class="err">T&gt; Pair</span><span class="o">&lt;</span><span class="err">T&gt; of</span><span class="p">(</span><span class="err">T reference</span><span class="p">,</span> <span class="err">int stamp</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">stamp</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>当了解了内部类 Pair 之后，现在我们看一下 compareAndSet() 方法到底是如何执行的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public boolean </span><span class="n">compareAndSet</span><span class="p">(</span><span class="err">V expectedReference</span><span class="p">,</span> <span class="err">V newReference</span><span class="p">,</span> <span class="err">int expectedStamp</span><span class="p">,</span> <span class="err">int newStamp</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 获取当前的（元素值，版本号）对
+</span><span class="c1"></span>    <span class="err">Pair&lt;V&gt; current </span><span class="o">=</span> <span class="n">pair</span><span class="p">;</span>
+    <span class="k">return</span>
+            <span class="c1">// 如果引用没有变
+</span><span class="c1"></span>            <span class="n">expectedReference</span> <span class="o">==</span> <span class="n">current</span><span class="p">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
+            <span class="c1">// 如果版本号也没有变
+</span><span class="c1"></span>            <span class="n">expectedStamp</span> <span class="o">==</span> <span class="n">current</span><span class="p">.</span><span class="na">stamp</span> <span class="o">&amp;&amp;</span>
+            <span class="c1">// 如果新的引用等于旧的引用
+</span><span class="c1"></span>            <span class="p">((</span><span class="n">newReference</span> <span class="o">==</span> <span class="n">current</span><span class="p">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
+            <span class="c1">// 如果新的时间戳等于旧的时间戳
+</span><span class="c1"></span>            <span class="n">newStamp</span> <span class="o">==</span> <span class="n">current</span><span class="p">.</span><span class="na">stamp</span><span class="p">)</span> <span class="o">||</span> 
+            <span class="c1">// 构造新的 Pair 对象并使用 CAS 的方式更新
+</span><span class="c1"></span>            <span class="n">casPair</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">Pair</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">newReference</span><span class="p">,</span> <span class="n">newStamp</span><span class="p">)));</span>
+<span class="p">}</span>
+
+
+<span class="err">private boolean </span><span class="n">casPair</span><span class="p">(</span><span class="err">Pair&lt;V&gt; cmp</span><span class="p">,</span> <span class="err">Pair&lt;V&gt; val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 调用 Unsafe 中的 compareAndSwapObject 方法通过 CAS 的方式更新 Pair 的引用为新的引用
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">UNSAFE</span><span class="p">.</span><span class="na">compareAndSwapObject</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">pairOffset</span><span class="p">,</span> <span class="n">cmp</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>因此，总体的流程为：</p>
+
+<ul>
+<li>如果元素值和版本号都没有发生变化，并且和新的也相同，那么返回 true；</li>
+<li>如果元素值和版本号都没有发生变化，并且和新的不完全相同，那么就构造一个新的 Pair 对象并通过 CAS 的方式更新 Pair。</li>
+</ul>
+
+<p>当然也可以使用 AtomicMarkableReference，它的内部存储方式也是使用了一个内部类 Pair，但与 AtomicStampedReference 不同的是，AtomicMarkableReference 维护的不是一个版本号，而是维护一个 boolean 类型的标记 mark，根据这个标记 mark 是否修改过，来解决 ABA 问题。</p>
+
 <h2 id="属性-字段-类型的原子操作">属性（字段）类型的原子操作</h2>
 
 <p>这里以 AtomicIntegerFieldUpdater 为例，它属于以原子的方式更新整型字段的更新器。要想原子的更新字段类，首先由于原子更新类都是抽象类，因此使用的时候必须使用静态方法 newUpdater() 创建一个更新器，并且需要设置想要更新的类和属性，然后在更新类的字段或属性的时候需要使用 public volatile 进行修饰。如以下示例：</p>

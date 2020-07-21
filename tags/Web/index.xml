@@ -21,14 +21,15 @@
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
 环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装
-3.  创建个人目录
-4.  创建虚拟目录
-5.  创建虚拟主机
-6.  使用域名访问web服务器&lt;/p&gt;</description>
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置虚拟机静态IP&lt;/li&gt;
+&lt;li&gt;安装&lt;/li&gt;
+&lt;li&gt;创建个人目录&lt;/li&gt;
+&lt;li&gt;创建虚拟目录&lt;/li&gt;
+&lt;li&gt;创建虚拟主机&lt;/li&gt;
+&lt;li&gt;使用域名访问web服务器&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
   </channel>

@@ -17,11 +17,9 @@
       <pubDate>Fri, 02 Jun 2017 21:41:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/02/Linux-WebServer/</guid>
-      <description>&lt;hr /&gt;
-
+      <description>&lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;2017/6/6 [更新]基于端口的虚拟主机&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;</description>
+&lt;hr&gt;</description>
     </item>
     
     <item>
@@ -32,7 +30,6 @@
       <guid>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</guid>
       <description>&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
 同时有三个软件包：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;

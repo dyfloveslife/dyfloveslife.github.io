@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/12/27/offer-Josephus/" />
@@ -47,16 +47,13 @@
 <meta property="article:modified_time" content="2019-12-27T09:36:56+08:00" />
 <meta itemprop="name" content="剑指 Offer 之 圆圈中最后剩下的数字（约瑟夫环问题）">
 <meta itemprop="description" content="《剑指 Offer》中涉及到了约瑟夫环问题，虽然下面文章中所描述的和书中的题目有些差异，但从总体上看，都涉及到了约瑟夫环问题。">
-
-
 <meta itemprop="datePublished" content="2019-12-27T09:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-27T09:36:56&#43;08:00" />
 <meta itemprop="wordCount" content="2637">
 
 
 
-<meta itemprop="keywords" content="Algorithm,剑指Offer,Josephus," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Algorithm,剑指Offer,Josephus," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="剑指 Offer 之 圆圈中最后剩下的数字（约瑟夫环问题）"/>
 <meta name="twitter:description" content="《剑指 Offer》中涉及到了约瑟夫环问题，虽然下面文章中所描述的和书中的题目有些差异，但从总体上看，都涉及到了约瑟夫环问题。"/>
 
@@ -146,76 +143,42 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#题目描述">题目描述</a></li>
-<li><a href="#方法一">方法一</a>
-<ul>
-<li><a href="#分析">分析</a></li>
-<li><a href="#代码">代码</a></li>
-</ul></li>
-<li><a href="#方法二">方法二</a>
-<ul>
-<li><a href="#代码-1">代码</a></li>
-</ul></li>
-<li><a href="#参考">参考</a></li>
-</ul>
+  <ul>
+    <li><a href="#分析">分析</a></li>
+    <li><a href="#代码">代码</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#代码-1">代码</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>《剑指 Offer》中涉及到了约瑟夫环问题，虽然下面文章中所描述的和书中的题目有些差异，但从总体上看，都涉及到了约瑟夫环问题。</p>
-
 <h1 id="题目描述">题目描述</h1>
-
 <p>0，1，···，n-1 这 n 个数字排成一个圆圈，从数字 0 开始，每次从这个圆圈里删除第 m 个数字。求出这个圆圈里剩下的最后一个数字。</p>
-
 <p>而本文所涉及到的题目如下所示：
 有很多人围成一个圈，由第 1 个人开始报数，报数到 3 的人就出队，然后再由下一个人重新从 1 开始报数，报数到 3 的那个人再出队，就这样直到剩下最后一个人。</p>
-
 <blockquote>
 <p>你可以看到，这两个题目所描述的有些不同。第二题与第一题的不同之处在于：每次需要由下一个人重新从 1 开始报数，则最后剩下的那个人必然就是 1。</p>
 </blockquote>
-
 <p>输入：一个环形单向链表的头节点 head 和报数的值 m。</p>
-
 <p>输出：最后生存下来的节点，且这个节点自己组成环形单链表，其他节点都删除掉。</p>
-
 <p>时间复杂度：O(N)</p>
-
 <h1 id="方法一">方法一</h1>
-
 <h2 id="分析">分析</h2>
-
 <p>首先根据题目的描述，走一遍这个流程。假如报数的值 <code>m = 3</code>，也就是需要删除的编号，如下图左侧所示。删除 <code>3</code> 后，则将原来的 <code>4</code> 置为 <code>1</code>， <code>5</code> 置为 <code>2</code>， <code>1</code> 置为 <code>3</code>， <code>2</code> 置为 <code>4</code>，如下图右侧所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/12/27/EBa8QuLrKqhVIcA.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>然后同样的再删除第三个数 <code>3</code>，则原来的 <code>4</code> 变成了 <code>1</code>，原来的 <code>1</code> 置为 <code>2</code>，原来的 <code>2</code> 置为 <code>3</code>，如下图所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/12/27/WpgUcYA1TdCabOf.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>然后再从 <code>1</code> 开始，删除第 <code>3</code> 个数，如下所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/12/27/vuyMZsrgKNoOR4a.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>然后再从 <code>1</code> 开始数三个数，结果又回到了 <code>1</code>，即将这个 <code>1</code> 删除后，再将 <code>2</code> 变为 <code>1</code>，这就得到了最后的结果。如下图所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/12/27/9ODSA2yCcqteVh3.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>好，知道以上计算流程之后，我们再看看如何具体的分析这个问题。</p>
-
 <p>我们 <strong>从后往前计算，每报一次数，然后链表中的下一个节点就重新编号</strong>，那么最后所剩节点的个数只有一个。并且可以确定的是，最后该节点一定是 <code>1</code>（如上图所示）。</p>
-
 <p>那么现在需要找到一个公式，能够从底往上推出初始的状态，如下所示：</p>
-
 <table>
 <thead>
 <tr>
@@ -223,44 +186,35 @@
 <th align="center">存活节点的编号</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="center">N</td>
 <td align="center">?</td>
 </tr>
-
 <tr>
 <td align="center">N-1</td>
 <td align="center">?</td>
 </tr>
-
 <tr>
 <td align="center">···</td>
 <td align="center">···</td>
 </tr>
-
 <tr>
 <td align="center">3</td>
 <td align="center">?</td>
 </tr>
-
 <tr>
 <td align="center">2</td>
 <td align="center">?</td>
 </tr>
-
 <tr>
 <td align="center">1</td>
 <td align="center"><strong>1</strong></td>
 </tr>
 </tbody>
 </table>
-
 <p>从 <code>1</code> 开始计算，一直计算到剩余节点数 <code>N</code>，此时对应的 <strong>存活节点的编号</strong> 就是在原链表中一个也没有报数的情况下所对应的节点，我们最后返回该节点即可。也就是说，我们一开始是不知道哪个节点最后是剩余的，而只知道最后那个剩余节点的编号一定是 <code>1</code>。</p>
-
 <p>现在假设链表长度为 <code>i</code>，则每个节点的 <code>编号</code> 和 <code>报数</code> 之间的关系，如下所示：</p>
-
 <table>
 <thead>
 <tr>
@@ -268,110 +222,80 @@
 <th align="center">报数</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="center">1</td>
 <td align="center">1</td>
 </tr>
-
 <tr>
 <td align="center">2</td>
 <td align="center">2</td>
 </tr>
-
 <tr>
 <td align="center">3</td>
 <td align="center">3</td>
 </tr>
-
 <tr>
 <td align="center">···</td>
 <td align="center">···</td>
 </tr>
-
 <tr>
 <td align="center">i</td>
 <td align="center">i</td>
 </tr>
-
 <tr>
 <td align="center">i+1</td>
 <td align="center">1</td>
 </tr>
-
 <tr>
 <td align="center">i+2</td>
 <td align="center">2</td>
 </tr>
-
 <tr>
 <td align="center">···</td>
 <td align="center">···</td>
 </tr>
-
 <tr>
 <td align="center">2i</td>
 <td align="center">i</td>
 </tr>
-
 <tr>
 <td align="center">2i+1</td>
 <td align="center">1</td>
 </tr>
-
 <tr>
 <td align="center">2i+2</td>
 <td align="center">2</td>
 </tr>
-
 <tr>
 <td align="center">···</td>
 <td align="center">···</td>
 </tr>
-
 <tr>
 <td align="center">3i</td>
 <td align="center">i</td>
 </tr>
-
 <tr>
 <td align="center">···</td>
 <td align="center">···</td>
 </tr>
 </tbody>
 </table>
-
 <p>我们可以将其绘制出来，如下所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/12/27/8TGOPUjXtLFzDg7.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>然而，上面的图像是如何得到的呢？</p>
-
 <p>这里可以对下面的图像进行平移，向右移动一位，再向上移动一位，从而得到上面的图像。</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/12/27/msE6ATuPbxYVofv.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>因此，可以得到 <code>编号</code> 和 <code>报数</code> 之间的关系：<code>编号 = (报数 - 1) % i + 1</code>。</p>
-
 <blockquote>
 <p>如何平移？</p>
-
 <p>左加右减，上加下减。</p>
 </blockquote>
-
 <p>好，找到了 <code>编号</code> 和 <code>报数</code> 之间对应的关系之后，我们再看 <code>新编号</code> 和 <code>老编号</code> 之间的关系。当链表长度为 <code>i</code> 的时候，它们之间的关系如下所示：</p>
-
 <blockquote>
 <p>S 表示被删除的节点。</p>
-
 <p>新号是由于删除了节点 S，才变成长度为 i - 1 的。</p>
 </blockquote>
-
 <table>
 <thead>
 <tr>
@@ -379,87 +303,57 @@
 <th align="center">新编号（长度为 i-1）</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="center">S-1</td>
 <td align="center">i-1</td>
 </tr>
-
 <tr>
 <td align="center">S</td>
 <td align="center">—</td>
 </tr>
-
 <tr>
 <td align="center">S+1</td>
 <td align="center">1</td>
 </tr>
-
 <tr>
 <td align="center">S+2</td>
 <td align="center">2</td>
 </tr>
 </tbody>
 </table>
-
 <p>由于 <code>S</code> 节点被删除了，所以它在新号中就没有编号了。原来在老编号中的 <code>S+1</code>，在新编号中就变成了 <code>1</code>。原来在老编号中的 <code>S-1</code>，在新编号中就变成了 <code>i-1</code>（因为新编号的长度就是 i-1）。</p>
-
 <p>下面进行详细说明，如下图所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/12/27/NJM57236aLj9Ptx.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>首先删除 <code>3</code>，然后从 <code>4</code> 的位置开始重新编号为 <code>1</code>。这里找一下对应的关系。新编号为 <code>1</code> 的时候，老编号为 <code>4</code>，也就是 <code>S+1=3+1=4</code>；新编号为 <code>2</code> 的时候，老编号为 <code>5</code>，也就是 <code>S+2=3+2=5</code>；&hellip;；新编号为 <code>6</code> 的时候，也就是 <code>i-S=9-3=6</code>，老编号为 <code>9</code>；新编号为 <code>7</code> 的时候，也就是 <code>i-S+1=9-3+1=7</code>，老编号回到了 <code>1</code>。</p>
-
 <p>这里用如下坐标形式将上面的内容进行表示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/12/27/UJi29nR3poq4Fgy.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>也就是说，新编号的 <code>1</code> 对应旧编号的 <code>S+1</code>，新编号的 <code>i-S</code> 对应旧编号的 <code>i</code>，新编号的 <code>i-S+1</code> 对应旧编号的 <code>1</code>，新编号的 <code>i-1</code> 对应旧编号的 <code>S-1</code>。此时 <code>S</code> 位置上的数已经被删除了。</p>
-
 <p>现在将上图中的线延长，如下所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/12/27/GOgKX6PAuin3kye.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>由于之前已经求出了函数：<code>编号 = (报数 - 1) % i + 1</code>，将该函数向左平移 <code>S</code> 个单位，就可以得到上图。过程如下：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/12/27/9ony1bAxR2XhKcV.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>从而可以得到对应关系：<code>旧编号 = (新编号 - 1 + S) % i + 1</code>。</p>
-
 <p>由之前的对应关系可知：数到第 <code>m</code> 个就报数，当前报数的编号就是 <code>S</code>，则有：<code>S = (m - 1) % i + 1</code>。由于 <code>m</code> 已知，则将 <code>S</code> 带入到上式中，就可以求出 <code>新编号</code> 和 <code>老编号</code> 对应的关系。如下所示：</p>
-
 <p>$$
-旧编号 = (新编号 - 1 + S) \% i + 1
+旧编号 = (新编号 - 1 + S) % i + 1 
 $$
 $$
-旧编号 = [新编号 - 1 + (m - 1) \% i + 1] \% i + 1
+旧编号 = [新编号 - 1 + (m - 1) % i + 1] % i + 1
 $$
 $$
-旧编号 = [新编号 + (m - 1) \% i] \% i + 1
+旧编号 = [新编号 + (m - 1) % i] % i + 1
 $$
 $$
-旧编号 = (新编号 + m - 1)\% i + 1
+旧编号 = (新编号 + m - 1)% i + 1
 $$</p>
-
 <p>这里说一下最后两步为什么相等？</p>
-
-<p>用 $ (a+k \% i) \%i $ 表示倒数第二个式子，用 $ (a+k) \%i $ 表示倒数第一个式子。</p>
-
-<p>假设 $ k=c \cdot i + t $，其中 $ t $ 表示余数，则有 $ (a+k \% i) \%i = (a+t) \% i $。而 $ (a+k) \%i = (a+t) \% i $，所以 $ (a+k \% i) \%i = (a+k) \%i $。</p>
-
+<p>用 $ (a+k % i) %i $ 表示倒数第二个式子，用 $ (a+k) %i $ 表示倒数第一个式子。</p>
+<p>假设 $ k=c \cdot i + t $，其中 $ t $ 表示余数，则有 $ (a+k % i) %i = (a+t) % i $。而 $ (a+k) %i = (a+t) % i $，所以 $ (a+k % i) %i = (a+k) %i $。</p>
 <h2 id="代码">代码</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -500,91 +394,74 @@ $$</p>
 </span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Solution</span> <span class="p">{</span>
-    <span class="err">public static class Node </span><span class="p">{</span>
-        <span class="err">int val</span><span class="p">;</span>
-        <span class="err">Node next</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">val</span><span class="o">;</span>
+        <span class="n">Node</span> <span class="n">next</span><span class="o">;</span>
 
-        <span class="n">Node</span><span class="p">(</span><span class="err">int val</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+        <span class="n">Node</span><span class="o">(</span><span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
     <span class="c1">// 用链表模拟环
-</span><span class="c1"></span>    <span class="err">public static Node lastRemaining_Solution</span><span class="p">(</span><span class="err">Node head</span><span class="p">,</span> <span class="err">int m</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span> <span class="o">==</span> <span class="n">head</span> <span class="o">||</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
-        <span class="p">}</span>
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Node</span> <span class="nf">lastRemaining_Solution</span><span class="o">(</span><span class="n">Node</span> <span class="n">head</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">==</span> <span class="n">head</span> <span class="o">||</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
+        <span class="o">}</span>
 
-        <span class="err">Node cur </span><span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="err">int temp </span><span class="o">=</span> <span class="n">1</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">temp</span><span class="o">++</span><span class="p">;</span>
-            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
+        <span class="n">Node</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">temp</span><span class="o">++;</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
 
-        <span class="n">temp</span> <span class="o">=</span> <span class="n">getLive</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">m</span><span class="p">);</span>
-        <span class="k">while</span> <span class="p">(</span><span class="o">--</span><span class="n">temp</span> <span class="o">!=</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">head</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
-    <span class="p">}</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">getLive</span><span class="o">(</span><span class="n">temp</span><span class="o">,</span> <span class="n">m</span><span class="o">);</span>
+        <span class="k">while</span> <span class="o">(--</span><span class="n">temp</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">head</span><span class="o">;</span>
+    <span class="o">}</span>
 
     <span class="c1">// 核心代码
-</span><span class="c1"></span>    <span class="err">private static int getLive</span><span class="p">(</span><span class="err">int i</span><span class="p">,</span> <span class="err">int m</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">1</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">getLive</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span>  <span class="n">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getLive</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">getLive</span><span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="o">,</span> <span class="n">m</span><span class="o">)</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span>  <span class="n">1</span><span class="o">)</span> <span class="o">%</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>对代码的详细解释：</p>
-
+</div><p>对代码的详细解释：</p>
 <p><a href="https://github.com/dyfloveslife/LeetCodeAndSwordToOffer/blob/master/src/SwordToOfferSolution/_62_LastNumberInCircle/Solution.java">https://github.com/dyfloveslife/LeetCodeAndSwordToOffer/blob/master/src/SwordToOfferSolution/_62_LastNumberInCircle/Solution.java</a></p>
-
 <h1 id="方法二">方法二</h1>
-
 <p>这是在力扣的解答区看到的方法，讲得比较清晰，因此在这里做一个梳理。</p>
-
 <p>该方法的核心在于：<strong>只关心最终活着的那个人的序号变化情况，从最终结果反推出规律</strong>。</p>
-
 <p>例如一共有 n=8 个人，每当数到 m=3 的时候就将该人给杀掉，我们用 F(n, m) 来表示最后剩下的那个人的序号。整个流程如下图所示：</p>
-
 <blockquote>
 <p>图片均来自【参考】文章。</p>
 </blockquote>
-
-<p><img src="https://i.loli.net/2020/05/24/p6lzsfCYA8BVM7X.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2020/05/24/p6lzsfCYA8BVM7X.png" alt="image.png"></p>
 <p>从上图可以看到，我们将这 8 个人用字母代替，在每一轮中，红色的方格表示当前需要被杀掉的人，绿色的方格表示最终存活下来的人。N=8 时，将 C 杀掉，则下一轮（N=7）将会从 D 开始报数，然后往右数 m=3 个数，再将 F 杀掉，以此类推。</p>
-
 <p>此外，注意观察每一轮中最后活下来的 G 的索引变化情况。当最后只剩下一个人的时候，这个人的编号（索引号）一定是 0。</p>
-
 <p>接下来我们看看如何进行反推，例如如何从 N=7 反推出 N=8 时的情况，如下图所示：</p>
-
-<p><img src="https://i.loli.net/2020/05/24/SyDhFk73qVYsxaG.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2020/05/24/SyDhFk73qVYsxaG.png" alt="image.png"></p>
 <p>在从 N=7 回到 N=8 的过程中，先将被杀掉的 C 补充回去，即黄色方格；然后将 N=7 右移 m 个单位，由于多出 3 个人（A、B、C）越界了，因此将它们移到前面；最后得到的结果就和 N=8 一样了。</p>
-
-<p>因此，从 N=7 到 N=8 的递推公式为：$f(8, 3)=[f(7, 3) + 3] \% 8$，而将此公式推广到一般情况，则有：$f(N, m)=[f(N-1, 3) + 3] \% N$。</p>
-
+<p>因此，从 N=7 到 N=8 的递推公式为：$f(8, 3)=[f(7, 3) + 3] % 8$，而将此公式推广到一般情况，则有：$f(N, m)=[f(N-1, 3) + 3] % N$。</p>
 <p>最后整理得到的递推公式：</p>
-
 <p>$$
 当 n=1 时，f(N, m) = 0
 $$</p>
-
 <p>$$
-当 n &gt; 1 时，f(N, m) = [f(N-1, m) + m] \% N
+当 n &gt; 1 时，f(N, m) = [f(N-1, m) + m] % N
 $$</p>
-
 <h2 id="代码-1">代码</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -595,19 +472,18 @@ $$</p>
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public int </span><span class="n">lastRemaining</span><span class="p">(</span><span class="err">int n</span><span class="p">,</span> <span class="err">int m</span><span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">int</span> <span class="nf">lastRemaining</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// 最终活下来的那个人的初始位置
-</span><span class="c1"></span>    <span class="err">int pos </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">m</span><span class="p">)</span> <span class="o">%</span> <span class="n">i</span><span class="p">;</span>
-    <span class="p">}</span>
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="o">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">m</span><span class="o">)</span> <span class="o">%</span> <span class="n">i</span><span class="o">;</span>
+    <span class="o">}</span>
     
-    <span class="k">return</span> <span class="n">pos</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="k">return</span> <span class="n">pos</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="参考">参考</h1>
-
+</div><h1 id="参考">参考</h1>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/huan-ge-jiao-du-ju-li-jie-jue-yue-se-fu-huan-by-as/">https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/huan-ge-jiao-du-ju-li-jie-jue-yue-se-fu-huan-by-as/</a></li>
 </ul>

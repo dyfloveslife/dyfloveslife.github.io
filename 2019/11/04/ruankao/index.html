@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/11/04/ruankao/" />
@@ -47,16 +47,13 @@
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="软考知识点总结">
 <meta itemprop="description" content="再有一段时间就软考了，这篇文章是为了将之前看过的、出现频率比较高的知识点总结一下，以便日后复习用。">
-
-
 <meta itemprop="datePublished" content="2019-11-04T20:01:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="2981">
+<meta itemprop="wordCount" content="2972">
 
 
 
-<meta itemprop="keywords" content="Computer Network," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Computer Network," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="软考知识点总结"/>
 <meta name="twitter:description" content="再有一段时间就软考了，这篇文章是为了将之前看过的、出现频率比较高的知识点总结一下，以便日后复习用。"/>
 
@@ -136,7 +133,7 @@
         <div class="post-category">
             <a href="/categories/Computer-Network/"> Computer Network </a>
             </div>
-          <span class="more-meta"> 2981 words </span>
+          <span class="more-meta"> 2972 words </span>
           <span class="more-meta"> 6 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -146,201 +143,122 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#1-中断响应时间">1. 中断响应时间</a></li>
-<li><a href="#2-指令流水线的计算">2. 指令流水线的计算</a></li>
-<li><a href="#3-单指令多数据流-simd">3. 单指令多数据流(SIMD)</a></li>
-<li><a href="#4-osi-模型">4. OSI 模型</a></li>
-<li><a href="#5-tcp-ip-协议">5. TCP/IP 协议</a></li>
-<li><a href="#6-信道复用技术">6. 信道复用技术</a>
-<ul>
-<li><a href="#6-1-频分复用">6.1 频分复用</a></li>
-<li><a href="#6-2-时分复用">6.2 时分复用</a></li>
-<li><a href="#6-3-波分复用">6.3 波分复用</a></li>
-<li><a href="#6-4-码分复用">6.4 码分复用</a></li>
-</ul></li>
-<li><a href="#7-dhcp">7. DHCP</a></li>
-<li><a href="#8-公钥私钥">8. 公钥私钥</a></li>
-<li><a href="#9-数据传输介质">9. 数据传输介质</a></li>
-<li><a href="#10-802-11a-ieee-802-11b-和-ieee-802-11g-的比较">10. 802.11a、IEEE 802.11b 和 IEEE 802.11g 的比较</a></li>
-<li><a href="#11-radius">11. RADIUS</a></li>
-<li><a href="#12-nat-网络地址转换">12. NAT(网络地址转换)</a></li>
-<li><a href="#13-原码-反码-补码-移码">13. 原码、反码、补码、移码</a></li>
-<li><a href="#14-指令寻址方式">14. 指令寻址方式</a></li>
-<li><a href="#15-求串联-并联的可靠度">15. 求串联、并联的可靠度</a></li>
-<li><a href="#16-逻辑地址-到-物理地址">16. 逻辑地址 到 物理地址</a></li>
-</ul>
+  <ul>
+    <li><a href="#61-频分复用">6.1 频分复用</a></li>
+    <li><a href="#62-时分复用">6.2 时分复用</a></li>
+    <li><a href="#63-波分复用">6.3 波分复用</a></li>
+    <li><a href="#64-码分复用">6.4 码分复用</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>再有一段时间就软考了，这篇文章是为了将之前看过的、出现频率比较高的知识点总结一下，以便日后复习用。</p>
-
 <p>今年报考了网络工程师，想着有机会就考一次，毕竟网络方面的知识以后在春招或秋招的时候还会用到，那就一举两得，一起复习了吧。只不过软考刷题比较多，所以这篇文章主要是围绕历年真题展开的，这样在复习的时候也比较有针对性。由于知识点很多且没有按照<code>难易程度</code>或<code>了解知识的先后顺序</code>进行，所以就先这么写，如果要有什么新的知识点，那就在这篇文章的基础上不断更新吧。</p>
-
 <h1 id="1-中断响应时间">1. 中断响应时间</h1>
-
 <p>中断响应时间：指中断响应过程所用的时间，从发出中断请求到进入中断处理所用的时间。</p>
-
 <h1 id="2-指令流水线的计算">2. 指令流水线的计算</h1>
-
 <p>声明：<code>T</code> 表示执行 <code>n</code> 条指令所用的总时间，<code>t1</code>、<code>t2</code>、<code>t3</code> 分别代表一条指令中的 <code>取指</code>、<code>分析</code> 和 <code>执行</code> 三部分，<code>t</code> 表示 <code>t1</code>、<code>t2</code>、<code>t3</code> 中最大的时间，也就是在一条指令中花费时间最多的那个指令所用的时间。</p>
-
 <p>传统的串行方式：<code>T = n * (t1 + t2 + t3)</code></p>
-
 <p>流水线方式：<code>T = (t1 + t2 + t3) + (n - 1) *　t</code>，如下所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/04/ae571fLCOWphbuA.png" alt="image.png" /></p>
-
-<h1 id="3-单指令多数据流-simd">3. 单指令多数据流(SIMD)</h1>
-
+<p><img src="https://i.loli.net/2019/11/04/ae571fLCOWphbuA.png" alt="image.png"></p>
+<h1 id="3-单指令多数据流simd">3. 单指令多数据流(SIMD)</h1>
 <p>SIMD（Single Instruction Multiple Datastream，单指令流多数据流）：同一条指令控制多个处理器的运行。在这种计算机中有多个处理单元，但只有一个控制部件，所有处理单元以同步方式，在同一时刻执行同一条指令，处理不同的数据。</p>
-
 <h1 id="4-osi-模型">4. OSI 模型</h1>
-
-<p><img src="https://i.loli.net/2019/11/04/pj9Am6ciEProxMk.png" alt="image.png" /></p>
-
-<h1 id="5-tcp-ip-协议">5. TCP/IP 协议</h1>
-
-<p><img src="https://i.loli.net/2019/11/04/ZHFX1pVKu6NyRiA.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2019/11/04/pj9Am6ciEProxMk.png" alt="image.png"></p>
+<h1 id="5-tcpip-协议">5. TCP/IP 协议</h1>
+<p><img src="https://i.loli.net/2019/11/04/ZHFX1pVKu6NyRiA.png" alt="image.png"></p>
 <h1 id="6-信道复用技术">6. 信道复用技术</h1>
-
 <p>简单的理解信道复用技术，就是指将原来使用多个信道的方式变成同一个共享信道的方式。如下图所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/04/L916sxbWUSJiBPh.png" alt="image.png" /></p>
-
-<h2 id="6-1-频分复用">6.1 频分复用</h2>
-
+<p><img src="https://i.loli.net/2019/11/04/L916sxbWUSJiBPh.png" alt="image.png"></p>
+<h2 id="61-频分复用">6.1 频分复用</h2>
 <p>　　频分复用(Frequency Division Multiplexing，FDM)，指用户在分配到一定的频带后，在通信过程中自始至终都占用这个频带。使用频分复用的所有用户在同样的时间占用不同的带宽资源。如下图所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/04/KckMQSptoAI83Om.png" alt="image.png" /></p>
-
-<p><img src="https://i.loli.net/2019/11/04/8wcolQTkLH5jbCr.png" alt="image.png" /></p>
-
-<h2 id="6-2-时分复用">6.2 时分复用</h2>
-
+<p><img src="https://i.loli.net/2019/11/04/KckMQSptoAI83Om.png" alt="image.png"></p>
+<p><img src="https://i.loli.net/2019/11/04/8wcolQTkLH5jbCr.png" alt="image.png"></p>
+<h2 id="62-时分复用">6.2 时分复用</h2>
 <p>时分复用(Time Division Multiplexing，TDM)，指将时间划分为一段段等长的<code>时分复用帧(TDM 帧)</code>，每一个时分复用的用户在每一个 TDM 帧中占用固定序号的时隙，并且占用的时隙是<code>周期性</code>地出现。该方式的所有用户是在不同的时间占用相同的频带宽度。</p>
-
 <p>时分多路复用将使用信道的时间分成一个个的时间片（时隙），按一定规则将这些时间片分配给各路信号，每一路信号只能在自己的时间片内独占信道进行传输，不能占用别人的时间片。即如果某个时间片的用户不使用该信道，也只能保持空闲。如下图所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/04/i4AsrDC5ZNIeqby.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2019/11/04/i4AsrDC5ZNIeqby.png" alt="image.png"></p>
 <p>　　但是时分复用存在一个问题，就是不管有没有信息通信，该信道都不能被其它用户使用，从而造成线路资源的浪费。为了解决这一问题，提高信道的传输能力，出现了一种叫做<code>统计时分复用(Statistical time-division multiplexing, STDM)</code>的方法。该方法可以让多个用户复用某个信道。如下图所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/04/C1snNSyYgVXH3Ed.png" alt="image.png" /></p>
-
-<h2 id="6-3-波分复用">6.3 波分复用</h2>
-
+<p><img src="https://i.loli.net/2019/11/04/C1snNSyYgVXH3Ed.png" alt="image.png"></p>
+<h2 id="63-波分复用">6.3 波分复用</h2>
 <p>波分复用(Wavelength Division Multiplexing，WDM)，指在同一根光纤中同时让两个或两个以上的光波长信号通过不同光信道各自传输信息。如下图所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/04/NkV6FMJcTBjsEh1.png" alt="image.png" /></p>
-
-<h2 id="6-4-码分复用">6.4 码分复用</h2>
-
+<p><img src="https://i.loli.net/2019/11/04/NkV6FMJcTBjsEh1.png" alt="image.png"></p>
+<h2 id="64-码分复用">6.4 码分复用</h2>
 <p>码分复用(Code Division Multiple Access，CDMA)，指使用不同的编码来区分各路原始信号的一种复用方式，各用户使用经过特殊挑选的不同的码型，因此彼此不会造成干扰。如下所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/04/r7p4o9fKs3QNRLk.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2019/11/04/r7p4o9fKs3QNRLk.png" alt="image.png"></p>
 <p>这里有一个计算码片序列的例子，如下图所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/04/oBlhAxNr7MuVSKR.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2019/11/04/oBlhAxNr7MuVSKR.png" alt="image.png"></p>
 <p>也就是说，将<code>A</code>、<code>B</code>、<code>C</code>、<code>D</code>分别于<code>R</code>计算，如果结果是<code>0</code>，则没有信号；如果是<code>1</code>或者<code>-1</code>，则就有信号。那么怎么计算呢？以<code>A</code>和<code>R</code>为例：它们各自有<code>8</code>位数，将它们对应相乘，然后再除以<code>8</code>，结果是<code>1</code>，说明有信号。</p>
-
 <h1 id="7-dhcp">7. DHCP</h1>
-
 <p>动态主机配置协议(Dynamic Host Configuration Protocol)，主要用于为网络上的主机动态分配IP地址并设置相关网络参数，从而减少网络管理员手工分配IP地址的工作量，并在一定程度上减缓IP紧缺的问题。在 Linux 中提供 DHCP 服务的程序是 <strong>/usr/sbin/dhcpd</strong>。</p>
-
 <h1 id="8-公钥私钥">8. 公钥私钥</h1>
-
 <p>私钥用于解密和签名，公钥用于加密和验证。数字证书由CA(数字证书认证机构，Certificate Authority)发送。</p>
-
 <h1 id="9-数据传输介质">9. 数据传输介质</h1>
-
 <p>100BaseTx 中的<code>T</code>表明 100BaseTx 以太网所使用的传输介质是双绞线(Twisted Pair)。</p>
-
-<h1 id="10-802-11a-ieee-802-11b-和-ieee-802-11g-的比较">10. 802.11a、IEEE 802.11b 和 IEEE 802.11g 的比较</h1>
-
+<h1 id="10-80211aieee-80211b-和-ieee-80211g-的比较">10. 802.11a、IEEE 802.11b 和 IEEE 802.11g 的比较</h1>
 <p>IEEE 802.11b 是目前应用最广的一种 WLAN 标准，使用开放的 2.4GHz 频段直接序列扩频，最大数据传输速率为 11Mbps。</p>
-
 <p>IEEE 802.11a 标准是在 IEEE 802.11b 标准后推出的，虽然它可以达到 54Mbps 的高传输速率，工作频段在 5.15~5.825GHz 的商业频段，产品价格较贵，且与原来的 IEEE 802.11b 标准产品不兼容。</p>
-
 <p>IEEE 802.11g 标准采用与 IEEE 802.11b 相同的 2.4GHz 频段，传输速率提高到 54Mbps，与现有 IEEE 802.11b 标准兼容。</p>
-
 <h1 id="11-radius">11. RADIUS</h1>
-
 <p>远程用户拨入验证服务(RADIUS, Remote Authentication Dial In User Service)，是一种用于在需要认证其链接的网络访问服务器（NAS）和共享认证服务器之间进行认证、授权和记帐信息的文档协议。</p>
-
 <p>RADIUS 服务器负责接收用户的连接请求、认证用户，然后返回客户机所有必要的配置信息以将服务发送到用户。</p>
-
 <p>用户通过 RADIUS 服务器登录的过程：</p>
-
-<p>1) 用户连接到接入点后，WLAN 交换机向用户发送请求用户ID的消息。</p>
-
-<p>2) 用户回复 ID，WLAN 将用户 ID 转发给 RADIUS 服务器。</p>
-
-<p>3) RADIUS 服务器接收接入请求，交换机提取用户身份信息，将用户分配到正确的 VLAN 中，接收信息被发送给用户。</p>
-
-<p>4) 一旦用户被分配到基于角色的 VLAN 中，随后所有的数据都被转发到正确的 VLAN。</p>
-
-<h1 id="12-nat-网络地址转换">12. NAT(网络地址转换)</h1>
-
+<ol>
+<li>
+<p>用户连接到接入点后，WLAN 交换机向用户发送请求用户ID的消息。</p>
+</li>
+<li>
+<p>用户回复 ID，WLAN 将用户 ID 转发给 RADIUS 服务器。</p>
+</li>
+<li>
+<p>RADIUS 服务器接收接入请求，交换机提取用户身份信息，将用户分配到正确的 VLAN 中，接收信息被发送给用户。</p>
+</li>
+<li>
+<p>一旦用户被分配到基于角色的 VLAN 中，随后所有的数据都被转发到正确的 VLAN。</p>
+</li>
+</ol>
+<h1 id="12-nat网络地址转换">12. NAT(网络地址转换)</h1>
 <p>即将一个整体的机构以一个公用 IP 地址出现在 Internet 上，也就是把内部的私有网络地址转换为外部地址。这里用一个例子来说明 NAT 转发的过程，如下图所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/05/qxHJK7sUjc9VydX.png" alt="NAT.png" /></p>
-
+<p><img src="https://i.loli.net/2019/11/05/qxHJK7sUjc9VydX.png" alt="NAT.png"></p>
 <p>其中，(1)、(2)、(3)、(4)、(5) 是需要你填写的 IP 地址或者端口号。</p>
-
 <p>根据 NAT 路由器中的<code>伪装 NAT 表</code>可以看出，在 <code>NAT 路由器</code>中，<code>内部 IP /端口号</code>为<code>90.0.0.5:1234</code>所对应的<code>本地 NAT 端口号</code>为<code>65533</code>，所以<code>(1)</code>处应为<code>65533</code>。同理，<code>(4)</code>处应为<code>65534</code>。</p>
-
 <p>由于 NAT 不会更改接收方的 IP 地址和端口号，所以<code>(2)</code>处应为<code>202.117.112.115</code>，<code>(5)</code>处应为<code>53.12.198.15</code>。</p>
-
 <p>由于 IP 伪装机制只使用一个外部网 IP 地址，所以<code>(3)</code>处应为<code>192.168.12.161</code>。</p>
-
-<h1 id="13-原码-反码-补码-移码">13. 原码、反码、补码、移码</h1>
-
+<h1 id="13-原码反码补码移码">13. 原码、反码、补码、移码</h1>
 <p>详细的内容就不一 一介绍了，这里提醒一下需要注意的地方。</p>
-
 <p>在计算机中，最适合进行数字加减运算的数字编码是<code>补码</code>，因为补码的加法和减法是相同的；最适合表示浮点数阶码的数字编码是<code>移码</code>，这是因为移码的正数大于负数，比较方便于阶码的比较。</p>
-
 <h1 id="14-指令寻址方式">14. 指令寻址方式</h1>
-
 <p>立即数寻址：将操作数作为指令的一部分而直接写在指令中。</p>
-
 <p>寄存器寻址：指令所要的操作数已存储在某寄存器中，或把目标操作数存入寄存器。</p>
-
 <p>寄存器间接寻址：操作数在存储器中，操作数的有效地址用SI、DI、BX和BP四个寄存器之一来指定。</p>
-
 <p>直接寻址：指令所要的操作数存放在内存中，在指令中直接给出该操作数的有效地址。</p>
-
-<h1 id="15-求串联-并联的可靠度">15. 求串联、并联的可靠度</h1>
-
+<h1 id="15-求串联并联的可靠度">15. 求串联、并联的可靠度</h1>
 <p>如下图所示，所描述的是计算机系统的可靠性结构，采用了<code>双重串并联结构</code>。如果每个部件的可靠度为 R = 0.9，那么系统整体的可靠度怎么求呢？</p>
-
-<p><img src="https://i.loli.net/2019/11/05/N7F8pPfa5dzMGch.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2019/11/05/N7F8pPfa5dzMGch.png" alt="image.png"></p>
 <p>其实也很简单，首先看串联结构的可靠度：R2 = R × R = 0.81；然后再将两组串联结构进行并联的可靠性就是：1 - (1 - R2) × (1 - R2) = 0.9639。</p>
-
 <h1 id="16-逻辑地址-到-物理地址">16. 逻辑地址 到 物理地址</h1>
-
 <p>页式存储系统的逻辑地址是由<code>页号</code>和<code>页内地址</code>两部分组成。如下图所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/05/wr7IJ98LWfO5KPy.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2019/11/05/wr7IJ98LWfO5KPy.png" alt="image.png"></p>
 <p>假如页面大小为<code>4K</code>，经过地址变换后，物理地址是多少？</p>
-
 <p>下面展示了具体的求解过程：</p>
-
-<p>1) 页面大小：4K × 1024 = 4096；(1K = 1024)</p>
-
-<p>2) 页号：8644 / 4096 = 2；</p>
-
-<p>3) 物理块号：查表可知，页号 2 所对应的物理块号为 8；</p>
-
-<p>4) 页内偏移：8644 % 4096 = 452；</p>
-
-<p>5) 物理地址 = 物理块号 × 页面大小 + 页内偏移 = 8 × 4096 + 452 = 33220。</p>
+<ol>
+<li>
+<p>页面大小：4K × 1024 = 4096；(1K = 1024)</p>
+</li>
+<li>
+<p>页号：8644 / 4096 = 2；</p>
+</li>
+<li>
+<p>物理块号：查表可知，页号 2 所对应的物理块号为 8；</p>
+</li>
+<li>
+<p>页内偏移：8644 % 4096 = 452；</p>
+</li>
+<li>
+<p>物理地址 = 物理块号 × 页面大小 + 页内偏移 = 8 × 4096 + 452 = 33220。</p>
+</li>
+</ol>
     </div>
 
     <div class="post-copyright">

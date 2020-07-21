@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/05/14/Build-VPS/" />
@@ -46,16 +46,13 @@
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="基于 Vultr &#43; Ubuntu18.04 &#43; BBR 的 ShadowsocksR 配置教程">
 <meta itemprop="description" content="">
-
-
 <meta itemprop="datePublished" content="2018-05-14T21:41:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="2510">
+<meta itemprop="wordCount" content="2499">
 
 
 
-<meta itemprop="keywords" content="VPS,ShadowsocksR," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="VPS,ShadowsocksR," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="基于 Vultr &#43; Ubuntu18.04 &#43; BBR 的 ShadowsocksR 配置教程"/>
 <meta name="twitter:description" content=""/>
 
@@ -135,8 +132,8 @@
         <div class="post-category">
             <a href="/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"> 科学上网 </a>
             </div>
-          <span class="more-meta"> 2510 words </span>
-          <span class="more-meta"> 6 mins read </span>
+          <span class="more-meta"> 2499 words </span>
+          <span class="more-meta"> 5 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -145,183 +142,151 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#1-名词介绍">1.名词介绍</a>
-<ul>
-<li><a href="#shadowsocks">Shadowsocks</a></li>
-<li><a href="#gfw">GFW</a></li>
-<li><a href="#vps">VPS</a></li>
-<li><a href="#vultr">Vultr</a></li>
-</ul></li>
-<li><a href="#2-从-vultr-购买服务器">2.从 Vultr 购买服务器</a></li>
-<li><a href="#3-测试服务器">3.测试服务器</a></li>
-<li><a href="#4-安装与通过xshell-5访问主机">4.安装与通过Xshell 5访问主机</a></li>
-<li><a href="#5-安装与配置-shadowsocksr">5.安装与配置 ShadowsocksR</a></li>
-<li><a href="#6-安装bbr加速">6.安装BBR加速</a></li>
-<li><a href="#7-下载-shadowsocks-客户端">7.下载 Shadowsocks 客户端</a></li>
-<li><a href="#8-测试效果">8.测试效果</a></li>
-</ul>
+  <ul>
+    <li><a href="#shadowsocks">Shadowsocks</a></li>
+    <li><a href="#gfw">GFW</a></li>
+    <li><a href="#vps">VPS</a></li>
+    <li><a href="#vultr">Vultr</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p><img src="/images/VPS/ShadowsocksR.jpg" alt="ShadowsocksR" /></p>
-
+      <p><img src="/images/VPS/ShadowsocksR.jpg" alt="ShadowsocksR"></p>
 <blockquote>
 <p>简单地说，本文会与你分享如何搭建自己的国外服务器（VPS），从而在不同设备（ios、Android、MacOS、Linux）下可以访问Google、YouTube、Twitter等国内受限网站。</p>
 </blockquote>
-
-<p><strong>摘要：本教程最终会实现*单服务器单用户*方式，可以在电脑、手机、平板不同设备登录，满足一个或者两个人日常使用，且没有流量管理功能！</strong></p>
-
-<h1 id="1-名词介绍">1.名词介绍</h1>
-
+<p><strong>摘要：本教程最终会实现<em>单服务器单用户</em>方式，可以在电脑、手机、平板不同设备登录，满足一个或者两个人日常使用，且没有流量管理功能！</strong></p>
+<h1 id="1名词介绍">1.名词介绍</h1>
 <h2 id="shadowsocks">Shadowsocks</h2>
-
-<p><img src="/images/VPS/Shadowsocks01.png" alt="Shadowsocks" />
+<p><img src="/images/VPS/Shadowsocks01.png" alt="Shadowsocks">
 Shadowsocks是由GitHub上知名的clowwindy开发的工具，该工具可以加密传输资料，绕过GFW，从而实现访问外网。</p>
-
 <h2 id="gfw">GFW</h2>
-
 <p>防火长城（英文名称Great Firewall of China，缩写为GFW），我们平常说的 <code>fq</code>，就是突破网络审查浏览境内外被屏蔽的网站或使用服务的行为。</p>
-
 <h2 id="vps">VPS</h2>
-
 <p>虚拟专用服务器（英语名称Virtual private server，缩写为VPS），是将一台服务器分区成多个虚拟专享服务器的服务。我们可以把它当做在国外租的一台电脑，VPS可以像独立服务器一样，重装操作系统，安装程序，单独重启服务器。</p>
-
 <h2 id="vultr">Vultr</h2>
-
 <p>Vultr是一家云基础架构提供商，面向软件开发人员提供虚拟专用服务器（VPS），具有许多性价比很高的服务器，按时计费。目前（2018年5月15日）价格为$5.00$/月($0.007$/小时)。</p>
-
 <blockquote>
 <p>基本的都介绍完了，下面开始进行VPS的搭建。</p>
 </blockquote>
-
-<h1 id="2-从-vultr-购买服务器">2.从 Vultr 购买服务器</h1>
-
+<h1 id="2从-vultr-购买服务器">2.从 Vultr 购买服务器</h1>
 <p>打开 <a href="https://www.vultr.com/?ref=7425888">Vultr</a> 官网，点击<code>Crate Account</code>，创建一个账户，然后进入你的邮箱进行验证，验证通过即可。
-<img src="/images/VPS/vultr_login.png" alt="Vultr" />
+<img src="/images/VPS/vultr_login.png" alt="Vultr">
 进入Vultr官网后，登录账号密码，出现以下页面。点击左侧<code>Billing</code>,我们用<code>Alipay</code>支付，选择<code>$10</code>后进入支付宝页面扫码付款即可，如下图：
-<img src="/images/VPS/vultr_Alipay.png" alt="Vultr_Alipay" />
+<img src="/images/VPS/vultr_Alipay.png" alt="Vultr_Alipay">
 然后选择左侧<code>Servers</code>，点击右侧圆圈状的<code>+</code>号进行添加服务器。这里的服务器地址<code>Server Location</code>建议选择<code>Tokyo</code>，如下图：
-<img src="/images/VPS/vultr_ServerLocation.png" alt="Vultr_erverLocation" /></p>
-
+<img src="/images/VPS/vultr_ServerLocation.png" alt="Vultr_erverLocation"></p>
 <blockquote>
 <p><strong>无奈，我在写这篇文章的时候日本的服务器售罄了，所以下面用新加坡<code>Singapore</code>服务器进行演示。</strong></p>
 </blockquote>
-
 <p>服务器类型<code>Server Type</code>选择<code>Ubuntu 18.04 x64</code>，如下图:
-<img src="/images/VPS/vultr_ServerType.png" alt="Vultr_ServerType" />
+<img src="/images/VPS/vultr_ServerType.png" alt="Vultr_ServerType">
 服务器大小<code>Server Size</code>选择<code>25GB SSD</code>就够用的，如下图:
-<img src="/images/VPS/vultr_ServerSize.png" alt="Vultr_ServerSize" />
+<img src="/images/VPS/vultr_ServerSize.png" alt="Vultr_ServerSize">
 附加功能<code>Additional Features</code>选择<code>Enable IPv6</code>，如下图:
-<img src="/images/VPS/vultr_AdditionalFeatures.png" alt="Vultr_AdditionalFeatures" />
+<img src="/images/VPS/vultr_AdditionalFeatures.png" alt="Vultr_AdditionalFeatures">
 服务器主机名和标签<code>Server Hostname &amp; Label</code>随意填写，这里我填写的是<code>Test</code>。另外其他的选项不用配置。如下图:
-<img src="/images/VPS/vultr_ServerHostname.png" alt="Vultr_ServerHostname" />
+<img src="/images/VPS/vultr_ServerHostname.png" alt="Vultr_ServerHostname">
 最后点击<code>Deploy Now</code>即可。</p>
-
-<h1 id="3-测试服务器">3.测试服务器</h1>
-
+<h1 id="3测试服务器">3.测试服务器</h1>
 <p>我们回到左侧的<code>Servers</code>，你会看到新增了一个服务器，这时的服务器状态为<code>Installing</code>，如下图：
-<img src="/images/VPS/Singapore_installing.png" alt="Singapore_installing" />
+<img src="/images/VPS/Singapore_installing.png" alt="Singapore_installing">
 等待几分钟后即可变为<code>Running</code>，如下图：
-<img src="/images/VPS/Singapore_running.png" alt="Singapore_running" />
+<img src="/images/VPS/Singapore_running.png" alt="Singapore_running">
 选择<code>Test</code>后，可以看到与服务器相关的信息。包括带宽、CPU使用率等。然后在左下方会有IP地址<code>IP Address</code>、用户名<code>Username</code>、密码<code>Password</code>，这是我们接下来要用到的，如下图：
-<img src="/images/VPS/ServerInfo.png" alt="ServerInfo" />
+<img src="/images/VPS/ServerInfo.png" alt="ServerInfo">
 在这之前我们可以ping一下IP地址，查看访问速度如何。（如果延迟过大，可以将服务器删除，重新选择不同的服务器地址再新建一个）如下图：
-<img src="/images/VPS/ping_ip.png" alt="ping_ip" />
+<img src="/images/VPS/ping_ip.png" alt="ping_ip">
 可以看到，延迟基本上在90ms左右，速度还是可以的。</p>
-
-<h1 id="4-安装与通过xshell-5访问主机">4.安装与通过Xshell 5访问主机</h1>
-
-<p>Xshell是一个强大的安全终端模拟软件，可以通过互联网连接到远程主机，获取主机root权限，从而控制远程主机。
-&gt; 接下来我们通过Xshell 5来访问刚才新建的服务器<code>Test</code>。下载地址：<a href="https://pan.baidu.com/s/1qigJGYXy3RH5LOYkRcq19g">点我</a>，密码：<code>7h0g</code>。
-&gt; 安装过程这里就不再介绍了，只不过其中有一个选项要选择：<strong>家庭/学校</strong>免费版。</p>
-
+<h1 id="4安装与通过xshell-5访问主机">4.安装与通过Xshell 5访问主机</h1>
+<p>Xshell是一个强大的安全终端模拟软件，可以通过互联网连接到远程主机，获取主机root权限，从而控制远程主机。</p>
+<blockquote>
+<p>接下来我们通过Xshell 5来访问刚才新建的服务器<code>Test</code>。下载地址：<a href="https://pan.baidu.com/s/1qigJGYXy3RH5LOYkRcq19g">点我</a>，密码：<code>7h0g</code>。
+安装过程这里就不再介绍了，只不过其中有一个选项要选择：<strong>家庭/学校</strong>免费版。</p>
+</blockquote>
 <p>安装好后打开Xshell 5，点击<code>文件</code>→<code>新建</code>，名称随意填写，协议选择<code>SSH</code>，主机名填写IP地址<code>149.28.135.165</code>，其他的不用填写，如下图：
-<img src="/images/VPS/Xshell5_create.png" alt="Xshell5_create" />
+<img src="/images/VPS/Xshell5_create.png" alt="Xshell5_create">
 点击确定后，进行连接，然后输入用户名<code>root</code>,如下图：
-<img src="/images/VPS/Xshell5_username.png" alt="Xshell5_username" />
+<img src="/images/VPS/Xshell5_username.png" alt="Xshell5_username">
 然后输入密码，直接将你的网页服务器上的密码粘贴过来就好，如下图：
-<img src="/images/VPS/Xshell5_password.png" alt="Xshell5_password" />
+<img src="/images/VPS/Xshell5_password.png" alt="Xshell5_password">
 点击确定后，出现相关提示即为连接成功，如下图：
-<img src="/images/VPS/Xshell5_login.png" alt="Xshell5_login" />
-&gt; 我们已经成功连接到了服务器，接下来开始安装ShadowsocksR！</p>
-
-<h1 id="5-安装与配置-shadowsocksr">5.安装与配置 ShadowsocksR</h1>
-
+<img src="/images/VPS/Xshell5_login.png" alt="Xshell5_login"></p>
+<blockquote>
+<p>我们已经成功连接到了服务器，接下来开始安装ShadowsocksR！</p>
+</blockquote>
+<h1 id="5安装与配置-shadowsocksr">5.安装与配置 ShadowsocksR</h1>
 <p>在Xshell5中输入以下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">wget -N --no-check-certificate https://softs.fun/Bash/ssr.sh <span class="o">&amp;&amp;</span> chmod +x ssr.sh <span class="o">&amp;&amp;</span> bash ssr.sh</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget -N --no-check-certificate https://softs.fun/Bash/ssr.sh <span class="o">&amp;&amp;</span> chmod +x ssr.sh <span class="o">&amp;&amp;</span> bash ssr.sh
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>然后系统会出现相关配置界面，如下图：
-<img src="/images/VPS/ss_create.png" alt="ss_create" />
+</div><p>然后系统会出现相关配置界面，如下图：
+<img src="/images/VPS/ss_create.png" alt="ss_create">
 我们选择<code>1</code>进行安装，输入端口号，这里直接回车就好，后面安装完成后可以自己改，再输入密码，如下图：
-<img src="/images/VPS/ss_portAndPass.png" alt="ss_portAndPass" />
+<img src="/images/VPS/ss_portAndPass.png" alt="ss_portAndPass">
 加密方式选择<code>9</code>，也可以后期更改，如下图：
-<img src="/images/VPS/ss_jiami.png" alt="ss_jiami" />
+<img src="/images/VPS/ss_jiami.png" alt="ss_jiami">
 接下来协议插件选择<code>2</code>，是否设置协议插件兼容原版，在这里输入<code>y</code>，混淆插件选择<code>1</code>，如下图：
-<img src="/images/VPS/ss_xieyiAndChajian.png" alt="ss_xieyiAndChajian" />
+<img src="/images/VPS/ss_xieyiAndChajian.png" alt="ss_xieyiAndChajian">
 后面是<code>限制设备数</code>、<code>单线程限速上线</code>、<code>总速度限速上线</code>，我们一直回车默认<code>无限</code>即可，如下图：
-<img src="/images/VPS/ss_xianzhiduankou.png" alt="ss_xianzhiduankou" />
+<img src="/images/VPS/ss_xianzhiduankou.png" alt="ss_xianzhiduankou">
 最后系统会自己配置，出现配置信息则说明配置成功，如下图：
-<img src="/images/VPS/ss_success.png" alt="ss_success" />
-&gt; 其实到这里VPS已经搭建好可以使用了，不过为了加快网页的访问速度，我们还可以安装BBR加速。</p>
-
-<h1 id="6-安装bbr加速">6.安装BBR加速</h1>
-
+<img src="/images/VPS/ss_success.png" alt="ss_success"></p>
+<blockquote>
+<p>其实到这里VPS已经搭建好可以使用了，不过为了加快网页的访问速度，我们还可以安装BBR加速。</p>
+</blockquote>
+<h1 id="6安装bbr加速">6.安装BBR加速</h1>
 <p>BBR是一个由谷歌社区开发的TCP拥塞控制技术，我们在配置完ShadowsocksR后再安装BBR，可以提升访问外网的速度。</p>
-
 <p>输入如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">wget -N --no-check-certificate https://softs.fun/Bash/bbr.sh <span class="o">&amp;&amp;</span> chmod +x bbr.sh <span class="o">&amp;&amp;</span> bash bbr.sh</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget -N --no-check-certificate https://softs.fun/Bash/bbr.sh <span class="o">&amp;&amp;</span> chmod +x bbr.sh <span class="o">&amp;&amp;</span> bash bbr.sh
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>注意：在删除旧内核时，会提示你是否终止删除内核的行为，这时选择<code>NO</code>，如下图：
-<img src="/images/VPS/bbr_neihe.png" alt="bbr_neihe" />
+</div><p>注意：在删除旧内核时，会提示你是否终止删除内核的行为，这时选择<code>NO</code>，如下图：
+<img src="/images/VPS/bbr_neihe.png" alt="bbr_neihe">
 更新完成后会提醒是否重启VPS，我们输入<code>Y</code>。等待十几秒，重新通过Xshell5连接到服务器，运行如下代码，出现<code>BBR已开启</code>提示即安装成功，如下图：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">bash /root/bbr.sh status </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">bash /root/bbr.sh status 
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><img src="/images/VPS/bbr_success.png" alt="bbr_success" /></p>
-
-<h1 id="7-下载-shadowsocks-客户端">7.下载 Shadowsocks 客户端</h1>
-
+</div><p><img src="/images/VPS/bbr_success.png" alt="bbr_success"></p>
+<h1 id="7下载-shadowsocks-客户端">7.下载 Shadowsocks 客户端</h1>
 <blockquote>
 <p>本文只演示在windows平台上配置服务器！</p>
 </blockquote>
-
 <p>在windows系统下，<a href="https://github.com/shadowsocks/shadowsocks-windows/releases">点我</a>下载客户端软件。
 解压后双击<code>Shadowsocks.exe</code>，右击桌面任务栏上的<code>小飞机</code>，选择<code>服务器</code>→<code>编辑服务器</code>，如下图：
-<img src="/images/VPS/ss_tianjia.png" alt="ss_tianjia" />
+<img src="/images/VPS/ss_tianjia.png" alt="ss_tianjia">
 在<code>编辑服务器</code>窗口，点击下方<code>添加</code>按钮，在右侧输入服务器地址<code>149.28.135.165</code>,服务器端口<code>2333</code>，密码<code>abc123</code>，加密方式选择<code>aes-192-cfb</code>，最后点击<code>确定</code>即可，如下图：
-<img src="/images/VPS/ss_tianjia2.png" alt="ss_tianjia2" />
-另：
-- 如果你是Mac OS系统，客户端<a href="https://github.com/shadowsocksr-backup/ShadowsocksX-NG/releases">点我</a>下载；
-- 如果你是Linux系统，客户端<a href="https://github.com/erguotou520/electron-ssr/releases">点我</a>下载；
-- 如果你是Android系统，客户端<a href="https://github.com/shadowsocksr-backup/shadowsocksr-android/releases/download/3.4.0.8/shadowsocksr-release.apk">点我</a>下载；
-- 如果你是ios系统，由于苹果下架了该软件，可以在苹果商店搜索其他的上网工具，配置方法和windows环境下的大同小异。</p>
-
-<h1 id="8-测试效果">8.测试效果</h1>
-
+<img src="/images/VPS/ss_tianjia2.png" alt="ss_tianjia2">
+另：</p>
+<ul>
+<li>如果你是Mac OS系统，客户端<a href="https://github.com/shadowsocksr-backup/ShadowsocksX-NG/releases">点我</a>下载；</li>
+<li>如果你是Linux系统，客户端<a href="https://github.com/erguotou520/electron-ssr/releases">点我</a>下载；</li>
+<li>如果你是Android系统，客户端<a href="https://github.com/shadowsocksr-backup/shadowsocksr-android/releases/download/3.4.0.8/shadowsocksr-release.apk">点我</a>下载；</li>
+<li>如果你是ios系统，由于苹果下架了该软件，可以在苹果商店搜索其他的上网工具，配置方法和windows环境下的大同小异。</li>
+</ul>
+<h1 id="8测试效果">8.测试效果</h1>
 <p>在这之前，右击桌面任务栏上的<code>小飞机</code>，选择<code>启用系统代理</code>，在<code>系统代理模式</code>中选择<code>全局模式</code>。这时<code>小飞机</code>就变成蓝色了。
-打开<a href="https://www.youtube.com">https://www.youtube.com</a>  ，输入<code>4k</code>，选择一个4k视频测试效果，如下图：
-<img src="/images/VPS/4k.png" alt="4k" />
-&gt; 当然，访问速度也与你本身的带宽有关。</p>
-
+打开https://www.youtube.com  ，输入<code>4k</code>，选择一个4k视频测试效果，如下图：
+<img src="/images/VPS/4k.png" alt="4k"></p>
+<blockquote>
+<p>当然，访问速度也与你本身的带宽有关。</p>
+</blockquote>
 <p>以上</p>
     </div>
 

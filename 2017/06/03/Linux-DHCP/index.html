@@ -17,15 +17,15 @@
 
 
 <meta name="author" content="Carol" /><meta name="description" content=" 说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。 用到两个软件包： shrike-i386-disc1.iso shrike-i386-disc2.iso
- 步骤： 1. 修改虚拟机静态IP 2. 安装DHCP包。 ·dhcp:DHCP服务器安装包（在第二张镜像中） ·dhclient:DHCP客户端软件包（在第一张镜像中） ·dhcp-devel:DHCP开发工具（在第二张镜像中） 3. 修改配置文件 4. 启动服务，并测试
-" /><meta name="keywords" content="Java, blog, carol" />
+ 步骤：
+ 修改虚拟机静态IP 安装DHCP包。 ·dhcp:DHCP服务器安装包（在第二张镜像中） ·dhclient:DHCP客户端软件包（在第一张镜像中） ·dhcp-devel:DHCP开发工具（在第二张镜像中） 修改配置文件 启动服务，并测试 " /><meta name="keywords" content="Java, blog, carol" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/03/Linux-DHCP/" />
@@ -47,15 +47,16 @@
 shrike-i386-disc1.iso
 shrike-i386-disc2.iso
 
-
 步骤：
-1. 修改虚拟机静态IP
-2.  安装DHCP包。
-    ·dhcp:DHCP服务器安装包（在第二张镜像中）
-    ·dhclient:DHCP客户端软件包（在第一张镜像中）
-    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
-3.  修改配置文件
-4.  启动服务，并测试" />
+
+修改虚拟机静态IP
+安装DHCP包。
+·dhcp:DHCP服务器安装包（在第二张镜像中）
+·dhclient:DHCP客户端软件包（在第一张镜像中）
+·dhcp-devel:DHCP开发工具（在第二张镜像中）
+修改配置文件
+启动服务，并测试
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2017/06/03/Linux-DHCP/" />
 <meta property="article:published_time" content="2017-06-03T11:28:11+08:00" />
@@ -67,25 +68,23 @@ shrike-i386-disc2.iso
 shrike-i386-disc1.iso
 shrike-i386-disc2.iso
 
-
 步骤：
-1. 修改虚拟机静态IP
-2.  安装DHCP包。
-    ·dhcp:DHCP服务器安装包（在第二张镜像中）
-    ·dhclient:DHCP客户端软件包（在第一张镜像中）
-    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
-3.  修改配置文件
-4.  启动服务，并测试">
 
-
+修改虚拟机静态IP
+安装DHCP包。
+·dhcp:DHCP服务器安装包（在第二张镜像中）
+·dhclient:DHCP客户端软件包（在第一张镜像中）
+·dhcp-devel:DHCP开发工具（在第二张镜像中）
+修改配置文件
+启动服务，并测试
+">
 <meta itemprop="datePublished" content="2017-06-03T11:28:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="557">
+<meta itemprop="wordCount" content="550">
 
 
 
-<meta itemprop="keywords" content="Linux,DHCP," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Linux,DHCP," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux 环境下配置 DHCP 服务器"/>
 <meta name="twitter:description" content="
 说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
@@ -93,15 +92,16 @@ shrike-i386-disc2.iso
 shrike-i386-disc1.iso
 shrike-i386-disc2.iso
 
-
 步骤：
-1. 修改虚拟机静态IP
-2.  安装DHCP包。
-    ·dhcp:DHCP服务器安装包（在第二张镜像中）
-    ·dhclient:DHCP客户端软件包（在第一张镜像中）
-    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
-3.  修改配置文件
-4.  启动服务，并测试"/>
+
+修改虚拟机静态IP
+安装DHCP包。
+·dhcp:DHCP服务器安装包（在第二张镜像中）
+·dhclient:DHCP客户端软件包（在第一张镜像中）
+·dhcp-devel:DHCP开发工具（在第二张镜像中）
+修改配置文件
+启动服务，并测试
+"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -179,7 +179,7 @@ shrike-i386-disc2.iso
         <div class="post-category">
             <a href="/categories/Linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 557 words </span>
+          <span class="more-meta"> 550 words </span>
           <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -189,16 +189,10 @@ shrike-i386-disc2.iso
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#一-修改虚拟机静态ip">一.修改虚拟机静态IP</a></li>
-<li><a href="#二-安装软件包">二.安装软件包</a>
-<ul>
-<li><a href="#1-挂载第一张镜像-安装dhclient">1.挂载第一张镜像，安装dhclient</a></li>
-<li><a href="#2-挂载第二张镜像-安装dhcp和dhcp-devel">2.挂载第二张镜像，安装dhcp和dhcp-devel</a></li>
-</ul></li>
-<li><a href="#三-修改配置文件">三.修改配置文件</a></li>
-<li><a href="#四-测试">四.测试</a></li>
-</ul>
+  <ul>
+    <li><a href="#1挂载第一张镜像安装dhclient">1.挂载第一张镜像，安装dhclient</a></li>
+    <li><a href="#2挂载第二张镜像安装dhcp和dhcp-devel">2.挂载第二张镜像，安装dhcp和dhcp-devel</a></li>
+  </ul>
 </nav>
   </div>
 </div>
@@ -209,72 +203,66 @@ shrike-i386-disc2.iso
 <strong>shrike-i386-disc1.iso</strong>
 <strong>shrike-i386-disc2.iso</strong></p>
 </blockquote>
-
-<p>步骤：
-1. 修改虚拟机静态IP
-2.  安装DHCP包。
-    ·dhcp:DHCP服务器安装包（在第二张镜像中）
-    ·dhclient:DHCP客户端软件包（在第一张镜像中）
-    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
-3.  修改配置文件
-4.  启动服务，并测试</p>
-
-<h1 id="一-修改虚拟机静态ip">一.修改虚拟机静态IP</h1>
-
-<p>左下角 &ldquo;主菜单&rdquo;-&gt;&ldquo;系统设置&rdquo;—&gt;&ldquo;网络&rdquo;，双击设备&rdquo;eth0&rdquo;。</p>
+<p>步骤：</p>
+<ol>
+<li>修改虚拟机静态IP</li>
+<li>安装DHCP包。
+·dhcp:DHCP服务器安装包（在第二张镜像中）
+·dhclient:DHCP客户端软件包（在第一张镜像中）
+·dhcp-devel:DHCP开发工具（在第二张镜像中）</li>
+<li>修改配置文件</li>
+<li>启动服务，并测试</li>
+</ol>
+<h1 id="一修改虚拟机静态ip">一.修改虚拟机静态IP</h1>
+<p>左下角 &ldquo;主菜单&rdquo;-&gt;&quot;系统设置&rdquo;—&gt;&quot;网络&rdquo;，双击设备&quot;eth0&rdquo;。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">IP地址：192.168.1.2
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">IP地址：192.168.1.2
 子网掩码：255.255.255.0
-默认网关地址：192.168.1.254</pre></td></tr></table>
+默认网关地址：192.168.1.254
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="二-安装软件包">二.安装软件包</h1>
-
+</div><h1 id="二安装软件包">二.安装软件包</h1>
 <blockquote>
 <p>我们把上面说的这三个包都安装上吧！</p>
 </blockquote>
-
-<h2 id="1-挂载第一张镜像-安装dhclient">1.挂载第一张镜像，安装dhclient</h2>
+<h2 id="1挂载第一张镜像安装dhclient">1.挂载第一张镜像，安装dhclient</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">mount /dev/cdrom /mnt/cdrom		//挂载光盘
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mount /dev/cdrom /mnt/cdrom		//挂载光盘
 cd /mnt/cdrom/RedHat/RPMS		//进入目录
 rpm -ivh dhclient-3.0pl1-23.i386.rpm	//安装
 umount /mnt/cdrom			//卸载光盘
-eject /dev/cdrom			//弹出光盘</pre></td></tr></table>
+eject /dev/cdrom			//弹出光盘
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="2-挂载第二张镜像-安装dhcp和dhcp-devel">2.挂载第二张镜像，安装dhcp和dhcp-devel</h2>
+</div><h2 id="2挂载第二张镜像安装dhcp和dhcp-devel">2.挂载第二张镜像，安装dhcp和dhcp-devel</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">rpm -ivh dhcp-3.0pl1.23.i386.rpm
-rpm -ivh dhcp-devel-3.0pl1-23.i386.rpm</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">rpm -ivh dhcp-3.0pl1.23.i386.rpm
+rpm -ivh dhcp-devel-3.0pl1-23.i386.rpm
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="三-修改配置文件">三.修改配置文件</h1>
-
+</div><h1 id="三修改配置文件">三.修改配置文件</h1>
 <p>先将 <code>/usr/share/doc/dhcp-3.0pl1/dhcpd.conf.sample</code> 文件复制并修改文件名 <code>/etc/dhcpd.conf</code>.如下图：
-<img src="/images/dhcpOfLinux1.png" alt="dhcp" /></p>
-
-<h1 id="四-测试">四.测试</h1>
-
+<img src="/images/dhcpOfLinux1.png" alt="dhcp"></p>
+<h1 id="四测试">四.测试</h1>
 <ol>
 <li>在Linux下启动服务： <code>service dhcpd start</code></li>
 <li>在Windows下设置物理机为自动获取IP地址；</li>

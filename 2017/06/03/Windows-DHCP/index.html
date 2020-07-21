@@ -17,15 +17,15 @@
 
 
 <meta name="author" content="Carol" /><meta name="description" content=" 软件： VMware Workstation Pro 环境： Windows 2008 R2
- 步骤： 1. 配置虚拟机静态IP 2. 安装DHCP 3. 配置DHCP 4. 测试
-" /><meta name="keywords" content="Java, blog, carol" />
+ 步骤：
+ 配置虚拟机静态IP 安装DHCP 配置DHCP 测试 " /><meta name="keywords" content="Java, blog, carol" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/03/Windows-DHCP/" />
@@ -45,12 +45,13 @@
 软件： VMware Workstation Pro
 环境： Windows 2008 R2
 
-
 步骤：
-1.  配置虚拟机静态IP
-2.  安装DHCP
-3.  配置DHCP
-4.  测试" />
+
+配置虚拟机静态IP
+安装DHCP
+配置DHCP
+测试
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2017/06/03/Windows-DHCP/" />
 <meta property="article:published_time" content="2017-06-03T10:49:11+08:00" />
@@ -60,33 +61,32 @@
 软件： VMware Workstation Pro
 环境： Windows 2008 R2
 
-
 步骤：
-1.  配置虚拟机静态IP
-2.  安装DHCP
-3.  配置DHCP
-4.  测试">
 
-
+配置虚拟机静态IP
+安装DHCP
+配置DHCP
+测试
+">
 <meta itemprop="datePublished" content="2017-06-03T10:49:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="361">
+<meta itemprop="wordCount" content="357">
 
 
 
-<meta itemprop="keywords" content="Windows,DHCP," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Windows,DHCP," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Windows 环境下配置 DHCP"/>
 <meta name="twitter:description" content="
 软件： VMware Workstation Pro
 环境： Windows 2008 R2
 
-
 步骤：
-1.  配置虚拟机静态IP
-2.  安装DHCP
-3.  配置DHCP
-4.  测试"/>
+
+配置虚拟机静态IP
+安装DHCP
+配置DHCP
+测试
+"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -164,7 +164,7 @@
         <div class="post-category">
             <a href="/categories/Windows/"> Windows </a>
             </div>
-          <span class="more-meta"> 361 words </span>
+          <span class="more-meta"> 357 words </span>
           <span class="more-meta"> 1 min read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -173,14 +173,7 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#一-配置虚拟机静态ip">一.配置虚拟机静态IP</a></li>
-<li><a href="#二-安装">二.安装</a></li>
-<li><a href="#三-配置">三.配置</a></li>
-<li><a href="#四-测试">四.测试</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
@@ -188,52 +181,47 @@
 <p>软件： <code>VMware Workstation Pro</code>
 环境： <code>Windows 2008 R2</code></p>
 </blockquote>
-
-<p>步骤：
-1.  配置虚拟机静态IP
-2.  安装DHCP
-3.  配置DHCP
-4.  测试</p>
-
-<h1 id="一-配置虚拟机静态ip">一.配置虚拟机静态IP</h1>
+<p>步骤：</p>
+<ol>
+<li>配置虚拟机静态IP</li>
+<li>安装DHCP</li>
+<li>配置DHCP</li>
+<li>测试</li>
+</ol>
+<h1 id="一配置虚拟机静态ip">一.配置虚拟机静态IP</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">IP地址：192.168.1.2
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">IP地址：192.168.1.2
 子网掩码：255.255.255.0
 默认网关：192.168.1.1
-首选DNS服务器：192.168.1.254</pre></td></tr></table>
+首选DNS服务器：192.168.1.254
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="二-安装">二.安装</h1>
-
+</div><h1 id="二安装">二.安装</h1>
 <p>打开 <code>服务器管理器</code> ，右击 <code>角色</code> ，然后 <code>添加角色</code> 。
 ①选中 <code>DHCP服务器</code>。如下图：
-<img src="/images/dhcp1.png" alt="dhcp" />
+<img src="/images/dhcp1.png" alt="dhcp">
 ②选中IP地址。如下图：
-<img src="/images/dhcp2.png" alt="dhcp" />
+<img src="/images/dhcp2.png" alt="dhcp">
 ③随意输入父域。如下图：
-<img src="/images/dhcp3.png" alt="dhcp" />
+<img src="/images/dhcp3.png" alt="dhcp">
 剩下的就直接点 <code>下一步</code> ，就好了，直至安装完成。</p>
-
-<h1 id="三-配置">三.配置</h1>
-
+<h1 id="三配置">三.配置</h1>
 <p>点击 <code>开始</code> -&gt; <code>管理工具</code> -&gt; <code>DHCP</code> 。
 在<code>IPV4</code>中，新建域。如下图：
-<img src="/images/dhcp4.png" alt="dhcp" />
+<img src="/images/dhcp4.png" alt="dhcp">
 点击 <code>下一步</code> ，填入随意的名称。如下图：
-<img src="/images/dhcp5.png" alt="dhcp" />
+<img src="/images/dhcp5.png" alt="dhcp">
 点击 <code>下一步</code> ,输入 <code>起始IP地址</code> 和 <code>结束IP地址</code> 。如下图：
-<img src="/images/dhcp6.png" alt="dhcp" />
+<img src="/images/dhcp6.png" alt="dhcp">
 剩下的就直接点 <code>下一步</code> ，就好了，直至配置完成。</p>
-
-<h1 id="四-测试">四.测试</h1>
-
+<h1 id="四测试">四.测试</h1>
 <ol>
 <li>设置物理机为自动获取IP地址；</li>
 <li><code>开始</code> -&gt; <code>运行</code> ，输入 <code>cmd</code> 。</li>

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/09/11/offer-PrintListInReversedOrder/" />
@@ -47,16 +47,13 @@
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="剑指 Offer 之 从尾到头打印链表">
 <meta itemprop="description" content="输入一个链表，从尾到头反过来打印出每个结点的值。">
-
-
 <meta itemprop="datePublished" content="2019-09-11T15:30:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="357">
 
 
 
-<meta itemprop="keywords" content="Algorithm,剑指Offer,LinkedList," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Algorithm,剑指Offer,LinkedList," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="剑指 Offer 之 从尾到头打印链表"/>
 <meta name="twitter:description" content="输入一个链表，从尾到头反过来打印出每个结点的值。"/>
 
@@ -146,28 +143,22 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#分析">分析</a></li>
-<li><a href="#实现">实现</a></li>
-<li><a href="#详解">详解</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#分析">分析</a></li>
+    <li><a href="#实现">实现</a></li>
+    <li><a href="#详解">详解</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>输入一个链表，从尾到头反过来打印出每个结点的值。</p>
-
 <h2 id="分析">分析</h2>
-
 <p>既然要反向打印值，那么我们可以使用 <code>栈</code> 这种 <code>后进先出</code> 数据结构，每遍历一个节点后就将该节点入栈，等到节点遍历完后，就将栈中的元素出栈即可。</p>
-
 <h2 id="实现">实现</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -204,45 +195,44 @@
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">PrintList</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PrintList</span> <span class="o">{</span>
     <span class="c1">// 首先定义链表的结构体
-</span><span class="c1"></span>    <span class="err">public static class ListNode </span><span class="p">{</span>
-        <span class="err">int val</span><span class="p">;</span>
-        <span class="err">ListNode next </span><span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">ListNode</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">val</span><span class="o">;</span>
+        <span class="n">ListNode</span> <span class="n">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 
-        <span class="n">ListNode</span><span class="p">(</span><span class="err">int val</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="p">}</span>
-	<span class="p">}</span>
+        <span class="n">ListNode</span><span class="o">(</span><span class="kt">int</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+	<span class="o">}</span>
     <span class="c1">// 非递归实现
-</span><span class="c1"></span>    <span class="err">public static ArrayList&lt;Integer&gt; printListFromTailToHead</span><span class="p">(</span><span class="err">ListNode listNode</span><span class="p">)</span> <span class="p">{</span>
-        <span class="err">Stack&lt;Integer&gt; stack </span><span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="err">ArrayList&lt;Integer&gt; list </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">listNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">listNode</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
-            <span class="n">listNode</span> <span class="o">=</span> <span class="n">listNode</span><span class="p">.</span><span class="na">next</span><span class="p">;</span> <span class="c1">//后移
-</span><span class="c1"></span>        <span class="p">}</span>
-        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">());</span> <span class="c1">//出栈的时候需要放在 list 中
-</span><span class="c1"></span>        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">list</span><span class="p">;</span>
-    <span class="p">}</span>
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">printListFromTailToHead</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">listNode</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;();</span>
+        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">listNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">listNode</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+            <span class="n">listNode</span> <span class="o">=</span> <span class="n">listNode</span><span class="o">.</span><span class="na">next</span><span class="o">;</span> <span class="c1">//后移
+</span><span class="c1"></span>        <span class="o">}</span>
+        <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">());</span> <span class="c1">//出栈的时候需要放在 list 中
+</span><span class="c1"></span>        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">list</span><span class="o">;</span>
+    <span class="o">}</span>
 
     <span class="c1">// 递归实现
-</span><span class="c1"></span>    <span class="err">static ArrayList</span><span class="o">&lt;</span><span class="err">Integer&gt; list_Recursively </span><span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-    <span class="err">public static ArrayList&lt;Integer&gt; printListFromTailToHead_Recursively</span><span class="p">(</span><span class="err">ListNode listNode</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">listNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">printListFromTailToHead_Recursively</span><span class="p">(</span><span class="n">listNode</span><span class="p">.</span><span class="na">next</span><span class="p">);</span>
-            <span class="n">list_Recursively</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">listNode</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">list_Recursively</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span>    <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list_Recursively</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">printListFromTailToHead_Recursively</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">listNode</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">listNode</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">printListFromTailToHead_Recursively</span><span class="o">(</span><span class="n">listNode</span><span class="o">.</span><span class="na">next</span><span class="o">);</span>
+            <span class="n">list_Recursively</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">listNode</span><span class="o">.</span><span class="na">val</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">list_Recursively</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="详解">详解</h2>
-
+</div><h2 id="详解">详解</h2>
 <p>对于非递归的方式，我们使用的是栈，第 <code>16~18</code> 行，只要该节点不为 <code>null</code>，就将其入栈，紧接着后移，直到最后一个节点为止。第 <code>20~21</code> 行，只要栈不为空，就出栈，并将节点添加到 <code>list</code> 中，最后将 <code>list</code> 返回。对于递归的方式，道理是一样的。</p>
     </div>
 

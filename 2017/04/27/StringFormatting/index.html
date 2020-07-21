@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/04/27/StringFormatting/" />
@@ -46,16 +46,13 @@
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="C# 之 字符串格式化">
 <meta itemprop="description" content="前几天在上C#时，学到了使用Connection连接数据库这一功能。 当时我写的连接字符串语句： 1 String s = &#34;Server=&#34; &#43; textBox1.Text &#43; &#34;;Database=&#34; &#43; textBox2.Text &#43; &#34;;User Id=&#34; &#43; textBox3.Text &#43; &#34;;Password=&#34; &#43; textBox4.Text &#43; &#34;&#34;; 这">
-
-
 <meta itemprop="datePublished" content="2017-04-27T22:57:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="133">
 
 
 
-<meta itemprop="keywords" content="C-sharp," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="C-sharp," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="C# 之 字符串格式化"/>
 <meta name="twitter:description" content="前几天在上C#时，学到了使用Connection连接数据库这一功能。 当时我写的连接字符串语句： 1 String s = &#34;Server=&#34; &#43; textBox1.Text &#43; &#34;;Database=&#34; &#43; textBox2.Text &#43; &#34;;User Id=&#34; &#43; textBox3.Text &#43; &#34;;Password=&#34; &#43; textBox4.Text &#43; &#34;&#34;; 这"/>
 
@@ -144,35 +141,33 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <blockquote>
 <p>前几天在上C#时，学到了使用Connection连接数据库这一功能。</p>
 </blockquote>
-
 <p>当时我写的连接字符串语句：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">    <span class="err">String s </span><span class="o">=</span> <span class="s">&#34;Server=&#34;</span> <span class="o">+</span> <span class="n">textBox1</span><span class="p">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;;Database=&#34;</span> <span class="o">+</span> <span class="n">textBox2</span><span class="p">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;;User Id=&#34;</span> <span class="o">+</span> <span class="n">textBox3</span><span class="p">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;;Password=&#34;</span> <span class="o">+</span> <span class="n">textBox4</span><span class="p">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;&#34;</span><span class="p">;</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;Server=&#34;</span> <span class="o">+</span> <span class="n">textBox1</span><span class="o">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;;Database=&#34;</span> <span class="o">+</span> <span class="n">textBox2</span><span class="o">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;;User Id=&#34;</span> <span class="o">+</span> <span class="n">textBox3</span><span class="o">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;;Password=&#34;</span> <span class="o">+</span> <span class="n">textBox4</span><span class="o">.</span><span class="na">Text</span> <span class="o">+</span> <span class="s">&#34;&#34;</span><span class="o">;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>这种写起来出错率高，可读性弱，不易修改。</p>
-
+</div><p>这种写起来出错率高，可读性弱，不易修改。</p>
 <p>后来发现有一种更简单的写法，用字符串格式化：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">    <span class="err">String s </span><span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="na">Fromat</span><span class="p">(</span><span class="s">&#34;Server={0};Database={1};User Id={2};Password={3}&#34;</span><span class="p">,</span><span class="n">textBox1</span><span class="p">.</span><span class="na">Text</span><span class="p">,</span><span class="n">textBox2</span><span class="p">.</span><span class="na">Text</span><span class="p">,</span><span class="n">textBox3</span><span class="p">.</span><span class="na">Text</span><span class="p">);</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="na">Fromat</span><span class="o">(</span><span class="s">&#34;Server={0};Database={1};User Id={2};Password={3}&#34;</span><span class="o">,</span><span class="n">textBox1</span><span class="o">.</span><span class="na">Text</span><span class="o">,</span><span class="n">textBox2</span><span class="o">.</span><span class="na">Text</span><span class="o">,</span><span class="n">textBox3</span><span class="o">.</span><span class="na">Text</span><span class="o">);</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>这样写起来就好多了，简单又直观。</p>
+</div><p>这样写起来就好多了，简单又直观。</p>
 
     </div>
 

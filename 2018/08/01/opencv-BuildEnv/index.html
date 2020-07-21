@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/08/01/opencv-BuildEnv/" />
@@ -51,16 +51,13 @@
 <meta itemprop="description" content="
 　　由于研究生选择的方向与计算机视觉有关，需要用到OpenCV和Matlab来处理图像，所以在这里先把环境搭建起来，然后通过一些小例子来逐渐熟悉OpenCV的使用。这算是一个学习系列的教程吧，也可以说是自己的学习总结，便于以后回顾。
 ">
-
-
 <meta itemprop="datePublished" content="2018-08-01T14:28:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="1937">
+<meta itemprop="wordCount" content="1928">
 
 
 
-<meta itemprop="keywords" content="OpenCV," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="OpenCV," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="OpenCV3.4 &#43; VS2017 &#43; Win7 环境搭建"/>
 <meta name="twitter:description" content="
 　　由于研究生选择的方向与计算机视觉有关，需要用到OpenCV和Matlab来处理图像，所以在这里先把环境搭建起来，然后通过一些小例子来逐渐熟悉OpenCV的使用。这算是一个学习系列的教程吧，也可以说是自己的学习总结，便于以后回顾。
@@ -142,7 +139,7 @@
         <div class="post-category">
             <a href="/categories/OpenCV/"> OpenCV </a>
             </div>
-          <span class="more-meta"> 1937 words </span>
+          <span class="more-meta"> 1928 words </span>
           <span class="more-meta"> 4 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -152,22 +149,17 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#1-opencv的下载与配置">1. OpenCV的下载与配置</a>
-<ul>
-<li><a href="#1-1-下载opencv">1.1 下载OpenCV</a></li>
-<li><a href="#1-2-安装">1.2 安装</a></li>
-<li><a href="#1-3-配置环境变量">1.3 配置环境变量</a></li>
-</ul></li>
-<li><a href="#2-vs2017配置opencv">2. VS2017配置OpenCV</a>
-<ul>
-<li><a href="#2-1-新建项目">2.1 新建项目</a></li>
-<li><a href="#2-2-添加目录">2.2 添加目录</a></li>
-<li><a href="#2-3-添加依赖项">2.3 添加依赖项</a></li>
-</ul></li>
-<li><a href="#3-新建-cpp文件">3. 新建.cpp文件</a></li>
-<li><a href="#4-总结">4.总结</a></li>
-</ul>
+  <ul>
+    <li><a href="#11-下载opencv">1.1 下载OpenCV</a></li>
+    <li><a href="#12-安装">1.2 安装</a></li>
+    <li><a href="#13-配置环境变量">1.3 配置环境变量</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-新建项目">2.1 新建项目</a></li>
+    <li><a href="#22-添加目录">2.2 添加目录</a></li>
+    <li><a href="#23-添加依赖项">2.3 添加依赖项</a></li>
+  </ul>
 </nav>
   </div>
 </div>
@@ -175,99 +167,85 @@
       <blockquote>
 <p>　　由于研究生选择的方向与计算机视觉有关，需要用到OpenCV和Matlab来处理图像，所以在这里先把环境搭建起来，然后通过一些小例子来逐渐熟悉OpenCV的使用。这算是一个学习系列的教程吧，也可以说是自己的学习总结，便于以后回顾。</p>
 </blockquote>
-
-<hr />
-
-<p>环境说明：
-- Windows 7 x64
-- OpenCV 3.4.0
-- Visual Studio 2017</p>
-
+<hr>
+<p>环境说明：</p>
+<ul>
+<li>Windows 7 x64</li>
+<li>OpenCV 3.4.0</li>
+<li>Visual Studio 2017</li>
+</ul>
 <h1 id="1-opencv的下载与配置">1. OpenCV的下载与配置</h1>
-
-<h2 id="1-1-下载opencv">1.1 下载OpenCV</h2>
-
+<h2 id="11-下载opencv">1.1 下载OpenCV</h2>
 <blockquote>
 <p>其实这篇文章适用于3.x以上版本，安装过程大同小异。</p>
 </blockquote>
-
-<p>在官网<a href="https://opencv.org/releases.html">https://opencv.org/releases.html</a> 下载安装包，选择自己想要的版本，这里我使用的是3.4.0版本。如下图：
-<img src="/images/OpenCV/BuildEnv/download_pack.png" alt="OpenCV" /></p>
-
-<h2 id="1-2-安装">1.2 安装</h2>
-
+<p>在官网https://opencv.org/releases.html 下载安装包，选择自己想要的版本，这里我使用的是3.4.0版本。如下图：
+<img src="/images/OpenCV/BuildEnv/download_pack.png" alt="OpenCV"></p>
+<h2 id="12-安装">1.2 安装</h2>
 <p>下载完后，双击<code>opencv-3.4.0-vc14_vc15.exe</code>安装即可，这里我安装在了<code>D:\opencv\opencv</code>下，如下图：
-<img src="/images/OpenCV/BuildEnv/build_pack.png" alt="OpenCV" />
-&gt; 安装在哪里都可以，不过在配置环境变量环节要注意一下！</p>
-
-<h2 id="1-3-配置环境变量">1.3 配置环境变量</h2>
-
+<img src="/images/OpenCV/BuildEnv/build_pack.png" alt="OpenCV"></p>
+<blockquote>
+<p>安装在哪里都可以，不过在配置环境变量环节要注意一下！</p>
+</blockquote>
+<h2 id="13-配置环境变量">1.3 配置环境变量</h2>
 <p>安装完以后，右击<code>计算机</code>，点击<code>属性</code>，选择左侧<code>高级系统设置</code>，在<code>高级</code>选项卡下面点击<code>环境变量</code>，在<code>系统变量</code>中查找变量<code>PATH</code>，对其进行<code>编辑</code>，在<code>变量值</code>一栏的最后添加<code>D:\opencv\opencv\build\x64\vc15\bin;</code>语句。（<strong>注意：这里的路径需要填写你自己安装OpenCV的路径，同时注意这条语句最后面有一个英文状态下的分号</strong>）如下图：
-<img src="/images/OpenCV/BuildEnv/build_path.png" alt="OpenCV" />
-&gt; 配置完环境变量后，建议重启一下机器，避免后面不必要的麻烦。</p>
-
+<img src="/images/OpenCV/BuildEnv/build_path.png" alt="OpenCV"></p>
+<blockquote>
+<p>配置完环境变量后，建议重启一下机器，避免后面不必要的麻烦。</p>
+</blockquote>
 <h1 id="2-vs2017配置opencv">2. VS2017配置OpenCV</h1>
-
-<h2 id="2-1-新建项目">2.1 新建项目</h2>
-
+<h2 id="21-新建项目">2.1 新建项目</h2>
 <p>打开Visual Studio 2017后，选择<code>文件</code>-&gt;<code>新建</code>-&gt;<code>项目</code>，如下图：
-<img src="/images/OpenCV/BuildEnv/build_1.png" alt="OpenCV" />
+<img src="/images/OpenCV/BuildEnv/build_1.png" alt="OpenCV">
 在<code>新建项目</code>页面依次选择<code>Visual C++</code>-&gt;<code>Windows 桌面</code>-&gt;<code>Windows 桌面向导</code>，我这里在E盘下新建了一个<code>opencv_test</code>文件夹，下面的名称可随意填写，如下图：
-<img src="/images/OpenCV/BuildEnv/build_2.png" alt="OpenCV" />
+<img src="/images/OpenCV/BuildEnv/build_2.png" alt="OpenCV">
 点击<code>确定</code>后，在<code>Windows 桌面项目</code>界面，选中<code>空项目</code>后点击确定，（选择空项目是为了避免VS2017创建头文件，这里的头文件我们现在不需要创建。）如下图：
-<img src="/images/OpenCV/BuildEnv/build_3.png" alt="OpenCV" />
+<img src="/images/OpenCV/BuildEnv/build_3.png" alt="OpenCV">
 这时候你可以看到文件夹<code>OpenCVProj</code>下还有一个<code>OpenCVProj</code>，如下图：
-<img src="/images/OpenCV/BuildEnv/build_4.png" alt="OpenCV" />
+<img src="/images/OpenCV/BuildEnv/build_4.png" alt="OpenCV">
 当然继续使用它也是可以的，不过这里看起来为了避免名称的重复，我将该项目在解决方案管理器里删除，重新新建一个<code>Hello-OpenCV</code>文件。右击<code>OpenCVProj</code>，选择<code>移除</code>，如下图：
-<img src="/images/OpenCV/BuildEnv/build_5.png" alt="OpenCV" />
+<img src="/images/OpenCV/BuildEnv/build_5.png" alt="OpenCV">
 然后再右击<code>解决方案管理器</code>，依次选择<code>添加</code>-&gt;<code>新建项目</code>，如下图：
-<img src="/images/OpenCV/BuildEnv/build_6.png" alt="OpenCV" />
+<img src="/images/OpenCV/BuildEnv/build_6.png" alt="OpenCV">
 在<code>添加新项目</code>中，<code>名称</code>和<code>位置</code>都填写好内容，如下图：
-<img src="/images/OpenCV/BuildEnv/build_7.png" alt="OpenCV" />
+<img src="/images/OpenCV/BuildEnv/build_7.png" alt="OpenCV">
 最后在<code>Windows 桌面项目</code>界面，选中<code>空项目</code>后点击确定即可。</p>
-
-<h2 id="2-2-添加目录">2.2 添加目录</h2>
-
+<h2 id="22-添加目录">2.2 添加目录</h2>
 <blockquote>
 <p>添加两个目录：<code>包含目录</code>和<code>库目录</code>。</p>
 </blockquote>
-
-<p>点击<code>属性管理器</code>，右击<code>Release|x64</code>，选择<code>属性</code>，如下图：
-&gt; 没有<code>属性管理器</code>的话，可以在vs2017的窗口右上角的搜索栏进行搜索。</p>
-
-<p><img src="/images/OpenCV/BuildEnv/build_8.png" alt="OpenCV" />
+<p>点击<code>属性管理器</code>，右击<code>Release|x64</code>，选择<code>属性</code>，如下图：</p>
+<blockquote>
+<p>没有<code>属性管理器</code>的话，可以在vs2017的窗口右上角的搜索栏进行搜索。</p>
+</blockquote>
+<p><img src="/images/OpenCV/BuildEnv/build_8.png" alt="OpenCV">
 在<code>Release 属性页</code>，点击<code>VC++ 目录</code>，在<code>包含目录</code>中添加<code>D:\opencv\opencv\build\include</code>路径（<strong>请添加自己的路径</strong>），如下图：
-<img src="/images/OpenCV/BuildEnv/build_9.png" alt="OpenCV" />
+<img src="/images/OpenCV/BuildEnv/build_9.png" alt="OpenCV">
 在<code>库目录</code>中添加<code>D:\opencv\opencv\build\x64\vc15\lib</code>路径（<strong>请添加自己的路径</strong>），如下图：
-<img src="/images/OpenCV/BuildEnv/build_10.png" alt="OpenCV" /></p>
-
+<img src="/images/OpenCV/BuildEnv/build_10.png" alt="OpenCV"></p>
 <p><strong>为什么要这么添加？</strong>
 因为在这之前你可以看到<code>opencv</code>安装目录下有两个文件夹，<code>vc14</code>和<code>vc15</code>。如下图：
-<img src="/images/OpenCV/BuildEnv/build_11.png" alt="OpenCV" /></p>
-
-<p>其中<code>vc14</code>表示<code>Visual Studio 2015</code>用的库，<code>vc15</code>表示<code>Visual Studio 2017</code>用的库，之前版本的如下所示：
-- <code>vc10</code>表示<code>Visual Studio 2010</code>用的库
-- <code>vc11</code>表示<code>Visual Studio 2012</code>用的库
-- <code>vc12</code>表示<code>Visual Studio 2013</code>用的库</p>
-
+<img src="/images/OpenCV/BuildEnv/build_11.png" alt="OpenCV"></p>
+<p>其中<code>vc14</code>表示<code>Visual Studio 2015</code>用的库，<code>vc15</code>表示<code>Visual Studio 2017</code>用的库，之前版本的如下所示：</p>
+<ul>
+<li><code>vc10</code>表示<code>Visual Studio 2010</code>用的库</li>
+<li><code>vc11</code>表示<code>Visual Studio 2012</code>用的库</li>
+<li><code>vc12</code>表示<code>Visual Studio 2013</code>用的库</li>
+</ul>
 <p>添加库文件可以帮助我们使用OpenCV函数。</p>
-
-<h2 id="2-3-添加依赖项">2.3 添加依赖项</h2>
-
+<h2 id="23-添加依赖项">2.3 添加依赖项</h2>
 <p>还是在<code>Release 属性页</code>，依次点击<code>链接器</code>-&gt;<code>输入</code>，在<code>附加依赖项</code>中添加<code>opencv_world340.lib</code>文件，如下图：
-<img src="/images/OpenCV/BuildEnv/build_12.png" alt="OpenCV" /></p>
-
-<h1 id="3-新建-cpp文件">3. 新建.cpp文件</h1>
-
+<img src="/images/OpenCV/BuildEnv/build_12.png" alt="OpenCV"></p>
+<h1 id="3-新建cpp文件">3. 新建.cpp文件</h1>
 <p>右击<code>解决方案管理器</code>下的<code>源文件</code>，依次点击<code>添加</code>-&gt;<code>新建项</code>，创建<code>Hello.cpp</code>文件即可，如下图：
-<img src="/images/OpenCV/BuildEnv/build_13.png" alt="OpenCV" />
+<img src="/images/OpenCV/BuildEnv/build_13.png" alt="OpenCV">
 <strong>注意1：在写代码之前，需要将<code>解决方案配置</code>和<code>解决方案平台</code>分别选择为<code>Release</code>和<code>x64</code></strong>，如下图：
-<img src="/images/OpenCV/BuildEnv/build_14.png" alt="OpenCV" />
+<img src="/images/OpenCV/BuildEnv/build_14.png" alt="OpenCV">
 <strong>注意2：还需要在<code>E:\opencv_test\OpenCVProj\Hello-OpenCV</code>下添加一张<code>picture.jpg</code>的图片，用于测试。（请添加自己的路径）</strong>
 好了之后键入如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -298,18 +276,15 @@
 	<span class="n">imshow</span><span class="p">(</span><span class="s">&#34;Display window&#34;</span><span class="p">,</span> <span class="n">img</span><span class="p">);</span>
 	<span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：
-<img src="/images/OpenCV/BuildEnv/display.png" alt="OpenCV" /></p>
-
+</div><p>输出结果如下：
+<img src="/images/OpenCV/BuildEnv/display.png" alt="OpenCV"></p>
 <p>你可以看到上图的右下角的输出信息部分有<code>无法查找或打开PDB文件</code>的提示，浏览下面的网址可以找到答案：
 <a href="https://msdn.microsoft.com/zh-cn/library/ms241613.aspx">https://msdn.microsoft.com/zh-cn/library/ms241613.aspx</a>
 <a href="https://www.cnblogs.com/wxl845235800/p/7206767.html">https://www.cnblogs.com/wxl845235800/p/7206767.html</a></p>
-
-<h1 id="4-总结">4.总结</h1>
-
+<h1 id="4总结">4.总结</h1>
 <p>　　写这篇文章是因为网上的一些博客在介绍环境搭建的时候，说得不够详细，步骤不够清晰，学过OpenCV的还好一点，但对于一些小白来说，基础环境搭建不好容易丧失学习的信心。所以在这里尽量将配置步骤讲的详细，满足绝大多数人的需求。
 　　好了，基础的环境搭建已经完成了，后续会学习与介绍一些关于OpenCV的函数功能，演示一些例子，加深对OpenCV的了解。</p>
     </div>

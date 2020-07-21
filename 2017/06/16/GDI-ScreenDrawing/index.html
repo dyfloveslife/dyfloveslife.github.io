@@ -16,8 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content="1.绘画工具 画笔和画刷 - 画笔Pens:细，画线条和轮廓； - 画刷Brushes:粗，填充闭合区域。
-Graphics类 通过 控件名.createGraphics() 取得某控件的屏幕区域作为画布。
+<meta name="author" content="Carol" /><meta name="description" content="1.绘画工具 画笔和画刷
+ 画笔Pens:细，画线条和轮廓； 画刷Brushes:粗，填充闭合区域。  Graphics类 通过 控件名.createGraphics() 取得某控件的屏幕区域作为画布。
 " /><meta name="keywords" content="Java, blog, carol" />
 
 
@@ -25,7 +25,7 @@ Graphics类 通过 控件名.createGraphics() 取得某控件的屏幕区域作�
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/16/GDI-ScreenDrawing/" />
@@ -42,10 +42,10 @@ Graphics类 通过 控件名.createGraphics() 取得某控件的屏幕区域作�
 
 <meta property="og:title" content="C# 之 GDI&#43; 屏幕绘图" />
 <meta property="og:description" content="1.绘画工具
-
 画笔和画刷
-- 画笔Pens:细，画线条和轮廓；
-- 画刷Brushes:粗，填充闭合区域。
+
+画笔Pens:细，画线条和轮廓；
+画刷Brushes:粗，填充闭合区域。
 
 Graphics类
 通过 控件名.createGraphics() 取得某控件的屏幕区域作为画布。" />
@@ -55,29 +55,26 @@ Graphics类
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="C# 之 GDI&#43; 屏幕绘图">
 <meta itemprop="description" content="1.绘画工具
-
 画笔和画刷
-- 画笔Pens:细，画线条和轮廓；
-- 画刷Brushes:粗，填充闭合区域。
+
+画笔Pens:细，画线条和轮廓；
+画刷Brushes:粗，填充闭合区域。
 
 Graphics类
 通过 控件名.createGraphics() 取得某控件的屏幕区域作为画布。">
-
-
 <meta itemprop="datePublished" content="2017-06-16T10:32:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="869">
+<meta itemprop="wordCount" content="856">
 
 
 
-<meta itemprop="keywords" content="C-sharp," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="C-sharp," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="C# 之 GDI&#43; 屏幕绘图"/>
 <meta name="twitter:description" content="1.绘画工具
-
 画笔和画刷
-- 画笔Pens:细，画线条和轮廓；
-- 画刷Brushes:粗，填充闭合区域。
+
+画笔Pens:细，画线条和轮廓；
+画刷Brushes:粗，填充闭合区域。
 
 Graphics类
 通过 控件名.createGraphics() 取得某控件的屏幕区域作为画布。"/>
@@ -158,7 +155,7 @@ Graphics类
         <div class="post-category">
             <a href="/categories/C-sharp/"> C-sharp </a>
             </div>
-          <span class="more-meta"> 869 words </span>
+          <span class="more-meta"> 856 words </span>
           <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -167,97 +164,84 @@ Graphics类
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#1-绘画工具">1.绘画工具</a></li>
-<li><a href="#2-绘制直线">2.绘制直线</a></li>
-<li><a href="#3-填充区域">3.填充区域</a></li>
-<li><a href="#4-绘制棋子">4.绘制棋子</a></li>
-<li><a href="#5-示例1-同心圆">5.示例1——同心圆</a></li>
-<li><a href="#6-示例2-棋盘和棋子">6.示例2——棋盘和棋子</a></li>
-<li><a href="#7-示例3-前后颜色和字体">7.示例3——前后颜色和字体</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      <h1 id="1-绘画工具">1.绘画工具</h1>
-
-<p>画笔和画刷
-- 画笔Pens:细，画线条和轮廓；
-- 画刷Brushes:粗，填充闭合区域。</p>
-
+      <h1 id="1绘画工具">1.绘画工具</h1>
+<p>画笔和画刷</p>
+<ul>
+<li>画笔Pens:细，画线条和轮廓；</li>
+<li>画刷Brushes:粗，填充闭合区域。</li>
+</ul>
 <p>Graphics类
 通过 <code>控件名.createGraphics()</code> 取得某控件的屏幕区域作为画布。</p>
-
-<h1 id="2-绘制直线">2.绘制直线</h1>
-
+<h1 id="2绘制直线">2.绘制直线</h1>
 <p>①取得画布</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="err">控件名</span><span class="p">.</span><span class="n">CreateGraphics</span><span class="p">();</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="err">控件名</span><span class="p">.</span><span class="n">CreateGraphics</span><span class="p">();</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>②调用g.DrawLine绘制直线</p>
+</div><p>②调用g.DrawLine绘制直线</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">g</span><span class="p">.</span><span class="n">DrawLine</span><span class="p">(</span><span class="n">Pens</span><span class="p">.</span><span class="n">Red</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">g</span><span class="p">.</span><span class="n">DrawLine</span><span class="p">(</span><span class="n">Pens</span><span class="p">.</span><span class="n">Red</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>说明：
-- Pens.Red是画笔颜色；
-- 10,10是起点坐标；
-- 400,300是终点坐标。</p>
-
-<h1 id="3-填充区域">3.填充区域</h1>
-
+</div><p>说明：</p>
+<ul>
+<li>Pens.Red是画笔颜色；</li>
+<li>10,10是起点坐标；</li>
+<li>400,300是终点坐标。</li>
+</ul>
+<h1 id="3填充区域">3.填充区域</h1>
 <p>①Graphics类FillRectangle填充矩形</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">FillRectangle</span><span class="p">(</span><span class="n">Brushes</span><span class="p">.</span><span class="n">Black</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">40</span><span class="p">);</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">FillRectangle</span><span class="p">(</span><span class="n">Brushes</span><span class="p">.</span><span class="n">Black</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">40</span><span class="p">);</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>说明：
-- 其中第一个参数是画刷颜色；
-- 10,10是矩形左上角顶点坐标；
-- 60,40是矩形的宽和高，当宽高相同时就是正方形。</p>
-
+</div><p>说明：</p>
+<ul>
+<li>其中第一个参数是画刷颜色；</li>
+<li>10,10是矩形左上角顶点坐标；</li>
+<li>60,40是矩形的宽和高，当宽高相同时就是正方形。</li>
+</ul>
 <p>②Graphics类FillEllipse填充椭圆</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">FillEllipse</span><span class="p">(</span><span class="n">Brushes</span><span class="p">.</span><span class="n">Black</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">40</span><span class="p">);</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">FillEllipse</span><span class="p">(</span><span class="n">Brushes</span><span class="p">.</span><span class="n">Black</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">40</span><span class="p">);</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>说明：
-- 参数含义与FillRectangle完全相同；
-- 后4个参数是椭圆外接矩形的坐标和宽高；
-- 若宽高相同，则是圆形。</p>
-
-<h1 id="4-绘制棋子">4.绘制棋子</h1>
-
+</div><p>说明：</p>
+<ul>
+<li>参数含义与FillRectangle完全相同；</li>
+<li>后4个参数是椭圆外接矩形的坐标和宽高；</li>
+<li>若宽高相同，则是圆形。</li>
+</ul>
+<h1 id="4绘制棋子">4.绘制棋子</h1>
 <p>鼠标单击事件:MouseClick
 获取鼠标位置:e.X, e.Y</p>
-
-<h1 id="5-示例1-同心圆">5.示例1——同心圆</h1>
-
+<h1 id="5示例1同心圆">5.示例1——同心圆</h1>
 <blockquote>
 <p>可用数组定义5个同心圆的颜色。</p>
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -282,17 +266,18 @@ Graphics类
             <span class="p">}</span>
             <span class="n">g</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span>
 
-        <span class="p">}</span></code></pre></td></tr></table>
+        <span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="6-示例2-棋盘和棋子">6.示例2——棋盘和棋子</h1>
-
-<p>要求：
-- 1.在窗体上画10行10列的棋盘，两条线相隔40像素。
-- 2.鼠标单击时在单击位置画一个棋子（直径20的黑圆）。</p>
+</div><h1 id="6示例2棋盘和棋子">6.示例2——棋盘和棋子</h1>
+<p>要求：</p>
+<ul>
+<li>1.在窗体上画10行10列的棋盘，两条线相隔40像素。</li>
+<li>2.鼠标单击时在单击位置画一个棋子（直径20的黑圆）。</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -375,15 +360,14 @@ Graphics类
             <span class="n">i</span> <span class="o">=</span> <span class="o">!</span><span class="n">i</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="7-示例3-前后颜色和字体">7.示例3——前后颜色和字体</h1>
-
+</div><h1 id="7示例3前后颜色和字体">7.示例3——前后颜色和字体</h1>
 <p>前景色：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -402,13 +386,13 @@ Graphics类
             <span class="p">{</span>
                 <span class="n">textBox1</span><span class="p">.</span><span class="n">ForeColor</span> <span class="o">=</span> <span class="n">dialog</span><span class="p">.</span><span class="n">Color</span><span class="p">;</span>
             <span class="p">}</span>
-        <span class="p">}</span></code></pre></td></tr></table>
+        <span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>背景色：</p>
+</div><p>背景色：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -427,13 +411,13 @@ Graphics类
             <span class="p">{</span>
                 <span class="n">textBox1</span><span class="p">.</span><span class="n">BackColor</span> <span class="o">=</span> <span class="n">dialog</span><span class="p">.</span><span class="n">Color</span><span class="p">;</span>
             <span class="p">}</span>
-        <span class="p">}</span></code></pre></td></tr></table>
+        <span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>字体格式设置：</p>
+</div><p>字体格式设置：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -452,7 +436,8 @@ Graphics类
             <span class="p">{</span>
                 <span class="n">textBox1</span><span class="p">.</span><span class="n">Font</span> <span class="o">=</span> <span class="n">dialog</span><span class="p">.</span><span class="n">Font</span><span class="p">;</span>
             <span class="p">}</span>
-        <span class="p">}</span></code></pre></td></tr></table>
+        <span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>

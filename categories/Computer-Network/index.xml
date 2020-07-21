@@ -6,10 +6,19 @@
     <description>Recent content in Computer Network on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 06 Nov 2019 19:23:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 09:23:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/Computer-Network/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>test</title>
+      <link>http://localhost:1313/2020/07/21/test/</link>
+      <pubDate>Tue, 21 Jul 2020 09:23:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/07/21/test/</guid>
+      <description>test!!!</description>
+    </item>
     
     <item>
       <title>可变长子网掩码在子网划分中的应用「转」</title>
@@ -36,7 +45,6 @@
       
       <guid>http://localhost:1313/2017/06/22/NetworkCabling-2/</guid>
       <description>&lt;p&gt;一般步骤：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;需求分析：根据各楼层各房间的用途，确定工作区人员数量；&lt;/li&gt;
 &lt;li&gt;与用户进行技术交流，分析业务需求；&lt;/li&gt;
@@ -53,14 +61,15 @@
       <pubDate>Thu, 22 Jun 2017 09:18:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/22/NetworkCabling-1/</guid>
-      <description>&lt;h1 id=&#34;1-每个楼层的用线计算公式&#34;&gt;1.每个楼层的用线计算公式&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34; /&gt;
-- C为每个楼层用线量
-- F为最远的信息插座离楼层管理间的距离
-- N为最近的信息插座离楼层管理间的距离
-- M为每层楼的信息插座的数量
-- 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;1每个楼层的用线计算公式&#34;&gt;1.每个楼层的用线计算公式&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;C为每个楼层用线量&lt;/li&gt;
+&lt;li&gt;F为最远的信息插座离楼层管理间的距离&lt;/li&gt;
+&lt;li&gt;N为最近的信息插座离楼层管理间的距离&lt;/li&gt;
+&lt;li&gt;M为每层楼的信息插座的数量&lt;/li&gt;
+&lt;li&gt;6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/09/11/offer-NextNodeInBinaryTrees/" />
@@ -47,16 +47,13 @@
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="剑指 Offer 之 二叉树的下一个节点">
 <meta itemprop="description" content="给定一棵二叉树和其中的一个节点，找出中序遍历顺序的下一个节点。树中的节点除了有两个分别指向左右子节点的指针以外，还有一个指向父节点的指针。">
-
-
 <meta itemprop="datePublished" content="2019-09-11T16:26:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="592">
+<meta itemprop="wordCount" content="590">
 
 
 
-<meta itemprop="keywords" content="Algorithm,剑指Offer,BinaryTree," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Algorithm,剑指Offer,BinaryTree," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="剑指 Offer 之 二叉树的下一个节点"/>
 <meta name="twitter:description" content="给定一棵二叉树和其中的一个节点，找出中序遍历顺序的下一个节点。树中的节点除了有两个分别指向左右子节点的指针以外，还有一个指向父节点的指针。"/>
 
@@ -136,7 +133,7 @@
         <div class="post-category">
             <a href="/categories/Algorithm/"> Algorithm </a>
             </div>
-          <span class="more-meta"> 592 words </span>
+          <span class="more-meta"> 590 words </span>
           <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -146,59 +143,54 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#分析">分析</a></li>
-<li><a href="#实现">实现</a></li>
-<li><a href="#详解">详解</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#分析">分析</a></li>
+    <li><a href="#实现">实现</a></li>
+    <li><a href="#详解">详解</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>给定一棵二叉树和其中的一个节点，找出中序遍历顺序的下一个节点。树中的节点除了有两个分别指向左右子节点的指针以外，还有一个指向父节点的指针。</p>
-
 <h2 id="分析">分析</h2>
-
 <p>对于一棵如下的二叉树，其中序遍历为 <code>{d, b, h, e, i, a, f, c, g}</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">         a
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">         a
        /   \
       b     c
      / \   / \
     d   e f   g
        / \
-      h   i</pre></td></tr></table>
+      h   i
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>有如下的规律：</p>
-
-<p>1) 如果给定的节点有右子树，则该节点在中序遍历中的下一个节点就是其右子树中最左侧的节点。例如，给定节点为 <code>b</code>，则 <code>b</code> 的下一个节点就是以 <code>e</code> 为根节点的子树的最左边的节点，即 <code>h</code>。同样的 <code>a</code> 的下一个节点就是 <code>f</code>；</p>
-
-<p>2) 如果给定的节点没有右子树，则需要判断其与父节点的关系：</p>
-
+</div><p>有如下的规律：</p>
+<ol>
+<li>
+<p>如果给定的节点有右子树，则该节点在中序遍历中的下一个节点就是其右子树中最左侧的节点。例如，给定节点为 <code>b</code>，则 <code>b</code> 的下一个节点就是以 <code>e</code> 为根节点的子树的最左边的节点，即 <code>h</code>。同样的 <code>a</code> 的下一个节点就是 <code>f</code>；</p>
+</li>
+<li>
+<p>如果给定的节点没有右子树，则需要判断其与父节点的关系：</p>
+</li>
+</ol>
 <p>　　2.1) 如果给定的节点是其父节点的左节点，则给定的节点的下一节点就是其父节点。例如，<code>d</code>-&gt;<code>b</code>，<code>f</code>-&gt;<code>c</code>；</p>
-
 <p>　　2.2) 如果给定的节点是其父节点的右节点，则可以沿着该节点的父指针向上找，直到找到一个是它父节点的左子节点的节点，找到则返回该节点，找不到则说明给定的节点没有下一节点，返回 <code>null</code>。</p>
-
 <p>例如，给定节点 <code>i</code> 没有右子树，朝上找到 <code>e</code> 不满足条件，再找到 <code>b</code>，由于 <code>a</code> 的左节点是 <code>b</code>，所以 <code>i</code> 的下一节点就是 <code>a</code> 了。而对于 <code>g</code> 来说，向上找到 <code>c</code> 不满足条件，然后再找到 <code>a</code> 还是不满足条件，则说明 <code>g</code> 没有下一节点。</p>
-
 <h2 id="实现">实现</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -218,28 +210,27 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">NextNodeInBinaryTrees</span> <span class="p">{</span>
-    <span class="err">public static TreeNode getNextNode</span><span class="p">(</span><span class="err">TreeNode node</span><span class="p">){</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">){</span>
-            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">;</span>
-            <span class="k">while</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">){</span>
-                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
-        <span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NextNodeInBinaryTrees</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">TreeNode</span> <span class="nf">getNextNode</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+            <span class="k">while</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
+        <span class="o">}</span>
 
-        <span class="k">while</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">parent</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">){</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">parent</span><span class="p">.</span><span class="na">left</span> <span class="o">==</span> <span class="n">node</span><span class="p">)</span> <span class="k">return</span> <span class="n">node</span><span class="p">.</span><span class="na">parent</span><span class="p">;</span>
-            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">.</span><span class="na">parent</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span class="k">while</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">parent</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="n">node</span><span class="o">)</span> <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="详解">详解</h2>
-
+</div><h2 id="详解">详解</h2>
 <p>第 <code>4~9</code> 行就对应上面讲到的第 <code>1)</code> 条，而第 <code>12~14</code> 行对应的就是第 <code>2</code> 条。</p>
     </div>
 

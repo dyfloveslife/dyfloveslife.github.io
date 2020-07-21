@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/12/16/Correlation-Filter/" />
@@ -47,16 +47,13 @@
 <meta property="article:modified_time" content="2019-12-19T16:08:56+08:00" />
 <meta itemprop="name" content="基于相关滤波器（Correlation Filters）的 MOSSE 算法">
 <meta itemprop="description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域，以及对 MOSSE 算法进行了介绍。">
-
-
 <meta itemprop="datePublished" content="2019-12-16T17:44:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-19T16:08:56&#43;08:00" />
-<meta itemprop="wordCount" content="2805">
+<meta itemprop="wordCount" content="2807">
 
 
 
-<meta itemprop="keywords" content="Correlation Filters," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Correlation Filters," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="基于相关滤波器（Correlation Filters）的 MOSSE 算法"/>
 <meta name="twitter:description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域，以及对 MOSSE 算法进行了介绍。"/>
 
@@ -136,7 +133,7 @@
         <div class="post-category">
             <a href="/categories/Visual-Trancking/"> Visual Trancking </a>
             </div>
-          <span class="more-meta"> 2805 words </span>
+          <span class="more-meta"> 2807 words </span>
           <span class="more-meta"> 6 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -145,208 +142,136 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#相关滤波器">相关滤波器</a></li>
-<li><a href="#mosse-算法">MOSSE 算法</a></li>
-<li><a href="#2d-fft">2D-FFT</a></li>
-<li><a href="#参考">参考</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>本文将会从 <code>相关滤波器</code> 的相关理论进行展开，讲述如何将信号处理领域的 <code>相关滤波器</code> 融入到目前比较热门的 <code>目标追踪</code> 领域，以及对 <code>MOSSE</code> 算法进行了介绍。</p>
-
 <blockquote>
 <p>若有错误，还请批评指出。</p>
 </blockquote>
-
 <h1 id="相关滤波器">相关滤波器</h1>
-
 <p>没错，这个滤波器的名字就叫做 <code>相关滤波器（Correlation filters）</code>，也叫 <code>判别相关滤波器（Discriminative correlation filters，DCF）</code>。它是将信号处理领域中的 <code>信号相关性理论</code> 引入到 <code>目标追踪</code> 领域中的一种方法。</p>
-
 <p><strong>具体思想是：通过使用信号的相关性来描述两个因素之间的联系，将 <code>目标区域</code> 与 <code>待检测的区域</code> 比作信号，并计算这两个区域之间的相关性，相关性越大，则滤波器得到的响应也就越大，最后得到相关性最大的区域就是目标区域，即跟踪区域。</strong></p>
-
 <p>实现步骤可分为如下三步：</p>
-
 <ul>
 <li>首先，对已经跟踪出的多个目标区域进行特征提取，通过训练这些特征得到一个滤波器模板；</li>
 <li>然后，用训练好的滤波器与下一帧中的待检测的区域进行相关性的计算，将相关性最大的区域（最大响应点所在的区域）设置为下一帧中目标预测的位置；</li>
 <li>最后，提取以目标位置为中心的特征，用新位置区域再次训练并更新相关滤波器，通过不断循环以上步骤进行预测，可达到实时跟踪的效果。</li>
 </ul>
-
 <p>这里有一个 <code>相关性</code> 的概念，可分为如下两种：</p>
-
 <ul>
 <li><strong>互相关</strong>（<a href="https://en.wikipedia.org/wiki/Cross-correlation">cross-correlation</a>），在信号处理领域中，互相关是用来表示 <strong>两个信号之间相似性的一个度量</strong>，通过与已知信号的比较，以此用于寻找未知信号中的特性。</li>
 <li><strong>自相关</strong>（<a href="https://en.wikipedia.org/wiki/Autocorrelation">auto-correlation</a>），也叫序列相关，<strong>是一个信号于其自身在不同时间点（频域）的互相关</strong>，也就是两次观察之间的相似度对它们之间的时间差的函数。</li>
 </ul>
-
 <p>对于 $ f $ 和 $ g $ 这两个信号量，它们之间的相关性如下所示：</p>
-
 <p>$$
 (f \star g)(\tau) = \int_ {\infty} ^ {-\infty}{f ^ *}(t)g(t + {\tau})dt  \qquad(1)
 $$</p>
-
 <p>$$
 (f \star g)(n) = \sum_{-\infty} ^ {\infty} {f ^ *} [m]g(m + n)  \qquad(2)
 $$</p>
-
 <blockquote>
 <p><strong>互相关</strong> 实质上类似于两个函数的卷积。</p>
 </blockquote>
-
 <p>式中，$ f ^ * $  表示 $ f $ 的<a href="https://en.wikipedia.org/wiki/Complex_conjugate">共轭复数</a>，这种相关性表示的就是两个函数在某个时刻 $ \tau $ 的相似程度。由于存在时间差，所以要想得到最大值，就需要将其中一个变量进行平移。而 $ g(t + {\tau}) $ 就表示将 $ g $ 平移 $ {\tau} $ 个时刻。</p>
-
 <p><code>相关滤波</code> 在 <code>目标跟踪</code> 方面主要是通过设计一个滤波器模板，使得当该模板作用在目标上时，得到最大的响应。</p>
-
 <p>目前针对视频的目标追踪方法有三大方向：<strong>深度学习方向</strong>、<strong>相关滤波方向</strong> 以及 <strong>其它传统方法</strong>。如<a href="https://github.com/foolwood/benchmark_results/blob/master/img/recent_Tracker_development.png">下图</a>所示：</p>
-
-<p><img src="https://i.loli.net/2019/12/16/v43pSLzyiXqoa91.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2019/12/16/v43pSLzyiXqoa91.png" alt="image.png"></p>
 <p>基于 <strong>深度学习</strong> 的方法在训练神经网络的时候会产生较多的参数，从而导致训练时间较长，难以达到实时追踪的目的。</p>
-
 <p>基于 <strong>相关滤波</strong> 的方法速度快，并且追踪的效果好，逐步成为视频跟踪算法发展的主要方向。从图中可以看到，作为首次将 <code>Correlation Filters</code> 引入到 <code>目标追踪</code> 的 <code>MOSSE</code> 方法被称为该领域的 <em><strong>开山鼻祖</strong></em> 。</p>
-
 <h1 id="mosse-算法">MOSSE 算法</h1>
-
 <p>该算法是在 2010 年由 <a href="https://www.semanticscholar.org/paper/Visual-object-tracking-using-adaptive-correlation-Bolme-Beveridge/70c3c9b9a40ca55264e454586dca2a6cf416f6e0">《Visual object tracking using adaptive correlation filters》</a> 论文提出的，其使用 <code>MISSE（Minimum Output Sum of Squared Error filter，误差最小平方和滤波器）</code> 来训练一个最优的滤波器模板，使其在目标上的响应最大，如下所示：</p>
-
 <p>$$
 g = f \star h   \qquad(3)
 $$</p>
-
 <p>其中，$ g $ 表示响应输出，即相关输出，$ f $ 表示输入图像，$ h $ 表示滤波模板，$ \star $ 为卷积操作。式 $ (3) $ 可以进一步展开，如下所示：</p>
-
 <p>$$
 (f \star h)(\tau) = \int_ {\infty} ^ {-\infty}{f ^ *}(t)h(t + {\tau})dt  \qquad(4)
 $$</p>
-
 <p>由于输入图像 $ f $ 是固定的，这里只需要确定的是滤波器模板 $ h $。由于上式的卷积运算计算量很大，因此 <code>MOSSE</code> 方法利用 <code>快速傅里叶变换（FFT）</code> 的方式，将 $ f $ 和 $ h $ 在频域内进行表示，函数互相关的傅里叶变换等于函数傅里叶变换的乘积（根据<a href="https://en.wikipedia.org/wiki/Convolution_theorem">卷积定理</a>可知：时域上的卷积等于频域上的乘积），将 <code>卷积</code> 操作转换为 <code>点乘</code> 操作，这样可以极大的减少计算量。也就是说，在这里将输入图像和滤波器通过算法变换到频域后，直接进行相乘，然后再变回时域（即图像的空域）就可以得到响应结果了。如下所示：</p>
-
 <p>$$
 \mathcal{F}(g) = \mathcal{F}(f \star h) = \mathcal{F}(f) \odot {\mathcal{F}(h) ^  *} \qquad(5)
 $$</p>
-
 <p>$ \mathcal{F} $ 表示傅里叶变换，$ \odot $ 表示点乘运算（也就是点积运算）。可将 $ (5) $ 简写成如下所示：</p>
-
 <p>$$
 G = F \odot {H^*} \qquad(6)
 $$</p>
-
 <p>也即：</p>
-
 <p>$$
 {H^*} =  \frac {G}{F} \qquad(7)
 $$</p>
-
 <p>好了，现在就只需要求 $ {H^*} $ 就可以了。</p>
-
 <p>在计算之前，对于实际的目标追踪技术，还需要考虑到 <strong>目标的外观变换</strong> 等因素的影响。所以需要考虑到以目标的 $ m $ 个图像作为参考，从而提高滤波器模板的鲁棒性，如下所示：</p>
-
 <p>$$
 min_ {H^*}= \sum_ {i=1}^{m} {\mid} H^ * {\odot} F_{i} - G_{i} {\mid}^{2}  \qquad(8)
 $$</p>
-
 <p>其中，$ F_{i} $ 表示输入图像，$ G_{i} $ 表示在傅里叶域中期望的输出图像，目标是找到使输出误差平方和最小的滤波器 $ H^* $。</p>
-
 <p>通常为了得到函数的最优值，可以通过对该函数求导数然后置为零即可。然而该函数表示的都是 <strong>实数值</strong>，即表示的是 <strong>复变量的实数值函数</strong>。</p>
-
-<p><strong>由于傅里叶域中的 <code>相关</code> 是逐个元素相乘的，所以这里可以独立地优化滤波器 $ H^* $ 中的每个元素。因此，优化问题可以从多元优化问题转换为独立地优化 $ H^* $ 中每个元素的问题。</strong></p>
-
+<p><em><em>由于傅里叶域中的 <code>相关</code> 是逐个元素相乘的，所以这里可以独立地优化滤波器 $ H^</em> $ 中的每个元素。因此，优化问题可以从多元优化问题转换为独立地优化 $ H^</em> $ 中每个元素的问题。**</p>
 <p>对于每个元素来说，要想找到最小的 $ min $，只需要将其中的每个元素的 MOSSE 都最小即可，如下所示：</p>
-
 <p>$$
 min_ {H_ {w,v}^*}= \sum_ {i=1}^{m} {\mid} H_ {w,v}^*F_{w,v,i} - G_{w,v,i} {\mid}^{2}  \qquad(9)
 $$</p>
-
 <blockquote>
 <p>$ w $ 和 $ v $ 是 $ H^* $ 中每个元素的索引。</p>
 </blockquote>
-
 <p>要想得到最小的 $ {H_ {wv}^{*}} $，只需要将上式求偏导，并使偏导等于 $ 0 $ 即可，如下所示：</p>
-
 <blockquote>
 <p>这里要注意的是，在 <strong>复数域</strong> 的求导和在 <strong>实数域</strong> 求导是不同的。</p>
 </blockquote>
-
 <p>$$
 0 = \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} {\mid} H_{w,v}^*F_{w,v,i} - G_{w,v,i} {\mid}^{2} \qquad(10)
 $$</p>
-
-<p>$$
-\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i}-G_{w,v,i})(H_{w,v}^*F_{w,v,i}-G_{w,v,i}) ^ *
+<p>$$ 
+\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i}-G_{w,v,i})(H_{w,v}^*F_{w,v,i}-G_{w,v,i}) ^ * 
 $$</p>
-
 <p>$$
-\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i}-G_{w,v,i})(H_{w,v}F_{w,v,i} ^ * - G_{w,v,i} ^ *)
+\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i}-G_{w,v,i})(H_{w,v}F_{w,v,i} ^ * - G_{w,v,i} ^ *) 
 $$</p>
-
 <p>$$
 \Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i} {\cdot} H_{w,v}F_{w,v,i} ^ *- H_{w,v}^*F_{w,v,i} {\cdot} G_{w,v,i} ^ * - H_{w,v}F_{w,v,i} ^ * {\cdot} G_{w,v,i} + G_{w,v,i} {\cdot} G_{w,v,i} ^ *)
 $$</p>
-
 <p>$$
 \Rightarrow 0 = \sum_{i=1}^{m} (F_{w,v,i} {\cdot} H_{w,v}F_{w,v,i} ^ * - F_{w,v,i} {\cdot} G_{w,v,i} ^ *)
 $$</p>
-
 <p>$$
 \Rightarrow \sum_{i=1}^{m} F_{w,v,i} {\cdot} H_{w,v}F_{w,v,i} ^ * = \sum_{i=1}^{m}F_{w,v,i} {\cdot} G_{w,v,i} ^ *
 $$</p>
-
 <p>$$
 \Rightarrow H_{w,v} = \frac {\sum_{i=1}^{m}F_{w,v,i} G_{w,v,i} ^ *}{\sum_{i=1}^{m} F_{w,v,i} F_{w,v,i} ^ *}  \qquad(11)
 $$</p>
-
 <p>其中，$ (11) $ 表示的是每个元素的值，按以上方式处理所有 $ H $ 中的元素，可以得到 <strong>滤波器模型的公式</strong>：</p>
-
 <p>$$
 H = \frac {\sum_{i=1}^{m}F_{i} {\odot} G_{i} ^ *}{\sum_{i=1}^{m} F_{i} {\odot} F_{i} ^ *}  \qquad(12)
 $$</p>
-
 <p>在原文中，作者对跟踪框（GroundTruth）进行随机变换，获取一系列的训练样本 $ f_ {i} $，而 $ g_ {i} $ 是由高斯函数产生的，其峰值的位置就是在 $ f_ {i} $ 的中心位置。获得了一系列的训练样本和结果之后，就可以计算滤波器模板 $ h $ 的值了。</p>
-
 <p>然而，在目标跟踪过程中，只需要将 $ (12) $ 这一滤波器模板与当前帧的图像做 <code>相关操作</code> 即可，将得到的响应结果中最大的点所对应的坐标作为当前帧的位置（相当于在二维平面上移动模板）。考虑到想要让滤波器对形变、光照等外界因素的影响具有更好的鲁棒性，采取了以下模板更新策略：</p>
-
 <p>$$
 H_ {t} = \frac {A_ t}{B_ t} \qquad(13)
 $$</p>
-
 <p>$$
 A_ {t} = \eta F_ {t} \odot G_ {t} ^ * + (1 - \eta) {A_ {t-1}} \qquad(14)
 $$</p>
-
 <p>$$
 B_ {t} = \eta F_ {t} \odot F_ {t} ^ * + (1 - \eta) {B_ {t-1}} \qquad(15)
 $$</p>
-
 <p>$ H_ {t} $ 表示在第 $ t $ 帧求得的滤波模板，$ \eta $ 为经验常数。这里将滤波器模板被拆分为 <code>分子</code> 和 <code>分母</code> 两部分，分别对这两部分进行更新。其中 $ A_ {t} $ 和 $ A_ {t-1} $ 分别表示当前帧和上一帧。</p>
-
 <p>对于其他的部分，比如可以向 $ (12) $ 中引入正则化参数，或者分别求 $ H_ {i} $ 然后再取平均值等。</p>
-
 <h1 id="2d-fft">2D-FFT</h1>
-
 <p>来看一下，在 Matlab 中 <code>二维傅里叶变换（fft2）</code> 是怎么进行的。</p>
-
 <p>$$
 Y_{p+1,q+1} = \sum_{j=0}^{m-1} \sum_{k=0}^{n-1} {w_{m}^{jp} w_{n}^{kq} X_{j+1,k+1} }
 $$</p>
-
 <p>其中， $ w_m $ 和 $ w_n $ 是复单位根，即：</p>
-
 <p>$$
 w_m = e^{\frac{-2πi}{m}}
 $$</p>
-
 <p>$$
 w_n = e^{\frac{-2πi}{n}}
 $$</p>
-
 <p>$ i $ 是虚数单位，$ p $ 和 $ j $ 表示从 $ 0 $ 到 $ m-1 $ 范围的索引，$ q $ 和 $ k $ 表示从 $ 0 $ 到 $ n-1 $ 范围的索引，$ +1 $ 表示将 $ X $ 和 $ Y $ 的索引平移 1 位。</p>
-
 <h1 id="参考">参考</h1>
-
 <ol>
 <li><a href="http://www4.comp.polyu.edu.hk/~cslzhang/STC/STC.htm">http://www4.comp.polyu.edu.hk/~cslzhang/STC/STC.htm</a></li>
 <li><a href="https://blog.csdn.net/sgfmby1994/article/details/68490903">https://blog.csdn.net/sgfmby1994/article/details/68490903</a></li>

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/02/18/kmp/" />
@@ -47,16 +47,13 @@
 <meta property="article:modified_time" content="2020-02-18T19:32:56+08:00" />
 <meta itemprop="name" content="KMP 算法">
 <meta itemprop="description" content="KMP 算法适用于求解字符串匹配的问题，网上有许多文章对它都有详细的解释，之前在学习数据结构的时候也对该算法有些了解，但一直没怎么总结。先将其进行回顾，并写下此文，以作备忘。">
-
-
 <meta itemprop="datePublished" content="2020-02-18T19:26:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-02-18T19:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="1439">
 
 
 
-<meta itemprop="keywords" content="Algorithm,KMP," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Algorithm,KMP," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="KMP 算法"/>
 <meta name="twitter:description" content="KMP 算法适用于求解字符串匹配的问题，网上有许多文章对它都有详细的解释，之前在学习数据结构的时候也对该算法有些了解，但一直没怎么总结。先将其进行回顾，并写下此文，以作备忘。"/>
 
@@ -145,80 +142,42 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#最长公共前缀和最长公共后缀">最长公共前缀和最长公共后缀</a></li>
-<li><a href="#分析">分析</a></li>
-<li><a href="#next-数组">next 数组</a></li>
-<li><a href="#代码">代码</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>KMP 算法适用于求解字符串匹配的问题，网上有许多<a href="https://www.google.com/search?q=Knuth-Morris-Pratt+algorithm">文章</a>对它都有详细的解释，之前在学习<a href="https://book.douban.com/subject/1101779/">数据结构</a>的时候也对该算法有些了解，但一直没怎么总结。先将其进行回顾，并写下此文，以作备忘。</p>
-
 <p>KMP 算法是要实现这么一个问题：给定一个原始的字符串<code>str1 = bbcabcdababcdabcdabde</code>，我想知道这里面是否包含一个子串<code>str2 = abcdabd</code>。如果存在，则返回子串中的第一个字符在原始字符串中的索引，否则返回<code>-1</code>。</p>
-
 <p>一般的解决思路可以使用暴力方法，即从 str1 的 0 位置开始逐个和 str2 开始匹配，如果有一位不相等的话，则再从 str1 的 1 位置开始与 str2 开始匹配，以此类推，一直比较下去，直至结束。</p>
-
 <p>假如 str1 的长度为 N，str2 的长度为 M，在 N &gt;= M 的前提下，该方法的时间复杂度为 O(N * M)。其中 N 一定是大于等于 M 的，假设 N 小于 M 的话，则 str2 构不成 str1 的子串，则就不符合题意了。</p>
-
 <p>这种解法显然不是我们要的答案，接下来在介绍一种更快的方法之前，还有一个知识点需要提前说一下，就是<code>公共前缀</code>与<code>公共后缀</code>的问题。</p>
-
 <h1 id="最长公共前缀和最长公共后缀">最长公共前缀和最长公共后缀</h1>
-
 <p><strong>前缀：除了最后一个字符，其它字符所构成的字符串。</strong></p>
-
 <p><strong>后缀：除了第一个字符，其它字符所构成的字符串。</strong></p>
-
 <p>例如，对于字符串<code>abcabcd</code>，求字符<code>d</code>的在此字符串中的前缀和后缀。我们先看前缀，字符<code>d</code>的前缀有<code>a</code>、<code>ab</code>、<code>abc</code>、<code>abca</code>、<code>abcab</code>，注意，<code>abcabc</code>虽然也是其前缀，但我们规定不能包括最后一个字符，所以不考虑<code>abcabc</code>。</p>
-
 <p>再来看<code>d</code>的后缀，有<code>c</code>、<code>bc</code>、<code>abc</code>、<code>cabc</code>、<code>bcabc</code>，注意，<code>abcabc</code>虽然也是其后缀，但我们规定不能包括第一个字符，所以这里也不考虑<code>abcabc</code>。</p>
-
 <p>而对于最长公共前缀和最长公共后缀来说，就是<code>前缀</code>和<code>后缀</code>中公共且最长的部分，即<code>abc</code>。如下图所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2020/02/18/ySIvA9Ow8XazNU4.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <h1 id="分析">分析</h1>
-
 <p>之所以暴力算法的时间复杂度很高，是因为它重复比较了多次，为了加速字符串的比较过程，我们还需要用到一个<code>next</code>数组，该数组记录了字符串 str2 中每个字符的最长公共前缀和最长公共后缀的长度。现在先将其理解为一个黑盒，暂时不用管它是怎么实现的，后面会讲到。</p>
-
 <p>假如 str1 的 i 位置与 str2 的 0 位置开始匹配，直到 X 和 Y 位置出现了不匹配的情况时，原来的方法是将 str2 的 0 位置再次来到 str1 的 i+1 位置再次开始匹配，然而现在不这么做。现在先根据<code>next[]</code>中 Y 的最长前缀和最长后缀的匹配长度，让 str2 的 0 位置来到 str1 的 j 位置，由于 str1 中从 j 位置开始的某些字符与 str2 中从 0 位置开始的字符是相同的，所以这里直接从 Z 位置与 X 位置开始匹配。如下图所示：</p>
-
-<p><img src="https://i.loli.net/2020/02/18/bLKD615UdxjRJHX.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2020/02/18/bLKD615UdxjRJHX.png" alt="image.png"></p>
 <p>如下图所示，X 位置上的 t 与 Y 位置上的 a 不同，所以 str2 中的 0 位置来到了 str1 中的 j 位置，让 X 位置上的 t 和 Z 位置上的 a 进行比较。</p>
-
-<p><img src="https://i.loli.net/2020/02/18/ueN9d4xqfQsoVpB.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2020/02/18/ueN9d4xqfQsoVpB.png" alt="image.png"></p>
 <p>由于 Z 位置的 a 与 t 还是不同的，所以在查<code>next[Z]</code>的时候，此时 Z 已经没有公共前缀和后缀了，所以最后<code>abcabca</code>不是<code>abcabct</code>的子串。注意：如果 str1 中的 t 后面还有字符的话，则 str2 在没有匹配到的时候，str2 还需要与 X+1 位置上的字符开始比较。</p>
-
 <h1 id="next-数组">next 数组</h1>
-
 <p>对于如何求 next 数组：</p>
-
 <ul>
 <li>0 位置为 -1；</li>
 <li>1 位置为 0；</li>
 <li>对于 2 位置上的值，如果 nums[0] 和 nums[1] 相等，则为 1，否则为 0；</li>
 <li>对于其它的位置，假如现在准备求 i 位置上的值，假设已知 i-1 位置上的值是 4，那么就看一下长度为 4 的下一个字符 X 等不等于 b，如果等于 b，则 i 位置的值为 5。</li>
 </ul>
-
 <p>如果相等，则 i 的值为<code>X在数组中的值+1</code>，如下图所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2020/02/18/Tp6esWcbxIA2ivh.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>如果不相等，则看 X 之前的最长前缀的下一个字符（这里假设是 C）是否和 b 相等，如果相等，则 a 的值就是 <code>C 在 next 数组中的值+1</code>，否则再继续往前找，直到找不到的时候，那 a 的值就是 0。如下图所示：</p>
-
-<p><img src="https://i.loli.net/2020/02/18/Nxh3YPnTzriAX6j.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2020/02/18/Nxh3YPnTzriAX6j.png" alt="image.png"></p>
 <h1 id="代码">代码</h1>
-
 <p><a href="https://github.com/dyfloveslife/LeetCodeAndSwordToOffer/blob/master/src/Other/AdvancedAlgorithm/_01_KMP/Solution.java">详见</a></p>
     </div>
 

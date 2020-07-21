@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/" />
@@ -44,12 +44,9 @@
 <meta property="og:description" content="Carol&#39;s blog." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://localhost:1313/" />
-
-<meta property="og:updated_time" content="2019-11-16T13:56:11+08:00" />
+<meta property="og:updated_time" content="2020-07-21T09:32:56+08:00" />
 <meta itemprop="name" content="Carol&#39;s blog">
-<meta itemprop="description" content="Carol&#39;s blog.">
-
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="Carol&#39;s blog."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Carol&#39;s blog"/>
 <meta name="twitter:description" content="Carol&#39;s blog."/>
 
@@ -79,13 +76,15 @@
     <a href="/">
         <li class="mobile-menu-item">Home</li>
       </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
+        <li class="mobile-menu-item">Writing</li>
       </a><a href="/tags/">
         <li class="mobile-menu-item">Tags</li>
       </a><a href="/categories/">
         <li class="mobile-menu-item">Categories</li>
       </a><a href="/about/">
         <li class="mobile-menu-item">About</li>
+      </a><a href="/2020/01/12/post_summary/">
+        <li class="mobile-menu-item">❤文章汇总</li>
       </a>
   </ul>
 </nav>
@@ -100,13 +99,15 @@
     <li class="menu-item">
         <a class="menu-item-link" href="/">Home</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
+        <a class="menu-item-link" href="/post/">Writing</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">Categories</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/about/">About</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/2020/01/12/post_summary/">❤文章汇总</a>
       </li>
   </ul>
 </nav>
@@ -118,188 +119,23 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/2017/06/16/GDI-ScreenDrawing/">C#——GDI&#43;屏幕绘图</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/2017/03/27/My-computer-application-software/">我使用的应用软件</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2017-06-16 </span>
+      <span class="post-time"> 2017-03-27 </span>
       <div class="post-category">
-          <a href="/categories/C/"> C# </a>
+          <a href="/categories/%E6%84%9F%E6%82%9F/"> 感悟 </a>
           </div>
-        <span class="more-meta"> 869 words </span>
-        <span class="more-meta"> 2 mins read </span>
+        <span class="more-meta"> 423 words </span>
+        <span class="more-meta"> 1 min read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="1-绘画工具">1.绘画工具</h1>
-
-<p>画笔和画刷
-- 画笔Pens:细，画线条和轮廓；
-- 画刷Brushes:粗，填充闭合区域。</p>
-
-<p>Graphics类
-通过 <code>控件名.createGraphics()</code> 取得某控件的屏幕区域作为画布。</p>
+      <p>从开始用电脑到现在，我也在自己的电脑上安装了不少的软件。有相关开发平台的软件，也有提升效率的各种小软件。想着以后有可能重装系统，在这里把我电脑上安装的软件做个记录，以后也许会用到。</p>
     </div>
     <div class="read-more">
-      <a href="/2017/06/16/GDI-ScreenDrawing/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/2017/06/15/Form-programming/">C#——窗体编程</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-06-15 </span>
-      <div class="post-category">
-          <a href="/categories/C/"> C# </a>
-          </div>
-        <span class="more-meta"> 1423 words </span>
-        <span class="more-meta"> 3 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>main方法：位于<code>Program.cs</code>文件，表示Windows窗体程序的入口。
-示例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">namespace MyForm
-{
-	static class Program
-      {
-           //code
-           static void Main( )
-           {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Form1());		//启动窗体
-           }
-      }
-}</pre></td></tr></table>
-</div>
-</div>
-    </div>
-    <div class="read-more">
-      <a href="/2017/06/15/Form-programming/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/2017/06/14/Console-program/">C#——控制台程序</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-06-14 </span>
-      <div class="post-category">
-          <a href="/categories/C/"> C# </a>
-          </div>
-        <span class="more-meta"> 1146 words </span>
-        <span class="more-meta"> 3 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="1-console类可实现输入输出功能">1.Console类可实现输入输出功能</h1>
-
-<h1 id="2-write方法-控制台输出-屏幕输出">2.Write方法：控制台输出(屏幕输出)</h1>
-
-<p>示例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="n">Console</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="err">“不明觉厉”</span><span class="p">);</span></code></pre></td></tr></table>
-</div>
-</div>
-    </div>
-    <div class="read-more">
-      <a href="/2017/06/14/Console-program/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/2017/06/04/Windows-DNS/">Windows环境下配置DNS服务器</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-06-04 </span>
-      <div class="post-category">
-          <a href="/categories/Windows/"> Windows </a>
-          </div>
-        <span class="more-meta"> 617 words </span>
-        <span class="more-meta"> 2 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <blockquote>
-<p>软件： <code>VMware Workstation Pro</code>
-环境： <code>Windows 2008 R2</code></p>
-</blockquote>
-
-<p>步骤：
-1.  配置虚拟机静态IP
-2.  安装DNS
-3.  创建正向查找区域
-4.  创建反向查找区域
-5.  测试</p>
-    </div>
-    <div class="read-more">
-      <a href="/2017/06/04/Windows-DNS/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/2017/06/03/Windows-Web/">Windows 环境下配置 Web 服务器</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2017-06-03 </span>
-      <div class="post-category">
-          <a href="/categories/Windows/"> Windows </a>
-          </div>
-        <span class="more-meta"> 1436 words </span>
-        <span class="more-meta"> 3 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <blockquote>
-<p>软件： <code>VMware Workstation Pro</code>
-环境： <code>Windows 2008 R2</code></p>
-</blockquote>
-
-<p>步骤：
-1.  配置虚拟机静态IP
-2.  安装
-3.  创建个人目录
-4.  创建虚拟目录
-5.  创建虚拟主机
-6.  使用域名访问web服务器</p>
-    </div>
-    <div class="read-more">
-      <a href="/2017/06/03/Windows-Web/" class="read-more-link">Read more...</a>
+      <a href="/2017/03/27/My-computer-application-software/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
@@ -311,10 +147,7 @@
         <i class="iconfont icon-left"></i>
         <span class="prev-text">Prev</span>
       </a>
-    <a class="next" href="/page/14/">
-        <span class="next-text">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
+    
   </nav>
         </div>
         
@@ -326,7 +159,7 @@
       <div class="social-links">
       <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
       <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
-  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  
 </div>
 
 <div class="copyright">
@@ -348,7 +181,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2019
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

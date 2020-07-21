@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/16/learning-python-ClassesAndObjects/" />
@@ -43,7 +43,6 @@
 <meta property="og:description" content="
 要点概括：
 
-
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2018/07/16/learning-python-ClassesAndObjects/" />
@@ -53,22 +52,17 @@
 <meta itemprop="description" content="
 要点概括：
 
-
 ">
-
-
 <meta itemprop="datePublished" content="2018-07-16T14:24:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="3099">
+<meta itemprop="wordCount" content="3098">
 
 
 
-<meta itemprop="keywords" content="Python,CLassAndObject," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python,CLassAndObject," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python 学习笔记之 类和对象"/>
 <meta name="twitter:description" content="
 要点概括：
-
 
 "/>
 
@@ -148,7 +142,7 @@
         <div class="post-category">
             <a href="/categories/Python/"> Python </a>
             </div>
-          <span class="more-meta"> 3099 words </span>
+          <span class="more-meta"> 3098 words </span>
           <span class="more-meta"> 7 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -158,23 +152,15 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#1-名词解释">1.名词解释</a></li>
-<li><a href="#2-类定义">2.类定义</a></li>
-<li><a href="#3-类对象">3.类对象</a></li>
-<li><a href="#4-类方法">4.类方法</a></li>
-<li><a href="#5-继承">5.继承</a>
-<ul>
-<li><a href="#5-1单继承">5.1单继承</a></li>
-<li><a href="#5-2多继承">5.2多继承</a></li>
-</ul></li>
-<li><a href="#6-方法重写">6.方法重写</a></li>
-<li><a href="#7-类属性与方法">7.类属性与方法</a>
-<ul>
-<li><a href="#7-1类的私有属性">7.1类的私有属性</a></li>
-<li><a href="#7-2类的私有方法">7.2类的私有方法</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#51单继承">5.1单继承</a></li>
+    <li><a href="#52多继承">5.2多继承</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#71类的私有属性">7.1类的私有属性</a></li>
+    <li><a href="#72类的私有方法">7.2类的私有方法</a></li>
+  </ul>
 </nav>
   </div>
 </div>
@@ -182,13 +168,9 @@
       <blockquote>
 <p><strong>要点概括：</strong></p>
 </blockquote>
-
-<p><img src="/images/Python/ClassesAndObjects/contents.png" alt="ClassesAndObjects-contents" /></p>
-
-<hr />
-
-<h1 id="1-名词解释">1.名词解释</h1>
-
+<p><img src="/images/Python/ClassesAndObjects/contents.png" alt="ClassesAndObjects-contents"></p>
+<hr>
+<h1 id="1名词解释">1.名词解释</h1>
 <ul>
 <li><strong>类(class)</strong>：用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。</li>
 <li><strong>方法</strong>：类中定义的函数。</li>
@@ -196,19 +178,16 @@
 <li><strong>数据成员</strong>：类变量或者实例变量用于处理类及其实例对象的相关的数据。</li>
 <li><strong>方法重写</strong>：如果从父类继承的方法不能满足子类的需求，可以对其进行改写，这个过程叫方法的覆盖（override），也称为方法的重写。</li>
 <li><strong>实例变量</strong>：定义在方法中的变量，只作用于当前实例的类。</li>
-<li><strong>继承</strong>：即一个派生类（derived class）继承基类（base class）的字段和方法。继承也允许把一个派生类的对象作为一个基类对象对待。例如，有这样一个设计：一个Dog类型的对象派生自Animal类，这是模拟&rdquo;是一个（is-a）&rdquo;关系（例如，Dog是一个Animal）。</li>
+<li><strong>继承</strong>：即一个派生类（derived class）继承基类（base class）的字段和方法。继承也允许把一个派生类的对象作为一个基类对象对待。例如，有这样一个设计：一个Dog类型的对象派生自Animal类，这是模拟&quot;是一个（is-a）&ldquo;关系（例如，Dog是一个Animal）。</li>
 <li><strong>实例化</strong>：创建一个类的实例，类的具体对象。</li>
 <li><strong>对象</strong>：通过类定义的数据结构实例。对象包括两个数据成员（类变量和实例变量）和方法。</li>
 </ul>
-
 <p>Python中的类提供了面向对象编程的所有基本功能：类的继承机制允许多个基类，派生类可以覆盖基类中的任何方法，方法中可以调用基类中的同名方法。对象可以包含任意数量和类型的数据。</p>
-
-<h1 id="2-类定义">2.类定义</h1>
-
+<h1 id="2类定义">2.类定义</h1>
 <p>语法格式如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -221,19 +200,17 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span></code></pre></td></tr></table>
+    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>类实例化后，可以使用其属性，实际上，创建一个类之后，可以通过类名访问其属性。</p>
-
-<h1 id="3-类对象">3.类对象</h1>
-
+</div><p>类实例化后，可以使用其属性，实际上，创建一个类之后，可以通过类名访问其属性。</p>
+<h1 id="3类对象">3.类对象</h1>
 <p>类对象支持两种操作：属性引用和实例化。
 属性引用使用和Python中所有的属性引用一样的标准语法：<code>obj.name</code>。
 类对象创建后，类命名空间中所有的命名都是有效属性名，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -258,36 +235,36 @@
 
 <span class="c1"># 访问类的属性和方法</span>
 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;MyClass类的属性i为：&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;MyClass类的方法f输出为：&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">f</span><span class="p">())</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;MyClass类的方法f输出为：&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">f</span><span class="p">())</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">MyClass类的属性i为</span><span class="err">：</span> <span class="mi">123</span>
-<span class="n">MyClass类的方法f输出为</span><span class="err">：</span> <span class="n">Hello</span> <span class="n">World</span><span class="err">!</span></code></pre></td></tr></table>
+<span class="n">MyClass类的方法f输出为</span><span class="err">：</span> <span class="n">Hello</span> <span class="n">World</span><span class="err">!</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>很多类都倾向于将对象创建为有初始状态的。因此类可能会定义一个名为<code>__init__()</code>的特殊方法（构造方法），如下所示：</p>
+</div><p>很多类都倾向于将对象创建为有初始状态的。因此类可能会定义一个名为<code>__init__()</code>的特殊方法（构造方法），如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span></code></pre></td></tr></table>
+    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>类定义了<code>__init__()</code>方法后，类的实例化操作会自动调用<code>__init__()</code>方法。
+</div><p>类定义了<code>__init__()</code>方法后，类的实例化操作会自动调用<code>__init__()</code>方法。
 当然，<code>__init__()</code>方法可以有参数，参数通过<code>__init__()</code>传递到类的实例化操作上，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -302,14 +279,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="n">imagepart</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">Complex</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.5</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># 输出结果：3.0 -4.5</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># 输出结果：3.0 -4.5</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><strong><code>self</code>代表类的实例，而非类。</strong>
+</div><p><strong><code>self</code>代表类的实例，而非类。</strong>
 类的方法与普通的函数只有一个特别的区别：它们必须有一个额外的<strong>第一个参数名称</strong>，按照惯例它的名称是<code>self</code>。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -324,29 +301,27 @@
         <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
 
 <span class="n">t</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
-<span class="n">t</span><span class="o">.</span><span class="n">prt</span><span class="p">()</span></code></pre></td></tr></table>
+<span class="n">t</span><span class="o">.</span><span class="n">prt</span><span class="p">()</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Test</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000000000223F9E8</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">Test</span><span class="s1">&#39;&gt;</span></code></pre></td></tr></table>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">Test</span><span class="s1">&#39;&gt;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>从执行结果可以很明显的看出，<code>self</code>代表的是类的实例，代表当前对象的地址，而<code>self.__class__</code>则指向类。
+</div><p>从执行结果可以很明显的看出，<code>self</code>代表的是类的实例，代表当前对象的地址，而<code>self.__class__</code>则指向类。
 <code>self</code>不是Python关键字，我们把他换成其他字符也是可以正常执行的。</p>
-
-<h1 id="4-类方法">4.类方法</h1>
-
+<h1 id="4类方法">4.类方法</h1>
 <p>在类地内部，使用<code>def</code>关键字来定义一个方法，与一般函数定义不同，类方法必须包含参数<code>self</code>，且为第一个参数，<code>self</code>代表的是类的实例。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -371,26 +346,24 @@
         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">))</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="n">People</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span></code></pre></td></tr></table>
+<span class="n">p</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">Carol说</span><span class="err">：我</span><span class="mi">10</span><span class="err">岁了，体重是</span><span class="mi">30</span><span class="err">公斤。</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">Carol说</span><span class="err">：我</span><span class="mi">10</span><span class="err">岁了，体重是</span><span class="mi">30</span><span class="err">公斤。</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="5-继承">5.继承</h1>
-
-<h2 id="5-1单继承">5.1单继承</h2>
-
+</div><h1 id="5继承">5.继承</h1>
+<h2 id="51单继承">5.1单继承</h2>
 <p>语法格式如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -407,24 +380,24 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span></code></pre></td></tr></table>
+    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>需要注意圆括号中基类的顺序，若是基类中有相同的方法名，而在子类使用时未指定，Python从左至右搜索 即方法在子类中未找到时，从左到右查找基类中是否包含方法。
+</div><p>需要注意圆括号中基类的顺序，若是基类中有相同的方法名，而在子类使用时未指定，Python从左至右搜索 即方法在子类中未找到时，从左到右查找基类中是否包含方法。
 基类名<code>BaseClassName</code>必须与派生类定义在一个作用域内。
 除了类，还可以用表达式，基类定义在另一个模块中时这一点非常有用，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">class</span> <span class="nc">DerivedClassName</span><span class="p">(</span><span class="n">modname</span><span class="o">.</span><span class="n">BaseClassName</span><span class="p">):</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">class</span> <span class="nc">DerivedClassName</span><span class="p">(</span><span class="n">modname</span><span class="o">.</span><span class="n">BaseClassName</span><span class="p">):</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>下面给出通过继承People类，调用并覆写People类方法的实例，如下所示：</p>
+</div><p>下面给出通过继承People类，调用并覆写People类方法的实例，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -471,24 +444,23 @@
         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤，在读</span><span class="si">%d</span><span class="s1">年级。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade</span><span class="p">))</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span></code></pre></td></tr></table>
+<span class="n">p</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">Carol说</span><span class="err">：我</span><span class="mi">10</span><span class="err">岁了，体重是</span><span class="mi">30</span><span class="err">公斤，在读</span><span class="mi">3</span><span class="err">年级。</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">Carol说</span><span class="err">：我</span><span class="mi">10</span><span class="err">岁了，体重是</span><span class="mi">30</span><span class="err">公斤，在读</span><span class="mi">3</span><span class="err">年级。</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="5-2多继承">5.2多继承</h2>
-
+</div><h2 id="52多继承">5.2多继承</h2>
 <p>语法格式如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -505,13 +477,13 @@
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="o">.</span>
-    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span></code></pre></td></tr></table>
+    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>需要注意圆括号中父类的顺序，若是父类中有相同的方法名，而在子类使用时未指定，python从左至右搜索 即方法在子类中未找到时，从左到右查找父类中是否包含方法。实例代码如下所示：</p>
+</div><p>需要注意圆括号中父类的顺序，若是父类中有相同的方法名，而在子类使用时未指定，python从左至右搜索 即方法在子类中未找到时，从左到右查找父类中是否包含方法。实例代码如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -588,24 +560,23 @@
         <span class="n">Speaker</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 
 <span class="n">test</span> <span class="o">=</span> <span class="n">Sample</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">)</span>
-<span class="n">test</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>  <span class="c1"># 方法名相同，默认调用的是在括号中排在前面的父类的方法</span></code></pre></td></tr></table>
+<span class="n">test</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>  <span class="c1"># 方法名相同，默认调用的是在括号中排在前面的父类的方法</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="err">我叫</span><span class="n">Carol</span><span class="err">，我演讲的主题是</span><span class="n">Python</span><span class="err">。</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="err">我叫</span><span class="n">Carol</span><span class="err">，我演讲的主题是</span><span class="n">Python</span><span class="err">。</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="6-方法重写">6.方法重写</h1>
-
+</div><h1 id="6方法重写">6.方法重写</h1>
 <p>如果你的父类方法的功能不能满足你的需求，你可以在子类重写父类的方法，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -628,28 +599,26 @@
 
 <span class="n">c</span> <span class="o">=</span> <span class="n">Child</span><span class="p">()</span>
 <span class="n">c</span><span class="o">.</span><span class="n">myMethod</span><span class="p">()</span>
-<span class="nb">super</span><span class="p">(</span><span class="n">Child</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">myMethod</span><span class="p">()</span></code></pre></td></tr></table>
+<span class="nb">super</span><span class="p">(</span><span class="n">Child</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">myMethod</span><span class="p">()</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="err">调用子类方法</span>
-<span class="err">调用父类方法</span></code></pre></td></tr></table>
+<span class="err">调用父类方法</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="7-类属性与方法">7.类属性与方法</h1>
-
-<h2 id="7-1类的私有属性">7.1类的私有属性</h2>
-
+</div><h1 id="7类属性与方法">7.类属性与方法</h1>
+<h2 id="71类的私有属性">7.1类的私有属性</h2>
 <p><code>__private_attrs</code>：两个下划线开头，声明该属性为私有，不能在类的外部被使用或直接访问。在类内部的方法中使用<code>self.__private_attrs</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -678,13 +647,13 @@
 <span class="n">counter</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 <span class="n">counter</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 <span class="k">print</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">publicCount</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">__secretCount</span><span class="p">)</span> <span class="c1"># 报错，实例不能访问私有变量</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">__secretCount</span><span class="p">)</span> <span class="c1"># 报错，实例不能访问私有变量</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -699,15 +668,14 @@
 <span class="mi">2</span>
   <span class="n">File</span> <span class="s2">&#34;F:/Python_test/BasicKnowledge/test_20180716.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">95</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
     <span class="k">print</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">__secretCount</span><span class="p">)</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;JustCounter&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;__secretCount&#39;</span>  <span class="c1"># 报错，实例不能访问私有变量</span></code></pre></td></tr></table>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;JustCounter&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;__secretCount&#39;</span>  <span class="c1"># 报错，实例不能访问私有变量</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="7-2类的私有方法">7.2类的私有方法</h2>
-
+</div><h2 id="72类的私有方法">7.2类的私有方法</h2>
 <p><code>__private_methods</code>：两个下划线开头，声明该方法为私有方法，只能在类的内部调用，不能在类地外部调用。在类内部的方法中使用<code>self.__private_methods</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -746,13 +714,13 @@
 <span class="n">test</span> <span class="o">=</span> <span class="n">Site</span><span class="p">(</span><span class="s1">&#39;我的博客&#39;</span><span class="p">,</span> <span class="s1">&#39;dyfloveslife.github.io&#39;</span><span class="p">)</span>
 <span class="n">test</span><span class="o">.</span><span class="n">who</span><span class="p">()</span>  <span class="c1"># 正常输出</span>
 <span class="n">test</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>  <span class="c1"># 正常输出</span>
-<span class="n">test</span><span class="o">.</span><span class="n">__foo</span><span class="p">()</span>  <span class="c1"># 报错</span></code></pre></td></tr></table>
+<span class="n">test</span><span class="o">.</span><span class="n">__foo</span><span class="p">()</span>  <span class="c1"># 报错</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -767,7 +735,8 @@
 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
   <span class="n">File</span> <span class="s2">&#34;F:/Python_test/BasicKnowledge/test_20180716.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">115</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
     <span class="n">test</span><span class="o">.</span><span class="n">__foo</span><span class="p">()</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;Site&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;__foo&#39;</span></code></pre></td></tr></table>
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;Site&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;__foo&#39;</span>
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>

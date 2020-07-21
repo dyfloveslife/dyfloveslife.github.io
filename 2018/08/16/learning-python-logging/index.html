@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.74.2 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/08/16/learning-python-logging/" />
@@ -47,16 +47,13 @@
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="Python 中的 logging">
 <meta itemprop="description" content="日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。">
-
-
 <meta itemprop="datePublished" content="2018-08-16T16:51:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="1451">
 
 
 
-<meta itemprop="keywords" content="Python,Logging," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python,Logging," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python 中的 logging"/>
 <meta name="twitter:description" content="日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。"/>
 
@@ -145,16 +142,13 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。</p>
-
-<p><img src="https://i.loli.net/2019/11/17/xbuKa5TE3geBXLA.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2019/11/17/xbuKa5TE3geBXLA.png" alt="image.png"></p>
 <p>logging为我们提供了许多记录日志的方法，如 <code>debug()</code>、<code>info()</code>、<code>warning()</code>、<code>error()</code>、<code>critical()</code>。根据处理事件的情况不同，又可以分为不同的等级，如 <code>DEBUG</code>、<code>INFO</code>、<code>WARNING</code>、<code>ERROR</code>、<code>CRITICAL</code>。如下表格：</p>
-
 <table>
 <thead>
 <tr>
@@ -162,37 +156,30 @@
 <th align="left">啥时候用？</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="center">DEBUG</td>
 <td align="left">输出详细信息，通常仅在诊断问题的时候使用。</td>
 </tr>
-
 <tr>
 <td align="center">INFO</td>
 <td align="left">按照预期正在进行的并且是确认的事情。</td>
 </tr>
-
 <tr>
 <td align="center">WARNING</td>
 <td align="left">预示着发生了意想不到的事情，或者在不久的将来预示着一些问题（例如“磁盘空间低”）。软件仍在按预期运行。</td>
 </tr>
-
 <tr>
 <td align="center">ERROR</td>
 <td align="left">由于更严重的问题，该软件无法执行某些功能。</td>
 </tr>
-
 <tr>
 <td align="center">CRITICAL</td>
 <td align="left">表明程序本身可能无法继续运行的严重的错误。</td>
 </tr>
 </tbody>
 </table>
-
 <p>下表给出了日志记录的等级：</p>
-
 <table>
 <thead>
 <tr>
@@ -200,48 +187,39 @@
 <th align="center">数值</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td align="center">CRITICAL</td>
 <td align="center">50</td>
 </tr>
-
 <tr>
 <td align="center">ERROT</td>
 <td align="center">40</td>
 </tr>
-
 <tr>
 <td align="center">WARNING</td>
 <td align="center">30</td>
 </tr>
-
 <tr>
 <td align="center">INFO</td>
 <td align="center">20</td>
 </tr>
-
 <tr>
 <td align="center">DEBUG</td>
 <td align="center">10</td>
 </tr>
-
 <tr>
 <td align="center">NOTSET</td>
 <td align="center">0</td>
 </tr>
 </tbody>
 </table>
-
 <p>然而，默认情况下是 <code>WARNING</code>，这种情况下它会追踪此级别及以上级别的事件。</p>
-
 <p>可以以不同方式处理被跟踪的事件。处理跟踪事件的最简单方法是将它们打印到控制台，另一种常见方法是将它们写入磁盘文件。</p>
-
 <p>先来看一个简单的例子，首先导入 <code>logging</code> 模块，通过模块的 <code>basicConfig</code> 方法设置了日志文件的名称以及将跟踪阈值的日志记录级别设置为 <code>DEBUG</code>，最后输出三条日志信息，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -254,21 +232,16 @@
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;example.log&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;This message should go to the log file.&#39;</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;So should this&#39;</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;And this, too.&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;And this, too.&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>执行程序后会生成一个日志文件<code>example.log</code>，打开它就会看到日志信息，如下图：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/17/S7ekWRCm5lTQYEg.png" alt="image.png" />
-</center></p>
-
+</div><p>执行程序后会生成一个日志文件<code>example.log</code>，打开它就会看到日志信息，如下图：</p>
+<!-- raw HTML omitted -->
 <p>你可以看到，单单是输出了日志信息，而没有时间，不方便查看。接下来通过另一个例子将日志时间、日志等级等信息一起记录下来。</p>
-
 <p>下面的例子用于计算一元二次方程的根，计算完成后将日志记录下来，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -337,55 +310,40 @@
     <span class="k">return</span> <span class="n">root1</span><span class="p">,</span> <span class="n">root2</span>
 
 <span class="n">roots</span> <span class="o">=</span> <span class="n">quadratic_formula</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">(2.0, -2.0)</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">(2.0, -2.0)
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>同时，执行程序后会生成一个日志文件 <code>test.log</code>，打开它就会看到日志信息，如下图：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/17/tJoLSV5avfPQqI6.png" alt="image.png" />
-</center></p>
-
+</div><p>同时，执行程序后会生成一个日志文件 <code>test.log</code>，打开它就会看到日志信息，如下图：</p>
+<!-- raw HTML omitted -->
 <p>你可以看到，在有解的情况下不仅返回了方程的根，而且也将计算顺序以日志的形式保存了下来。</p>
-
 <p>下面我们给它一个无解的参数，看看它的日志文件会保存什么东西。修改下列语句：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">roots</span> <span class="o">=</span> <span class="n">quadratic_formula</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">roots</span> <span class="o">=</span> <span class="n">quadratic_formula</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>你可以看到控制台报错，同时日志文件如下图：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/17/retZHhspOjB7Mqw.png" alt="image.png" />
-</center></p>
-
+</div><p>你可以看到控制台报错，同时日志文件如下图：</p>
+<!-- raw HTML omitted -->
 <p>这是因为它在执行完 <code>logger.debug('# compute the two roots')</code> 这条语句之后就不再执行了，也就是我们修改的参数不满足方程根的求解。</p>
-
 <p>再最后一个例子，我们结合 <code>try-except-else-finally</code> 来说明 <code>logging</code> 的使用方法。</p>
-
 <p>对于不熟悉 <code>try-except-else-finally</code> 的同学，你可以看下面的图片：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/17/OMbCxVqyv8DSLrh.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>该例子用于统计打开一个文件所需要的时间，并将其记录在日志文件中，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -436,19 +394,14 @@
         <span class="n">dt</span> <span class="o">=</span> <span class="n">stop_time</span> <span class="o">-</span> <span class="n">start_time</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Time required for {file} = {time}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">dt</span><span class="p">))</span>
 
-<span class="n">path</span> <span class="o">=</span> <span class="n">read_file_timed</span><span class="p">(</span><span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge</span><span class="se">\\</span><span class="s1">google_stock_data.csv&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="n">path</span> <span class="o">=</span> <span class="n">read_file_timed</span><span class="p">(</span><span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge</span><span class="se">\\</span><span class="s1">google_stock_data.csv&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如果 <code>google_stock_data.csv</code> 文件存在的话，你可以看到日志文件中有如下内容：</p>
-
-<p><img src="https://i.loli.net/2019/11/17/mEBKOVzMkgurh5S.png" alt="image.png" /></p>
-
+</div><p>如果 <code>google_stock_data.csv</code> 文件存在的话，你可以看到日志文件中有如下内容：</p>
+<p><img src="https://i.loli.net/2019/11/17/mEBKOVzMkgurh5S.png" alt="image.png"></p>
 <p>如果打开一个不存在的文件，执行程序后，会出现如下的内容：</p>
-
-<p><img src="https://i.loli.net/2019/11/17/RZVXtNwKq1Bl95S.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2019/11/17/RZVXtNwKq1Bl95S.png" alt="image.png"></p>
 <p>好了，介绍完了。</p>
-
 <p>对于一个比较有意思的谷歌股票数据文件，你可以在 <a href="https://goo.gl/3zaUlD">这里</a> 下载。</p>
     </div>
 

@@ -6,7 +6,7 @@
     <description>Recent content on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 09 Jul 2020 21:24:02 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 09:23:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -17,7 +17,16 @@
       <pubDate>Sat, 16 Nov 2019 09:30:52 +0800</pubDate>
       
       <guid>http://localhost:1313/about/</guid>
-      <description>$ &amp;ldquo; Dare \; \; to \; \; dream, \; Dare \; \; to \; \; do \; ! \;&amp;rdquo; $ 关于我 硕士 / 计算机技术。 自身始终保持着对技术、书籍、写作的热爱。 学会学习，也要学会分享。 我会分享一</description>
+      <description>$ &#39;&amp;rsquo; Dare ; ; to ; ; dream, ; Dare ; ; to ; ; do ; ! ;&amp;rsquo;&amp;rsquo; $ 关于我 硕士 / 计算机技术。 自身始终保持着对技术、书籍、写作的热爱。 学会学习，也要学会分享。 我会分享一</description>
+    </item>
+    
+    <item>
+      <title>test</title>
+      <link>http://localhost:1313/2020/07/21/test/</link>
+      <pubDate>Tue, 21 Jul 2020 09:23:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/07/21/test/</guid>
+      <description>test!!!</description>
     </item>
     
     <item>
@@ -431,7 +440,7 @@
       <pubDate>Mon, 18 Nov 2019 15:32:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/11/18/java-memory-areas/</guid>
-      <description>&lt;p&gt;本篇文章是对 Java 内存区域的概述与总结，大部分参考自&lt;a href=&#34;https://book.douban.com/subject/24722612/&#34;&gt;《深入理解 Java 虚拟机》&lt;/a&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;，以及自己对这部分的理解。记性不好就先把它记下来，以便日后复习使用。如果能帮助到你的话最好了。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章是对 Java 内存区域的概述与总结，大部分参考自&lt;a href=&#34;https://book.douban.com/subject/24722612/&#34;&gt;《深入理解 Java 虚拟机》&lt;/a&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;，以及自己对这部分的理解。记性不好就先把它记下来，以便日后复习使用。如果能帮助到你的话最好了。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -575,9 +584,11 @@
       <pubDate>Sun, 12 May 2019 13:12:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/05/12/chrome-tips/</guid>
-      <description>&lt;p&gt;本篇文章主要介绍以下内容：
-1. 开启 Chrome 浏览器多线程下载；
-2. 加速 Youtube、Netflix 等流媒体视频播放。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章主要介绍以下内容：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;开启 Chrome 浏览器多线程下载；&lt;/li&gt;
+&lt;li&gt;加速 Youtube、Netflix 等流媒体视频播放。&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -694,19 +705,13 @@
       <pubDate>Tue, 25 Sep 2018 12:20:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/09/25/zhongqiuxiaoji/</guid>
-      <description>&lt;p&gt;&lt;center&gt;
-《望月怀远》&lt;/p&gt;
-
+      <description>&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;张九龄&lt;/p&gt;
-
 &lt;p&gt;海上生明月，天涯共此时。&lt;/p&gt;
-
 &lt;p&gt;情人怨遥夜，竟夕起相思。&lt;/p&gt;
-
 &lt;p&gt;灭烛怜光满，披衣觉露滋。&lt;/p&gt;
-
-&lt;p&gt;不堪盈手赠，还寝梦佳静。
-&lt;/center&gt;&lt;/p&gt;</description>
+&lt;p&gt;不堪盈手赠，还寝梦佳静。&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     
     <item>
@@ -734,8 +739,7 @@
       
       <guid>http://localhost:1313/2018/08/15/learning-python-Module/</guid>
       <description>&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Module/contents.png&#34; alt=&#34;Module-contents&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Module/contents.png&#34; alt=&#34;Module-contents&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -788,7 +792,7 @@
       <pubDate>Sun, 29 Jul 2018 15:17:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/29/main_function_of_c/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/C/main_function.png&#34; alt=&#34;main_function&#34; /&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/C/main_function.png&#34; alt=&#34;main_function&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -800,8 +804,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/ClassesAndObjects/contents.png&#34; alt=&#34;ClassesAndObjects-contents&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/ClassesAndObjects/contents.png&#34; alt=&#34;ClassesAndObjects-contents&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -813,8 +816,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/DataStructure/contents.png&#34; alt=&#34;DataStructure-contents&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/DataStructure/contents.png&#34; alt=&#34;DataStructure-contents&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -826,8 +828,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/VariableScope/contents.png&#34; alt=&#34;VariableScope-contents&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/VariableScope/contents.png&#34; alt=&#34;VariableScope-contents&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -839,8 +840,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Function/contents.png&#34; alt=&#34;Function-contents&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Function/contents.png&#34; alt=&#34;Function-contents&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -852,8 +852,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/IteratorsAndGenerators/contents.png&#34; alt=&#34;IteratorsAndGenerators-contents&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/IteratorsAndGenerators/contents.png&#34; alt=&#34;IteratorsAndGenerators-contents&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -865,8 +864,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/LoopStatement/contents.png&#34; alt=&#34;LoopStatement-contents&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/LoopStatement/contents.png&#34; alt=&#34;LoopStatement-contents&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -878,8 +876,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/ConditionalControl/contents.png&#34; alt=&#34;ConditionalControl-contents&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/ConditionalControl/contents.png&#34; alt=&#34;ConditionalControl-contents&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -891,8 +888,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Operator/contents.png&#34; alt=&#34;Operator-contents&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Operator/contents.png&#34; alt=&#34;Operator-contents&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -904,8 +900,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/BasicDataType/contents.png&#34; alt=&#34;BasicGrammar-contents&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/BasicDataType/contents.png&#34; alt=&#34;BasicGrammar-contents&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -917,8 +912,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;人生苦短，我用Python！&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/python-logo.png&#34; alt=&#34;Python-logo&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/python-logo.png&#34; alt=&#34;Python-logo&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -936,7 +930,7 @@
       <pubDate>Mon, 14 May 2018 21:41:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/05/14/Build-VPS/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/VPS/ShadowsocksR.jpg&#34; alt=&#34;ShadowsocksR&#34; /&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/VPS/ShadowsocksR.jpg&#34; alt=&#34;ShadowsocksR&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -955,7 +949,6 @@
       
       <guid>http://localhost:1313/2018/02/11/2017-summary/</guid>
       <description>&lt;p&gt;马上就快过年了，考完研后回到家一直没写东西，拖到现在&amp;hellip;&lt;/p&gt;
-
 &lt;p&gt;今天正好有时间，总结一下吧。&lt;/p&gt;</description>
     </item>
     
@@ -983,7 +976,7 @@
       <pubDate>Sun, 25 Jun 2017 12:13:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/25/LoopArray/</guid>
-      <description>&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;del&gt; 其实是复习周，不用上课哒&lt;/del&gt;，把那个给跳水运动员打分的程序写在这里。&lt;/p&gt;</description>
+      <description>&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;!-- raw HTML omitted --&gt; 其实是复习周，不用上课哒&lt;!-- raw HTML omitted --&gt;，把那个给跳水运动员打分的程序写在这里。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -993,7 +986,6 @@
       
       <guid>http://localhost:1313/2017/06/22/NetworkCabling-2/</guid>
       <description>&lt;p&gt;一般步骤：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;需求分析：根据各楼层各房间的用途，确定工作区人员数量；&lt;/li&gt;
 &lt;li&gt;与用户进行技术交流，分析业务需求；&lt;/li&gt;
@@ -1010,14 +1002,15 @@
       <pubDate>Thu, 22 Jun 2017 09:18:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/22/NetworkCabling-1/</guid>
-      <description>&lt;h1 id=&#34;1-每个楼层的用线计算公式&#34;&gt;1.每个楼层的用线计算公式&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34; /&gt;
-- C为每个楼层用线量
-- F为最远的信息插座离楼层管理间的距离
-- N为最近的信息插座离楼层管理间的距离
-- M为每层楼的信息插座的数量
-- 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;1每个楼层的用线计算公式&#34;&gt;1.每个楼层的用线计算公式&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;C为每个楼层用线量&lt;/li&gt;
+&lt;li&gt;F为最远的信息插座离楼层管理间的距离&lt;/li&gt;
+&lt;li&gt;N为最近的信息插座离楼层管理间的距离&lt;/li&gt;
+&lt;li&gt;M为每层楼的信息插座的数量&lt;/li&gt;
+&lt;li&gt;6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -1026,17 +1019,16 @@
       <pubDate>Mon, 19 Jun 2017 18:32:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/19/Query-the-database/</guid>
-      <description>&lt;h1 id=&#34;1-查询单个值&#34;&gt;1.查询单个值&lt;/h1&gt;
-
+      <description>&lt;h1 id=&#34;1查询单个值&#34;&gt;1.查询单个值&lt;/h1&gt;
 &lt;p&gt;SQL语言使用select进行查询。查询返回结果有多有少，通常来说，会返回多行多列的一个结果集。&lt;/p&gt;
-
-&lt;h2 id=&#34;示例1-查询单个值&#34;&gt;示例1：查询单个值&lt;/h2&gt;
+&lt;h2 id=&#34;示例1查询单个值&#34;&gt;示例1：查询单个值&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;	&lt;span class=&#34;n&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;student&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;	&lt;span class=&#34;n&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;student&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -1047,8 +1039,7 @@
       <pubDate>Mon, 19 Jun 2017 18:31:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/19/Modify-the-database/</guid>
-      <description>&lt;h1 id=&#34;1-连接数据库&#34;&gt;1.连接数据库&lt;/h1&gt;
-
+      <description>&lt;h1 id=&#34;1连接数据库&#34;&gt;1.连接数据库&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;应用程序（我们用C#编写的程序）与数据库程序（如SQL Server）是两个不同的程序，要想从应用程序中读取/修改数据库的数据，首先要建立二者的通信机制。为了在C#程序中使用（读取、修改等）数据库，必须首先连接到数据库。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -1060,12 +1051,14 @@
       <pubDate>Sat, 17 Jun 2017 17:21:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/17/File-and-directory-operations/</guid>
-      <description>&lt;p&gt;说明：
-&amp;gt; 1.文件是保存到磁盘上的数据的集合。
-&amp;gt; 2.流可以看作连续的字节序列，形成“流”。
-&amp;gt; 3.文件是一种流。
-&amp;gt; 4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
-&amp;gt; 5.使用流读/写器对流进行读取/写入操作。&lt;/p&gt;</description>
+      <description>&lt;p&gt;说明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.文件是保存到磁盘上的数据的集合。
+2.流可以看作连续的字节序列，形成“流”。
+3.文件是一种流。
+4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
+5.使用流读/写器对流进行读取/写入操作。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -1074,12 +1067,13 @@
       <pubDate>Fri, 16 Jun 2017 20:33:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/16/Menus-and-Messages/</guid>
-      <description>&lt;h1 id=&#34;1-显示新的窗体&#34;&gt;1.显示新的窗体&lt;/h1&gt;
-
-&lt;p&gt;步骤：
-- ①定义一个新窗体类型的变量
-- ②实例化新窗体变量
-- ③调用新窗体的Show方法显示&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;1显示新的窗体&#34;&gt;1.显示新的窗体&lt;/h1&gt;
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;①定义一个新窗体类型的变量&lt;/li&gt;
+&lt;li&gt;②实例化新窗体变量&lt;/li&gt;
+&lt;li&gt;③调用新窗体的Show方法显示&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -1088,12 +1082,12 @@
       <pubDate>Fri, 16 Jun 2017 10:32:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/16/GDI-ScreenDrawing/</guid>
-      <description>&lt;h1 id=&#34;1-绘画工具&#34;&gt;1.绘画工具&lt;/h1&gt;
-
-&lt;p&gt;画笔和画刷
-- 画笔Pens:细，画线条和轮廓；
-- 画刷Brushes:粗，填充闭合区域。&lt;/p&gt;
-
+      <description>&lt;h1 id=&#34;1绘画工具&#34;&gt;1.绘画工具&lt;/h1&gt;
+&lt;p&gt;画笔和画刷&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;画笔Pens:细，画线条和轮廓；&lt;/li&gt;
+&lt;li&gt;画刷Brushes:粗，填充闭合区域。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Graphics类
 通过 &lt;code&gt;控件名.createGraphics()&lt;/code&gt; 取得某控件的屏幕区域作为画布。&lt;/p&gt;</description>
     </item>
@@ -1108,7 +1102,7 @@
 示例：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
@@ -1121,9 +1115,9 @@
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;namespace MyForm
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;namespace MyForm
 {
 	static class Program
       {
@@ -1135,7 +1129,8 @@
                 Application.Run(new Form1());		//启动窗体
            }
       }
-}&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -1146,17 +1141,16 @@
       <pubDate>Wed, 14 Jun 2017 22:44:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/14/Console-program/</guid>
-      <description>&lt;h1 id=&#34;1-console类可实现输入输出功能&#34;&gt;1.Console类可实现输入输出功能&lt;/h1&gt;
-
-&lt;h1 id=&#34;2-write方法-控制台输出-屏幕输出&#34;&gt;2.Write方法：控制台输出(屏幕输出)&lt;/h1&gt;
-
+      <description>&lt;h1 id=&#34;1console类可实现输入输出功能&#34;&gt;1.Console类可实现输入输出功能&lt;/h1&gt;
+&lt;h1 id=&#34;2write方法控制台输出屏幕输出&#34;&gt;2.Write方法：控制台输出(屏幕输出)&lt;/h1&gt;
 &lt;p&gt;示例：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;n&#34;&gt;Console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“不明觉厉”&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;n&#34;&gt;Console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“不明觉厉”&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -1171,13 +1165,14 @@
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
 环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装DNS
-3.  创建正向查找区域
-4.  创建反向查找区域
-5.  测试&lt;/p&gt;</description>
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置虚拟机静态IP&lt;/li&gt;
+&lt;li&gt;安装DNS&lt;/li&gt;
+&lt;li&gt;创建正向查找区域&lt;/li&gt;
+&lt;li&gt;创建反向查找区域&lt;/li&gt;
+&lt;li&gt;测试&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -1190,14 +1185,15 @@
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
 环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装
-3.  创建个人目录
-4.  创建虚拟目录
-5.  创建虚拟主机
-6.  使用域名访问web服务器&lt;/p&gt;</description>
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置虚拟机静态IP&lt;/li&gt;
+&lt;li&gt;安装&lt;/li&gt;
+&lt;li&gt;创建个人目录&lt;/li&gt;
+&lt;li&gt;创建虚拟目录&lt;/li&gt;
+&lt;li&gt;创建虚拟主机&lt;/li&gt;
+&lt;li&gt;使用域名访问web服务器&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -1210,14 +1206,15 @@
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
 环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装Web服务器(IIS)，同时安装FTP服务器。
-3.  添加站点
-4.  用户名登录
-5.  下载、上传文件
-6.  隔离用户&lt;/p&gt;</description>
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置虚拟机静态IP&lt;/li&gt;
+&lt;li&gt;安装Web服务器(IIS)，同时安装FTP服务器。&lt;/li&gt;
+&lt;li&gt;添加站点&lt;/li&gt;
+&lt;li&gt;用户名登录&lt;/li&gt;
+&lt;li&gt;下载、上传文件&lt;/li&gt;
+&lt;li&gt;隔离用户&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -1229,7 +1226,6 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
 同时有两个软件包：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;
@@ -1249,15 +1245,16 @@
 &lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
 &lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;步骤：
-1. 修改虚拟机静态IP
-2.  安装DHCP包。
-    ·dhcp:DHCP服务器安装包（在第二张镜像中）
-    ·dhclient:DHCP客户端软件包（在第一张镜像中）
-    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
-3.  修改配置文件
-4.  启动服务，并测试&lt;/p&gt;</description>
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;修改虚拟机静态IP&lt;/li&gt;
+&lt;li&gt;安装DHCP包。
+·dhcp:DHCP服务器安装包（在第二张镜像中）
+·dhclient:DHCP客户端软件包（在第一张镜像中）
+·dhcp-devel:DHCP开发工具（在第二张镜像中）&lt;/li&gt;
+&lt;li&gt;修改配置文件&lt;/li&gt;
+&lt;li&gt;启动服务，并测试&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -1270,12 +1267,13 @@
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
 环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装DHCP
-3.  配置DHCP
-4.  测试&lt;/p&gt;</description>
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置虚拟机静态IP&lt;/li&gt;
+&lt;li&gt;安装DHCP&lt;/li&gt;
+&lt;li&gt;配置DHCP&lt;/li&gt;
+&lt;li&gt;测试&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -1284,11 +1282,9 @@
       <pubDate>Fri, 02 Jun 2017 21:41:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/02/Linux-WebServer/</guid>
-      <description>&lt;hr /&gt;
-
+      <description>&lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;2017/6/6 [更新]基于端口的虚拟主机&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;</description>
+&lt;hr&gt;</description>
     </item>
     
     <item>
@@ -1298,7 +1294,6 @@
       
       <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
       <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
@@ -1310,7 +1305,6 @@
       <guid>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</guid>
       <description>&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
 同时有三个软件包：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;

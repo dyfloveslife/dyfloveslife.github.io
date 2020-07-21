@@ -21,14 +21,15 @@
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
 环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装Web服务器(IIS)，同时安装FTP服务器。
-3.  添加站点
-4.  用户名登录
-5.  下载、上传文件
-6.  隔离用户&lt;/p&gt;</description>
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置虚拟机静态IP&lt;/li&gt;
+&lt;li&gt;安装Web服务器(IIS)，同时安装FTP服务器。&lt;/li&gt;
+&lt;li&gt;添加站点&lt;/li&gt;
+&lt;li&gt;用户名登录&lt;/li&gt;
+&lt;li&gt;下载、上传文件&lt;/li&gt;
+&lt;li&gt;隔离用户&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -38,7 +39,6 @@
       
       <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
       <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     

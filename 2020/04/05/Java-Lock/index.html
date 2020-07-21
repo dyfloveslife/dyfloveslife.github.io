@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-04-05T18:35:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-06T19:50:11&#43;08:00" />
-<meta itemprop="wordCount" content="7205">
+<meta itemprop="wordCount" content="8176">
 
 
 
@@ -136,8 +136,8 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 7205 words </span>
-          <span class="more-meta"> 15 mins read </span>
+          <span class="more-meta"> 8176 words </span>
+          <span class="more-meta"> 17 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -203,6 +203,8 @@
 <li><strong>synchronized 是 Java 的关键字，因此是 Java 的内置特性，是基于 JVM 层面实现的，其经过编译之后，会在同步块的前后分别形成 monitorenter 和 monitorexit 两个字节码指令；而 Lock 是一个 Java 接口，是基于 JDK 层面实现的，通过这个接口可以实现同步访问；</strong></li>
 <li><strong>采用 synchronized 方式不需要用户去手动释放锁，当 synchronized 方法或者 synchronized 代码块执行完之后，系统会自动让线程释放对锁的占用；而 Lock 则必须要用户去手动释放锁 (发生异常时，不会自动释放锁)，如果没有主动释放锁，就有可能导致死锁现象。</strong></li>
 </ul>
+
+<p>详细的区别，请见 <a href="https://dyfloveslife.github.io/2020/05/07/Java-ReentrantLock/">《Java 中的 ReentrantLock》</a> 一文。</p>
 
 <h1 id="lock-接口">Lock 接口</h1>
 
@@ -978,6 +980,10 @@
 
 <h1 id="readwritelock">ReadWriteLock</h1>
 
+<p>在<font color='red'>读多写少</font>的场景下，我们更加希望允许多个线程同时读，但只要有一个线程在写，那么其它线程就必须等待。ReadWriteLock 适用于这种场景下的问题，它只允许一个线程执行写操作，其它线程不能写也不能读。另外，在没有写操作时，它可以允许多个线程同时读，这样就提高了性能。</p>
+
+<p><font color='red'>换句话说，ReadWriteLock 管理了一组锁，一个是只读的锁，一个是写锁。读锁可以在没有写锁的情况下被多个线程持有，而写锁是独占的。每次只能有一个写线程，但是同时可以有多个线程并发的读数据。</font></p>
+
 <p>ReadWriteLock 接口中定义了连两个方法，分别用于获取读锁和获取写锁。即对临界资源的读写操作分成两个锁来分配给线程，从而使多个线程可以进行读操作。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1017,11 +1023,37 @@
 </div>
 <h1 id="reentrantreadwritelock">ReentrantReadWriteLock</h1>
 
-<p>ReentrantLock 具有排他性，是一种排他锁。即同一时刻只允许一个线程访问，这样做虽然保证了线程安全，但效率很低。ReentrantLock 接口的实现类 ReentrantReadWriteLock 读写锁解决了这个问题，其提供了许多方法，但最主要的是：readLock() 和 writeLock() 方法。同时，ReentrantReadWriteLock 类实现了 ReadWriteLock、java.io.Serializable 接口。</p>
+<p>ReentrantLock 具有排他性，是一种排他锁。即同一时刻只允许一个线程访问，这样做虽然保证了线程安全，但效率很低。ReentrantLock 接口的实现类 ReentrantReadWriteLock 这一读写锁解决了这个问题，其提供了许多方法，但最主要的是 readLock() 和 writeLock() 方法。</p>
+
+<p>同时，ReentrantReadWriteLock 类实现了 ReadWriteLock 接口、Serializable 接口，因此曾加了可重入的特性。</p>
 
 <p><center>
 <img src="https://i.loli.net/2020/04/06/IsbtJKZyQpfGd2m.png" alt="image.png" />
 </center></p>
+
+<p>通过 ReentrantReadWriteLock 的构造器可以看出，它支持公平锁和非公平锁。执行顺序是：</p>
+
+<ul>
+<li>默认以非公平锁的方式执行，此状态下的读锁和写锁的获取顺序是不确定的。非公平锁主张竞争获取，可能会延缓一个或多个读线程或写线程，但是非公平锁比公平锁具有更高的吞吐量。（详细请参见文章<a href="https://dyfloveslife.github.io/2020/05/07/Java-ReentrantLock/">《Java 中的 ReentrantLock》</a>中公平锁与非公平锁的对比）</li>
+<li>公平锁，当处于公平模式初始化时，线程将会以队列的顺序获取锁。如果当前线程将锁释放了，那么接下来等待时间最长的写锁线程就会被分配写锁；或者有一组<code>读线程组</code>，它的等待时间比写线程长，那么这组<code>读线程组</code>将会被分配读锁。
+
+<ul>
+<li>当有写线程持有写锁（或者有等待的写锁时），一个尝试获取公平的读锁线程就会被阻塞。这个线程直到等待时间最长的写锁获得锁后并释放后，才能获取到读锁。</li>
+</ul></li>
+</ul>
+
+<p>此外，ReentrantReadWriteLock 还具有以下特性：</p>
+
+<ul>
+<li>可重入：一个线程在获取某个锁后，还可以继续获取该锁，即允许一个线程可以多次获取同一个锁。但需要注意的是，获取多少次锁，就需要释放多少次锁，知道该线程的加锁次数为 0，否则会发生死锁的情况。</li>
+<li>锁降级：线程获取写锁后可以获取读锁，此时如果释放了写锁，那么就从写锁变成了读锁，从而实现了锁的降级。但不支持锁升级。
+
+<ul>
+<li>锁升级：在一个线程中，在没有释放读锁的情况下就去申请写锁，这属于锁升级。这是不支持的，因为读锁不能直接升级为写锁，只有将所有的读锁释放以后，才能获取写锁。换句话说，因为当获取一个写锁的时候需要释放所有的读锁，如果有两个读锁试图获取写锁而不释放读锁的话，就可能会发生死锁的情况。</li>
+</ul></li>
+<li>支持锁中断：读锁和写锁都支持获取锁期间被中断。</li>
+<li>支持 Condition：写锁（WriteLock）支持 Condition 的实现，即 newCondition()。</li>
+</ul>
 
 <p><strong>独享锁</strong>也叫<strong>排他锁</strong>，指该锁当前只能被一个线程所持有。如果某个线程对某数据加上排他锁后，则其它线程不能再对该数据加任意类型的锁。获得排他锁的线程既能读取数据也能修改数据，也就是说既能执行读操作也能执行写操作。</p>
 

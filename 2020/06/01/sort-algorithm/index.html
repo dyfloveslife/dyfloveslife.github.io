@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-06-01T08:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-01T08:09:56&#43;08:00" />
-<meta itemprop="wordCount" content="9373">
+<meta itemprop="wordCount" content="9376">
 
 
 
@@ -136,7 +136,7 @@
         <div class="post-category">
             <a href="/categories/Algorithm/"> Algorithm </a>
             </div>
-          <span class="more-meta"> 9373 words </span>
+          <span class="more-meta"> 9376 words </span>
           <span class="more-meta"> 19 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -358,7 +358,7 @@
 
 <h1 id="插入排序">插入排序</h1>
 
-<p>插入排序的核心思是：每一步将一个待排序的元素插入到已经排好序的有序序列中去，直到插完所有元素为止。如何插呢？插入排序每次对第 $k$个元素进行排序，此前的 $k-1$ 个已经是从小到大排好序的。在插入的时候从后往前遍历已排好序的序列，找到第一个小于当前元素的位置<code>i</code>，那么当前元素的位置就应该放在<code>i</code>的后面。</p>
+<p>插入排序的核心思是：每一步将一个待排序的元素插入到已经排好序的有序序列中去，直到插完所有元素为止。如何插呢？插入排序每次对第 $k$ 个元素进行排序，此前的 $k-1$ 个已经是从小到大排好序的。在插入的时候从后往前遍历已排好序的序列，找到第一个小于当前元素的位置<code>i</code>，那么当前元素的位置就应该放在<code>i</code>的后面。</p>
 
 <p>类似于我们平时打扑克牌，向已经排好序的牌中插入一个新的牌，只不过需要从后往前比较而已。其实这里的<code>插入</code>操作也是通过元素交换进行实现的。如下所示：</p>
 <div class="highlight"><div class="chroma">
@@ -396,7 +396,7 @@
 </span><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// j 先来到已排序序列的末尾元素，如果前面的数比后面的数大的话，则需要交换
 </span><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="err">int j </span><span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">0</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="n">1</span><span class="p">];</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span><span class="n">1</span><span class="p">);</span>
+            <span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="n">1</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
@@ -445,7 +445,7 @@
     <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// 右手摸到一个牌，准备将它插入到已排序数组中
 </span><span class="c1"></span>        <span class="err">int get </span><span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-        <span class="c1">// j 的位置是已排序数组的最后一个位置，也就是左手中的牌
+        <span class="c1">// j 的位置是已排序数组的最后一个位置，也就是左手中最大的那张牌
 </span><span class="c1"></span>        <span class="err">int j </span><span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">;</span>
         <span class="c1">// 将抓到的牌与手牌进行从右往左的比较
 </span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">0</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">get</span><span class="p">)</span> <span class="p">{</span>

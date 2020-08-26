@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 09 Jul 2020 21:24:02 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 26 Aug 2020 19:21:02 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>最短路径问题</title>
+      <link>http://localhost:1313/2020/08/26/alg-Shortest-Path-Problem/</link>
+      <pubDate>Wed, 26 Aug 2020 19:21:02 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/08/26/alg-Shortest-Path-Problem/</guid>
+      <description>&lt;p&gt;最近在参加秋招，笔试的过程中发现又不少公司喜欢考最短路径问题，例如完美世界、大疆等。现在再来总结复习一下这些板子题，希望下次再遇到这种类型的题之也后能 AC。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>算法题：恢复空格</title>

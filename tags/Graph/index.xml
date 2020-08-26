@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>LeetCode on Carol&#39;s blog</title>
-    <link>http://localhost:1313/tags/LeetCode/</link>
-    <description>Recent content in LeetCode on Carol&#39;s blog</description>
+    <title>Graph on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/Graph/</link>
+    <description>Recent content in Graph on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 26 Aug 2020 19:21:02 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/LeetCode/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/tags/Graph/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>http://localhost:1313/2020/08/26/alg-Shortest-Path-Problem/</guid>
       <description>&lt;p&gt;最近在参加秋招，笔试的过程中发现又不少公司喜欢考最短路径问题，例如完美世界、大疆等。现在再来总结复习一下这些板子题，希望下次再遇到这种类型的题之也后能 AC。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>算法题：恢复空格</title>
-      <link>http://localhost:1313/2020/07/09/alg-re-space-LCCI/</link>
-      <pubDate>Thu, 09 Jul 2020 21:24:02 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2020/07/09/alg-re-space-LCCI/</guid>
-      <description>&lt;p&gt;本文详细解释《程序员面试金典》中的&lt;a href=&#34;https://leetcode-cn.com/problems/re-space-lcci/&#34;&gt;《恢复空格》&lt;/a&gt;一题。&lt;/p&gt;</description>
     </item>
     
   </channel>

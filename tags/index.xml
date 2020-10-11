@@ -462,15 +462,6 @@
     </item>
     
     <item>
-      <title>文章汇总</title>
-      <link>http://localhost:1313/tags/%E6%96%87%E7%AB%A0%E6%B1%87%E6%80%BB/</link>
-      <pubDate>Sun, 12 Jan 2020 17:12:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/tags/%E6%96%87%E7%AB%A0%E6%B1%87%E6%80%BB/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Josephus</title>
       <link>http://localhost:1313/tags/Josephus/</link>
       <pubDate>Fri, 27 Dec 2019 09:02:11 +0800</pubDate>

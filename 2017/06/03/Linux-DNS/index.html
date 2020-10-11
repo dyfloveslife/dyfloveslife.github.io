@@ -16,8 +16,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content=" 说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。 同时有两个软件包：
- shrike-i386-disc1.iso shrike-i386-disc2.iso  " /><meta name="keywords" content="Java, blog, carol" />
+<meta name="author" content="Carol" /><meta name="description" content=" 说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
+ 有两个软件包：
+shrike-i386-disc1.iso、shrike-i386-disc2.iso。
+" /><meta name="keywords" content="Java, blog, carol" />
 
 
 
@@ -42,13 +44,11 @@
 <meta property="og:title" content="Linux 环境下配置 DNS 服务器" />
 <meta property="og:description" content="
 说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
-同时有两个软件包：
 
 
-shrike-i386-disc1.iso
-shrike-i386-disc2.iso
+有两个软件包：
 
-" />
+shrike-i386-disc1.iso、shrike-i386-disc2.iso。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2017/06/03/Linux-DNS/" />
 <meta property="article:published_time" content="2017-06-03T13:24:11+08:00" />
@@ -56,18 +56,16 @@ shrike-i386-disc2.iso
 <meta itemprop="name" content="Linux 环境下配置 DNS 服务器">
 <meta itemprop="description" content="
 说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
-同时有两个软件包：
 
 
-shrike-i386-disc1.iso
-shrike-i386-disc2.iso
+有两个软件包：
 
-">
+shrike-i386-disc1.iso、shrike-i386-disc2.iso。">
 
 
 <meta itemprop="datePublished" content="2017-06-03T13:24:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="1364">
+<meta itemprop="wordCount" content="1341">
 
 
 
@@ -76,13 +74,11 @@ shrike-i386-disc2.iso
 <meta name="twitter:title" content="Linux 环境下配置 DNS 服务器"/>
 <meta name="twitter:description" content="
 说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
-同时有两个软件包：
 
 
-shrike-i386-disc1.iso
-shrike-i386-disc2.iso
+有两个软件包：
 
-"/>
+shrike-i386-disc1.iso、shrike-i386-disc2.iso。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -156,7 +152,7 @@ shrike-i386-disc2.iso
         <div class="post-category">
             <a href="/categories/Linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 1364 words </span>
+          <span class="more-meta"> 1341 words </span>
           <span class="more-meta"> 3 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -170,15 +166,15 @@ shrike-i386-disc2.iso
 <li><a href="#概述">概述</a></li>
 <li><a href="#一-安装">一、安装</a>
 <ul>
-<li><a href="#1-挂载第一张镜像-安装-bind">1.挂载第一张镜像，安装 bind</a></li>
-<li><a href="#2-挂载第二张镜像-安装-caching">2.挂载第二张镜像，安装 caching</a></li>
+<li><a href="#1-挂载第一张镜像-安装-bind">1. 挂载第一张镜像，安装 bind</a></li>
+<li><a href="#2-挂载第二张镜像-安装-caching">2. 挂载第二张镜像，安装 caching</a></li>
 </ul></li>
 <li><a href="#二-配置-dns">二、配置 dns</a>
 <ul>
-<li><a href="#1-配置虚拟机静态ip">1.配置虚拟机静态IP</a></li>
-<li><a href="#2-修改-etc-named-conf-配置文件">2.修改 /etc/named.conf 配置文件</a></li>
-<li><a href="#3-在-var-named-下新建正向和反向解析文件-并修改配置信息">3.在 /var/named 下新建正向和反向解析文件，并修改配置信息</a></li>
-<li><a href="#4-启动-named-服务-检测-dns-是否配置成功">4.启动 named 服务，检测 DNS 是否配置成功</a></li>
+<li><a href="#1-配置虚拟机静态-ip">1. 配置虚拟机静态 IP</a></li>
+<li><a href="#2-修改-etc-named-conf-配置文件">2. 修改 /etc/named.conf 配置文件</a></li>
+<li><a href="#3-在-var-named-下新建正向和反向解析文件-并修改配置信息">3. 在 /var/named 下新建正向和反向解析文件，并修改配置信息</a></li>
+<li><a href="#4-启动-named-服务-检测-dns-是否配置成功">4. 启动 named 服务，检测 DNS 是否配置成功</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -186,14 +182,12 @@ shrike-i386-disc2.iso
 </div>
     <div class="post-content">
       <blockquote>
-<p>说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
-同时有两个软件包：</p>
-
-<ul>
-<li><strong>shrike-i386-disc1.iso</strong></li>
-<li><strong>shrike-i386-disc2.iso</strong></li>
-</ul>
+<p>说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。</p>
 </blockquote>
+
+<p>有两个软件包：</p>
+
+<p><strong>shrike-i386-disc1.iso、shrike-i386-disc2.iso。</strong></p>
 
 <h1 id="概述">概述</h1>
 
@@ -227,20 +221,18 @@ shrike-i386-disc2.iso
 <p>步骤：</p>
 
 <ol>
-<li><p>软件包的安装（bind 和 caching）</p></li>
-
-<li><p>配置DNS</p>
+<li>软件包的安装（bind 和 caching）；</li>
+<li>配置 DNS
 
 <ul>
-<li>2.1 配置虚拟机静态IP</li>
-<li>2.2 修改 /etc/named.conf 配置文件</li>
-<li>2.3 在 /var/named 下新建正向和反向解析文件，并修改配置信息</li>
+<li>2.1 配置虚拟机静态 IP；</li>
+<li>2.2 修改<code>/etc/named.conf</code>配置文件；</li>
+<li>2.3 在<code>/var/named</code>下新建正向和反向解析文件，并修改配置信息；</li>
 </ul></li>
-
-<li><p>启动 named 服务，检测 DNS 是否配置成功</p></li>
+<li>启动 named 服务，检测 DNS 是否配置成功。</li>
 </ol>
 
-<h2 id="1-挂载第一张镜像-安装-bind">1.挂载第一张镜像，安装 bind</h2>
+<h2 id="1-挂载第一张镜像-安装-bind">1. 挂载第一张镜像，安装 bind</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -248,12 +240,12 @@ shrike-i386-disc2.iso
 </span><span class="lnt">3
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">mount /dev/cdrom /mnt/cdrom			//挂载镜像
-cd /mnt/cdrom/RedHat/RPMS			//进入软件包目录
-rpm -ivh bind-9.2.1-16.i386.rpm			//安装</pre></td></tr></table>
+<pre class="chroma">mount /dev/cdrom /mnt/cdrom		//挂载镜像
+cd /mnt/cdrom/RedHat/RPMS		//进入软件包目录
+rpm -ivh bind-9.2.1-16.i386.rpm		//安装</pre></td></tr></table>
 </div>
 </div>
-<h2 id="2-挂载第二张镜像-安装-caching">2.挂载第二张镜像，安装 caching</h2>
+<h2 id="2-挂载第二张镜像-安装-caching">2. 挂载第二张镜像，安装 caching</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -264,9 +256,9 @@ rpm -ivh bind-9.2.1-16.i386.rpm			//安装</pre></td></tr></table>
 </div>
 <h1 id="二-配置-dns">二、配置 dns</h1>
 
-<h2 id="1-配置虚拟机静态ip">1.配置虚拟机静态IP</h2>
+<h2 id="1-配置虚拟机静态-ip">1. 配置虚拟机静态 IP</h2>
 
-<p>左下角 &ldquo;主菜单&rdquo;-&gt;&ldquo;系统设置&rdquo;—&gt;&ldquo;网络&rdquo;，双击设备&rdquo;eth0&rdquo;。</p>
+<p>左下角<code>主菜单</code>→<code>系统设置</code>→<code>网络</code>，双击设备<code>eth0</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -274,12 +266,12 @@ rpm -ivh bind-9.2.1-16.i386.rpm			//安装</pre></td></tr></table>
 </span><span class="lnt">3
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">IP地址：192.168.1.2
+<pre class="chroma">IP 地址：192.168.1.2
 子网掩码：255.255.255.0
 默认网关地址：192.168.1.254</pre></td></tr></table>
 </div>
 </div>
-<p>在 &ldquo;DNS&rdquo; 选项卡下，修改 &ldquo;主 DNS&rdquo; 为：192.168.1.2，最后单击&rdquo;激活&rdquo;。</p>
+<p>在<code>DNS</code>选项卡下，修改<code>主 DNS</code>为：192.168.1.2，最后单击<code>激活</code>。</p>
 
 <p>如果配置静态 IP 不成功，则需要修改网卡配置文件。(前面加上<code>#</code>即可)位置为：<code>/etc/sysconfig/network-scripts/ifup</code> 文件。如下图：</p>
 
@@ -287,7 +279,7 @@ rpm -ivh bind-9.2.1-16.i386.rpm			//安装</pre></td></tr></table>
 
 <p>修改完后，再执行 <code>service network restart</code> 即可。</p>
 
-<h2 id="2-修改-etc-named-conf-配置文件">2.修改 /etc/named.conf 配置文件</h2>
+<h2 id="2-修改-etc-named-conf-配置文件">2. 修改 /etc/named.conf 配置文件</h2>
 
 <p>在末尾添加配置信息即可。</p>
 
@@ -316,7 +308,7 @@ rpm -ivh bind-9.2.1-16.i386.rpm			//安装</pre></td></tr></table>
 };</pre></td></tr></table>
 </div>
 </div>
-<h2 id="3-在-var-named-下新建正向和反向解析文件-并修改配置信息">3.在 /var/named 下新建正向和反向解析文件，并修改配置信息</h2>
+<h2 id="3-在-var-named-下新建正向和反向解析文件-并修改配置信息">3. 在 /var/named 下新建正向和反向解析文件，并修改配置信息</h2>
 
 <blockquote>
 <p>也可直接复制该目录下的 localhost.zone 文件，然后修改配置。</p>
@@ -374,7 +366,7 @@ www IN A    192.168.1.2
 2   PTR     dns.bzu.com.</pre></td></tr></table>
 </div>
 </div>
-<h2 id="4-启动-named-服务-检测-dns-是否配置成功">4.启动 named 服务，检测 DNS 是否配置成功</h2>
+<h2 id="4-启动-named-服务-检测-dns-是否配置成功">4. 启动 named 服务，检测 DNS 是否配置成功</h2>
 
 <p>在终端键入命令：</p>
 <div class="highlight"><div class="chroma">

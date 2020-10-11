@@ -27,14 +27,12 @@
       
       <guid>http://localhost:1313/2017/06/03/Linux-DNS/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
-同时有两个软件包：&lt;/p&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;</description>
+&lt;p&gt;有两个软件包：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso、shrike-i386-disc2.iso。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -44,20 +42,12 @@
       
       <guid>http://localhost:1313/2017/06/03/Linux-DHCP/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
-用到两个软件包：
-&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
-&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;步骤：
-1. 修改虚拟机静态IP
-2.  安装DHCP包。
-    ·dhcp:DHCP服务器安装包（在第二张镜像中）
-    ·dhclient:DHCP客户端软件包（在第一张镜像中）
-    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
-3.  修改配置文件
-4.  启动服务，并测试&lt;/p&gt;</description>
+&lt;p&gt;用到两个软件包：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;、&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -66,11 +56,7 @@
       <pubDate>Fri, 02 Jun 2017 21:41:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/02/Linux-WebServer/</guid>
-      <description>&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;2017/6/6 [更新]基于端口的虚拟主机&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;</description>
+      <description>&lt;p&gt;&lt;strong&gt;2017/6/6 [更新]基于端口的虚拟主机&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -79,9 +65,9 @@
       <pubDate>Thu, 01 Jun 2017 22:43:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以访问。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

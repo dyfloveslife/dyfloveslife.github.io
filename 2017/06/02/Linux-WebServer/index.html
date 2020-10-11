@@ -40,37 +40,25 @@
 
 
 <meta property="og:title" content="Linux 环境下配置 Web 服务器" />
-<meta property="og:description" content="
-
-2017/6/6 [更新]基于端口的虚拟主机
-
-" />
+<meta property="og:description" content="2017/6/6 [更新]基于端口的虚拟主机" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2017/06/02/Linux-WebServer/" />
 <meta property="article:published_time" content="2017-06-02T21:41:11+08:00" />
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="Linux 环境下配置 Web 服务器">
-<meta itemprop="description" content="
-
-2017/6/6 [更新]基于端口的虚拟主机
-
-">
+<meta itemprop="description" content="2017/6/6 [更新]基于端口的虚拟主机">
 
 
 <meta itemprop="datePublished" content="2017-06-02T21:41:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="897">
+<meta itemprop="wordCount" content="862">
 
 
 
 <meta itemprop="keywords" content="Linux,Web Server," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux 环境下配置 Web 服务器"/>
-<meta name="twitter:description" content="
-
-2017/6/6 [更新]基于端口的虚拟主机
-
-"/>
+<meta name="twitter:description" content="2017/6/6 [更新]基于端口的虚拟主机"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -144,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/Linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 897 words </span>
+          <span class="more-meta"> 862 words </span>
           <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -155,56 +143,53 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#一-安装">一、安装</a>
+<li><a href="#一-安装">一. 安装</a>
 <ul>
-<li><a href="#1-挂载第一张镜像-安装httpd和httpd-manual">1.挂载第一张镜像，安装httpd和httpd-manual。</a></li>
-<li><a href="#2-开启服务-并测试是否可用">2.开启服务，并测试是否可用。</a></li>
+<li><a href="#1-挂载第一张镜像-安装-httpd-和-httpd-manual">1. 挂载第一张镜像，安装 httpd 和 httpd-manual</a></li>
+<li><a href="#2-开启服务-并测试是否可用">2. 开启服务，并测试是否可用</a></li>
 </ul></li>
-<li><a href="#二-创建个人web站点">二.创建个人Web站点</a>
+<li><a href="#二-创建个人web站点">二. 创建个人Web站点</a>
 <ul>
-<li><a href="#1-新建用户-修改默认主路径的权限">1.新建用户，修改默认主路径的权限</a></li>
-<li><a href="#2-修改配置文件">2.修改配置文件</a></li>
-<li><a href="#3-测试">3.测试</a></li>
+<li><a href="#1-新建用户-修改默认主路径的权限">1. 新建用户，修改默认主路径的权限</a></li>
+<li><a href="#2-修改配置文件">2. 修改配置文件</a></li>
+<li><a href="#3-测试">3. 测试</a></li>
 </ul></li>
-<li><a href="#三-创建虚拟目录">三.创建虚拟目录</a>
+<li><a href="#三-创建虚拟目录">三. 创建虚拟目录</a>
 <ul>
-<li><a href="#1-创建目录-设置首页信息">1.创建目录，设置首页信息</a></li>
-<li><a href="#2-修改文件">2.修改文件</a></li>
-<li><a href="#3-测试-1">3.测试</a></li>
+<li><a href="#1-创建目录-设置首页信息">1. 创建目录，设置首页信息</a></li>
+<li><a href="#2-修改文件">2. 修改文件</a></li>
+<li><a href="#3-测试-1">3. 测试</a></li>
 </ul></li>
-<li><a href="#四-基于域名的虚拟主机">四.基于域名的虚拟主机</a></li>
-<li><a href="#五-基于端口的虚拟主机">五.基于端口的虚拟主机</a></li>
+<li><a href="#四-基于域名的虚拟主机">四. 基于域名的虚拟主机</a></li>
+<li><a href="#五-基于端口的虚拟主机">五. 基于端口的虚拟主机</a></li>
 </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <hr />
-
-<p><strong>2017/6/6 [更新]基于端口的虚拟主机</strong></p>
-
-<hr />
+      <p><strong>2017/6/6 [更新]基于端口的虚拟主机</strong></p>
 
 <blockquote>
-<p>说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
-软件包：<strong>shrike-i386-disc1.iso</strong>
-步骤：
-1. Httpd包的安装（包括httpd和httpd-manual）
-2. 创建个人web站点
-3. 创建虚拟目录
-4. 基于域名的虚拟主机
-5. 基于端口的虚拟主机</p>
+<p>说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。</p>
+
+<p>软件包：<strong>shrike-i386-disc1.iso</strong></p>
 </blockquote>
 
-<hr />
+<p>步骤：</p>
+
+<ol>
+<li>Httpd包的安装（包括httpd和httpd-manual）</li>
+<li>创建个人web站点</li>
+<li>创建虚拟目录</li>
+<li>基于域名的虚拟主机</li>
+<li>基于端口的虚拟主机</li>
+</ol>
 
 <p><strong>注意：先配置虚拟机静态IP。（本次为：192.168.1.2）</strong></p>
 
-<hr />
+<h1 id="一-安装">一. 安装</h1>
 
-<h1 id="一-安装">一、安装</h1>
-
-<h2 id="1-挂载第一张镜像-安装httpd和httpd-manual">1.挂载第一张镜像，安装httpd和httpd-manual。</h2>
+<h2 id="1-挂载第一张镜像-安装-httpd-和-httpd-manual">1. 挂载第一张镜像，安装 httpd 和 httpd-manual</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -213,13 +198,13 @@
 </span><span class="lnt">4
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">mount /dev/cdrom /mnt/cdrom			//挂载镜像
-cd /mnt/cdrom/RedHar/RPMS			//进入软件包目录
+<pre class="chroma">mount /dev/cdrom /mnt/cdrom	//挂载镜像
+cd /mnt/cdrom/RedHar/RPMS	//进入软件包目录
 rpm -ivh httpd-2.0.40-21.i386.rpm
 rpm -ivh httpd-manual-2.0.40-21.i386.rpm</pre></td></tr></table>
 </div>
 </div>
-<h2 id="2-开启服务-并测试是否可用">2.开启服务，并测试是否可用。</h2>
+<h2 id="2-开启服务-并测试是否可用">2. 开启服务，并测试是否可用</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -228,9 +213,9 @@ rpm -ivh httpd-manual-2.0.40-21.i386.rpm</pre></td></tr></table>
 <pre class="chroma">service httpd start</pre></td></tr></table>
 </div>
 </div>
-<p>在浏览器输入： <code>192.168.1.2</code>
-出现如下界面即可：
-<img src="/images/web1.png" alt="web" /></p>
+<p>在浏览器输入： <code>192.168.1.2</code>，出现如下界面即可：</p>
+
+<p><img src="/images/web1.png" alt="web" /></p>
 
 <p>然在 <code>/var/www/html</code> 下，新建index.html，写入 <code>Hello World!</code> 等随意字符。重启服务后，再打开浏览器，查看效果。</p>
 <div class="highlight"><div class="chroma">
@@ -243,12 +228,13 @@ rpm -ivh httpd-manual-2.0.40-21.i386.rpm</pre></td></tr></table>
 service httpd restart</pre></td></tr></table>
 </div>
 </div>
-<p>如下图：
-<img src="/images/web2.png" alt="web" /></p>
+<p>如下图：</p>
 
-<h1 id="二-创建个人web站点">二.创建个人Web站点</h1>
+<p><img src="/images/web2.png" alt="web" /></p>
 
-<h2 id="1-新建用户-修改默认主路径的权限">1.新建用户，修改默认主路径的权限</h2>
+<h1 id="二-创建个人web站点">二. 创建个人Web站点</h1>
+
+<h2 id="1-新建用户-修改默认主路径的权限">1. 新建用户，修改默认主路径的权限</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -259,7 +245,7 @@ service httpd restart</pre></td></tr></table>
 </span><span class="lnt">6
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">useradd dyf			//假设用户名为：dyf
+<pre class="chroma">useradd dyf		// 假设用户名为：dyf
 passwd 	dyf
 chmod 711 /home/dyf
 cd /home/dyf
@@ -267,19 +253,19 @@ mkdir public_html
 chown dyf:dyf public_html</pre></td></tr></table>
 </div>
 </div>
-<h2 id="2-修改配置文件">2.修改配置文件</h2>
+<h2 id="2-修改配置文件">2. 修改配置文件</h2>
 
-<p>在 <code>/etc/httpd/conf</code> 中的 <code>httpd.conf</code> 文件。
-如下图：
-<img src="/images/web3.png" alt="web" /></p>
+<p>在 <code>/etc/httpd/conf</code> 中的 <code>httpd.conf</code> 文件。如下图：</p>
 
-<h2 id="3-测试">3.测试</h2>
+<p><img src="/images/web3.png" alt="web" /></p>
+
+<h2 id="3-测试">3. 测试</h2>
 
 <p>重启服务，并在浏览器输入 <code>192.168.1.2/~dyf</code> 即可。</p>
 
-<h1 id="三-创建虚拟目录">三.创建虚拟目录</h1>
+<h1 id="三-创建虚拟目录">三. 创建虚拟目录</h1>
 
-<h2 id="1-创建目录-设置首页信息">1.创建目录，设置首页信息</h2>
+<h2 id="1-创建目录-设置首页信息">1. 创建目录，设置首页信息</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -292,37 +278,36 @@ cd /dir/test
 echo &#34;Dys&#39;s /dir/test directory!&#34;&gt;index.html</pre></td></tr></table>
 </div>
 </div>
-<h2 id="2-修改文件">2.修改文件</h2>
+<h2 id="2-修改文件">2. 修改文件</h2>
 
 <p>在 <code>/etc/httpd/conf</code> 中的 <code>httpd.conf</code> 文件。在 <code>Alias /icons &quot;/var/www/icons/&quot;</code> 下面添加语句 <code>Alias /test &quot;/dir/test&quot;</code> 即可。
-如下图：
-<img src="/images/web4.png" alt="web" /></p>
+如下图：</p>
 
-<h2 id="3-测试-1">3.测试</h2>
+<p><img src="/images/web4.png" alt="web" /></p>
 
-<p>重启服务，并在浏览器输入 <code>192.168.1.2/test/index.html</code> 即可。
-如下图：
-<img src="/images/web5.png" alt="web" /></p>
+<h2 id="3-测试-1">3. 测试</h2>
 
-<h1 id="四-基于域名的虚拟主机">四.基于域名的虚拟主机</h1>
+<p>重启服务，并在浏览器输入 <code>192.168.1.2/test/index.html</code> 即可。如下图：</p>
 
-<blockquote>
-<p><strong>需要先配置DNS</strong>
-<strong>需要先配置DNS</strong>
-<strong>需要先配置DNS</strong></p>
-</blockquote>
+<p><img src="/images/web5.png" alt="web" /></p>
 
-<p>具体请参见《Linux配置web服务器——通过域名访问主机》。</p>
-
-<h1 id="五-基于端口的虚拟主机">五.基于端口的虚拟主机</h1>
+<h1 id="四-基于域名的虚拟主机">四. 基于域名的虚拟主机</h1>
 
 <blockquote>
-<p><strong>不需要配置DNS，直接指定不同端口，访问不同端口获取不同网页。</strong>
-接下来我们实现访问不同端口，进入不同网页的例子。<strong>记得先配置静态IP哦！~</strong></p>
+<p>需要先配置 DNS</p>
 </blockquote>
 
-<ol>
-<li><p>在<code>/var/www</code>下创建用于测试的文件和网页。</p>
+<p>具体请参见《Linux 配置 web 服务器——通过域名访问主机》。</p>
+
+<h1 id="五-基于端口的虚拟主机">五. 基于端口的虚拟主机</h1>
+
+<blockquote>
+<p>不需要配置DNS，直接指定不同端口，访问不同端口获取不同网页。</p>
+
+<p>接下来我们实现访问不同端口，进入不同网页的例子。记得先配置静态 IP。</p>
+</blockquote>
+
+<p>1.在<code>/var/www</code>下创建用于测试的文件和网页。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -332,31 +317,42 @@ echo &#34;Dys&#39;s /dir/test directory!&#34;&gt;index.html</pre></td></tr></tab
 </span><span class="lnt">5
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">	cd /var/www
-	mkdir test80
-	echo &#34;This is 80 port&#34;&gt;/var/www/test80/index.html
-	mkdir test81
-	echo &#34;This is 81 port&#34;&gt;/var/www/test81/index.html</pre></td></tr></table>
+<pre class="chroma">cd /var/www
+mkdir test80
+echo &#34;This is 80 port&#34;&gt;/var/www/test80/index.html
+mkdir test81
+echo &#34;This is 81 port&#34;&gt;/var/www/test81/index.html</pre></td></tr></table>
 </div>
-</div></li>
+</div>
+<p>2.修改<code>/etc/httpd/conf/httpd.conf</code> 文件。</p>
 
-<li><p>修改<code>/etc/httpd/conf/httpd.conf</code> 文件。
-在改文件最下面，添加如图信息：
-<img src="/images/linux_web1.png" alt="linux_web" />
-然后添加如下图信息：
-&gt; 小提示：用键盘上的 <code>Ctrl+F</code> 两个按键直接查询 <code>liten</code> 即可。
-<img src="/images/linux_web2.png" alt="linux_web" /></p></li>
+<p>在改文件最下面，添加如图信息：</p>
 
-<li><p>重启服务 <code>service httpd restart</code>。
-如下图：
-<img src="/images/linux_web3.png" alt="linux_web" /></p></li>
+<p><img src="/images/linux_web1.png" alt="linux_web" /></p>
 
-<li><p>测试
-打开浏览器，输入 <code>http://192.168.1.2</code>，即可默认访问<code>80</code> 端口。如下图:
-<img src="/images/linux_web4.png" alt="linux_web" />
-同理，输入<code>http://192.168.1.2：81</code>，即可访问 <code>81</code>端口下的内容。如下图：
-<img src="/images/linux_web5.png" alt="linux_web" /></p></li>
-</ol>
+<p>然后添加如下图信息：</p>
+
+<blockquote>
+<p>小提示：用键盘上的 <code>Ctrl+F</code> 两个按键直接查询 <code>liten</code> 即可。</p>
+</blockquote>
+
+<p><img src="/images/linux_web2.png" alt="linux_web" /></p>
+
+<p>3.重启服务 <code>service httpd restart</code>。</p>
+
+<p>如下图：</p>
+
+<p><img src="/images/linux_web3.png" alt="linux_web" /></p>
+
+<p>4.测试</p>
+
+<p>打开浏览器，输入 <code>http://192.168.1.2</code>，即可默认访问<code>80</code> 端口。如下图:</p>
+
+<p><img src="/images/linux_web4.png" alt="linux_web" /></p>
+
+<p>同理，输入<code>http://192.168.1.2：81</code>，即可访问 <code>81</code>端口下的内容。如下图：</p>
+
+<p><img src="/images/linux_web5.png" alt="linux_web" /></p>
     </div>
 
     <div class="post-copyright">

@@ -9,14 +9,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Algorithm/</loc>
+    <loc>http://localhost:1313/tags/Algorithm/</loc>
     <lastmod>2020-08-26T21:24:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Algorithm/</loc>
+    <loc>http://localhost:1313/categories/Algorithm/</loc>
     <lastmod>2020-08-26T21:24:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -856,14 +856,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Linux/</loc>
+    <loc>http://localhost:1313/tags/Linux/</loc>
     <lastmod>2019-11-20T15:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Linux/</loc>
+    <loc>http://localhost:1313/categories/Linux/</loc>
     <lastmod>2019-11-20T15:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -996,14 +996,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Spring/</loc>
+    <loc>http://localhost:1313/tags/Spring/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Spring/</loc>
+    <loc>http://localhost:1313/categories/Spring/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1073,14 +1073,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Machine-learning/</loc>
+    <loc>http://localhost:1313/categories/Machine-learning/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Machine-learning/</loc>
+    <loc>http://localhost:1313/tags/Machine-learning/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1213,14 +1213,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Python/</loc>
+    <loc>http://localhost:1313/tags/Python/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Python/</loc>
+    <loc>http://localhost:1313/categories/Python/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1276,14 +1276,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/OpenCV/</loc>
+    <loc>http://localhost:1313/tags/OpenCV/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/OpenCV/</loc>
+    <loc>http://localhost:1313/categories/OpenCV/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1739,13 +1739,6 @@
   
   <url>
     <loc>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</loc>
-    <lastmod>2019-11-16T10:32:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/2017/04/27/StringFormatting/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

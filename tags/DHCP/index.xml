@@ -18,20 +18,12 @@
       
       <guid>http://localhost:1313/2017/06/03/Linux-DHCP/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
-用到两个软件包：
-&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
-&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;步骤：
-1. 修改虚拟机静态IP
-2.  安装DHCP包。
-    ·dhcp:DHCP服务器安装包（在第二张镜像中）
-    ·dhclient:DHCP客户端软件包（在第一张镜像中）
-    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
-3.  修改配置文件
-4.  启动服务，并测试&lt;/p&gt;</description>
+&lt;p&gt;用到两个软件包：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;、&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -41,15 +33,10 @@
       
       <guid>http://localhost:1313/2017/06/03/Windows-DHCP/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
-环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装DHCP
-3.  配置DHCP
-4.  测试&lt;/p&gt;</description>
+&lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
   </channel>

@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content="1.每个楼层的用线计算公式 - C为每个楼层用线量 - F为最远的信息插座离楼层管理间的距离 - N为最近的信息插座离楼层管理间的距离 - M为每层楼的信息插座的数量 - 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)
-" /><meta name="keywords" content="Java, blog, carol" />
+<meta name="author" content="Carol" /><meta name="description" content="1. 每个楼层的用线计算公式  C 为每个楼层用线量 F 为最远的信息插座离楼层管理间的距离 N 为最近的信息插座离楼层管理间的距离 M 为每层楼的信息插座的数量 6 为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素) " /><meta name="keywords" content="Java, blog, carol" />
 
 
 
@@ -40,46 +39,55 @@
 
 
 <meta property="og:title" content="网络综合布线之 计算公式" />
-<meta property="og:description" content="1.每个楼层的用线计算公式
+<meta property="og:description" content="1. 每个楼层的用线计算公式
 
 
-- C为每个楼层用线量
-- F为最远的信息插座离楼层管理间的距离
-- N为最近的信息插座离楼层管理间的距离
-- M为每层楼的信息插座的数量
-- 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)" />
+
+
+C 为每个楼层用线量
+F 为最远的信息插座离楼层管理间的距离
+N 为最近的信息插座离楼层管理间的距离
+M 为每层楼的信息插座的数量
+6 为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2017/06/22/NetworkCabling-1/" />
 <meta property="article:published_time" content="2017-06-22T09:18:11+08:00" />
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="网络综合布线之 计算公式">
-<meta itemprop="description" content="1.每个楼层的用线计算公式
+<meta itemprop="description" content="1. 每个楼层的用线计算公式
 
 
-- C为每个楼层用线量
-- F为最远的信息插座离楼层管理间的距离
-- N为最近的信息插座离楼层管理间的距离
-- M为每层楼的信息插座的数量
-- 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)">
+
+
+C 为每个楼层用线量
+F 为最远的信息插座离楼层管理间的距离
+N 为最近的信息插座离楼层管理间的距离
+M 为每层楼的信息插座的数量
+6 为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)
+">
 
 
 <meta itemprop="datePublished" content="2017-06-22T09:18:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="915">
+<meta itemprop="wordCount" content="879">
 
 
 
 <meta itemprop="keywords" content="Computer Network," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="网络综合布线之 计算公式"/>
-<meta name="twitter:description" content="1.每个楼层的用线计算公式
+<meta name="twitter:description" content="1. 每个楼层的用线计算公式
 
 
-- C为每个楼层用线量
-- F为最远的信息插座离楼层管理间的距离
-- N为最近的信息插座离楼层管理间的距离
-- M为每层楼的信息插座的数量
-- 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)"/>
+
+
+C 为每个楼层用线量
+F 为最远的信息插座离楼层管理间的距离
+N 为最近的信息插座离楼层管理间的距离
+M 为每层楼的信息插座的数量
+6 为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)
+"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -153,7 +161,7 @@
         <div class="post-category">
             <a href="/categories/Computer-Network/"> Computer Network </a>
             </div>
-          <span class="more-meta"> 915 words </span>
+          <span class="more-meta"> 879 words </span>
           <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -164,101 +172,141 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#1-每个楼层的用线计算公式">1.每个楼层的用线计算公式</a></li>
-<li><a href="#2-整座楼的用线量">2.整座楼的用线量</a></li>
-<li><a href="#3-开放型办公室布线系统长度的计算">3.开放型办公室布线系统长度的计算</a></li>
-<li><a href="#4-计算rj-45接头的用量">4.计算RJ-45接头的用量</a></li>
-<li><a href="#5-计算信息模块的用量">5.计算信息模块的用量</a></li>
-<li><a href="#6-线槽规格的计算">6.线槽规格的计算</a></li>
-<li><a href="#7-线槽截面积计算">7.线槽截面积计算</a></li>
-<li><a href="#8-线管的截面积计算">8.线管的截面积计算</a></li>
-<li><a href="#9-线缆的截面积计算">9.线缆的截面积计算</a></li>
-<li><a href="#10-求最大布线根数">10.求最大布线根数</a></li>
+<li><a href="#1-每个楼层的用线计算公式">1. 每个楼层的用线计算公式</a></li>
+<li><a href="#2-整座楼的用线量">2. 整座楼的用线量</a></li>
+<li><a href="#3-开放型办公室布线系统长度的计算">3. 开放型办公室布线系统长度的计算</a></li>
+<li><a href="#4-计算-rj-45-接头的用量">4. 计算 RJ-45 接头的用量</a></li>
+<li><a href="#5-计算信息模块的用量">5. 计算信息模块的用量</a></li>
+<li><a href="#6-线槽规格的计算">6. 线槽规格的计算</a></li>
+<li><a href="#7-线槽截面积计算">7. 线槽截面积计算</a></li>
+<li><a href="#8-线管的截面积计算">8. 线管的截面积计算</a></li>
+<li><a href="#9-线缆的截面积计算">9. 线缆的截面积计算</a></li>
+<li><a href="#10-求最大布线根数">10. 求最大布线根数</a></li>
 </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h1 id="1-每个楼层的用线计算公式">1.每个楼层的用线计算公式</h1>
+      <h1 id="1-每个楼层的用线计算公式">1. 每个楼层的用线计算公式</h1>
 
-<p><img src="/images/zhbx/gs2.png" alt="zhbx" />
-- C为每个楼层用线量
-- F为最远的信息插座离楼层管理间的距离
-- N为最近的信息插座离楼层管理间的距离
-- M为每层楼的信息插座的数量
-- 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)</p>
+<p><img src="/images/zhbx/gs2.png" alt="zhbx" /></p>
 
-<p>例子：
-已知某学生宿舍楼有8层，每层20个房间，每个房间安装4个网络接口，实现100M接入校园网。
-- 要求1：为了方便网络管理，每层楼中间的楼梯间设置管理间。根据现场测量：每个楼层最远的信息点到管理间的距离为50米，最近的信息点到管理间的距离为10米。
-- 要求2：试确定该幢楼应选用的电缆类型，估算出整幢楼所需的电缆用量？</p>
+<ul>
+<li>C 为每个楼层用线量</li>
+<li>F 为最远的信息插座离楼层管理间的距离</li>
+<li>N 为最近的信息插座离楼层管理间的距离</li>
+<li>M 为每层楼的信息插座的数量</li>
+<li>6 为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)</li>
+</ul>
 
-<p>解：
-1.实现100Mbit/s传输，楼内布线应采用五类或超五类双绞线。
-2.楼层数：M＝8，楼层信息点数：n＝20×4＝80
-3.一个楼层用线量：C＝[0.55×(50+10)+6]×80＝3120m
-4.整栋楼的用线量:S＝MC=8×3120＝24960m</p>
+<p>例子：</p>
 
-<h1 id="2-整座楼的用线量">2.整座楼的用线量</h1>
+<p>已知某学生宿舍楼有 8 层，每层 20 个房间，每个房间安装 4 个网络接口，实现 100M 接入校园网。</p>
 
-<p><img src="/images/zhbx/gs1.png" alt="zhbx" />
-- M为楼层数
-- C为每个楼层用线量</p>
+<ul>
+<li>要求 1：为了方便网络管理，每层楼中间的楼梯间设置管理间。根据现场测量：每个楼层最远的信息点到管理间的距离为 50 米，最近的信息点到管理间的距离为 10 米。</li>
+<li>要求 2：试确定该幢楼应选用的电缆类型，估算出整幢楼所需的电缆用量？</li>
+</ul>
 
-<h1 id="3-开放型办公室布线系统长度的计算">3.开放型办公室布线系统长度的计算</h1>
+<p>解：</p>
+
+<ol>
+<li>实现 $100Mbit/s$ 传输，楼内布线应采用五类或超五类双绞线；</li>
+<li>楼层数：M=8，楼层信息点数：$n=20×4=80$；</li>
+<li>一个楼层用线量：$C=[0.55×(50+10)+6]×80=3120m$；</li>
+<li>整栋楼的用线量: $S=MC=8×3120=24960m$。</li>
+</ol>
+
+<h1 id="2-整座楼的用线量">2. 整座楼的用线量</h1>
+
+<p><img src="/images/zhbx/gs1.png" alt="zhbx" /></p>
+
+<ul>
+<li>M 为楼层数</li>
+<li>C 为每个楼层用线量</li>
+</ul>
+
+<h1 id="3-开放型办公室布线系统长度的计算">3. 开放型办公室布线系统长度的计算</h1>
 
 <blockquote>
 <p>采用多用户信息插座时，每一个多用户插座包括适当的备用量在内。各段缆线长度如下表：</p>
 </blockquote>
 
 <p><img src="/images/zhbx/biao1.png" alt="zhbx" />
-<img src="/images/zhbx/gs3.png" alt="zhbx" />
-- C=W+D：表示工作区电缆、电信间跳线和设备电缆的长度之和；
-- D：表示电信间跳线和设备电缆的总长度；
-- W：表示工作区电缆的最大长度，且W&lt;=22m；
-- H：表示水平电缆的长度。</p>
+<img src="/images/zhbx/gs3.png" alt="zhbx" /></p>
 
-<h1 id="4-计算rj-45接头的用量">4.计算RJ-45接头的用量</h1>
+<ul>
+<li>$C=W+D$：表示工作区电缆、电信间跳线和设备电缆的长度之和；</li>
+<li>D：表示电信间跳线和设备电缆的总长度；</li>
+<li>W：表示工作区电缆的最大长度，且 $W&lt;=22m$；</li>
+<li>H：表示水平电缆的长度。</li>
+</ul>
 
-<p><code>m=n*4+n*4*15%</code>
-- m：表示RJ-45接头的总需求量
-- n：表示信息点的总量
-- <code>n*4*15%</code>：表示留有的富余量</p>
+<h1 id="4-计算-rj-45-接头的用量">4. 计算 RJ-45 接头的用量</h1>
 
-<h1 id="5-计算信息模块的用量">5.计算信息模块的用量</h1>
+<p>$$
+m=n*4+n*4*15
+$$</p>
 
-<p><code>m=n+n*3%</code>
-- m：表示信息模块的总需求量
-- n：表示信息点的总量
-- <code>n*3%</code>：表示富余量</p>
+<ul>
+<li>m：表示 $RJ-45$ 接头的总需求量</li>
+<li>n：表示信息点的总量</li>
+<li>$n*4*15%$：表示留有的富余量</li>
+</ul>
 
-<h1 id="6-线槽规格的计算">6.线槽规格的计算</h1>
+<h1 id="5-计算信息模块的用量">5. 计算信息模块的用量</h1>
 
-<p><img src="/images/zhbx/gs4.png" alt="zhbx" />
-- n：表示用户所要安装的多少条线缆（已知数）
-- 槽(管)截面积：表示要选择的槽管截面积（未知数）
-- 线缆截面积：表示选用的线缆面积（已知数）
-- 70%：表示布线标准规定允许的空间
-- 40%~50%：表示线缆之间浪费的空间</p>
+<p>$$
+m=n+n*3
+$$</p>
 
-<h1 id="7-线槽截面积计算">7.线槽截面积计算</h1>
+<ul>
+<li>m：表示信息模块的总需求量</li>
+<li>n：表示信息点的总量</li>
+<li>$n*3%$：表示富余量</li>
+</ul>
 
-<p><code>S=W*L</code>
-<strong>注意：W和L分别代表的是线槽的内长和内宽（重点）</strong></p>
+<h1 id="6-线槽规格的计算">6. 线槽规格的计算</h1>
 
-<h1 id="8-线管的截面积计算">8.线管的截面积计算</h1>
+<p><img src="/images/zhbx/gs4.png" alt="zhbx" /></p>
 
-<p><code>S=PI()*R*R</code>
-<strong>注意：R代表的是线管内径的半径（重点）</strong></p>
+<ul>
+<li>n：表示用户所要安装的多少条线缆（已知数）</li>
+<li>槽(管)截面积：表示要选择的槽管截面积（未知数）</li>
+<li>线缆截面积：表示选用的线缆面积（已知数）</li>
+<li>70%：表示布线标准规定允许的空间</li>
+<li>40%~50%：表示线缆之间浪费的空间</li>
+</ul>
 
-<h1 id="9-线缆的截面积计算">9.线缆的截面积计算</h1>
+<h1 id="7-线槽截面积计算">7. 线槽截面积计算</h1>
 
-<p><code>S=PI()*R*R</code></p>
+<p>$$
+S=W*L
+$$</p>
 
-<h1 id="10-求最大布线根数">10.求最大布线根数</h1>
+<p><strong>注意：W 和 L 分别代表的是线槽的内长和内宽（重点）</strong></p>
 
-<p><code>N=线槽(管)截面积*30%/线缆截面积</code>
-<strong>注意：30%为线槽和线管的截面有效利用率（难点）</strong></p>
+<h1 id="8-线管的截面积计算">8. 线管的截面积计算</h1>
+
+<p>$$
+S=PI()*R*R
+$$</p>
+
+<p><strong>注意：R 代表的是线管内径的半径（重点）</strong></p>
+
+<h1 id="9-线缆的截面积计算">9. 线缆的截面积计算</h1>
+
+<p>$$
+S=PI()*R*R
+$$</p>
+
+<h1 id="10-求最大布线根数">10. 求最大布线根数</h1>
+
+<p>$$
+N=线槽(管)截面积*30%/线缆截面积
+$$</p>
+
+<p><strong>注意：30% 为线槽和线管的截面有效利用率（难点）</strong></p>
     </div>
 
     <div class="post-copyright">

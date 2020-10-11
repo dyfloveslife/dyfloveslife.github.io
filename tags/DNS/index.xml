@@ -18,16 +18,10 @@
       
       <guid>http://localhost:1313/2017/06/04/Windows-DNS/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
-环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装DNS
-3.  创建正向查找区域
-4.  创建反向查找区域
-5.  测试&lt;/p&gt;</description>
+&lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -37,14 +31,12 @@
       
       <guid>http://localhost:1313/2017/06/03/Linux-DNS/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
-同时有两个软件包：&lt;/p&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;</description>
+&lt;p&gt;有两个软件包：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso、shrike-i386-disc2.iso。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

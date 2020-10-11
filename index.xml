@@ -1010,14 +1010,17 @@
       <pubDate>Thu, 22 Jun 2017 09:18:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/22/NetworkCabling-1/</guid>
-      <description>&lt;h1 id=&#34;1-每个楼层的用线计算公式&#34;&gt;1.每个楼层的用线计算公式&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;1-每个楼层的用线计算公式&#34;&gt;1. 每个楼层的用线计算公式&lt;/h1&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34; /&gt;
-- C为每个楼层用线量
-- F为最远的信息插座离楼层管理间的距离
-- N为最近的信息插座离楼层管理间的距离
-- M为每层楼的信息插座的数量
-- 6为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;C 为每个楼层用线量&lt;/li&gt;
+&lt;li&gt;F 为最远的信息插座离楼层管理间的距离&lt;/li&gt;
+&lt;li&gt;N 为最近的信息插座离楼层管理间的距离&lt;/li&gt;
+&lt;li&gt;M 为每层楼的信息插座的数量&lt;/li&gt;
+&lt;li&gt;6 为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -1168,16 +1171,10 @@
       
       <guid>http://localhost:1313/2017/06/04/Windows-DNS/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
-环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装DNS
-3.  创建正向查找区域
-4.  创建反向查找区域
-5.  测试&lt;/p&gt;</description>
+&lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -1187,17 +1184,10 @@
       
       <guid>http://localhost:1313/2017/06/03/Windows-Web/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
-环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装
-3.  创建个人目录
-4.  创建虚拟目录
-5.  创建虚拟主机
-6.  使用域名访问web服务器&lt;/p&gt;</description>
+&lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -1227,14 +1217,12 @@
       
       <guid>http://localhost:1313/2017/06/03/Linux-DNS/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
-同时有两个软件包：&lt;/p&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;</description>
+&lt;p&gt;有两个软件包：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso、shrike-i386-disc2.iso。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1244,20 +1232,12 @@
       
       <guid>http://localhost:1313/2017/06/03/Linux-DHCP/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
-用到两个软件包：
-&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;
-&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;步骤：
-1. 修改虚拟机静态IP
-2.  安装DHCP包。
-    ·dhcp:DHCP服务器安装包（在第二张镜像中）
-    ·dhclient:DHCP客户端软件包（在第一张镜像中）
-    ·dhcp-devel:DHCP开发工具（在第二张镜像中）
-3.  修改配置文件
-4.  启动服务，并测试&lt;/p&gt;</description>
+&lt;p&gt;用到两个软件包：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;、&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1267,15 +1247,10 @@
       
       <guid>http://localhost:1313/2017/06/03/Windows-DHCP/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
-环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装DHCP
-3.  配置DHCP
-4.  测试&lt;/p&gt;</description>
+&lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -1284,11 +1259,7 @@
       <pubDate>Fri, 02 Jun 2017 21:41:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/02/Linux-WebServer/</guid>
-      <description>&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;2017/6/6 [更新]基于端口的虚拟主机&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;</description>
+      <description>&lt;p&gt;&lt;strong&gt;2017/6/6 [更新]基于端口的虚拟主机&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1297,9 +1268,9 @@
       <pubDate>Thu, 01 Jun 2017 22:43:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以访问。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1316,15 +1287,6 @@
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc3.iso&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>C# 之 字符串格式化</title>
-      <link>http://localhost:1313/2017/04/27/StringFormatting/</link>
-      <pubDate>Thu, 27 Apr 2017 22:57:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/04/27/StringFormatting/</guid>
-      <description>前几天在上C#时，学到了使用Connection连接数据库这一功能。 当时我写的连接字符串语句： 1 String s = &amp;#34;Server=&amp;#34; + textBox1.Text + &amp;#34;;Database=&amp;#34; + textBox2.Text + &amp;#34;;User Id=&amp;#34; + textBox3.Text + &amp;#34;;Password=&amp;#34; + textBox4.Text + &amp;#34;&amp;#34;; 这</description>
     </item>
     
     <item>

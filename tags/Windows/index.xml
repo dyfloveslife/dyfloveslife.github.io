@@ -18,16 +18,10 @@
       
       <guid>http://localhost:1313/2017/06/04/Windows-DNS/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
-环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装DNS
-3.  创建正向查找区域
-4.  创建反向查找区域
-5.  测试&lt;/p&gt;</description>
+&lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -37,17 +31,10 @@
       
       <guid>http://localhost:1313/2017/06/03/Windows-Web/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
-环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装
-3.  创建个人目录
-4.  创建虚拟目录
-5.  创建虚拟主机
-6.  使用域名访问web服务器&lt;/p&gt;</description>
+&lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -77,15 +64,10 @@
       
       <guid>http://localhost:1313/2017/06/03/Windows-DHCP/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
-环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装DHCP
-3.  配置DHCP
-4.  测试&lt;/p&gt;</description>
+&lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
   </channel>

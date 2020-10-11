@@ -161,14 +161,5 @@
 &lt;/div&gt;</description>
     </item>
     
-    <item>
-      <title>C# 之 字符串格式化</title>
-      <link>http://localhost:1313/2017/04/27/StringFormatting/</link>
-      <pubDate>Thu, 27 Apr 2017 22:57:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/04/27/StringFormatting/</guid>
-      <description>前几天在上C#时，学到了使用Connection连接数据库这一功能。 当时我写的连接字符串语句： 1 String s = &amp;#34;Server=&amp;#34; + textBox1.Text + &amp;#34;;Database=&amp;#34; + textBox2.Text + &amp;#34;;User Id=&amp;#34; + textBox3.Text + &amp;#34;;Password=&amp;#34; + textBox4.Text + &amp;#34;&amp;#34;; 这</description>
-    </item>
-    
   </channel>
 </rss>

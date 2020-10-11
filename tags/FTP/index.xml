@@ -37,9 +37,9 @@
       <pubDate>Thu, 01 Jun 2017 22:43:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能&lt;/strong&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地dog可以访问ftp，以user为代表的其他用户不可以访问&lt;/strong&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以访问。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

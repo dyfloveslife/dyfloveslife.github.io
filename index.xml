@@ -931,15 +931,6 @@
     </item>
     
     <item>
-      <title>基于 Vultr &#43; Ubuntu18.04 &#43; BBR 的 ShadowsocksR 配置教程</title>
-      <link>http://localhost:1313/2018/05/14/Build-VPS/</link>
-      <pubDate>Mon, 14 May 2018 21:41:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2018/05/14/Build-VPS/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/VPS/ShadowsocksR.jpg&#34; alt=&#34;ShadowsocksR&#34; /&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>2018 年 4 月到 8 月规划</title>
       <link>http://localhost:1313/2018/04/04/2018-4to8month-plan/</link>
       <pubDate>Wed, 04 Apr 2018 11:46:11 +0800</pubDate>
@@ -960,7 +951,7 @@
     </item>
     
     <item>
-      <title>2017 下半年，给自己一个加油</title>
+      <title>2017 下半年小结</title>
       <link>http://localhost:1313/2017/07/12/2017-Second-half/</link>
       <pubDate>Wed, 12 Jul 2017 19:56:11 +0800</pubDate>
       
@@ -969,43 +960,7 @@
     </item>
     
     <item>
-      <title>数据结构之 期末复习</title>
-      <link>http://localhost:1313/2017/06/29/DataStructure-FinalReview/</link>
-      <pubDate>Thu, 29 Jun 2017 12:35:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/29/DataStructure-FinalReview/</guid>
-      <description>一.算法应用复习要点 会用迪杰斯特拉算法解决最短路径问题 会求二叉树的各种遍历序列 会用哈希函数构造哈希表，会用开放定址法解决冲突，会计算查找成功</description>
-    </item>
-    
-    <item>
-      <title>C# 之 循环数组</title>
-      <link>http://localhost:1313/2017/06/25/LoopArray/</link>
-      <pubDate>Sun, 25 Jun 2017 12:13:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/25/LoopArray/</guid>
-      <description>&lt;p&gt;考完试好几天了，一直没把在考试中遇到的问写下来。趁着周末&lt;del&gt; 其实是复习周，不用上课哒&lt;/del&gt;，把那个给跳水运动员打分的程序写在这里。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>网络综合布线之 工作区子系统设计过程</title>
-      <link>http://localhost:1313/2017/06/22/NetworkCabling-2/</link>
-      <pubDate>Thu, 22 Jun 2017 11:44:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/22/NetworkCabling-2/</guid>
-      <description>&lt;p&gt;一般步骤：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;需求分析：根据各楼层各房间的用途，确定工作区人员数量；&lt;/li&gt;
-&lt;li&gt;与用户进行技术交流，分析业务需求；&lt;/li&gt;
-&lt;li&gt;确定信息点数量，完成点数统计表；&lt;/li&gt;
-&lt;li&gt;确定信息点安装位置，完成端口对应表；&lt;/li&gt;
-&lt;li&gt;确定工作区材料的规格和数量，完成材料统计表；&lt;/li&gt;
-&lt;li&gt;施工图设计。&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>网络综合布线之 计算公式</title>
+      <title>网络综合布线</title>
       <link>http://localhost:1313/2017/06/22/NetworkCabling-1/</link>
       <pubDate>Thu, 22 Jun 2017 09:18:11 +0800</pubDate>
       
@@ -1021,147 +976,6 @@
 &lt;li&gt;M 为每层楼的信息插座的数量&lt;/li&gt;
 &lt;li&gt;6 为端对容差(考虑施工时线缆的损耗、线缆布设长度误差等因素)&lt;/li&gt;
 &lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>C# 之 查询数据库</title>
-      <link>http://localhost:1313/2017/06/19/Query-the-database/</link>
-      <pubDate>Mon, 19 Jun 2017 18:32:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/19/Query-the-database/</guid>
-      <description>&lt;h1 id=&#34;1-查询单个值&#34;&gt;1.查询单个值&lt;/h1&gt;
-
-&lt;p&gt;SQL语言使用select进行查询。查询返回结果有多有少，通常来说，会返回多行多列的一个结果集。&lt;/p&gt;
-
-&lt;h2 id=&#34;示例1-查询单个值&#34;&gt;示例1：查询单个值&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;	&lt;span class=&#34;n&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;student&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>C# 之 修改数据库</title>
-      <link>http://localhost:1313/2017/06/19/Modify-the-database/</link>
-      <pubDate>Mon, 19 Jun 2017 18:31:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/19/Modify-the-database/</guid>
-      <description>&lt;h1 id=&#34;1-连接数据库&#34;&gt;1.连接数据库&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;应用程序（我们用C#编写的程序）与数据库程序（如SQL Server）是两个不同的程序，要想从应用程序中读取/修改数据库的数据，首先要建立二者的通信机制。为了在C#程序中使用（读取、修改等）数据库，必须首先连接到数据库。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>C# 之 文件和目录操作</title>
-      <link>http://localhost:1313/2017/06/17/File-and-directory-operations/</link>
-      <pubDate>Sat, 17 Jun 2017 17:21:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/17/File-and-directory-operations/</guid>
-      <description>&lt;p&gt;说明：
-&amp;gt; 1.文件是保存到磁盘上的数据的集合。
-&amp;gt; 2.流可以看作连续的字节序列，形成“流”。
-&amp;gt; 3.文件是一种流。
-&amp;gt; 4.在.NET平台上用于处理文件和流的类在System.IO命名空间中，使用时要导入命名空间。
-&amp;gt; 5.使用流读/写器对流进行读取/写入操作。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>C# 之 菜单和消息</title>
-      <link>http://localhost:1313/2017/06/16/Menus-and-Messages/</link>
-      <pubDate>Fri, 16 Jun 2017 20:33:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/16/Menus-and-Messages/</guid>
-      <description>&lt;h1 id=&#34;1-显示新的窗体&#34;&gt;1.显示新的窗体&lt;/h1&gt;
-
-&lt;p&gt;步骤：
-- ①定义一个新窗体类型的变量
-- ②实例化新窗体变量
-- ③调用新窗体的Show方法显示&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>C# 之 GDI&#43; 屏幕绘图</title>
-      <link>http://localhost:1313/2017/06/16/GDI-ScreenDrawing/</link>
-      <pubDate>Fri, 16 Jun 2017 10:32:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/16/GDI-ScreenDrawing/</guid>
-      <description>&lt;h1 id=&#34;1-绘画工具&#34;&gt;1.绘画工具&lt;/h1&gt;
-
-&lt;p&gt;画笔和画刷
-- 画笔Pens:细，画线条和轮廓；
-- 画刷Brushes:粗，填充闭合区域。&lt;/p&gt;
-
-&lt;p&gt;Graphics类
-通过 &lt;code&gt;控件名.createGraphics()&lt;/code&gt; 取得某控件的屏幕区域作为画布。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>C# 之 窗体编程</title>
-      <link>http://localhost:1313/2017/06/15/Form-programming/</link>
-      <pubDate>Thu, 15 Jun 2017 22:42:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/15/Form-programming/</guid>
-      <description>&lt;p&gt;main方法：位于&lt;code&gt;Program.cs&lt;/code&gt;文件，表示Windows窗体程序的入口。
-示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;namespace MyForm
-{
-	static class Program
-      {
-           //code
-           static void Main( )
-           {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Form1());		//启动窗体
-           }
-      }
-}&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>C# 之 控制台程序</title>
-      <link>http://localhost:1313/2017/06/14/Console-program/</link>
-      <pubDate>Wed, 14 Jun 2017 22:44:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/14/Console-program/</guid>
-      <description>&lt;h1 id=&#34;1-console类可实现输入输出功能&#34;&gt;1.Console类可实现输入输出功能&lt;/h1&gt;
-
-&lt;h1 id=&#34;2-write方法-控制台输出-屏幕输出&#34;&gt;2.Write方法：控制台输出(屏幕输出)&lt;/h1&gt;
-
-&lt;p&gt;示例：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;n&#34;&gt;Console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“不明觉厉”&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
     </item>
     
     <item>

@@ -30,25 +30,7 @@
     </item>
     
     <item>
-      <title>网络综合布线之 工作区子系统设计过程</title>
-      <link>http://localhost:1313/2017/06/22/NetworkCabling-2/</link>
-      <pubDate>Thu, 22 Jun 2017 11:44:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2017/06/22/NetworkCabling-2/</guid>
-      <description>&lt;p&gt;一般步骤：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;需求分析：根据各楼层各房间的用途，确定工作区人员数量；&lt;/li&gt;
-&lt;li&gt;与用户进行技术交流，分析业务需求；&lt;/li&gt;
-&lt;li&gt;确定信息点数量，完成点数统计表；&lt;/li&gt;
-&lt;li&gt;确定信息点安装位置，完成端口对应表；&lt;/li&gt;
-&lt;li&gt;确定工作区材料的规格和数量，完成材料统计表；&lt;/li&gt;
-&lt;li&gt;施工图设计。&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>网络综合布线之 计算公式</title>
+      <title>网络综合布线</title>
       <link>http://localhost:1313/2017/06/22/NetworkCabling-1/</link>
       <pubDate>Thu, 22 Jun 2017 09:18:11 +0800</pubDate>
       

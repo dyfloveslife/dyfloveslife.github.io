@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2018-08-14T10:28:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="2050">
+<meta itemprop="wordCount" content="1960">
 
 
 
@@ -132,8 +132,8 @@
         <div class="post-category">
             <a href="/categories/Python/"> Python </a>
             </div>
-          <span class="more-meta"> 2050 words </span>
-          <span class="more-meta"> 5 mins read </span>
+          <span class="more-meta"> 1960 words </span>
+          <span class="more-meta"> 4 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -154,16 +154,16 @@
     <div class="post-content">
       <p>JSON（JavaScript Object Notation）是一种使用JavaScript表示的轻量级数据格式。JSON数据包很小并且很快被浏览器解析。今天我们将探讨如何在Python中读取和编写JSON数据。</p>
 
-<hr />
-
 <p>有这么一组数据：</p>
 
 <blockquote>
-<p>注意：最后一行的<code>Sławomir Idziak</code>，其中<code>Sławomir</code>中的<code>ł</code>是带有横线的拉丁文小写字母<code>L</code>，它不是一个ASCII字符，你可以在Python中用<code>print(u'\u0142')</code>将其打印出来。你可以查看：<a href="https://www.fileformat.info/info/unicode/char/0142/index.htm">https://www.fileformat.info/info/unicode/char/0142/index.htm</a> 这里使用它是为了说明JSON编码的区别。</p>
+<p>注意：最后一行的<code>Sławomir Idziak</code>，其中<code>Sławomir</code>中的<code>ł</code>是带有横线的拉丁文小写字母<code>L</code>，它不是一个 ASCII 字符，你可以在 Python 中用<code>print(u'\u0142')</code>将其打印出来。</p>
+
+<p>你可以查看：<a href="https://www.fileformat.info/info/unicode/char/0142/index.htm">https://www.fileformat.info/info/unicode/char/0142/index.htm</a> ，这里使用它是为了说明 JSON 编码的区别。</p>
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -180,36 +180,36 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="p">{</span>
-    <span class="s2">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;Gattaca&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;release_year&#34;</span><span class="p">:</span> <span class="mi">1997</span><span class="p">,</span>
-    <span class="s2">&#34;is_awesome&#34;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&#34;won_oscar&#34;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&#34;actors&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Ethan Hawke&#34;</span><span class="p">,</span> <span class="s2">&#34;Uma Thurman&#34;</span><span class="p">,</span> <span class="s2">&#34;Alan Arkin&#34;</span><span class="p">,</span>
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;Gattaca&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;release_year&#34;</span><span class="p">:</span> <span class="mi">1997</span><span class="p">,</span>
+    <span class="nt">&#34;is_awesome&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;won_oscar&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&#34;actors&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Ethan Hawke&#34;</span><span class="p">,</span> <span class="s2">&#34;Uma Thurman&#34;</span><span class="p">,</span> <span class="s2">&#34;Alan Arkin&#34;</span><span class="p">,</span>
                <span class="s2">&#34;Loren Dean&#34;</span><span class="p">],</span>
-    <span class="s2">&#34;budget&#34;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&#34;credits&#34;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&#34;director&#34;</span><span class="p">:</span> <span class="s2">&#34;Andrew Niccol&#34;</span><span class="p">,</span>
-        <span class="s2">&#34;writer&#34;</span><span class="p">:</span> <span class="s2">&#34;Andrew Niccol&#34;</span><span class="p">,</span>
-        <span class="s2">&#34;composer&#34;</span><span class="p">:</span> <span class="s2">&#34;Michael Nyman&#34;</span><span class="p">,</span>
-        <span class="s2">&#34;cinematogtapher&#34;</span><span class="p">:</span> <span class="s2">&#34;Sławomir Idziak&#34;</span>
+    <span class="nt">&#34;budget&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;credits&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;director&#34;</span><span class="p">:</span> <span class="s2">&#34;Andrew Niccol&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;writer&#34;</span><span class="p">:</span> <span class="s2">&#34;Andrew Niccol&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;composer&#34;</span><span class="p">:</span> <span class="s2">&#34;Michael Nyman&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;cinematogtapher&#34;</span><span class="p">:</span> <span class="s2">&#34;Sławomir Idziak&#34;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>它看起来就像是Python中的字典，但也有一些例外。Python中的<code>True</code>和<code>False</code>是以大写字母开头，而在JSON中却是小写。</p>
+<p>它看起来就像是 Python 中的字典，但也有一些例外。Python 中的<code>True</code>和<code>False</code>是以大写字母开头，而在 JSON 中却是小写。</p>
 
-<p>它所有的键（key）都是字符串，而值（value）可以是字符串、数字、布尔值、列表、null，甚至是另一个JSON对象。</p>
+<p>它所有的键（key）都是字符串，而值（value）可以是字符串、数字、布尔值、列表、null，甚至是另一个 JSON 对象。</p>
 
-<p>首先，将上面的JSON数据以<code>utf-8 无BOM格式编码</code>的格式保存在<code>movie_1.txt</code>文件中，然后我们接下来看一下对JSON数据进行<code>编码</code>或者<code>解码</code>的函数方法。如下所示：</p>
+<p>首先，将上面的JSON数据以<code>utf-8 无BOM格式编码</code>的格式保存在<code>movie_1.txt</code>文件中，然后我们接下来看一下对 JSON 数据进行<code>编码</code>或者<code>解码</code>的函数方法。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">json</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
 
 <span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">json</span><span class="p">))</span></code></pre></td></tr></table>
 </div>
@@ -217,28 +217,31 @@
 <p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="p">[</span><span class="s1">&#39;JSONDecodeError&#39;</span><span class="p">,</span> <span class="s1">&#39;JSONDecoder&#39;</span><span class="p">,</span> <span class="s1">&#39;JSONEncoder&#39;</span><span class="p">,</span> <span class="s1">&#39;__all__&#39;</span><span class="p">,</span> <span class="s1">&#39;__author__&#39;</span><span class="p">,</span> <span class="s1">&#39;__builtins__&#39;</span><span class="p">,</span> <span class="s1">&#39;__cached__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">,</span> <span class="s1">&#39;__loader__&#39;</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;__package__&#39;</span><span class="p">,</span> <span class="s1">&#39;__path__&#39;</span><span class="p">,</span> <span class="s1">&#39;__spec__&#39;</span><span class="p">,</span> <span class="s1">&#39;__version__&#39;</span><span class="p">,</span> <span class="s1">&#39;_default_decoder&#39;</span><span class="p">,</span> <span class="s1">&#39;_default_encoder&#39;</span><span class="p">,</span> <span class="s1">&#39;codecs&#39;</span><span class="p">,</span> <span class="s1">&#39;decoder&#39;</span><span class="p">,</span> <span class="s1">&#39;detect_encoding&#39;</span><span class="p">,</span> <span class="s1">&#39;dump&#39;</span><span class="p">,</span> <span class="s1">&#39;dumps&#39;</span><span class="p">,</span> <span class="s1">&#39;encoder&#39;</span><span class="p">,</span> <span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="s1">&#39;loads&#39;</span><span class="p">,</span> <span class="s1">&#39;scanner&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+<pre class="chroma">[&#39;JSONDecodeError&#39;, &#39;JSONDecoder&#39;, &#39;JSONEncoder&#39;, &#39;__all__&#39;, &#39;__author__&#39;, &#39;__builtins__&#39;, &#39;__cached__&#39;, &#39;__doc__&#39;, &#39;__file__&#39;, &#39;__loader__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;__path__&#39;, &#39;__spec__&#39;, &#39;__version__&#39;, &#39;_default_decoder&#39;, &#39;_default_encoder&#39;, &#39;codecs&#39;, &#39;decoder&#39;, &#39;detect_encoding&#39;, &#39;dump&#39;, &#39;dumps&#39;, &#39;encoder&#39;, &#39;load&#39;, &#39;loads&#39;, &#39;scanner&#39;]</pre></td></tr></table>
 </div>
 </div>
-<p>我们这里主要关注<code>dump</code>、<code>dumps</code>、<code>load</code>、<code>loads</code>这四个方法。
-- json.load(f)：用于从文件中加载JSON数据
-- json.loads(s)：用于从字符串中加载JSON数据
-- json.dump(j, f)：用于将JSON对象写入文件
-- json.dupms(j)：用于将JSON对象输出为字符串</p>
+<p>我们这里主要关注<code>dump</code>、<code>dumps</code>、<code>load</code>、<code>loads</code>这四个方法。</p>
+
+<ul>
+<li>json.load(f)：用于从文件中加载JSON数据</li>
+<li>json.loads(s)：用于从字符串中加载JSON数据</li>
+<li>json.dump(j, f)：用于将JSON对象写入文件</li>
+<li>json.dupms(j)：用于将JSON对象输出为字符串</li>
+</ul>
 
 <h1 id="1-json-load">1. json.load</h1>
 
 <blockquote>
-<p>json.load(f)：用于从文件中加载JSON数据</p>
+<p>json.load(f)：用于从文件中加载 JSON 数据</p>
 </blockquote>
 
 <p>键入如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -248,7 +251,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">json</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
 
 <span class="n">json_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;f:/Python_test/BasicKnowledge/movie_1.txt&#34;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 <span class="n">moive</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
@@ -261,25 +264,25 @@
 <p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Gattaca&#39;</span><span class="p">,</span> <span class="s1">&#39;release_year&#39;</span><span class="p">:</span> <span class="mi">1997</span><span class="p">,</span> <span class="s1">&#39;is_awesome&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;won_oscar&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ethan Hawke&#39;</span><span class="p">,</span> <span class="s1">&#39;Uma Thurman&#39;</span><span class="p">,</span> <span class="s1">&#39;Alan Arkin&#39;</span><span class="p">,</span> <span class="s1">&#39;Loren Dean&#39;</span><span class="p">],</span> <span class="s1">&#39;budget&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;credits&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;director&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrew Niccol&#39;</span><span class="p">,</span> <span class="s1">&#39;writer&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrew Niccol&#39;</span><span class="p">,</span> <span class="s1">&#39;composer&#39;</span><span class="p">:</span> <span class="s1">&#39;Michael Nyman&#39;</span><span class="p">,</span> <span class="s1">&#39;cinematogtapher&#39;</span><span class="p">:</span> <span class="s1">&#39;Sławomir Idziak&#39;</span><span class="p">}}</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Gattaca&#39;</span><span class="p">,</span> <span class="s1">&#39;release_year&#39;</span><span class="p">:</span> <span class="mi">1997</span><span class="p">,</span> <span class="s1">&#39;is_awesome&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;won_oscar&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ethan Hawke&#39;</span><span class="p">,</span> <span class="s1">&#39;Uma Thurman&#39;</span><span class="p">,</span> <span class="s1">&#39;Alan Arkin&#39;</span><span class="p">,</span> <span class="s1">&#39;Loren Dean&#39;</span><span class="p">],</span> <span class="s1">&#39;budget&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;credits&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;director&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrew Niccol&#39;</span><span class="p">,</span> <span class="s1">&#39;writer&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrew Niccol&#39;</span><span class="p">,</span> <span class="s1">&#39;composer&#39;</span><span class="p">:</span> <span class="s1">&#39;Michael Nyman&#39;</span><span class="p">,</span> <span class="s1">&#39;cinematogtapher&#39;</span><span class="p">:</span> <span class="s1">&#39;Sławomir Idziak&#39;</span><span class="p">}}</span>
 <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">dict</span><span class="s1">&#39;&gt;</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>你可以看到，<code>movie</code>事实上是一个字典类型。同时注意到<code>true</code>、<code>false</code>、<code>null</code>都变成了Python中的<code>True</code>、<code>False</code>、<code>None</code>，并且正确解析了非ASCII字符<code>ł</code>。</p>
+<p>你可以看到，<code>movie</code>事实上是一个字典类型。同时注意到<code>true</code>、<code>false</code>、<code>null</code>都变成了Python中的<code>True</code>、<code>False</code>、<code>None</code>，并且正确解析了非 ASCII 字符<code>ł</code>。</p>
 
 <p>由于这是一个字典，你可以通过<code>key</code>来访问数据。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">print</span><span class="p">(</span><span class="n">moive</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">moive</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">moive</span><span class="p">[</span><span class="s1">&#39;actors&#39;</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">moive</span><span class="p">[</span><span class="s1">&#39;release_year&#39;</span><span class="p">])</span></code></pre></td></tr></table>
 </div>
@@ -287,26 +290,26 @@
 <p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></code></pre></td>
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">Gattaca</span>
-<span class="p">[</span><span class="s1">&#39;Ethan Hawke&#39;</span><span class="p">,</span> <span class="s1">&#39;Uma Thurman&#39;</span><span class="p">,</span> <span class="s1">&#39;Alan Arkin&#39;</span><span class="p">,</span> <span class="s1">&#39;Loren Dean&#39;</span><span class="p">]</span>
-<span class="mi">1997</span></code></pre></td></tr></table>
+<pre class="chroma">Gattaca
+[&#39;Ethan Hawke&#39;, &#39;Uma Thurman&#39;, &#39;Alan Arkin&#39;, &#39;Loren Dean&#39;]
+1997</pre></td></tr></table>
 </div>
 </div>
 <h1 id="2-json-loads">2. json.loads</h1>
 
 <blockquote>
-<p>json.loads(s)：用于从字符串中加载JSON数据</p>
+<p>json.loads(s)：用于从字符串中加载 JSON 数据</p>
 </blockquote>
 
 <p>键入如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -320,7 +323,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">json</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
 <span class="n">value</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
 </span><span class="s2">    {&#34;title&#34;: &#34;Tron: Legacy&#34;,
 </span><span class="s2">    &#34;composer&#34;: &#34;Daft Puck&#34;,
@@ -337,26 +340,26 @@
 <p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Tron: Legacy&#39;</span><span class="p">,</span> <span class="s1">&#39;composer&#39;</span><span class="p">:</span> <span class="s1">&#39;Daft Puck&#39;</span><span class="p">,</span> <span class="s1">&#39;release_year&#39;</span><span class="p">:</span> <span class="mi">2010</span><span class="p">,</span> <span class="s1">&#39;budget&#39;</span><span class="p">:</span> <span class="mi">170000000</span><span class="p">,</span> <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;won_oscar&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma">{&#39;title&#39;: &#39;Tron: Legacy&#39;, &#39;composer&#39;: &#39;Daft Puck&#39;, &#39;release_year&#39;: 2010, &#39;budget&#39;: 170000000, &#39;actors&#39;: None, &#39;won_oscar&#39;: False}</pre></td></tr></table>
 </div>
 </div>
-<p>首先创建了一个带有JSON格式值的字符串。要解析这个JSON数据，可以通过调用<code>loads</code>函数来实现。因为所有字符都是ASCII，所以不需要担心编码问题。</p>
+<p>首先创建了一个带有 JSON 格式值的字符串。要解析这个 JSON 数据，可以通过调用<code>loads</code>函数来实现。因为所有字符都是 ASCII，所以不需要担心编码问题。</p>
 
-<p>查看结果你会发现，它生成了一个Python字典，所有数据都进行了正确的转换。<code>False</code>是Python中的布尔类型，<code>null</code>被转换为<code>None</code>。</p>
+<p>查看结果你会发现，它生成了一个 Python 字典，所有数据都进行了正确的转换。<code>False</code>是 Python 中的布尔类型，<code>null</code>被转换为<code>None</code>。</p>
 
 <h1 id="3-json-dumps">3. json.dumps</h1>
 
 <blockquote>
-<p>json.dupms(j)：用于将JSON对象输出为字符串</p>
+<p>json.dupms(j)：用于将 JSON 对象输出为字符串</p>
 </blockquote>
 
 <p>如果要将字典转换为有效的JSON字符串，可以在使用<code>dumps</code>方法时传入字典。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -366,7 +369,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">json</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
 
 <span class="n">json_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;f:/Python_test/BasicKnowledge/movie_1.txt&#34;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 <span class="n">moive</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
@@ -379,50 +382,50 @@
 <p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><span class="lnt">1
 </span><span class="lnt">2
-</span></code></pre></td>
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Gattaca&#39;</span><span class="p">,</span> <span class="s1">&#39;release_year&#39;</span><span class="p">:</span> <span class="mi">1997</span><span class="p">,</span> <span class="s1">&#39;is_awesome&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;won_oscar&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ethan Hawke&#39;</span><span class="p">,</span> <span class="s1">&#39;Uma Thurman&#39;</span><span class="p">,</span> <span class="s1">&#39;Alan Arkin&#39;</span><span class="p">,</span> <span class="s1">&#39;Loren Dean&#39;</span><span class="p">],</span> <span class="s1">&#39;budget&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;credits&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;director&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrew Niccol&#39;</span><span class="p">,</span> <span class="s1">&#39;writer&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrew Niccol&#39;</span><span class="p">,</span> <span class="s1">&#39;composer&#39;</span><span class="p">:</span> <span class="s1">&#39;Michael Nyman&#39;</span><span class="p">,</span> <span class="s1">&#39;cinematogtapher&#39;</span><span class="p">:</span> <span class="s1">&#39;Sławomir Idziak&#39;</span><span class="p">}}</span>
-<span class="p">{</span><span class="s2">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;Gattaca&#34;</span><span class="p">,</span> <span class="s2">&#34;release_year&#34;</span><span class="p">:</span> <span class="mi">1997</span><span class="p">,</span> <span class="s2">&#34;is_awesome&#34;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="s2">&#34;won_oscar&#34;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span> <span class="s2">&#34;actors&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Ethan Hawke&#34;</span><span class="p">,</span> <span class="s2">&#34;Uma Thurman&#34;</span><span class="p">,</span> <span class="s2">&#34;Alan Arkin&#34;</span><span class="p">,</span> <span class="s2">&#34;Loren Dean&#34;</span><span class="p">],</span> <span class="s2">&#34;budget&#34;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span> <span class="s2">&#34;credits&#34;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;director&#34;</span><span class="p">:</span> <span class="s2">&#34;Andrew Niccol&#34;</span><span class="p">,</span> <span class="s2">&#34;writer&#34;</span><span class="p">:</span> <span class="s2">&#34;Andrew Niccol&#34;</span><span class="p">,</span> <span class="s2">&#34;composer&#34;</span><span class="p">:</span> <span class="s2">&#34;Michael Nyman&#34;</span><span class="p">,</span> <span class="s2">&#34;cinematogtapher&#34;</span><span class="p">:</span> <span class="s2">&#34;S</span><span class="se">\u0142</span><span class="s2">awomir Idziak&#34;</span><span class="p">}}</span></code></pre></td></tr></table>
+<pre class="chroma">{&#39;title&#39;: &#39;Gattaca&#39;, &#39;release_year&#39;: 1997, &#39;is_awesome&#39;: True, &#39;won_oscar&#39;: False, &#39;actors&#39;: [&#39;Ethan Hawke&#39;, &#39;Uma Thurman&#39;, &#39;Alan Arkin&#39;, &#39;Loren Dean&#39;], &#39;budget&#39;: None, &#39;credits&#39;: {&#39;director&#39;: &#39;Andrew Niccol&#39;, &#39;writer&#39;: &#39;Andrew Niccol&#39;, &#39;composer&#39;: &#39;Michael Nyman&#39;, &#39;cinematogtapher&#39;: &#39;Sławomir Idziak&#39;}}
+{&#34;title&#34;: &#34;Gattaca&#34;, &#34;release_year&#34;: 1997, &#34;is_awesome&#34;: true, &#34;won_oscar&#34;: false, &#34;actors&#34;: [&#34;Ethan Hawke&#34;, &#34;Uma Thurman&#34;, &#34;Alan Arkin&#34;, &#34;Loren Dean&#34;], &#34;budget&#34;: null, &#34;credits&#34;: {&#34;director&#34;: &#34;Andrew Niccol&#34;, &#34;writer&#34;: &#34;Andrew Niccol&#34;, &#34;composer&#34;: &#34;Michael Nyman&#34;, &#34;cinematogtapher&#34;: &#34;S\u0142awomir Idziak&#34;}}</pre></td></tr></table>
 </div>
 </div>
-<p>结果看到返回了一个正确的JSON格式字符串，<code>true</code>和<code>false</code>都被转换成了小写。但是注意：非ASCII字符<code>ł</code>不会原格式输出。因为JSON库默认输出为ASCII字符，并且将转义所有非ASCII字符。</p>
+<p>结果看到返回了一个正确的 JSON 格式字符串，<code>true</code>和<code>false</code>都被转换成了小写。但是注意：非 ASCII 字符<code>ł</code>不会原格式输出。因为JSON库默认输出为 ASCII 字符，并且将转义所有非 ASCII 字符。</p>
 
 <p>如果要避免这种情况发生，让其输出原格式的<code>ł</code>，可以在使用<code>dumps</code>方法时，指定<code>ensure_ascii=False</code>即可。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">moive</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">moive</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span></code></pre></td></tr></table>
 </div>
 </div>
 <p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="p">{</span><span class="s2">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;Gattaca&#34;</span><span class="p">,</span> <span class="s2">&#34;release_year&#34;</span><span class="p">:</span> <span class="mi">1997</span><span class="p">,</span> <span class="s2">&#34;is_awesome&#34;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="s2">&#34;won_oscar&#34;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span> <span class="s2">&#34;actors&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;Ethan Hawke&#34;</span><span class="p">,</span> <span class="s2">&#34;Uma Thurman&#34;</span><span class="p">,</span> <span class="s2">&#34;Alan Arkin&#34;</span><span class="p">,</span> <span class="s2">&#34;Loren Dean&#34;</span><span class="p">],</span> <span class="s2">&#34;budget&#34;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span> <span class="s2">&#34;credits&#34;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;director&#34;</span><span class="p">:</span> <span class="s2">&#34;Andrew Niccol&#34;</span><span class="p">,</span> <span class="s2">&#34;writer&#34;</span><span class="p">:</span> <span class="s2">&#34;Andrew Niccol&#34;</span><span class="p">,</span> <span class="s2">&#34;composer&#34;</span><span class="p">:</span> <span class="s2">&#34;Michael Nyman&#34;</span><span class="p">,</span> <span class="s2">&#34;cinematogtapher&#34;</span><span class="p">:</span> <span class="s2">&#34;Sławomir Idziak&#34;</span><span class="p">}}</span></code></pre></td></tr></table>
+<pre class="chroma">{&#34;title&#34;: &#34;Gattaca&#34;, &#34;release_year&#34;: 1997, &#34;is_awesome&#34;: true, &#34;won_oscar&#34;: false, &#34;actors&#34;: [&#34;Ethan Hawke&#34;, &#34;Uma Thurman&#34;, &#34;Alan Arkin&#34;, &#34;Loren Dean&#34;], &#34;budget&#34;: null, &#34;credits&#34;: {&#34;director&#34;: &#34;Andrew Niccol&#34;, &#34;writer&#34;: &#34;Andrew Niccol&#34;, &#34;composer&#34;: &#34;Michael Nyman&#34;, &#34;cinematogtapher&#34;: &#34;Sławomir Idziak&#34;}}</pre></td></tr></table>
 </div>
 </div>
-<p>现在结果保留了非ASCII字符，并且不反转反斜杠。</p>
+<p>现在结果保留了非 ASCII 字符，并且不反转反斜杠。</p>
 
 <h1 id="4-json-dump">4. json.dump</h1>
 
 <blockquote>
-<p>json.dump(j, f)：用于将JSON对象写入文件</p>
+<p>json.dump(j, f)：用于将 JSON 对象写入文件</p>
 </blockquote>
 
-<p>现在我们创建一个新对象，将其转换为JSON，并写入文件。</p>
+<p>现在我们创建一个新对象，将其转换为 JSON，并写入文件。</p>
 
-<p>首先创建一个<code>movie2</code>字典，并初始化字典中的数据。注意在<code>cinematographer</code>中的值中有一个Unicode编码。这个编码最后会被解析成带有一撇的拉丁文小写字母N，就是 <code>ń</code>。</p>
+<p>首先创建一个<code>movie2</code>字典，并初始化字典中的数据。注意在<code>cinematographer</code>中的值中有一个 Unicode 编码。这个编码最后会被解析成带有一撇的拉丁文小写字母 N，就是 <code>ń</code>。</p>
 
-<p>创建好以后使用<code>utf-8</code>编码以写入模式打开文件，然后调用<code>dump</code>方法。因为我们的数据中含有非ASCII字符，所以将<code>ensure_ascii</code>设置为<code>False</code>，最后关闭文件即可。如下所示：</p>
+<p>创建好以后使用<code>utf-8</code>编码以写入模式打开文件，然后调用<code>dump</code>方法。因为我们的数据中含有非 ASCII 字符，所以将<code>ensure_ascii</code>设置为<code>False</code>，最后关闭文件即可。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -439,7 +442,7 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">json</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
 
 <span class="n">moive2</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">moive2</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Minority Report&#39;</span>
@@ -456,8 +459,9 @@
 <span class="n">file2</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>点击<code>movies_2.txt</code>文件后，你可以看见JSON格式的数据。如下图：
-<img src="/images/Python/JSON/JSON.png" alt="JSON" /></p>
+<p>点击<code>movies_2.txt</code>文件后，你可以看见JSON格式的数据。如下图：</p>
+
+<p><img src="/images/Python/JSON/JSON.png" alt="JSON" /></p>
 
 <p>之后我们就可以用这种格式进行文件的传输，也可以利用JSON对数据进行解析，便于分类。</p>
     </div>

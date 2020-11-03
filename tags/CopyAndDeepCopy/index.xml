@@ -17,11 +17,7 @@
       <pubDate>Mon, 30 Jul 2018 18:24:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/30/learning-python-CopyAndDeepCopy/</guid>
-      <description>&lt;ul&gt;
-&lt;li&gt;直接赋值：即对象的引用，其对象的&lt;code&gt;id&lt;/code&gt;不变。&lt;/li&gt;
-&lt;li&gt;浅拷贝（copy）：拷贝父对象，不会拷贝对象的内部的子对象。&lt;/li&gt;
-&lt;li&gt;深拷贝（deepcopy）：拷贝父对象及其子对象。&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description></description>
     </item>
     
   </channel>

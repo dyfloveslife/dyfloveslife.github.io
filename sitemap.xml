@@ -128,14 +128,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Java/</loc>
+    <loc>http://localhost:1313/tags/Java/</loc>
     <lastmod>2020-06-11T17:24:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Java/</loc>
+    <loc>http://localhost:1313/categories/Java/</loc>
     <lastmod>2020-06-11T17:24:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -590,14 +590,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/MySQL/</loc>
+    <loc>http://localhost:1313/categories/MySQL/</loc>
     <lastmod>2020-02-03T20:41:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/MySQL/</loc>
+    <loc>http://localhost:1313/tags/MySQL/</loc>
     <lastmod>2020-02-03T20:41:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -612,13 +612,6 @@
   
   <url>
     <loc>http://localhost:1313/2020/02/01/java-object-and-reference/</loc>
-    <lastmod>2020-02-01T19:00:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/object/</loc>
     <lastmod>2020-02-01T19:00:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -772,6 +765,13 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/tags/Object/</loc>
+    <lastmod>2019-12-09T17:36:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/tags/Array/</loc>
     <lastmod>2019-11-29T19:23:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -856,14 +856,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Linux/</loc>
+    <loc>http://localhost:1313/categories/Linux/</loc>
     <lastmod>2019-11-20T15:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Linux/</loc>
+    <loc>http://localhost:1313/tags/Linux/</loc>
     <lastmod>2019-11-20T15:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1165,27 +1165,6 @@
   
   <url>
     <loc>http://localhost:1313/2018/11/21/read-books/</loc>
-    <lastmod>2019-11-16T10:32:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/2018/11/19/20181119/</loc>
-    <lastmod>2019-11-16T10:32:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/2018/11/07/20181107-suiji/</loc>
-    <lastmod>2019-11-16T10:32:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/2018/10/08/guoqingxiaoji/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1514,14 +1493,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Windows/</loc>
+    <loc>http://localhost:1313/tags/Windows/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Windows/</loc>
+    <loc>http://localhost:1313/categories/Windows/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content=" 直接赋值：即对象的引用，其对象的id不变。 浅拷贝（copy）：拷贝父对象，不会拷贝对象的内部的子对象。 深拷贝（deepcopy）：拷贝父对象及其子对象。 " /><meta name="keywords" content="Java, blog, carol" />
+<meta name="author" content="Carol" /><meta name="description" content="" /><meta name="keywords" content="Java, blog, carol" />
 
 
 
@@ -39,37 +39,25 @@
 
 
 <meta property="og:title" content="Python 中的浅拷贝(copy)和深拷贝(deepcopy)" />
-<meta property="og:description" content="
-直接赋值：即对象的引用，其对象的id不变。
-浅拷贝（copy）：拷贝父对象，不会拷贝对象的内部的子对象。
-深拷贝（deepcopy）：拷贝父对象及其子对象。
-" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2018/07/30/learning-python-CopyAndDeepCopy/" />
 <meta property="article:published_time" content="2018-07-30T18:24:11+08:00" />
 <meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
 <meta itemprop="name" content="Python 中的浅拷贝(copy)和深拷贝(deepcopy)">
-<meta itemprop="description" content="
-直接赋值：即对象的引用，其对象的id不变。
-浅拷贝（copy）：拷贝父对象，不会拷贝对象的内部的子对象。
-深拷贝（deepcopy）：拷贝父对象及其子对象。
-">
+<meta itemprop="description" content="">
 
 
 <meta itemprop="datePublished" content="2018-07-30T18:24:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="1032">
+<meta itemprop="wordCount" content="1021">
 
 
 
 <meta itemprop="keywords" content="Python,CopyAndDeepCopy," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python 中的浅拷贝(copy)和深拷贝(deepcopy)"/>
-<meta name="twitter:description" content="
-直接赋值：即对象的引用，其对象的id不变。
-浅拷贝（copy）：拷贝父对象，不会拷贝对象的内部的子对象。
-深拷贝（deepcopy）：拷贝父对象及其子对象。
-"/>
+<meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -143,7 +131,7 @@
         <div class="post-category">
             <a href="/categories/Python/"> Python </a>
             </div>
-          <span class="more-meta"> 1032 words </span>
+          <span class="more-meta"> 1021 words </span>
           <span class="more-meta"> 3 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -169,10 +157,8 @@
 <li>深拷贝（deepcopy）：拷贝父对象及其子对象。</li>
 </ul>
 
-<hr />
-
 <blockquote>
-<p>Python中的<code>id()</code>函数用于返回对象的内存地址。</p>
+<p>Python 中的<code>id()</code>函数用于返回对象的内存地址。</p>
 </blockquote>
 
 <h1 id="1-直接赋值">1.直接赋值</h1>
@@ -180,7 +166,7 @@
 <p>直接赋值，即赋值引用，两个变量指向同一对象（同一内存地址）。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -195,7 +181,7 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">139794901177544</span><span class="p">,</span> <span class="mi">139794901177544</span><span class="p">)</span>
@@ -217,7 +203,7 @@
 <p>浅拷贝只会拷贝父对象，不会拷贝对象的内部的子对象。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -229,7 +215,7 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">==</span><span class="nb">id</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 <span class="bp">False</span>
@@ -241,13 +227,16 @@
 <span class="o">&gt;&gt;&gt;</span> </code></pre></td></tr></table>
 </div>
 </div>
-<p>因为<code>c</code>浅拷贝了<code>a</code>，所以新增了一个内存地址用于存放<code>c</code>，它们的<code>id</code>不同。改变其<code>c</code>中某个元素的值，<code>a</code>也没有发生相应的改变，这就是因为内存地址不同了。
-&gt; 对于父对象和子对象，例如在<code>a = [1, 2, [3, 4]]</code>中，我们把<code>a[0]</code>、<code>a[1]</code>、<code>a[2]</code>叫做父对象，把<code>a[2][0]</code>、<code>a[2][1]</code>叫做子对象。</p>
+<p>因为<code>c</code>浅拷贝了<code>a</code>，所以新增了一个内存地址用于存放<code>c</code>，它们的<code>id</code>不同。改变其<code>c</code>中某个元素的值，<code>a</code>也没有发生相应的改变，这就是因为内存地址不同了。</p>
+
+<blockquote>
+<p>对于父对象和子对象，例如在<code>a = [1, 2, [3, 4]]</code>中，我们把<code>a[0]</code>、<code>a[1]</code>、<code>a[2]</code>叫做父对象，把<code>a[2][0]</code>、<code>a[2][1]</code>叫做子对象。</p>
+</blockquote>
 
 <p>但是看下面的例子，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -262,7 +251,7 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">==</span><span class="nb">id</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 <span class="bp">False</span>
@@ -277,8 +266,9 @@
 <span class="o">&gt;&gt;&gt;</span> </code></pre></td></tr></table>
 </div>
 </div>
-<p>一开始<code>d</code>拷贝了<code>a</code>，因为新增了一个内存地址用于存放<code>d</code>，所以<code>id</code>不同了，内存地址也就不同了。这时候改变<code>a[0]</code>这一父对象，相应的<code>d[0]</code>没有改变，说明父对象的内存地址发生改变了，<code>id</code>也不一样了；而改变子对象<code>a[2][0]</code>元素，相应的<code>d[2][0]</code>元素被改变了，说明子对象的内存地址不变，<code>id</code>是相同的。
-<strong>所以说：浅拷贝会拷贝父对象，不会拷贝子对象。</strong></p>
+<p>一开始<code>d</code>拷贝了<code>a</code>，因为新增了一个内存地址用于存放<code>d</code>，所以<code>id</code>不同了，内存地址也就不同了。这时候改变<code>a[0]</code>这一父对象，相应的<code>d[0]</code>没有改变，说明父对象的内存地址发生改变了，<code>id</code>也不一样了；而改变子对象<code>a[2][0]</code>元素，相应的<code>d[2][0]</code>元素被改变了，说明子对象的内存地址不变，<code>id</code>是相同的。</p>
+
+<p><strong>所以说：浅拷贝会拷贝父对象，不会拷贝子对象。</strong></p>
 
 <h1 id="3-深拷贝">3.深拷贝</h1>
 
@@ -289,7 +279,7 @@
 <p>深拷贝完全拷贝了父对象及子对象。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -302,7 +292,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">copy</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">copy</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">e</span>
@@ -320,7 +310,7 @@
 <h1 id="4-总结">4.总结</h1>
 
 <ul>
-<li>Python中对象的赋值都是进行对象引用（内存地址）的传递。</li>
+<li>Python 中对象的赋值都是进行对象引用（内存地址）的传递。</li>
 <li>浅拷贝它拷贝了对象，但对于对象中的元素，依然使用的是原始的引用（内存地址），但所含元素（父对象）的子元素（子对象）不会被拷贝。</li>
 <li>深拷贝可将父对象和子对象进行拷贝。</li>
 </ul>

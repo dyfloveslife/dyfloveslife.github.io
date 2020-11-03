@@ -653,33 +653,6 @@
     </item>
     
     <item>
-      <title>20181119</title>
-      <link>http://localhost:1313/2018/11/19/20181119/</link>
-      <pubDate>Mon, 19 Nov 2018 18:57:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2018/11/19/20181119/</guid>
-      <description>&lt;p&gt;好久没写博客啦，感觉文章的输出突然少了许多（好像之前也没怎么输出），本篇文章就记录一下这几天发生的事情吧~&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>随记</title>
-      <link>http://localhost:1313/2018/11/07/20181107-suiji/</link>
-      <pubDate>Wed, 07 Nov 2018 12:53:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2018/11/07/20181107-suiji/</guid>
-      <description>&lt;p&gt;从开学到现在已经两个多月了，这两个月以来，我收获了许多，但最重要的是收获了爱❤情！&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>国庆小记</title>
-      <link>http://localhost:1313/2018/10/08/guoqingxiaoji/</link>
-      <pubDate>Mon, 08 Oct 2018 10:28:11 +0800</pubDate>
-      
-      <guid>http://localhost:1313/2018/10/08/guoqingxiaoji/</guid>
-      <description>&lt;p&gt;国庆七天的假期过得很快，这里是一些碎碎念。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>中秋小记</title>
       <link>http://localhost:1313/2018/09/25/zhongqiuxiaoji/</link>
       <pubDate>Tue, 25 Sep 2018 12:20:11 +0800</pubDate>
@@ -724,9 +697,7 @@
       <pubDate>Wed, 15 Aug 2018 16:09:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/08/15/learning-python-Module/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Module/contents.png&#34; alt=&#34;Module-contents&#34; /&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -755,9 +726,7 @@
       <pubDate>Wed, 01 Aug 2018 14:28:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/08/01/opencv-BuildEnv/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;　　由于研究生选择的方向与计算机视觉有关，需要用到OpenCV和Matlab来处理图像，所以在这里先把环境搭建起来，然后通过一些小例子来逐渐熟悉OpenCV的使用。这算是一个学习系列的教程吧，也可以说是自己的学习总结，便于以后回顾。&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;由于研究生选择的方向与计算机视觉有关，需要用到OpenCV和Matlab来处理图像，所以在这里先把环境搭建起来，然后通过一些小例子来逐渐熟悉OpenCV的使用。这算是一个学习系列的教程吧，也可以说是自己的学习总结，便于以后回顾。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -766,11 +735,7 @@
       <pubDate>Mon, 30 Jul 2018 18:24:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/30/learning-python-CopyAndDeepCopy/</guid>
-      <description>&lt;ul&gt;
-&lt;li&gt;直接赋值：即对象的引用，其对象的&lt;code&gt;id&lt;/code&gt;不变。&lt;/li&gt;
-&lt;li&gt;浅拷贝（copy）：拷贝父对象，不会拷贝对象的内部的子对象。&lt;/li&gt;
-&lt;li&gt;深拷贝（deepcopy）：拷贝父对象及其子对象。&lt;/li&gt;
-&lt;/ul&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -779,7 +744,7 @@
       <pubDate>Sun, 29 Jul 2018 15:17:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/29/main_function_of_c/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/C/main_function.png&#34; alt=&#34;main_function&#34; /&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -814,11 +779,7 @@
       <pubDate>Sat, 14 Jul 2018 14:50:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/14/learning-python-VariableScope/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/VariableScope/contents.png&#34; alt=&#34;VariableScope-contents&#34; /&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -827,11 +788,7 @@
       <pubDate>Fri, 13 Jul 2018 16:24:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/13/learning-python-Function/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Function/contents.png&#34; alt=&#34;Function-contents&#34; /&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -840,11 +797,7 @@
       <pubDate>Fri, 13 Jul 2018 15:09:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/13/learning-python-IteratorsAndGenerators/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/IteratorsAndGenerators/contents.png&#34; alt=&#34;IteratorsAndGenerators-contents&#34; /&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -853,11 +806,7 @@
       <pubDate>Mon, 09 Jul 2018 15:51:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/09/learning-python-LoopStatement/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/LoopStatement/contents.png&#34; alt=&#34;LoopStatement-contents&#34; /&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -866,11 +815,7 @@
       <pubDate>Mon, 09 Jul 2018 14:24:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/09/lenrning-python-ConditionalControl/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/ConditionalControl/contents.png&#34; alt=&#34;ConditionalControl-contents&#34; /&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -879,11 +824,7 @@
       <pubDate>Sat, 07 Jul 2018 17:24:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/07/learning-python-Operator/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/Operator/contents.png&#34; alt=&#34;Operator-contents&#34; /&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -892,11 +833,7 @@
       <pubDate>Fri, 06 Jul 2018 14:24:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/07/06/learning-python-BasicDataType/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;要点概括：&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/BasicDataType/contents.png&#34; alt=&#34;BasicGrammar-contents&#34; /&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -906,7 +843,7 @@
       
       <guid>http://localhost:1313/2018/07/05/learning-python-BasicGrammar/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;人生苦短，我用Python！&lt;/p&gt;
+&lt;p&gt;人生苦短，我用 Python！&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/python-logo.png&#34; alt=&#34;Python-logo&#34; /&gt;&lt;/p&gt;</description>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Technology on Carol&#39;s blog</title>
+    <link>http://localhost:1313/categories/Technology/</link>
+    <description>Recent content in Technology on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 10 Nov 2020 14:30:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/Technology/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>技术成长路线与规划</title>
+      <link>http://localhost:1313/2020/11/10/Programmer-training-strategy/</link>
+      <pubDate>Tue, 10 Nov 2020 14:30:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/11/10/Programmer-training-strategy/</guid>
+      <description>&lt;p&gt;作为一名程序员，我有考虑过自己未来的职业发展道路。从刚开始工作的 1 到 3 年内，能够将自己本职工作做好，按时完成给定的业务需求，去思考如何将业务做得更好；4 到 5 年内，争取开始带团队，能够独当一面的完成具体的工作，管理并带领团队成员完成较大的项目；6 到 10 年内，我自己能够希望在技术这条路上越走越远，深究技术原理，用自己学到的知识去为企业解决技术上的难题。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

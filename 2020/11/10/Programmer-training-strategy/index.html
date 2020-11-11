@@ -44,14 +44,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2020/11/10/Programmer-training-strategy/" />
 <meta property="article:published_time" content="2020-11-10T14:30:11+08:00" />
-<meta property="article:modified_time" content="2020-11-10T14:31:11+08:00" />
+<meta property="article:modified_time" content="2020-11-11T14:02:11+08:00" />
 <meta itemprop="name" content="技术成长路线与规划">
 <meta itemprop="description" content="作为一名程序员，我有考虑过自己未来的职业发展道路。从刚开始工作的 1 到 3 年内，能够将自己本职工作做好，按时完成给定的业务需求，去思考如何将业务做得更好；4 到 5 年内，争取开始带团队，能够独当一面的完成具体的工作，管理并带领团队成员完成较大的项目；6 到 10 年内，我自己能够希望在技术这条路上越走越远，深究技术原理，用自己学到的知识去为企业解决技术上的难题。">
 
 
 <meta itemprop="datePublished" content="2020-11-10T14:30:11&#43;08:00" />
-<meta itemprop="dateModified" content="2020-11-10T14:31:11&#43;08:00" />
-<meta itemprop="wordCount" content="4882">
+<meta itemprop="dateModified" content="2020-11-11T14:02:11&#43;08:00" />
+<meta itemprop="wordCount" content="6303">
 
 
 
@@ -132,8 +132,8 @@
         <div class="post-category">
             <a href="/categories/Technology/"> Technology </a>
             </div>
-          <span class="more-meta"> 4882 words </span>
-          <span class="more-meta"> 10 mins read </span>
+          <span class="more-meta"> 6303 words </span>
+          <span class="more-meta"> 13 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -159,6 +159,7 @@
 <ul>
 <li><a href="#java">Java</a></li>
 <li><a href="#c-c">C/C++</a></li>
+<li><a href="#go">Go</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -286,7 +287,55 @@
 <li><a href="https://docs.oracle.com/javase/specs/">《Java Language and Virtual Machine Specifications》</a>，Java 官方文档，包括 Java 各个 JDK 版本的语言规范和虚拟机规范。</li>
 </ul>
 
+<p>对于 Java 并发编程的学习，可以参看这两本书：<a href="https://book.douban.com/subject/26591326/">《Java 并发编程的艺术》</a>和<a href="https://book.douban.com/subject/10484692/">《Java 并发编程实战》</a>。这两本书我都有读，前者给我的感觉是很容易理解书中的理论及概念，它更像是一篇篇的博客一样，每个知识点理解起来并不是很困难；而对于后者，就像它的书名一样，更加偏重于实战，理解起来要稍微困难一些，有条件的话，可以看英文版的《Java Concurrency in Practice》。</p>
+
+<p>对于 Spring 来说，可以看<a href="https://book.douban.com/subject/26767354/">《Spring 实战》</a>和<a href="https://book.douban.com/subject/26857423/">《Spring Boot 实战》</a>，前者是传统的 Spring，后者是微服务式的 Spring，都是通过 Spring 构建 Web 应用程序。</p>
+
 <h2 id="c-c">C/C++</h2>
+
+<p>第一次接触的编程语言就是 C 语言，然后用 C 语言写了一些类似于管理系统之类的程序。到后来才学了 Java，有了 C 语言的基础，在学习 Java 时是很快的。虽然我目前所使用的语言主要是 Java，但如果想要理解更加底层的东西，那么 C/C++ 是必须要拾起来的。因此，这一部分将会制定一个学习 C/C++ 的计划。</p>
+
+<ul>
+<li><a href="https://book.douban.com/subject/1139336/">《C 程序设计语言》</a>，豆瓣热门编程图书 No.3，C 语言作者的作品。该书通过简洁的描述、典型的示例，全面、系统地讲述了 C 语言的各个特性以及程序设计的基本方法。书不厚，能够很快读完。</li>
+<li><a href="https://book.douban.com/subject/25708312/">《C++ Primer》</a>，久负盛名的 C++ 经典教程，用它作为新手学习 C++ 准没错。其中，第 5 版也是对之前的 C++ 做了大量的更新，基于全新的 C++11 标准改写，无论是初学者还是中高级程序员，均是学习 C++ 的首选资料。</li>
+<li><a href="https://book.douban.com/subject/5387403/">《Effective C++》</a>，如同《Effective Java》一样，这本书也是给程序员提供了关于改善程序与设计的 55 个具体的做法，给出了许多有效的 C++ 编程技巧，值得一读。</li>
+<li><a href="https://book.douban.com/subject/10427315/">《深度探索 C++ 对象模型》</a>，该书专注 C++ 底层机制与代码优化，它会告诉你编译器底层到底干了什么事，就像 Java 中的 JVM 一样。</li>
+</ul>
+
+<p>此外，C++ 的作者 <a href="https://en.wikipedia.org/wiki/Bjarne_Stroustrup">Bjarne Stroustrup</a> 所写的关于 C++ 的 <a href="https://www.stroustrup.com/bs_faq.html">FAQ</a>（<a href="https://www.stroustrup.com/bsfaqcn.html">中文版</a>） 也值得一读。</p>
+
+<p>还有一个是近期发布的一本书<a href="https://changkun.de/modern-cpp/">《现代 C++ 教程：高速上手 C++ 11/14/17/20》</a>，这本书适用于已经熟悉了传统 C++、长期使用 C++ 进行编码并渴望在短时间内迅速了解<strong>现代</strong> C++ 特性的人。</p>
+
+<h2 id="go">Go</h2>
+
+<p>由于我研究生的方向是与深度学习相关的图像处理技术，因此对于 Python 来说，之前也学习过并一直都在使用，写一些脚本还是挺方便的。而 Go 也是我下一步需要学习的编程语言，一方面 Go 语言有大厂背书，另一方面 Go 的生态、社区都很丰富。所以，这里也对 Go 的学习做一个规划。</p>
+
+<ul>
+<li><a href="https://golang.org/doc/tutorial/">《Go Tutorials》</a>，对于入门的话，首先还是推荐官方文档。这里面包括 Go 的安装与基本语法使用，可以快速上手 Go 语言。
+
+<ul>
+<li><a href="https://gobyexample.com/">《Go by Example》</a>也是不错的入门教程。</li>
+</ul></li>
+<li><a href="https://golang.org/doc/effective_go.html">《Effective Go》</a>，该文档能够帮助你写出清晰地、惯用的 Go 代码，涉及 Go 语言规范，必读。</li>
+<li><a href="https://draveness.me/golang/">《Go 语言设计与实现》</a>，这是一位博主写的 Go 语言学习指南，通过大量的配图帮助读者理解语言实现细节，适用于学习过 Go 语言并且想要理解背后设计与实现的程序员，或者有过其它语言的开发经验，想要学习 Go 语言的开发者。
+
+<ul>
+<li>顺便一提，该作者<a href="https://draveness.me/">博客</a>中的文章质量非常高，值得一读。</li>
+</ul></li>
+</ul>
+
+<p>Go 语言的优点是并发编程，许多开源框架（Kubernets、etcd 等）都使用 Go 语言开发，近年来的微服务架构和云原生技术也为 Go 语言社区带来了很大的活力。因此，除了了解一些并发编程模型以外，还可以看一下 「Go 语言在操作系统层面是如何调度的」系列文章：<a href="https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html">Scheduling In Go</a>。</p>
+
+<p>此外，GitHub 上也有许多关于 Go 的学习资源，在此列出：</p>
+
+<ul>
+<li><a href="https://github.com/avelino/awesome-go">Awesome Go</a></li>
+<li><a href="https://github.com/golang/go/wiki/Articles">Go 优质文章</a></li>
+<li><a href="https://github.com/golang/go/wiki/Blogs">Go 相关博客</a></li>
+<li><a href="https://github.com/golang/go/wiki/GoTalks">Go Talks</a></li>
+</ul>
+
+<p>对于其它的，如编程范式、软件设计、分布式、微服务、容器化和自动化运维等技术，将会在以后进行同步更新。</p>
     </div>
 
     <div class="post-copyright">
@@ -297,7 +346,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2020-11-10
+        2020-11-11
         
     </span>
   </p>

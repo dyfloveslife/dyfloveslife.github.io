@@ -17,7 +17,7 @@
       <pubDate>Thu, 26 Nov 2020 19:46:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2020/11/26/learn-Missing-Semester-shell-tool-and-scripting/</guid>
-      <description>Course overview + the shell Shell Tools and Scripting Editors (Vim) Data Wrangling（数据整理） Command-line Environment Version Control (Git) Debugging and Profiling Metaprogramming Security and Cryptography（安全和密码学） Potpourri（大杂</description>
+      <description>&lt;p&gt;本文将会介绍以 bash 作为脚本语言的一些基本操作，以及几种常用的 shell 工具。&lt;/p&gt;</description>
     </item>
     
     <item>

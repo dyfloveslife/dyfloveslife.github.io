@@ -10,27 +10,62 @@
   
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2020-11-11T14:02:11+08:00</lastmod>
+    <lastmod>2020-11-26T19:47:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2020-11-11T14:02:11+08:00</lastmod>
+    <lastmod>2020-11-26T19:47:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/categories/Linux/</loc>
+    <lastmod>2020-11-26T19:47:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/Linux/</loc>
+    <lastmod>2020-11-26T19:47:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2020/11/26/learn-Missing-Semester-shell-tool-and-scripting/</loc>
+    <lastmod>2020-11-26T19:47:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2020-11-11T14:02:11+08:00</lastmod>
+    <lastmod>2020-11-26T19:47:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2020-11-26T19:47:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2020/11/26/learn-Missing-Semester-shell/</loc>
+    <lastmod>2020-11-26T16:32:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/Technology/</loc>
     <lastmod>2020-11-11T14:02:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -38,13 +73,6 @@
   
   <url>
     <loc>http://localhost:1313/categories/Technology/</loc>
-    <lastmod>2020-11-11T14:02:11+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/Technology/</loc>
     <lastmod>2020-11-11T14:02:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -877,20 +905,6 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Linux/</loc>
-    <lastmod>2019-11-20T15:32:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/Linux/</loc>
-    <lastmod>2019-11-20T15:32:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://localhost:1313/2019/11/13/linux-io/</loc>
     <lastmod>2019-11-20T15:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -933,14 +947,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E6%8A%80%E5%B7%A7/</loc>
+    <loc>http://localhost:1313/categories/%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E6%8A%80%E5%B7%A7/</loc>
+    <loc>http://localhost:1313/tags/%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

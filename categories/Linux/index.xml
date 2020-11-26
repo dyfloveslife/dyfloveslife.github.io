@@ -6,10 +6,28 @@
     <description>Recent content in Linux on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 13 Nov 2019 07:52:11 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 26 Nov 2020 19:46:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Missing Semester 学习笔记 - Shell Tools and Scripting</title>
+      <link>http://localhost:1313/2020/11/26/learn-Missing-Semester-shell-tool-and-scripting/</link>
+      <pubDate>Thu, 26 Nov 2020 19:46:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/11/26/learn-Missing-Semester-shell-tool-and-scripting/</guid>
+      <description>Course overview + the shell Shell Tools and Scripting Editors (Vim) Data Wrangling（数据整理） Command-line Environment Version Control (Git) Debugging and Profiling Metaprogramming Security and Cryptography（安全和密码学） Potpourri（大杂</description>
+    </item>
+    
+    <item>
+      <title>Missing Semester 学习笔记 - Shell</title>
+      <link>http://localhost:1313/2020/11/26/learn-Missing-Semester-shell/</link>
+      <pubDate>Thu, 26 Nov 2020 16:24:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/11/26/learn-Missing-Semester-shell/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://missing.csail.mit.edu/&#34;&gt;《The Missing Semester of Your CS Education》&lt;/a&gt;（中文：&lt;a href=&#34;https://missing-semester-cn.github.io/&#34;&gt;《计算机教育中缺失的一课》&lt;/a&gt;）是 &lt;a href=&#34;https://en.wikipedia.org/wiki/Massachusetts_Institute_of_Technology&#34;&gt;MIT&lt;/a&gt; 给 CS 专业的学生开设的一门「如何使用计算机工具」的一门课程。正如课程介绍所说的那样：&lt;em&gt;&lt;strong&gt;本门课程主要讲述命令行、强大的文本编辑器的使用、版本控制的特性等&lt;/strong&gt;&lt;/em&gt; 。我觉得这门课比较实用，而且比较有意思，所以就学习了这门课。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>情景再现 Linux 中的 IO 模型</title>

@@ -44,14 +44,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2020/11/26/learn-Missing-Semester-shell-tool-and-scripting/" />
 <meta property="article:published_time" content="2020-11-26T19:46:11+08:00" />
-<meta property="article:modified_time" content="2020-11-28T17:17:56+08:00" />
+<meta property="article:modified_time" content="2020-11-29T17:15:56+08:00" />
 <meta itemprop="name" content="Missing Semester 学习笔记 - Shell Tools and Scripting">
 <meta itemprop="description" content="本文将会介绍以 bash 作为脚本语言的一些基本操作，以及几种常用的 shell 工具。">
 
 
 <meta itemprop="datePublished" content="2020-11-26T19:46:11&#43;08:00" />
-<meta itemprop="dateModified" content="2020-11-28T17:17:56&#43;08:00" />
-<meta itemprop="wordCount" content="2700">
+<meta itemprop="dateModified" content="2020-11-29T17:15:56&#43;08:00" />
+<meta itemprop="wordCount" content="2826">
 
 
 
@@ -132,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/Linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 2700 words </span>
+          <span class="more-meta"> 2826 words </span>
           <span class="more-meta"> 6 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -805,9 +805,20 @@ carol@ubuntu-carol:~/learnShell$ </code></pre></td></tr></table>
 <pre class="chroma"><code class="language-shell" data-lang="shell">find . -name <span class="s1">&#39;*png&#39;</span> -exec convert <span class="o">{}</span> <span class="o">{</span>.<span class="o">}</span>.jpg <span class="se">\;</span></code></pre></td></tr></table>
 </div>
 </div>
-<blockquote>
-<p>35:20 / 48:55</p>
-</blockquote>
+<p>之前可以使用<code>grep</code>进行文件中的字符串的查找，也可以使用工具<code>fzf</code>进行查找，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ cat example.sh <span class="p">|</span> fzf</code></pre></td></tr></table>
+</div>
+</div>
+<p>输入完上述命令后，则会进入编辑模式。然后，你可以在该模式下输入你想要查找的字符串。</p>
+
+<p><img src="https://i.loli.net/2020/11/29/tov6cINTF43UK79.png" alt="image.png" /></p>
+
+<p>对于可视化目录来说，也有几个比较实用的工具，如 <a href="https://en.wikipedia.org/wiki/Tree_(command)">tree</a>、<a href="https://github.com/Canop/broot">broot</a>、<a href="https://github.com/jarun/nnn/wiki/Usage">nnn</a> 等。</p>
     </div>
 
     <div class="post-copyright">
@@ -818,7 +829,7 @@ carol@ubuntu-carol:~/learnShell$ </code></pre></td></tr></table>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2020-11-28
+        2020-11-29
         
     </span>
   </p>

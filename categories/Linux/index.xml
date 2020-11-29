@@ -6,10 +6,19 @@
     <description>Recent content in Linux on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 26 Nov 2020 19:46:11 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Nov 2020 17:16:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Missing Semester 学习笔记 - Vim</title>
+      <link>http://localhost:1313/2020/11/29/learn-Missing-Semester-vim/</link>
+      <pubDate>Sun, 29 Nov 2020 17:16:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/11/29/learn-Missing-Semester-vim/</guid>
+      <description>&lt;p&gt;这节课学习的是 &lt;a href=&#34;https://www.vim.org/&#34;&gt;Vim&lt;/a&gt;，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：&lt;a href=&#34;https://coolshell.cn/articles/5426.html&#34;&gt;《简明 VIM 练级攻略》&lt;/a&gt;，英文版在这里 &lt;a href=&#34;http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/&#34;&gt;《Learn Vim Progressively》&lt;/a&gt;。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Missing Semester 学习笔记 - Shell Tools and Scripting</title>

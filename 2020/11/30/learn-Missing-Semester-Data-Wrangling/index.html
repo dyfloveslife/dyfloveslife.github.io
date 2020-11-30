@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Missing Semester 学习笔记 - Vim - Carol&#39;s blog</title>
+  <title>Missing Semester 学习笔记 - Data Wrangling - Carol&#39;s blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Carol" /><meta name="description" content="这节课学习的是 Vim，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：《简明 VIM 练级攻略》，英文版在这里《Learn Vim Progressively》。
+<meta name="author" content="Carol" /><meta name="description" content="本节会介绍如何将数据的一种格式转换到另一种格式，也就是对数据的整理。
 " /><meta name="keywords" content="Java, blog, carol" />
 
 
@@ -27,7 +27,7 @@
 <meta name="generator" content="Hugo 0.59.1 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/2020/11/29/learn-Missing-Semester-vim/" />
+<link rel="canonical" href="http://localhost:1313/2020/11/30/learn-Missing-Semester-Data-Wrangling/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,26 +39,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Missing Semester 学习笔记 - Vim" />
-<meta property="og:description" content="这节课学习的是 Vim，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：《简明 VIM 练级攻略》，英文版在这里《Learn Vim Progressively》。" />
+<meta property="og:title" content="Missing Semester 学习笔记 - Data Wrangling" />
+<meta property="og:description" content="本节会介绍如何将数据的一种格式转换到另一种格式，也就是对数据的整理。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2020/11/29/learn-Missing-Semester-vim/" />
-<meta property="article:published_time" content="2020-11-29T17:16:11+08:00" />
-<meta property="article:modified_time" content="2020-11-29T17:17:56+08:00" />
-<meta itemprop="name" content="Missing Semester 学习笔记 - Vim">
-<meta itemprop="description" content="这节课学习的是 Vim，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：《简明 VIM 练级攻略》，英文版在这里《Learn Vim Progressively》。">
+<meta property="og:url" content="http://localhost:1313/2020/11/30/learn-Missing-Semester-Data-Wrangling/" />
+<meta property="article:published_time" content="2020-11-30T14:35:11+08:00" />
+<meta property="article:modified_time" content="2020-11-30T14:36:56+08:00" />
+<meta itemprop="name" content="Missing Semester 学习笔记 - Data Wrangling">
+<meta itemprop="description" content="本节会介绍如何将数据的一种格式转换到另一种格式，也就是对数据的整理。">
 
 
-<meta itemprop="datePublished" content="2020-11-29T17:16:11&#43;08:00" />
-<meta itemprop="dateModified" content="2020-11-29T17:17:56&#43;08:00" />
-<meta itemprop="wordCount" content="1095">
+<meta itemprop="datePublished" content="2020-11-30T14:35:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-30T14:36:56&#43;08:00" />
+<meta itemprop="wordCount" content="885">
 
 
 
-<meta itemprop="keywords" content="Linux,Vim," />
+<meta itemprop="keywords" content="Linux," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Missing Semester 学习笔记 - Vim"/>
-<meta name="twitter:description" content="这节课学习的是 Vim，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：《简明 VIM 练级攻略》，英文版在这里《Learn Vim Progressively》。"/>
+<meta name="twitter:title" content="Missing Semester 学习笔记 - Data Wrangling"/>
+<meta name="twitter:description" content="本节会介绍如何将数据的一种格式转换到另一种格式，也就是对数据的整理。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -125,15 +125,15 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Missing Semester 学习笔记 - Vim</h1>
+      <h1 class="post-title">Missing Semester 学习笔记 - Data Wrangling</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2020-11-29 </span>
+        <span class="post-time"> 2020-11-30 </span>
         <div class="post-category">
             <a href="/categories/Linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 1095 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 885 words </span>
+          <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -145,15 +145,15 @@
   </div>
 </div>
     <div class="post-content">
-      <p>这节课学习的是 <a href="https://www.vim.org/">Vim</a>，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：<a href="https://coolshell.cn/articles/5426.html">《简明 VIM 练级攻略》</a>，英文版在这里<a href="http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/">《Learn Vim Progressively》</a>。</p>
+      <p>本节会介绍如何将数据的一种格式转换到另一种格式，也就是对数据的整理。</p>
 
 <p>目录如下：</p>
 
 <ul>
 <li>Course overview + the shell</li>
 <li>Shell Tools and Scripting</li>
-<li><strong>Editors (Vim)</strong></li>
-<li>Data Wrangling（数据整理）</li>
+<li>Editors (Vim)</li>
+<li><strong>Data Wrangling（数据整理）</strong></li>
 <li>Command-line Environment</li>
 <li>Version Control (Git)</li>
 <li>Debugging and Profiling</li>
@@ -163,67 +163,111 @@
 <li>Q&amp;A</li>
 </ul>
 
-<p>仅看上面的文章就足够日常使用了，下面仅给出部分命令。</p>
-
-<p>在 <strong>Normal</strong> 模式下的部分命令：</p>
-
-<ul>
-<li><code>:ls</code>：显示打开的缓存。</li>
-<li><code>:help {标题}</code>：打开帮助文档，例如：
-
-<ul>
-<li><code>:help :w</code>：打开<code>:w</code>的帮助文档。</li>
-<li><code>:help w</code>：打开<code>w</code>移动的帮助文档（<code>w</code>的作用是将光标移动到下一个单词的开头，如果中间含有特殊字符或标点符号的话，则会来到特殊字符或标点符号的位置。）</li>
-</ul></li>
-</ul>
-
-<p>在移动光标时，也可以根据不同的场景需求，使用不同的字符。除了上面说到的<code>w</code>外，还有如下方式：</p>
-
-<ul>
-<li><code>b</code>：移动到当前单词的开头或上一个单词的开头。</li>
-<li><code>e</code>：移动到词尾。</li>
-<li><code>0</code>：数字 0，移动到行首。</li>
-<li><code>$</code>：移动到行尾。</li>
-<li><code>^</code>：移动到第一个非空格字符。</li>
-<li><code>H</code>：移动到当前屏幕的首行。</li>
-<li><code>M</code>：移动到当前屏幕的中间一行。</li>
-<li><code>L</code>：移动到当前屏幕的底部一行。</li>
-<li><kbd>Ctrl</kbd>+<kbd>u</kbd>：向上翻页。</li>
-<li><kbd>Ctrl</kbd>+<kbd>d</kbd>：向下翻页。</li>
-<li><code>gg</code>：移动到文件首行。</li>
-<li><code>G</code>：移动到文件末尾。</li>
-<li><strong>:</strong>行号<kbd>Enter</kbd>：来到指定的行。例如输入<code>:12</code>后按<kbd>Enter</kbd>，则光标将会定位在第 12 行。</li>
-<li><code>行号gg</code>：例如<code>20gg</code>则会来到第 20 行。</li>
-<li><code>行号G</code>：例如<code>12G</code>则会来到第 12 行。</li>
-</ul>
-
-<p>以下命令用于改变括号或引号中的内容。</p>
-
-<ul>
-<li><code>ci(</code>：改变当前小括号中的内容。</li>
-<li><code>ci[</code>：改变当前中括号中的内容。</li>
-<li><code>da'</code>；改变当前单引号中的内容，并将左右两侧的单引号删除。</li>
-<li><code>da&quot;</code>：作用同上，只不过是对双引号起作用。</li>
-</ul>
-
-<p>可以使用<code>:sp</code>或<code>:vsp</code>在同一终端下创建多个窗口，然后使用<code>:w</code>+<code>hjkl</code>的方式在各个窗口之间选择。如果你觉得每次使用<code>:q</code>退出当前窗口很麻烦的话，可以使用<code>:qa</code>退出全部的窗口。</p>
-
-<p>如果想要将整个文件中的某个字符串替换为另一个字符串，则可以使用以下方式。该实例表示：将整个文件中的所有字符串<code>bar</code>替换成<code>for</code>。</p>
+<p>我们可以使用<code>journalctl</code>来查询系统的日志，然后使用<code>grep</code>将想要得到的信息进行过滤：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">:%s/bar/for/g</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ journalctl <span class="p">|</span> grep -i intel</code></pre></td></tr></table>
 </div>
 </div>
-<p>如果你想在一行中，向后（右）找到首个距离光标最近的字符的话，可以使用<code>f{字符}</code>。例如<code>fo</code>，即在这一行中，将光标移动到第一个字符<code>o</code>的位置上。同理，如果想要向前（左）找到首个距离光标最近的字符的话，则可以使用<code>F{字符}</code>。</p>
+<p>你会看到控制台会一次性显示很多与<code>intel</code>相关的日志信息，为了便于查看，可以使用<code>less</code>命令进行翻页。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ journalctl <span class="p">|</span> grep -i intel <span class="p">|</span> less</code></pre></td></tr></table>
+</div>
+</div>
+<p>当然，这里会介绍一个强大的“流编辑器”工具<code>sed</code>，我们可以使用一些简短的命令（例如正则表达式）来修改文件，而不是直接操作文件的内容。</p>
 
-<p>如果想要来到光标右侧的首个字符<code>m</code>之前的那个字符，可以使用<code>tm</code>，那么执行命令之后，光标就会停留在字符<code>m</code>的左侧那个字符。同理，你可以试试<code>T{字符}</code>的效果。</p>
+<p>比较常用的是<code>s</code>，也就是进行替换命令。它的格式为<code>s/REGEX/SUBSTITITION</code>，其中，<code>REGEX</code>需要使用正则表达式，而<code>SUBSTITITION</code>是用于替换匹配结果的文本。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ cat ssh.log <span class="p">|</span> sed <span class="s1">&#39;s/.*intel //&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这里的<code>/.*intel /</code>表示可以匹配任何以若干任意字符开头，并且包含<code>intel</code>的字符串。常见的正则表达式如下：</p>
 
-<p><code>dd</code>表示删除光标所在的行，<code>cc</code>除了删除光标所在的行之外，还会进入 <strong>INSERT</strong> 模式。</p>
+<ul>
+<li><code>.</code>：除了空格之外的任意单个字符。</li>
+<li><code>*</code>：匹配前面字符零次或多次。</li>
+<li><code>+</code>：匹配前面字符一次或多次。</li>
+<li><code>[abc]</code>：匹配 a、b、c 中的任意一个。</li>
+<li><code>(RX1 | RX2)</code>：任何能够匹配<code>RX1</code>或<code>RX2</code>的结果。</li>
+<li><code>^</code>：行首。</li>
+<li><code>&amp;</code>：行尾。</li>
+</ul>
 
-<p>对于其它的命令，在具体使用的时候可以看一看本文开头提到的文章。</p>
+<p>这里对<code>[abc]</code>的使用给出一个实例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;aba&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//&#39;</span>
+ba
+carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;bba&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//&#39;</span>
+ba
+carol@ubuntu-carol:~/learnShell$ </code></pre></td></tr></table>
+</div>
+</div>
+<p>正如你所看到的，对于字符串<code>aba</code>来说，当遇到<code>s/[ab]//</code>时，会将首个<code>a</code>替换为空。而对于字符串<code>bba</code>来说，当遇到<code>s/[ab]//</code>时，会将首个<code>b</code>替换为空。</p>
+
+<p>你也可以使用<code>g</code>来过滤出不在<code>[ab]</code>中的字符，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abac&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//g&#39;</span>
+c
+carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abzzcczac&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//g&#39;</span>
+zzcczc
+carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abzzccabszac&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//g&#39;</span>
+zzccszc
+carol@ubuntu-carol:~/learnShell$ </code></pre></td></tr></table>
+</div>
+</div>
+<p>还可以进行一些其它的应用，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abcabc&#39;</span> <span class="p">|</span> sed -E <span class="s1">&#39;s/(ab)*//g&#39;</span>
+cc
+carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abcabc&#39;</span> <span class="p">|</span> sed -E <span class="s1">&#39;s/(ab|bc)*//g&#39;</span>
+cc
+carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abcabbc&#39;</span> <span class="p">|</span> sed -E <span class="s1">&#39;s/(ab|bc)*//g&#39;</span>
+c
+carol@ubuntu-carol:~/learnShell$ </code></pre></td></tr></table>
+</div>
+</div>
+<p>通篇看下来，文章主要介绍了<code>sed</code>、<code>awk</code>的使用，并结合正则表达式来进行一些数据整理的操作。对于正则表达式来说，可以使用在线调试工具 <a href="https://regex101.com/r/qqbZqh/2">Regex101</a> 来帮助你更好的理解它的使用。</p>
+
+<p>此外，文章最后还给出了<a href="https://emailregex.com/">匹配电子邮箱</a>的正则表达式、判断一个数<a href="https://www.noulakaz.net/2007/03/18/a-regular-expression-to-check-for-prime-numbers/">是否为质数</a>的正则表达式。</p>
     </div>
 
     <div class="post-copyright">
@@ -234,7 +278,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2020-11-29
+        2020-11-30
         
     </span>
   </p>
@@ -261,16 +305,15 @@
 </div><footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/Linux/">Linux</a>
-          <a href="/tags/Vim/">Vim</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/2020/11/30/learn-Missing-Semester-Data-Wrangling/">
+        <a class="prev" href="/2020/11/30/learn-Missing-Semester-Command-line-Environment/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Missing Semester 学习笔记 - Data Wrangling</span>
+            <span class="prev-text nav-default">Missing Semester 学习笔记 - Command-line Environment</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/2020/11/26/learn-Missing-Semester-shell-tool-and-scripting/">
-            <span class="next-text nav-default">Missing Semester 学习笔记 - Shell Tools and Scripting</span>
+        <a class="next" href="/2020/11/29/learn-Missing-Semester-vim/">
+            <span class="next-text nav-default">Missing Semester 学习笔记 - Vim</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

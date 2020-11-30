@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Missing Semester 学习笔记 - Command-line Environment - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="本节会介绍如何同时执行多个不同的进程并追踪它们的状态，以及如何停止或暂停某个进程，同时如何使进程在后台运行。这对于后端开发人员来说是必备技能。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2020/11/30/learn-Missing-Semester-Command-line-Environment/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Missing Semester 学习笔记 - Command-line Environment" />
+<meta property="og:description" content="本节会介绍如何同时执行多个不同的进程并追踪它们的状态，以及如何停止或暂停某个进程，同时如何使进程在后台运行。这对于后端开发人员来说是必备技能。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/11/30/learn-Missing-Semester-Command-line-Environment/" />
+<meta property="article:published_time" content="2020-11-30T15:52:11+08:00" />
+<meta property="article:modified_time" content="2020-11-30T19:27:56+08:00" />
+<meta itemprop="name" content="Missing Semester 学习笔记 - Command-line Environment">
+<meta itemprop="description" content="本节会介绍如何同时执行多个不同的进程并追踪它们的状态，以及如何停止或暂停某个进程，同时如何使进程在后台运行。这对于后端开发人员来说是必备技能。">
+
+
+<meta itemprop="datePublished" content="2020-11-30T15:52:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-30T19:27:56&#43;08:00" />
+<meta itemprop="wordCount" content="1460">
+
+
+
+<meta itemprop="keywords" content="Linux," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Missing Semester 学习笔记 - Command-line Environment"/>
+<meta name="twitter:description" content="本节会介绍如何同时执行多个不同的进程并追踪它们的状态，以及如何停止或暂停某个进程，同时如何使进程在后台运行。这对于后端开发人员来说是必备技能。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Missing Semester 学习笔记 - Command-line Environment</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-30 </span>
+        <div class="post-category">
+            <a href="/categories/Linux/"> Linux </a>
+            </div>
+          <span class="more-meta"> 1460 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <p>本节会介绍如何同时执行多个不同的进程并追踪它们的状态，以及如何停止或暂停某个进程，同时如何使进程在后台运行。这对于后端开发人员来说是必备技能。</p>
+
+<p>目录如下：</p>
+
+<ul>
+<li>Course overview + the shell</li>
+<li>Shell Tools and Scripting</li>
+<li>Editors (Vim)</li>
+<li>Data Wrangling（数据整理）</li>
+<li><strong>Command-line Environment</strong></li>
+<li>Version Control (Git)</li>
+<li>Debugging and Profiling</li>
+<li>Metaprogramming</li>
+<li>Security and Cryptography（安全和密码学）</li>
+<li>Potpourri（大杂烩）</li>
+<li>Q&amp;A</li>
+</ul>
+
+<p>假设我们使用<code>sleep</code>命令让当前的进程睡眠<code>20</code>秒，在这期间，通过不同的中断方式，则会终止进程的运行。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ sleep <span class="m">20</span>
+^C
+carol@ubuntu-carol:~/learnShell$ sleep <span class="m">20</span>
+^<span class="se">\Q</span>uit <span class="o">(</span>core dumped<span class="o">)</span>
+carol@ubuntu-carol:~/learnShell$ </code></pre></td></tr></table>
+</div>
+</div>
+<p>第一次使用<kbd>Ctrl</kbd>+<kbd>c</kbd>终止，第二次使用<kbd>Ctrl</kbd>+<kbd>\</kbd>终止。通过提示信息可以看到这两种不同终止方式所给出的不同结果。</p>
+
+<p>这是因为：这里的 shell 会使用 UNIX 提供的信号机制进行进程之间的通信。当一个进程收到信号时，该进程会停止、处理该信号，并基于该信号传递的信息来改变其执行，即软件中断。</p>
+
+<p>当使用<kbd>Ctrl</kbd>+<kbd>c</kbd>时，shell 会发送一个<code>SIGINT</code>信号给进程，用于中断该进程。而当使用<kbd>Ctrl</kbd>+<kbd>\</kbd>时，shell 会发送一个<code>SIGQUIT</code>信号给进程，用于退出进程。</p>
+
+<p>下面的<code>sigint.py</code>程序能够捕获<code>SIGINT</code>信号并将其忽略，但不会让程序停止。为了停止程序，需要使用到<code>SIGQUIT</code>信号。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">signal</span><span class="o">,</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">I got a SIGINT, but I am not stopping&#34;</span><span class="p">)</span>
+
+<span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\r</span><span class="s2">{}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>当执行该程序之后，我执行了两次<kbd>Ctrl</kbd>+<kbd>c</kbd>操作，显然程序还在运行中。然后，我执行了一次<kbd>Ctrl</kbd>+<kbd>\</kbd>操作，程序才停止运行。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ python3 sigint.py 
+<span class="m">16</span>^C
+I got a SIGINT, but I am not stopping.
+<span class="m">23</span>^C
+I got a SIGINT, but I am not stopping.
+<span class="m">36</span>^<span class="se">\Q</span>uit <span class="o">(</span>core dumped<span class="o">)</span>
+carol@ubuntu-carol:~/learnShell$ </code></pre></td></tr></table>
+</div>
+</div>
+<p>上述演示了<code>SIGINT</code>信号和<code>SIGQUIT</code>信号的使用，除了这俩以外，<code>SIGTERM</code>是一个更加通用、优雅地退出信号，我们可以使用<code>kill</code>命令发出这个信号。</p>
+
+<p>此外，使用<kbd>Ctrl</kbd>+<kbd>z</kbd>则会发送一个<code>SIGTSTP</code>信号，表示将进程挂起。而对于暂停或者挂起的进程，我们可以使用<code>fg</code>或<code>bg</code>命令让其继续执行，前者表示在前台继续执行，后者表示在后台继续执行。</p>
+
+<p>此外，<code>jobs</code>命令的作用是列出当前终端会话中尚未完成的全部任务。在某个命令的最后添加<code>&amp;</code>这一后缀字符，可以让该命令直接在后台运行。</p>
+
+<p>如果你想让正在运行的进程转到后台运行，那么可以执行<kbd>Ctrl</kbd>+<kbd>z</kbd>，然后再输入<code>bg</code>。不过需要注意的是：后台的进程仍然是当前终端的子进程，一旦关闭了终端，那么这些子进程也就随之终止了。为了防止这种情况的发生，可以使用<code>nohup</code>命令。下面是一些例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~$ sleep <span class="m">1000</span>
+^Z
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>+  Stopped                 sleep <span class="m">1000</span>
+carol@ubuntu-carol:~$ nohup sleep <span class="m">2000</span> <span class="p">&amp;</span>
+<span class="o">[</span><span class="m">2</span><span class="o">]</span> <span class="m">5525</span>
+carol@ubuntu-carol:~$ nohup: ignoring input and appending output to <span class="s1">&#39;nohup.out&#39;</span>
+<span class="nb">jobs</span>
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>+  Stopped                 sleep <span class="m">1000</span>
+<span class="o">[</span><span class="m">2</span><span class="o">]</span>-  Running                 nohup sleep <span class="m">2000</span> <span class="p">&amp;</span>
+carol@ubuntu-carol:~$ <span class="nb">bg</span> %1
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>+ sleep <span class="m">1000</span> <span class="p">&amp;</span>
+carol@ubuntu-carol:~$ <span class="nb">jobs</span>
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>-  Running                 sleep <span class="m">1000</span> <span class="p">&amp;</span>
+<span class="o">[</span><span class="m">2</span><span class="o">]</span>+  Running                 nohup sleep <span class="m">2000</span> <span class="p">&amp;</span>
+carol@ubuntu-carol:~$ <span class="nb">kill</span> -STOP %1
+carol@ubuntu-carol:~$ <span class="nb">jobs</span>
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>+  Stopped                 sleep <span class="m">1000</span>
+<span class="o">[</span><span class="m">2</span><span class="o">]</span>-  Running                 nohup sleep <span class="m">2000</span> <span class="p">&amp;</span>
+carol@ubuntu-carol:~$ <span class="nb">kill</span> -SIGHUP %1
+carol@ubuntu-carol:~$ <span class="nb">jobs</span>
+<span class="o">[</span><span class="m">1</span><span class="o">]</span>-  Hangup                  sleep <span class="m">1000</span>
+<span class="o">[</span><span class="m">2</span><span class="o">]</span>+  Running                 nohup sleep <span class="m">2000</span> <span class="p">&amp;</span>
+carol@ubuntu-carol:~$ <span class="nb">kill</span> -SIGHUP %2
+carol@ubuntu-carol:~$ <span class="nb">jobs</span>
+<span class="o">[</span><span class="m">2</span><span class="o">]</span>+  Running                 nohup sleep <span class="m">2000</span> <span class="p">&amp;</span>
+carol@ubuntu-carol:~$ <span class="nb">kill</span> %2
+carol@ubuntu-carol:~$ <span class="nb">jobs</span>
+<span class="o">[</span><span class="m">2</span><span class="o">]</span>+  Terminated              nohup sleep <span class="m">2000</span>
+carol@ubuntu-carol:~$ <span class="nb">jobs</span>
+carol@ubuntu-carol:~$ </code></pre></td></tr></table>
+</div>
+</div>
+<p>此外，<code>SIGKILL</code>是一个特殊的信号，它不能被进程捕获并且它会马上结束该进程。但它的缺点是会留下孤儿进程。</p>
+
+<p>接下来介绍一个终端多路复用工具 <a href="https://github.com/tmux/tmux">tmux</a>，你可以在一个终端上轻松地切换多个程序，或者分离它们，此时它们会在后台运行，并将它们重新连接到另一个终端。也就是说，当你在使用终端的时候，如果想要同时执行多个任务，在运行编辑器的同时在终端的另一侧执行某个程序。你当然可以再重新打开一个终端，但是使用终端多路复用工具无疑是最好、最方便的选择。</p>
+
+<p>这里有一篇关于 tmux 的文章<a href="https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/">《A Quick and Easy Guide to tmux》</a>，介绍了 tmux 的安装及简单使用。更加详细的文章：<a href="https://man7.org/linux/man-pages/man1/tmux.1.html">《tmux(1) — Linux manual page》</a>、<a href="http://linuxcommand.org/lc3_adv_termmux.php">《Terminal Multiplexers》</a>。</p>
+
+<p>接下来是 alias 的使用，也就是<code>别名</code>。</p>
+
+<blockquote>
+<p>27:15 / 56:06</p>
+</blockquote>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-30
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Linux/">Linux</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/11/30/learn-Missing-Semester-Data-Wrangling/">
+            <span class="next-text nav-default">Missing Semester 学习笔记 - Data Wrangling</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

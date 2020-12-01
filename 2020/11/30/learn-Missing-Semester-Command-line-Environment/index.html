@@ -44,14 +44,14 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2020/11/30/learn-Missing-Semester-Command-line-Environment/" />
 <meta property="article:published_time" content="2020-11-30T15:52:11+08:00" />
-<meta property="article:modified_time" content="2020-11-30T19:27:56+08:00" />
+<meta property="article:modified_time" content="2020-12-01T11:01:56+08:00" />
 <meta itemprop="name" content="Missing Semester 学习笔记 - Command-line Environment">
 <meta itemprop="description" content="本节会介绍如何同时执行多个不同的进程并追踪它们的状态，以及如何停止或暂停某个进程，同时如何使进程在后台运行。这对于后端开发人员来说是必备技能。">
 
 
 <meta itemprop="datePublished" content="2020-11-30T15:52:11&#43;08:00" />
-<meta itemprop="dateModified" content="2020-11-30T19:27:56&#43;08:00" />
-<meta itemprop="wordCount" content="1460">
+<meta itemprop="dateModified" content="2020-12-01T11:01:56&#43;08:00" />
+<meta itemprop="wordCount" content="2392">
 
 
 
@@ -132,8 +132,8 @@
         <div class="post-category">
             <a href="/categories/Linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 1460 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 2392 words </span>
+          <span class="more-meta"> 5 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -317,11 +317,43 @@ carol@ubuntu-carol:~$ </code></pre></td></tr></table>
 
 <p>这里有一篇关于 tmux 的文章<a href="https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/">《A Quick and Easy Guide to tmux》</a>，介绍了 tmux 的安装及简单使用。更加详细的文章：<a href="https://man7.org/linux/man-pages/man1/tmux.1.html">《tmux(1) — Linux manual page》</a>、<a href="http://linuxcommand.org/lc3_adv_termmux.php">《Terminal Multiplexers》</a>。</p>
 
-<p>接下来是 alias 的使用，也就是<code>别名</code>。</p>
+<p>接下来是 alias 的使用，也就是<code>别名</code>。例如，当你在终端输入<code>ls -lah</code>的时候，这个过程有些繁琐。因此，你可以使用<code>alias ll=&quot;ls -lah&quot;</code>（注意：等号两边不能含有空格），然后在终端直接输入<code>ll</code>即可。这大幅度减少了输入命令所需要的时间。</p>
 
-<blockquote>
-<p>27:15 / 56:06</p>
-</blockquote>
+<p>默认情况下，shell 不会保存这些别名，你需要将这些别名配置在<code>.bashrc</code>文件中。像这样以<code>.</code>开头的文件称为<code>dotfile</code>，即<code>配置文件</code>。常见的配置文件如下所示：</p>
+
+<ul>
+<li><code>bash</code>：~/.bashrc、~/.bash_profile</li>
+<li><code>git</code>：~/.gitconfig</li>
+<li><code>vim</code>：~/.vimrc 和 ~/.vim 目录</li>
+<li><code>ssh</code>：~/ssh/config</li>
+<li><code>tmux</code>：~/.tmux.conf</li>
+</ul>
+
+<p>至于这些配置文件需要怎么配置或者怎么使用，你可以在 <a href="https://github.com/search?o=desc&amp;q=dotfiles&amp;s=stars&amp;type=Repositories">github</a> 上找到许多 dotfile 文件，<a href="https://dotfiles.github.io/">这里</a> 也可以找到。</p>
+
+<p>对于<code>ssh</code>的使用，该工具可以连接到其它服务器，例如<code>ssh foo@bar.mit.edu</code>，即通过用户名<code>foo</code>登录服务器<code>bar.mit.edu</code>（这里的服务器也可以是 IP 地址）。</p>
+
+<p>有一点没有之前没有注意到的是：可以使用<code>ssh foobar@server ls</code>直接在服务器<code>server</code>上以用户名<code>foobar</code>的身份执行<code>ls</code>的命令。甚至也可以配合管道命令来使用。</p>
+
+<p>此外，当我们在使用 ssh 连接到远程服务器的时候，我们可能会遇到「软件需要监听特定设备端口」的需求。如果在本地的话，则可以直接使用<code>localhost:端口号</code>或<code>127.0.0.1:端口号</code>。但是，通常情况下，服务器的远程端口不会直接通过网络暴露给用户。</p>
+
+<p>我们可以通过<a href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot">端口转发</a>的方式解决上述问题。转发方式有：本地端口转发和远程端口转发两种方式。如下图所示：</p>
+
+<p><strong>本地端口转发</strong>：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/12/01/tzEXUvfBNMKPRso.png" width="600" height="600" />
+</center></p>
+
+<p><strong>远程端口转发</strong>：</p>
+
+<p><center>
+<img src="https://i.loli.net/2020/12/01/G7ELsCSQYlMN5wX.png" width="500" height="500" />
+</center></p>
+
+<p>最常用的是本地端口转发，即在本地设备上某个端口建立连接并转发到远程端口上，同时远程设备上的服务监听一个端口。例如，在远程服务器上运行 Jupyter notebook 并监听<code>8888</code>端口，通过建立本地<code>9999</code>端口进行转发，即<code>ssh -L 9999:localhost:8888 foobar@remote_server</code>。在使用时，只需要访问本地的<code>localhost:9999</code>即可。</p>
+
+<p>此外，对于其它的 shell 框架，比较流行的有 <a href="https://github.com/sorin-ionescu/prezto">prezto</a> 和 <a href="https://ohmyz.sh/">oh-my-zsh</a>。而对于终端模拟器来说，<a href="https://anarc.at/blog/2018-04-12-terminal-emulators-1/">这里</a>展示了许多不同的终端模拟器，通过这些模拟器来对终端进行设置，除了可以配置字体、彩色主题、快捷键等功能之外，有的终端模拟器还支持 GPU 加速，例如 <a href="https://github.com/jwilm/alacritty">Alacritty</a> 和 <a href="https://sw.kovidgoyal.net/kitty/">kitty</a>。</p>
     </div>
 
     <div class="post-copyright">
@@ -332,7 +364,7 @@ carol@ubuntu-carol:~$ </code></pre></td></tr></table>
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2020-11-30
+        2020-12-01
         
     </span>
   </p>

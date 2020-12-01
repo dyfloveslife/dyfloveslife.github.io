@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 30 Nov 2020 15:52:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 01 Dec 2020 11:05:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Missing Semester 学习笔记 - Version Control (Git)</title>
+      <link>http://localhost:1313/2020/12/01/learn-Missing-Semester-Version-Control/</link>
+      <pubDate>Tue, 01 Dec 2020 11:05:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/12/01/learn-Missing-Semester-Version-Control/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://git-scm.com/&#34;&gt;Git&lt;/a&gt; 是一个开源的分布式版本控制系统，我们可以很方便的通过该工具进行代码的管理，例如查看修改历史、创建项目快照，在多人协作开发时，可以记录每处代码的改动等。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Missing Semester 学习笔记 - Command-line Environment</title>

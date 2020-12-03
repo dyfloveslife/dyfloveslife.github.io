@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Missing Semester 学习笔记 - Debugging and Profiling - Carol&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Carol" /><meta name="description" content="本节将介绍如果通过 debug 的方式调试代码，除了使用打印调试、日志、调试器以外，还将会介绍如果对代码进行性能分析。
+" /><meta name="keywords" content="Java, blog, carol" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.59.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/2020/12/03/learn-Missing-Semester-Debugging-and-Profiling/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.a289a5a4.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Missing Semester 学习笔记 - Debugging and Profiling" />
+<meta property="og:description" content="本节将介绍如果通过 debug 的方式调试代码，除了使用打印调试、日志、调试器以外，还将会介绍如果对代码进行性能分析。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/2020/12/03/learn-Missing-Semester-Debugging-and-Profiling/" />
+<meta property="article:published_time" content="2020-12-03T14:41:11+08:00" />
+<meta property="article:modified_time" content="2020-12-03T16:44:56+08:00" />
+<meta itemprop="name" content="Missing Semester 学习笔记 - Debugging and Profiling">
+<meta itemprop="description" content="本节将介绍如果通过 debug 的方式调试代码，除了使用打印调试、日志、调试器以外，还将会介绍如果对代码进行性能分析。">
+
+
+<meta itemprop="datePublished" content="2020-12-03T14:41:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-12-03T16:44:56&#43;08:00" />
+<meta itemprop="wordCount" content="1703">
+
+
+
+<meta itemprop="keywords" content="Linux," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Missing Semester 学习笔记 - Debugging and Profiling"/>
+<meta name="twitter:description" content="本节将介绍如果通过 debug 的方式调试代码，除了使用打印调试、日志、调试器以外，还将会介绍如果对代码进行性能分析。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Carol&#39;s blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Writing</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Carol&#39;s blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Writing</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Missing Semester 学习笔记 - Debugging and Profiling</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-12-03 </span>
+        <div class="post-category">
+            <a href="/categories/Linux/"> Linux </a>
+            </div>
+          <span class="more-meta"> 1703 words </span>
+          <span class="more-meta"> 4 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <p>本节将介绍如果通过 debug 的方式调试代码，除了使用打印调试、日志、调试器以外，还将会介绍如果对代码进行性能分析。</p>
+
+<p>目录如下：</p>
+
+<ul>
+<li>Course overview + the shell</li>
+<li>Shell Tools and Scripting</li>
+<li>Editors (Vim)</li>
+<li>Data Wrangling（数据整理）</li>
+<li>Command-line Environment</li>
+<li>Version Control (Git)</li>
+<li><strong>Debugging and Profiling</strong></li>
+<li>Metaprogramming</li>
+<li>Security and Cryptography（安全和密码学）</li>
+<li>Potpourri（大杂烩）</li>
+<li>Q&amp;A</li>
+</ul>
+
+<p>对于打印调试来说，这是最简单、最直接的方法，也就是通过输出语句，直接输出一些变量、返回值的信息，通过这些输出的信息来判断程序中的代码是否执行出错。当然，也可以将这些信息一起写入到日志、socket 或者远程服务器中。</p>
+
+<p>除了直接输出变量信息以外，还可以对日志设置严重等级。例如<code>INFO</code>、<code>DEBUG</code>、<code>WARN</code>、<code>ERROR</code>等，以便于根据需要进行过滤。</p>
+
+<p>然而，在有些情况下，仅通过客户端的代码错误信息可能并不足以定位问题。例如一些大型的软件系统，它们可能会依赖一些其它的应用程序。这些应用程序都会将日志保存在系统中的某个位置。例如对于 UNIX 来说，程序的日志通常保存在<code>/var/log</code>下。你可以通过一些<a href="http://lnav.org/">工具</a>来更好地展示和浏览日志文件。</p>
+
+<p>以上的方法是通过日志信息来追踪错误，还可以通过<strong>调试器</strong>来一步一步的找到具体的错误代码。例如常见的编辑器<code>IntelliJ IDEA</code>中就带有调试器（Python 的终端调试器是 <a href="https://docs.python.org/3/library/pdb.html">pdb</a>）。你可以在可能会出现代码错误的地方打一个断点，然后通过不同的命令来让程序运行到某一行或一次执行一条语句的方式，直至定位问题。</p>
+
+<p>如果你调试的是那种类似于二进制的程序，那么可以使用专门的工具进行调试。当你的程序中需要执行一些只有操作系统内核才能完成的操作时，则需要经过系统调用。在 Linux 下可以通过 <a href="https://man7.org/linux/man-pages/man1/strace.1.html">strace</a> 命令来追踪程序执行的系统调用。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~$ sudo strace ls -l &gt; /dev/null 
+execve<span class="o">(</span><span class="s2">&#34;/usr/bin/ls&#34;</span>, <span class="o">[</span><span class="s2">&#34;ls&#34;</span>, <span class="s2">&#34;-l&#34;</span><span class="o">]</span>, 0x7ffdef66c4f8 /* <span class="m">16</span> vars */<span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
+brk<span class="o">(</span>NULL<span class="o">)</span>                               <span class="o">=</span> 0x55899474c000
+arch_prctl<span class="o">(</span>0x3001 /* ARCH_??? */, 0x7ffd296c75b0<span class="o">)</span> <span class="o">=</span> -1 EINVAL <span class="o">(</span>Invalid argument<span class="o">)</span>
+access<span class="o">(</span><span class="s2">&#34;/etc/ld.so.preload&#34;</span>, R_OK<span class="o">)</span>      <span class="o">=</span> -1 ENOENT <span class="o">(</span>No such file or directory<span class="o">)</span>
+openat<span class="o">(</span>AT_FDCWD, <span class="s2">&#34;/etc/ld.so.cache&#34;</span>, O_RDONLY<span class="p">|</span>O_CLOEXEC<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
+fstat<span class="o">(</span><span class="m">3</span>, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span><span class="m">0644</span>, <span class="nv">st_size</span><span class="o">=</span><span class="m">65827</span>, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
+mmap<span class="o">(</span>NULL, <span class="m">65827</span>, PROT_READ, MAP_PRIVATE, <span class="m">3</span>, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0x7fbcccaa9000
+close<span class="o">(</span><span class="m">3</span><span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
+openat<span class="o">(</span>AT_FDCWD, <span class="s2">&#34;/lib/x86_64-linux-gnu/libselinux.so.1&#34;</span>, O_RDONLY<span class="p">|</span>O_CLOEXEC<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
+read<span class="o">(</span><span class="m">3</span>, <span class="s2">&#34;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0@p\0\0\0\0\0\0&#34;</span>..., <span class="m">832</span><span class="o">)</span> <span class="o">=</span> <span class="m">832</span>
+fstat<span class="o">(</span><span class="m">3</span>, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span><span class="m">0644</span>, <span class="nv">st_size</span><span class="o">=</span><span class="m">163200</span>, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
+mmap<span class="o">(</span>NULL, <span class="m">8192</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS, -1, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0x7fbcccaa7000
+mmap<span class="o">(</span>NULL, <span class="m">174600</span>, PROT_READ, MAP_PRIVATE<span class="p">|</span>MAP_DENYWRITE, <span class="m">3</span>, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0x7fbccca7c000
+mprotect<span class="o">(</span>0x7fbccca82000, <span class="m">135168</span>, PROT_NONE<span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
+mmap<span class="o">(</span>0x7fbccca82000, <span class="m">102400</span>, PROT_READ<span class="p">|</span>PROT_EXEC, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, <span class="m">3</span>, 0x6000<span class="o">)</span> <span class="o">=</span> 0x7fbccca82000
+mmap<span class="o">(</span>0x7fbccca9b000, <span class="m">28672</span>, PROT_READ, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, <span class="m">3</span>, 0x1f000<span class="o">)</span> <span class="o">=</span> 0x7fbccca9b000
+mmap<span class="o">(</span>0x7fbcccaa3000, <span class="m">8192</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, <span class="m">3</span>, 0x26000<span class="o">)</span> <span class="o">=</span> 0x7fbcccaa3000
+mmap<span class="o">(</span>0x7fbcccaa5000, <span class="m">6664</span>, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_ANONYMOUS, -1, <span class="m">0</span><span class="o">)</span> <span class="o">=</span> 0x7fbcccaa5000
+close<span class="o">(</span><span class="m">3</span><span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
+openat<span class="o">(</span>AT_FDCWD, <span class="s2">&#34;/lib/x86_64-linux-gnu/libc.so.6&#34;</span>, O_RDONLY<span class="p">|</span>O_CLOEXEC<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
+...
+<span class="o">(</span>more information<span class="o">)</span>
+...
+carol@ubuntu-carol:~$ </code></pre></td></tr></table>
+</div>
+</div>
+<p><code>strace</code>是如何追踪系统调用的？情况这篇文章 <a href="https://blogs.oracle.com/linux/strace-the-sysadmins-microscope-v2">Strace &ndash; The Sysadmin&rsquo;s Microscope</a>。</p>
+
+<p>此外，如果你是 Web 开发者或是前端开发，那么可以使用 <a href="https://developers.google.com/web/tools/chrome-devtools/javascript">Chrome</a> 或 <a href="https://developer.mozilla.org/en-US/docs/Tools/Debugger">Firefox</a> 开发者工具进行相应的调试。</p>
+
+<p>在有些情况下，并不需要执行代码就可以发现问题所在。例如，某个变量在被读取之前没有被定义过。这时可以使用<code>静态分析</code>工具这道这个问题。静态分析的原理是将程序代码作为输入，然后基于编码规则对其进行分析并对代码的正确性进行推理。针对 Python 语言可以使用 <a href="https://pypi.org/project/pyflakes/">pyflakes</a> 或 <a href="http://mypy-lang.org/">mypy</a> 工具。在 Vim 下，可以使用插件 <a href="https://vimawesome.com/plugin/ale">ale</a> 和 <a href="https://vimawesome.com/plugin/syntastic">syntastic</a>。而对于其它语言来说，你可以在 Github 上的 <a href="https://github.com/analysis-tools-dev/static-analysis">static analysis</a> 找到对应语言的分析工具。</p>
+
+<p>而对于代码风格检查和格式化工具，Python 语言可以使用 <a href="https://github.com/psf/black">black</a>，Go 语言可以使用 <a href="https://golang.org/cmd/gofmt/">gofmt</a>，JavaScript、HTML 和 CSS 可以使用 <a href="https://prettier.io/">Prettier</a>。</p>
+
+<p>对于那些系统中最耗时、最耗资源的代码，也可以有针对性的进行分析。此时就需要用到性能分析工具。针对 CPU 性能分析的工具有两种：追踪分析器和采样分析器。前者会记录程序的每一次函数调用，而后者会周期性的监测程序并记录程序堆栈。对于 Python 可以使用 <a href="https://docs.python.org/3/library/profile.html">cProfile</a> 来进行性能分析。如果你是 C/C++ 的使用者，那么有可能会产生内存泄漏的问题，导致程序在使用完内存后而没有释放。此时可以使用 <a href="https://valgrind.org/">Valgrind</a> 来帮助你分析内存。</p>
+
+<p>你可能会觉得上面的基于命令行的方式不能很好地展示一些信息，为了方便信息的展示，我们可以使用<a href="http://www.brendangregg.com/flamegraphs.html">火焰图</a>进行可视化操作。火焰图的横轴表示 CPU 耗时的比例，纵轴表示函数调用关系。你甚至可以与火焰图进行<a href="http://www.brendangregg.com/FlameGraphs/cpu-bash-flamegraph.svg">交互</a>，深入程序的某一个具体部分查看栈信息并进行追踪。</p>
+
+<p>除了程序性能分析之外，对系统资源的监控也尤其重要。以下列出了许多工具来显示不同的系统资源（例如，CPU 占用、内存使用、网络状况、磁盘使用情况等）。</p>
+
+<ul>
+<li><a href="https://man7.org/linux/man-pages/man1/top.1.html">top</a>、<a href="https://hisham.hm/htop/index.php">htop</a>: 可以显示当前运行进程的多种统计信息。</li>
+<li><a href="https://man7.org/linux/man-pages/man8/iotop.8.html">iotop</a>: 实时显示 I/O 占用信息。</li>
+<li><a href="https://man7.org/linux/man-pages/man1/df.1.html">df</a>: 显示磁盘分区信息。</li>
+<li><a href="https://man7.org/linux/man-pages/man1/free.1.html">free</a>: 显示系统当前空闲内存。</li>
+<li><a href="https://man7.org/linux/man-pages/man8/lsof.8.html">lsof</a>: 显示被进程打开的文件信息。</li>
+<li><a href="https://man7.org/linux/man-pages/man8/ss.8.html">ss</a>: 用于监控网络包的收发情况以及网络接口的显示信息。</li>
+<li><a href="https://github.com/raboof/nethogs">nethogs</a>、<a href="http://www.ex-parrot.com/pdw/iftop/">iftop</a>: 用于对网络占用进行监控的交互式命令行工具。</li>
+</ul>
+
+<p>以上。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Carol</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-12-03
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">Reward</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/zU4q6LiShYpHrdZ.png">
+        <span>wechat</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://i.loli.net/2019/11/17/Xnlykx8W3f6DvFi.png">
+        <span>alipay</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/Linux/">Linux</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/12/01/learn-Missing-Semester-Version-Control/">
+            <span class="next-text nav-default">Missing Semester 学习笔记 - Version Control (Git)</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'SirCarol';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://twitter.com/SirCarol_" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/dyfloveslife" class="iconfont icon-github" title="github"></a>
+  
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Carol</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

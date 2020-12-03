@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://localhost:1313/" />
 
-<meta property="og:updated_time" content="2020-12-01T11:05:11+08:00" />
+<meta property="og:updated_time" content="2020-12-03T14:41:11+08:00" />
 <meta itemprop="name" content="Carol&#39;s blog">
 <meta itemprop="description" content="Carol&#39;s blog.">
 
@@ -116,6 +116,29 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/2020/03/16/Java-volatile/">Java 中的 volatile</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-03-16 </span>
+      <div class="post-category">
+          <a href="/categories/Java/"> Java </a>
+          </div>
+        <span class="more-meta"> 5110 words </span>
+        <span class="more-meta"> 11 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>volatile 是轻量级的 synchronized，其在多处理器中保证了共享变量的<code>可见性</code>，即当一个线程修改一个共享变量时，另一个线程会读到这个修改的值。但 volatile 不能保证<code>原子性</code>（例如自增操作），详细的说明将会在下文进行展开。保证并发程序正确执行还需要做到<code>有序性</code>，满足以上三个原则，才能够正确的执行并发程序。而本文将对 volatile 关键字进行详细解释，结合具体例子的同时说明 volatile 关键字的使用场景。</p>
+    </div>
+    <div class="read-more">
+      <a href="/2020/03/16/Java-volatile/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/2020/03/11/JavaSrc-HashTable/">Java 容器之 HashTable</a></h1>
@@ -319,29 +342,6 @@
     </div>
     <div class="read-more">
       <a href="/2020/02/01/java-object-and-reference/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/2020/01/21/JavaCore-difference-between-exception-and-error/">Java 中的 Exception 和 Error</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-01-21 </span>
-      <div class="post-category">
-          <a href="/categories/Java/"> Java </a>
-          </div>
-        <span class="more-meta"> 3271 words </span>
-        <span class="more-meta"> 7 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>程序的异常处理在开发中很是常见，只有正确处理好意外情况，才能保证程序的可靠性。本文通过 Java 异常处理机制，详细的分析与解释 Java 中的 Exception 与 Error 之间的区别以及需要注意的点，以便更好的实现程序的可维护性。</p>
-    </div>
-    <div class="read-more">
-      <a href="/2020/01/21/JavaCore-difference-between-exception-and-error/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

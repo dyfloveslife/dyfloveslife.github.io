@@ -6,10 +6,19 @@
     <description>Recent content in Linux on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 01 Dec 2020 11:05:11 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 03 Dec 2020 14:41:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/Linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Missing Semester 学习笔记 - Debugging and Profiling</title>
+      <link>http://localhost:1313/2020/12/03/learn-Missing-Semester-Debugging-and-Profiling/</link>
+      <pubDate>Thu, 03 Dec 2020 14:41:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/12/03/learn-Missing-Semester-Debugging-and-Profiling/</guid>
+      <description>&lt;p&gt;本节将介绍如果通过 debug 的方式调试代码，除了使用打印调试、日志、调试器以外，还将会介绍如果对代码进行性能分析。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Missing Semester 学习笔记 - Version Control (Git)</title>

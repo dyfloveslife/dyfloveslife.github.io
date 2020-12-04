@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 03 Dec 2020 14:41:11 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 04 Dec 2020 14:31:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Linux</title>
       <link>http://localhost:1313/tags/Linux/</link>
-      <pubDate>Thu, 03 Dec 2020 14:41:11 +0800</pubDate>
+      <pubDate>Fri, 04 Dec 2020 14:31:11 +0800</pubDate>
       
       <guid>http://localhost:1313/tags/Linux/</guid>
       <description></description>
@@ -463,10 +463,10 @@
     
     <item>
       <title>object</title>
-      <link></link>
+      <link>http://localhost:1313/tags/object/</link>
       <pubDate>Sat, 01 Feb 2020 19:00:11 +0800</pubDate>
       
-      <guid></guid>
+      <guid>http://localhost:1313/tags/object/</guid>
       <description></description>
     </item>
     
@@ -562,10 +562,10 @@
     
     <item>
       <title>Object</title>
-      <link>http://localhost:1313/tags/Object/</link>
+      <link></link>
       <pubDate>Wed, 04 Dec 2019 18:02:11 +0800</pubDate>
       
-      <guid>http://localhost:1313/tags/Object/</guid>
+      <guid></guid>
       <description></description>
     </item>
     

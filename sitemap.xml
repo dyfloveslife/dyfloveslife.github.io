@@ -23,14 +23,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Linux/</loc>
+    <loc>http://localhost:1313/categories/Linux/</loc>
     <lastmod>2020-12-04T14:44:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Linux/</loc>
+    <loc>http://localhost:1313/tags/Linux/</loc>
     <lastmod>2020-12-04T14:44:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -121,14 +121,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Technology/</loc>
+    <loc>http://localhost:1313/categories/Technology/</loc>
     <lastmod>2020-11-11T14:02:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Technology/</loc>
+    <loc>http://localhost:1313/tags/Technology/</loc>
     <lastmod>2020-11-11T14:02:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -695,14 +695,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/MySQL/</loc>
+    <loc>http://localhost:1313/tags/MySQL/</loc>
     <lastmod>2020-02-03T20:41:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/MySQL/</loc>
+    <loc>http://localhost:1313/categories/MySQL/</loc>
     <lastmod>2020-02-03T20:41:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -1283,14 +1283,14 @@
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/Python/</loc>
+    <loc>http://localhost:1313/categories/Python/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/Python/</loc>
+    <loc>http://localhost:1313/tags/Python/</loc>
     <lastmod>2019-11-16T10:32:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

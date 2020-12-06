@@ -6,10 +6,19 @@
     <description>Recent content in Linux on Carol&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 04 Dec 2020 14:31:11 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 06 Dec 2020 14:46:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/tags/Linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Missing Semester 学习笔记 - Security and Cryptography</title>
+      <link>http://localhost:1313/2020/12/06/learn-Missing-Security-and-Cryptography/</link>
+      <pubDate>Sun, 06 Dec 2020 14:46:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2020/12/06/learn-Missing-Security-and-Cryptography/</guid>
+      <description>&lt;p&gt;本节将介绍如何从用户角度增强隐私保护和安全的方法，包括散列函数、密钥生成函数、对称/非对称加密等。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Missing Semester 学习笔记 - Metaprogramming</title>

@@ -473,10 +473,10 @@
     
     <item>
       <title>object</title>
-      <link>http://localhost:1313/tags/object/</link>
+      <link></link>
       <pubDate>Sat, 01 Feb 2020 19:00:11 +0800</pubDate>
       
-      <guid>http://localhost:1313/tags/object/</guid>
+      <guid></guid>
       <description></description>
     </item>
     
@@ -572,10 +572,10 @@
     
     <item>
       <title>Object</title>
-      <link></link>
+      <link>http://localhost:1313/tags/Object/</link>
       <pubDate>Wed, 04 Dec 2019 18:02:11 +0800</pubDate>
       
-      <guid></guid>
+      <guid>http://localhost:1313/tags/Object/</guid>
       <description></description>
     </item>
     

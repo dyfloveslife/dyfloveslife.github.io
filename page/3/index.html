@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://localhost:1313/" />
 
-<meta property="og:updated_time" content="2020-12-06T14:46:11+08:00" />
+<meta property="og:updated_time" content="2021-02-03T16:49:11+08:00" />
 <meta itemprop="name" content="Carol&#39;s blog">
 <meta itemprop="description" content="Carol&#39;s blog.">
 
@@ -116,6 +116,29 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/2020/04/27/Java-CopyOnWrite/">Java 中的 CopyOnWrite 容器</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-27 </span>
+      <div class="post-category">
+          <a href="/categories/Java/"> Java </a>
+          </div>
+        <span class="more-meta"> 2804 words </span>
+        <span class="more-meta"> 6 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在某些<code>读多写少</code>的多线程环境下，基于 CopyOnWrite 思想的 CopyOnWriteArrayList 容器和 CopyOnWriteArraySet 容器可以保证线程安全，能够确保读操作和写操作之间不会被阻塞。本文将会从 线程不安全的 ArrayList 入手，由 CopyOnWrite 思想引申到 CopyOnWriteArrayList，通过示例说明它是怎么保证线程安全的，适用的场景，最后对其进行总结。</p>
+    </div>
+    <div class="read-more">
+      <a href="/2020/04/27/Java-CopyOnWrite/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/2020/04/21/Java-Concurrent-Tool-Class/">Java 中的并发工具类</a></h1>
@@ -319,29 +342,6 @@
     </div>
     <div class="read-more">
       <a href="/2020/03/24/JavaSrc-ConcurrentHashMap/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/2020/03/21/Serialization-and-Deserialization-in-Java/">Java 中的序列化和反序列化</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-03-21 </span>
-      <div class="post-category">
-          <a href="/categories/Java/"> Java </a>
-          </div>
-        <span class="more-meta"> 5756 words </span>
-        <span class="more-meta"> 12 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>当在 Java 中创建对象的时候，只要我们需要这个对象，它就会一直存在。但是一旦程序终止，它们也就不复存在了。如果我们想让对象能够在程序不运行的状态下仍然能够保存它们的信息，那就需要用到<code>序列化机制</code>。</p>
-    </div>
-    <div class="read-more">
-      <a href="/2020/03/21/Serialization-and-Deserialization-in-Java/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

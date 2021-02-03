@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sun, 06 Dec 2020 14:46:11 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 03 Feb 2021 16:49:11 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,6 +19,15 @@
       
       <guid>http://localhost:1313/about/</guid>
       <description>$ &amp;ldquo; Dare \; \; to \; \; dream, \; dare \; \; to \; \; do \; ! \;&amp;rdquo; $ 关于我 硕士 / 计算机技术。 自身始终保持着对技术、书籍、写作的热爱。 学会学习，也要学会分享。 我会分享一</description>
+    </item>
+    
+    <item>
+      <title>2020 年总结</title>
+      <link>http://localhost:1313/2021/02/03/2020-summary/</link>
+      <pubDate>Wed, 03 Feb 2021 16:49:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2021/02/03/2020-summary/</guid>
+      <description>&lt;p&gt;现在已经是 2021 年了，明天就是小年，在这里做一个总结吧。一方面是对自己研究生三年的总结，另一方面也归纳一下最近这段时间的一些思考。&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sun, 15 Jul 2018 14:24:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/DataStructure/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 15 Jul 2018 14:24:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/DataStructure/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python 学习笔记之 数据结构</title>
       <link>http://localhost:1313/2018/07/15/learning-python-DataStructure/</link>

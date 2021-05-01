@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Mon, 30 Jul 2018 18:24:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/CopyAndDeepCopy/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 30 Jul 2018 18:24:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/CopyAndDeepCopy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python 中的浅拷贝(copy)和深拷贝(deepcopy)</title>
       <link>http://localhost:1313/2018/07/30/learning-python-CopyAndDeepCopy/</link>

@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Tue, 05 Nov 2019 10:15:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/DropBox/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 05 Nov 2019 10:15:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/DropBox/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>去掉 DropBox 桌面右键菜单</title>
       <link>http://localhost:1313/2019/11/05/Delete-dropbox-right-click-menu/</link>

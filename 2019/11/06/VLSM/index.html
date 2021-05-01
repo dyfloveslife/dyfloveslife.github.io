@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/11/06/VLSM/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="可变长子网掩码在子网划分中的应用「转」" />
 <meta property="og:description" content="本文转自 51CTO 的作者「百年求索」——《可变长度子网掩码（VLSM）在子网划分中的应用》。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2019/11/06/VLSM/" />
-<meta property="article:published_time" content="2019-11-06T19:23:11+08:00" />
-<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2019/11/06/VLSM/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-11-06T19:23:11&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56&#43;08:00" />
+
 <meta itemprop="name" content="可变长子网掩码在子网划分中的应用「转」">
-<meta itemprop="description" content="本文转自 51CTO 的作者「百年求索」——《可变长度子网掩码（VLSM）在子网划分中的应用》。">
-
-
-<meta itemprop="datePublished" content="2019-11-06T19:23:11&#43;08:00" />
+<meta itemprop="description" content="本文转自 51CTO 的作者「百年求索」——《可变长度子网掩码（VLSM）在子网划分中的应用》。"><meta itemprop="datePublished" content="2019-11-06T19:23:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="5803">
-
-
-
-<meta itemprop="keywords" content="Computer Network," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="5601">
+<meta itemprop="keywords" content="Computer Network," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="可变长子网掩码在子网划分中的应用「转」"/>
 <meta name="twitter:description" content="本文转自 51CTO 的作者「百年求索」——《可变长度子网掩码（VLSM）在子网划分中的应用》。"/>
 
@@ -132,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/Computer-Network/"> Computer Network </a>
             </div>
-          <span class="more-meta"> 5803 words </span>
+          <span class="more-meta"> 5601 words </span>
           <span class="more-meta"> 12 mins read </span>
         
       </div>
@@ -142,460 +136,331 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#1-什么是可变长度子网掩码">1. 什么是可变长度子网掩码？</a>
-<ul>
-<li><a href="#1-1-一个-ip-地址由-4-个字节组成-采用点分十进制方式表示">1.1 一个 IP 地址由 4 个字节组成，采用点分十进制方式表示</a></li>
-<li><a href="#1-2-ip-地址的分类">1.2 IP 地址的分类</a></li>
-<li><a href="#1-3-各类-ip-地址的特征及判断依据">1.3 各类 IP 地址的特征及判断依据</a></li>
-<li><a href="#1-4-ip-地址由两部分组成-网络号与主机号">1.4 IP 地址由两部分组成：网络号与主机号</a></li>
-<li><a href="#1-5-通过子网掩码计算网络号与主机号">1.5 通过子网掩码计算网络号与主机号</a></li>
-<li><a href="#1-6-ip-地址中的保留地址和私有地址">1.6 IP 地址中的保留地址和私有地址</a></li>
-<li><a href="#1-7-三类网络的数量与每个网络的主机数">1.7 三类网络的数量与每个网络的主机数</a></li>
-</ul></li>
-<li><a href="#2-可变长度子网掩码能干什么">2. 可变长度子网掩码能干什么?</a></li>
-<li><a href="#3-怎么确定可变子网掩码的长度">3. 怎么确定可变子网掩码的长度?</a></li>
-</ul>
+  <ul>
+    <li><a href="#11-一个-ip-地址由-4-个字节组成采用点分十进制方式表示">1.1 一个 IP 地址由 4 个字节组成，采用点分十进制方式表示</a></li>
+    <li><a href="#12-ip-地址的分类">1.2 IP 地址的分类</a></li>
+    <li><a href="#13-各类-ip-地址的特征及判断依据">1.3 各类 IP 地址的特征及判断依据</a></li>
+    <li><a href="#14-ip-地址由两部分组成网络号与主机号">1.4 IP 地址由两部分组成：网络号与主机号</a></li>
+    <li><a href="#15-通过子网掩码计算网络号与主机号">1.5 通过子网掩码计算网络号与主机号</a></li>
+    <li><a href="#16-ip-地址中的保留地址和私有地址">1.6 IP 地址中的保留地址和私有地址</a></li>
+    <li><a href="#17-三类网络的数量与每个网络的主机数">1.7 三类网络的数量与每个网络的主机数</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>本文转自 51CTO 的作者「百年求索」——《可变长度子网掩码（VLSM）在子网划分中的应用》。</p>
-
 <blockquote>
 <p>原文链接: <a href="https://blog.51cto.com/mmanong/1945144">https://blog.51cto.com/mmanong/1945144</a></p>
 </blockquote>
-
 <p>　　在学习可变长度子网掩码时，必须先熟练掌握二进制与十进制的转化、计算机中数据的单位（字节、位）等知识。</p>
-
 <h1 id="1-什么是可变长度子网掩码">1. 什么是可变长度子网掩码？</h1>
-
 <p>　　要理解可变长度子网掩码，先要理解子网掩码；要理解子网掩码，先要理解 IP 地址的组成。</p>
-
 <p>　　在互联网上，每台计算机必须有一个唯一的 IP 地址作用这台计算机在身份标志，可以将 IP 地址理解成一台计算机的身份证号码。在互联网上不允许出现相同的IP地址（NAT 技术另论，它是一种 IP 地址共享技术，用于解决IP地址资源不足的问题）。身份证的编号要按照一定的规则进行，同样，IP 地址的编号也要按照一定的规则进行。</p>
-
-<h2 id="1-1-一个-ip-地址由-4-个字节组成-采用点分十进制方式表示">1.1 一个 IP 地址由 4 个字节组成，采用点分十进制方式表示</h2>
-
+<h2 id="11-一个-ip-地址由-4-个字节组成采用点分十进制方式表示">1.1 一个 IP 地址由 4 个字节组成，采用点分十进制方式表示</h2>
 <p>　　例如，一个4个字节的 IP 地址的二进制形式是：11000000　10101000　11000111　00000001，其点分十进制表示就是将每个字节依次转化为十进制并用点分隔开，即：192.168.199.1。</p>
-
 <p>　　在全国计算机等级考试一级中常会出现一道这样的题目：</p>
-
 <p>　　判断以下 IP 地址哪个是正确的 IP 地址（）?</p>
-
 <p>　　（A）192.256.4.4    （B）124.45.2.3.3   （C）45.21.4.3   （D）78.4.5
 　　很明显正确答案是 C。</p>
-
 <p>　　A 错在点分十进制表示的 IP 地址中，每个点分隔开的数值不能大于 255，因为一个字节转化为十进制最大为 255；B、D 错在 IP 使用点分十制表示是 4 段（三个点分隔开4个十进制数）。</p>
-
-<h2 id="1-2-ip-地址的分类">1.2 IP 地址的分类</h2>
-
+<h2 id="12-ip-地址的分类">1.2 IP 地址的分类</h2>
 <table>
 <thead>
 <tr>
-<th align="center">类别</th>
-<th align="center">第一个字节:二进制</th>
-<th align="center">第一个字节:十进制</th>
-<th align="center">示例 IP</th>
-<th align="center">子网掩码</th>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">第一个字节:二进制</th>
+<th style="text-align:center">第一个字节:十进制</th>
+<th style="text-align:center">示例 IP</th>
+<th style="text-align:center">子网掩码</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td align="center">A 类</td>
-<td align="center">0000　0001 ~ 0111　1110</td>
-<td align="center">1 ~ 126</td>
-<td align="center">12.0.0.1</td>
-<td align="center">255.0.0.0</td>
+<td style="text-align:center">A 类</td>
+<td style="text-align:center">0000　0001 ~ 0111　1110</td>
+<td style="text-align:center">1 ~ 126</td>
+<td style="text-align:center">12.0.0.1</td>
+<td style="text-align:center">255.0.0.0</td>
 </tr>
-
 <tr>
-<td align="center">B 类</td>
-<td align="center">1000　0000 ~ 1011　1111</td>
-<td align="center">128 ~ 191</td>
-<td align="center">133.25.0.4</td>
-<td align="center">255.255.0.0</td>
+<td style="text-align:center">B 类</td>
+<td style="text-align:center">1000　0000 ~ 1011　1111</td>
+<td style="text-align:center">128 ~ 191</td>
+<td style="text-align:center">133.25.0.4</td>
+<td style="text-align:center">255.255.0.0</td>
 </tr>
-
 <tr>
-<td align="center">C 类</td>
-<td align="center">1100　0000 ~ 1101　1111</td>
-<td align="center">192 ~ 223</td>
-<td align="center">200.18.19.4</td>
-<td align="center">255.255.255.0</td>
+<td style="text-align:center">C 类</td>
+<td style="text-align:center">1100　0000 ~ 1101　1111</td>
+<td style="text-align:center">192 ~ 223</td>
+<td style="text-align:center">200.18.19.4</td>
+<td style="text-align:center">255.255.255.0</td>
 </tr>
-
 <tr>
-<td align="center">D 类</td>
-<td align="center">1110　0000 ~ 1110　1111</td>
-<td align="center">224 ~ 239</td>
-<td align="center">-</td>
-<td align="center">-</td>
+<td style="text-align:center">D 类</td>
+<td style="text-align:center">1110　0000 ~ 1110　1111</td>
+<td style="text-align:center">224 ~ 239</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
 </tr>
-
 <tr>
-<td align="center">E 类</td>
-<td align="center">1111　0000 ~ 1111　1110</td>
-<td align="center">240 ~ 154</td>
-<td align="center">-</td>
-<td align="center">-</td>
+<td style="text-align:center">E 类</td>
+<td style="text-align:center">1111　0000 ~ 1111　1110</td>
+<td style="text-align:center">240 ~ 154</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">　　IP 地址是以第一个字节进行分类的，可分为五类：A、B、C、D、E。D 类地址用于多点广播，E 类地址用于科研、保留（目前找不到具体的应用资料），这两类地址不在本文中讨论。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-
-<p>　　IP 地址是以第一个字节进行分类的，可分为五类：A、B、C、D、E。D 类地址用于多点广播，E 类地址用于科研、保留（目前找不到具体的应用资料），这两类地址不在本文中讨论。</p>
-
-<h2 id="1-3-各类-ip-地址的特征及判断依据">1.3 各类 IP 地址的特征及判断依据</h2>
-
+<h2 id="13-各类-ip-地址的特征及判断依据">1.3 各类 IP 地址的特征及判断依据</h2>
 <p>　　A 类地址：第一个字节第一位二进制位为 0，第一个字节十进制值为 [1，126]；</p>
-
 <p>　　B 类地址：第一个字节前两位二进制位为 10，第一个字节十进制值为 [128，191]；</p>
-
 <p>　　C 类地址：第一个字节前三位二进制位为 110，第一个字节十进制值为 [192，223]；</p>
-
 <p>　　D 类地址：第一个字节前四位二进制位为 1110，第一个字节十进制值为 [224，239]；</p>
-
 <p>　　E 类地址：第一个字节前五位二进制位为 11110，第一个字节十进制值为 [240，254]。</p>
-
 <p>　　在全国计算机计算机等级考试一级中，经常给出多个 IP 地址，判断这些 IP 地址所属的类别，判断的方法就是根据第一个字节的前几位二进制值或第一个字节的十进制进行判断的。</p>
-
-<h2 id="1-4-ip-地址由两部分组成-网络号与主机号">1.4 IP 地址由两部分组成：网络号与主机号</h2>
-
+<h2 id="14-ip-地址由两部分组成网络号与主机号">1.4 IP 地址由两部分组成：网络号与主机号</h2>
 <p>　　身份证号前两位表示省代码，3、4位表示市代码，5、6位表示区代码。通过每位赋予不同的意义可以分解出身份证的信息。IP 地址也一样，一个 IP 地址包含两部分信息，一部分代表 IP 地址是属于哪个网络的，另一部分代表 IP 地址在这网络中的编号是多少。IP 地址属于哪个网络称之为该 IP 地址的网络号，IP 地址在其网络中的编号称之为该 IP 地址的主机号，而且，网络号在前，主机号在后。（备注：D、E两类地址不区分网络号与主机号）</p>
-
-<h2 id="1-5-通过子网掩码计算网络号与主机号">1.5 通过子网掩码计算网络号与主机号</h2>
-
+<h2 id="15-通过子网掩码计算网络号与主机号">1.5 通过子网掩码计算网络号与主机号</h2>
 <p>　　子网掩码与 IP 地址的表示类似，也是使用 4 个字节（32bit）表示，也可以用点分十进制表示。只是子网掩码没有网络号、主机号之分了，而且它只有与 IP 地址一起合用，用于计算 IP 地址的网络号与主机号才有意义。</p>
-
 <p>　　4 个字节（32位）的子网掩码组成：N 个 1 后面跟着 M 个 0（N + M = 32）。</p>
-
 <p>　　A 类地址，子网掩码为 11111111　00000000　00000000　00000000（二进制），即 255.0.0.0。</p>
-
 <p>　　B 类地址，子网掩码为 11111111　11111111　00000000　00000000（二进制），即 255.255.0.0。</p>
-
 <p>　　C 类地址，子网掩码为 11111111　11111111　11111111　00000000（二进制），即 255.255.255.0。</p>
-
 <p>　　<strong>通过子网掩码计算网络号与主机号的方法是：将 IP 地址转化为二进制数，再与其对应的子网掩码（二进制数）进行与运算，运算结果是网络号，剩下的是主机号。</strong>
 　　例如：</p>
-
 <p>　　随便取一个 A 类地址 25.4.5.6，其子网掩码是 255.0.0.0，网络号与主机号的计算方式如下：</p>
-
 <p>　　　　① 25.4.5.6 的二进制形式为：00011001　00000100　00000101　00000110；
 　　　　</p>
-
 <p>　　　　② 子网掩码的二进制形式为：11111111　00000000　00000000　00000000；
 　　　　</p>
-
 <p>　　　　③ 将这两个数进行<strong>与运算</strong>，得到 25.0.0.0；
 　　　　</p>
-
 <p>　　　　④ 则该 IP 地址的网络号是 25.0.0.0，主机号是 4.5.6。</p>
-
 <p>　　随便取一个 B 类地址 146.100.15.96，其子网掩码是 255.255.0.0，网络号与主机号的计算方式如下：
 　　　　① 146.100.15.96 的二进制形式为：10010010　01100100　00001111　01100000；</p>
-
 <p>　　　　② 子网掩码的二进制形式为：11111111　11111111　00000000　00000000；</p>
-
 <p>　　　　③ 将这两个数进行<strong>与运算</strong>，得到 146.100.0.0；</p>
-
 <p>　　　　④ 则该 IP 地址的网络号是 146.100.0.0，主机号是 15.96。</p>
-
 <p>　　随便取一个 C 类地址 198.150.1.6，其子网掩码是 255.255.255.0，网络号与主机号的计算方式如下：
 　　　　① 198.150.1.6 的二进制形式为：11000110　10010110　00000001　00000110；</p>
-
 <p>　　　　② 子网掩码的二进制形式为：11111111　11111111　11111111　00000000；</p>
-
 <p>　　　　③ 将这两个数进行<strong>与运算</strong>，得到 198.150.1.0；</p>
-
 <p>　　　　④ 则该 IP 地址的网络号是 198.150.1.0，主机号是 6。</p>
-
 <p>　　<strong>备注：将点分十进制的IP地址转化为二进制时，如果转化后不足 8 位，要在前面补 0，补到 8 位满为止。</strong></p>
-
 <p>　　通过上面的计算，可以观察到，对于有类地址：A 类 IP 的网络号就是前面一个字节（或者前面 8 个 bit 位），B 类 IP 的网络号就是前面两个字节（或者前面 16 个 bit 位），C 类 IP 的网络号就是前面三个字节（或者前面 18 个 bit 位），剩余部分就是其主机号。</p>
-
-<h2 id="1-6-ip-地址中的保留地址和私有地址">1.6 IP 地址中的保留地址和私有地址</h2>
-
+<h2 id="16-ip-地址中的保留地址和私有地址">1.6 IP 地址中的保留地址和私有地址</h2>
 <table>
 <thead>
 <tr>
-<th align="center">序号</th>
-<th align="center">地址</th>
-<th align="center">说明</th>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">地址</th>
+<th style="text-align:center">说明</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td align="center">1</td>
-<td align="center">0.0.0.0</td>
-<td align="center">路由表中默认路由使用</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0.0.0.0</td>
+<td style="text-align:center">路由表中默认路由使用</td>
 </tr>
-
 <tr>
-<td align="center">2</td>
-<td align="center">255.255.255.255</td>
-<td align="center">通常在广播中使用</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">255.255.255.255</td>
+<td style="text-align:center">通常在广播中使用</td>
 </tr>
-
 <tr>
-<td align="center">3</td>
-<td align="center">127.0.0.0 ~ 127.255.255.255</td>
-<td align="center">保留地址，常用做循环测试用的，也代表本机地址</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">127.0.0.0 ~ 127.255.255.255</td>
+<td style="text-align:center">保留地址，常用做循环测试用的，也代表本机地址</td>
 </tr>
-
 <tr>
-<td align="center">4</td>
-<td align="center">10.0.0.0 ~ 10.255.255.255</td>
-<td align="center">A 类私有地址</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">10.0.0.0 ~ 10.255.255.255</td>
+<td style="text-align:center">A 类私有地址</td>
 </tr>
-
 <tr>
-<td align="center">5</td>
-<td align="center">169.254.0.0 ~ 169.254.255.255</td>
-<td align="center">保留地址</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">169.254.0.0 ~ 169.254.255.255</td>
+<td style="text-align:center">保留地址</td>
 </tr>
-
 <tr>
-<td align="center">6</td>
-<td align="center">172.16.0.0 ~ 172.31.255.255</td>
-<td align="center">B 类私有地址</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">172.16.0.0 ~ 172.31.255.255</td>
+<td style="text-align:center">B 类私有地址</td>
 </tr>
-
 <tr>
-<td align="center">7</td>
-<td align="center">192.168.0.0 ~ 192.168.255.255</td>
-<td align="center">C 类私有地址</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">192.168.0.0 ~ 192.168.255.255</td>
+<td style="text-align:center">C 类私有地址</td>
 </tr>
 </tbody>
 </table>
-
 <blockquote>
 <p>私有地址：供内部的局域网使用，不能在公网使用。</p>
-
 <p>保留地址：特殊用途。</p>
 </blockquote>
-
 <p>　　每个网络中还有两个地址不能使用：一个是主机位全为 0，用于表示这个网络使用，另一个是主机位全为 1，用于这个网络的广播使用。</p>
-
-<p>　　例如：A 类 12.5.4.3/8（通常在 IP 地址后面加上<code>/N</code>用于表示子网掩码的位数），其 IP 地址的二进制表示是 00001100　00000101　00000100　00000011，子网掩码的二进制是 11111111　00000000　00000000　00000000，其网络号 <u>00001100</u>　00000000　00000000　00000000（12.0.0.0），后面三个字节用于表示主机号。</p>
-
-<p>　　主机号上的二进制全为 0 时，即 00001100　<u>00000000　00000000　00000000</u>（12.0.0.0），这个地址不能用于表示主机；当主机号全为 1 时，即 00001100　<u>11111111　11111111　11111111</u>（12.255.255.255），这个地址也不能用于表示主机（它用于 12.0.0.0 这个网络的广播使用）。</p>
-
-<h2 id="1-7-三类网络的数量与每个网络的主机数">1.7 三类网络的数量与每个网络的主机数</h2>
-
+<p>　　例如：A 类 12.5.4.3/8（通常在 IP 地址后面加上<code>/N</code>用于表示子网掩码的位数），其 IP 地址的二进制表示是 00001100　00000101　00000100　00000011，子网掩码的二进制是 11111111　00000000　00000000　00000000，其网络号 <!-- raw HTML omitted -->00001100<!-- raw HTML omitted -->　00000000　00000000　00000000（12.0.0.0），后面三个字节用于表示主机号。</p>
+<p>　　主机号上的二进制全为 0 时，即 00001100　<!-- raw HTML omitted -->00000000　00000000　00000000<!-- raw HTML omitted -->（12.0.0.0），这个地址不能用于表示主机；当主机号全为 1 时，即 00001100　<!-- raw HTML omitted -->11111111　11111111　11111111<!-- raw HTML omitted -->（12.255.255.255），这个地址也不能用于表示主机（它用于 12.0.0.0 这个网络的广播使用）。</p>
+<h2 id="17-三类网络的数量与每个网络的主机数">1.7 三类网络的数量与每个网络的主机数</h2>
 <table>
 <thead>
 <tr>
-<th align="center">类别</th>
-<th align="center">网络数</th>
-<th align="center">表示主机的二进制位数</th>
-<th align="center">每个网络中的主机数</th>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">网络数</th>
+<th style="text-align:center">表示主机的二进制位数</th>
+<th style="text-align:center">每个网络中的主机数</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td align="center">A 类</td>
-<td align="center">126</td>
-<td align="center">后面三个字节共 24 位</td>
-<td align="center">$ 2^{24} - 2 = 16777214 $</td>
+<td style="text-align:center">A 类</td>
+<td style="text-align:center">126</td>
+<td style="text-align:center">后面三个字节共 24 位</td>
+<td style="text-align:center">$ 2^{24} - 2 = 16777214 $</td>
 </tr>
-
 <tr>
-<td align="center">B 类</td>
-<td align="center">约 $ 2^{14} = 16384 $</td>
-<td align="center">后面两个字节共 16 位</td>
-<td align="center">$ 2^{16} - 2 = 65534 $</td>
+<td style="text-align:center">B 类</td>
+<td style="text-align:center">约 $ 2^{14} = 16384 $</td>
+<td style="text-align:center">后面两个字节共 16 位</td>
+<td style="text-align:center">$ 2^{16} - 2 = 65534 $</td>
 </tr>
-
 <tr>
-<td align="center">C 类</td>
-<td align="center">约 $ 2^{21} = 2097152 $</td>
-<td align="center">后面一个字节共 8 位</td>
-<td align="center">$ 2^8 - 2 = 254 $</td>
+<td style="text-align:center">C 类</td>
+<td style="text-align:center">约 $ 2^{21} = 2097152 $</td>
+<td style="text-align:center">后面一个字节共 8 位</td>
+<td style="text-align:center">$ 2^8 - 2 = 254 $</td>
 </tr>
 </tbody>
 </table>
-
 <h1 id="2-可变长度子网掩码能干什么">2. 可变长度子网掩码能干什么?</h1>
-
 <p>　　在现实中，如果将一个 A 类网络分配给一个组织使用，但是这个组织内部的计算机又没有 16777214 这么多台，这就会造成大量的 IP 地址闲置与浪费。因此，需要有一种更加灵活的方式根据网络规模的大小来划分网络。思路就是将一个网络再划分为更小的多个子网，以供不同组织使用。这种划分网络的方式所使用的技术就是<strong>可变长度子网掩码（VLSM）</strong>。可变长度子网掩码在公网与企业内部中都可以使用。</p>
-
 <p>　　采用可变长度子网掩码，网络的类别已不重要了，网络中主机的数量也不是固定的，而是依据实际情况的需要而确定。为了实现灵活的网络大小规划，在网络号与主机号中间增加了一个概念——<strong>子网</strong>。子网概念的增加并没有改变 IP 地址的实际长度，而是采用：从表示主机的二进制位的位数中借用一定的位数来表示子网的方法实现（网络中主机数会减少）。同时，子网掩码也不再是 8 位、16、24 位这些 8 的倍数了，它会根据实际需要使用不同的位数来表示网络号。</p>
-
-<p>　　例如：146.45.182.6/20。表示 IP 地址是 146.45.182.6，子网掩码是 20 位，即 255.255.240.0。子网掩码的二进制表示形式是：<u>11111111　11111111　1111</u>0000　00000000，下划线共标出 20 位。</p>
-
+<p>　　例如：146.45.182.6/20。表示 IP 地址是 146.45.182.6，子网掩码是 20 位，即 255.255.240.0。子网掩码的二进制表示形式是：<!-- raw HTML omitted -->11111111　11111111　1111<!-- raw HTML omitted -->0000　00000000，下划线共标出 20 位。</p>
 <p>　　该地址如果按类分是个 B 类地址，子网掩码应该是 255.255.0.0，即 16 位，主机数应该可达 65534。而采用可变长度子网掩码后，子网掩码是 255.255.240.0，即 20 位，主机数减少了（用于表示主机的二进制位拿出 4 位，表示子网）。</p>
-
 <p>　　该 IP 地址的网络号、主机数的计算方法如下：</p>
-
 <p>　　① 146.45.182.6 的二进制形式为 10010010　00101101　10110110　00000110；</p>
-
 <p>　　② 255.255.240.0 的二进制形式为 11111111　11111111　11110000　00000000；</p>
-
 <p>　　③ 将这两个数进行<strong>与运算</strong>，得到 10010010　00101101　10110000　00000000；</p>
-
 <p>　　④ 再将结果转为十进制为 146.45.176.0，即为网络号。
 　　</p>
-
 <p>　　总共是 32 位，网络位用掉了 20 位，还剩 12 位的主机位。则主机数为 $ 2^{12} - 2 = 4094 $，这里<code>减2</code>是去掉全 0 和全 1 的两个 IP。</p>
-
 <p>　　网络中可用的 IP 地址从 10010010　00101101　10110000　00000001（146.45.176.1）到 10010010　00101101　10111111　11111110（146.45.191.254）。</p>
-
 <p>　　综上所述，该 IP 地址的网络号为 146.45.176.0，广播地址为 146.45.191.255，子网掩码为 255.255.240.0。</p>
-
 <blockquote>
-<p>广播地址：指主机号全为 1 的地址。也就是将 10010010　00101101　1011<u>0000　00000000</u> 中下划线部分全部置为 1 。</p>
+<p>广播地址：指主机号全为 1 的地址。也就是将 10010010　00101101　1011<!-- raw HTML omitted -->0000　00000000<!-- raw HTML omitted --> 中下划线部分全部置为 1 。</p>
 </blockquote>
-
 <h1 id="3-怎么确定可变子网掩码的长度">3. 怎么确定可变子网掩码的长度?</h1>
-
 <p>　　确定可变子网掩码长度的过程其实就是划分子网的过程。</p>
-
 <p>　　当从主机位中借 1 位二进制位时，当前网络可划分出 2 个子网，每个子网主机数是原来的 $ \frac{1}{2} - 2 $；当从主机位中借 2 位二进制位时，当前网络可划分出 4 个子网，每个子网主机数是原来的 $ \frac{1}{4} - 2 $ &hellip;&hellip; 当从主机位中借 N 位二进制位时，当前网络可划分为 $ 2^N $ 个子网，每个子网主机数是原来的 $ 2^{-N} - 2 $。</p>
-
 <p>　　例如：192.168.10.0/24 这个 C 类网络要划分出 2 个相等主机数的子网，则:</p>
-
 <p>　　1. 网络号与子网掩码转为二进制:</p>
-
-<p>　　　　网络号 192.168.10.0 转换为二进制是
-<center>11000000　10101000　00001010　00000000</center></p>
-
+<p>　　　　网络号 192.168.10.0 转换为二进制是</p>
+<!-- raw HTML omitted -->
 <p>　　　　子网掩码 255.255.255.0 转换为二进制是</p>
-
-<p><center>11111111　11111111　11111111　00000000</center></p>
-
+<!-- raw HTML omitted -->
 <p>　　2. 要把一个网络划分成两个相等子网，子网掩码要加 1 位，变成</p>
-
-<p><center>11111111　11111111　11111111　<u>1</u>0000000</center></p>
-
-<p>　　3. 网络号从主机位借一位用于子网 11000000　10101000　00001010　XYYYYYYY；X 位代表借入的，用于表示子网号，7 个 Y 代表剩余主机位，X 有两个值 0 和 1。</br></p>
-
+<!-- raw HTML omitted -->
+<p>　　3. 网络号从主机位借一位用于子网 11000000　10101000　00001010　XYYYYYYY；X 位代表借入的，用于表示子网号，7 个 Y 代表剩余主机位，X 有两个值 0 和 1。<!-- raw HTML omitted --></p>
 <p>　　　　①当 X 为 0 时，即</p>
-
-<p><center>11000000　10101000　00001010　<u>0</u>YYYYYYY</center></p>
-
+<!-- raw HTML omitted -->
 <p>　　　　若 Y 全为 0，表示划分出的这个子网的网络号为</p>
-
-<p><center>11000000　10101000　00001010　<u>0</u>0000000</center></p>
-
+<!-- raw HTML omitted -->
 <p>　　　　其主机可用 IP 地址范围是</p>
-
-<p><center>11000000　10101000　00001010　00000001（192.168.10.1，掩码：255.255.255.128）至</center></p>
-
-<p><center>11000000　10101000　00001010　01111110（192.168.10.126，掩码：255.255.255.128）</center></p>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>　　　　②当 X 为 1 时，即</p>
-
-<p><center>11000000　10101000　00001010　<u>1</u>YYYYYYY</center></p>
-
-<p>　　　　若 Y 全为 0，表示划分出的这个子网的网络号为 <center>11000000　10101000　00001010　<u>1</u>0000000</center></p>
-
+<!-- raw HTML omitted -->
+<p>　　　　若 Y 全为 0，表示划分出的这个子网的网络号为 <!-- raw HTML omitted -->11000000　10101000　00001010　<!-- raw HTML omitted -->1<!-- raw HTML omitted -->0000000<!-- raw HTML omitted --></p>
 <p>　　　　其主机可用 IP 地址范围是</p>
-
-<p><center>11000000　10101000　00001010　10000001（192.168.10.129，掩码：255.255.255.128）至</center></p>
-
-<p><center>11000000　10101000　00001010　11111110（192.168.10.254，掩码：255.255.255.128）</center></p>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <p>　　综上所述，192.168.10.0/24 要划分成两个相等主机数的子网，子网掩码要改为 25 位，划分出的两个子网情况是：</p>
-
 <p>　　　　子网 1：网络号：192.168.10.0，子网掩码：255.255.255.128，广播地址：192.168.10.127，主机 IP 地址范围：192.168.10.1 至 192.168.10.126。</p>
-
 <p>　　　　子网 2：网络号：192.168.10.128；子网掩码：255.255.255.128；广播地址：192.168.10.255，主机 IP 地址范围：192.168.10.129 至 192.168.10.254。</p>
-
 <p>　　<strong>在子网划分的实际应用中，制定子网划分的方案，要首先确定子网的规模，即子网包含的主机数是多少，再根据主机数来确定要借用多少主机位用于表示子网。</strong></p>
-
 <p>　　例如：某学校有个部门获得一个 C 类网络（地址段）的独立使用权，该网络（网段）为 192.168.20.0。该部门有三间机房和一间办公室，每间机房有 51 台计算机，办公室有 10 台计算机，机房和办公室都需要使用该网络（网段）。请为该部门做一份子网规划方案以满足这个部门的需要，要求每间机房、办公室的主机在各自的一个子网中。</p>
-
 <p>　　对一个网络进行子网划分，根据其每个子网需要容纳的主机数来确定需要从主机位中借几位的二进制位用于表示子网。假设一个子网的主机数有 51 台，则主机位最少要使用 6 个二进制位才能满足主机的编号，即 $ 2^{n} - 2 &gt; 51 $（n 就是二进制的位数），也就是说，n 在这里至少取 6 才能满足要求。</p>
-
 <p>　　在现实应用中，对 C 类网络划分子网的应用明显比 A、B 两类多得多。对于一个 C 类的网络进行子网划分，可以参照下面总结的这张表：</p>
-
 <blockquote>
 <p><code>-</code> 表示没有再划分下去的必要了，即没有用于表示主机的编号了。</p>
 </blockquote>
-
 <table>
 <thead>
 <tr>
-<th align="center">借主机位数</th>
-<th align="center">可划分子网数</th>
-<th align="center">每个子网可容纳下主机</th>
-<th align="center">掩码</th>
+<th style="text-align:center">借主机位数</th>
+<th style="text-align:center">可划分子网数</th>
+<th style="text-align:center">每个子网可容纳下主机</th>
+<th style="text-align:center">掩码</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td align="center">1</td>
-<td align="center">$ 2^1 = 2 $</td>
-<td align="center">$ 2^7 - 2 = 126 $</td>
-<td align="center">255.255.255.128</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">$ 2^1 = 2 $</td>
+<td style="text-align:center">$ 2^7 - 2 = 126 $</td>
+<td style="text-align:center">255.255.255.128</td>
 </tr>
-
 <tr>
-<td align="center">2</td>
-<td align="center">$ 2^2 = 4 $</td>
-<td align="center">$ 2^6 - 2 = 62 $</td>
-<td align="center">255.255.255.192</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">$ 2^2 = 4 $</td>
+<td style="text-align:center">$ 2^6 - 2 = 62 $</td>
+<td style="text-align:center">255.255.255.192</td>
 </tr>
-
 <tr>
-<td align="center">3</td>
-<td align="center">$ 2^3 = 8 $</td>
-<td align="center">$ 2^5 - 2 = 30 $</td>
-<td align="center">255.255.255.224</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">$ 2^3 = 8 $</td>
+<td style="text-align:center">$ 2^5 - 2 = 30 $</td>
+<td style="text-align:center">255.255.255.224</td>
 </tr>
-
 <tr>
-<td align="center">4</td>
-<td align="center">$ 2^4 = 16 $</td>
-<td align="center">$ 2^4 - 2 = 14 $</td>
-<td align="center">255.255.255.240</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">$ 2^4 = 16 $</td>
+<td style="text-align:center">$ 2^4 - 2 = 14 $</td>
+<td style="text-align:center">255.255.255.240</td>
 </tr>
-
 <tr>
-<td align="center">5</td>
-<td align="center">$ 2^5 = 32 $</td>
-<td align="center">$ 2^3 - 2 = 6 $</td>
-<td align="center">255.255.255.248</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">$ 2^5 = 32 $</td>
+<td style="text-align:center">$ 2^3 - 2 = 6 $</td>
+<td style="text-align:center">255.255.255.248</td>
 </tr>
-
 <tr>
-<td align="center">6</td>
-<td align="center">$ 2^6 = 64 $</td>
-<td align="center">$ 2^2 - 2 = 2 $</td>
-<td align="center">255.255.255.252</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">$ 2^6 = 64 $</td>
+<td style="text-align:center">$ 2^2 - 2 = 2 $</td>
+<td style="text-align:center">255.255.255.252</td>
 </tr>
-
 <tr>
-<td align="center">7</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center">-</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
 </tr>
-
 <tr>
-<td align="center">8</td>
-<td align="center">-</td>
-<td align="center">-</td>
-<td align="center">-</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
 </tr>
 </tbody>
 </table>
-
 <blockquote>
 <p>备注：有些教科书中把划分出的子网再减 2，即借来的二进制位全 0 和全 1 代表的子网不使用，个人实践验证，使用也没有问题。</p>
 </blockquote>
-
 <p>　　通过对上面表格的参照，每间机房 51 台主机，如果加上网关就是 52 个 IP，30 &lt; 52 &lt; 62，为了最大化利用 IP 地址，应采用向主机位借 2 位的。即：</p>
-
 <p>　　机房一：子网络为 192.168.20.0，掩码为 255.255.255.192，IP 范围为 192.168.20.1 至 192.168.20.62，广播地址 192.168.20.63；</p>
-
 <p>　　机房二：子网络为 192.168.20.64，掩码为 255.255.255.192，IP 范围为 192.168.20.65 至 192.168.20.126，广播地址 192.168.20.127；</p>
-
 <p>　　机房三：子网络为 192.168.20.128，掩码为 255.255.255.192，IP 范围为 192.168.20.129 至 192.168.20.190，广播地址 192.168.20.191；</p>
-
 <p>　　办公室 10 台，如果加上网关是 11 个 IP，6 &lt; 11 &lt; 14，为了最大化利用 IP 地址，可采用向主机位借 4 位。其中借两位的 00、01、10（二进制代码）的子网已在三个机房中使用，可以从 11 开始再借 2 位。即：子网络为 192.168.20.192，掩码为 255.255.255.240，IP 范围为 192.168.20.193 至 192.168.20.206，广播地址 192.168.20.207。</p>
     </div>
 

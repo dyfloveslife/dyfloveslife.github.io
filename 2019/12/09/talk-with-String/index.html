@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/12/09/talk-with-String/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="再谈 String s1 = &#34;123&#34; 与 String s2 = new String(&#34;123&#34;)" />
 <meta property="og:description" content="之前在介绍 JDK 源码之基础类 Object 中 equals() 方法的时候，稍微提到了关于在声明一个 String 变量的时候，通过其内存地址或具体内容来比较两个变量是否相同。本篇文章是对之前文章的进一步理解。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2019/12/09/talk-with-String/" />
-<meta property="article:published_time" content="2019-12-09T20:24:11+08:00" />
-<meta property="article:modified_time" content="2019-12-10T20:24:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2019/12/09/talk-with-String/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-12-09T20:24:11&#43;08:00" />
+<meta property="article:modified_time" content="2019-12-10T20:24:56&#43;08:00" />
+
 <meta itemprop="name" content="再谈 String s1 = &#34;123&#34; 与 String s2 = new String(&#34;123&#34;)">
-<meta itemprop="description" content="之前在介绍 JDK 源码之基础类 Object 中 equals() 方法的时候，稍微提到了关于在声明一个 String 变量的时候，通过其内存地址或具体内容来比较两个变量是否相同。本篇文章是对之前文章的进一步理解。">
-
-
-<meta itemprop="datePublished" content="2019-12-09T20:24:11&#43;08:00" />
+<meta itemprop="description" content="之前在介绍 JDK 源码之基础类 Object 中 equals() 方法的时候，稍微提到了关于在声明一个 String 变量的时候，通过其内存地址或具体内容来比较两个变量是否相同。本篇文章是对之前文章的进一步理解。"><meta itemprop="datePublished" content="2019-12-09T20:24:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-12-10T20:24:56&#43;08:00" />
-<meta itemprop="wordCount" content="2694">
-
-
-
-<meta itemprop="keywords" content="String," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="2690">
+<meta itemprop="keywords" content="String," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="再谈 String s1 = &#34;123&#34; 与 String s2 = new String(&#34;123&#34;)"/>
 <meta name="twitter:description" content="之前在介绍 JDK 源码之基础类 Object 中 equals() 方法的时候，稍微提到了关于在声明一个 String 变量的时候，通过其内存地址或具体内容来比较两个变量是否相同。本篇文章是对之前文章的进一步理解。"/>
 
@@ -132,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 2694 words </span>
+          <span class="more-meta"> 2690 words </span>
           <span class="more-meta"> 6 mins read </span>
         
       </div>
@@ -141,26 +135,16 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#深入-string">深入 String</a></li>
-<li><a href="#使用符号-连接字符串会发生什么">使用符号 &ldquo;+&rdquo; 连接字符串会发生什么？</a></li>
-<li><a href="#如何正确的连接字符串">如何正确的连接字符串？</a></li>
-<li><a href="#再来个例子">再来个例子</a></li>
-<li><a href="#最后一个例子">最后一个例子</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>之前在介绍 <a href="https://dyfloveslife.github.io/2019/12/04/JavaSrc-BasicClass-Object/#equals">JDK 源码之基础类 Object</a> 中 <code>equals()</code> 方法的时候，稍微提到了关于在声明一个 String 变量的时候，通过其内存地址或具体内容来比较两个变量是否相同。本篇文章是对之前文章的进一步理解。</p>
-
 <h1 id="深入-string">深入 String</h1>
-
 <p>先来个例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -174,45 +158,39 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="err">String s1 </span><span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="p">;</span>
-    <span class="err">String s2 </span><span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="p">;</span>
-    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">);</span> <span class="c1">// true
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="o">;</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="o">);</span> <span class="c1">// true
 </span><span class="c1"></span>
-    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;----&#34;</span><span class="p">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;----&#34;</span><span class="o">);</span>
 
-    <span class="err">String s3 </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">);</span>
-    <span class="err">String s4 </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;abc&#34;</span><span class="p">);</span>
-    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s3</span> <span class="o">==</span> <span class="n">s4</span><span class="p">);</span> <span class="c1">// false
+    <span class="n">String</span> <span class="n">s3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abc&#34;</span><span class="o">);</span>
+    <span class="n">String</span> <span class="n">s4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abc&#34;</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s3</span> <span class="o">==</span> <span class="n">s4</span><span class="o">);</span> <span class="c1">// false
 </span><span class="c1"></span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><strong>从输出结果可以看到，<code>s1 == s2</code> 此时比较的是这两个对象的引用是否相等，而不是比较具体的内容。</strong></p>
-
+</div><p><strong>从输出结果可以看到，<code>s1 == s2</code> 此时比较的是这两个对象的引用是否相等，而不是比较具体的内容。</strong></p>
 <p><strong>对于 <code>s3 == s4</code> 来说虽然内容相等，但是 <code>s3</code> 和 <code>s4</code> 是两个不同的引用，因此返回 <code>false</code>。</strong></p>
-
 <p>在文章 <a href="https://dyfloveslife.github.io/2019/11/18/java-memory-areas/#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0">Java 内存区域概述</a> 里提到过，<code>常量池</code> 里存放的数据是 <strong>在编译期间生成的各种字面量和符号引用，这部分内容（基本数据类型、String、数组）将在类加载后进入方法区的运行时常量池中存放。</strong></p>
-
 <p>对于字面量，也就是说对于 <code>String s1 = &quot;123&quot;;</code> 来说，其中 <code>String</code> 表示引用的类型；<code>s1</code> 表示一个引用，<strong>该引用指向的是字面量 <code>123</code> 在常量池中的地址；</strong> <code>123</code> 表示在编译期间可被确定的内容，存放在 <code>常量池</code> 中。</p>
-
 <p>关于 <code>栈</code> 与 <code>常量池</code> 的区别，我也在网上搜集了不少文章，比如在知乎上的<a href="https://www.zhihu.com/question/26711836">回答</a>。同时，我也想起了 <a href="https://github.com/alibaba/p3c/blob/master/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%88%E5%8D%8E%E5%B1%B1%E7%89%88%EF%BC%89.pdf">阿里巴巴Java开发手册</a> 中 <code>编程规约 -&gt; OOP 规约</code> 下的第 7 条，如下所示：</p>
-
 <blockquote>
 <p><strong>所有的相同类型的包装类型对象之间 <code>值的比较</code>，全部使用 equals 方法。</strong></p>
-
-<p><br></p>
-
+</blockquote>
+<!-- raw HTML omitted -->
+<blockquote>
 <ul>
 <li>对于 Integer var = ? ，在 -128 至 127 范围内的赋值，Integer 对象是在 <code>IntegerCache.cache</code> 产生，<strong>会复用已有对象</strong>，这个区间内的 Integer 值可以直接使用 == 进行判断。</li>
 <li>但是 <strong>这个区间之外的所有数据，都会在 <code>堆</code> 上产生，并不会复用已有对象</strong>，这是一个大坑，推荐使用 equals 方法进行判断。</li>
 </ul>
 </blockquote>
-
 <p>对于这条约定，我们可以用以下代码说明：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -220,50 +198,41 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">Integer i1 </span><span class="o">=</span> <span class="n">100</span><span class="p">;</span>
-<span class="err">Integer i2 </span><span class="o">=</span> <span class="n">100</span><span class="p">;</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i1</span> <span class="o">==</span> <span class="n">i2</span><span class="p">);</span> <span class="c1">// true
-</span><span class="c1"></span><span class="err">Integer i3 </span><span class="o">=</span> <span class="n">200</span><span class="p">;</span>
-<span class="err">Integer i4 </span><span class="o">=</span> <span class="n">200</span><span class="p">;</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i3</span> <span class="o">==</span> <span class="n">i4</span><span class="p">);</span> <span class="o">//</span> <span class="kc">false</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Integer</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">100</span><span class="o">;</span>
+<span class="n">Integer</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">100</span><span class="o">;</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i1</span> <span class="o">==</span> <span class="n">i2</span><span class="o">);</span> <span class="c1">// true
+</span><span class="c1"></span><span class="n">Integer</span> <span class="n">i3</span> <span class="o">=</span> <span class="n">200</span><span class="o">;</span>
+<span class="n">Integer</span> <span class="n">i4</span> <span class="o">=</span> <span class="n">200</span><span class="o">;</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i3</span> <span class="o">==</span> <span class="n">i4</span><span class="o">);</span> <span class="c1">// false
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<p>产生这种现象的原因是由于 <code>自动装箱</code> 造成的：</p>
-
+</div><p>产生这种现象的原因是由于 <code>自动装箱</code> 造成的：</p>
 <ul>
 <li><code>Integer i1 = 100;</code> 产生了自动装箱，由基本数据类型 <code>int = 100</code> 自动装箱成了对应的包装类型 <code>Integer = 100</code>，具体转换过程就是在源码中对应的 <code>Integer i1 = Integer.valueOf(100);</code>。</li>
 <li>这里涉及到 <code>IntegerCache</code> 的大小，即 <code>IntegerCache.low</code> 默认为 <code>-128</code>，<code>IntegerCache.high</code> 默认为 <code>127</code>。</li>
 <li>这个容量大小表示：在此范围内的对象直接放到缓存中，等到下次再取这个对象的时候，直接复用即可。这种缓存机制可以提高程序的运行效率、节省内存空间。</li>
 <li>所以，<code>100</code> 是在这个区间范围里面的。而 <code>200</code> 不在此范围中，它会在堆中产生（new）新的对象，并不会复用原有的对象，这也是返回 <code>false</code> 的原因。</li>
 </ul>
-
 <blockquote>
 <p>好像有点扯远了。</p>
 </blockquote>
-
 <p>回到 <code>常量池</code> 具有 <code>数据共享</code> 这一特点，对于语句 <code>String s1 = &quot;123&quot;;</code>：</p>
-
 <ul>
 <li>JVM 首先会在 <code>常量池</code> 中查找该字符串是否已经存在，如果存在则直接返回该字符串对应的引用（也就是地址）；</li>
 <li>然后语句 <code>String s2 = &quot;123&quot;;</code> 也会在 <code>常量池</code> 中查看有没有这个字符串，结果发现已经存在了；</li>
 <li>由于 <code>数据共享</code>，所以 <code>s2</code> 就指向了 <code>123</code>，而不是再次创建一个 <code>123</code>。因此，此时返回的是 <code>true</code>。</li>
 </ul>
-
 <p>对于 <code>String s3 = new String(&quot;abc&quot;);</code> 来说：</p>
-
 <ul>
 <li>由于使用了 <code>new</code> 关键字，JVM 不会再查询 <code>常量池</code> 了，而是被 <code>new</code> 出来的对象会被放置在 <code>堆内存</code> 中，并用 <code>s3</code> 指向这块内存，即 <code>s3</code> 代表的是 <code>当前对象的引用</code>；</li>
 <li>每 <code>new</code> 一次，就从堆中开辟一块内存。由于是两块不同的内存，所代表的是两个完全不同的对象，所以 <code>s3</code> 和 <code>s4</code> 也就不相等了。</li>
 </ul>
-
-<h1 id="使用符号-连接字符串会发生什么">使用符号 &ldquo;+&rdquo; 连接字符串会发生什么？</h1>
-
+<h1 id="使用符号--连接字符串会发生什么">使用符号 &ldquo;+&rdquo; 连接字符串会发生什么？</h1>
 <p>我们首先使用 <code>javap -c Demo</code> 反编译 <code>Demo.class</code> 文件，得到 Java 编译器生成的字节码：</p>
-
 <p>源文件：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -274,21 +243,21 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">Demo</span><span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Demo</span><span class="o">{</span>
 
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="err">String s </span><span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="p">;</span>
-        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#34;456&#34;</span><span class="p">;</span>
-        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#34;789&#34;</span><span class="p">;</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="o">;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#34;456&#34;</span><span class="o">;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#34;789&#34;</span><span class="o">;</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>编译后的字节码：</p>
+</div><p>编译后的字节码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -324,9 +293,9 @@
 </span><span class="lnt">34
 </span><span class="lnt">35
 </span><span class="lnt">36
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">$ javap -c Demo
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ javap -c Demo
 Compiled from &#34;Demo.java&#34;
 public class Demo {
   public Demo();
@@ -361,42 +330,35 @@ public class Demo {
       46: aload_1
       47: invokevirtual #10                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
       50: return
-}</pre></td></tr></table>
+}
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>通过编译结果可以看出，第 <code>16</code> 行对应的是源代码中的第 <code>#4</code> 行，也就是 <code>String s = &quot;123&quot;;</code>语句。在初始化 <code>s</code> 的时候，其实在内部使用了 <code>StringBuilder</code>。</p>
-
+</div><p>通过编译结果可以看出，第 <code>16</code> 行对应的是源代码中的第 <code>#4</code> 行，也就是 <code>String s = &quot;123&quot;;</code>语句。在初始化 <code>s</code> 的时候，其实在内部使用了 <code>StringBuilder</code>。</p>
 <p>然后到了第 <code>18</code> 行，也就是对应源代码中的第 <code>#5</code> 行，再执行 <code>s += &quot;456&quot;;</code> 语句的时候，调用了 <code>StringBuilder</code> 的 <code>append</code> 方法，最后调用 <code>StringBuilder</code> 的 <code>toString</code> 方法生成字符串。</p>
-
 <p>然而 <code>StringBuilder</code> 的 <code>toString</code> 方法是创建一个新的 <code>String</code> 对象的拷贝，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public String </span><span class="n">toString</span><span class="p">()</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
     <span class="c1">// Create a copy, don&#39;t share the array
-</span><span class="c1"></span>    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
-<span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>所以说，每次在使用符号 “+” 的时候，都会 new 一个 <code>StringBuilder</code>，使用这种方式连接字符串无疑是一种对内存的浪费。</p>
-
+</div><p>所以说，每次在使用符号 “+” 的时候，都会 new 一个 <code>StringBuilder</code>，使用这种方式连接字符串无疑是一种对内存的浪费。</p>
 <h1 id="如何正确的连接字符串">如何正确的连接字符串？</h1>
-
 <p>我们可以使用 <code>StringBuilder</code> 或者 <code>StringBuffer</code> 的 <code>append</code> 方法连接字符串。它俩的区别在于，<code>StringBuffer</code> 是线程安全的，因为它里面的许多方法都是使用 <code>synchronized</code> 修饰的，而 <code>StringBuilder</code> 不是线程安全的。</p>
-
 <p><code>StringBuilder</code> 在底层维护了一个 <code>char</code> 类型的数组，每次调用 <code>append</code> 方法的时候就往数组里面存值，在调用 <code>toString</code> 方法的时候，将 <code>char</code> 数组中的字符转换成字符串。整个过程其实只使用了一个 <code>StringBuilder</code> 对象，这样的话可以节省内存。</p>
-
 <h1 id="再来个例子">再来个例子</h1>
-
 <p>如下面代码所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -406,49 +368,40 @@ public class Demo {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">IntegerDemo</span> <span class="p">{</span>
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="err">String s1 </span><span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;abc &#34;</span><span class="p">)</span> <span class="o">+</span> <span class="k">new</span> <span class="n">String</span><span class="p">(</span><span class="s">&#34;def&#34;</span><span class="p">);</span>
-        <span class="n">s1</span><span class="p">.</span><span class="na">intern</span><span class="p">();</span>
-        <span class="err">String s2 </span><span class="o">=</span> <span class="s">&#34;abc def&#34;</span><span class="p">;</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">);</span> <span class="c1">// true
-</span><span class="c1"></span>    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">IntegerDemo</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abc &#34;</span><span class="o">)</span> <span class="o">+</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;def&#34;</span><span class="o">);</span>
+        <span class="n">s1</span><span class="o">.</span><span class="na">intern</span><span class="o">();</span>
+        <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;abc def&#34;</span><span class="o">;</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="o">);</span> <span class="c1">// true
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如果将 <code>s1.intern();</code> 语句注释掉后，结果则返回 <code>false</code>。为什么？</p>
-
+</div><p>如果将 <code>s1.intern();</code> 语句注释掉后，结果则返回 <code>false</code>。为什么？</p>
 <p>来分析一下第 3 行语句 <code>String s1 = new String(&quot;abc &quot;) + new String(&quot;def&quot;);</code>：</p>
-
 <ul>
-<li>首先由于是 new 关键字，则直接在堆中生成两个字符串 <code>abc</code> 和 <code>def</code>；</li>
+<li>首先由于是 new 关键字，则直接在堆中生成两个字符串 <code>abc </code> 和 <code>def</code>；</li>
 <li>然后符号 “+” 在底层使用了 <code>StringBuilder</code> 进行字符串的拼接；</li>
 <li>拼接完成后产生新的 <code>abc def</code> 对象，并使用 <code>s1</code> 指向它。</li>
 </ul>
-
 <p>第 4 行语句 <code>s1.intern();</code> 的作用是：</p>
-
 <ul>
 <li>先去 <code>常量池</code> 中查看是否有当前字符串对应的引用：
-
 <ul>
 <li>如果有的话，就直接返回该字符串；</li>
 <li>如果没有的话，则在 <code>常量池</code> 中生成该字符串的引用，然后再返回该字符串。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p><strong>由于字符串 <code>abc def</code> 是在 <code>堆</code> 中生成的，<code>常量池</code> 中没有对应的引用，所以它会在 <code>常量池</code> 中生成该字符串的引用。</strong></p>
-
 <p>第 5 行语句 <code>String s2 = &quot;abc def&quot;;</code> 就是前面讲过的，首先会在 <code>常量池</code> 中查找有没有当前字符串对应的引用，这时由于 <code>s1.intern();</code> 已经生成过引用了，再加上 <code>数据共享机制</code>，所以 <code>s2</code> 就和 <code>s1</code> 一样共同指向字符串 <code>abc def</code>，即 <code>s1</code> 和 <code>s2</code> 指向相同的对象，所以最后结果返回的是 <code>true</code>。</p>
-
 <p>如果没有 <code>s1.intern();</code> 这一语句，则 <code>s2</code> 会看到在 <code>常量池</code> 中没有当前字符串对应的引用，所以它会在 <code>常量池</code> 中生成 <code>abc def</code>，此时 <code>s1</code> 与 <code>s2</code> 指向的就是两个不同的对象了，这就是返回 <code>false</code> 的原因。</p>
-
 <h1 id="最后一个例子">最后一个例子</h1>
-
 <p>看下列代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -457,19 +410,18 @@ public class Demo {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="err">String s1 </span><span class="o">=</span> <span class="s">&#34;aaa &#34;</span><span class="p">;</span> <span class="c1">// 注意：aaa 后面有一个空格
-</span><span class="c1"></span>    <span class="err">String s2 </span><span class="o">=</span> <span class="s">&#34;bbb&#34;</span><span class="p">;</span>
-    <span class="err">String s3 </span><span class="o">=</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span><span class="p">;</span>
-    <span class="err">String s4 </span><span class="o">=</span> <span class="s">&#34;aaa bbb&#34;</span><span class="p">;</span>
-    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s3</span> <span class="o">==</span> <span class="n">s4</span><span class="p">);</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;aaa &#34;</span><span class="o">;</span> <span class="c1">// 注意：aaa 后面有一个空格
+</span><span class="c1"></span>    <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;bbb&#34;</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">s3</span> <span class="o">=</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">s4</span> <span class="o">=</span> <span class="s">&#34;aaa bbb&#34;</span><span class="o">;</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s3</span> <span class="o">==</span> <span class="n">s4</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>经过前面的“修炼”，我想你应该知道上面代码最终的输出结果了。我们还是来分析一下最终的结果为什么是 <code>fasle</code>。</p>
-
+</div><p>经过前面的“修炼”，我想你应该知道上面代码最终的输出结果了。我们还是来分析一下最终的结果为什么是 <code>fasle</code>。</p>
 <ul>
-<li>首先，由于在 <code>常量池</code> 中没有创建过 <code>aaa</code>，则此时 <code>s1</code> 就指向的是 <code>aaa</code>，<code>s2</code> 同理指向 <code>bbb</code>；</li>
+<li>首先，由于在 <code>常量池</code> 中没有创建过 <code>aaa </code>，则此时 <code>s1</code> 就指向的是 <code>aaa </code>，<code>s2</code> 同理指向 <code>bbb</code>；</li>
 <li>然后，由于符号 “+” 在底层使用的是 <code>StringBuilder</code> 进行字符串的拼接，其生成的字符串是调用 <code>toString</code> 方法在 <code>堆</code> 上 new 出来的 <code>aaa bbb</code>，然后 <code>s3</code> 指向 <code>堆</code> 中的字符串；</li>
 <li>一个在 <code>常量池</code> 中，另一个在 <code>堆</code> 中，结果自然就返回 <code>false</code> 了。</li>
 </ul>

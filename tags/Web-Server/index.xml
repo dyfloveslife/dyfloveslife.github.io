@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Fri, 02 Jun 2017 21:41:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/Web-Server/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 02 Jun 2017 21:41:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/Web-Server/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux 环境下配置 Web 服务器</title>
       <link>http://localhost:1313/2017/06/02/Linux-WebServer/</link>
@@ -29,7 +25,6 @@
       <guid>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</guid>
       <description>&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
 同时有三个软件包：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;

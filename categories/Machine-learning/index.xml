@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Mon, 08 Apr 2019 08:04:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/categories/Machine-learning/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 08 Apr 2019 08:04:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/Machine-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>用迁移学习来区分外星人和铁血战士</title>
       <link>http://localhost:1313/2019/04/08/how-to-distinguish-Aliens-vs-Predators-with-transfer-learning/</link>

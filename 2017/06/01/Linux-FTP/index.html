@@ -25,7 +25,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/01/Linux-FTP/" />
@@ -42,29 +42,20 @@
 
 <meta property="og:title" content="Linux 环境下配置 FTP 服务器" />
 <meta property="og:description" content="2017/6/5 [更新]文件上传、下载功能。
-
 2017/6/8 [更新]实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以访问。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2017/06/01/Linux-FTP/" />
-<meta property="article:published_time" content="2017-06-01T22:43:11+08:00" />
-<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2017/06/01/Linux-FTP/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-06-01T22:43:11&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56&#43;08:00" />
+
 <meta itemprop="name" content="Linux 环境下配置 FTP 服务器">
 <meta itemprop="description" content="2017/6/5 [更新]文件上传、下载功能。
-
-2017/6/8 [更新]实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以访问。">
-
-
-<meta itemprop="datePublished" content="2017-06-01T22:43:11&#43;08:00" />
+2017/6/8 [更新]实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以访问。"><meta itemprop="datePublished" content="2017-06-01T22:43:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="1423">
-
-
-
-<meta itemprop="keywords" content="Linux,FTP," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="1414">
+<meta itemprop="keywords" content="Linux,FTP," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux 环境下配置 FTP 服务器"/>
 <meta name="twitter:description" content="2017/6/5 [更新]文件上传、下载功能。
-
 2017/6/8 [更新]实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以访问。"/>
 
 <!--[if lte IE 9]>
@@ -139,7 +130,7 @@
         <div class="post-category">
             <a href="/categories/Linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 1423 words </span>
+          <span class="more-meta"> 1414 words </span>
           <span class="more-meta"> 3 mins read </span>
         
       </div>
@@ -149,304 +140,269 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#一-配置虚拟机静态-ip">一、配置虚拟机静态 IP</a></li>
-<li><a href="#二-安装">二、安装</a>
-<ul>
-<li><a href="#1-挂载第三张镜像-安装-vsftpd">1. 挂载第三张镜像，安装 vsftpd</a></li>
-<li><a href="#2-启动服务">2. 启动服务</a></li>
-</ul></li>
-<li><a href="#三-实现上传-下载功能">三、实现上传、下载功能</a>
-<ul>
-<li><a href="#1-修改配置文件">1. 修改配置文件</a></li>
-<li><a href="#2-下载文件">2.下载文件</a></li>
-<li><a href="#3-上传文件">3. 上传文件</a></li>
-</ul></li>
-<li><a href="#四-禁止本地user1登录ftp服务器">四、禁止本地user1登录ftp服务器</a></li>
-<li><a href="#五-只有本地dog可以访问ftp-以user为代表的其他用户不可以访问">五、只有本地dog可以访问ftp，以user为代表的其他用户不可以访问</a>
-<ul>
-<li><a href="#1-安装包">1. 安装包</a></li>
-<li><a href="#2-开启服务">2. 开启服务</a></li>
-<li><a href="#3-添加用户-dog">3. 添加用户 dog</a></li>
-<li><a href="#4-修改配置文件">4. 修改配置文件</a></li>
-<li><a href="#5-重启服务-并测试">5. 重启服务，并测试</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1-挂载第三张镜像安装-vsftpd">1. 挂载第三张镜像，安装 vsftpd</a></li>
+    <li><a href="#2-启动服务">2. 启动服务</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-修改配置文件">1. 修改配置文件</a></li>
+    <li><a href="#2下载文件">2.下载文件</a></li>
+    <li><a href="#3-上传文件">3. 上传文件</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-安装包">1. 安装包</a></li>
+    <li><a href="#2-开启服务">2. 开启服务</a></li>
+    <li><a href="#3-添加用户-dog">3. 添加用户 dog</a></li>
+    <li><a href="#4-修改配置文件">4. 修改配置文件</a></li>
+    <li><a href="#5-重启服务并测试">5. 重启服务，并测试</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p><strong>2017/6/5 [更新]文件上传、下载功能。</strong></p>
-
 <p><strong>2017/6/8 [更新]实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以访问。</strong></p>
-
 <blockquote>
 <p>说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。</p>
-
 <p>用到一个软件包：<strong>shrike-i386-disc3.iso</strong></p>
 </blockquote>
-
 <p>步骤：</p>
-
 <ul>
-<li>1. 配置静态 IP。</li>
-<li>2. 安装 vsftpd 包，启动服务，测试服务。（在第三张镜像中）</li>
-<li>3. 上传、下载功能
-
+<li>
+<ol>
+<li>配置静态 IP。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>安装 vsftpd 包，启动服务，测试服务。（在第三张镜像中）</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>上传、下载功能</li>
+</ol>
 <ul>
 <li>3.1 修改配置文件</li>
-<li>3.2 下载文件</li>
-<li>3.3 上传文件</li>
-</ul></li>
-<li>4. 禁止本地 user1 登录 ftp 服务器</li>
-<li>5. 实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以</li>
+<li>3.2	下载文件</li>
+<li>3.3	上传文件</li>
 </ul>
-
-<h1 id="一-配置虚拟机静态-ip">一、配置虚拟机静态 IP</h1>
-
-<p>左下角 &ldquo;主菜单&rdquo;→&rdquo;系统设置&rdquo;→&rdquo;网络&rdquo;，双击设备 &ldquo;eth0&rdquo;。</p>
+</li>
+<li>
+<ol start="4">
+<li>禁止本地 user1 登录 ftp 服务器</li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以</li>
+</ol>
+</li>
+</ul>
+<h1 id="一配置虚拟机静态-ip">一、配置虚拟机静态 IP</h1>
+<p>左下角 &ldquo;主菜单&quot;→&quot;系统设置&quot;→&quot;网络&rdquo;，双击设备 &ldquo;eth0&rdquo;。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">IP 地址：192.168.1.2
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">IP 地址：192.168.1.2
 子网掩码：255.255.255.0
-默认网关地址：192.168.1.254</pre></td></tr></table>
+默认网关地址：192.168.1.254
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>在 &ldquo;DNS&rdquo; 选项卡下，修改 &ldquo;主 DNS&rdquo; 为 192.168.1.2。最后单击 &ldquo;激活&rdquo;。</p>
-
-<h1 id="二-安装">二、安装</h1>
-
-<h2 id="1-挂载第三张镜像-安装-vsftpd">1. 挂载第三张镜像，安装 vsftpd</h2>
+</div><p>在 &ldquo;DNS&rdquo; 选项卡下，修改 &ldquo;主 DNS&rdquo; 为 192.168.1.2。最后单击 &ldquo;激活&rdquo;。</p>
+<h1 id="二安装">二、安装</h1>
+<h2 id="1-挂载第三张镜像安装-vsftpd">1. 挂载第三张镜像，安装 vsftpd</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">mount /dev/cdrom /mnt/cdrom		// 挂载镜像
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mount /dev/cdrom /mnt/cdrom		// 挂载镜像
 cd /mnt/cdrom/RedHar/RPMS		// 进入软件包目录
-rpm -ivh vsftpd-1.1.3-8.i386.rpm	// 安装</pre></td></tr></table>
+rpm -ivh vsftpd-1.1.3-8.i386.rpm	// 安装
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="2-启动服务">2. 启动服务</h2>
+</div><h2 id="2-启动服务">2. 启动服务</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">service vsftpd start	// 启动服务
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">service vsftpd start	// 启动服务
 ftp 192.168.1.2		// 静态 IP 地址
 ftp			// 用户名
-ftp			// 密码</pre></td></tr></table>
+ftp			// 密码
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>出现如下图：</p>
-
-<p><img src="/images/vsftpd.png" alt="vsftpd" /></p>
-
+</div><p>出现如下图：</p>
+<p><img src="/images/vsftpd.png" alt="vsftpd"></p>
 <blockquote>
 <p>到此为止，ftp 就配置完成了。接下来进行一些配置案例。</p>
 </blockquote>
-
-<h1 id="三-实现上传-下载功能">三、实现上传、下载功能</h1>
-
+<h1 id="三实现上传下载功能">三、实现上传、下载功能</h1>
 <blockquote>
 <p>注意：匿名用户只具有下载权限。若要实现上传权限，需要添加新的用户，用该用户登录 FTP 即可。</p>
 </blockquote>
-
 <h2 id="1-修改配置文件">1. 修改配置文件</h2>
-
 <p>修改<code>/etc/vsftpd/vsftpd.conf</code>配置文件,即去掉<code>anon_upload_enable=YES</code>和<code>anon_mkdir_write_enable=YES</code>前面的<code>#</code>号。该作用是：允许匿名用户上传和新建文件夹。</p>
-
-<h2 id="2-下载文件">2.下载文件</h2>
-
+<h2 id="2下载文件">2.下载文件</h2>
 <p>1.匿名用户下载</p>
-
 <p>①先创建文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">cd /var/ftp
-touch 1.txt</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd /var/ftp
+touch 1.txt
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>②下载</p>
+</div><p>②下载</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">cd /
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cd /
 ftp 192.168.1.2
 ftp
 ftp
-get 1.txt		// 文件会下载到根目录</pre></td></tr></table>
+get 1.txt		// 文件会下载到根目录
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如下图：</p>
-
-<p><img src="/images/linux_ftp1.png" alt="linuxftp" /></p>
-
+</div><p>如下图：</p>
+<p><img src="/images/linux_ftp1.png" alt="linuxftp"></p>
 <p>2.新建用户下载</p>
-
 <p>①添加用户</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">useradd dyf
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">useradd dyf
 passwd dyf
-// 输入密码</pre></td></tr></table>
+// 输入密码
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>②下载</p>
-
+</div><p>②下载</p>
 <blockquote>
 <p>我们现在实现将 <code>/home/dyf/2.txt</code>文件下载到 <code>/</code> 下。</p>
 </blockquote>
-
 <p>先在<code>/home/dyf</code> 下新建 <code>2.txt</code>文件。然后登陆FTP，要记得用户名是 <code>dyf</code>,密码是你设置的密码。进入后执行<code>get 2.txt</code>即可。如下图：</p>
-
-<p><img src="/images/linux_ftp2.png" alt="linuxftp" /></p>
-
+<p><img src="/images/linux_ftp2.png" alt="linuxftp"></p>
 <h2 id="3-上传文件">3. 上传文件</h2>
-
 <blockquote>
 <p>由于<code>匿名用户</code>不能上传文件，改了配置文件也不能实现。所以，接下来实现 <code>新建用户上传文件</code>。我们现在实现将 <code>/</code>下的<code>3.txt</code> 文件，上传到 <code>/home/dyf</code>下。</p>
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">ftp 192.168.1.2
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">ftp 192.168.1.2
 dyf
 // 输入密码
-put 3.txt	//上传</pre></td></tr></table>
+put 3.txt	//上传
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如下图：</p>
-
-<p><img src="/images/linux_ftp4.png" alt="linuxftp" /></p>
-
+</div><p>如下图：</p>
+<p><img src="/images/linux_ftp4.png" alt="linuxftp"></p>
 <blockquote>
 <p>我们现在实现将 <code>/</code>下的<code>3.txt</code> 文件，上传到 <code>/var/ftp/pub</code>下。</p>
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">chown ftp:ftp /var/ftp/pub	// 更改文件所有者和文件组群
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">chown ftp:ftp /var/ftp/pub	// 更改文件所有者和文件组群
 chmod 777 /var/ftp/pub		// 增加权限
 ftp 192.168.1.2
 dyf
 //输入密码
 cd /var/ftp/pub			// 更改到该路径下
-put 3.txt			// 上传</pre></td></tr></table>
+put 3.txt			// 上传
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如下图：</p>
-
-<p><img src="/images/linux_ftp5.png" alt="linuxftp" /></p>
-
-<h1 id="四-禁止本地user1登录ftp服务器">四、禁止本地user1登录ftp服务器</h1>
-
+</div><p>如下图：</p>
+<p><img src="/images/linux_ftp5.png" alt="linuxftp"></p>
+<h1 id="四禁止本地user1登录ftp服务器">四、禁止本地user1登录ftp服务器</h1>
 <p>1.添加用户</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">useradd	user1
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">useradd	user1
 passwd	user1
-// 接下来输入两次密码</pre></td></tr></table>
+// 接下来输入两次密码
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>2.修改配置文件</p>
-
+</div><p>2.修改配置文件</p>
 <p>修改 <code>/etc/vsftpd.ftpusers</code> 文件，在末尾添加 <code>user1</code> ,保存退出。</p>
-
 <p>3.重启服务</p>
-
 <p><code>service vsftpd restart</code></p>
-
 <p>4.如下图：</p>
-
-<p><img src="/images/stopuser1.jpg" alt="stopuser1" /></p>
-
-<h1 id="五-只有本地dog可以访问ftp-以user为代表的其他用户不可以访问">五、只有本地dog可以访问ftp，以user为代表的其他用户不可以访问</h1>
-
+<p><img src="/images/stopuser1.jpg" alt="stopuser1"></p>
+<h1 id="五只有本地dog可以访问ftp以user为代表的其他用户不可以访问">五、只有本地dog可以访问ftp，以user为代表的其他用户不可以访问</h1>
 <blockquote>
 <p>我这是重新配置的FTP服务器。（一切从新开始）</p>
 </blockquote>
-
 <h2 id="1-安装包">1. 安装包</h2>
-
 <p>即安装 vsftpd 包。</p>
-
 <h2 id="2-开启服务">2. 开启服务</h2>
-
 <p><code>service vsftpd start</code></p>
-
 <h2 id="3-添加用户-dog">3. 添加用户 dog</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">useradd dog
-passwd dog</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">useradd dog
+passwd dog
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="4-修改配置文件">4. 修改配置文件</h2>
-
+</div><h2 id="4-修改配置文件">4. 修改配置文件</h2>
 <ol>
 <li>修改 <code>etc/vsftpd/vsftpd.conf</code>文件，在末尾修改<code>userlist_enable=YES</code>，添加<code>userlist_deny=NO</code>和<code>userlist_file=/etc/vsftpd.user_list</code>。如下图：
-<img src="/images/linux_ftp6.png" alt="linux_ftp" /></li>
+<img src="/images/linux_ftp6.png" alt="linux_ftp"></li>
 <li>修改<code>etc/vsftpd.user_list</code>文件，在末尾添加可以访问ftp的用户，例如<code>dog</code>。</li>
 </ol>
-
 <p>如下图：</p>
-
-<p><img src="/images/linux_ftp7.png" alt="linux_ftp" /></p>
-
-<h2 id="5-重启服务-并测试">5. 重启服务，并测试</h2>
-
+<p><img src="/images/linux_ftp7.png" alt="linux_ftp"></p>
+<h2 id="5-重启服务并测试">5. 重启服务，并测试</h2>
 <p>如下图：</p>
-
-<p><img src="/images/linux_ftp8.png" alt="linux_ftp" /></p>
+<p><img src="/images/linux_ftp8.png" alt="linux_ftp"></p>
     </div>
 
     <div class="post-copyright">

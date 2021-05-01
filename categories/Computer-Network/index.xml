@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Wed, 06 Nov 2019 19:23:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/categories/Computer-Network/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 06 Nov 2019 19:23:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/Computer-Network/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>可变长子网掩码在子网划分中的应用「转」</title>
       <link>http://localhost:1313/2019/11/06/VLSM/</link>
@@ -37,9 +33,7 @@
       
       <guid>http://localhost:1313/2017/06/22/NetworkCabling-1/</guid>
       <description>&lt;h1 id=&#34;1-每个楼层的用线计算公式&#34;&gt;1. 每个楼层的用线计算公式&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;C 为每个楼层用线量&lt;/li&gt;
 &lt;li&gt;F 为最远的信息插座离楼层管理间的距离&lt;/li&gt;

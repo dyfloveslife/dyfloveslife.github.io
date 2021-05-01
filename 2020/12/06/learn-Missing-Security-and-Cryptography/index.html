@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/12/06/learn-Missing-Security-and-Cryptography/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="Missing Semester 学习笔记 - Security and Cryptography" />
 <meta property="og:description" content="本节将介绍如何从用户角度增强隐私保护和安全的方法，包括散列函数、密钥生成函数、对称/非对称加密等。该部分的内容仅作了解即可。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2020/12/06/learn-Missing-Security-and-Cryptography/" />
-<meta property="article:published_time" content="2020-12-06T14:46:11+08:00" />
-<meta property="article:modified_time" content="2020-12-06T14:47:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2020/12/06/learn-Missing-Security-and-Cryptography/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-12-06T14:46:11&#43;08:00" />
+<meta property="article:modified_time" content="2020-12-06T14:47:56&#43;08:00" />
+
 <meta itemprop="name" content="Missing Semester 学习笔记 - Security and Cryptography">
-<meta itemprop="description" content="本节将介绍如何从用户角度增强隐私保护和安全的方法，包括散列函数、密钥生成函数、对称/非对称加密等。该部分的内容仅作了解即可。">
-
-
-<meta itemprop="datePublished" content="2020-12-06T14:46:11&#43;08:00" />
+<meta itemprop="description" content="本节将介绍如何从用户角度增强隐私保护和安全的方法，包括散列函数、密钥生成函数、对称/非对称加密等。该部分的内容仅作了解即可。"><meta itemprop="datePublished" content="2020-12-06T14:46:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-12-06T14:47:56&#43;08:00" />
 <meta itemprop="wordCount" content="1194">
-
-
-
-<meta itemprop="keywords" content="Linux,Cryptography," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Linux,Cryptography," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Missing Semester 学习笔记 - Security and Cryptography"/>
 <meta name="twitter:description" content="本节将介绍如何从用户角度增强隐私保护和安全的方法，包括散列函数、密钥生成函数、对称/非对称加密等。该部分的内容仅作了解即可。"/>
 
@@ -141,14 +135,12 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>本节将介绍如何从用户角度增强隐私保护和安全的方法，包括散列函数、密钥生成函数、对称/非对称加密等。该部分的内容仅作了解即可。</p>
-
 <p>目录如下：</p>
-
 <ul>
 <li><a href="https://dyfloveslife.github.io/2020/11/26/learn-Missing-Semester-shell/">Course overview + the shell</a></li>
 <li><a href="https://dyfloveslife.github.io/2020/11/26/learn-Missing-Semester-shell-tool-and-scripting/">Shell Tools and Scripting</a></li>
@@ -162,13 +154,11 @@
 <li><a href="https://missing-semester-cn.github.io/2020/potpourri/">Potpourri（大杂烩）</a></li>
 <li><a href="https://missing-semester-cn.github.io/2020/qa/">Q&amp;A</a></li>
 </ul>
-
 <p>在介绍计算机系统安全或密码学的概念之前，课程首先给出了<a href="https://en.wikipedia.org/wiki/Entropy_(information_theory)">熵</a>的概念。<strong>在信息论中，熵度量了不确定性并可以用来决定密码的强度</strong>。熵的单位是比特。因此，使用多少比特的熵取决于应用的威胁模型。例如，大约 40 比特的熵足以应对在线穷举攻击。</p>
-
 <p><a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">加密散列函数</a>是散列函数中的一种单向函数，即很难通过函数的输出结果来反推出函数的输入。例如 <a href="https://en.wikipedia.org/wiki/SHA-1">SHA-1</a> 是在 Git 中使用的一种散列函数，可以将任意大小的输入映射为一个 160 比特的输出，而其散列值通常的呈现形式为 40 个十六进制数。你可以在 Git 下使用<code>sha1sum</code>命令查看某个字符串的 SHA-1 值，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -187,27 +177,20 @@ f572d396fae9206628714fb2ce00f72e94f2258f  -
 2beec0d1b3eeee6c25b1eacc1063338047d588e3  -
 ➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ print <span class="s2">&#34;Hello &#34;</span> <span class="p">|</span> sha1sum
 a83f9352aa642ceec0a03b126e453a5984cf68ab  -
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ </code></pre></td></tr></table>
+➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>对于这些结果，都是通过<a href="https://zh.wikipedia.org/zh-cn/%E9%9A%A8%E6%A9%9F%E9%A0%90%E8%A8%80%E6%A9%9F">随机语言机</a>得到的。它对于任何输入都回传一个真正随机的输出。而对于相同的输入，该语言机每次都会使用同一方法输出。也就是说，随机预言机就是一个将所有可能的输入与输出作随机映射的函数。</p>
-
+</div><p>对于这些结果，都是通过<a href="https://zh.wikipedia.org/zh-cn/%E9%9A%A8%E6%A9%9F%E9%A0%90%E8%A8%80%E6%A9%9F">随机语言机</a>得到的。它对于任何输入都回传一个真正随机的输出。而对于相同的输入，该语言机每次都会使用同一方法输出。也就是说，随机预言机就是一个将所有可能的输入与输出作随机映射的函数。</p>
 <p>那么密码散列函数（加密散列函数）可以应用于哪些方面呢？</p>
-
 <ul>
 <li>Git 中的内容寻址存储。</li>
 <li>文件信息的摘要。</li>
 <li><a href="https://en.wikipedia.org/wiki/Commitment_scheme">承诺机制</a>。</li>
 </ul>
-
 <p><a href="https://en.wikipedia.org/wiki/Key_derivation_function">密钥派生函数</a>用于生成固定长度的密钥，在其它密码算法中较为常用。例如，在网站上登录用户名时，由于存储登录凭证时不能直接存储明文密码。因此，可以针对每个用户随机生成一个盐，即 <code>salt=random()</code>，并将其进行存储。通过密钥生成函数对使用了盐的明文密码生成哈希值，即<code>KDF(password+salt)</code>。那么在执行登录验证请求时，用户输入的密码与盐值重新计算哈希值，即<code>KDF(input_password+salt)</code>，然后在与之前存储的哈希值做对比，就可以对登录的用户进行密码的验证了。</p>
-
 <p>对于<code>对称加密</code>和<code>非对称加密</code>的概念与应用，其实在 HTTPS 的加密过程中就涉及到了这两种技术。至于如何对两者进行区分，可以将对称加密和非对称加密比作门锁。对称加密就好比一个防盗门，只要有钥匙的人都可以打开门或锁门。而非对称加密就好比一个可以拿下来的挂锁。你可以将打开状态的挂锁（公钥）给任何一个人，但唯一的钥匙（私钥）需要你自己保留着。这样的话，当他们将某些信息装进盒子里并锁上之后，只有你可以使用保留的钥匙进行开锁。</p>
-
-<hr />
-
+<hr>
 <p>至此，该系列的学习就结束了。至于最后的两节：<a href="https://missing-semester-cn.github.io/2020/potpourri/">大杂烩</a> 和 <a href="https://missing-semester-cn.github.io/2020/qa/">提问&amp;回答</a>，这里不再给出，都是一些比较零碎但相对实用的知识点，感兴趣的可以看看。</p>
-
 <p>总体来说，对我帮助最大的课程有 <a href="https://missing.csail.mit.edu/2020/shell-tools/">Shell Tools and Scripting</a>、<a href="https://missing.csail.mit.edu/2020/data-wrangling/">Data Wrangling</a>、<a href="https://missing.csail.mit.edu/2020/command-line/">Command-line Environment</a> 以及 <a href="https://missing.csail.mit.edu/2020/version-control/">Version Control (Git)</a>，相当于对以往知识的查漏补缺，复习并拓展了相关内容。</p>
     </div>
 

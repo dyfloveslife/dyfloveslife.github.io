@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/09/11/offer-ConstructBinaryTree/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="剑指 Offer 之 重建二叉树" />
 <meta property="og:description" content="输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列 {1, 2, 4, 7, 3, 5, 6, 8} 和中序遍历序列{4, 7, 2, 1, 5, 3, 8, 6}，则重建出二叉树并输出它的头结点。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2019/09/11/offer-ConstructBinaryTree/" />
-<meta property="article:published_time" content="2019-09-11T10:48:11+08:00" />
-<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2019/09/11/offer-ConstructBinaryTree/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-09-11T10:48:11&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56&#43;08:00" />
+
 <meta itemprop="name" content="剑指 Offer 之 重建二叉树">
-<meta itemprop="description" content="输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列 {1, 2, 4, 7, 3, 5, 6, 8} 和中序遍历序列{4, 7, 2, 1, 5, 3, 8, 6}，则重建出二叉树并输出它的头结点。">
-
-
-<meta itemprop="datePublished" content="2019-09-11T10:48:11&#43;08:00" />
+<meta itemprop="description" content="输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列 {1, 2, 4, 7, 3, 5, 6, 8} 和中序遍历序列{4, 7, 2, 1, 5, 3, 8, 6}，则重建出二叉树并输出它的头结点。"><meta itemprop="datePublished" content="2019-09-11T10:48:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="1520">
-
-
-
-<meta itemprop="keywords" content="Algorithm,剑指Offer,BinaryTree," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Algorithm,剑指Offer,BinaryTree," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="剑指 Offer 之 重建二叉树"/>
 <meta name="twitter:description" content="输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列 {1, 2, 4, 7, 3, 5, 6, 8} 和中序遍历序列{4, 7, 2, 1, 5, 3, 8, 6}，则重建出二叉树并输出它的头结点。"/>
 
@@ -142,71 +136,66 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#分析">分析</a></li>
-<li><a href="#实现">实现</a>
-<ul>
-<li><a href="#1-定义二叉树的结构体">1.定义二叉树的结构体</a></li>
-<li><a href="#2-具体实现">2.具体实现</a></li>
-<li><a href="#3-详解">3.详解</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#分析">分析</a></li>
+    <li><a href="#实现">实现</a>
+      <ul>
+        <li><a href="#1定义二叉树的结构体">1.定义二叉树的结构体</a></li>
+        <li><a href="#2具体实现">2.具体实现</a></li>
+        <li><a href="#3详解">3.详解</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列 <code>{1, 2, 4, 7, 3, 5, 6, 8}</code> 和中序遍历序列<code>{4, 7, 2, 1, 5, 3, 8, 6}</code>，则重建出二叉树并输出它的头结点。</p>
-
 <h2 id="分析">分析</h2>
-
 <p>利用二叉树的 <code>前序遍历</code> 和 <code>中序遍历</code> 可以构造出一棵二叉树，<code>中序遍历</code> 和 <code>后序遍历</code> 也可以构造出一棵二叉树。<code>前序遍历</code> 和 <code>后序遍历</code> 用来指定根节点的位置，<code>中序遍历</code> 用来指定该根节点有哪些左右子树。</p>
-
 <p>拿 <code>前序遍历</code> 序列{1, 2, 4, 7, 3, 5, 6, 8}和 <code>中序遍历</code> 序列{4, 7, 2, 1, 5, 3, 8, 6}来说，具体步骤如下：</p>
-
 <ol>
-<li><p>首先在 <code>前序遍历</code> 中第一个节点 <code>1</code> 就是构造后的二叉树的根节点，然后在 <code>中序遍历</code> 中用 <code>1</code> 将序列划分成 <code>{4, 7, 2}</code> 和 <code>{5, 3, 8, 6}</code> 两部分，前部分是 <code>1</code> 的左子树上所有的节点，后部分是 <code>1</code> 右子树上所有的节点。</p></li>
-
-<li><p>接下来要确定 <code>1</code> 的左孩子。我们可以看到序列 <code>{4, 7, 2}</code> 在 <code>前序遍历</code> 中，<code>2</code> 是排在前面的，所以 <code>2</code> 是 <code>1</code> 的左孩子，用 <code>2</code> 在<code>中序遍历</code> 中找到 <code>2</code> 的左右子树。发现在序列 <code>{4, 7, 2, 1, 5, 3, 8, 6}</code> 中，<code>2</code> 的左孩子包含 <code>{4, 7}</code>，而没有右孩子（因为 <code>1</code> 已经是根节点了）。</p></li>
-
-<li><p>再看 <code>{4, 7}</code>在 <code>前序遍历</code> 序列 <code>{1, 2, 4, 7, 3, 5, 6, 8}</code> 中确定 <code>2</code> 的左孩子到底是谁。可以看到是 <code>4</code>，然后 <code>4</code> 的右孩子是 <code>7</code>。</p></li>
-
-<li><p><code>1</code> 的右子树上的节点也是重复上面的过程。</p></li>
+<li>
+<p>首先在 <code>前序遍历</code> 中第一个节点 <code>1</code> 就是构造后的二叉树的根节点，然后在 <code>中序遍历</code> 中用 <code>1</code> 将序列划分成 <code>{4, 7, 2}</code> 和 <code>{5, 3, 8, 6}</code> 两部分，前部分是 <code>1</code> 的左子树上所有的节点，后部分是 <code>1</code> 右子树上所有的节点。</p>
+</li>
+<li>
+<p>接下来要确定 <code>1</code> 的左孩子。我们可以看到序列 <code>{4, 7, 2}</code> 在 <code>前序遍历</code> 中，<code>2</code> 是排在前面的，所以 <code>2</code> 是 <code>1</code> 的左孩子，用 <code>2</code> 在<code> 中序遍历</code> 中找到 <code>2</code> 的左右子树。发现在序列 <code>{4, 7, 2, 1, 5, 3, 8, 6}</code> 中，<code>2</code> 的左孩子包含 <code>{4, 7}</code>，而没有右孩子（因为 <code>1</code> 已经是根节点了）。</p>
+</li>
+<li>
+<p>再看 <code>{4, 7}</code>在 <code>前序遍历</code> 序列 <code>{1, 2, 4, 7, 3, 5, 6, 8}</code> 中确定 <code>2</code> 的左孩子到底是谁。可以看到是 <code>4</code>，然后 <code>4</code> 的右孩子是 <code>7</code>。</p>
+</li>
+<li>
+<p><code>1</code> 的右子树上的节点也是重复上面的过程。</p>
+</li>
 </ol>
-
 <p>构造后的二叉树如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">            1
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">            1
            / \
           2   3
          /   / \
         4   5   6
          \     /
-          7   8</pre></td></tr></table>
+          7   8
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="实现">实现</h2>
-
+</div><h2 id="实现">实现</h2>
 <p>总体上来说，构造二叉树的过程就是一个 <code>递归</code> 的过程，我们可以使用 <code>递归</code> 的方式来实现。</p>
-
-<h3 id="1-定义二叉树的结构体">1.定义二叉树的结构体</h3>
-
+<h3 id="1定义二叉树的结构体">1.定义二叉树的结构体</h3>
 <p>声明某一节点的值，以及该节点的左右子树。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -219,23 +208,23 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">TreeNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="err">public T </span><span class="n">val</span><span class="p">;</span>
-    <span class="err">public TreeNode</span><span class="o">&lt;</span><span class="err">T&gt; left</span><span class="p">;</span>
-    <span class="err">public TreeNode</span><span class="o">&lt;</span><span class="err">T&gt; right</span><span class="p">;</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TreeNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">T</span> <span class="n">val</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">TreeNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">left</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">TreeNode</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">right</span><span class="o">;</span>
 
-    <span class="err">public TreeNode</span><span class="p">(</span><span class="err">T val</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">left</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">right</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="kd">public</span> <span class="nf">TreeNode</span><span class="o">(</span><span class="n">T</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="2-具体实现">2.具体实现</h3>
+</div><h3 id="2具体实现">2.具体实现</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -271,56 +260,49 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">ConstructBinaryTree</span> <span class="p">{</span>
-    <span class="err">public static TreeNode&lt;Integer&gt; constructBinaryTree</span><span class="p">(</span><span class="err">int[] pre</span><span class="p">,</span> <span class="err">int[] in</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">pre</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">in</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">pre</span><span class="p">.</span><span class="na">length</span> <span class="o">&lt;=</span> <span class="n">0</span> <span class="o">||</span>
-                <span class="n">in</span><span class="p">.</span><span class="na">length</span> <span class="o">&lt;=</span> <span class="n">0</span> <span class="o">||</span> <span class="n">pre</span><span class="p">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">in</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">reConstructBinaryTree</span><span class="p">(</span><span class="n">pre</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="n">pre</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="p">,</span> <span class="n">in</span><span class="p">,</span> <span class="n">0</span><span class="p">,</span> <span class="n">in</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
-    <span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConstructBinaryTree</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">TreeNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">constructBinaryTree</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">pre</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">in</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">pre</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">in</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">pre</span><span class="o">.</span><span class="na">length</span> <span class="o">&lt;=</span> <span class="n">0</span> <span class="o">||</span>
+                <span class="n">in</span><span class="o">.</span><span class="na">length</span> <span class="o">&lt;=</span> <span class="n">0</span> <span class="o">||</span> <span class="n">pre</span><span class="o">.</span><span class="na">length</span> <span class="o">!=</span> <span class="n">in</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">reConstructBinaryTree</span><span class="o">(</span><span class="n">pre</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">pre</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">,</span> <span class="n">in</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">in</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+    <span class="o">}</span>
 
-    <span class="err">private static TreeNode&lt;Integer&gt; reConstructBinaryTree</span><span class="p">(</span><span class="err">int[] pre</span><span class="p">,</span> <span class="err">int startPre</span><span class="p">,</span> <span class="err">int endPre</span><span class="p">,</span> <span class="err">int[] in</span><span class="p">,</span> <span class="err">int startIn</span><span class="p">,</span> <span class="err">int endIn</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">startPre</span> <span class="o">&gt;</span> <span class="n">endPre</span> <span class="o">||</span> <span class="n">startIn</span> <span class="o">&gt;</span> <span class="n">endIn</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-        <span class="err">TreeNode&lt;Integer&gt; root </span><span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">pre</span><span class="p">[</span><span class="n">startPre</span><span class="p">]);</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">TreeNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">reConstructBinaryTree</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">pre</span><span class="o">,</span> <span class="kt">int</span> <span class="n">startPre</span><span class="o">,</span> <span class="kt">int</span> <span class="n">endPre</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">in</span><span class="o">,</span> <span class="kt">int</span> <span class="n">startIn</span><span class="o">,</span> <span class="kt">int</span> <span class="n">endIn</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">startPre</span> <span class="o">&gt;</span> <span class="n">endPre</span> <span class="o">||</span> <span class="n">startIn</span> <span class="o">&gt;</span> <span class="n">endIn</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">TreeNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="o">&lt;&gt;(</span><span class="n">pre</span><span class="o">[</span><span class="n">startPre</span><span class="o">]);</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">startIn</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">endIn</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">pre</span><span class="p">[</span><span class="n">startPre</span><span class="p">])</span> <span class="p">{</span>
-                <span class="n">root</span><span class="p">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">reConstructBinaryTree</span><span class="p">(</span><span class="n">pre</span><span class="p">,</span> <span class="n">startPre</span> <span class="o">+</span> <span class="n">1</span><span class="p">,</span> <span class="n">startPre</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="n">startIn</span><span class="p">,</span> <span class="n">in</span><span class="p">,</span> <span class="n">startIn</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="p">);</span>
-                <span class="n">root</span><span class="p">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">reConstructBinaryTree</span><span class="p">(</span><span class="n">pre</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">startIn</span> <span class="o">+</span> <span class="n">startPre</span> <span class="o">+</span> <span class="n">1</span><span class="p">,</span> <span class="n">endPre</span><span class="p">,</span> <span class="n">in</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span><span class="p">,</span> <span class="n">endIn</span><span class="p">);</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
-    <span class="p">}</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">startIn</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">endIn</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">in</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">pre</span><span class="o">[</span><span class="n">startPre</span><span class="o">])</span> <span class="o">{</span>
+                <span class="n">root</span><span class="o">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">reConstructBinaryTree</span><span class="o">(</span><span class="n">pre</span><span class="o">,</span> <span class="n">startPre</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span> <span class="n">startPre</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="n">startIn</span><span class="o">,</span> <span class="n">in</span><span class="o">,</span> <span class="n">startIn</span><span class="o">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+                <span class="n">root</span><span class="o">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">reConstructBinaryTree</span><span class="o">(</span><span class="n">pre</span><span class="o">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">startIn</span> <span class="o">+</span> <span class="n">startPre</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span> <span class="n">endPre</span><span class="o">,</span> <span class="n">in</span><span class="o">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span> <span class="n">endIn</span><span class="o">);</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">root</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="err">int[] pre </span><span class="o">=</span> <span class="p">{</span><span class="n">1</span><span class="p">,</span> <span class="n">2</span><span class="p">,</span> <span class="n">4</span><span class="p">,</span> <span class="n">7</span><span class="p">,</span> <span class="n">3</span><span class="p">,</span> <span class="n">5</span><span class="p">,</span> <span class="n">6</span><span class="p">,</span> <span class="n">8</span><span class="p">};</span>
-        <span class="err">int[] in </span><span class="o">=</span> <span class="p">{</span><span class="n">4</span><span class="p">,</span> <span class="n">7</span><span class="p">,</span> <span class="n">2</span><span class="p">,</span> <span class="n">1</span><span class="p">,</span> <span class="n">5</span><span class="p">,</span> <span class="n">3</span><span class="p">,</span> <span class="n">8</span><span class="p">,</span> <span class="n">6</span><span class="p">};</span>
-        <span class="err">TreeNode&lt;Integer&gt; root </span><span class="o">=</span> <span class="n">constructBinaryTree</span><span class="p">(</span><span class="n">pre</span><span class="p">,</span> <span class="n">in</span><span class="p">);</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">pre</span> <span class="o">=</span> <span class="o">{</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">4</span><span class="o">,</span> <span class="n">7</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">5</span><span class="o">,</span> <span class="n">6</span><span class="o">,</span> <span class="n">8</span><span class="o">};</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">in</span> <span class="o">=</span> <span class="o">{</span><span class="n">4</span><span class="o">,</span> <span class="n">7</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">1</span><span class="o">,</span> <span class="n">5</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">8</span><span class="o">,</span> <span class="n">6</span><span class="o">};</span>
+        <span class="n">TreeNode</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">root</span> <span class="o">=</span> <span class="n">constructBinaryTree</span><span class="o">(</span><span class="n">pre</span><span class="o">,</span> <span class="n">in</span><span class="o">);</span>
 
-        <span class="err">List&lt;Integer&gt; preorder </span><span class="o">=</span> <span class="n">BinaryTreeOrder</span><span class="p">.</span><span class="na">preorderRecursively</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-        <span class="err">List&lt;Integer&gt; inorder </span><span class="o">=</span> <span class="n">BinaryTreeOrder</span><span class="p">.</span><span class="na">inorderRecursively</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-        <span class="err">List&lt;Integer&gt; postorder </span><span class="o">=</span> <span class="n">BinaryTreeOrder</span><span class="p">.</span><span class="na">postorderRecursively</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">preorder</span><span class="p">);</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">inorder</span><span class="p">);</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">postorder</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">preorder</span> <span class="o">=</span> <span class="n">BinaryTreeOrder</span><span class="o">.</span><span class="na">preorderRecursively</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">inorder</span> <span class="o">=</span> <span class="n">BinaryTreeOrder</span><span class="o">.</span><span class="na">inorderRecursively</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">postorder</span> <span class="o">=</span> <span class="n">BinaryTreeOrder</span><span class="o">.</span><span class="na">postorderRecursively</span><span class="o">(</span><span class="n">root</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">preorder</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">inorder</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">postorder</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="3-详解">3.详解</h3>
-
+</div><h3 id="3详解">3.详解</h3>
 <p>总的来说，核心代码在第 <code>5</code>、<code>14</code>、<code>15</code> 行。</p>
-
 <p>在 <code>main</code> 函数中，定义了一个 <code>前序序列</code> 和 <code>中序序列</code>，然后将 <code>pre</code> 和 <code>in</code> 传给 <code>constructBinaryTree()</code> 函数。</p>
-
 <p>在 <code>constructBinaryTree()</code> 函数中，先判断序列是否符合规定的条件以及进行边界检查，最后返回一个<code>reConstructBinaryTree()</code>，里面的参数对应<code>reConstructBinaryTree()</code>方法的参数，分别是：前序序列的数组、前序序列的起始位置、前序序列的结束位置、中序序列的数组、中序序列的起始位置、中序序列的结束位置。因为起始下标都是从<code>0</code>开始的，所以结束下标就是<code>length-1</code>了。</p>
-
 <p>在<code>reConstructBinaryTree()</code>方法中，同样是先进行边界条件的检查，然后第<code>10</code>行，用前序遍历序列的第一个节点<code>1</code>作为根节点，这和我们之前分析的都是一样的。<code>for</code>循环来遍历中序序列中的没一个节点，如果中序序列中的某一个节点与<code>1</code>相等，则分别进行左右子树的递归操作，在根节点的左右子树分别构建二叉树。</p>
-
 <p>第<code>14</code>行，此时<code>i=3</code>，<code>startIn=0</code>，于是构建根节点<code>1</code>的左子树，里面的参数其实就是找到划分后的两部分的左右边界。分别为：前序序列的数组、在前序序列数组中下标为<code>1</code>的位置、在前序序列数组中下标为<code>3</code>的位置、中序序列的数组、在中序序列数组中下标为<code>0</code>的位置、在中序序列数组中下标为<code>2</code>的位置。</p>
-
 <p>第<code>15</code>行用来构建<code>1</code>的右子树，对应<code>中序遍历</code>中的 <code>{5, 3, 8, 6}</code>这一部分。然后对每一个节点递归就可以了。</p>
-
 <p><code>main</code>函数的最后，使用递归的方式来遍历构建后的二叉树，输出其前序、中序和后序遍历的结果，用来检查一下是否构建成功。</p>
     </div>
 

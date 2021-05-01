@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/21/Java-Concurrent-Tool-Class/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="Java 中的并发工具类" />
 <meta property="og:description" content="在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2020/04/21/Java-Concurrent-Tool-Class/" />
-<meta property="article:published_time" content="2020-04-21T18:02:11+08:00" />
-<meta property="article:modified_time" content="2020-04-21T19:19:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2020/04/21/Java-Concurrent-Tool-Class/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-04-21T18:02:11&#43;08:00" />
+<meta property="article:modified_time" content="2020-04-21T19:19:56&#43;08:00" />
+
 <meta itemprop="name" content="Java 中的并发工具类">
-<meta itemprop="description" content="在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。">
-
-
-<meta itemprop="datePublished" content="2020-04-21T18:02:11&#43;08:00" />
+<meta itemprop="description" content="在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。"><meta itemprop="datePublished" content="2020-04-21T18:02:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-21T19:19:56&#43;08:00" />
 <meta itemprop="wordCount" content="6317">
-
-
-
-<meta itemprop="keywords" content="JVM,Concurrency,CountDownLatch,CyclicBarrier,Semaphore,Exchanger," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="JVM,Concurrency,CountDownLatch,CyclicBarrier,Semaphore,Exchanger," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java 中的并发工具类"/>
 <meta name="twitter:description" content="在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。"/>
 
@@ -141,28 +135,17 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#countdownlatch">CountDownLatch</a></li>
-<li><a href="#cyclicbarrier">CyclicBarrier</a></li>
-<li><a href="#semaphore">Semaphore</a></li>
-<li><a href="#exchanger">Exchanger</a></li>
-<li><a href="#参考">参考</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>在 JDK 1.5 中的 java.util.concurrent 包下，有一些在并发情况下控制线程的工具类，有的可以控制并发流程，而有的可以交换线程之间的数据。通过这些辅助类可以更好的帮助我们进行并发编程，而本文主要介绍 CountDownLatch、CyclicBarrier、Semaphore、Exchanger 这四个并发工具类。</p>
-
 <h1 id="countdownlatch">CountDownLatch</h1>
-
 <p>CountDownLatch 可以允许一个或多个线程等待其它线程完成操作。通俗的说，假如有一个任务 A，它需要等待其它多个任务执行完之后才能执行。对于这样的场景，我们就可以使用 CountDownLatch 实现。我们不妨将 CountDownLatch 这几个单词拆开来看，count down 相当于倒数的意思，latch 相当于门闩（读作 shuan，一声）。可以理解为：在创建 CountDownLatch 对象的时候需要传入一个 count 参数，在这个 count “倒数”到 0 之前，主线程需要等在门口，而这个“倒数”的动作需要执行中的线程来驱动，每个线程执行完一次就“倒数”一次，等到这些执行中的线程都执行完之后，再将结果汇总（非必须），然后主线程才可以继续往下执行。</p>
-
 <p>这里首先使用线程的 join 方法来实现类似于上面的功能，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -193,41 +176,41 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">JoinTest</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JoinTest</span> <span class="o">{</span>
 
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;主线程 main 开始执行...&#34;</span><span class="p">);</span>
-        <span class="err">Thread t1 </span><span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;主线程 main 开始执行...&#34;</span><span class="o">);</span>
+        <span class="n">Thread</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
-            <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 t1 完成...&#34;</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 t1 完成...&#34;</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
 
-        <span class="err">Thread t2 </span><span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">Thread</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
-            <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 t2 完成...&#34;</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 t2 完成...&#34;</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
 
-        <span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
-        <span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+        <span class="n">t1</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="n">t2</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
 
-        <span class="n">t1</span><span class="p">.</span><span class="na">join</span><span class="p">();</span>
-        <span class="n">t2</span><span class="p">.</span><span class="na">join</span><span class="p">();</span>
+        <span class="n">t1</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
+        <span class="n">t2</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
 
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;t1 和 t2 均执行完毕...&#34;</span><span class="p">);</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;继续执行主线程 main...&#34;</span><span class="p">);</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;主线程 main 执行完毕...&#34;</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;t1 和 t2 均执行完毕...&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;继续执行主线程 main...&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;主线程 main 执行完毕...&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下所示：</p>
+</div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -235,22 +218,20 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">主线程 main 开始执行...
-</span><span class="err">线程 t1 完成</span><span class="p">...</span>
-<span class="err">线程 t2 完成...
-</span><span class="err">t1 和 t2 均执行完毕...
-</span><span class="err">继续执行主线程 main...
-</span><span class="err">主线程 main 执行完毕</span><span class="p">...</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">主线程</span> <span class="n">main</span> <span class="n">开始执行</span><span class="o">...</span>
+<span class="n">线程</span> <span class="n">t1</span> <span class="n">完成</span><span class="o">...</span>
+<span class="n">线程</span> <span class="n">t2</span> <span class="n">完成</span><span class="o">...</span>
+<span class="n">t1</span> <span class="n">和</span> <span class="n">t2</span> <span class="n">均执行完毕</span><span class="o">...</span>
+<span class="n">继续执行主线程</span> <span class="n">main</span><span class="o">...</span>
+<span class="n">主线程</span> <span class="n">main</span> <span class="n">执行完毕</span><span class="o">...</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>需要注意的是，第 2 行和第 3 行输出语句的顺序可能是不同的，因为当运行程序以后，有可能是 t1 先获得 CPU 时间片，则 t1 先执行，也有可能是 t2 先获得 CPU 时间片，t2 先执行，因此输出结果就有可能不同了。</p>
-
+</div><p>需要注意的是，第 2 行和第 3 行输出语句的顺序可能是不同的，因为当运行程序以后，有可能是 t1 先获得 CPU 时间片，则 t1 先执行，也有可能是 t2 先获得 CPU 时间片，t2 先执行，因此输出结果就有可能不同了。</p>
 <p>以上实现的功能是，通过使用 join 方法让<code>当前执行的线程</code>等待<code>join 线程</code>执行结束后再执行。也就是说，join 方法让主线程 main 等待线程 t1 和线程 t2 执行完以后再执行。实现的原理是，不停的检查 join 线程是否存活，如果 join 线程存活则让当前线程永远等待。</p>
-
 <p>join 方法内部调用了 wait(0) 方法，等待 join 线程执行完以后，线程的 notifyAll() 方法就会被调用，此调用方式是在 JVM 层面实现的。核心源码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -271,31 +252,31 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public final void join</span><span class="p">()</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
-    <span class="n">join</span><span class="p">(</span><span class="n">0</span><span class="p">);</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">join</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+    <span class="n">join</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+<span class="o">}</span>
 
-<span class="err">public final synchronized void </span><span class="n">join</span><span class="p">(</span><span class="err">long millis</span><span class="p">)</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
-    <span class="p">...</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">join</span><span class="o">(</span><span class="kt">long</span> <span class="n">millis</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+    <span class="o">...</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">millis</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="p">...</span>
-    <span class="p">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">millis</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">millis</span> <span class="o">==</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">isAlive</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">wait</span><span class="p">(</span><span class="n">0</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-       <span class="p">...</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+    <span class="k">if</span> <span class="o">(</span><span class="n">millis</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">isAlive</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">wait</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+       <span class="o">...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>以上稍微提到了一些 join 方法的使用与注意事项，当然，我们也可以使用 CountDownLatch 来实现 join 的功能，而且功能比 join 更多，如下：</p>
+</div><p>以上稍微提到了一些 join 方法的使用与注意事项，当然，我们也可以使用 CountDownLatch 来实现 join 的功能，而且功能比 join 更多，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -336,82 +317,77 @@
 </span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">CountDownLatchTest</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CountDownLatchTest</span> <span class="o">{</span>
 
-    <span class="err">private static CountDownLatch latch </span><span class="o">=</span> <span class="k">new</span> <span class="n">CountDownLatch</span><span class="p">(</span><span class="n">2</span><span class="p">);</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">CountDownLatch</span> <span class="n">latch</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CountDownLatch</span><span class="o">(</span><span class="n">2</span><span class="o">);</span>
 
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
 
-        <span class="k">new</span> <span class="n">Thread</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="p">{</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 正在执行...&#34;</span><span class="p">);</span>
-                <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">3000</span><span class="p">);</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕...&#34;</span><span class="p">);</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 正在执行...&#34;</span><span class="o">);</span>
+                <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">3000</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕...&#34;</span><span class="o">);</span>
                 <span class="c1">// 将 latch 减 1
-</span><span class="c1"></span>                <span class="n">latch</span><span class="p">.</span><span class="na">countDown</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-            <span class="p">}</span>
-        <span class="p">},</span> <span class="s">&#34;t1&#34;</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+</span><span class="c1"></span>                <span class="n">latch</span><span class="o">.</span><span class="na">countDown</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">},</span> <span class="s">&#34;t1&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-        <span class="k">new</span> <span class="n">Thread</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="p">{</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 正在执行...&#34;</span><span class="p">);</span>
-                <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">3000</span><span class="p">);</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕...&#34;</span><span class="p">);</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 正在执行...&#34;</span><span class="o">);</span>
+                <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">3000</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;子线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕...&#34;</span><span class="o">);</span>
                 <span class="c1">// 将 latch 减 1
-</span><span class="c1"></span>                <span class="n">latch</span><span class="p">.</span><span class="na">countDown</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-            <span class="p">}</span>
-        <span class="p">},</span> <span class="s">&#34;t2&#34;</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+</span><span class="c1"></span>                <span class="n">latch</span><span class="o">.</span><span class="na">countDown</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">},</span> <span class="s">&#34;t2&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;等待两个子线程执行完毕...&#34;</span><span class="p">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;等待两个子线程执行完毕...&#34;</span><span class="o">);</span>
         <span class="c1">// 如果 latch 中的 count 值还没有减到 0 的话，
 </span><span class="c1"></span>        <span class="c1">// 则调用 await 方法的宿主线程将会一直处于阻塞状态，
 </span><span class="c1"></span>        <span class="c1">// 直到 count 的值减为 0，则宿主线程才会继续执行下去
-</span><span class="c1"></span>        <span class="n">latch</span><span class="p">.</span><span class="na">await</span><span class="p">();</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;两个子线程已经执行完毕...&#34;</span><span class="p">);</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;继续执行主线程 main...&#34;</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span>        <span class="n">latch</span><span class="o">.</span><span class="na">await</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;两个子线程已经执行完毕...&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;继续执行主线程 main...&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下所示：</p>
+</div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">子线程 t1 正在执行...
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">子线程 t1 正在执行...
 等待两个子线程执行完毕...
 子线程 t2 正在执行...
 子线程 t1 执行完毕...
 子线程 t2 执行完毕...
 两个子线程已经执行完毕...
-继续执行主线程 main...</pre></td></tr></table>
+继续执行主线程 main...
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>以上代码的逻辑是：首先创建了一个给定 count 值为 2 的 CountDownLatch 对象，然后开启了两个线程，这两个线程所完成的工作都是一样的，这里用<code>Thread.sleep(3000);</code>模拟线程正在工作（当然有些不恰当，但将其理解成线程正在处理任务即可），当执行完以后调用 countDown() 方法，表示将 count 减 1，在最后调用了 await() 方法表示使调用该方法的线程处于等待状态，这里就是主线程 mian 调用了 await() 方法从而阻塞了，一直等到 t1 和 t2 都执行完之后，主线程 main 才继续执行。</p>
-
+</div><p>以上代码的逻辑是：首先创建了一个给定 count 值为 2 的 CountDownLatch 对象，然后开启了两个线程，这两个线程所完成的工作都是一样的，这里用<code>Thread.sleep(3000);</code>模拟线程正在工作（当然有些不恰当，但将其理解成线程正在处理任务即可），当执行完以后调用 countDown() 方法，表示将 count 减 1，在最后调用了 await() 方法表示使调用该方法的线程处于等待状态，这里就是主线程 mian 调用了 await() 方法从而阻塞了，一直等到 t1 和 t2 都执行完之后，主线程 main 才继续执行。</p>
 <p>countDown() 方法一般由执行任务的线程调用，同一个线程可以调用多次，即每次都会使计数器减 1。既可以将该方法在多个线程内执行，也可以属于 1 个线程的多个执行步骤。</p>
-
 <p>await() 方法一般由主线程调用，但也没有规定 await() 方法只能由一个线程执行该方法，如果多个线程同时执行 await() 方法，那么这几个线程都将处于等待状态，以共享模式享有同一把锁。此外，如果不想让主线程一直等待其它线程执行完毕，还可以使用 await(long timeout, TimeUnit unit) 方法，表明等待特定的时间后，就不再阻塞主线程了。</p>
-
 <p><strong>CountDownLatch 的使用场景</strong>：</p>
-
 <p>CountDownLatch 特别适合将一个问题分成 N 个子部分的场景，将 N 个子部分交给 N 个线程去处理，等到所有的子部分都完成以后再交给主线程处理。由此可见，总的执行时间取决于执行最慢的任务，但平均来看，可谓是大大减少了总的执行时间。例如某个列表页面需要获取许多图片，如果使用的单个线程顺序获取的话，那么等待时间会很长。而使用 CountDownLatch 的话，可以对获取图片的操作进行拆分，并行的获取图片，这样就缩短了总的获取时间。</p>
-
 <p>主要源码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -433,38 +409,35 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public CountDownLatch</span><span class="p">(</span><span class="err">int count</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;count &lt; 0&#34;</span><span class="p">);</span>
-    <span class="k">this</span><span class="p">.</span><span class="na">sync</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sync</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">CountDownLatch</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;count &lt; 0&#34;</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sync</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sync</span><span class="o">(</span><span class="n">count</span><span class="o">);</span>
+<span class="o">}</span>
 
 
-<span class="err">public void </span><span class="n">await</span><span class="p">()</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
-    <span class="n">sync</span><span class="p">.</span><span class="na">acquireSharedInterruptibly</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">await</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+    <span class="n">sync</span><span class="o">.</span><span class="na">acquireSharedInterruptibly</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+<span class="o">}</span>
 
 
-<span class="err">public boolean </span><span class="n">await</span><span class="p">(</span><span class="err">long timeout</span><span class="p">,</span> <span class="err">TimeUnit unit</span><span class="p">)</span>
-    <span class="err">throws InterruptedException </span><span class="p">{</span>
-    <span class="k">return</span> <span class="n">sync</span><span class="p">.</span><span class="na">tryAcquireSharedNanos</span><span class="p">(</span><span class="n">1</span><span class="p">,</span> <span class="n">unit</span><span class="p">.</span><span class="na">toNanos</span><span class="p">(</span><span class="n">timeout</span><span class="p">));</span>
-<span class="p">}</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">await</span><span class="o">(</span><span class="kt">long</span> <span class="n">timeout</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">)</span>
+    <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">sync</span><span class="o">.</span><span class="na">tryAcquireSharedNanos</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">unit</span><span class="o">.</span><span class="na">toNanos</span><span class="o">(</span><span class="n">timeout</span><span class="o">));</span>
+<span class="o">}</span>
 
 
-<span class="err">public void </span><span class="n">countDown</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">sync</span><span class="p">.</span><span class="na">releaseShared</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">countDown</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">sync</span><span class="o">.</span><span class="na">releaseShared</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>需要注意的是，CountDownLatch 是基于 AbstractQueuedSynchronizer 实现的，即 CountDownLatch 的内部类 Sync 继承了 AbstractQueuedSynchronizer。对于 AbstractQueuedSynchronizer 的分析，可以查看文章<a href="https://dyfloveslife.github.io/2020/05/01/Java-AQS/">AbstractQueuedSynchronizer</a>。</p>
-
+</div><p>需要注意的是，CountDownLatch 是基于 AbstractQueuedSynchronizer 实现的，即 CountDownLatch 的内部类 Sync 继承了 AbstractQueuedSynchronizer。对于 AbstractQueuedSynchronizer 的分析，可以查看文章<a href="https://dyfloveslife.github.io/2020/05/01/Java-AQS/">AbstractQueuedSynchronizer</a>。</p>
 <h1 id="cyclicbarrier">CyclicBarrier</h1>
-
 <p>从字面意思上看，CyclicBarrier 就是循环屏障的意思，或者说循环栅栏。它的作用是让一组线程到达某个屏障的时候被阻塞，直到最后一个线程到达该屏障时，这个屏障才会打开，最后所有被屏障拦截的线程才会继续往下运行。也就是说，只有所有的线程都到齐之后，这个栅栏才能打开，此时所有的线程才能继续执行下去。叫做“循环”是因为当所有的线程被释放掉以后，那么这个屏障还是可以被使用到的。</p>
-
 <p>在使用 CyclicBarrier 的时候，需要传入一个参数 parties，表明屏障拦截的线程数量，每个线程调用 await 方法告诉 CyclicBarrier 我已经到达了屏障，也就是处于 Barrier 的状态，然后当前线程会被阻塞。而参数 barrierAction 表示当这些线程都到达了这个屏障的时候，优先执行 barrierAction，方便处理更复杂的业务场景。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -477,23 +450,23 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public CyclicBarrier</span><span class="p">(</span><span class="err">int parties</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">(</span><span class="n">parties</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">CyclicBarrier</span><span class="o">(</span><span class="kt">int</span> <span class="n">parties</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">(</span><span class="n">parties</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="o">}</span>
 
 
-<span class="err">public CyclicBarrier</span><span class="p">(</span><span class="err">int parties</span><span class="p">,</span> <span class="err">Runnable barrierAction</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">parties</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">();</span>
-    <span class="k">this</span><span class="p">.</span><span class="na">parties</span> <span class="o">=</span> <span class="n">parties</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="na">count</span> <span class="o">=</span> <span class="n">parties</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="na">barrierCommand</span> <span class="o">=</span> <span class="n">barrierAction</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="kd">public</span> <span class="nf">CyclicBarrier</span><span class="o">(</span><span class="kt">int</span> <span class="n">parties</span><span class="o">,</span> <span class="n">Runnable</span> <span class="n">barrierAction</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">parties</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">parties</span> <span class="o">=</span> <span class="n">parties</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">count</span> <span class="o">=</span> <span class="n">parties</span><span class="o">;</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">barrierCommand</span> <span class="o">=</span> <span class="n">barrierAction</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>await 方法有两个重载的版本，无参的 await 方法用来阻塞当前线程，直至所有线程都到达屏障的时候再同时执行后序任务，而含参的 await 方法则是让这些线程等待一段时间，等到时间结束后，如果还有线程没有到达屏障状态，则直接让已到达屏障状态的线程继续往下执行。源码如下所示：</p>
+</div><p>await 方法有两个重载的版本，无参的 await 方法用来阻塞当前线程，直至所有线程都到达屏障的时候再同时执行后序任务，而含参的 await 方法则是让这些线程等待一段时间，等到时间结束后，如果还有线程没有到达屏障状态，则直接让已到达屏障状态的线程继续往下执行。源码如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -510,27 +483,27 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public int </span><span class="n">await</span><span class="p">()</span> <span class="err">throws InterruptedException</span><span class="p">,</span> <span class="n">BrokenBarrierException</span> <span class="p">{</span>
-    <span class="k">try</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">dowait</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="n">0L</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">TimeoutException toe</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">Error</span><span class="p">(</span><span class="n">toe</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">int</span> <span class="nf">await</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span><span class="o">,</span> <span class="n">BrokenBarrierException</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">dowait</span><span class="o">(</span><span class="kc">false</span><span class="o">,</span> <span class="n">0L</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">TimeoutException</span> <span class="n">toe</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">Error</span><span class="o">(</span><span class="n">toe</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
 
-<span class="err">public int </span><span class="n">await</span><span class="p">(</span><span class="err">long timeout</span><span class="p">,</span> <span class="err">TimeUnit unit</span><span class="p">)</span>
-    <span class="err">throws InterruptedException</span><span class="p">,</span>
-            <span class="n">BrokenBarrierException</span><span class="p">,</span>
-            <span class="n">TimeoutException</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">dowait</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="n">unit</span><span class="p">.</span><span class="na">toNanos</span><span class="p">(</span><span class="n">timeout</span><span class="p">));</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">await</span><span class="o">(</span><span class="kt">long</span> <span class="n">timeout</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">)</span>
+    <span class="kd">throws</span> <span class="n">InterruptedException</span><span class="o">,</span>
+            <span class="n">BrokenBarrierException</span><span class="o">,</span>
+            <span class="n">TimeoutException</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">dowait</span><span class="o">(</span><span class="kc">true</span><span class="o">,</span> <span class="n">unit</span><span class="o">.</span><span class="na">toNanos</span><span class="o">(</span><span class="n">timeout</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>下面通过示例来理解 CyclicBarrier 的使用。</p>
+</div><p>下面通过示例来理解 CyclicBarrier 的使用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -560,59 +533,57 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">CyclicBarrierTest</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CyclicBarrierTest</span> <span class="o">{</span>
 
-    <span class="err">static CyclicBarrier </span><span class="n">cb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CyclicBarrier</span><span class="p">(</span><span class="n">2</span><span class="p">);</span>
+    <span class="kd">static</span> <span class="n">CyclicBarrier</span> <span class="n">cb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CyclicBarrier</span><span class="o">(</span><span class="n">2</span><span class="o">);</span>
 
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">new</span> <span class="n">Thread</span><span class="p">(()</span> <span class="o">-&gt;</span> <span class="p">{</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 准备阻塞...&#34;</span><span class="p">);</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">cb</span><span class="p">.</span><span class="na">await</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">BrokenBarrierException e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-            <span class="p">}</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕...&#34;</span><span class="p">);</span>
-        <span class="p">},</span> <span class="s">&#34;t1&#34;</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 准备阻塞...&#34;</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">cb</span><span class="o">.</span><span class="na">await</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">BrokenBarrierException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕...&#34;</span><span class="o">);</span>
+        <span class="o">},</span> <span class="s">&#34;t1&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
 
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 准备阻塞...&#34;</span><span class="p">);</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">cb</span><span class="p">.</span><span class="na">await</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">BrokenBarrierException e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-        <span class="p">}</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕...&#34;</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 准备阻塞...&#34;</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">cb</span><span class="o">.</span><span class="na">await</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">BrokenBarrierException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 执行完毕...&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下所示（输出顺序不唯一）：</p>
+</div><p>输出结果如下所示（输出顺序不唯一）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">线程 main 准备阻塞...
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">线程 main 准备阻塞...
 线程 t1 准备阻塞...
 线程 t1 执行完毕...
-线程 main 执行完毕...</pre></td></tr></table>
+线程 main 执行完毕...
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>这里有一个主线程 main 和一个子线程 t1，对于上面的这种输出结果来说，由于 CyclicBarrier 初始化的时候被设置为 2，所以首先执行了线程 t1，此时调用了 await 方法，由于线程数量不等于 2，则此时 t1 阻塞在了 Barrier 状态；然后又执行了主线程 main，调用了 await 方法，由于处于 Barrier 状态的线程数量达到 2 了，所以两个程序就会继续执行下去。</p>
-
+</div><p>这里有一个主线程 main 和一个子线程 t1，对于上面的这种输出结果来说，由于 CyclicBarrier 初始化的时候被设置为 2，所以首先执行了线程 t1，此时调用了 await 方法，由于线程数量不等于 2，则此时 t1 阻塞在了 Barrier 状态；然后又执行了主线程 main，调用了 await 方法，由于处于 Barrier 状态的线程数量达到 2 了，所以两个程序就会继续执行下去。</p>
 <p>而如果将 CyclicBarrier 的初始化值设置为 3，则程序永远不会停止。因为当前程序最多只有两个线程到达 Barrier 状态，此时这两个线程就会一直处于阻塞状态，而不会继续执行下去。</p>
-
 <p>当每个线程到达栅栏位置（即处于 Barrier 状态）的时候，都会调用 await 方法进入阻塞状态，只有当最后一个线程也到达之后，这些阻塞的线程才能<code>全部继续往下执行</code>。而如果想在<code>全部继续往下执行</code>之前，做一些其它事情的话，可以使用 CyclicBarrier(int parties, Runnable barrierAction) 构造函数。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -652,50 +623,50 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">CyclicBarrierTest_02</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CyclicBarrierTest_02</span> <span class="o">{</span>
 
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="err">CyclicBarrier cb </span><span class="o">=</span> <span class="k">new</span> <span class="n">CyclicBarrier</span><span class="p">(</span><span class="n">4</span><span class="p">,</span> <span class="k">new</span> <span class="n">Runnable</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">CyclicBarrier</span> <span class="n">cb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CyclicBarrier</span><span class="o">(</span><span class="n">4</span><span class="o">,</span> <span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
             <span class="nd">@Override</span>
-            <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;123&#34;</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;123&#34;</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">new</span> <span class="n">Writer</span><span class="p">(</span><span class="n">cb</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">4</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">new</span> <span class="n">Writer</span><span class="o">(</span><span class="n">cb</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-    <span class="err">static class Writer extends </span><span class="n">Thread</span> <span class="p">{</span>
-        <span class="err">private CyclicBarrier </span><span class="n">cb</span><span class="p">;</span>
+    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Writer</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="n">CyclicBarrier</span> <span class="n">cb</span><span class="o">;</span>
 
-        <span class="err">public Writer</span><span class="p">(</span><span class="err">CyclicBarrier cb</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">cb</span> <span class="o">=</span> <span class="n">cb</span><span class="p">;</span>
-        <span class="p">}</span>
+        <span class="kd">public</span> <span class="nf">Writer</span><span class="o">(</span><span class="n">CyclicBarrier</span> <span class="n">cb</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">cb</span> <span class="o">=</span> <span class="n">cb</span><span class="o">;</span>
+        <span class="o">}</span>
 
         <span class="nd">@Override</span>
-        <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 正在写入数据...&#34;</span><span class="p">);</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">5000</span><span class="p">);</span> <span class="c1">// 模拟写入数据动作
-</span><span class="c1"></span>                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 写入数据完毕，等待其它线程写入完毕...&#34;</span><span class="p">);</span>
-                <span class="n">cb</span><span class="p">.</span><span class="na">await</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">BrokenBarrierException e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-            <span class="p">}</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;所有线程写入完毕，继续处理其它任务...&#34;</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 正在写入数据...&#34;</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">5000</span><span class="o">);</span> <span class="c1">// 模拟写入数据动作
+</span><span class="c1"></span>                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 写入数据完毕，等待其它线程写入完毕...&#34;</span><span class="o">);</span>
+                <span class="n">cb</span><span class="o">.</span><span class="na">await</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">BrokenBarrierException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;所有线程写入完毕，继续处理其它任务...&#34;</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -710,54 +681,49 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">线程 Thread</span><span class="o">-</span><span class="err">0 正在写入数据</span><span class="p">...</span>
-<span class="err">线程 Thread</span><span class="o">-</span><span class="err">1 正在写入数据</span><span class="p">...</span>
-<span class="err">线程 Thread</span><span class="o">-</span><span class="err">3 正在写入数据</span><span class="p">...</span>
-<span class="err">线程 Thread</span><span class="o">-</span><span class="err">2 正在写入数据</span><span class="p">...</span>
-<span class="err">线程 Thread</span><span class="o">-</span><span class="err">1 写入数据完毕，等待其它线程写入完毕...
-</span><span class="err">线程 </span><span class="n">Thread</span><span class="o">-</span><span class="err">0 写入数据完毕，等待其它线程写入完毕...
-</span><span class="err">线程 </span><span class="n">Thread</span><span class="o">-</span><span class="err">3 写入数据完毕，等待其它线程写入完毕...
-</span><span class="err">线程 </span><span class="n">Thread</span><span class="o">-</span><span class="err">2 写入数据完毕，等待其它线程写入完毕...
-</span><span class="err">123
-</span><span class="err"></span><span class="n">所有线程写入完毕</span><span class="err">，继续处理其它任务...
-</span><span class="err">所有线程写入完毕，继续处理其它任务...
-</span><span class="err">所有线程写入完毕，继续处理其它任务...
-</span><span class="err">所有线程写入完毕，</span><span class="n">继续处理其它任务</span><span class="p">...</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">线程</span> <span class="n">Thread</span><span class="o">-</span><span class="n">0</span> <span class="n">正在写入数据</span><span class="o">...</span>
+<span class="n">线程</span> <span class="n">Thread</span><span class="o">-</span><span class="n">1</span> <span class="n">正在写入数据</span><span class="o">...</span>
+<span class="n">线程</span> <span class="n">Thread</span><span class="o">-</span><span class="n">3</span> <span class="n">正在写入数据</span><span class="o">...</span>
+<span class="n">线程</span> <span class="n">Thread</span><span class="o">-</span><span class="n">2</span> <span class="n">正在写入数据</span><span class="o">...</span>
+<span class="n">线程</span> <span class="n">Thread</span><span class="o">-</span><span class="n">1</span> <span class="n">写入数据完毕</span><span class="err">，</span><span class="n">等待其它线程写入完毕</span><span class="o">...</span>
+<span class="n">线程</span> <span class="n">Thread</span><span class="o">-</span><span class="n">0</span> <span class="n">写入数据完毕</span><span class="err">，</span><span class="n">等待其它线程写入完毕</span><span class="o">...</span>
+<span class="n">线程</span> <span class="n">Thread</span><span class="o">-</span><span class="n">3</span> <span class="n">写入数据完毕</span><span class="err">，</span><span class="n">等待其它线程写入完毕</span><span class="o">...</span>
+<span class="n">线程</span> <span class="n">Thread</span><span class="o">-</span><span class="n">2</span> <span class="n">写入数据完毕</span><span class="err">，</span><span class="n">等待其它线程写入完毕</span><span class="o">...</span>
+<span class="n">123</span>
+<span class="n">所有线程写入完毕</span><span class="err">，</span><span class="n">继续处理其它任务</span><span class="o">...</span>
+<span class="n">所有线程写入完毕</span><span class="err">，</span><span class="n">继续处理其它任务</span><span class="o">...</span>
+<span class="n">所有线程写入完毕</span><span class="err">，</span><span class="n">继续处理其它任务</span><span class="o">...</span>
+<span class="n">所有线程写入完毕</span><span class="err">，</span><span class="n">继续处理其它任务</span><span class="o">...</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>当 4 个线程都到达 Barrier 状态后，会在 4 个线程执行之前先会输出 123，然后这 4 个线程才继续往下执行。通过这种实现方式，我们可以想到 <strong>CyclicBarrier 的使用场景</strong>，例如用于多线程计算数据，让每个线程分别去计算各自的数据，然后将各个线程所计算出的结果进行汇总即可。</p>
-
+</div><p>当 4 个线程都到达 Barrier 状态后，会在 4 个线程执行之前先会输出 123，然后这 4 个线程才继续往下执行。通过这种实现方式，我们可以想到 <strong>CyclicBarrier 的使用场景</strong>，例如用于多线程计算数据，让每个线程分别去计算各自的数据，然后将各个线程所计算出的结果进行汇总即可。</p>
 <p><strong>CountDownLatch 和 CyclicBarrier 的区别</strong>？</p>
-
 <p>虽然这两个并发工具类都可以将其理解成维护了一个计数器，但这两者还是有一些差别的：</p>
-
 <ul>
 <li>等待方式不同：
-
 <ul>
 <li>CountDownLatch 一般用于某个线程 A 等待若干个其它线程执行完以后，线程 A 才继续执行，它强调的是一个线程等待其它线程完成某件事；</li>
 <li>CyclicBarrier 一般用于一组（多个）线程相互等待至某个状态，然后这一组（多个）线程再同时执行，它强调的是线程之间相互等待，等到大家都完成，再一起继续往下执行。</li>
-</ul></li>
+</ul>
+</li>
 <li>执行方式不同：
-
 <ul>
 <li>CountDownLatch 是在多个线程都进行了 latch.countDown() 后才会触发事件，唤醒 await 在 latch 上的线程，而执行 countDown() 的线程在执行完 countDown() 后会<strong>继续执行</strong>自己线程的工作；</li>
 <li>CyclicBarrier 用于同步所有调用 await 方法的线程，<strong>线程执行了 await 方法后并不会执行之后的代码</strong>，而只有当执行 await() 方法的线程数量等于指定的 parties 之后，这些执行了 await 方法的线程才会同时运行。</li>
-</ul></li>
+</ul>
+</li>
 <li>循环次数不同：
-
 <ul>
 <li>CountDownLatch 的计数器只能使用一次，即计数器减为 0 就不能被重置了；</li>
 <li>CyclicBarrier 的计数器可以通过 reset() 方法重置。</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h1 id="semaphore">Semaphore</h1>
-
 <p>Semaphore 用于控制线程并发的数量，它维护了一组<code>许可证</code>，在构造 Semaphore 的时候，需要传入想要管理的线程数量，通过调用 acquire() 方法获取一个许可，通过 release() 释放一个许可，因此 Semaphore 相当于一个并发控制器。构造方法如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -767,20 +733,20 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public Semaphore</span><span class="p">(</span><span class="err">int permits</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">sync</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NonfairSync</span><span class="p">(</span><span class="n">permits</span><span class="p">);</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">Semaphore</span><span class="o">(</span><span class="kt">int</span> <span class="n">permits</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">sync</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NonfairSync</span><span class="o">(</span><span class="n">permits</span><span class="o">);</span>
+<span class="o">}</span>
 
 
-<span class="err">public Semaphore</span><span class="p">(</span><span class="err">int permits</span><span class="p">,</span> <span class="err">boolean fair</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">sync</span> <span class="o">=</span> <span class="n">fair</span> <span class="o">?</span> <span class="k">new</span> <span class="n">FairSync</span><span class="p">(</span><span class="n">permits</span><span class="p">)</span> <span class="o">:</span> <span class="k">new</span> <span class="n">NonfairSync</span><span class="p">(</span><span class="n">permits</span><span class="p">);</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="kd">public</span> <span class="nf">Semaphore</span><span class="o">(</span><span class="kt">int</span> <span class="n">permits</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">fair</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">sync</span> <span class="o">=</span> <span class="n">fair</span> <span class="o">?</span> <span class="k">new</span> <span class="n">FairSync</span><span class="o">(</span><span class="n">permits</span><span class="o">)</span> <span class="o">:</span> <span class="k">new</span> <span class="n">NonfairSync</span><span class="o">(</span><span class="n">permits</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>参数 permits 表示的实际上是可用的许可的数量，如果设置为 5 的话，则表明允许 5 个线程获取许可证，即最大并发数是 5。参数 fair 表示可以设置公平锁还是非公平锁。Semaphore 中的重要方法如下：</p>
+</div><p>参数 permits 表示的实际上是可用的许可的数量，如果设置为 5 的话，则表明允许 5 个线程获取许可证，即最大并发数是 5。参数 fair 表示可以设置公平锁还是非公平锁。Semaphore 中的重要方法如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -799,31 +765,30 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public void </span><span class="n">acquire</span><span class="p">()</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
-    <span class="n">sync</span><span class="p">.</span><span class="na">acquireSharedInterruptibly</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
-<span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">acquire</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+    <span class="n">sync</span><span class="o">.</span><span class="na">acquireSharedInterruptibly</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+<span class="o">}</span>
 
-<span class="err">public void </span><span class="n">acquire</span><span class="p">(</span><span class="err">int permits</span><span class="p">)</span> <span class="err">throws InterruptedException </span><span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">permits</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">();</span>
-    <span class="n">sync</span><span class="p">.</span><span class="na">acquireSharedInterruptibly</span><span class="p">(</span><span class="n">permits</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">acquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">permits</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">permits</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+    <span class="n">sync</span><span class="o">.</span><span class="na">acquireSharedInterruptibly</span><span class="o">(</span><span class="n">permits</span><span class="o">);</span>
+<span class="o">}</span>
 
-<span class="err">public void </span><span class="n">release</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">sync</span><span class="p">.</span><span class="na">releaseShared</span><span class="p">(</span><span class="n">1</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">release</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">sync</span><span class="o">.</span><span class="na">releaseShared</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+<span class="o">}</span>
 
-<span class="err">public void </span><span class="n">release</span><span class="p">(</span><span class="err">int permits</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">permits</span> <span class="o">&lt;</span> <span class="n">0</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">();</span>
-    <span class="n">sync</span><span class="p">.</span><span class="na">releaseShared</span><span class="p">(</span><span class="n">permits</span><span class="p">);</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">release</span><span class="o">(</span><span class="kt">int</span> <span class="n">permits</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">permits</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+    <span class="n">sync</span><span class="o">.</span><span class="na">releaseShared</span><span class="o">(</span><span class="n">permits</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>无参的 acquire() 方法表示获取一个许可，如果没有许可可以获得的话，则会一直等待，直到能够获取许可。而有参的 acquire(int permits) 方法表示获取多个许可。相应的，release() 方法表示释放一个许可，有参的 release(int permits) 方法表示释放多个许可。需要注意的是，在释放许可之前需要先获得许可。</p>
-
+</div><p>无参的 acquire() 方法表示获取一个许可，如果没有许可可以获得的话，则会一直等待，直到能够获取许可。而有参的 acquire(int permits) 方法表示获取多个许可。相应的，release() 方法表示释放一个许可，有参的 release(int permits) 方法表示释放多个许可。需要注意的是，在释放许可之前需要先获得许可。</p>
 <p>由于以上方法有可能发生阻塞，所以还有几个 tryAcquire 方法，在没有获得许可的情况下会立即返回。下面通过示例说明 Semaphore 的使用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -859,46 +824,46 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class </span><span class="n">SemaphoreTest</span> <span class="p">{</span>
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SemaphoreTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">// 工人的数量
-</span><span class="c1"></span>        <span class="err">int N </span><span class="o">=</span> <span class="n">8</span><span class="p">;</span>
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="n">8</span><span class="o">;</span>
         <span class="c1">// 机器的数量
-</span><span class="c1"></span>        <span class="err">Semaphore semaphore </span><span class="o">=</span> <span class="k">new</span> <span class="n">Semaphore</span><span class="p">(</span><span class="n">5</span><span class="p">);</span>
-        <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">new</span> <span class="n">Worker</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">semaphore</span><span class="p">).</span><span class="na">start</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+</span><span class="c1"></span>        <span class="n">Semaphore</span> <span class="n">semaphore</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Semaphore</span><span class="o">(</span><span class="n">5</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">new</span> <span class="n">Worker</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">semaphore</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-    <span class="err">static class Worker extends </span><span class="n">Thread</span> <span class="p">{</span>
-        <span class="err">private int </span><span class="n">num</span><span class="p">;</span>
-        <span class="err">private Semaphore </span><span class="n">semaphore</span><span class="p">;</span>
+    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Worker</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="kt">int</span> <span class="n">num</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="n">Semaphore</span> <span class="n">semaphore</span><span class="o">;</span>
 
-        <span class="err">public Worker </span><span class="p">(</span><span class="err">int num</span><span class="p">,</span> <span class="err">Semaphore semaphore</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">num</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
-            <span class="k">this</span><span class="p">.</span><span class="na">semaphore</span> <span class="o">=</span> <span class="n">semaphore</span><span class="p">;</span>
-        <span class="p">}</span>
+        <span class="kd">public</span> <span class="nf">Worker</span> <span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">,</span> <span class="n">Semaphore</span> <span class="n">semaphore</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">num</span> <span class="o">=</span> <span class="n">num</span><span class="o">;</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">semaphore</span> <span class="o">=</span> <span class="n">semaphore</span><span class="o">;</span>
+        <span class="o">}</span>
 
         <span class="nd">@Override</span>
-        <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">semaphore</span><span class="p">.</span><span class="na">acquire</span><span class="p">();</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;工人 &#34;</span> <span class="o">+</span> <span class="n">num</span> <span class="o">+</span> <span class="s">&#34; 占用一个机器在生产...&#34;</span><span class="p">);</span>
-                <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">2000</span><span class="p">);</span>
-                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;工人 &#34;</span> <span class="o">+</span> <span class="n">num</span> <span class="o">+</span> <span class="s">&#34; 释放出机器...&#34;</span><span class="p">);</span>
-                <span class="n">semaphore</span><span class="p">.</span><span class="na">release</span><span class="p">();</span>
-            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">semaphore</span><span class="o">.</span><span class="na">acquire</span><span class="o">();</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;工人 &#34;</span> <span class="o">+</span> <span class="n">num</span> <span class="o">+</span> <span class="s">&#34; 占用一个机器在生产...&#34;</span><span class="o">);</span>
+                <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">2000</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;工人 &#34;</span> <span class="o">+</span> <span class="n">num</span> <span class="o">+</span> <span class="s">&#34; 释放出机器...&#34;</span><span class="o">);</span>
+                <span class="n">semaphore</span><span class="o">.</span><span class="na">release</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下所示：</p>
+</div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -914,9 +879,9 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">工人 0 占用一个机器在生产...
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">工人 0 占用一个机器在生产...
 工人 1 占用一个机器在生产...
 工人 2 占用一个机器在生产...
 工人 3 占用一个机器在生产...
@@ -931,17 +896,15 @@
 工人 4 释放出机器...
 工人 6 释放出机器...
 工人 5 释放出机器...
-工人 7 释放出机器...</pre></td></tr></table>
+工人 7 释放出机器...
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>由于工人的数量大于机器的数量，即 8 &gt; 5，因此只能够允许 5 台机器同时被 5 个工人使用，也就是说只允许 5 台机器并发执行。需要注意的是，一台机器同时只能被一个工人使用，只有使用完了，其它工人才能继续使用。</p>
-
+</div><p>由于工人的数量大于机器的数量，即 8 &gt; 5，因此只能够允许 5 台机器同时被 5 个工人使用，也就是说只允许 5 台机器并发执行。需要注意的是，一台机器同时只能被一个工人使用，只有使用完了，其它工人才能继续使用。</p>
 <h1 id="exchanger">Exchanger</h1>
-
 <p>顾名思义，Exchanger 类用于线程间进行数据的交换，如果第一个线程先执行 exchange() 方法，则该线程会一直等待另一个线程也调用 exchange() 方法，等到这两个线程都到达<code>同步点</code>以后，此时就可以交换数据了。需要注意的是，如果一个线程 A 调用了 exchange() 方法而另一个线程 B 始终没有调用 exchange() 方法，则线程 A 会一直等待下去，因此可以使用重载的 exchange(V x, long timeout, TimeUnit unit) 方法设置最大等待时长，来避免一直等待的情况发生。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -977,61 +940,59 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public class ExchangerTest extends </span><span class="n">Thread</span> <span class="p">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExchangerTest</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
 
-    <span class="err">private String </span><span class="n">str</span><span class="p">;</span>
-    <span class="err">private Exchanger</span><span class="o">&lt;</span><span class="err">String&gt; exchanger</span><span class="p">;</span>
-    <span class="err">private int </span><span class="n">sleepSecond</span><span class="p">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">str</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Exchanger</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">exchanger</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">sleepSecond</span><span class="o">;</span>
 
-    <span class="err">public ExchangerTest</span><span class="p">(</span><span class="err">String str</span><span class="p">,</span> <span class="err">Exchanger&lt;String&gt; exchanger</span><span class="p">,</span> <span class="err">int sleepSecond</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">str</span> <span class="o">=</span> <span class="n">str</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">exchanger</span> <span class="o">=</span> <span class="n">exchanger</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">sleepSecond</span> <span class="o">=</span> <span class="n">sleepSecond</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span class="kd">public</span> <span class="nf">ExchangerTest</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">,</span> <span class="n">Exchanger</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">exchanger</span><span class="o">,</span> <span class="kt">int</span> <span class="n">sleepSecond</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">str</span> <span class="o">=</span> <span class="n">str</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">exchanger</span> <span class="o">=</span> <span class="n">exchanger</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">sleepSecond</span> <span class="o">=</span> <span class="n">sleepSecond</span><span class="o">;</span>
+    <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="err">public void </span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 启动，原始数据为: &#34;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&#34;，时间为: &#34;</span> <span class="o">+</span> <span class="n">sleepSecond</span><span class="p">);</span>
-            <span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">sleepSecond</span> <span class="o">*</span> <span class="n">1000</span><span class="p">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 启动，原始数据为: &#34;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&#34;，时间为: &#34;</span> <span class="o">+</span> <span class="n">sleepSecond</span><span class="o">);</span>
+            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">sleepSecond</span> <span class="o">*</span> <span class="n">1000</span><span class="o">);</span>
             <span class="c1">// 交换数据
-</span><span class="c1"></span>            <span class="n">str</span> <span class="o">=</span> <span class="n">exchanger</span><span class="p">.</span><span class="na">exchange</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34; 交换了数据，交换后的数据为: &#34;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&#34;，时间为: &#34;</span> <span class="o">+</span> <span class="n">sleepSecond</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="err">InterruptedException e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+</span><span class="c1"></span>            <span class="n">str</span> <span class="o">=</span> <span class="n">exchanger</span><span class="o">.</span><span class="na">exchange</span><span class="o">(</span><span class="n">str</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 交换了数据，交换后的数据为: &#34;</span> <span class="o">+</span> <span class="n">str</span> <span class="o">+</span> <span class="s">&#34;，时间为: &#34;</span> <span class="o">+</span> <span class="n">sleepSecond</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 
-    <span class="err">public static void main</span><span class="p">(</span><span class="err">String[] args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="err">Exchanger&lt;String&gt; exchanger </span><span class="o">=</span> <span class="k">new</span> <span class="n">Exchanger</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="err">ExchangerTest test1 </span><span class="o">=</span> <span class="k">new</span> <span class="n">ExchangerTest</span><span class="p">(</span><span class="s">&#34;111&#34;</span><span class="p">,</span> <span class="n">exchanger</span><span class="p">,</span> <span class="n">3</span><span class="p">);</span>
-        <span class="err">ExchangerTest test2 </span><span class="o">=</span> <span class="k">new</span> <span class="n">ExchangerTest</span><span class="p">(</span><span class="s">&#34;222&#34;</span><span class="p">,</span> <span class="n">exchanger</span><span class="p">,</span> <span class="n">2</span><span class="p">);</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Exchanger</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">exchanger</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Exchanger</span><span class="o">&lt;&gt;();</span>
+        <span class="n">ExchangerTest</span> <span class="n">test1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ExchangerTest</span><span class="o">(</span><span class="s">&#34;111&#34;</span><span class="o">,</span> <span class="n">exchanger</span><span class="o">,</span> <span class="n">3</span><span class="o">);</span>
+        <span class="n">ExchangerTest</span> <span class="n">test2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ExchangerTest</span><span class="o">(</span><span class="s">&#34;222&#34;</span><span class="o">,</span> <span class="n">exchanger</span><span class="o">,</span> <span class="n">2</span><span class="o">);</span>
 
-        <span class="n">test1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
-        <span class="n">test2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
+        <span class="n">test1</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="n">test2</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下所示：</p>
+</div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">Thread-0 启动，原始数据为: 111，时间为: 3
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Thread-0 启动，原始数据为: 111，时间为: 3
 Thread-1 启动，原始数据为: 222，时间为: 2
 Thread-0 交换了数据，交换后的数据为: 222，时间为: 3
-Thread-1 交换了数据，交换后的数据为: 111，时间为: 2</pre></td></tr></table>
+Thread-1 交换了数据，交换后的数据为: 111，时间为: 2
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>对于线程 test1 和线程 test2，它们 sleep 的时间是不同的。睡眠 2 秒的线程肯定需要等待睡眠 3 秒的线程，因为前面也说了，既然需要交换数据，那么需要两个线程要到达一个<code>时间点</code>或者<code>同步点</code>，只有同时到达这个点以后，才能交换相应的数据。</p>
-
+</div><p>对于线程 test1 和线程 test2，它们 sleep 的时间是不同的。睡眠 2 秒的线程肯定需要等待睡眠 3 秒的线程，因为前面也说了，既然需要交换数据，那么需要两个线程要到达一个<code>时间点</code>或者<code>同步点</code>，只有同时到达这个点以后，才能交换相应的数据。</p>
 <h1 id="参考">参考</h1>
-
 <ul>
 <li><a href="https://book.douban.com/subject/26591326/">https://book.douban.com/subject/26591326/</a></li>
 <li><a href="https://www.cnblogs.com/dolphin0520/p/3920397.html">https://www.cnblogs.com/dolphin0520/p/3920397.html</a></li>

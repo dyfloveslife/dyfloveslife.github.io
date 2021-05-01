@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/15/learning-python-DataStructure/" />
@@ -41,21 +41,15 @@
 <meta property="og:title" content="Python 学习笔记之 数据结构" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2018/07/15/learning-python-DataStructure/" />
-<meta property="article:published_time" content="2018-07-15T14:24:11+08:00" />
-<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2018/07/15/learning-python-DataStructure/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-07-15T14:24:11&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56&#43;08:00" />
+
 <meta itemprop="name" content="Python 学习笔记之 数据结构">
-<meta itemprop="description" content="">
-
-
-<meta itemprop="datePublished" content="2018-07-15T14:24:11&#43;08:00" />
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2018-07-15T14:24:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="1623">
-
-
-
-<meta itemprop="keywords" content="Python,DataStructure," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python,DataStructure," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python 学习笔记之 数据结构"/>
 <meta name="twitter:description" content=""/>
 
@@ -140,35 +134,19 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#1-列表">1.列表</a></li>
-<li><a href="#2-将列表用作堆栈">2.将列表用作堆栈</a></li>
-<li><a href="#3-将列表用作队列">3.将列表用作队列</a></li>
-<li><a href="#4-列表推导式">4.列表推导式</a></li>
-<li><a href="#5-嵌套列表">5.嵌套列表</a></li>
-<li><a href="#6-集合推导式">6.集合推导式</a></li>
-<li><a href="#7-字典推导式">7.字典推导式</a></li>
-<li><a href="#8-遍历技巧">8.遍历技巧</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p><strong>要点概括：</strong></p>
-
-<p><img src="/images/Python/DataStructure/contents.png" alt="DataStructure-contents" /></p>
-
-<h1 id="1-列表">1.列表</h1>
-
+<p><img src="/images/Python/DataStructure/contents.png" alt="DataStructure-contents"></p>
+<h1 id="1列表">1.列表</h1>
 <p>列表可以修改，而字符串和元组不能。在 Python 中，列表的方法如下所示：</p>
-
-<p><img src="/images/Python/DataStructure/list_method.png" alt="DataStructure-contents" /></p>
-
+<p><img src="/images/Python/DataStructure/list_method.png" alt="DataStructure-contents"></p>
 <p>列表的部分用法如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -191,34 +169,33 @@
 <span class="n">a</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
 <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">2 1 0
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">2 1 0
 [66.25, 333, -1, 333, 1, 1234.5]
 1
 [66.25, -1, 333, 1, 1234.5]
 [1234.5, 1, 333, -1, 66.25]
-[-1, 1, 66.25, 333, 1234.5]</pre></td></tr></table>
+[-1, 1, 66.25, 333, 1234.5]
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="2-将列表用作堆栈">2.将列表用作堆栈</h1>
-
+</div><h1 id="2将列表用作堆栈">2.将列表用作堆栈</h1>
 <p>列表方法使得列表可以很方便的作为一个堆栈来使用，堆栈作为特定的数据结构，最先进入的元素最后一个被释放（后进先出）。用<code>append()</code>方法可以把一个元素添加到堆栈顶。用不指定索引的<code>pop()</code>方法可以把一个元素从堆栈顶释放出来。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -239,32 +216,31 @@
 <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 <span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
 <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">[3, 4, 5, 6]
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[3, 4, 5, 6]
 [3, 4, 5, 6, 7]
 ===============
 [3, 4, 5, 6]
-[3, 4, 5]</pre></td></tr></table>
+[3, 4, 5]
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="3-将列表用作队列">3.将列表用作队列</h1>
-
+</div><h1 id="3将列表用作队列">3.将列表用作队列</h1>
 <p>队列，第一个先被加入列表中的的元素在取出的时候会第一个出来，即先进先出。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -285,99 +261,97 @@
 <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>  <span class="c1"># 出队</span>
 <span class="k">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
 <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>  <span class="c1"># 出队</span>
-<span class="k">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">deque([&#39;Carol&#39;, &#39;Jack&#39;, &#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">deque([&#39;Carol&#39;, &#39;Jack&#39;, &#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
 deque([&#39;Jack&#39;, &#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
-deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])</pre></td></tr></table>
+deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="4-列表推导式">4.列表推导式</h1>
-
+</div><h1 id="4列表推导式">4.列表推导式</h1>
 <p>列表推导式提供了从序列创建列表的简单途径。通常应用程序将一些操作应用于某个序列的每个元素，用其获得的结果作为生成新列表的元素，或者根据确定的判定条件创建子序列。</p>
-
 <p>每个列表推导式都在 for 之后跟一个表达式，然后有零到多个 for 或 if 子句。返回结果是一个根据表达从其后的 for 和 if 上下文环境中生成出来的列表。另外，如果希望表达式推导出一个元组，就必须使用括号。下面的程序会生成<code>1</code>到<code>10</code>之内所有数的平方，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>也可以在 for 后面加上 if 语句，下面程序可以筛选出仅由偶数组成的平方，如下所示：</p>
+</div><p>也可以在 for 后面加上 if 语句，下面程序可以筛选出仅由偶数组成的平方，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">[4, 16, 36, 64, 100]</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[4, 16, 36, 64, 100]
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>也可以用两层循环生成全排列，如下所示：</p>
+</div><p>也可以用两层循环生成全排列，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="s1">&#39;ABC&#39;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="s1">&#39;abc&#39;</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">[&#39;Aa&#39;, &#39;Ab&#39;, &#39;Ac&#39;, &#39;Ba&#39;, &#39;Bb&#39;, &#39;Bc&#39;, &#39;Ca&#39;, &#39;Cb&#39;, &#39;Cc&#39;]</pre></td></tr></table>
-</div>
-</div>
-<p>另外，对于列表推导式的执行顺序为：各语句之间是嵌套关系，左边第二个语句是最外层，依次往右进一层，最左边的第一条语句是最后一层，如下所示：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">]</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[&#39;Aa&#39;, &#39;Ab&#39;, &#39;Ac&#39;, &#39;Ba&#39;, &#39;Bb&#39;, &#39;Bc&#39;, &#39;Ca&#39;, &#39;Cb&#39;, &#39;Cc&#39;]
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>上面的式子等同于：</p>
+</div><p>另外，对于列表推导式的执行顺序为：各语句之间是嵌套关系，左边第二个语句是最外层，依次往右进一层，最左边的第一条语句是最后一层，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的式子等同于：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -388,26 +362,25 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])</pre></td></tr></tabl
     <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
-                <span class="n">x</span> <span class="o">*</span> <span class="n">y</span></code></pre></td></tr></table>
+                <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>当然，这里仅仅只是解释列表推导式的执行顺序，程序本身需要修改后才能运行。</p>
-
+</div><p>当然，这里仅仅只是解释列表推导式的执行顺序，程序本身需要修改后才能运行。</p>
 <p>再看一个例子，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]]</span></code></pre></td></tr></table>
+<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]]</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>可以将上式改写成下面的式子，如下所示：</p>
+</div><p>可以将上式改写成下面的式子，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -424,24 +397,23 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])</pre></td></tr></tabl
     <span class="n">b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
     <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">[2, 5, 10]</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[2, 5, 10]
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="5-嵌套列表">5.嵌套列表</h1>
-
+</div><h1 id="5嵌套列表">5.嵌套列表</h1>
 <p>下面演示的是将<code>3x4</code>的矩阵列表转换成<code>4x3</code>的矩阵列表，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -456,118 +428,115 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])</pre></td></tr></tabl
     <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
 <span class="p">]</span>
 <span class="n">a</span> <span class="o">=</span> <span class="p">[[</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="6-集合推导式">6.集合推导式</h1>
-
+</div><h1 id="6集合推导式">6.集合推导式</h1>
 <p>如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s1">&#39;abracadabra&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;abc&#39;</span><span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">{&#39;d&#39;, &#39;r&#39;}</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{&#39;d&#39;, &#39;r&#39;}
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="7-字典推导式">7.字典推导式</h1>
-
+</div><h1 id="7字典推导式">7.字典推导式</h1>
 <p>如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">{0: 0, 1: 2, 2: 4, 3: 6, 4: 8}</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{0: 0, 1: 2, 2: 4, 3: 6, 4: 8}
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="8-遍历技巧">8.遍历技巧</h1>
-
+</div><h1 id="8遍历技巧">8.遍历技巧</h1>
 <p>在字典中遍历时，关键字和对应的值可以使用<code>items()</code>方法同时解读出来，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">}</span>
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">person</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">name Carol
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">name Carol
 age 20
-gender male</pre></td></tr></table>
+gender male
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>在序列中遍历时，索引位置和对应值可以使用<code>enumerate()</code>函数同时得到，如下所示：</p>
+</div><p>在序列中遍历时，索引位置和对应值可以使用<code>enumerate()</code>函数同时得到，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;Jack&#39;</span><span class="p">,</span> <span class="s1">&#39;Mike&#39;</span><span class="p">]):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">0 Carol
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">0 Carol
 1 Jack
-2 Mike</pre></td></tr></table>
+2 Mike
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>同时遍历两个或更多的序列，可以使用<code>zip()</code>组合，如下所示：</p>
+</div><p>同时遍历两个或更多的序列，可以使用<code>zip()</code>组合，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -580,76 +549,77 @@ gender male</pre></td></tr></table>
 <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="n">answers</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;What is your {0}? It is {1}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
     <span class="c1"># 也可以使用%s方法输出，结果是一样的</span>
-    <span class="c1"># print(&#39;What is your %s? It is %s.&#39; % (q, a))</span></code></pre></td></tr></table>
+    <span class="c1"># print(&#39;What is your %s? It is %s.&#39; % (q, a))</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">What is your name? It is Carol.
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">What is your name? It is Carol.
 What is your quest? It is the holy grail.
-What is your favorite color? It is blue.</pre></td></tr></table>
+What is your favorite color? It is blue.
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>要反向遍历一个序列，首先指定这个序列，然后调用<code>reversed()</code>函数，如下所示：</p>
+</div><p>要反向遍历一个序列，首先指定这个序列，然后调用<code>reversed()</code>函数，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">9
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">9
 7
 5
 3
-1</pre></td></tr></table>
+1
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>要按顺序遍历一个序列，使用<code>sorted()</code>函数返回一个已排序的序列，并不修改原值，如下所示：</p>
+</div><p>要按顺序遍历一个序列，使用<code>sorted()</code>函数返回一个已排序的序列，并不修改原值，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">basket</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">basket</span><span class="p">)):</span>  <span class="c1"># set()可以去重</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">apple
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">apple
 banana
 orange
-pear</pre></td></tr></table>
+pear
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>

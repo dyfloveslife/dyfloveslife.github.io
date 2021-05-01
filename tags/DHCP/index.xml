@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sat, 03 Jun 2017 11:28:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/DHCP/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 03 Jun 2017 11:28:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/DHCP/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux 环境下配置 DHCP 服务器</title>
       <link>http://localhost:1313/2017/06/03/Linux-DHCP/</link>
@@ -21,9 +17,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;用到两个软件包：&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;、&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
     
@@ -35,7 +29,6 @@
       <guid>http://localhost:1313/2017/06/03/Windows-DHCP/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>

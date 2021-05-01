@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/08/26/alg-Shortest-Path-Problem/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="最短路径问题" />
 <meta property="og:description" content="最近在参加秋招，笔试的过程中发现又不少公司喜欢考最短路径问题，例如完美世界、大疆等。现在再来总结复习一下这些板子题，希望下次再遇到这种类型的题之也后能 AC。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2020/08/26/alg-Shortest-Path-Problem/" />
-<meta property="article:published_time" content="2020-08-26T19:21:02+08:00" />
-<meta property="article:modified_time" content="2020-08-26T21:24:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2020/08/26/alg-Shortest-Path-Problem/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-08-26T19:21:02&#43;08:00" />
+<meta property="article:modified_time" content="2020-08-26T21:24:56&#43;08:00" />
+
 <meta itemprop="name" content="最短路径问题">
-<meta itemprop="description" content="最近在参加秋招，笔试的过程中发现又不少公司喜欢考最短路径问题，例如完美世界、大疆等。现在再来总结复习一下这些板子题，希望下次再遇到这种类型的题之也后能 AC。">
-
-
-<meta itemprop="datePublished" content="2020-08-26T19:21:02&#43;08:00" />
+<meta itemprop="description" content="最近在参加秋招，笔试的过程中发现又不少公司喜欢考最短路径问题，例如完美世界、大疆等。现在再来总结复习一下这些板子题，希望下次再遇到这种类型的题之也后能 AC。"><meta itemprop="datePublished" content="2020-08-26T19:21:02&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-26T21:24:56&#43;08:00" />
 <meta itemprop="wordCount" content="1334">
-
-
-
-<meta itemprop="keywords" content="Algorithm,LeetCode,Graph," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Algorithm,LeetCode,Graph," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="最短路径问题"/>
 <meta name="twitter:description" content="最近在参加秋招，笔试的过程中发现又不少公司喜欢考最短路径问题，例如完美世界、大疆等。现在再来总结复习一下这些板子题，希望下次再遇到这种类型的题之也后能 AC。"/>
 
@@ -141,66 +135,41 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#概述">概述</a></li>
-<li><a href="#dijkstra-算法">$Dijkstra$ 算法</a></li>
-<li><a href="#spfa-算法">$SPFA$ 算法</a></li>
-<li><a href="#folyd-算法">$Folyd$ 算法</a></li>
-<li><a href="#代码">代码</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>最近在参加秋招，笔试的过程中发现又不少公司喜欢考最短路径问题，例如完美世界、大疆等。现在再来总结复习一下这些板子题，希望下次再遇到这种类型的题之也后能 AC。</p>
-
 <h1 id="概述">概述</h1>
-
 <p>解决图论的最短路算法有很多，根据分类，最长用的有以下三种：</p>
-
 <ul>
 <li>单源最短路径：
-
 <ul>
 <li>不带负权边的：$Dijkstra$ 算法</li>
 <li>带负权边的：$Bellman-Ford$ 算法、$SPFA$ 算法</li>
-</ul></li>
+</ul>
+</li>
 <li>多源最短路径：
-
 <ul>
 <li>$Folyd$ 算法</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>其中，<strong>单源最短路径</strong>解决的问题是：指定源点，求它到其余各个点的最短路经。而<strong>多源最短路径</strong>解决的问题是：执行一次算法后，我们能得到任意点之间的最短路径，而不是像单源最短路径那样只能得到两点之间的最短路径。虽然可以对每个顶点都执行单元最短路径算法，来求得所有顶点到所有顶点的最短路径，但时间复杂度很高。</p>
-
 <h1 id="dijkstra-算法">$Dijkstra$ 算法</h1>
-
 <p>假设图中有 $V$ 个顶点，$E$ 条边。对于 $Dijkstra$ 来说，本质是基于贪心策略的算法，利用广搜的方式，每次新扩展一个路径最短的顶点，更新与它相邻的所有点。当所有边的权值为正时，由于不会存在一个路径更短的、没扩展过的点，所以这个点的路径就被确定下来了，这样就保证了算法的正确性。但也正是因为这样，$Dijkstra$ 算法不能处理带有负权的边，因为扩展到负权边的时候会产生更短的路径，这就有可能破坏了已经更新的点的路径不会变这个性质。</p>
-
 <p>对于 $Dijkstra$ 的朴素写法，时间复杂度是 $O(V^2+E)$，相当于 $O(V^2)$。如果使用小根堆（结合邻接矩阵）优化的话，可以优化到 $O(VlogV+E)$。可以看到，顶点数量的多少将会影响到算法的时间复杂度，因此，$Dijkstra$ 适用于<strong>稠密图</strong>，也就是边多的图。</p>
-
 <p>无论图中是否构成环，都是可以使用 $Dijkstra$ 算法的。就像上面所说的，它只是不能处理带有负权的边。因为本质上是贪心策略，每个点选择之后就不再被更新了，如果碰到了负权边的存在，那么就会破坏这个贪心的策略，从而无法处理了。</p>
-
 <h1 id="spfa-算法">$SPFA$ 算法</h1>
-
 <p>$Dijkstra$ 不能处理含有负权边的图，而 $Bellman-Ford$ 算法可以。但是 $Bellman-Ford$ 的时间复杂度是 $O(VE)$，效率太低，并且适用于<strong>稀疏图</strong>。而 $SPFA$ 使用队列对 $Bellman-Ford$ 进行了优化，但是时间复杂度不稳定，最好的时间复杂度是 $O(E)$，也就是每个顶点只入队一次，最坏的情况下是 $O(VE)$，即每个顶点都要入队 $V-1$ 次，此时就退化成了 $Bellman-Ford$ 算法。</p>
-
-<p>$SPFA$ 算法适用于<strong>稀疏图</strong>，图中也可以含有负权的边，在 $SPFA$ 中每一个顶点<strong>松弛</strong>后，说明这个点距离更近了，所以有可能通过这个点会再次优化其它顶点。因此，<font color='red'>该算法的策略是将 $vis$ 设置为 $false$，把这个点入队再判断一次</font>，从这里就看出它和 $Dijkstra$ 算法的区别了。</p>
-
+<p>$SPFA$ 算法适用于<strong>稀疏图</strong>，图中也可以含有负权的边，在 $SPFA$ 中每一个顶点<strong>松弛</strong>后，说明这个点距离更近了，所以有可能通过这个点会再次优化其它顶点。因此，<!-- raw HTML omitted -->该算法的策略是将 $vis$ 设置为 $false$，把这个点入队再判断一次<!-- raw HTML omitted -->，从这里就看出它和 $Dijkstra$ 算法的区别了。</p>
 <blockquote>
 <p>所谓的“松弛”，指的是如果想要让两个顶点 $i$ 和 $j$ 之间的路径变短，那么只能通过第三个点 $k$ 进行中转，通过顶点 $k$ 中转之后，$i$ 和 $j$ 之间的路径就变短了。例如顶点 $1\rightarrow5$ 的距离为 $10$，但 $1\rightarrow2\rightarrow5$ 的距离为 $9$。因此，每个顶点都有可能使另外两个顶点间的路径变短。<strong>这种中转变短的过程成为松弛</strong>。</p>
 </blockquote>
-
 <p>$SPFA$ 还有一个作用是判断是否存在负环，使用一个 $count[x]$ 数组来存放经过这个点的次数。上文提到过，最坏情况下每个顶点入队 $V-1$ 次，如果 $count[x]$ 为 $V$ 的个数，那么就说明存在负环了。</p>
-
 <h1 id="folyd-算法">$Folyd$ 算法</h1>
-
 <p>$Folyd$ 的本质是动态规划，能解决任意两个顶点之间的最短路径，时间复杂度是 $O(V^3)$。该算法可以判断是否含有负权的边，但不能判断是否存在负环。</p>
-
 <h1 id="代码">代码</h1>
-
 <p>具体代码，详见 repo：<a href="https://github.com/dyfloveslife/LeetCodeAndSwordToOffer/blob/master/src/Other/BasicAlgorithm/_48_ShortestPathProblem/Solution.java">最短路径问题</a>。</p>
     </div>
 

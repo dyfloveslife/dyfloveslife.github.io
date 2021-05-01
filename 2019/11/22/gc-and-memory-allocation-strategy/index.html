@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/11/22/gc-and-memory-allocation-strategy/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="JVM 垃圾收集器与内存分配策略" />
 <meta property="og:description" content="上篇文章 《JVM 对象存活和垃圾收集算法》 对 JVM 中的对象是否存活以及几种垃圾收集算法进行了说明，而本文将对内存回收的具体实现，即对 垃圾收集器 进行归类与总结。同时，也将介绍一个对象是如何在堆内存中的不同区域进行分配的。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2019/11/22/gc-and-memory-allocation-strategy/" />
-<meta property="article:published_time" content="2019-11-22T08:55:16+08:00" />
-<meta property="article:modified_time" content="2019-11-25T10:03:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2019/11/22/gc-and-memory-allocation-strategy/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-11-22T08:55:16&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-25T10:03:56&#43;08:00" />
+
 <meta itemprop="name" content="JVM 垃圾收集器与内存分配策略">
-<meta itemprop="description" content="上篇文章 《JVM 对象存活和垃圾收集算法》 对 JVM 中的对象是否存活以及几种垃圾收集算法进行了说明，而本文将对内存回收的具体实现，即对 垃圾收集器 进行归类与总结。同时，也将介绍一个对象是如何在堆内存中的不同区域进行分配的。">
-
-
-<meta itemprop="datePublished" content="2019-11-22T08:55:16&#43;08:00" />
+<meta itemprop="description" content="上篇文章 《JVM 对象存活和垃圾收集算法》 对 JVM 中的对象是否存活以及几种垃圾收集算法进行了说明，而本文将对内存回收的具体实现，即对 垃圾收集器 进行归类与总结。同时，也将介绍一个对象是如何在堆内存中的不同区域进行分配的。"><meta itemprop="datePublished" content="2019-11-22T08:55:16&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-25T10:03:56&#43;08:00" />
-<meta itemprop="wordCount" content="4821">
-
-
-
-<meta itemprop="keywords" content="JVM,GC," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="4825">
+<meta itemprop="keywords" content="JVM,GC," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="JVM 垃圾收集器与内存分配策略"/>
 <meta name="twitter:description" content="上篇文章 《JVM 对象存活和垃圾收集算法》 对 JVM 中的对象是否存活以及几种垃圾收集算法进行了说明，而本文将对内存回收的具体实现，即对 垃圾收集器 进行归类与总结。同时，也将介绍一个对象是如何在堆内存中的不同区域进行分配的。"/>
 
@@ -132,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 4821 words </span>
+          <span class="more-meta"> 4825 words </span>
           <span class="more-meta"> 10 mins read </span>
         
       </div>
@@ -142,130 +136,76 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#垃圾收集">垃圾收集</a>
-<ul>
-<li><a href="#新生代收集器">新生代收集器</a>
-<ul>
-<li><a href="#serial-收集器">Serial 收集器</a></li>
-<li><a href="#parnew-收集器">ParNew 收集器</a></li>
-<li><a href="#parallel-scavenge-收集器">Parallel Scavenge 收集器</a></li>
-</ul></li>
-<li><a href="#老年代收集器">老年代收集器</a>
-<ul>
-<li><a href="#serial-old">Serial Old</a></li>
-<li><a href="#parallel-old">Parallel Old</a></li>
-<li><a href="#cms">CMS</a></li>
-</ul></li>
-<li><a href="#g1-收集器">G1 收集器</a></li>
-</ul></li>
-<li><a href="#内存分配策略">内存分配策略</a>
-<ul>
-<li><a href="#对象优先在-eden-分配">对象优先在 Eden 分配</a></li>
-<li><a href="#大对象直接进入老年代">大对象直接进入老年代</a></li>
-<li><a href="#动态对象年龄判断">动态对象年龄判断</a></li>
-<li><a href="#空间分配担保">空间分配担保</a></li>
-</ul></li>
-<li><a href="#参考">参考</a></li>
-</ul>
+  <ul>
+    <li><a href="#新生代收集器">新生代收集器</a>
+      <ul>
+        <li><a href="#serial-收集器">Serial 收集器</a></li>
+        <li><a href="#parnew-收集器">ParNew 收集器</a></li>
+        <li><a href="#parallel-scavenge-收集器">Parallel Scavenge 收集器</a></li>
+      </ul>
+    </li>
+    <li><a href="#老年代收集器">老年代收集器</a>
+      <ul>
+        <li><a href="#serial-old">Serial Old</a></li>
+        <li><a href="#parallel-old">Parallel Old</a></li>
+        <li><a href="#cms">CMS</a></li>
+      </ul>
+    </li>
+    <li><a href="#g1-收集器">G1 收集器</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#对象优先在-eden-分配">对象优先在 Eden 分配</a></li>
+    <li><a href="#大对象直接进入老年代">大对象直接进入老年代</a></li>
+    <li><a href="#动态对象年龄判断">动态对象年龄判断</a></li>
+    <li><a href="#空间分配担保">空间分配担保</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>上篇文章 <a href="https://dyfloveslife.github.io/2019/11/20/object-survival-and-gc-algorithm/">《JVM 对象存活和垃圾收集算法》</a> 对 JVM 中的对象是否存活以及几种垃圾收集算法进行了说明，而本文将对内存回收的具体实现，即对 <code>垃圾收集器</code> 进行归类与总结。同时，也将介绍一个对象是如何在堆内存中的不同区域进行分配的。</p>
-
 <h1 id="垃圾收集">垃圾收集</h1>
-
 <p>前面介绍的垃圾收集算法是理论上的概念，而垃圾收集器就是具体的实现了。根据 JVM 堆中 <strong>新生代</strong> 和 <strong>老年代</strong> 特点的不同，不同的垃圾收集器所处的位置如下图所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/22/MlIqFtL8GvVWZah.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>中间一条线将 JVM 堆划分成了 <strong>新生代</strong> 和 <strong>老年代</strong>，可以使用在 <strong>新生代</strong> 的垃圾收集器有 <code>Serial</code>、<code>ParNew</code>、<code>Parallel Scavenge</code>，使用在 <strong>老年代</strong> 的垃圾收集器有 <code>CMS</code>、<code>Serial Old（MSC）</code>、<code>Parallel Old</code>，而 <code>G1</code> 横跨了这两代。</p>
-
 <h2 id="新生代收集器">新生代收集器</h2>
-
 <h3 id="serial-收集器">Serial 收集器</h3>
-
-<p><code>Serial 收集器</code> 是一个 <code>单线程</code> 收集器，这里的 <code>单线程</code> 指的是 <strong>在进行垃圾回收的时候，必须暂停其他所有的工作线程，直到他收集结束，即所谓的 “Stop The World”。</strong>同时，它也是独占式的垃圾收集器,，由于线程之间没有通信的开销，所以该方式实现简单而高效。运行示意图如下所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/22/9rERYcx5Jh3tMeV.png" alt="image.png" />
-</center></p>
-
+<p><code>Serial 收集器</code> 是一个 <code>单线程</code> 收集器，这里的 <code>单线程</code> 指的是 **在进行垃圾回收的时候，必须暂停其他所有的工作线程，直到他收集结束，即所谓的 “Stop The World”。**同时，它也是独占式的垃圾收集器,，由于线程之间没有通信的开销，所以该方式实现简单而高效。运行示意图如下所示：</p>
+<!-- raw HTML omitted -->
 <p>在 Serial 收集器进行垃圾回收的时候，Java 应用程序中的线程都必须暂停，等待垃圾回收完成，这样造成的用户体验是很差的。虽然如此，但 Serial 收集器却是一个稳定成熟、经过长时间生产环境考验的极为高效的收集器。在单 CPU 处理器或用户桌面的应用场景中，它依然是虚拟机运行在 Client 模式下的默认新生代收集器。由于虚拟机在内存回收的时候会导致 <code>停顿</code> 情况，所以该收集器相对于其他收集器来说，停顿时间可以控制在几十毫秒最多一百毫秒，只要不是频繁发生，这点停顿是可以接受的。</p>
-
 <p>此外，可以通过设置虚拟机参数 <code>-XX:+UseSeralGC</code> 来使用 Serial 收集器进行垃圾回收。</p>
-
 <h3 id="parnew-收集器">ParNew 收集器</h3>
-
 <p><code>ParNew 收集器</code> 是 Serial 收集器的 <code>多线程</code> 版本，也就是将 Serial 收集器进行多线程化，在控制参数、收集算法、Stop The World、对象分配策略、回收策略等都和 Serial 收集器是一样的。如下图所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/22/zfLcyClRnQ6oxP3.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>ParNew 收集器是运行在 Server 模式下的虚拟机中首选的新生代收集器，在并发能力比较强的 CPU 上，它产生的停顿时间要短于 Serial 收集器，而在单 CPU 或者并发能力较弱的系统中，ParNew 收集器的效果不会比 Serial 收集器好。由于多线程的压力，它的实际表现很可能比 Serial 收集器差。</p>
-
 <p>此外，可以通过设置虚拟机参数 <code>-XX:+UseParNewGC</code> 来强制使用 ParNew 收集器进行垃圾回收。</p>
-
 <h3 id="parallel-scavenge-收集器">Parallel Scavenge 收集器</h3>
-
 <p><code>Parallel Scavenge  收集器</code> 是一个采用 <code>复制算法</code> 的 <code>并行多线程</code> 的新生代收集器。它和 ParNew 收集器一样都是多线程、独占式的收集器。但是，<code>Parallel Scavenge 收集器</code> 有一个重要的特点：<strong>它非常关注系统的吞吐量</strong>，因此它也经常被称为 <code>吞吐量优先</code> 收集器。</p>
-
 <blockquote>
 <p>吞吐量 = CPU 运行用户代码的时间 / (CPU 运行用户代码的时间 + 垃圾收集时间)</p>
 </blockquote>
-
 <p>运行示意图如下所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/22/c7fQj2nX6rix1qW.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p>该收集器提供了两个用于精确控制吞吐量的参数：</p>
-
 <p>设置最大垃圾收集停顿时间的 <code>-XX:+MaxGCPauseMills</code>。它的值是一个大于 0 的整数。收集器在工作时会调整 Java 堆大小或者其他一些参数，尽可能地把停顿时间控制在 MaxGCPauseMills 以内。如果希望减少停顿时间，把这个值设置得很小的话，那么为了达到预期的停顿时间，JVM 可能会使用一个较小的堆 (一个小堆比一个大堆回收快)，而这将导致垃圾回收变得很频繁，从而增加了垃圾回收总时间，降低了吞吐量。</p>
-
 <p>设置吞吐量大小的 <code>-XX:+GCTimeRatio</code>。它的值是一个 <code>0~100</code> 之间的整数。假设 GCTimeRatio 的值为 <code>n</code>，那么系统将花费不超过 <code>1/(1+n)</code> 的时间用于垃圾收集。比如 GCTimeRatio 等于 <code>19</code>，则系统用于垃圾收集的时间不超过 <code>1/(1+19)=5%</code>。默认情况下，它的取值是 <code>99</code>，即不超过 <code>1%</code> 的时间用于垃圾收集。</p>
-
 <p>除此之外，<code>Parallel Scavenge 收集器</code> 还有一个参数是 <code>-XX:+UseAdaptiveSizePolicy</code>，当设置了该参数，就不需要手工指定新生代的大小、Eden 与 Survivor 区的比例、晋升老年代对象大小等参数了，虚拟机会根据当前系统运行情况收集性能监控信息，采用 <code>GC 自适应调节策略</code> 动态调整这些参数以最合适的停顿时间或者最大的吞吐量。这也是 <code>Parallel Scavenge 收集器</code> 与 ParNew 收集器的一个重要区别。</p>
-
 <h2 id="老年代收集器">老年代收集器</h2>
-
 <h3 id="serial-old">Serial Old</h3>
-
 <p>运行示意图和 Serial 收集器是一样的，如下所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/22/9rERYcx5Jh3tMeV.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p><code>Serial Old 收集器</code> 是 Serial 的老年代版本，也是一个单线程收集器，在老年代区域使用 <code>标记-整理</code> 算法。和新生代 Serial 收集器一样，它也是一个串行的、独占式的垃圾收集器。由于老年代垃圾收集通常会使用比新生代垃圾收集更长的时间，因此，在堆空间较大的应用程序中，一旦 <code>Serial Old 收集器</code> 启动，应用程序很可能会因此停顿几秒甚至更长时间。虽然如此，<code>Serial Old 收集器</code> 可以和多种新生代收集器配合使用，同时它也可以作为 CMS 收集器的备用收集器。</p>
-
 <p>若要启用 <code>Serial Old 收集器</code>，可以尝试使用 <code>-XX:+UseSerialGC</code> 参数。</p>
-
 <h3 id="parallel-old">Parallel Old</h3>
-
 <p><code>Parallel Old 收集器</code> 是 <code>Parallel Scavenge</code> 的老年代版本，使用 <code>多线程</code> 和 <code>标记-整理</code> 算法。和新生代的 <code>Parallel Scavenge 收集器</code> 一样，也是一种关注 <code>吞吐量</code> 的收集器。但该收集器在 JDK 1.6 才开始使用。而在 JDK 1.6 之前，新生代的 <code>Parallel Scavenge 收集器</code> 处于比较尴尬的地位。</p>
-
 <p>为什么尴尬？</p>
-
 <p>从文章开头的 <code>垃圾收集整体框架图</code> 中可以看出，如果新生代选择了 <code>Parallel Scavenge</code> 作为垃圾收集器，那么它只能与老年代的 <code>Serial Old</code> 进行结合。但由于 <code>Serial Old</code> 在服务端上的性能显得有些 <strong>“拖累”</strong>，所以即使用了并行回收的 <code>Parallel Scavenge</code> 也未必能在整体应用上获得吞吐量最大化的效果。</p>
-
 <p>而老年代的 <code>Parallel Old</code> 出现以后，它可以与新生代的  <code>Parallel Scavenge</code> 结合，这时才真正实现了 <strong>“吞吐量优先”</strong> 的效果，更适用于吞吐量高以及 CPU 资源敏感的场合。运行示意图如下所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/22/c7fQj2nX6rix1qW.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <h3 id="cms">CMS</h3>
-
 <p>CMS（Concurrent Mark Sweep）是一种 <code>并发标记清除</code> 收集器，它关注的是 <strong>尽可能缩短垃圾收集时用户线程的停顿问题</strong>，适用于 <strong>服务响应速度高、系统停顿时间短</strong> 的场合。</p>
-
 <p>该收集器是基于 <code>标记-清除</code> 算法实现的，其运行机制包括以下 4 个步骤：</p>
-
 <ul>
 <li>初始标记（CMS initial mark）</li>
 <li>并发标记（CMS concurrent mark）</li>
@@ -273,116 +213,76 @@
 <li>并发擦除（CMS concurrent sweep）</li>
 <li>并发重置（CMS concurrent reset）</li>
 </ul>
-
 <blockquote>
 <p>其中，<code>初始标记</code> 和 <code>重新标记</code> 需要 “Stop The World”，即独占系统资源。
 而 <code>并发标记</code> 和 <code>并发擦除</code> 是可以和用户一起执行的。因此，从整体上来说，<code>CMS 收集器</code> 不是独占式的，它可以在应用程序运行过程中进行垃圾回收。</p>
 </blockquote>
-
 <p>具体运行机制如下图所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/22/YBFrVbqQ41oaNvw.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <p><code>初始标记</code> 阶段的速度很快，只是标记一下 GC Root 能直接关联到的对象；<code>并发标记</code> 阶段是进行 GC Roots Tracing（追踪）的过程；<code>重新标记</code> 阶段则是为了修正 <code>并发标记</code> 期间因用户程序运作而导致标记产生变动的那一部分的标记对象，该阶段的停顿时间比 <code>并发标记</code> 的时间短，而比 <code>初始标记</code> 的时间长。<code>并发重置</code> 是指在垃圾收集完成后，重新初始化 CMS 数据结构和数据，为下一次垃圾收集做好准备。</p>
-
 <p><code>CMS 收集器</code> 的优点是：<code>并发收集</code>、<code>低停顿</code>。因此也被称为 <code>并发低停顿收集器（Concurrent Low Pause Collector）</code>。</p>
-
 <p>其缺点是主要在 3 个方面：</p>
-
 <ul>
 <li><code>CMS 收集器</code> 对 CPU 资源非常敏感。在并发时，该收集器虽然不会导致用户线程停顿，但是会因为占用了一部分线程而导致应用程序变慢，总吞吐量会降低。一种 <code>CMS 收集器</code> 的变种 <code>增量式并发收集器（Incremental Concurrent Mark Sweep / i-CMS）</code> 可以解决这个问题，其在操作系统中使用 <code>抢占式</code> 来模拟多任务机制的思想，在并发标记、清理的时候让 GC 线程、用户线程交替运行，尽量减少 GC 线程的独占资源的时间，让整个垃圾收集的过程变长。但在目前的版本中，该变种已经不提倡用户使用。</li>
 <li><code>CMS 收集器</code> 无法处理浮动垃圾（Floating Garbage），可能会出现 <code>Concurrent Mode Failure</code> 失败而导致另一次 Full GC 产生。由于 <code>CMS 收集器</code> 不是独占式的收集器，在 CMS 收集过程中，应用程序仍然在不停地工作。在应用程序工作过程中，又会不断地产生垃圾。这些新生成的垃圾在当前 CMS 收集过程中是无法清除的。同时，因为应用程序没有中断，所以在 CMS 收集过程中，还应该确保应用程序有足够的内存可用。因此，<code>CMS 收集器</code> 不会等待堆内存饱和时才进行垃圾收集，而是当前堆内存使用率达到某一阈值时，便开始进行收集，以确保应用程序在 CMS 工作过程中依然有足够的空间支持应用程序运行。</li>
-<li><code>CMS 收集器</code> 由于采用了 <code>标记-清除</code> 算法，因此收集结束时会有大量空间碎片产生，离散的可用空间无法分配较大的对象。在这种情况下，即使堆内存仍然有较大的剩余空间，也可能会被迫进行一次垃圾回收，以换取一块可用的连续内存，这种现象对系统性能是相当不利的，为了解决这个问题，CMS 收集器还提供了几个用于内存压缩整理的参数设置。
-
-<ul>
+<li><code>CMS 收集器</code> 由于采用了 <code>标记-清除</code> 算法，因此收集结束时会有大量空间碎片产生，离散的可用空间无法分配较大的对象。在这种情况下，即使堆内存仍然有较大的剩余空间，也可能会被迫进行一次垃圾回收，以换取一块可用的连续内存，这种现象对系统性能是相当不利的，为了解决这个问题，CMS 收集器还提供了几个用于内存压缩整理的参数设置。</li>
 <li><code>-XX:+UseCMSCompactAtFullCollection</code> 参数可以使 CMS 在垃圾收集完成后，进行一次内存碎片整理，内存碎片的整理并不是并发进行的。</li>
 <li><code>-XX:CMSFullGCsBeforeCompaction</code> 参数可以用于设定进行多少次 CMS 回收后，进行一次内存压缩。</li>
-</ul></li>
 </ul>
-
 <blockquote>
 <p><strong>Minor GC</strong>：指新生代 GC，即发生在新生代的垃圾回收动作。由于 Java 对象大多都具备朝生夕灭的特性，所以 Minor GC 非常频繁，回收速度也比较快。</p>
-
+</blockquote>
+<blockquote>
 <p><strong>Major GC / Full GC</strong>：指老年代 GC，如果出现了 Major GC，则至少会出现一次 Minor GC。但 Major GC 的速度一般比 Minor GC 慢 10 倍以上。</p>
 </blockquote>
-
 <h2 id="g1-收集器">G1 收集器</h2>
-
 <p><code>G1</code> 是面向服务端应用的垃圾收集器，其有以下特点：</p>
-
 <ul>
 <li>多线程高并行度，能与用户线程共存的并发能力。即使用多个 CPU 来缩短 <code>Stop The World</code> 停顿的时间，通过并发的方式让 Java 程序继续执行。</li>
 <li>分代收集，并且可以不与其他的收集器配合，独自管理整个堆。</li>
 <li>不会产生空间碎片。从整体上看，基于 <code>标记-整理</code> 算法；从局部上看，基于 <code>复制</code> 算法。</li>
 <li>可预测的停顿。<code>G1</code> 除了追求低停顿以外，还能建立 <code>可预测的停顿时间模型</code>，能然使用者明确指定一个长度在 M 毫秒的时间片段内，消耗在垃圾收集上的时间不得超过 N 毫秒。</li>
 </ul>
-
 <p>与其它收集器不同的是，<code>G1</code> 将内存划分为多个独立 <code>区域（Region）</code>，保留新生代、老生代概念，不过不再是物理隔绝，都只是一些 <code>Region</code> 的集合。</p>
-
 <p><code>G1</code> 收集器之所以能够建立 <code>可预测的停顿时间模型</code>，是因为其跟踪各个 Region 里面的垃圾堆积的价值大小，维护了一个 <code>优先列表</code>，保证在允许的收集时间优先回收价值最大的 Region。</p>
-
 <p>为了避免全堆扫描，在 <code>G1</code> 收集器的 Region 之间的对象引用以及其它收集器的新生代和老年代之间的对象引用，都使用的是 <code>Remembered Set</code>。对每个 Region 维护一个引用缓存 <code>Rememberd Set</code> 来提高 <code>GC Root Tracing</code> 的效率。</p>
-
 <p>如果没有 <code>Rememberd Set</code> 操作的话，<code>G1</code> 收集器的运作步骤如下：</p>
-
 <ul>
 <li>初始标记（Initial Marking），标记一下 GC Root 关联的对象，并且修改 <code>Next top at Mark Start</code> 的值。</li>
 <li>并发标记（Concurrent Marking），进行 <code>GC Roots Tracing</code>，即可达性分析。</li>
 <li>最终标记（Final Marking），修正并发标记期间因用户程序继续运作而导致标记的变动，更新记录在 <code>Remembered Set Logs</code> 中，需要合并到 <code>Remembered Set</code> 中。</li>
 <li>筛选回收（Live Data Counting and Evacuation），对 Region 进行回收价值和成本排序，根据用户制定的 GC 停顿时间来制定计划。</li>
 </ul>
-
 <p>运行示意图如下所示：</p>
-
-<p><center>
-<img src="https://i.loli.net/2019/11/25/7kvL1X9HYEbDeAS.png" alt="image.png" />
-</center></p>
-
+<!-- raw HTML omitted -->
 <h1 id="内存分配策略">内存分配策略</h1>
-
 <h2 id="对象优先在-eden-分配">对象优先在 Eden 分配</h2>
-
 <p>当 Eden 区域没有足够的空间进行分配的时候，虚拟机将进行一次 <code>Minor GC</code>，即进行一次发生在新生代的垃圾收集动作。</p>
-
 <h2 id="大对象直接进入老年代">大对象直接进入老年代</h2>
-
 <p>即 <strong>大量连续空间内存的 Java 对象</strong> 直接进入老年代，常见的大对象有很长的字符串和数组。</p>
-
 <p>虚拟机提供了 <code>-XX:PretenureSizeThreshold</code> 参数，大于这个参数的对象直接进入老年代，避免在 Eden 和两个 Survivor 之间发生大量的内存复制。</p>
-
 <p>##　长期存活的对象将进入老年代
 分代收集的思想就是能够分别哪些对象应该放在新生代，哪些对象应该放在老年代。可以通过个每个对象定义一个 <code>对象年龄计数器</code>。如果对象在 Eden 区域出生并经过一次 Minor GC 后仍然存活，并能被 Survivor 容纳的话，则将被移动到 Survivor 空间中，同时 <code>对象年龄</code> 置为 1。默认经过15次 Minor GC 就能进入老年代。</p>
-
 <p>可通过 <code>-XX:MaxTenuringThreshold</code> 参数设置晋升老年代的年龄阈值。</p>
-
 <h2 id="动态对象年龄判断">动态对象年龄判断</h2>
-
 <p>如果在 Survivor 空间中相同年龄所有对象大小的总和大于 Survivor 空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，无需等到 <code>MaxTenuringThreshold</code> 中要求的年龄。</p>
-
 <h2 id="空间分配担保">空间分配担保</h2>
-
 <p>在发生 Minor GC 之前，虚拟机会检查老年代最大可用的连续空间是否大于新生代所有的空间：</p>
-
 <ul>
 <li>如果大于，则 Minor GC 是安全的。</li>
 <li>如果不大于，则虚拟机会查看 <code>HandlePromotionFailure</code> 设置的值是否允许担保失败：
-
 <ul>
 <li>如果允许，则继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小：
-
 <ul>
 <li>如果大于，则尝试进行 Minor GC；</li>
 <li>如果小于或 <code>HandlePromotionFailure</code> 设置的值不允许冒这个险的话，则进行 Full GC。</li>
-</ul></li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
+</li>
+</ul>
 <p>但是，JDK6 Update 24 以后取消了该设置，即只要老年代连续空间大于新生代对象总大小或者历次晋升的平均大小就会进行 Minor GC，否则进行 Full GC。</p>
-
 <h1 id="参考">参考</h1>
-
 <ul>
 <li><a href="https://docs.oracle.com/javase/9/gctuning/available-collectors.htm#JSGCT-GUID-F215A508-9E58-40B4-90A5-74E29BF3BD3C">Available Collectors</a></li>
 <li>图片来源：<a href="https://crowhawk.github.io/2017/08/15/jvm_3/">深入理解JVM(3)——7种垃圾收集器</a></li>

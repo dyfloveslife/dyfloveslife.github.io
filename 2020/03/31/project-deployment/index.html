@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/03/31/project-deployment/" />
@@ -41,21 +41,15 @@
 <meta property="og:title" content="项目部署小结" />
 <meta property="og:description" content="之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2020/03/31/project-deployment/" />
-<meta property="article:published_time" content="2020-03-31T09:03:11+08:00" />
-<meta property="article:modified_time" content="2020-03-31T09:03:11+08:00" />
+<meta property="og:url" content="http://localhost:1313/2020/03/31/project-deployment/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-03-31T09:03:11&#43;08:00" />
+<meta property="article:modified_time" content="2020-03-31T09:03:11&#43;08:00" />
+
 <meta itemprop="name" content="项目部署小结">
-<meta itemprop="description" content="之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑">
-
-
-<meta itemprop="datePublished" content="2020-03-31T09:03:11&#43;08:00" />
+<meta itemprop="description" content="之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑"><meta itemprop="datePublished" content="2020-03-31T09:03:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-31T09:03:11&#43;08:00" />
 <meta itemprop="wordCount" content="3095">
-
-
-
-<meta itemprop="keywords" content="项目," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="项目," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="项目部署小结"/>
 <meta name="twitter:description" content="之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑"/>
 
@@ -141,56 +135,41 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#安装-java">安装 Java</a></li>
-<li><a href="#安装-tomcat">安装 Tomcat</a></li>
-<li><a href="#防火墙及端口">防火墙及端口</a></li>
-<li><a href="#测试">测试</a></li>
-<li><a href="#安装-maven">安装 Maven</a></li>
-<li><a href="#安装与设置-mysql">安装与设置 MySQL</a>
-<ul>
-<li><a href="#导入初始化数据">导入初始化数据</a></li>
-</ul></li>
-<li><a href="#安装-redis">安装 Redis</a></li>
-<li><a href="#安装-kafka">安装 Kafka</a></li>
-<li><a href="#安装-elasticsearch">安装 Elasticsearch</a></li>
-</ul>
+  <ul>
+    <li><a href="#导入初始化数据">导入初始化数据</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑，仅供参考。</p>
-
+      <p>之前做的项目都是跑在本地的虚拟机上的，想到在腾讯云上还有一台云服务器，于是便打算将其部署到云服务器上，本文会涉及到一些部署上的流程以及一些坑，仅供参考。</p>
 <h1 id="安装-java">安装 Java</h1>
-
 <p>首先需要在服务器上安装 Java，这样 Web 应用程序才能才其上面执行。由于使用的是 CentOS7，因此可以使用以下命令安装 OpenJDK 7：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">yum -y install java-1.8.0-openjdk-devel</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">yum -y install java-1.8.0-openjdk-devel
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>安装完以后，Java 以及 jre 就会被安装在以下目录：</p>
+</div><p>安装完以后，Java 以及 jre 就会被安装在以下目录：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/bin/java
 
-/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/jre/bin/java</code></pre></td></tr></table>
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/jre/bin/java
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>现在需要配置环境变量<code>$PATH</code>，直接执行<code>vim /etc/profile</code>命令，编辑其中的<code>export</code>。需要修改的地方已在下方标出，其中<code>JAVA_HOME</code>就是上面的 Java 根路径，这里根据自己机器的情况而定。<code>PATH</code>指明 Java 根路径下面的<code>/bin</code> 和<code>/jre</code>文件，相应的也将<code>CLASSPATH</code>指定到<code>/lib</code>和<code>/jre</code>。</p>
+</div><p>现在需要配置环境变量<code>$PATH</code>，直接执行<code>vim /etc/profile</code>命令，编辑其中的<code>export</code>。需要修改的地方已在下方标出，其中<code>JAVA_HOME</code>就是上面的 Java 根路径，这里根据自己机器的情况而定。<code>PATH</code>指明 Java 根路径下面的<code>/bin</code> 和<code>/jre</code>文件，相应的也将<code>CLASSPATH</code>指定到<code>/lib</code>和<code>/jre</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -294,7 +273,7 @@
     pathmunge /usr/sbin after
 <span class="k">fi</span>
 
-<span class="nv">HOSTNAME</span><span class="o">=</span><span class="sb">`</span>/usr/bin/hostname <span class="m">2</span>&gt;/dev/null<span class="sb">`</span>
+<span class="nv">HOSTNAME</span><span class="o">=</span><span class="sb">`</span>/usr/bin/hostname 2&gt;/dev/null<span class="sb">`</span>
 <span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$HISTCONTROL</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;ignorespace&#34;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
     <span class="nb">export</span> <span class="nv">HISTCONTROL</span><span class="o">=</span>ignoreboth
 <span class="k">else</span>
@@ -327,13 +306,13 @@
 <span class="k">done</span>
 
 <span class="nb">unset</span> i
-<span class="nb">unset</span> -f pathmunge</code></pre></td></tr></table>
+<span class="nb">unset</span> -f pathmunge
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>编辑好文件后，需要执行<code>source /etc/profile</code>命令，以便更新<code>profile</code>文件。然后输入<code>java -version</code>即可看到 Java 安装成功：</p>
+</div><p>编辑好文件后，需要执行<code>source /etc/profile</code>命令，以便更新<code>profile</code>文件。然后输入<code>java -version</code>即可看到 Java 安装成功：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -342,65 +321,59 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># java -version</span>
 openjdk version <span class="s2">&#34;1.8.0_242&#34;</span>
-OpenJDK Runtime Environment <span class="o">(</span>build <span class="m">1</span>.8.0_242-b08<span class="o">)</span>
-OpenJDK <span class="m">64</span>-Bit Server VM <span class="o">(</span>build <span class="m">25</span>.242-b08, mixed mode<span class="o">)</span>
-<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span># </code></pre></td></tr></table>
+OpenJDK Runtime Environment <span class="o">(</span>build 1.8.0_242-b08<span class="o">)</span>
+OpenJDK 64-Bit Server VM <span class="o">(</span>build 25.242-b08, mixed mode<span class="o">)</span>
+<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="安装-tomcat">安装 Tomcat</h1>
-
+</div><h1 id="安装-tomcat">安装 Tomcat</h1>
 <p>我这里选择的版本是<a href="https://tomcat.apache.org/download-80.cgi">Tomcat 8.5.53</a>，下载<code>tar.gz</code>文件后通过<a href="https://filezilla-project.org/">FileZilla</a>将安装包传输到云服务器。然后解压该文件：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">tar -zxvf apache-tomcat-8.5.53.tar.gz</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">tar -zxvf apache-tomcat-8.5.53.tar.gz
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>再将该文件重新命名为<code>tomcat</code>：</p>
+</div><p>再将该文件重新命名为<code>tomcat</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mv apache-tomcat-8.5.53.tar.gz tomcat</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">mv apache-tomcat-8.5.53.tar.gz tomcat
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="防火墙及端口">防火墙及端口</h1>
-
+</div><h1 id="防火墙及端口">防火墙及端口</h1>
 <p>这里需要注意的是：在防火墙开启之前，需要确认是否已经将<code>8080</code>端口打开。因为我们是通过<code>http://ip:8080</code>来访问网址，即通过 ip 地址加端口号的方式来访问。</p>
-
 <p>可使用如下命令查看当前所有的端口号：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">netstat -ntlp</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">netstat -ntlp
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如果发现没有开启<code>8080</code>端口的话，则需要在防火墙设置一下：</p>
+</div><p>如果发现没有开启<code>8080</code>端口的话，则需要在防火墙设置一下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">firewall-cmd --zone<span class="o">=</span>public --permanent --add-port<span class="o">=</span><span class="m">8080</span>/tcp
-firewall-cmd --reload</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">firewall-cmd --zone<span class="o">=</span>public --permanent --add-port<span class="o">=</span>8080/tcp
+firewall-cmd --reload
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>此外，还需要将云服务器安全组中的<code>8080</code>端口打开，如下所示：</p>
-
-<p><img src="https://i.loli.net/2020/03/31/jWxFd9zip2s64OX.png" alt="image.png" /></p>
-
+</div><p>此外，还需要将云服务器安全组中的<code>8080</code>端口打开，如下所示：</p>
+<p><img src="https://i.loli.net/2020/03/31/jWxFd9zip2s64OX.png" alt="image.png"></p>
 <h1 id="测试">测试</h1>
-
 <p>在<code>tomcat</code>目录下的<code>bin</code>文件中，有启动和关闭 tomcat 服务的命令，分别为<code>startup.sh</code>和<code>shutdown.sh</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -431,37 +404,37 @@ firewall-cmd --reload</code></pre></td></tr></table>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos bin<span class="o">]</span><span class="c1"># ll</span>
 total <span class="m">860</span>
--rwxrwxrwx <span class="m">1</span> root root  <span class="m">35204</span> Mar <span class="m">11</span> <span class="m">18</span>:04 bootstrap.jar
--rwxrwxrwx <span class="m">1</span> root root  <span class="m">15953</span> Mar <span class="m">11</span> <span class="m">18</span>:04 catalina.bat
--rwxrwxrwx <span class="m">1</span> root root  <span class="m">23792</span> Mar <span class="m">11</span> <span class="m">18</span>:04 catalina.sh
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">1664</span> Mar <span class="m">11</span> <span class="m">18</span>:06 catalina-tasks.xml
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">2123</span> Mar <span class="m">11</span> <span class="m">18</span>:04 ciphers.bat
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">1997</span> Mar <span class="m">11</span> <span class="m">18</span>:04 ciphers.sh
--rwxrwxrwx <span class="m">1</span> root root  <span class="m">25197</span> Mar <span class="m">11</span> <span class="m">18</span>:04 commons-daemon.jar
--rwxrwxrwx <span class="m">1</span> root root <span class="m">206895</span> Mar <span class="m">11</span> <span class="m">18</span>:04 commons-daemon-native.tar.gz
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">2040</span> Mar <span class="m">11</span> <span class="m">18</span>:04 configtest.bat
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">1922</span> Mar <span class="m">11</span> <span class="m">18</span>:04 configtest.sh
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">8675</span> Mar <span class="m">11</span> <span class="m">18</span>:04 daemon.sh
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">2091</span> Mar <span class="m">11</span> <span class="m">18</span>:04 digest.bat
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">1965</span> Mar <span class="m">11</span> <span class="m">18</span>:04 digest.sh
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">3460</span> Mar <span class="m">11</span> <span class="m">18</span>:04 setclasspath.bat
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">3708</span> Mar <span class="m">11</span> <span class="m">18</span>:04 setclasspath.sh
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">2020</span> Mar <span class="m">11</span> <span class="m">18</span>:04 shutdown.bat
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">1902</span> Mar <span class="m">11</span> <span class="m">18</span>:04 shutdown.sh
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">2022</span> Mar <span class="m">11</span> <span class="m">18</span>:04 startup.bat
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">1904</span> Mar <span class="m">11</span> <span class="m">18</span>:04 startup.sh
--rwxrwxrwx <span class="m">1</span> root root  <span class="m">51264</span> Mar <span class="m">11</span> <span class="m">18</span>:04 tomcat-juli.jar
--rwxrwxrwx <span class="m">1</span> root root <span class="m">419428</span> Mar <span class="m">11</span> <span class="m">18</span>:04 tomcat-native.tar.gz
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">4574</span> Mar <span class="m">11</span> <span class="m">18</span>:04 tool-wrapper.bat
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">5540</span> Mar <span class="m">11</span> <span class="m">18</span>:04 tool-wrapper.sh
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">2026</span> Mar <span class="m">11</span> <span class="m">18</span>:04 version.bat
--rwxrwxrwx <span class="m">1</span> root root   <span class="m">1908</span> Mar <span class="m">11</span> <span class="m">18</span>:04 version.sh</code></pre></td></tr></table>
+-rwxrwxrwx <span class="m">1</span> root root  <span class="m">35204</span> Mar <span class="m">11</span> 18:04 bootstrap.jar
+-rwxrwxrwx <span class="m">1</span> root root  <span class="m">15953</span> Mar <span class="m">11</span> 18:04 catalina.bat
+-rwxrwxrwx <span class="m">1</span> root root  <span class="m">23792</span> Mar <span class="m">11</span> 18:04 catalina.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1664</span> Mar <span class="m">11</span> 18:06 catalina-tasks.xml
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2123</span> Mar <span class="m">11</span> 18:04 ciphers.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1997</span> Mar <span class="m">11</span> 18:04 ciphers.sh
+-rwxrwxrwx <span class="m">1</span> root root  <span class="m">25197</span> Mar <span class="m">11</span> 18:04 commons-daemon.jar
+-rwxrwxrwx <span class="m">1</span> root root <span class="m">206895</span> Mar <span class="m">11</span> 18:04 commons-daemon-native.tar.gz
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2040</span> Mar <span class="m">11</span> 18:04 configtest.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1922</span> Mar <span class="m">11</span> 18:04 configtest.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">8675</span> Mar <span class="m">11</span> 18:04 daemon.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2091</span> Mar <span class="m">11</span> 18:04 digest.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1965</span> Mar <span class="m">11</span> 18:04 digest.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">3460</span> Mar <span class="m">11</span> 18:04 setclasspath.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">3708</span> Mar <span class="m">11</span> 18:04 setclasspath.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2020</span> Mar <span class="m">11</span> 18:04 shutdown.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1902</span> Mar <span class="m">11</span> 18:04 shutdown.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2022</span> Mar <span class="m">11</span> 18:04 startup.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1904</span> Mar <span class="m">11</span> 18:04 startup.sh
+-rwxrwxrwx <span class="m">1</span> root root  <span class="m">51264</span> Mar <span class="m">11</span> 18:04 tomcat-juli.jar
+-rwxrwxrwx <span class="m">1</span> root root <span class="m">419428</span> Mar <span class="m">11</span> 18:04 tomcat-native.tar.gz
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">4574</span> Mar <span class="m">11</span> 18:04 tool-wrapper.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">5540</span> Mar <span class="m">11</span> 18:04 tool-wrapper.sh
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">2026</span> Mar <span class="m">11</span> 18:04 version.bat
+-rwxrwxrwx <span class="m">1</span> root root   <span class="m">1908</span> Mar <span class="m">11</span> 18:04 version.sh
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>此时，执行<code>./startup.sh</code>即可启动 tomcat 服务器，如下所示：</p>
+</div><p>此时，执行<code>./startup.sh</code>即可启动 tomcat 服务器，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -470,45 +443,41 @@ total <span class="m">860</span>
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos bin<span class="o">]</span><span class="c1"># ./startup.sh</span> 
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos bin<span class="o">]</span><span class="c1"># ./startup.sh </span>
 Using CATALINA_BASE:   /home/carol/tomcat
 Using CATALINA_HOME:   /home/carol/tomcat
 Using CATALINA_TMPDIR: /home/carol/tomcat/temp
 Using JRE_HOME:        /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre/bin/java
 Using CLASSPATH:       /home/carol/tomcat/bin/bootstrap.jar:/home/carol/tomcat/bin/tomcat-juli.jar
-Tomcat started.</code></pre></td></tr></table>
+Tomcat started.
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>通过以下命令可以查看 tomcat 是否处于开启状态：</p>
+</div><p>通过以下命令可以查看 tomcat 是否处于开启状态：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ps -ef <span class="p">|</span> grep tomcat</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">ps -ef <span class="p">|</span> grep tomcat
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>然后就可以通过<code>http://ip:8080</code>的方式在浏览器中打开 tomcat 默认的界面了，如下所示：</p>
-
-<p><img src="https://i.loli.net/2020/03/31/eXPKVwFtYUqoShM.png" alt="image.png" /></p>
-
+</div><p>然后就可以通过<code>http://ip:8080</code>的方式在浏览器中打开 tomcat 默认的界面了，如下所示：</p>
+<p><img src="https://i.loli.net/2020/03/31/eXPKVwFtYUqoShM.png" alt="image.png"></p>
 <h1 id="安装-maven">安装 Maven</h1>
-
 <p>在 Maven 官网<a href="https://maven.apache.org/download.cgi">下载</a>相应的安装包，解压后即可。解压完成以后，需要在<code>/etc/profile</code>中配置 Maven 的环境变量，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>:<span class="nv">$PATH</span>:/opt/apache-maven-3.6.3/bin</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>:<span class="nv">$PATH</span>:/opt/apache-maven-3.6.3/bin
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>最后，使用<code>source /etc/profile</code>命令让文件生效。</p>
-
+</div><p>最后，使用<code>source /etc/profile</code>命令让文件生效。</p>
 <p>此时，使用<code>mvn --version</code>可以看到已经安装成功了，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -518,18 +487,18 @@ Tomcat started.</code></pre></td></tr></table>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># mvn --version</span>
-Apache Maven <span class="m">3</span>.6.3 <span class="o">(</span>cecedd343002696d0abb50b32b541b8a6ba2883f<span class="o">)</span>
+Apache Maven 3.6.3 <span class="o">(</span>cecedd343002696d0abb50b32b541b8a6ba2883f<span class="o">)</span>
 Maven home: /opt/apache-maven-3.6.3
-Java version: <span class="m">1</span>.8.0_242, vendor: Oracle Corporation, runtime: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/jre
+Java version: 1.8.0_242, vendor: Oracle Corporation, runtime: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64/jre
 Default locale: en_US, platform encoding: UTF-8
 OS name: <span class="s2">&#34;linux&#34;</span>, version: <span class="s2">&#34;3.10.0-1062.1.2.el7.x86_64&#34;</span>, arch: <span class="s2">&#34;amd64&#34;</span>, family: <span class="s2">&#34;unix&#34;</span>
-<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span># </code></pre></td></tr></table>
+<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>可以看到 Maven 被安装在<code>/opt/apache-maven-3.6.3</code>下，我们修改一下<code>/opt/apache-maven-3.6.3/conf</code>配置文件<code>settings.xml</code>中的镜像，使用阿里云的镜像，这样的话，Maven 会使用国内镜像来下载相关的依赖，速度要快一些。如下所示：</p>
+</div><p>可以看到 Maven 被安装在<code>/opt/apache-maven-3.6.3</code>下，我们修改一下<code>/opt/apache-maven-3.6.3/conf</code>配置文件<code>settings.xml</code>中的镜像，使用阿里云的镜像，这样的话，Maven 会使用国内镜像来下载相关的依赖，速度要快一些。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -540,34 +509,29 @@ OS name: <span class="s2">&#34;linux&#34;</span>, version: <span class="s2">&#34
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="o">&lt;</span><span class="n">mirror</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">id</span><span class="o">&gt;</span><span class="n">alimaven</span><span class="o">&lt;/</span><span class="n">id</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">mirrorOf</span><span class="o">&gt;</span><span class="n">central</span><span class="o">&lt;/</span><span class="n">mirrorOf</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="err">name&gt;aliyun maven</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="n">aliyun</span> <span class="n">maven</span><span class="o">&lt;/</span><span class="n">name</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">url</span><span class="o">&gt;</span><span class="n">https</span><span class="o">:</span><span class="c1">//maven.aliyun.com/repository/central&lt;/url&gt;
-</span><span class="c1"></span><span class="o">&lt;/</span><span class="n">mirror</span><span class="o">&gt;</span></code></pre></td></tr></table>
+</span><span class="c1"></span><span class="o">&lt;/</span><span class="n">mirror</span><span class="o">&gt;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="安装与设置-mysql">安装与设置 MySQL</h1>
-
+</div><h1 id="安装与设置-mysql">安装与设置 MySQL</h1>
 <p>在 MySQL 官网<a href="https://dev.mysql.com/downloads/repo/yum/">下载</a>相应的安装包，我这里下载的是<code>mysql80-community-release-el7-3.noarch.rpm</code>。</p>
-
 <p>这里遇到了一些坑，主要是使用<code>yum install mysql80-community-release-el7-3.noarch.rpm</code>后，提示<code>Nothing to do.</code>。然后直接执行以下命令就可以安装 MySQL 的客户端和服务端了：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">yum install mysql-server</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">yum install mysql-server
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如下所示：</p>
-
-<p><img src="https://i.loli.net/2020/03/31/HPBg3A1nNjrFTv9.png" alt="image.png" /></p>
-
+</div><p>如下所示：</p>
+<p><img src="https://i.loli.net/2020/03/31/HPBg3A1nNjrFTv9.png" alt="image.png"></p>
 <p>当然，此过程网速很慢，因此我将<code>server</code>包单独下载下来，通过<a href="https://filezilla-project.org/">FileZilla</a>将安装包传输到云服务器之后，再执行<code>yum localinstall mysql-community-server.x86_64 0:8.0.19-1.el7</code>即可安装。</p>
-
 <p>安装好以后，通过<code>systemctl state mysqld</code>启动 MySQL 服务器，然后通过<code>systemctl status mysqld</code>查看 MySQL 的运行状态，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -589,77 +553,75 @@ OS name: <span class="s2">&#34;linux&#34;</span>, version: <span class="s2">&#34
 <span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># systemctl status mysqld</span>
 ● mysqld.service - MySQL Server
    Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/mysqld.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
-   Active: active <span class="o">(</span>running<span class="o">)</span> since Tue <span class="m">2020</span>-03-31 <span class="m">16</span>:15:37 CST<span class="p">;</span> 22s ago
-     Docs: man:mysqld<span class="o">(</span><span class="m">8</span><span class="o">)</span>
+   Active: active <span class="o">(</span>running<span class="o">)</span> since Tue 2020-03-31 16:15:37 CST<span class="p">;</span> 22s ago
+     Docs: man:mysqld<span class="o">(</span>8<span class="o">)</span>
            http://dev.mysql.com/doc/refman/en/using-systemd.html
-  Process: <span class="m">2377</span> <span class="nv">ExecStartPre</span><span class="o">=</span>/usr/bin/mysqld_pre_systemd <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span><span class="m">0</span>/SUCCESS<span class="o">)</span>
+  Process: <span class="m">2377</span> <span class="nv">ExecStartPre</span><span class="o">=</span>/usr/bin/mysqld_pre_systemd <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
  Main PID: <span class="m">2491</span> <span class="o">(</span>mysqld<span class="o">)</span>
    Status: <span class="s2">&#34;Server is operational&#34;</span>
    CGroup: /system.slice/mysqld.service
            └─2491 /usr/sbin/mysqld
 
-Mar <span class="m">31</span> <span class="m">16</span>:15:24 VM_0_4_centos systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Starting MySQL Server...
-Mar <span class="m">31</span> <span class="m">16</span>:15:37 VM_0_4_centos systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Started MySQL Server.
-<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span># </code></pre></td></tr></table>
+Mar <span class="m">31</span> 16:15:24 VM_0_4_centos systemd<span class="o">[</span>1<span class="o">]</span>: Starting MySQL Server...
+Mar <span class="m">31</span> 16:15:37 VM_0_4_centos systemd<span class="o">[</span>1<span class="o">]</span>: Started MySQL Server.
+<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>启动成功后，通过以下命令查看 MySQL 默认的密码，准备将其进行修改。因为 MySQL 的默认密码是一串乱序的字符，所以这里最好修改其密码。</p>
+</div><p>启动成功后，通过以下命令查看 MySQL 默认的密码，准备将其进行修改。因为 MySQL 的默认密码是一串乱序的字符，所以这里最好修改其密码。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">grep <span class="s1">&#39;password&#39;</span> /var/log/mysqld.log</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">grep <span class="s1">&#39;password&#39;</span> /var/log/mysqld.log
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>得到的密码为：<code>)egJaoLgh7pH</code>，然后登录到 MySQL 服务器，进行修改：</p>
+</div><p>得到的密码为：<code>)egJaoLgh7pH</code>，然后登录到 MySQL 服务器，进行修改：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mysql -u root -p</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">mysql -u root -p
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>然后输入以下命令设置一个新的密码，需要注意的是：这里的面应包含大小写字母、特殊符号以及数字，如下所示：</p>
+</div><p>然后输入以下命令设置一个新的密码，需要注意的是：这里的面应包含大小写字母、特殊符号以及数字，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">alter user root@localhost identified by <span class="s1">&#39;New_password123&#39;</span><span class="p">;</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">alter user root@localhost identified by <span class="s1">&#39;New_password123&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="导入初始化数据">导入初始化数据</h2>
-
+</div><h2 id="导入初始化数据">导入初始化数据</h2>
 <p>这里使用自己<a href="https://github.com/dyfloveslife/SSM-nowcoder">项目</a>中的初始数据，将 MySQL 建表文件传输到云服务器，然后解压即可。</p>
-
 <p>通过<code>unzip</code>命令解压后缀为<code>*.zip</code>的压缩包，将其解压到<code>/root</code>目录下。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">unzip -d /root *.zip</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">unzip -d /root *.zip
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>进入 MySQL 后创建一个数据库，然后使用该数据库，如下所示：</p>
+</div><p>进入 MySQL 后创建一个数据库，然后使用该数据库，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">create databse community<span class="p">;</span>
 
-use community<span class="p">;</span></code></pre></td></tr></table>
+use community<span class="p">;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>执行 sql 语句，将初始数据进行初始化：</p>
+</div><p>执行 sql 语句，将初始数据进行初始化：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -670,30 +632,28 @@ use community<span class="p">;</span></code></pre></td></tr></table>
 
 <span class="nb">source</span> /root/community-init-sql-1.5/init_data.sql<span class="p">;</span>
 
-<span class="nb">source</span> /root/community-init-sql-1.5/tables_mysql_innodb.sql<span class="p">;</span></code></pre></td></tr></table>
+<span class="nb">source</span> /root/community-init-sql-1.5/tables_mysql_innodb.sql<span class="p">;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>通过<code>show tables;</code>查看已创建的表数据。</p>
-
+</div><p>通过<code>show tables;</code>查看已创建的表数据。</p>
 <h1 id="安装-redis">安装 Redis</h1>
-
 <p>通过<code>yum list redis*</code>查看可用的 Redis 版本，选择<code>redis.x86_64</code>进行安装即可。安装完成后，启动 Redis，并查看其运行状态。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">systemctl start redis<span class="p">;</span>
 
-systemctl status redis<span class="p">;</span></code></pre></td></tr></table>
+systemctl status redis<span class="p">;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>结果如下所示：</p>
+</div><p>结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -715,68 +675,66 @@ systemctl status redis<span class="p">;</span></code></pre></td></tr></table>
    Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/redis.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
   Drop-In: /etc/systemd/system/redis.service.d
            ©¸©¤limit.conf
-   Active: active <span class="o">(</span>running<span class="o">)</span> since Tue <span class="m">2020</span>-03-31 <span class="m">16</span>:53:48 CST<span class="p">;</span> 9s ago
+   Active: active <span class="o">(</span>running<span class="o">)</span> since Tue 2020-03-31 16:53:48 CST<span class="p">;</span> 9s ago
  Main PID: <span class="m">10234</span> <span class="o">(</span>redis-server<span class="o">)</span>
    CGroup: /system.slice/redis.service
-           ©¸©¤10234 /usr/bin/redis-server <span class="m">127</span>.0.0.1:6379
+           ©¸©¤10234 /usr/bin/redis-server 127.0.0.1:6379
 
-Mar <span class="m">31</span> <span class="m">16</span>:53:48 VM_0_4_centos systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Starting Redis persistent key-value database...
-Mar <span class="m">31</span> <span class="m">16</span>:53:48 VM_0_4_centos systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>: Started Redis persistent key-value database.
-<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span># </code></pre></td></tr></table>
+Mar <span class="m">31</span> 16:53:48 VM_0_4_centos systemd<span class="o">[</span>1<span class="o">]</span>: Starting Redis persistent key-value database...
+Mar <span class="m">31</span> 16:53:48 VM_0_4_centos systemd<span class="o">[</span>1<span class="o">]</span>: Started Redis persistent key-value database.
+<span class="o">[</span>root@VM_0_4_centos ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="安装-kafka">安装 Kafka</h1>
-
+</div><h1 id="安装-kafka">安装 Kafka</h1>
 <p>将压缩包<code>kafka_2.12-2.2.0.tgz</code>进行加压到<code>/opt</code>下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">tar -zxvf kafka_2.12-2.2.0.tgz -C /opt</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">tar -zxvf kafka_2.12-2.2.0.tgz -C /opt
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>通过后台的方式先启动 zookeeper，再启动 Kafa：</p>
+</div><p>通过后台的方式先启动 zookeeper，再启动 Kafa：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">bin/zookeeper-server-start.sh -daemon config/zookeeper.properties 
 
-nohup bin/kafka-server-start.sh config/server.properties <span class="m">1</span>&gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span></code></pre></td></tr></table>
+nohup bin/kafka-server-start.sh config/server.properties 1&gt;/dev/null 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>通过查看 Kafka 下的主题，来判断是否启动成功：</p>
+</div><p>通过查看 Kafka 下的主题，来判断是否启动成功：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">./bin/kafka-topics.sh --list --bootstrap-server localhost:9092</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">./bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="安装-elasticsearch">安装 Elasticsearch</h1>
-
+</div><h1 id="安装-elasticsearch">安装 Elasticsearch</h1>
 <p>将压缩包解压到<code>/opt</code>目录下，然后将插件放到<code>/plugins/ik</code>目录下即可。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">tar -zxvf elasticsearch-6.4.3.tar.gz -C /opt/
 
-unzip -d /opt/elasticsearch-6.4.3/plugins/ik elasticsearch-analysis-ik-6.4.3.zip </code></pre></td></tr></table>
+unzip -d /opt/elasticsearch-6.4.3/plugins/ik elasticsearch-analysis-ik-6.4.3.zip 
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>修改 Elasticsearch 的配置文件<code>elasticsearch.yml</code>，修改<code>cluster.name</code>、<code>path.data</code>以及<code>path.logs</code>，如下所示：</p>
+</div><p>修改 Elasticsearch 的配置文件<code>elasticsearch.yml</code>，修改<code>cluster.name</code>、<code>path.data</code>以及<code>path.logs</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -787,56 +745,56 @@ unzip -d /opt/elasticsearch-6.4.3/plugins/ik elasticsearch-analysis-ik-6.4.3.zip
 
 path.data: /tmp/elastic/data
 
-path.logs: /tmp/elastic/logs</code></pre></td></tr></table>
+path.logs: /tmp/elastic/logs
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>修改<code>jvm.options</code>文件，指定 Elasticsearch 启动内存：</p>
+</div><p>修改<code>jvm.options</code>文件，指定 Elasticsearch 启动内存：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">-Xms128m
--Xmx256m</code></pre></td></tr></table>
+-Xmx256m
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>创建新的用户，使用新的用户启动 Elasticsearch：</p>
+</div><p>创建新的用户，使用新的用户启动 Elasticsearch：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos config<span class="o">]</span><span class="c1"># groupadd nowcoder</span>
-<span class="o">[</span>root@VM_0_4_centos config<span class="o">]</span><span class="c1"># useradd nowcoder1 -p 123456 -g nowcoder</span></code></pre></td></tr></table>
+<span class="o">[</span>root@VM_0_4_centos config<span class="o">]</span><span class="c1"># useradd nowcoder1 -p 123456 -g nowcoder</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>给<code>/opt</code>和<code>/tmp</code>目录设置权限，使其<code>nowcoder1</code>能够访问到：</p>
+</div><p>给<code>/opt</code>和<code>/tmp</code>目录设置权限，使其<code>nowcoder1</code>能够访问到：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos opt<span class="o">]</span><span class="c1"># chown -R nowcoder1:nowcoder *</span>
-<span class="o">[</span>root@VM_0_4_centos tmp<span class="o">]</span><span class="c1"># chown -R nowcoder1:nowcoder *</span></code></pre></td></tr></table>
+<span class="o">[</span>root@VM_0_4_centos tmp<span class="o">]</span><span class="c1"># chown -R nowcoder1:nowcoder *</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>切换到 nowcoder1 用户后，启动 Elasticsearch：</p>
+</div><p>切换到 nowcoder1 用户后，启动 Elasticsearch：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@VM_0_4_centos /<span class="o">]</span><span class="c1"># su - nowcoder1</span>
 <span class="o">[</span>nowcoder1@VM_0_4_centos ~<span class="o">]</span>$ <span class="nb">cd</span> /opt/elasticsearch-6.4.3/
-<span class="o">[</span>nowcoder1@VM_0_4_centos elasticsearch-6.4.3<span class="o">]</span>$ ./bin/elasticsearch -d</code></pre></td></tr></table>
+<span class="o">[</span>nowcoder1@VM_0_4_centos elasticsearch-6.4.3<span class="o">]</span>$ ./bin/elasticsearch -d
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>进行到这里的时候，我的云服务器的内存（1G）就已经被使用满了。因此，后序的话会在虚拟机里安装。</p>
+</div><p>进行到这里的时候，我的云服务器的内存（1G）就已经被使用满了。因此，后序的话会在虚拟机里安装。</p>
 
     </div>
 

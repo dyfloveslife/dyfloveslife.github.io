@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/04/08/how-to-distinguish-Aliens-vs-Predators-with-transfer-learning/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="用迁移学习来区分外星人和铁血战士" />
 <meta property="og:description" content="不管是区分外星人和铁血战士，还是对图像进行分类的其他问题，都可以利用机器学习的方法来进行处理，而且使用起来更高效、更有趣。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2019/04/08/how-to-distinguish-Aliens-vs-Predators-with-transfer-learning/" />
-<meta property="article:published_time" content="2019-04-08T08:04:11+08:00" />
-<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2019/04/08/how-to-distinguish-Aliens-vs-Predators-with-transfer-learning/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-04-08T08:04:11&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56&#43;08:00" />
+
 <meta itemprop="name" content="用迁移学习来区分外星人和铁血战士">
-<meta itemprop="description" content="不管是区分外星人和铁血战士，还是对图像进行分类的其他问题，都可以利用机器学习的方法来进行处理，而且使用起来更高效、更有趣。">
-
-
-<meta itemprop="datePublished" content="2019-04-08T08:04:11&#43;08:00" />
+<meta itemprop="description" content="不管是区分外星人和铁血战士，还是对图像进行分类的其他问题，都可以利用机器学习的方法来进行处理，而且使用起来更高效、更有趣。"><meta itemprop="datePublished" content="2019-04-08T08:04:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="2089">
-
-
-
-<meta itemprop="keywords" content="Keras,PyTorch,Machine learning," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Keras,PyTorch,Machine learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="用迁移学习来区分外星人和铁血战士"/>
 <meta name="twitter:description" content="不管是区分外星人和铁血战士，还是对图像进行分类的其他问题，都可以利用机器学习的方法来进行处理，而且使用起来更高效、更有趣。"/>
 
@@ -142,29 +136,16 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#1-准备数据集">1.准备数据集</a></li>
-<li><a href="#2-导入相关依赖">2.导入相关依赖</a></li>
-<li><a href="#3-创建数据生成器">3.创建数据生成器</a></li>
-<li><a href="#4-创建网络">4.创建网络</a></li>
-<li><a href="#5-训练模型">5.训练模型</a></li>
-<li><a href="#6-保存并加载模型">6.保存并加载模型</a>
-<ul>
-<li><a href="#保存">保存</a></li>
-<li><a href="#加载-导入模型">加载（导入模型）</a></li>
-</ul></li>
-<li><a href="#7-对样本测试图像进行预测">7.对样本测试图像进行预测</a></li>
-<li><a href="#总结">总结</a></li>
-<li><a href="#参考">参考</a></li>
-</ul>
+  <ul>
+    <li><a href="#保存">保存</a></li>
+    <li><a href="#加载导入模型">加载（导入模型）</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>不管是区分外星人和铁血战士，还是对图像进行分类的其他问题，都可以利用机器学习的方法来进行处理，而且使用起来更高效、更有趣。</p>
-
 <p>话不多说，本文利用PyTorch这一深度学习框架，来对外星人和铁血战士进行识别分类。主要包括以下几个部分：</p>
-
 <ol>
 <li>准备数据集</li>
 <li>导入相关依赖</li>
@@ -174,55 +155,44 @@
 <li>保存并加载模型</li>
 <li>对样本测试图像进行预测</li>
 </ol>
-
-<h1 id="1-准备数据集">1.准备数据集</h1>
-
+<h1 id="1准备数据集">1.准备数据集</h1>
 <p>数据集无疑就是外星人和铁血战士的图像了，这里使用的都是大约 <code>255×255</code> 像素的图像，你可以从 <a href="https://www.kaggle.com/pmigdal/alien-vs-predator-images">Kaggle</a> 直接下载该数据集。
 该数据集包含两部分：</p>
-
 <ul>
 <li>训练集——包括347张外星人图像，347张铁血战士图像，该训练集用于网络模型的训练。</li>
 <li>验证集——包括100张外星人图像，100张铁血战士图像，该验证集用于检测训练好的模型在以前未见过的数据上的性能好坏(也就是说，用之前训练好的模型来识别一下新的图像，看看该模型训练的效果怎么样)</li>
 </ul>
-
 <p>数据集结构如下所示：</p>
-
 <ul>
 <li>train
-
 <ul>
 <li>alien</li>
 <li>predator</li>
-</ul></li>
-<li>validation
-
-<ul>
-<li>alien</li>
-<li>predator</li>
-</ul></li>
 </ul>
-
-<h1 id="2-导入相关依赖">2.导入相关依赖</h1>
-
+</li>
+<li>validation
+<ul>
+<li>alien</li>
+<li>predator</li>
+</ul>
+</li>
+</ul>
+<h1 id="2导入相关依赖">2.导入相关依赖</h1>
 <p>数据集准备好了之后，先把它放到一边，我们来准备一下用到的环境。</p>
-
 <blockquote>
 <p>文中用到了Keras和PyTorch这两种深度学习框架，都可以实现对图片的分类，我这里就使用PyTorch来进行本次的实验吧。</p>
 </blockquote>
-
 <p>本次实验环境如下所示：</p>
-
 <ul>
 <li>Python-3.6，只要是3.5版本以上都可以</li>
 <li>PyTorch-1.0.1</li>
 <li>torchvision-0.2.2</li>
 <li>jupyter-1.0.1</li>
 </ul>
-
 <p>安装完之后就可以导入相应的模块，在终端运行<code>jupyter notebook demo.ipynb</code>后就可以键入代码了。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -241,45 +211,41 @@
 <span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">transforms</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="kn">as</span> <span class="nn">nn</span>
 <span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
-<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="kn">as</span> <span class="nn">optim</span></code></pre></td></tr></table>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="kn">as</span> <span class="nn">optim</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>当然，你也可以查看一下模块的版本：</p>
+</div><p>当然，你也可以查看一下模块的版本：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span>  <span class="c1"># 输出&#39;1.0.1&#39;</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span>  <span class="c1"># 输出&#39;1.0.1&#39;</span>
+</code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">torchvision</span>
-<span class="n">torchvision</span><span class="o">.</span><span class="n">__version__</span>  <span class="c1"># 输出&#39;0.2.2&#39;</span></code></pre></td></tr></table>
+<span class="n">torchvision</span><span class="o">.</span><span class="n">__version__</span>  <span class="c1"># 输出&#39;0.2.2&#39;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="3-创建数据生成器">3.创建数据生成器</h1>
-
+</div><h1 id="3创建数据生成器">3.创建数据生成器</h1>
 <p>通常情况下，图像不能一次全部加载完，因为这样会占用太多内存空间。因此，这里使用数据生成器批量加载图像，比如说，每次加载32张图像。每次遍历整个数据集的过程称为一个 <code>epoch</code>。</p>
-
 <p>于此同时，使用数据生成器对图像进行预处理，调整图像大小并标准化图像。因为这里使用的是 <a href="http://dgschwend.github.io/netscope/#/preset/resnet-50">ResNet-50</a> 网络，所以要将图片处理成 <code>244×244</code> 像素，带有缩放的颜色通道的图像。此外，在这次实验中，还对图像进行了随机剪切，缩放和水翻转。</p>
-
 <p>以下是创建数据生成器的过程：</p>
-
 <ul>
 <li>从文件中加载数据</li>
 <li>规范化数据（包括训练和验证）</li>
 <li>增加数据（仅用于训练）</li>
 </ul>
-
 <p>代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -362,29 +328,24 @@
                                 <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
                                 <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                                 <span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># for Kaggle</span>
-<span class="p">}</span></code></pre></td></tr></table>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="4-创建网络">4.创建网络</h1>
-
+</div><h1 id="4创建网络">4.创建网络</h1>
 <p>接下来是导入预先训练好的ResNet-50模型，这里仅训练最后两个完全连接（密集）层，并调整最后一层。</p>
-
 <blockquote>
 <p>因为我的笔记本显卡不支持PyTorch的GPU版本，所以就用CPU来跑的代码。</p>
 </blockquote>
-
 <p>步骤如下：</p>
-
 <ul>
 <li>加载预先训练好的网络，切断头部并冻结权重</li>
 <li>添加自定义的密集层（这里的隐层选择了128个神经元）</li>
 <li>设置优化器和损失函数</li>
 </ul>
-
 <p>代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -411,22 +372,19 @@
                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
 <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">fc</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span></code></pre></td></tr></table>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">fc</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="5-训练模型">5.训练模型</h1>
-
+</div><h1 id="5训练模型">5.训练模型</h1>
 <p>现在可以进行模型的训练了，我们需要传递数据，计算其损失函数并修改相应的网络权重。步骤如下：</p>
-
 <ul>
 <li>训练模型</li>
 <li>测量训练集和验证集的损失函数（对数损失）和准确性</li>
 </ul>
-
 <p>代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -505,13 +463,13 @@
                                                         <span class="n">epoch_acc</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">model</span>
 
-<span class="n">model_trained</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="n">model_trained</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下所示：</p>
+</div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -536,33 +494,29 @@
 <span class="n">Epoch</span> <span class="mi">3</span><span class="o">/</span><span class="mi">3</span>
 <span class="o">----------</span>
 <span class="n">train</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.2746</span><span class="p">,</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9020</span>
-<span class="n">validation</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.2431</span><span class="p">,</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9200</span></code></pre></td></tr></table>
+<span class="n">validation</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.2431</span><span class="p">,</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.9200</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="6-保存并加载模型">6.保存并加载模型</h1>
-
+</div><h1 id="6保存并加载模型">6.保存并加载模型</h1>
 <h2 id="保存">保存</h2>
-
 <p>训练一个模型通常需要很长的时间和计算成本，最好的方法是将其保存下来以便日后使用。通常有如下两种方法：</p>
-
 <ul>
 <li>将整个模型的体系结构和训练权重（以及优化器状态）保存到文件中</li>
 <li>将训练过的权重保存到文件中（将模型体系结构保留在代码中）</li>
 </ul>
-
 <p>代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_trained</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s1">&#39;./models/pytorch/weights.h5&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_trained</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s1">&#39;./models/pytorch/weights.h5&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="加载-导入模型">加载（导入模型）</h2>
+</div><h2 id="加载导入模型">加载（导入模型）</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -575,25 +529,21 @@
                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2048</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
                <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;./models/pytorch/weights.h5&#39;</span><span class="p">))</span></code></pre></td></tr></table>
+<span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;./models/pytorch/weights.h5&#39;</span><span class="p">))</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>对于保存和加载模型这部分，还需要注意一下文件的路径是否准确。</p>
-
-<h1 id="7-对样本测试图像进行预测">7.对样本测试图像进行预测</h1>
-
+</div><p>对于保存和加载模型这部分，还需要注意一下文件的路径是否准确。</p>
+<h1 id="7对样本测试图像进行预测">7.对样本测试图像进行预测</h1>
 <p>步骤如下：</p>
-
 <ul>
 <li>加载和预处理测试图像</li>
 <li>预测图像类别</li>
 <li>显示图像以及预测</li>
 </ul>
-
 <p>示例代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -608,61 +558,61 @@
 <span class="n">img_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">input_path</span> <span class="o">+</span> <span class="n">img_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">img_path</span> <span class="ow">in</span> <span class="n">validation_img_paths</span><span class="p">]</span>
 
 <span class="n">validation_batch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">data_transforms</span><span class="p">[</span><span class="s1">&#39;validation&#39;</span><span class="p">](</span><span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-                                <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">img_list</span><span class="p">])</span></code></pre></td></tr></table>
+                                <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">img_list</span><span class="p">])</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>这里可以打印一些信息便于查看：</p>
+</div><p>这里可以打印一些信息便于查看：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pred_logits_tensor</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">validation_batch</span><span class="p">)</span>
-<span class="n">pred_logits_tensor</span></code></pre></td></tr></table>
+<span class="n">pred_logits_tensor</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tensor</span><span class="p">([[</span> <span class="mf">0.2340</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3168</span><span class="p">],</span>
         <span class="p">[</span> <span class="mf">0.9597</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9461</span><span class="p">],</span>
-        <span class="p">[</span><span class="o">-</span><span class="mf">2.0024</span><span class="p">,</span>  <span class="mf">1.4126</span><span class="p">]],</span> <span class="n">grad_fn</span><span class="o">=&lt;</span><span class="n">AddmmBackward</span><span class="o">&gt;</span><span class="p">)</span></code></pre></td></tr></table>
+        <span class="p">[</span><span class="o">-</span><span class="mf">2.0024</span><span class="p">,</span>  <span class="mf">1.4126</span><span class="p">]],</span> <span class="n">grad_fn</span><span class="o">=&lt;</span><span class="n">AddmmBackward</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>同时可以查看以下信息：</p>
+</div><p>同时可以查看以下信息：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pred_probs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">pred_logits_tensor</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">pred_probs</span></code></pre></td></tr></table>
+<span class="n">pred_probs</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">array</span><span class="p">([[</span><span class="mf">0.63430333</span><span class="p">,</span> <span class="mf">0.36569664</span><span class="p">],</span>
        <span class="p">[</span><span class="mf">0.8705474</span> <span class="p">,</span> <span class="mf">0.12945262</span><span class="p">],</span>
-       <span class="p">[</span><span class="mf">0.03182863</span><span class="p">,</span> <span class="mf">0.9681714</span> <span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span></code></pre></td></tr></table>
+       <span class="p">[</span><span class="mf">0.03182863</span><span class="p">,</span> <span class="mf">0.9681714</span> <span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>最后的分类显示结果：</p>
+</div><p>最后的分类显示结果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -675,18 +625,14 @@
     <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&#34;{:.0f}% Alien, {:.0f}% Predator&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">pred_probs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="mi">100</span><span class="o">*</span><span class="n">pred_probs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>最终输出的结果：
-<img src="https://i.loli.net/2019/11/17/cL5FxapX4v9OBW3.png" alt="image.png" /></p>
-
+</div><p>最终输出的结果：
+<img src="https://i.loli.net/2019/11/17/cL5FxapX4v9OBW3.png" alt="image.png"></p>
 <h1 id="总结">总结</h1>
-
 <p>这原本是由 <a href="https://deepsense.ai/keras-or-PyTorch/">这篇文章</a> 引发的一个深度学习框架选择的问题，用 Keras 还是 PyTorch。Keras 用起来更加简洁，但代价是它的灵活性；而 PyTorch 提供了更加明确和详细的代码，在大多数情况下，它有着可调试以及灵活的代码，然而在训练时，PyTorch 稍显得有些笨重。至于选择什么样的学习框架，你可以自行阅读该文章，选择一个适合自己的框架进行学习。</p>
-
 <h1 id="参考">参考</h1>
-
 <p><a href="https://medium.freecodecamp.org/keras-vs-PyTorch-avp-transfer-learning-c8b852c31f02">Keras vs PyTorch: how to distinguish Aliens vs Predators with transfer learning</a></p>
     </div>
 

@@ -7,20 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sun, 12 May 2019 13:12:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/Chrome/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 12 May 2019 13:12:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/Chrome/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Chrome 浏览器使用小贴士</title>
       <link>http://localhost:1313/2019/05/12/chrome-tips/</link>
       <pubDate>Sun, 12 May 2019 13:12:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/05/12/chrome-tips/</guid>
-      <description>&lt;p&gt;本篇文章主要介绍以下内容：
-1. 开启 Chrome 浏览器多线程下载；
-2. 加速 Youtube、Netflix 等流媒体视频播放。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章主要介绍以下内容：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;开启 Chrome 浏览器多线程下载；&lt;/li&gt;
+&lt;li&gt;加速 Youtube、Netflix 等流媒体视频播放。&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
   </channel>

@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Fri, 29 Nov 2019 19:23:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/Array/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 29 Nov 2019 19:23:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/Array/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>剑指 Offer 之 数字序列中某一位的数字</title>
       <link>http://localhost:1313/2019/11/29/offer-DigitsInSequence/</link>

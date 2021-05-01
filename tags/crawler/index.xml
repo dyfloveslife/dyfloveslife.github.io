@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sun, 05 Aug 2018 21:27:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/crawler/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 05 Aug 2018 21:27:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/crawler/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python 实战之 爬取酷狗音乐 Top500</title>
       <link>http://localhost:1313/2018/08/05/learning-python-KuGouTop500/</link>

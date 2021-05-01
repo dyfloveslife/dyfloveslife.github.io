@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/03/05/accelerate-github-clone/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="加速 Github 的 clone 速度" />
 <meta property="og:description" content="今天在 Github 上要 clone 一个感兴趣的库到本地，发现 clone 速度奇慢无比。于是在 Github 上搜索加速 clone 的方法，亲身体验后发现，clone 速度提升巨大，你也赶快来试试吧！" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2019/03/05/accelerate-github-clone/" />
-<meta property="article:published_time" content="2019-03-05T08:27:02+08:00" />
-<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2019/03/05/accelerate-github-clone/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-03-05T08:27:02&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56&#43;08:00" />
+
 <meta itemprop="name" content="加速 Github 的 clone 速度">
-<meta itemprop="description" content="今天在 Github 上要 clone 一个感兴趣的库到本地，发现 clone 速度奇慢无比。于是在 Github 上搜索加速 clone 的方法，亲身体验后发现，clone 速度提升巨大，你也赶快来试试吧！">
-
-
-<meta itemprop="datePublished" content="2019-03-05T08:27:02&#43;08:00" />
+<meta itemprop="description" content="今天在 Github 上要 clone 一个感兴趣的库到本地，发现 clone 速度奇慢无比。于是在 Github 上搜索加速 clone 的方法，亲身体验后发现，clone 速度提升巨大，你也赶快来试试吧！"><meta itemprop="datePublished" content="2019-03-05T08:27:02&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="689">
-
-
-
-<meta itemprop="keywords" content="技巧,Github," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="技巧,Github," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="加速 Github 的 clone 速度"/>
 <meta name="twitter:description" content="今天在 Github 上要 clone 一个感兴趣的库到本地，发现 clone 速度奇慢无比。于是在 Github 上搜索加速 clone 的方法，亲身体验后发现，clone 速度提升巨大，你也赶快来试试吧！"/>
 
@@ -141,33 +135,22 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#方式一">方式一</a></li>
-<li><a href="#方式二">方式二</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>今天在 Github 上要 clone 一个感兴趣的库到本地，发现 clone 速度奇慢无比。于是在 Github 上搜索加速 clone 的方法，亲身体验后发现，clone 速度提升巨大，你也赶快来试试吧！</p>
-
 <blockquote>
 <p>更新内容：增加了<code>方式二</code></p>
-
 <p>更新时间：2020/10/15</p>
 </blockquote>
-
 <h1 id="方式一">方式一</h1>
-
 <p><strong>注意：此方法已经很长时间没有更新，有可能无效。</strong></p>
-
 <p>因为自己使用了 Shadowsocks，想看一下能不能用 Shadowsocks 代理来加速 clone 的速度。在网络上搜寻一番并配置之后，并没有起到什么加速的效果，于是继续搜寻其他的方法。</p>
-
 <p>在 <a href="https://github.com/chenxuhua/issues-blog/issues/3">这里</a> 看到了可以通过修改 Hosts 文件来加速 clone 速度，其给出的 Hosts 如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -185,9 +168,9 @@
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"># GitHub Start
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># GitHub Start
 192.30.253.112 github.com
 192.30.253.118 gist.github.com
 151.101.112.133 assets-cdn.github.com
@@ -204,27 +187,20 @@
 151.101.184.133 avatars6.githubusercontent.com
 151.101.184.133 avatars7.githubusercontent.com
 151.101.12.133 avatars8.githubusercontent.com
-# GitHub End</pre></td></tr></table>
+# GitHub End
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>得到 Hosts 以后，就可以修改 Hosts 文件了。你可以使用 <a href="https://github.com/oldj/SwitchHosts/releases">SwitchHosts</a> 来进行更改，使用起来十分方便。</p>
-
+</div><p>得到 Hosts 以后，就可以修改 Hosts 文件了。你可以使用 <a href="https://github.com/oldj/SwitchHosts/releases">SwitchHosts</a> 来进行更改，使用起来十分方便。</p>
 <p>下载好以后，双击<strong>SwitchHosts!.exe</strong>即可打开该软件，点击<strong>File</strong>-&gt;<strong>New</strong>，在<strong>Local</strong>的<strong>Hosts title</strong>可以填写上<strong>github</strong>，用于和其他 Hosts 进行区分，然后将上面的Hosts复制进去就可以了，如下图所示：</p>
-
-<p><img src="https://i.loli.net/2019/11/17/iDOdQtqPbZyeplF.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2019/11/17/iDOdQtqPbZyeplF.png" alt="image.png"></p>
 <p>最后就可以进行快速的 clone 了~</p>
-
 <h1 id="方式二">方式二</h1>
-
 <p>由于使用了 <a href="https://github.com/Fndroid/clash_for_windows_pkg">CFW</a>，所以可以设置<code>git clone</code>时走全局代理。</p>
-
-<p>首先，按下<kbd>Win</kbd>+<kbd>i</kbd>键，在<code>Windows 设置</code>中选择<code>网络和 Internet</code>→<code>代理</code>，查看自己的<code>地址</code>和<code>端口</code>。</p>
-
+<p>首先，按下<!-- raw HTML omitted -->Win<!-- raw HTML omitted -->+<!-- raw HTML omitted -->i<!-- raw HTML omitted -->键，在<code>Windows 设置</code>中选择<code>网络和 Internet</code>→<code>代理</code>，查看自己的<code>地址</code>和<code>端口</code>。</p>
 <p>然后，修改 git 配置文件，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -239,13 +215,13 @@ git config --global https.proxy socks5://127.0.0.1:1080
 
 <span class="c1"># http 协议，请将 1081 端口修改成自己的本地代理端口</span>
 git config --global http.proxy http://127.0.0.1:1081
-git config --global https.proxy https://127.0.0.1:1081</code></pre></td></tr></table>
+git config --global https.proxy https://127.0.0.1:1081
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>通过以上设置，就可以加快<code>git clone</code>的速度了，下面是一些常用的命令：</p>
+</div><p>通过以上设置，就可以加快<code>git clone</code>的速度了，下面是一些常用的命令：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -258,7 +234,8 @@ git config -l
 
 <span class="c1"># 重置代理设置</span>
 git config --global --unset http.proxy
-git config --global --unset https.proxy</code></pre></td></tr></table>
+git config --global --unset https.proxy
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>

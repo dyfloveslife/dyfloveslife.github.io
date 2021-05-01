@@ -7,10 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Wed, 03 Feb 2021 16:49:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 01 May 2021 16:38:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在北京的第一个月</title>
+      <link>http://localhost:1313/2021/05/01/new-company/</link>
+      <pubDate>Sat, 01 May 2021 16:38:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2021/05/01/new-company/</guid>
+      <description>&lt;p&gt;在北京已经待了一个月了，本文对这段时间的所见所闻做一个总结。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>2020 年总结</title>
@@ -522,7 +527,7 @@
       <pubDate>Mon, 18 Nov 2019 15:32:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/11/18/java-memory-areas/</guid>
-      <description>&lt;p&gt;本篇文章是对 Java 内存区域的概述与总结，大部分参考自&lt;a href=&#34;https://book.douban.com/subject/24722612/&#34;&gt;《深入理解 Java 虚拟机》&lt;/a&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;，以及自己对这部分的理解。记性不好就先把它记下来，以便日后复习使用。如果能帮助到你的话最好了。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章是对 Java 内存区域的概述与总结，大部分参考自&lt;a href=&#34;https://book.douban.com/subject/24722612/&#34;&gt;《深入理解 Java 虚拟机》&lt;/a&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;，以及自己对这部分的理解。记性不好就先把它记下来，以便日后复习使用。如果能帮助到你的话最好了。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -666,9 +671,11 @@
       <pubDate>Sun, 12 May 2019 13:12:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2019/05/12/chrome-tips/</guid>
-      <description>&lt;p&gt;本篇文章主要介绍以下内容：
-1. 开启 Chrome 浏览器多线程下载；
-2. 加速 Youtube、Netflix 等流媒体视频播放。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章主要介绍以下内容：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;开启 Chrome 浏览器多线程下载；&lt;/li&gt;
+&lt;li&gt;加速 Youtube、Netflix 等流媒体视频播放。&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -758,19 +765,13 @@
       <pubDate>Tue, 25 Sep 2018 12:20:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/09/25/zhongqiuxiaoji/</guid>
-      <description>&lt;p&gt;&lt;center&gt;
-《望月怀远》&lt;/p&gt;
-
+      <description>&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;张九龄&lt;/p&gt;
-
 &lt;p&gt;海上生明月，天涯共此时。&lt;/p&gt;
-
 &lt;p&gt;情人怨遥夜，竟夕起相思。&lt;/p&gt;
-
 &lt;p&gt;灭烛怜光满，披衣觉露滋。&lt;/p&gt;
-
-&lt;p&gt;不堪盈手赠，还寝梦佳静。
-&lt;/center&gt;&lt;/p&gt;</description>
+&lt;p&gt;不堪盈手赠，还寝梦佳静。&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     
     <item>
@@ -937,8 +938,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;人生苦短，我用 Python！&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/python-logo.png&#34; alt=&#34;Python-logo&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/Python/python-logo.png&#34; alt=&#34;Python-logo&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -966,7 +966,6 @@
       
       <guid>http://localhost:1313/2018/02/11/2017-summary/</guid>
       <description>&lt;p&gt;马上就快过年了，考完研后回到家一直没写东西，拖到现在&amp;hellip;&lt;/p&gt;
-
 &lt;p&gt;今天正好有时间，总结一下吧。&lt;/p&gt;</description>
     </item>
     
@@ -986,9 +985,7 @@
       
       <guid>http://localhost:1313/2017/06/22/NetworkCabling-1/</guid>
       <description>&lt;h1 id=&#34;1-每个楼层的用线计算公式&#34;&gt;1. 每个楼层的用线计算公式&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/zhbx/gs2.png&#34; alt=&#34;zhbx&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;C 为每个楼层用线量&lt;/li&gt;
 &lt;li&gt;F 为最远的信息插座离楼层管理间的距离&lt;/li&gt;
@@ -1006,7 +1003,6 @@
       <guid>http://localhost:1313/2017/06/04/Windows-DNS/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
@@ -1019,7 +1015,6 @@
       <guid>http://localhost:1313/2017/06/03/Windows-Web/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
@@ -1034,14 +1029,15 @@
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;
 环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;步骤：
-1.  配置虚拟机静态IP
-2.  安装Web服务器(IIS)，同时安装FTP服务器。
-3.  添加站点
-4.  用户名登录
-5.  下载、上传文件
-6.  隔离用户&lt;/p&gt;</description>
+&lt;p&gt;步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;配置虚拟机静态IP&lt;/li&gt;
+&lt;li&gt;安装Web服务器(IIS)，同时安装FTP服务器。&lt;/li&gt;
+&lt;li&gt;添加站点&lt;/li&gt;
+&lt;li&gt;用户名登录&lt;/li&gt;
+&lt;li&gt;下载、上传文件&lt;/li&gt;
+&lt;li&gt;隔离用户&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -1053,9 +1049,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;有两个软件包：&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso、shrike-i386-disc2.iso。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
@@ -1068,9 +1062,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;用到两个软件包：&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;、&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
     
@@ -1082,7 +1074,6 @@
       <guid>http://localhost:1313/2017/06/03/Windows-DHCP/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;软件： &lt;code&gt;VMware Workstation Pro&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;环境： &lt;code&gt;Windows 2008 R2&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</description>
     </item>
@@ -1103,7 +1094,6 @@
       
       <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
       <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能。&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以访问。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
@@ -1115,7 +1105,6 @@
       <guid>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</guid>
       <description>&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
 同时有三个软件包：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;

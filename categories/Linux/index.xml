@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sun, 06 Dec 2020 14:46:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 06 Dec 2020 14:46:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Missing Semester 学习笔记 - Security and Cryptography</title>
       <link>http://localhost:1313/2020/12/06/learn-Missing-Security-and-Cryptography/</link>
@@ -111,9 +107,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;有两个软件包：&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso、shrike-i386-disc2.iso。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
@@ -126,9 +120,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;用到两个软件包：&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;、&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
     
@@ -148,7 +140,6 @@
       
       <guid>http://localhost:1313/2017/06/01/Linux-FTP/</guid>
       <description>&lt;p&gt;&lt;strong&gt;2017/6/5 [更新]文件上传、下载功能。&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;2017/6/8 [更新]实现只有本地 dog 可以访问 ftp，以 user 为代表的其他用户不可以访问。&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
@@ -160,7 +151,6 @@
       <guid>http://localhost:1313/2017/05/18/Linux-WebServer-AccessHostThroughDomainName/</guid>
       <description>&lt;p&gt;说明：在虚拟机（VMware Workstation Pro）下运行Red Hat Linux。
 同时有三个软件包：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc1.iso&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;shrike-i386-disc2.iso&lt;/strong&gt;&lt;/li&gt;

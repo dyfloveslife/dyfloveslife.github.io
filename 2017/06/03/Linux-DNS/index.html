@@ -26,7 +26,7 @@ shrike-i386-disc1.iso、shrike-i386-disc2.iso。
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/03/Linux-DNS/" />
@@ -45,39 +45,27 @@ shrike-i386-disc1.iso、shrike-i386-disc2.iso。
 <meta property="og:description" content="
 说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
 
-
 有两个软件包：
-
 shrike-i386-disc1.iso、shrike-i386-disc2.iso。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2017/06/03/Linux-DNS/" />
-<meta property="article:published_time" content="2017-06-03T13:24:11+08:00" />
-<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2017/06/03/Linux-DNS/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2017-06-03T13:24:11&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56&#43;08:00" />
+
 <meta itemprop="name" content="Linux 环境下配置 DNS 服务器">
 <meta itemprop="description" content="
 说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
 
-
 有两个软件包：
-
-shrike-i386-disc1.iso、shrike-i386-disc2.iso。">
-
-
-<meta itemprop="datePublished" content="2017-06-03T13:24:11&#43;08:00" />
+shrike-i386-disc1.iso、shrike-i386-disc2.iso。"><meta itemprop="datePublished" content="2017-06-03T13:24:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="1341">
-
-
-
-<meta itemprop="keywords" content="Linux,DNS," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Linux,DNS," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux 环境下配置 DNS 服务器"/>
 <meta name="twitter:description" content="
 说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。
 
-
 有两个软件包：
-
 shrike-i386-disc1.iso、shrike-i386-disc2.iso。"/>
 
 <!--[if lte IE 9]>
@@ -162,21 +150,17 @@ shrike-i386-disc1.iso、shrike-i386-disc2.iso。"/>
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#概述">概述</a></li>
-<li><a href="#一-安装">一、安装</a>
-<ul>
-<li><a href="#1-挂载第一张镜像-安装-bind">1. 挂载第一张镜像，安装 bind</a></li>
-<li><a href="#2-挂载第二张镜像-安装-caching">2. 挂载第二张镜像，安装 caching</a></li>
-</ul></li>
-<li><a href="#二-配置-dns">二、配置 dns</a>
-<ul>
-<li><a href="#1-配置虚拟机静态-ip">1. 配置虚拟机静态 IP</a></li>
-<li><a href="#2-修改-etc-named-conf-配置文件">2. 修改 /etc/named.conf 配置文件</a></li>
-<li><a href="#3-在-var-named-下新建正向和反向解析文件-并修改配置信息">3. 在 /var/named 下新建正向和反向解析文件，并修改配置信息</a></li>
-<li><a href="#4-启动-named-服务-检测-dns-是否配置成功">4. 启动 named 服务，检测 DNS 是否配置成功</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1-挂载第一张镜像安装-bind">1. 挂载第一张镜像，安装 bind</a></li>
+    <li><a href="#2-挂载第二张镜像安装-caching">2. 挂载第二张镜像，安装 caching</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-配置虚拟机静态-ip">1. 配置虚拟机静态 IP</a></li>
+    <li><a href="#2-修改-etcnamedconf-配置文件">2. 修改 /etc/named.conf 配置文件</a></li>
+    <li><a href="#3-在-varnamed-下新建正向和反向解析文件并修改配置信息">3. 在 /var/named 下新建正向和反向解析文件，并修改配置信息</a></li>
+    <li><a href="#4-启动-named-服务检测-dns-是否配置成功">4. 启动 named 服务，检测 DNS 是否配置成功</a></li>
+  </ul>
 </nav>
   </div>
 </div>
@@ -184,111 +168,87 @@ shrike-i386-disc1.iso、shrike-i386-disc2.iso。"/>
       <blockquote>
 <p>说明：在虚拟机（VMware Workstation Pro）下运行 Red Hat Linux。</p>
 </blockquote>
-
 <p>有两个软件包：</p>
-
 <p><strong>shrike-i386-disc1.iso、shrike-i386-disc2.iso。</strong></p>
-
 <h1 id="概述">概述</h1>
-
 <p>在配置 DNS 服务器之前，我们不妨理解一下 DNS 服务器是如何工作的？它的原理是什么？它是如何将域名转换成 IP 地址的？</p>
-
-<p>DNS（域名系统）是一种分布式数据库系统，即使单个计算机出现了故障，也不会妨碍整个 DNS 系统的正常运行。从域名到 IP 地址的解析过程如下：<font color='red'></p>
-
+<p>DNS（域名系统）是一种分布式数据库系统，即使单个计算机出现了故障，也不会妨碍整个 DNS 系统的正常运行。从域名到 IP 地址的解析过程如下：<!-- raw HTML omitted --></p>
 <ul>
 <li>当某一个应用进程把主机名解析为 IP 地址的时候，该应用进程就调用解析程序，并成为 DNS 的一个客户，把待解析的域名放在 DNS 请求报文中，以 UDP 用户数据报的方式发送给本地域名服务器。</li>
 <li>本地域名服务器在查找到域名后，把对应的 IP 地址放在响应报文中返回。应用程序获得目的主机的 IP 地址后即可进行通信。</li>
-<li>如果本地域名服务器不能回答该请求，则此域名服务器就暂时成为 DNS 中的另一个客户，并向其它域名服务器发出查询请求，直到找到能够回答改请求的域名服务器为止</font>。</li>
+<li>如果本地域名服务器不能回答该请求，则此域名服务器就暂时成为 DNS 中的另一个客户，并向其它域名服务器发出查询请求，直到找到能够回答改请求的域名服务器为止<!-- raw HTML omitted -->。</li>
 </ul>
-
 <p><strong>为什么使用 UDP 进行传输，而不使用 TCP</strong>？</p>
-
 <p>UDP 用户数据报的首部仅占 8 个字节，而 TCP 报文段的首部最小为 20 字节，使用 UDP 是为了减少开销。</p>
-
 <p>DNS 查询请求的两种方式：</p>
-
 <ul>
 <li><strong>递归查询</strong>：如果主机所询问的本地域名服务器不知道被查询域名的 IP 地址，那么本地域名服务器就以 DNS 客户端的身份向其它根域名服务器继续发出查询请求报文，而不是让主机自己进行下一步查询。</li>
 <li><strong>迭代查询</strong>：一般情况下使用的是迭代查询，当根域名服务器收到本地域名服务器发出的迭代查询请求报文时，要么给出所要查询的 IP 地址，要么告诉本地域名服务器：你下一步应该向哪一个域名服务器进行查询。然后本地域名服务器进行后续的查询。</li>
 </ul>
-
 <p>如下图所示：</p>
-
-<p><img src="https://i.loli.net/2020/06/13/6yu7UNt159XrvZb.png" alt="image.png" /></p>
-
-<h1 id="一-安装">一、安装</h1>
-
+<p><img src="https://i.loli.net/2020/06/13/6yu7UNt159XrvZb.png" alt="image.png"></p>
+<h1 id="一安装">一、安装</h1>
 <p>步骤：</p>
-
 <ol>
 <li>软件包的安装（bind 和 caching）；</li>
 <li>配置 DNS
-
 <ul>
 <li>2.1 配置虚拟机静态 IP；</li>
 <li>2.2 修改<code>/etc/named.conf</code>配置文件；</li>
 <li>2.3 在<code>/var/named</code>下新建正向和反向解析文件，并修改配置信息；</li>
-</ul></li>
+</ul>
+</li>
 <li>启动 named 服务，检测 DNS 是否配置成功。</li>
 </ol>
-
-<h2 id="1-挂载第一张镜像-安装-bind">1. 挂载第一张镜像，安装 bind</h2>
+<h2 id="1-挂载第一张镜像安装-bind">1. 挂载第一张镜像，安装 bind</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">mount /dev/cdrom /mnt/cdrom		//挂载镜像
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">mount /dev/cdrom /mnt/cdrom		//挂载镜像
 cd /mnt/cdrom/RedHat/RPMS		//进入软件包目录
-rpm -ivh bind-9.2.1-16.i386.rpm		//安装</pre></td></tr></table>
+rpm -ivh bind-9.2.1-16.i386.rpm		//安装
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="2-挂载第二张镜像-安装-caching">2. 挂载第二张镜像，安装 caching</h2>
+</div><h2 id="2-挂载第二张镜像安装-caching">2. 挂载第二张镜像，安装 caching</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">rpm -ivh caching-nameserver-7.2-7.noarch.rpm</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">rpm -ivh caching-nameserver-7.2-7.noarch.rpm
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="二-配置-dns">二、配置 dns</h1>
-
+</div><h1 id="二配置-dns">二、配置 dns</h1>
 <h2 id="1-配置虚拟机静态-ip">1. 配置虚拟机静态 IP</h2>
-
 <p>左下角<code>主菜单</code>→<code>系统设置</code>→<code>网络</code>，双击设备<code>eth0</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">IP 地址：192.168.1.2
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">IP 地址：192.168.1.2
 子网掩码：255.255.255.0
-默认网关地址：192.168.1.254</pre></td></tr></table>
+默认网关地址：192.168.1.254
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>在<code>DNS</code>选项卡下，修改<code>主 DNS</code>为：192.168.1.2，最后单击<code>激活</code>。</p>
-
+</div><p>在<code>DNS</code>选项卡下，修改<code>主 DNS</code>为：192.168.1.2，最后单击<code>激活</code>。</p>
 <p>如果配置静态 IP 不成功，则需要修改网卡配置文件。(前面加上<code>#</code>即可)位置为：<code>/etc/sysconfig/network-scripts/ifup</code> 文件。如下图：</p>
-
-<p><img src="https://i.loli.net/2020/06/13/3FfKOH4SUkmnTeY.png" alt="image.png" /></p>
-
+<p><img src="https://i.loli.net/2020/06/13/3FfKOH4SUkmnTeY.png" alt="image.png"></p>
 <p>修改完后，再执行 <code>service network restart</code> 即可。</p>
-
-<h2 id="2-修改-etc-named-conf-配置文件">2. 修改 /etc/named.conf 配置文件</h2>
-
+<h2 id="2-修改-etcnamedconf-配置文件">2. 修改 /etc/named.conf 配置文件</h2>
 <p>在末尾添加配置信息即可。</p>
-
 <blockquote>
 <p>注意：其中 &ldquo;bzu.com.zone&rdquo; 和 &ldquo;1.zone&rdquo; 就是我们过会儿要创建的文件。</p>
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -296,28 +256,26 @@ rpm -ivh bind-9.2.1-16.i386.rpm		//安装</pre></td></tr></table>
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">zone &#34;bzu.com&#34; IN {
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">zone &#34;bzu.com&#34; IN {
     type master;
     file &#34;bzu.com.zone&#34;;
 };
     zone &#34;1.168.192.in-addr.arpa&#34; IN {
     type master;
     file &#34;1.zone&#34;;
-};</pre></td></tr></table>
+};
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="3-在-var-named-下新建正向和反向解析文件-并修改配置信息">3. 在 /var/named 下新建正向和反向解析文件，并修改配置信息</h2>
-
+</div><h2 id="3-在-varnamed-下新建正向和反向解析文件并修改配置信息">3. 在 /var/named 下新建正向和反向解析文件，并修改配置信息</h2>
 <blockquote>
 <p>也可直接复制该目录下的 localhost.zone 文件，然后修改配置。</p>
 </blockquote>
-
 <p>bzu.com.zone 文件配置信息：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -326,9 +284,9 @@ rpm -ivh bind-9.2.1-16.i386.rpm		//安装</pre></td></tr></table>
 </span><span class="lnt">7
 </span><span class="lnt">8
 </span><span class="lnt">9
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">$TTL 86400
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$TTL 86400
 @	1D IN	SOA	dns.bzu.com. mail.bzu.com. (
                 42		; serial (d. adams)
                 3H		; refresh
@@ -336,13 +294,13 @@ rpm -ivh bind-9.2.1-16.i386.rpm		//安装</pre></td></tr></table>
                 1W		; expiry
                 1D	)	; minimum
 @	IN NS	dns.bzu.com.
-www	IN A	192.168.1.2</pre></td></tr></table>
+www	IN A	192.168.1.2
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>1.zone 文件配置信息</p>
+</div><p>1.zone 文件配置信息</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -352,9 +310,9 @@ www	IN A	192.168.1.2</pre></td></tr></table>
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">$TTL 86400
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$TTL 86400
 @   1D IN   SOA	dns.bzu.com. mail.bzu.com. (
                 42		; serial (d. adams)
                 3H		; refresh
@@ -363,25 +321,21 @@ www	IN A	192.168.1.2</pre></td></tr></table>
                 1D	)	; minimum
 @   IN NS   dns.bzu.com.
 www IN A    192.168.1.2
-2   PTR     dns.bzu.com.</pre></td></tr></table>
+2   PTR     dns.bzu.com.
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="4-启动-named-服务-检测-dns-是否配置成功">4. 启动 named 服务，检测 DNS 是否配置成功</h2>
-
+</div><h2 id="4-启动-named-服务检测-dns-是否配置成功">4. 启动 named 服务，检测 DNS 是否配置成功</h2>
 <p>在终端键入命令：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">nslookup</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">nslookup
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>若出现以下内容，说明 DNS 配置成功。</p>
-
-<p><center>
-<img src="https://i.loli.net/2020/06/13/uY4LjFKXO8A9N2Q.png" alt="image.png" />
-</center></p>
+</div><p>若出现以下内容，说明 DNS 配置成功。</p>
+<!-- raw HTML omitted -->
     </div>
 
     <div class="post-copyright">

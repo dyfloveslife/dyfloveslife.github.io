@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Wed, 01 Aug 2018 14:28:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/OpenCV/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 01 Aug 2018 14:28:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/OpenCV/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>OpenCV3.4 &#43; VS2017 &#43; Win7 环境搭建</title>
       <link>http://localhost:1313/2018/08/01/opencv-BuildEnv/</link>

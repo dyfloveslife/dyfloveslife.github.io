@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/05/learning-python-BasicGrammar/" />
@@ -43,32 +43,23 @@
 <meta property="og:description" content="
 人生苦短，我用 Python！
 
-
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2018/07/05/learning-python-BasicGrammar/" />
-<meta property="article:published_time" content="2018-07-05T14:24:11+08:00" />
-<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2018/07/05/learning-python-BasicGrammar/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-07-05T14:24:11&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56&#43;08:00" />
+
 <meta itemprop="name" content="Python 学习笔记之 基础语法">
 <meta itemprop="description" content="
 人生苦短，我用 Python！
 
-
-">
-
-
-<meta itemprop="datePublished" content="2018-07-05T14:24:11&#43;08:00" />
+"><meta itemprop="datePublished" content="2018-07-05T14:24:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="1963">
-
-
-
-<meta itemprop="keywords" content="Python,BasicGrammer," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python,BasicGrammer," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python 学习笔记之 基础语法"/>
 <meta name="twitter:description" content="
 人生苦短，我用 Python！
-
 
 "/>
 
@@ -154,20 +145,10 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#1-标识符">1.标识符</a></li>
-<li><a href="#2-关键字">2.关键字</a></li>
-<li><a href="#3-注释">3.注释</a>
-<ul>
-<li><a href="#3-1-单行注释">3.1 单行注释</a></li>
-<li><a href="#3-2-多行注释">3.2 多行注释</a></li>
-</ul></li>
-<li><a href="#4-代码缩进">4. 代码缩进</a></li>
-<li><a href="#5-数字的类型">5. 数字的类型</a></li>
-<li><a href="#6-字符串">6. 字符串</a></li>
-<li><a href="#7-用户的输入">7. 用户的输入</a></li>
-<li><a href="#8-导入模块">8. 导入模块</a></li>
-</ul>
+  <ul>
+    <li><a href="#31-单行注释">3.1 单行注释</a></li>
+    <li><a href="#32-多行注释">3.2 多行注释</a></li>
+  </ul>
 </nav>
   </div>
 </div>
@@ -175,87 +156,72 @@
       <blockquote>
 <p>人生苦短，我用 Python！</p>
 </blockquote>
-
-<p><img src="/images/Python/python-logo.png" alt="Python-logo" /></p>
-
+<p><img src="/images/Python/python-logo.png" alt="Python-logo"></p>
 <p>我相信很多人都见过上面这句话，尤其是计算机专业的同学，它和<code>PHP 是世界上最好语言！</code>一样，无异于是对编程语言的一种看法。不管这些话是对编程语言的喜爱还是调侃，每个人都有自己的观点，只要能够满足任务需求，激发自己的学习兴趣的就是有用的工具。</p>
-
 <p>六月中旬我开始接触 Python，当时对爬虫很感兴趣，希望能够做一些有趣的东西出来。然而一开始我的目的很明确，即利用 Python 进行爬虫。看到 Python 是爬虫的利器，所以就先学习 Python，在原有的编程语言基础上扩展知识面。考虑到自己有做笔记的习惯，我就顺带将这段时间学习到的知识点写到博客上。一方面能够简洁的梳理自己的学习过程，理清学习思路；另一方面可以留给日后复习，巩固提高所学知识。</p>
-
 <p>环境搭建:</p>
-
 <ul>
 <li>Python版本：3.6.3</li>
 <li>IDE：PyCharm</li>
 <li>OS：Windows 7</li>
 </ul>
-
 <p>要点概括：</p>
-
-<p><img src="/images/Python/BasicGrammar/contents.png" alt="BasicGrammar-contents" /></p>
-
-<h1 id="1-标识符">1.标识符</h1>
-
+<p><img src="/images/Python/BasicGrammar/contents.png" alt="BasicGrammar-contents"></p>
+<h1 id="1标识符">1.标识符</h1>
 <p>学过 C 语言或者 Java 的你肯定不会对编程语言的标识符感到陌生，而在 Python 中，对于标识符的规定有以下三个原则：</p>
-
 <ul>
 <li>第一个字符必须是字母或下划线；</li>
 <li>标识符的其他的部分由字母、数字和下划线组成；</li>
 <li>标识符区分大小写。</li>
 </ul>
-
-<h1 id="2-关键字">2.关键字</h1>
-
+<h1 id="2关键字">2.关键字</h1>
 <p>Python 和 C 语言或 Java 一样，也有预先保留的关键字（保留字）,这些关键字不能用来表示标识符，否则会出错。我们只需两行代码即可显示全部的关键字，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">keyword</span>
-<span class="k">print</span><span class="p">(</span><span class="n">keyword</span><span class="o">.</span><span class="n">kwlist</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">keyword</span><span class="o">.</span><span class="n">kwlist</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="s1">&#39;False&#39;</span><span class="p">,</span> <span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;as&#39;</span><span class="p">,</span> <span class="s1">&#39;assert&#39;</span><span class="p">,</span> <span class="s1">&#39;break&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;continue&#39;</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="s1">&#39;del&#39;</span><span class="p">,</span> <span class="s1">&#39;elif&#39;</span><span class="p">,</span> <span class="s1">&#39;else&#39;</span><span class="p">,</span> <span class="s1">&#39;except&#39;</span><span class="p">,</span> <span class="s1">&#39;finally&#39;</span><span class="p">,</span> <span class="s1">&#39;for&#39;</span><span class="p">,</span> <span class="s1">&#39;from&#39;</span><span class="p">,</span> <span class="s1">&#39;global&#39;</span><span class="p">,</span> <span class="s1">&#39;if&#39;</span><span class="p">,</span> <span class="s1">&#39;import&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">,</span> <span class="s1">&#39;nonlocal&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">,</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;pass&#39;</span><span class="p">,</span> <span class="s1">&#39;raise&#39;</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">,</span> <span class="s1">&#39;try&#39;</span><span class="p">,</span> <span class="s1">&#39;while&#39;</span><span class="p">,</span> <span class="s1">&#39;with&#39;</span><span class="p">,</span> <span class="s1">&#39;yield&#39;</span><span class="p">]</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">[</span><span class="s1">&#39;False&#39;</span><span class="p">,</span> <span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;as&#39;</span><span class="p">,</span> <span class="s1">&#39;assert&#39;</span><span class="p">,</span> <span class="s1">&#39;break&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;continue&#39;</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="s1">&#39;del&#39;</span><span class="p">,</span> <span class="s1">&#39;elif&#39;</span><span class="p">,</span> <span class="s1">&#39;else&#39;</span><span class="p">,</span> <span class="s1">&#39;except&#39;</span><span class="p">,</span> <span class="s1">&#39;finally&#39;</span><span class="p">,</span> <span class="s1">&#39;for&#39;</span><span class="p">,</span> <span class="s1">&#39;from&#39;</span><span class="p">,</span> <span class="s1">&#39;global&#39;</span><span class="p">,</span> <span class="s1">&#39;if&#39;</span><span class="p">,</span> <span class="s1">&#39;import&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">,</span> <span class="s1">&#39;nonlocal&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">,</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;pass&#39;</span><span class="p">,</span> <span class="s1">&#39;raise&#39;</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">,</span> <span class="s1">&#39;try&#39;</span><span class="p">,</span> <span class="s1">&#39;while&#39;</span><span class="p">,</span> <span class="s1">&#39;with&#39;</span><span class="p">,</span> <span class="s1">&#39;yield&#39;</span><span class="p">]</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="3-注释">3.注释</h1>
-
-<h2 id="3-1-单行注释">3.1 单行注释</h2>
-
+</div><h1 id="3注释">3.注释</h1>
+<h2 id="31-单行注释">3.1 单行注释</h2>
 <p>对于单行注释，在 Python 中用<code>#</code>表示。可以放在每行的开头，也可以放在每行语句之后，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 放在开头的注释</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello,world!&#39;</span><span class="p">)</span>  <span class="c1"># 放在语句之后的注释</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello,world!&#39;</span><span class="p">)</span>  <span class="c1"># 放在语句之后的注释</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>运行结果会忽略注释，最终显示<code>Hello,world!</code>，如下所示：</p>
+</div><p>运行结果会忽略注释，最终显示<code>Hello,world!</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Hello</span><span class="p">,</span><span class="n">world</span><span class="err">!</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Hello</span><span class="p">,</span><span class="n">world</span><span class="err">!</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="3-2-多行注释">3.2 多行注释</h2>
-
+</div><h2 id="32-多行注释">3.2 多行注释</h2>
 <p>对于多行注释，可以对每行使用<code>#</code>，也可以用键盘上的<code>单引号</code>或<code>双引号</code>来表示，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -282,26 +248,24 @@
 </span><span class="s2">多行注释4
 </span><span class="s2">&#34;&#34;&#34;</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello,world!&#39;</span><span class="p">)</span> </code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello,world!&#39;</span><span class="p">)</span> 
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Hello</span><span class="p">,</span><span class="n">world</span><span class="err">!</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Hello</span><span class="p">,</span><span class="n">world</span><span class="err">!</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="4-代码缩进">4. 代码缩进</h1>
-
+</div><h1 id="4-代码缩进">4. 代码缩进</h1>
 <p>不像其他编程语言，Python 对于每行的代码缩进要求严格，这也是它的特色。到底是使用<code>空格</code>缩进还是<code>Tab</code>键缩进呢？官方文档推荐使用<code>空格</code>进行缩进。</p>
-
 <p>缩进时要注意：<strong>同一个代码块的语句必须包含相同的缩进空格数</strong>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -310,160 +274,153 @@
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;False&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;False&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><strong>注意：<code>if</code>和<code>else</code>后面都有一个英文状态下的<code>冒号</code>。</strong></p>
-
+</div><p><strong>注意：<code>if</code>和<code>else</code>后面都有一个英文状态下的<code>冒号</code>。</strong></p>
 <h1 id="5-数字的类型">5. 数字的类型</h1>
-
 <p>Python 中的数字有四种类型：</p>
-
 <ul>
 <li>整数：int，如 0、1、2、3</li>
 <li>布尔：bool，如 True 或 False</li>
 <li>浮点数：float，如 1.23</li>
 <li>复数：complex，如 1+2j</li>
 </ul>
-
 <h1 id="6-字符串">6. 字符串</h1>
-
 <p>在 Python 中，对于字符串（string）的表示大致有以下规定：</p>
-
 <p>（1）单引号和双引号的作用相同，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello1&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;hello2&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;hello2&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">hello1</span>
-<span class="n">hello2</span></code></pre></td></tr></table>
+<span class="n">hello2</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>另 1：为什么这里的<code>hello1</code>换行之后才显示<code>hello2</code>？</p>
-
+</div><p>另 1：为什么这里的<code>hello1</code>换行之后才显示<code>hello2</code>？</p>
 <p>因为 Python 中的 print 语句在打印出结果后会默认执行换行操作，若要实现不换行，可在第一行括号内增加<code>end=&quot;-&quot;</code>语句，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello1&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&#34;-&#34;</span><span class="p">)</span> <span class="c1"># 这里用横线进行分隔，也可以用空格或其他字符</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;hello2&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;hello2&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">hello1</span><span class="o">-</span><span class="n">hello2</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">hello1</span><span class="o">-</span><span class="n">hello2</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>另 2：<code>print()</code>打印的双引号和单引号还可以当做定界符使用，可相互嵌套。被嵌套的引号会被解释成标点符号，如下所示：</p>
+</div><p>另 2：<code>print()</code>打印的双引号和单引号还可以当做定界符使用，可相互嵌套。被嵌套的引号会被解释成标点符号，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;helo&#34;world&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;hello&#39;world&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;hello&#39;world&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">helo</span><span class="s2">&#34;world</span>
-<span class="n">hello</span><span class="s1">&#39;world</span></code></pre></td></tr></table>
+<span class="n">hello</span><span class="s1">&#39;world</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>（2）用反斜杠<code>\</code>进行转义，也可用字母<code>r</code>让反斜杠不进行转义，如下所示：</p>
+</div><p>（2）用反斜杠<code>\</code>进行转义，也可用字母<code>r</code>让反斜杠不进行转义，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;hello\n&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;hello\n&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">hello</span>
         <span class="c1"># 注意这里有空行</span>
-<span class="n">hello</span>\<span class="n">n</span></code></pre></td></tr></table>
+<span class="n">hello</span>\<span class="n">n</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>（3）级联字符串，如下所示：</p>
+</div><p>（3）级联字符串，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello&#39;&#39;abc&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello&#39;&#39;abc&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Helloabc</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Helloabc</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>（4）字符串可以用<code>+</code>号连在一起，用<code>*</code>重复字符串，如下所示：</p>
+</div><p>（4）字符串可以用<code>+</code>号连在一起，用<code>*</code>重复字符串，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">+</span> <span class="s1">&#39;b&#39;</span> <span class="o">+</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 重复输出5个a</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 重复输出5个a</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">abc</span>
-<span class="n">aaaaa</span></code></pre></td></tr></table>
+<span class="n">aaaaa</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>（5）对于字符串的索引，左侧从 0 开始，右侧从 -1 开始，如下所示：</p>
+</div><p>（5）对于字符串的索引，左侧从 0 开始，右侧从 -1 开始，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -482,13 +439,13 @@
 <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:])</span>  <span class="c1"># 输出第一个到最后的所有字符</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 输出从第一个到倒数第二个字符，加了冒号之后就不包括右侧的索引位置了</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># 输出从第二个到第五个字符，第二个字符的索引为1，第五个字符的索引为4，同样的，加了冒号之后就不包括右侧的索引位置了</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span> <span class="o">+</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>  <span class="c1"># 用加号连接字符串</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span> <span class="o">+</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>  <span class="c1"># 用加号连接字符串</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -505,100 +462,97 @@
 <span class="n">IlovePython</span>
 <span class="n">IlovePyhto</span>
 <span class="n">love</span>
-<span class="n">IlovePythonadd</span></code></pre></td></tr></table>
+<span class="n">IlovePythonadd</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>（6）字符串的格式化</p>
-
+</div><p>（6）字符串的格式化</p>
 <p>通过一个例子来了解格式化字符串的输出，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;My name is </span><span class="si">%s</span><span class="s2">,I&#39;m </span><span class="si">%d</span><span class="s2"> years old.&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;My name is </span><span class="si">%s</span><span class="s2">,I&#39;m </span><span class="si">%d</span><span class="s2"> years old.&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Carol</span><span class="p">,</span><span class="n">I</span><span class="s1">&#39;m 18 years old.</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">My</span> <span class="n">name</span> <span class="ow">is</span> <span class="n">Carol</span><span class="p">,</span><span class="n">I</span><span class="s1">&#39;m 18 years old.</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="7-用户的输入">7. 用户的输入</h1>
-
+</div><h1 id="7-用户的输入">7. 用户的输入</h1>
 <p>上面用了<code>print()</code>进行了输出，同时可以用<code>input()</code>进行用户的输入，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;按下 Enter 后退出：&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;按下 Enter 后退出：&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下（没按回车之前）：</p>
+</div><p>输出结果如下（没按回车之前）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">按下</span> <span class="n">Enter</span> <span class="err">后退出：</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">按下</span> <span class="n">Enter</span> <span class="err">后退出：</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下（按下回车之后）：</p>
+</div><p>输出结果如下（按下回车之后）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="err">按下</span> <span class="n">Enter</span> <span class="err">后退出：</span>
 
-<span class="n">Process</span> <span class="n">finished</span> <span class="k">with</span> <span class="nb">exit</span> <span class="n">code</span> <span class="mi">0</span></code></pre></td></tr></table>
+<span class="n">Process</span> <span class="n">finished</span> <span class="k">with</span> <span class="nb">exit</span> <span class="n">code</span> <span class="mi">0</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="8-导入模块">8. 导入模块</h1>
-
+</div><h1 id="8-导入模块">8. 导入模块</h1>
 <p>在 python 中，使用 import 或 from&hellip;import 来导入相应的模块。</p>
-
 <p>①将整个模块(somemodule)导入，格式如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">somemodule</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">somemodule</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>②从某个模块中导入某个函数，格式如下：</p>
+</div><p>②从某个模块中导入某个函数，格式如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">somemodule</span> <span class="kn">import</span> <span class="n">somefunction</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">somemodule</span> <span class="kn">import</span> <span class="n">somefunction</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>③从某个模块中导入多个函数，格式如下：</p>
+</div><p>③从某个模块中导入多个函数，格式如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">somemodule</span> <span class="kn">import</span> <span class="n">firstfunc</span><span class="p">,</span> <span class="n">secondfunc</span><span class="p">,</span> <span class="n">thirdfunc</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">somemodule</span> <span class="kn">import</span> <span class="n">firstfunc</span><span class="p">,</span> <span class="n">secondfunc</span><span class="p">,</span> <span class="n">thirdfunc</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>④将某个模块中的全部函数导入，格式如下：</p>
+</div><p>④将某个模块中的全部函数导入，格式如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">somemodule</span> <span class="kn">import</span> <span class="o">*</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">somemodule</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>

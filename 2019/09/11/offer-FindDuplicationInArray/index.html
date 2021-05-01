@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/09/11/offer-FindDuplicationInArray/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="剑指 Offer 之 数组中重复的数字" />
 <meta property="og:description" content="在一个长度为 n 的数组里的所有数字都在 0 到 n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2019/09/11/offer-FindDuplicationInArray/" />
-<meta property="article:published_time" content="2019-09-11T21:32:11+08:00" />
-<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2019/09/11/offer-FindDuplicationInArray/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-09-11T21:32:11&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56&#43;08:00" />
+
 <meta itemprop="name" content="剑指 Offer 之 数组中重复的数字">
-<meta itemprop="description" content="在一个长度为 n 的数组里的所有数字都在 0 到 n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。">
-
-
-<meta itemprop="datePublished" content="2019-09-11T21:32:11&#43;08:00" />
+<meta itemprop="description" content="在一个长度为 n 的数组里的所有数字都在 0 到 n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。"><meta itemprop="datePublished" content="2019-09-11T21:32:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
 <meta itemprop="wordCount" content="590">
-
-
-
-<meta itemprop="keywords" content="Algorithm,剑指Offer,Array," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Algorithm,剑指Offer,Array," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="剑指 Offer 之 数组中重复的数字"/>
 <meta name="twitter:description" content="在一个长度为 n 的数组里的所有数字都在 0 到 n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。"/>
 
@@ -142,30 +136,23 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#分析">分析</a></li>
-<li><a href="#实现">实现</a></li>
-<li><a href="#详解">详解</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#分析">分析</a></li>
+    <li><a href="#实现">实现</a></li>
+    <li><a href="#详解">详解</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>在一个长度为 <code>n</code> 的数组里的所有数字都在 <code>0</code> 到 <code>n-1</code> 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的，也不知道每个数字重复几次。请找出数组中任意一个重复的数字。</p>
-
 <h2 id="分析">分析</h2>
-
 <p>假如数组为 <code>{2, 3, 1, 0, 2, 5}</code>，则输出为 <code>2</code>。如果要求不能使用排序，也不能使用额外的标记，我们可以利用 <code>所有数字都在 0 到 n-1 的范围内</code> 这一特点。从头到尾依次扫描数组中的数字，将值为 <code>i</code> 的元素调整到数组索引为 <code>i</code> 的位置。</p>
-
 <p>首先，数组索引为 <code>0</code> 的元素是 <code>2</code>，而索引位置为 <code>2</code> 的元素是 <code>1</code>，由于不相等，所以交换位置，交换后的数组为 <code>{1, 3, 2, 0, 2, 5}</code>；接着数组索引为 <code>0</code> 的元素是 <code>1</code>，而索引位置为 <code>1</code> 的元素是 <code>3</code>，再交换位置，交换后的数组为 <code>{3, 1, 2, 0, 2, 5}</code>；再看数组索引为 <code>0</code> 的元素是 <code>3</code>，而索引位置为 <code>3</code> 的元素是 <code>0</code>，由于不相等，再交换位置，交换后的数组为 <code>{0, 1, 2, 3, 2, 5}</code>，此时 <code>{0, 1, 2, 3}</code> 都已经排好位置了。再遍历到第四个元素 <code>3</code> 时，由于索引位置为 <code>2</code> 的元素已经是 <code>2</code> 了，所以就找到了一个重复的元素。</p>
-
 <h2 id="实现">实现</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -186,29 +173,28 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="err">public boolean </span><span class="n">duplicate</span><span class="p">(</span><span class="err">int[] nums</span><span class="p">,</span> <span class="err">int length</span><span class="p">,</span> <span class="err">int[] duplicate</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">nums</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">0</span> <span class="o">||</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">length</span> <span class="o">-</span> <span class="n">1</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">for</span> <span class="p">(</span><span class="err">int i </span><span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span><span class="p">){</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]]){</span>
-                <span class="n">duplicate</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-            <span class="p">}</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">duplicate</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">length</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">duplicate</span><span class="o">){</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">nums</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">0</span> <span class="o">||</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="n">i</span><span class="o">){</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">nums</span><span class="o">[</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]]){</span>
+                <span class="n">duplicate</span><span class="o">[</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
             <span class="c1">// 交换 nums[i] 和 nums[nums[i]] 的位置
-</span><span class="c1"></span>            <span class="err">int temp </span><span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">temp</span><span class="p">];</span>
-            <span class="n">nums</span><span class="p">[</span><span class="n">temp</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-<span class="p">}</span></code></pre></td></tr></table>
+</span><span class="c1"></span>            <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">temp</span><span class="o">];</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">temp</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="详解">详解</h2>
-
+</div><h2 id="详解">详解</h2>
 <p>第 <code>2~5</code> 行进行边界检查。第 <code>6</code> 行开始遍历数组中的元素，其中 <code>while</code> 循环只要第 <code>i</code> 元素和 <code>i</code> 不相等，就交换位置。但是第 <code>8</code> 行，如果发现原来的位置已经有对应的元素了，那么就返回重复的元素。</p>
     </div>
 

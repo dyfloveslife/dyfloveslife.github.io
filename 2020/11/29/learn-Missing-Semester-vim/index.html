@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/11/29/learn-Missing-Semester-vim/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="Missing Semester 学习笔记 - Vim" />
 <meta property="og:description" content="这节课学习的是 Vim，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：《简明 VIM 练级攻略》，英文版在这里《Learn Vim Progressively》。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2020/11/29/learn-Missing-Semester-vim/" />
-<meta property="article:published_time" content="2020-11-29T17:16:11+08:00" />
-<meta property="article:modified_time" content="2020-11-29T17:17:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2020/11/29/learn-Missing-Semester-vim/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-11-29T17:16:11&#43;08:00" />
+<meta property="article:modified_time" content="2020-11-29T17:17:56&#43;08:00" />
+
 <meta itemprop="name" content="Missing Semester 学习笔记 - Vim">
-<meta itemprop="description" content="这节课学习的是 Vim，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：《简明 VIM 练级攻略》，英文版在这里《Learn Vim Progressively》。">
-
-
-<meta itemprop="datePublished" content="2020-11-29T17:16:11&#43;08:00" />
+<meta itemprop="description" content="这节课学习的是 Vim，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：《简明 VIM 练级攻略》，英文版在这里《Learn Vim Progressively》。"><meta itemprop="datePublished" content="2020-11-29T17:16:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-11-29T17:17:56&#43;08:00" />
-<meta itemprop="wordCount" content="1095">
-
-
-
-<meta itemprop="keywords" content="Linux,Vim," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="1099">
+<meta itemprop="keywords" content="Linux,Vim," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Missing Semester 学习笔记 - Vim"/>
 <meta name="twitter:description" content="这节课学习的是 Vim，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：《简明 VIM 练级攻略》，英文版在这里《Learn Vim Progressively》。"/>
 
@@ -132,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/Linux/"> Linux </a>
             </div>
-          <span class="more-meta"> 1095 words </span>
+          <span class="more-meta"> 1099 words </span>
           <span class="more-meta"> 3 mins read </span>
         
       </div>
@@ -141,14 +135,12 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <p>这节课学习的是 <a href="https://www.vim.org/">Vim</a>，因为之前学习过 Vim，所以这里对其进行简单的介绍。推荐一篇皓哥的文章：<a href="https://coolshell.cn/articles/5426.html">《简明 VIM 练级攻略》</a>，英文版在这里<a href="http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/">《Learn Vim Progressively》</a>。</p>
-
 <p>目录如下：</p>
-
 <ul>
 <li><a href="https://dyfloveslife.github.io/2020/11/26/learn-Missing-Semester-shell/">Course overview + the shell</a></li>
 <li><a href="https://dyfloveslife.github.io/2020/11/26/learn-Missing-Semester-shell-tool-and-scripting/">Shell Tools and Scripting</a></li>
@@ -162,23 +154,18 @@
 <li><a href="https://missing-semester-cn.github.io/2020/potpourri/">Potpourri（大杂烩）</a></li>
 <li><a href="https://missing-semester-cn.github.io/2020/qa/">Q&amp;A</a></li>
 </ul>
-
 <p>仅看上面的文章就足够日常使用了，下面仅给出部分命令。</p>
-
 <p>在 <strong>Normal</strong> 模式下的部分命令：</p>
-
 <ul>
 <li><code>:ls</code>：显示打开的缓存。</li>
 <li><code>:help {标题}</code>：打开帮助文档，例如：
-
 <ul>
 <li><code>:help :w</code>：打开<code>:w</code>的帮助文档。</li>
 <li><code>:help w</code>：打开<code>w</code>移动的帮助文档（<code>w</code>的作用是将光标移动到下一个单词的开头，如果中间含有特殊字符或标点符号的话，则会来到特殊字符或标点符号的位置。）</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <p>在移动光标时，也可以根据不同的场景需求，使用不同的字符。除了上面说到的<code>w</code>外，还有如下方式：</p>
-
 <ul>
 <li><code>b</code>：移动到当前单词的开头或上一个单词的开头。</li>
 <li><code>e</code>：移动到词尾。</li>
@@ -188,41 +175,34 @@
 <li><code>H</code>：移动到当前屏幕的首行。</li>
 <li><code>M</code>：移动到当前屏幕的中间一行。</li>
 <li><code>L</code>：移动到当前屏幕的底部一行。</li>
-<li><kbd>Ctrl</kbd>+<kbd>u</kbd>：向上翻页。</li>
-<li><kbd>Ctrl</kbd>+<kbd>d</kbd>：向下翻页。</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->u<!-- raw HTML omitted -->：向上翻页。</li>
+<li><!-- raw HTML omitted -->Ctrl<!-- raw HTML omitted -->+<!-- raw HTML omitted -->d<!-- raw HTML omitted -->：向下翻页。</li>
 <li><code>gg</code>：移动到文件首行。</li>
 <li><code>G</code>：移动到文件末尾。</li>
-<li><strong>:</strong>行号<kbd>Enter</kbd>：来到指定的行。例如输入<code>:12</code>后按<kbd>Enter</kbd>，则光标将会定位在第 12 行。</li>
+<li>**:**行号<!-- raw HTML omitted -->Enter<!-- raw HTML omitted -->：来到指定的行。例如输入<code>:12</code>后按<!-- raw HTML omitted -->Enter<!-- raw HTML omitted -->，则光标将会定位在第 12 行。</li>
 <li><code>行号gg</code>：例如<code>20gg</code>则会来到第 20 行。</li>
 <li><code>行号G</code>：例如<code>12G</code>则会来到第 12 行。</li>
 </ul>
-
 <p>以下命令用于改变括号或引号中的内容。</p>
-
 <ul>
 <li><code>ci(</code>：改变当前小括号中的内容。</li>
 <li><code>ci[</code>：改变当前中括号中的内容。</li>
 <li><code>da'</code>；改变当前单引号中的内容，并将左右两侧的单引号删除。</li>
 <li><code>da&quot;</code>：作用同上，只不过是对双引号起作用。</li>
 </ul>
-
 <p>可以使用<code>:sp</code>或<code>:vsp</code>在同一终端下创建多个窗口，然后使用<code>:w</code>+<code>hjkl</code>的方式在各个窗口之间选择。如果你觉得每次使用<code>:q</code>退出当前窗口很麻烦的话，可以使用<code>:qa</code>退出全部的窗口。</p>
-
 <p>如果想要将整个文件中的某个字符串替换为另一个字符串，则可以使用以下方式。该实例表示：将整个文件中的所有字符串<code>bar</code>替换成<code>for</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">:%s/bar/for/g</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">:%s/bar/for/g
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如果你想在一行中，向后（右）找到首个距离光标最近的字符的话，可以使用<code>f{字符}</code>。例如<code>fo</code>，即在这一行中，将光标移动到第一个字符<code>o</code>的位置上。同理，如果想要向前（左）找到首个距离光标最近的字符的话，则可以使用<code>F{字符}</code>。</p>
-
+</div><p>如果你想在一行中，向后（右）找到首个距离光标最近的字符的话，可以使用<code>f{字符}</code>。例如<code>fo</code>，即在这一行中，将光标移动到第一个字符<code>o</code>的位置上。同理，如果想要向前（左）找到首个距离光标最近的字符的话，则可以使用<code>F{字符}</code>。</p>
 <p>如果想要来到光标右侧的首个字符<code>m</code>之前的那个字符，可以使用<code>tm</code>，那么执行命令之后，光标就会停留在字符<code>m</code>的左侧那个字符。同理，你可以试试<code>T{字符}</code>的效果。</p>
-
 <p><code>dd</code>表示删除光标所在的行，<code>cc</code>除了删除光标所在的行之外，还会进入 <strong>INSERT</strong> 模式。</p>
-
 <p>对于其它的命令，在具体使用的时候可以看一看本文开头提到的文章。</p>
     </div>
 

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.59.1 with theme even" />
+<meta name="generator" content="Hugo 0.82.1 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/08/05/learning-python-KuGouTop500/" />
@@ -44,23 +44,17 @@
 　　学习Python有一段时间了，基础的语法过了一遍，也做了一些小例子，但总是感觉不能熟练的运用。为了巩固所学知识，增加实战经验，解锁更多知识点，本篇文章做了一次爬虫练习，通过具体的需求，明确爬虫的具体思路，掌握Python常用的数据结构，以此提高对Python学习的兴趣，加深基础知识的了解。
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/2018/08/05/learning-python-KuGouTop500/" />
-<meta property="article:published_time" content="2018-08-05T21:27:11+08:00" />
-<meta property="article:modified_time" content="2019-11-16T10:32:56+08:00" />
+<meta property="og:url" content="http://localhost:1313/2018/08/05/learning-python-KuGouTop500/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-08-05T21:27:11&#43;08:00" />
+<meta property="article:modified_time" content="2019-11-16T10:32:56&#43;08:00" />
+
 <meta itemprop="name" content="Python 实战之 爬取酷狗音乐 Top500">
 <meta itemprop="description" content="
 　　学习Python有一段时间了，基础的语法过了一遍，也做了一些小例子，但总是感觉不能熟练的运用。为了巩固所学知识，增加实战经验，解锁更多知识点，本篇文章做了一次爬虫练习，通过具体的需求，明确爬虫的具体思路，掌握Python常用的数据结构，以此提高对Python学习的兴趣，加深基础知识的了解。
-">
-
-
-<meta itemprop="datePublished" content="2018-08-05T21:27:11&#43;08:00" />
+"><meta itemprop="datePublished" content="2018-08-05T21:27:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="3113">
-
-
-
-<meta itemprop="keywords" content="Python,crawler," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="wordCount" content="3106">
+<meta itemprop="keywords" content="Python,crawler," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python 实战之 爬取酷狗音乐 Top500"/>
 <meta name="twitter:description" content="
 　　学习Python有一段时间了，基础的语法过了一遍，也做了一些小例子，但总是感觉不能熟练的运用。为了巩固所学知识，增加实战经验，解锁更多知识点，本篇文章做了一次爬虫练习，通过具体的需求，明确爬虫的具体思路，掌握Python常用的数据结构，以此提高对Python学习的兴趣，加深基础知识的了解。
@@ -138,7 +132,7 @@
         <div class="post-category">
             <a href="/categories/Python/"> Python </a>
             </div>
-          <span class="more-meta"> 3113 words </span>
+          <span class="more-meta"> 3106 words </span>
           <span class="more-meta"> 7 mins read </span>
         
       </div>
@@ -147,51 +141,34 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#1-测试网页">1.测试网页</a></li>
-<li><a href="#2-分析网页">2.分析网页</a></li>
-<li><a href="#3-爬取数据">3.爬取数据</a></li>
-<li><a href="#4-数据保存">4.数据保存</a></li>
-<li><a href="#5-整理代码">5.整理代码</a></li>
-<li><a href="#6-总结">6.总结</a></li>
-</ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
       <blockquote>
 <p>　　学习Python有一段时间了，基础的语法过了一遍，也做了一些小例子，但总是感觉不能熟练的运用。为了巩固所学知识，增加实战经验，解锁更多知识点，本篇文章做了一次爬虫练习，通过具体的需求，明确爬虫的具体思路，掌握Python常用的数据结构，以此提高对Python学习的兴趣，加深基础知识的了解。</p>
 </blockquote>
-
-<hr />
-
+<hr>
 <blockquote>
-<p>环境：
-- OS：Windows7 x64
-- IDE：PyCharm
-- Python Version：3.6
-- Browser：Google Chrome</p>
+<p>环境：</p>
 </blockquote>
-
-<hr />
-
+<ul>
+<li>OS：Windows7 x64</li>
+<li>IDE：PyCharm</li>
+<li>Python Version：3.6</li>
+<li>Browser：Google Chrome</li>
+</ul>
+<hr>
 <p><strong>建议安装<a href="https://anaconda.org/">Anaconda</a>，它是一个开源的Python发行版本，里面包含了Python需要的许多依赖安装包，在导入模块的时候十分方面。</strong></p>
-
 <p><strong>关于HTML的一些基础知识，在这里就不展开讲解了，你可以在<a href="http://www.w3school.com.cn/html/index.asp">W3school</a>上学到，祝你好运！</strong></p>
-
 <p><strong>实战中用于访问网络的模块<a href="http://docs.python-requests.org/zh_CN/latest/index.html">Requests</a>在这里也不展开讲解，你可以点击它阅读其文档，贵在坚持！</strong></p>
-
 <p><strong>另外，用于解析HTML或XML文件数据的模块<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/">BeautifulSoup</a>也不展开讲解，你可以自行翻阅文档，加油！</strong></p>
-
-<hr />
-
-<h1 id="1-测试网页">1.测试网页</h1>
-
+<hr>
+<h1 id="1测试网页">1.测试网页</h1>
 <p>在爬取网页数据之前，我们需要知道这个网站是否可以访问。判断其方法很简单，首先导入<code>requests</code>模块，其次添加一个<code>headers</code>告诉这个网站说，我们是通过浏览器访问的，然后再写上一个待会儿我们要爬取的网址<code>url</code>，再次通过<code>requests</code>的<code>get</code>方法将该页面的<code>HTML</code>信息保存到<code>wb_data</code>中，我们可以用<code>status_code</code>查看是否可以访问，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -210,52 +187,45 @@
 
 <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://www.kugou.com/yy/rank/home/1-8888.html?from=rank&#39;</span>
 <span class="n">wb_data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">wb_data</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">wb_data</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="mi">200</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="mi">200</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>返回<code>200</code>就说明此网页可以访问。我们也可以使用<code>print(wb_data.text)</code>来输出整个<code>HTML</code>数据，如下图：
-<img src="/images/Python/PythonSpider/data_2.png" alt="Python_Spider" />
+</div><p>返回<code>200</code>就说明此网页可以访问。我们也可以使用<code>print(wb_data.text)</code>来输出整个<code>HTML</code>数据，如下图：
+<img src="/images/Python/PythonSpider/data_2.png" alt="Python_Spider">
 输出的东西很多，包括此<code>url</code>下全部的HTML信息。</p>
-
 <blockquote>
 <p>如何获取User-Agent？</p>
 </blockquote>
-
 <p>打开网页后右击空白区域，选择<code>检查</code>，点击上方的<code>Network</code>后刷新网页，在左侧<code>Name</code>栏中单击<code>1-8888.html?from=rank</code>，在右侧的<code>Request Headers</code>中可也以找到<code>User-Agent</code>，我们将其复制过来即可，如下图：
-<img src="/images/Python/PythonSpider/data_3.png" alt="Python_Spider" /></p>
-
-<h1 id="2-分析网页">2.分析网页</h1>
-
+<img src="/images/Python/PythonSpider/data_3.png" alt="Python_Spider"></p>
+<h1 id="2分析网页">2.分析网页</h1>
 <p>打开酷狗 <a href="http://www.kugou.com/yy/rank/home/1-8888.html?from=rank">http://www.kugou.com/yy/rank/home/1-8888.html?from=rank</a> 后可以看到，在未登录的情况下，这一页共有22首歌曲。我们修改上面的连接，将其中的<code>1</code>修改为<code>2</code>，可以看到浏览器跳转到了第二页。再次将<code>-8888</code>前面的数字改成<code>23</code>即可看到最后一页排名500的歌曲，这些歌曲就是我们待会儿要爬取的东西。</p>
-
 <blockquote>
 <p>爬取什么呢？</p>
 </blockquote>
-
-<p><img src="/images/Python/PythonSpider/data_1.png" alt="Python_Spider" />
-从上面的图片中可以看到，我们爬取的数据主要分三类：排名、歌手名与歌曲名、歌曲时间。
-&gt; 好了，需求知道了，现在就开始吧。</p>
-
+<p><img src="/images/Python/PythonSpider/data_1.png" alt="Python_Spider">
+从上面的图片中可以看到，我们爬取的数据主要分三类：排名、歌手名与歌曲名、歌曲时间。</p>
+<blockquote>
+<p>好了，需求知道了，现在就开始吧。</p>
+</blockquote>
 <p>右击歌曲左边排名为<code>1</code>的地方，点击<code>检查</code>，如下图：
-<img src="/images/Python/PythonSpider/rank_1.png" alt="Python_Spider" />
+<img src="/images/Python/PythonSpider/rank_1.png" alt="Python_Spider">
 进来以后，可以看到<code>1</code>在一对<code>strong</code>标签中，我们可以通过它的上级标签<code>span class=&quot;pc_temp_num&quot;</code>来获取排名信息，如下图：
-<img src="/images/Python/PythonSpider/rank_2.png" alt="Python_Spider" /></p>
-
-<h1 id="3-爬取数据">3.爬取数据</h1>
-
+<img src="/images/Python/PythonSpider/rank_2.png" alt="Python_Spider"></p>
+<h1 id="3爬取数据">3.爬取数据</h1>
 <p>我们先导入<code>BeautifulSoup</code>，用它来解析HTML数据。导入<code>requests</code>用于发送网络请求，紧接着添加<code>headers</code>和<code>url</code>，利用<code>requests.get()</code>将服务器响应的内容读取到<code>wb_data</code>，再使用<code>BeautifulSoup</code>将<code>wb_data</code>中的数据返回一个对象到<code>soup</code>，最后再用<code>soup.select()</code>方法筛选歌曲的排行，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -280,24 +250,24 @@
 <span class="n">wb_data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">wb_data</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
 <span class="n">ranks</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;.pc_temp_num&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：
-<img src="/images/Python/PythonSpider/rank_3.png" alt="Python_Spider" />
+</div><p>输出结果如下：
+<img src="/images/Python/PythonSpider/rank_3.png" alt="Python_Spider">
 你可以看到歌曲的排名被放在了一对<code>strong</code>标签中，我们使用<code>get_text()</code>方法可以获取到它的排名，用<code>strip()</code>方法去除多余的空格，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>  <span class="c1"># 输出 1</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>  <span class="c1"># 输出 1</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>利用这种方法可以同样的获得歌手名与歌曲名、歌曲时间，如下所示：</p>
+</div><p>利用这种方法可以同样的获得歌手名与歌曲名、歌曲时间，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -332,13 +302,13 @@
 <span class="k">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 <span class="k">print</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 <span class="k">print</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">song_times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">song_times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -347,13 +317,13 @@
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="mi">1</span>
 <span class="err">小潘潘、小峰峰</span>
 <span class="err">学猫叫</span>
-<span class="mi">3</span><span class="p">:</span><span class="mi">29</span></code></pre></td></tr></table>
+<span class="mi">3</span><span class="p">:</span><span class="mi">29</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>这样我们就得到了一首歌曲的信息，然后将其放在<code>for</code>循环中遍历整页的歌曲，（这里用到<code>zip()</code>和<code>字典</code>等知识）如下所示：</p>
+</div><p>这样我们就得到了一首歌曲的信息，然后将其放在<code>for</code>循环中遍历整页的歌曲，（这里用到<code>zip()</code>和<code>字典</code>等知识）如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -396,13 +366,13 @@
         <span class="s1">&#39;song&#39;</span><span class="p">:</span> <span class="n">title</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
         <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">song_time</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
     <span class="p">}</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>输出结果如下：</p>
+</div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -425,9 +395,9 @@
 </span><span class="lnt">21
 </span><span class="lnt">22
 </span><span class="lnt">23
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">{&#39;rank&#39;: &#39;1&#39;, &#39;singer&#39;: &#39;小潘潘、小峰峰&#39;, &#39;song&#39;: &#39;学猫叫&#39;, &#39;time&#39;: &#39;3:29&#39;}
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{&#39;rank&#39;: &#39;1&#39;, &#39;singer&#39;: &#39;小潘潘、小峰峰&#39;, &#39;song&#39;: &#39;学猫叫&#39;, &#39;time&#39;: &#39;3:29&#39;}
 {&#39;rank&#39;: &#39;2&#39;, &#39;singer&#39;: &#39;王北车&#39;, &#39;song&#39;: &#39;陷阱&#39;, &#39;time&#39;: &#39;4:40&#39;}
 {&#39;rank&#39;: &#39;3&#39;, &#39;singer&#39;: &#39;Olly Murs&#39;, &#39;song&#39;: &#39;That Girl&#39;, &#39;time&#39;: &#39;2:57&#39;}
 {&#39;rank&#39;: &#39;4&#39;, &#39;singer&#39;: &#39;曾惜&#39;, &#39;song&#39;: &#39;讲真的&#39;, &#39;time&#39;: &#39;3:59&#39;}
@@ -449,15 +419,14 @@
 {&#39;rank&#39;: &#39;20&#39;, &#39;singer&#39;: &#39;王力宏&#39;, &#39;song&#39;: &#39;需要人陪&#39;, &#39;time&#39;: &#39;4:09&#39;}
 {&#39;rank&#39;: &#39;21&#39;, &#39;singer&#39;: &#39;旭日阳刚刘刚&#39;, &#39;song&#39;: &#39;怀念青春&#39;, &#39;time&#39;: &#39;4:28&#39;}
 {&#39;rank&#39;: &#39;22&#39;, &#39;singer&#39;: &#39;新乐尘符&#39;, &#39;song&#39;: &#39;123我爱你&#39;, &#39;time&#39;: &#39;3:19&#39;}
-Process finished with exit code 0</pre></td></tr></table>
+Process finished with exit code 0
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="4-数据保存">4.数据保存</h1>
-
+</div><h1 id="4数据保存">4.数据保存</h1>
 <p>在保存数据之前，我们首先声明一个<code>total</code>列表，用<code>append()</code>方法将每条数据添加到<code>total</code>中，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -476,28 +445,27 @@ Process finished with exit code 0</pre></td></tr></table>
         <span class="s1">&#39;song&#39;</span><span class="p">:</span> <span class="n">title</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
         <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">song_time</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
     <span class="p">}</span>
-    <span class="n">total</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="n">total</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>使用<code>open</code>将爬取到的数据保存在文本文档中，如下所示：</p>
+</div><p>使用<code>open</code>将爬取到的数据保存在文本文档中，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;kugouTop500.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">total</span><span class="p">:</span>
-        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h1 id="5-整理代码">5.整理代码</h1>
-
+</div><h1 id="5整理代码">5.整理代码</h1>
 <p>我们分别将<code>数据爬取部分</code>和<code>写入文本文档部分</code>整理成函数，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -536,6 +504,7 @@ Process finished with exit code 0</pre></td></tr></table>
 </span><span class="lnt">37
 </span><span class="lnt">38
 </span><span class="lnt">39
+</span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">time</span>
@@ -576,16 +545,17 @@ Process finished with exit code 0</pre></td></tr></table>
     <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;http://www.kugou.com/yy/rank/home/{}-8888.html?from=rank&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">)]</span>  
     <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
         <span class="n">get_info</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 这里调用time的sleep方法，等待一秒再继续爬取下一页数据信息，避免过度频繁爬取</span></code></pre></td></tr></table>
-</div>
-</div>
-<h1 id="6-总结">6.总结</h1>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 这里调用time的sleep方法，等待一秒再继续爬取下一页数据信息，避免过度频繁爬取</span>
 
-<p>看完本篇文章后，你可以了解到爬虫的一般步骤：
-- 抓取网页信息
-- 筛选有用信息
-- 保存数据信息</p>
-
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="6总结">6.总结</h1>
+<p>看完本篇文章后，你可以了解到爬虫的一般步骤：</p>
+<ul>
+<li>抓取网页信息</li>
+<li>筛选有用信息</li>
+<li>保存数据信息</li>
+</ul>
 <p>当然，本文还有一些关于爬虫需要注意的地方没有涉及到，这仅仅是一个简单的上手实例。我想，通过不断亲手实践，逐渐学习新方法、新思路，以此来加深对Python基础知识的了解，才是我们想要达到的目的。</p>
     </div>
 

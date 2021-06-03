@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sat, 01 May 2021 16:38:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Jun 2021 15:37:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>毕业了</title>
+      <link>http://localhost:1313/2021/06/03/graduated/</link>
+      <pubDate>Thu, 03 Jun 2021 15:37:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2021/06/03/graduated/</guid>
+      <description>&lt;p&gt;三年的研究生生涯就要结束了，本文对这三年进行总结。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>在北京的第一个月</title>
       <link>http://localhost:1313/2021/05/01/new-company/</link>

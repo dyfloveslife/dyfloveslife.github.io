@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/08/05/learning-python-KuGouTop500/" />
@@ -187,7 +187,7 @@
 
 <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://www.kugou.com/yy/rank/home/1-8888.html?from=rank&#39;</span>
 <span class="n">wb_data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">wb_data</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">wb_data</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -250,7 +250,7 @@
 <span class="n">wb_data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">wb_data</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
 <span class="n">ranks</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;.pc_temp_num&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：
@@ -261,7 +261,7 @@
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>  <span class="c1"># 输出 1</span>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="nb">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>  <span class="c1"># 输出 1</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>利用这种方法可以同样的获得歌手名与歌曲名、歌曲时间，如下所示：</p>
@@ -299,10 +299,10 @@
 <span class="n">ranks</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;.pc_temp_num&#39;</span><span class="p">)</span>
 <span class="n">titles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;.pc_temp_songlist &gt; ul &gt; li &gt; a&#39;</span><span class="p">)</span>
 <span class="n">song_times</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;.pc_temp_time&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="n">song_times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">song_times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -315,8 +315,8 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="mi">1</span>
-<span class="err">小潘潘、小峰峰</span>
-<span class="err">学猫叫</span>
+<span class="n">小潘潘</span><span class="err">、</span><span class="n">小峰峰</span>
+<span class="n">学猫叫</span>
 <span class="mi">3</span><span class="p">:</span><span class="mi">29</span>
 </code></pre></td></tr></table>
 </div>
@@ -366,7 +366,7 @@
         <span class="s1">&#39;song&#39;</span><span class="p">:</span> <span class="n">title</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
         <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">song_time</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
     <span class="p">}</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -456,9 +456,9 @@ Process finished with exit code 0
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;kugouTop500.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;kugouTop500.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">total</span><span class="p">:</span>
-        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="5整理代码">5.整理代码</h1>
@@ -535,14 +535,14 @@ Process finished with exit code 0
 
 <span class="c1"># 保存到txt中</span>
 <span class="k">def</span> <span class="nf">write_to_txt</span><span class="p">(</span><span class="n">total</span><span class="p">):</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;kugouTop500.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;kugouTop500.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">total</span><span class="p">:</span>
-            <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1"># 这里一共有23页，用格式化字符串的方式，每次将1到23中的数字放到花括号内，从而生成新的网页</span>
-    <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;http://www.kugou.com/yy/rank/home/{}-8888.html?from=rank&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">)]</span>  
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;http://www.kugou.com/yy/rank/home/</span><span class="si">{}</span><span class="s1">-8888.html?from=rank&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">)]</span>  
     <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
         <span class="n">get_info</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 这里调用time的sleep方法，等待一秒再继续爬取下一页数据信息，避免过度频繁爬取</span>

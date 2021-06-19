@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/15/learning-python-DataStructure/" />
@@ -160,16 +160,16 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mf">66.25</span><span class="p">,</span> <span class="mi">333</span><span class="p">,</span> <span class="mi">333</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1234.5</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">333</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mf">66.25</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">333</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mf">66.25</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span>
 <span class="n">a</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">333</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">333</span><span class="p">))</span>
 <span class="n">a</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">333</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -209,14 +209,14 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
 <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;===============&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;===============&#39;</span><span class="p">)</span>
 <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
 <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -257,11 +257,11 @@
 <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;Jack&#39;</span><span class="p">,</span> <span class="s1">&#39;Tom&#39;</span><span class="p">])</span>
 <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Terry&#39;</span><span class="p">)</span>
 <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Michael&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
 <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>  <span class="c1"># 出队</span>
-<span class="k">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
 <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>  <span class="c1"># 出队</span>
-<span class="k">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -287,7 +287,7 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -307,7 +307,7 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -327,7 +327,7 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="s1">&#39;ABC&#39;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="s1">&#39;abc&#39;</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -397,7 +397,7 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
     <span class="n">b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
     <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -428,7 +428,7 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
     <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
 <span class="p">]</span>
 <span class="n">a</span> <span class="o">=</span> <span class="p">[[</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -449,7 +449,7 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s1">&#39;abracadabra&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;abc&#39;</span><span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -470,7 +470,7 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -493,7 +493,7 @@ deque([&#39;Tom&#39;, &#39;Terry&#39;, &#39;Michael&#39;])
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">}</span>
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">person</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -517,7 +517,7 @@ gender male
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;Jack&#39;</span><span class="p">,</span> <span class="s1">&#39;Mike&#39;</span><span class="p">]):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -547,7 +547,7 @@ gender male
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">questions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;quest&#39;</span><span class="p">,</span> <span class="s1">&#39;favorite color&#39;</span><span class="p">]</span>
 <span class="n">answers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;the holy grail&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="n">answers</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;What is your {0}? It is {1}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;What is your </span><span class="si">{0}</span><span class="s1">? It is </span><span class="si">{1}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
     <span class="c1"># 也可以使用%s方法输出，结果是一样的</span>
     <span class="c1"># print(&#39;What is your %s? It is %s.&#39; % (q, a))</span>
 </code></pre></td></tr></table>
@@ -573,7 +573,7 @@ What is your favorite color? It is blue.
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -603,7 +603,7 @@ What is your favorite color? It is blue.
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">basket</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;pear&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">basket</span><span class="p">)):</span>  <span class="c1"># set()可以去重</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>

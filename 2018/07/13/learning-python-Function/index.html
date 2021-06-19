@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/13/learning-python-Function/" />
@@ -187,8 +187,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="err">函数名</span><span class="p">(</span><span class="err">参数列表</span><span class="p">):</span>
-    <span class="err">函数体</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">函数名</span><span class="p">(</span><span class="n">参数列表</span><span class="p">):</span>
+    <span class="n">函数体</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>默认情况下，参数值和参数名称是按函数声明中定义的顺序匹配起来的。下面定义一个函数用来输出<code>Hello World!</code>，如下所示：</p>
@@ -201,7 +201,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
 
 <span class="n">hello</span><span class="p">()</span>
 </code></pre></td></tr></table>
@@ -239,13 +239,13 @@
 
 
 <span class="k">def</span> <span class="nf">print_hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
 
 <span class="n">print_hello</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
 <span class="n">w</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">h</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;width =&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="s1">&#39;height =&#39;</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="s1">&#39;area =&#39;</span><span class="p">,</span> <span class="n">area</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;width =&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="s1">&#39;height =&#39;</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="s1">&#39;area =&#39;</span><span class="p">,</span> <span class="n">area</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -273,7 +273,7 @@ width = 1 height = 2 area = 2
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 定义函数</span>
 <span class="k">def</span> <span class="nf">print_me</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 
 <span class="c1"># 调用函数</span>
 <span class="n">print_me</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
@@ -321,7 +321,7 @@ width = 1 height = 2 area = 2
 
 <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">change_int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>  <span class="c1"># 输出结果为2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>  <span class="c1"># 输出结果为2</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>实例中有<code>int</code>对象<code>2</code>，指向它的变量是<code>b</code>，在传递给<code>change_int</code>函数时，按传值的方式复制了变量<code>b</code>，<code>a</code>和<code>b</code>都指向了同一个<code>int</code>对象，在 <code>a=10</code>时，则新生成一个<code>int</code>值对象<code>10</code>，并让<code>a</code>指向它。</p>
@@ -341,12 +341,12 @@ width = 1 height = 2 area = 2
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">change_me</span><span class="p">(</span><span class="n">mylist</span><span class="p">):</span>
     <span class="n">mylist</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数内取值：&#39;</span><span class="p">,</span> <span class="n">mylist</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数内取值：&#39;</span><span class="p">,</span> <span class="n">mylist</span><span class="p">)</span>
     <span class="k">return</span>
 
 <span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
 <span class="n">change_me</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数外取值：&#39;</span><span class="p">,</span> <span class="n">mylist</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数外取值：&#39;</span><span class="p">,</span> <span class="n">mylist</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -356,8 +356,8 @@ width = 1 height = 2 area = 2
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">函数内取值：</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
-<span class="err">函数外取值：</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">函数内取值</span><span class="err">：</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+<span class="n">函数外取值</span><span class="err">：</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>可以看出，传入函数的对象和在末尾添加新内容的对象用的是同一个引用。</p>
@@ -383,7 +383,7 @@ width = 1 height = 2 area = 2
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 定义函数</span>
 <span class="k">def</span> <span class="nf">print_me</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 
 <span class="c1"># 调用函数</span>
 <span class="n">print_me</span><span class="p">()</span>  <span class="c1"># 这里没有给参数，所以程序报错</span>
@@ -404,7 +404,7 @@ width = 1 height = 2 area = 2
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 定义函数</span>
 <span class="k">def</span> <span class="nf">print_me</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 
 <span class="c1"># 调用函数</span>
 <span class="n">print_me</span><span class="p">(</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
@@ -434,8 +434,8 @@ width = 1 height = 2 area = 2
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 定义函数</span>
 <span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;名字：&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;年龄：&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;名字：&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;年龄：&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
     <span class="k">return</span>
 
 <span class="c1"># 调用函数</span>
@@ -472,12 +472,12 @@ width = 1 height = 2 area = 2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;名字：&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;年龄：&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;名字：&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;年龄：&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
     <span class="k">return</span>
 
 <span class="n">print_info</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jack&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;============&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;============&#39;</span><span class="p">)</span>
 <span class="n">print_info</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
@@ -526,9 +526,9 @@ width = 1 height = 2 area = 2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">*</span><span class="n">vartuple</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">vartuple</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">vartuple</span><span class="p">)</span>
 
 <span class="n">print_info</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
@@ -561,10 +561,10 @@ hello
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">*</span><span class="n">vartuple</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vartuple</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
     <span class="k">return</span>
 
 <span class="n">print_info</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -621,9 +621,9 @@ world
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">vardict</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">vardict</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">vardict</span><span class="p">)</span>
 
 <span class="n">print_info</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></td></tr></table>
@@ -665,8 +665,8 @@ world
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 程序会报错</span>
-<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 输出为6</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 程序会报错</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 输出为6</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="5匿名函数">5.匿名函数</h1>
@@ -695,7 +695,7 @@ world
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">:</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;相加后的值为：&#39;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;相加后的值为：&#39;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -715,7 +715,7 @@ world
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 输出结果为13</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 输出结果为13</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>同样的，<code>lambda</code>匿名函数也是可以设定默认值，如下所示：</p>
@@ -728,9 +728,9 @@ world
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 这里x=3，y=0</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># 这里x=0，y=2</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 这里x=3，y=0</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># 这里x=0，y=2</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -763,11 +763,11 @@ world
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
     <span class="n">total</span> <span class="o">=</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数内：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数内：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">total</span>
 
 <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数外：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数外：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -821,11 +821,11 @@ world
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
     <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;HelloWorld&#39;</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -851,9 +851,9 @@ HelloWorld
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
     <span class="n">msg_inner</span> <span class="o">=</span> <span class="s1">&#39;HelloWorld&#39;</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">msg_inner</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">msg_inner</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">msg_inner</span><span class="p">)</span>  <span class="c1"># 这里程序会报错，显示name &#39;msg_inner&#39; is not defined，也就是msg_inner未定义</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">msg_inner</span><span class="p">)</span>  <span class="c1"># 这里程序会报错，显示name &#39;msg_inner&#39; is not defined，也就是msg_inner未定义</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="71全局变量和局部变量">7.1全局变量和局部变量</h2>
@@ -875,11 +875,11 @@ HelloWorld
 
 <span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
     <span class="n">total</span> <span class="o">=</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>  <span class="c1"># 这里的total是局部变量</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数内是局部变量：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数内是局部变量：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">total</span>
 
 <span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;函数外是全局变量：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数外是全局变量：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -913,10 +913,10 @@ HelloWorld
 <span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
     <span class="k">global</span> <span class="n">num</span>  <span class="c1"># 加了global后，在函数内部是可以改变外面的全局变量</span>
     <span class="n">num</span> <span class="o">=</span> <span class="mi">123</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;在函数中的 num：&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>  <span class="c1"># 这里输出内部的num=123</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;在函数中的 num：&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>  <span class="c1"># 这里输出内部的num=123</span>
 
 <span class="n">fun</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;全局变量 num：&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;全局变量 num：&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -953,7 +953,7 @@ HelloWorld
         <span class="n">count</span> <span class="o">=</span> <span class="mi">12</span>
 
     <span class="n">inner</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
 
 <span class="n">outer</span><span class="p">()</span>  <span class="c1"># 输出结果为1</span>
 </code></pre></td></tr></table>
@@ -978,11 +978,11 @@ HelloWorld
     <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
-        <span class="n">nonlocal</span> <span class="n">count</span>
+        <span class="k">nonlocal</span> <span class="n">count</span>
         <span class="n">count</span> <span class="o">=</span> <span class="mi">12</span>
 
     <span class="n">inner</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
 
 <span class="n">outer</span><span class="p">()</span>  <span class="c1"># 输出结果为12</span>
 </code></pre></td></tr></table>
@@ -1001,7 +1001,7 @@ HelloWorld
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
 <span class="n">test</span><span class="p">()</span>  <span class="c1"># 程序会出现局部作用域引用错误</span>
 </code></pre></td></tr></table>
@@ -1020,7 +1020,7 @@ HelloWorld
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
 <span class="n">test</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 输出结果为11</span>
 </code></pre></td></tr></table>

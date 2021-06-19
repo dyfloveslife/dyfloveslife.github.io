@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/04/08/how-to-distinguish-Aliens-vs-Predators-with-transfer-learning/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="用迁移学习来区分外星人和铁血战士">
 <meta itemprop="description" content="不管是区分外星人和铁血战士，还是对图像进行分类的其他问题，都可以利用机器学习的方法来进行处理，而且使用起来更高效、更有趣。"><meta itemprop="datePublished" content="2019-04-08T08:04:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-16T10:32:56&#43;08:00" />
-<meta itemprop="wordCount" content="2089">
+<meta itemprop="wordCount" content="2088">
 <meta itemprop="keywords" content="Keras,PyTorch,Machine learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="用迁移学习来区分外星人和铁血战士"/>
 <meta name="twitter:description" content="不管是区分外星人和铁血战士，还是对图像进行分类的其他问题，都可以利用机器学习的方法来进行处理，而且使用起来更高效、更有趣。"/>
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/Machine-learning/"> Machine learning </a>
             </div>
-          <span class="more-meta"> 2089 words </span>
+          <span class="more-meta"> 2088 words </span>
           <span class="more-meta"> 5 mins read </span>
         
       </div>
@@ -203,15 +203,15 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">transforms</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="kn">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
-<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="kn">as</span> <span class="nn">optim</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>当然，你也可以查看一下模块的版本：</p>
@@ -321,12 +321,12 @@
     <span class="s1">&#39;train&#39;</span><span class="p">:</span>
     <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">image_datasets</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span>
                                 <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-                                <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>  <span class="c1"># for Kaggle</span>
     <span class="s1">&#39;validation&#39;</span><span class="p">:</span>
     <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">image_datasets</span><span class="p">[</span><span class="s1">&#39;validation&#39;</span><span class="p">],</span>
                                 <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-                                <span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">num_workers</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># for Kaggle</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -362,13 +362,13 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&#34;cuda:0&#34;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&#34;cpu&#34;</span><span class="p">)</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet50</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>    
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet50</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>    
 <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
-    <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="bp">False</span>   
+    <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>   
     
 <span class="n">model</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2048</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
-               <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+               <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
 <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
@@ -427,8 +427,8 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">num_epochs</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Epoch {}/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_epochs</span><span class="p">))</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch </span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_epochs</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">phase</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;validation&#39;</span><span class="p">]:</span>
             <span class="k">if</span> <span class="n">phase</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
@@ -458,7 +458,7 @@
             <span class="n">epoch_loss</span> <span class="o">=</span> <span class="n">running_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_datasets</span><span class="p">[</span><span class="n">phase</span><span class="p">])</span>
             <span class="n">epoch_acc</span> <span class="o">=</span> <span class="n">running_corrects</span><span class="o">.</span><span class="n">double</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_datasets</span><span class="p">[</span><span class="n">phase</span><span class="p">])</span>
 
-            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} loss: {:.4f}, acc: {:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> loss: </span><span class="si">{:.4f}</span><span class="s1">, acc: </span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span>
                                                         <span class="n">epoch_loss</span><span class="p">,</span>
                                                         <span class="n">epoch_acc</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">model</span>
@@ -524,10 +524,10 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet50</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet50</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2048</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
-               <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+               <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
                <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;./models/pytorch/weights.h5&#39;</span><span class="p">))</span>
 </code></pre></td></tr></table>
@@ -624,7 +624,7 @@
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">img</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">img_list</span><span class="p">):</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&#34;{:.0f}% Alien, {:.0f}% Predator&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">pred_probs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="mi">100</span><span class="o">*</span><span class="n">pred_probs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">{:.0f}</span><span class="s2">% Alien, </span><span class="si">{:.0f}</span><span class="s2">% Predator&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">pred_probs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="mi">100</span><span class="o">*</span><span class="n">pred_probs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>

@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/08/15/learning-python-Module/" />
@@ -158,11 +158,11 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;命令行参数如下：&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;命令行参数如下：&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">路径为：&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">路径为：&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>用<strong>命令行</strong>运行，如下所示：</p>
@@ -184,18 +184,18 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="err">$</span> <span class="n">python</span> <span class="n">test_20180715</span><span class="o">.</span><span class="n">py</span>
-<span class="err">参数</span><span class="mi">1</span> <span class="err">参数</span><span class="mi">2</span>
-<span class="err">命令行参数如下：</span>
+<span class="n">参数1</span> <span class="n">参数2</span>
+<span class="n">命令行参数如下</span><span class="err">：</span>
 <span class="n">test_20180715</span><span class="o">.</span><span class="n">py</span>
-<span class="err">参数</span><span class="mi">1</span>
-<span class="err">参数</span><span class="mi">2</span>
+<span class="n">参数1</span>
+<span class="n">参数2</span>
 
-<span class="err">路径为：</span> <span class="p">[</span><span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge&#39;</span><span class="p">,</span> <span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\
+<span class="n">路径为</span><span class="err">：</span> <span class="p">[</span><span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge&#39;</span><span class="p">,</span> <span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\
 </span><span class="se">\v</span><span class="s1">env</span><span class="se">\\</span><span class="s1">Scripts</span><span class="se">\\</span><span class="s1">python36.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;G:</span><span class="se">\\</span><span class="s1">Python</span><span class="se">\\</span><span class="s1">DLLs&#39;</span><span class="p">,</span> <span class="s1">&#39;G:</span><span class="se">\\</span><span class="s1">Python</span>
 \\<span class="n">lib</span><span class="s1">&#39;, &#39;</span><span class="n">G</span><span class="p">:</span>\\<span class="n">Python</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_test</span>\\<span class="n">venv</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_tes</span>
 <span class="n">t</span>\\<span class="n">venv</span>\\<span class="n">lib</span>\\<span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_test</span>\\<span class="n">venv</span>\\<span class="n">lib</span>\\<span class="n">sit</span>
-<span class="n">e</span><span class="o">-</span><span class="n">packages</span>\\<span class="n">setuptools</span><span class="o">-</span><span class="mf">28.8</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">py3</span><span class="o">.</span><span class="mf">6.</span><span class="n">egg</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_test</span>\\<span class="n">ve</span>
-<span class="n">nv</span>\\<span class="n">lib</span>\\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\\<span class="n">pip</span><span class="o">-</span><span class="mf">9.0</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="n">py3</span><span class="o">.</span><span class="mf">6.</span><span class="n">egg</span><span class="s1">&#39;]</span>
+<span class="n">e</span><span class="o">-</span><span class="n">packages</span>\\<span class="n">setuptools</span><span class="o">-</span><span class="mf">28.8.0</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_test</span>\\<span class="n">ve</span>
+<span class="n">nv</span>\\<span class="n">lib</span>\\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\\<span class="n">pip</span><span class="o">-</span><span class="mf">9.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="s1">&#39;]</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>说明：</p>
@@ -224,7 +224,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
     <span class="k">return</span> 
 </code></pre></td></tr></table>
 </div>
@@ -286,9 +286,9 @@
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>   <span class="c1"># 定义到n的斐波那契数列</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="k">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
 
 
 <span class="k">def</span> <span class="nf">fib2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>  <span class="c1"># 返回到n的斐波那契数列</span>
@@ -346,9 +346,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;程序自身在运行&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;程序自身在运行&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;来自另一模块&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;来自另一模块&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>运行该文件，输出结果如下：</p>

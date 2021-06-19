@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/11/26/learn-Missing-Semester-shell-tool-and-scripting/" />
@@ -468,7 +468,7 @@ carol@ubuntu-carol:~/learnShell$
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>执行完<code>./example.sh mcd.sh script.py example.sh</code>语句后可以发现，<code>mcd.sh</code>中没有<code>foobar</code>语句，因此程序会在<code>mcd.sh</code>中的末尾添加<code># foobar</code>语句。</p>

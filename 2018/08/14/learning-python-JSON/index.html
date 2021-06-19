@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/08/14/learning-python-JSON/" />
@@ -195,7 +195,7 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
 
-<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">json</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">json</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -237,8 +237,8 @@
 <span class="n">moive</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
 <span class="n">json_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">moive</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">moive</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moive</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">moive</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -248,7 +248,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Gattaca&#39;</span><span class="p">,</span> <span class="s1">&#39;release_year&#39;</span><span class="p">:</span> <span class="mi">1997</span><span class="p">,</span> <span class="s1">&#39;is_awesome&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;won_oscar&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ethan Hawke&#39;</span><span class="p">,</span> <span class="s1">&#39;Uma Thurman&#39;</span><span class="p">,</span> <span class="s1">&#39;Alan Arkin&#39;</span><span class="p">,</span> <span class="s1">&#39;Loren Dean&#39;</span><span class="p">],</span> <span class="s1">&#39;budget&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;credits&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;director&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrew Niccol&#39;</span><span class="p">,</span> <span class="s1">&#39;writer&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrew Niccol&#39;</span><span class="p">,</span> <span class="s1">&#39;composer&#39;</span><span class="p">:</span> <span class="s1">&#39;Michael Nyman&#39;</span><span class="p">,</span> <span class="s1">&#39;cinematogtapher&#39;</span><span class="p">:</span> <span class="s1">&#39;Sławomir Idziak&#39;</span><span class="p">}}</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Gattaca&#39;</span><span class="p">,</span> <span class="s1">&#39;release_year&#39;</span><span class="p">:</span> <span class="mi">1997</span><span class="p">,</span> <span class="s1">&#39;is_awesome&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;won_oscar&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;actors&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Ethan Hawke&#39;</span><span class="p">,</span> <span class="s1">&#39;Uma Thurman&#39;</span><span class="p">,</span> <span class="s1">&#39;Alan Arkin&#39;</span><span class="p">,</span> <span class="s1">&#39;Loren Dean&#39;</span><span class="p">],</span> <span class="s1">&#39;budget&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;credits&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;director&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrew Niccol&#39;</span><span class="p">,</span> <span class="s1">&#39;writer&#39;</span><span class="p">:</span> <span class="s1">&#39;Andrew Niccol&#39;</span><span class="p">,</span> <span class="s1">&#39;composer&#39;</span><span class="p">:</span> <span class="s1">&#39;Michael Nyman&#39;</span><span class="p">,</span> <span class="s1">&#39;cinematogtapher&#39;</span><span class="p">:</span> <span class="s1">&#39;Sławomir Idziak&#39;</span><span class="p">}}</span>
 <span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">dict</span><span class="s1">&#39;&gt;</span>
 </code></pre></td></tr></table>
 </div>
@@ -261,9 +261,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">moive</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">moive</span><span class="p">[</span><span class="s1">&#39;actors&#39;</span><span class="p">])</span>
-<span class="k">print</span><span class="p">(</span><span class="n">moive</span><span class="p">[</span><span class="s1">&#39;release_year&#39;</span><span class="p">])</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="n">moive</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moive</span><span class="p">[</span><span class="s1">&#39;actors&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moive</span><span class="p">[</span><span class="s1">&#39;release_year&#39;</span><span class="p">])</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -311,7 +311,7 @@
 </span><span class="s2">    }&#34;&#34;&#34;</span>
 
 <span class="n">tron</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">tron</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tron</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -348,8 +348,8 @@
 <span class="n">moive</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
 <span class="n">json_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">moive</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">moive</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moive</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">moive</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -370,7 +370,7 @@
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">moive</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">moive</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -417,12 +417,12 @@
 <span class="n">moive2</span><span class="p">[</span><span class="s1">&#39;composer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;John Williams&#39;</span>
 <span class="n">moive2</span><span class="p">[</span><span class="s1">&#39;actors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Tom Cruise&#39;</span><span class="p">,</span> <span class="s1">&#39;Colin Farrell&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;Samantha Morton&#39;</span><span class="p">,</span> <span class="s1">&#39;Max von Sydow&#39;</span><span class="p">]</span>
-<span class="n">moive2</span><span class="p">[</span><span class="s1">&#39;is_awesom&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">moive2</span><span class="p">[</span><span class="s1">&#39;is_awesom&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">moive2</span><span class="p">[</span><span class="s1">&#39;budget&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">102000000</span>
 <span class="n">moive2</span><span class="p">[</span><span class="s1">&#39;cinematographer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Janusz Kami</span><span class="se">\u0144</span><span class="s1">ski&#39;</span>  <span class="c1"># 注意这里的Unicode编码</span>
 
 <span class="n">file2</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;f:/Python_test/BasicKnowledge/movie_2.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">moive2</span><span class="p">,</span> <span class="n">file2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">moive2</span><span class="p">,</span> <span class="n">file2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">file2</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>

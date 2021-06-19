@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.83.1 with theme even" />
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/05/learning-python-BasicGrammar/" />
@@ -183,7 +183,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">keyword</span>
-<span class="k">print</span><span class="p">(</span><span class="n">keyword</span><span class="o">.</span><span class="n">kwlist</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">keyword</span><span class="o">.</span><span class="n">kwlist</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -205,7 +205,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 放在开头的注释</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello,world!&#39;</span><span class="p">)</span>  <span class="c1"># 放在语句之后的注释</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello,world!&#39;</span><span class="p">)</span>  <span class="c1"># 放在语句之后的注释</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>运行结果会忽略注释，最终显示<code>Hello,world!</code>，如下所示：</p>
@@ -248,7 +248,7 @@
 </span><span class="s2">多行注释4
 </span><span class="s2">&#34;&#34;&#34;</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello,world!&#39;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello,world!&#39;</span><span class="p">)</span> 
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -271,10 +271,10 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;False&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;False&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>注意：<code>if</code>和<code>else</code>后面都有一个英文状态下的<code>冒号</code>。</strong></p>
@@ -295,8 +295,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello1&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;hello2&#34;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello1&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;hello2&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -318,8 +318,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello1&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&#34;-&#34;</span><span class="p">)</span> <span class="c1"># 这里用横线进行分隔，也可以用空格或其他字符</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;hello2&#34;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello1&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&#34;-&#34;</span><span class="p">)</span> <span class="c1"># 这里用横线进行分隔，也可以用空格或其他字符</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;hello2&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -338,8 +338,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;helo&#34;world&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;hello&#39;world&#34;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;helo&#34;world&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;hello&#39;world&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -360,8 +360,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;hello\n&#39;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;hello\n&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -383,7 +383,7 @@
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Hello&#39;&#39;abc&#39;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello&#39;&#39;abc&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -402,8 +402,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">+</span> <span class="s1">&#39;b&#39;</span> <span class="o">+</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 重复输出5个a</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">+</span> <span class="s1">&#39;b&#39;</span> <span class="o">+</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a&#39;</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 重复输出5个a</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -432,14 +432,14 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;IlovePython&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>  <span class="c1"># 输出整个字符串</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[:])</span>  <span class="c1"># 输出整个字符串</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 输出字符串第一个字符，其索引为0</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 输出倒数第一个字符</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:])</span>  <span class="c1"># 输出第一个到最后的所有字符</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 输出从第一个到倒数第二个字符，加了冒号之后就不包括右侧的索引位置了</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># 输出从第二个到第五个字符，第二个字符的索引为1，第五个字符的索引为4，同样的，加了冒号之后就不包括右侧的索引位置了</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span> <span class="o">+</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>  <span class="c1"># 用加号连接字符串</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>  <span class="c1"># 输出整个字符串</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[:])</span>  <span class="c1"># 输出整个字符串</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 输出字符串第一个字符，其索引为0</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 输出倒数第一个字符</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:])</span>  <span class="c1"># 输出第一个到最后的所有字符</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 输出从第一个到倒数第二个字符，加了冒号之后就不包括右侧的索引位置了</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># 输出从第二个到第五个字符，第二个字符的索引为1，第五个字符的索引为4，同样的，加了冒号之后就不包括右侧的索引位置了</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span> <span class="o">+</span> <span class="s1">&#39;add&#39;</span><span class="p">)</span>  <span class="c1"># 用加号连接字符串</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -472,7 +472,7 @@
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">print</span><span class="p">(</span><span class="s2">&#34;My name is </span><span class="si">%s</span><span class="s2">,I&#39;m </span><span class="si">%d</span><span class="s2"> years old.&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;My name is </span><span class="si">%s</span><span class="s2">,I&#39;m </span><span class="si">%d</span><span class="s2"> years old.&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
@@ -500,7 +500,7 @@
 <pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">按下</span> <span class="n">Enter</span> <span class="err">后退出：</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">按下</span> <span class="n">Enter</span> <span class="n">后退出</span><span class="err">：</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下（按下回车之后）：</p>
@@ -511,9 +511,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">按下</span> <span class="n">Enter</span> <span class="err">后退出：</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">按下</span> <span class="n">Enter</span> <span class="n">后退出</span><span class="err">：</span>
 
-<span class="n">Process</span> <span class="n">finished</span> <span class="k">with</span> <span class="nb">exit</span> <span class="n">code</span> <span class="mi">0</span>
+<span class="n">Process</span> <span class="n">finished</span> <span class="k">with</span> <span class="n">exit</span> <span class="n">code</span> <span class="mi">0</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="8-导入模块">8. 导入模块</h1>

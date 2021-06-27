@@ -142,7 +142,7 @@
       <p>程序的异常处理在开发中很是常见，只有正确处理好意外情况，才能保证程序的可靠性。本文通过 Java 异常处理机制，详细的分析与解释 Java 中的 Exception 与 Error 之间的区别以及需要注意的点，以便更好的实现程序的可维护性。</p>
 <h1 id="如何区分-exception-和-error">如何区分 Exception 和 Error</h1>
 <p>在 Java 的异常处理机制中，有许多捕获由于产生的不同异常而制定不同的异常类，各异常类之间的关系如下图所示：</p>
-<!-- raw HTML omitted -->
+<p><img src="https://i.loli.net/2020/01/21/fmeEQZSGt7Txyuz.png" alt="image.png"></p>
 <p>从上图可以看出，<code>Exception</code>和<code>Error</code>都继承了<code>Throwable</code>类。一般我们在编写代码的时候，假如语法使用错误，编辑器通常会给与提醒，我们是很容易发现并改正的。但在编译期间发生的错误是不能全部找到的，也就是说，某一些错误只有在程序运行期间才能显现出来，这类错误就属于<code>Throwable</code>，它可以被抛出或者被捕获，同时也是异常处理机制的基本组成类型。</p>
 <p>对于异常的抛出，首先会在堆上创建异常对象，然后当前执行的路径会被终止，并且从当前环境中弹出对异常对象的引用，最后的程序由异常处理机制进行接管，从而将程序从错误状态中恢复。</p>
 <p>下面对<code>Exception</code>和<code>Error</code>进行展开说明：</p>

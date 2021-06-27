@@ -14,7 +14,7 @@
       <pubDate>Thu, 16 Aug 2018 16:51:11 +0800</pubDate>
       
       <guid>http://localhost:1313/2018/08/16/learning-python-logging/</guid>
-      <description>&lt;p&gt;日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。&lt;/p&gt;</description>
+      <description>&lt;p&gt;日志记录是一种跟踪软件在运行时所发生的任何事件的方法。也就是说，在日常开发过程中，我们可以将程序所产生的事件用日志的形式记录下来，以此来查看程序逻辑执行得是否合理。这对于开发人员来说十分的重要。本篇文章使用Python中的logging来对日志的一些操作展开说明。adas&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.3 with theme even" />
+<meta name="generator" content="Hugo 0.84.4 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/03/16/Java-volatile/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="volatile 是轻量级的 synchronized，其在多处理器中保证了共享变量的可见性，即当一个线程修改一个共享变量时，另一个线程会读到这个修改的值。但 volatile 不能保证原子性（例如自增操作），详细的说明将会在下文进行展开。保证并发程序正确执行还需要做到有序性，满足以上三个原则，才能够正确的执行并发程序。而本文将对 volatile 关键字进行详细解释，结合具体例子的同时说明 volatile 关键字的使用场景。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2020/03/16/Java-volatile/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-03-16T16:35:11&#43;08:00" />
-<meta property="article:modified_time" content="2020-03-16T16:36:11&#43;08:00" />
+<meta property="article:published_time" content="2020-03-16T16:35:11+08:00" />
+<meta property="article:modified_time" content="2020-03-16T16:36:11+08:00" />
 
 <meta itemprop="name" content="Java 中的 volatile">
-<meta itemprop="description" content="volatile 是轻量级的 synchronized，其在多处理器中保证了共享变量的可见性，即当一个线程修改一个共享变量时，另一个线程会读到这个修改的值。但 volatile 不能保证原子性（例如自增操作），详细的说明将会在下文进行展开。保证并发程序正确执行还需要做到有序性，满足以上三个原则，才能够正确的执行并发程序。而本文将对 volatile 关键字进行详细解释，结合具体例子的同时说明 volatile 关键字的使用场景。"><meta itemprop="datePublished" content="2020-03-16T16:35:11&#43;08:00" />
-<meta itemprop="dateModified" content="2020-03-16T16:36:11&#43;08:00" />
+<meta itemprop="description" content="volatile 是轻量级的 synchronized，其在多处理器中保证了共享变量的可见性，即当一个线程修改一个共享变量时，另一个线程会读到这个修改的值。但 volatile 不能保证原子性（例如自增操作），详细的说明将会在下文进行展开。保证并发程序正确执行还需要做到有序性，满足以上三个原则，才能够正确的执行并发程序。而本文将对 volatile 关键字进行详细解释，结合具体例子的同时说明 volatile 关键字的使用场景。"><meta itemprop="datePublished" content="2020-03-16T16:35:11+08:00" />
+<meta itemprop="dateModified" content="2020-03-16T16:36:11+08:00" />
 <meta itemprop="wordCount" content="5108">
 <meta itemprop="keywords" content="Java,Concurrent,volatile," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java 中的 volatile"/>

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.3 with theme even" />
+<meta name="generator" content="Hugo 0.84.4 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/14/Java-ThreadPool/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="在多线程并发的环境下创建多个线程去执行任务，每当有一个任务到来的时候都需要创建一个线程去执行。这种方式虽然是可行的，但如果线程并发的数量很多，并且每个线程都是执行一个时间很短的任务就结束掉了，这样频繁的创建线程就会大大降低系统的运行效率，因为频繁的创建和销毁线程需要消耗额外的时间。对于这种情况，我们可以使用线程池技术让线程达到复用的目的。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2020/04/14/Java-ThreadPool/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-04-14T13:35:11&#43;08:00" />
-<meta property="article:modified_time" content="2020-04-15T23:04:11&#43;08:00" />
+<meta property="article:published_time" content="2020-04-14T13:35:11+08:00" />
+<meta property="article:modified_time" content="2020-04-15T23:04:11+08:00" />
 
 <meta itemprop="name" content="Java 中的线程池">
-<meta itemprop="description" content="在多线程并发的环境下创建多个线程去执行任务，每当有一个任务到来的时候都需要创建一个线程去执行。这种方式虽然是可行的，但如果线程并发的数量很多，并且每个线程都是执行一个时间很短的任务就结束掉了，这样频繁的创建线程就会大大降低系统的运行效率，因为频繁的创建和销毁线程需要消耗额外的时间。对于这种情况，我们可以使用线程池技术让线程达到复用的目的。"><meta itemprop="datePublished" content="2020-04-14T13:35:11&#43;08:00" />
-<meta itemprop="dateModified" content="2020-04-15T23:04:11&#43;08:00" />
+<meta itemprop="description" content="在多线程并发的环境下创建多个线程去执行任务，每当有一个任务到来的时候都需要创建一个线程去执行。这种方式虽然是可行的，但如果线程并发的数量很多，并且每个线程都是执行一个时间很短的任务就结束掉了，这样频繁的创建线程就会大大降低系统的运行效率，因为频繁的创建和销毁线程需要消耗额外的时间。对于这种情况，我们可以使用线程池技术让线程达到复用的目的。"><meta itemprop="datePublished" content="2020-04-14T13:35:11+08:00" />
+<meta itemprop="dateModified" content="2020-04-15T23:04:11+08:00" />
 <meta itemprop="wordCount" content="7521">
 <meta itemprop="keywords" content="Java,Concurrent,ThreadPool," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java 中的线程池"/>

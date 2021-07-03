@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.3 with theme even" />
+<meta name="generator" content="Hugo 0.84.4 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/07/Java-Inter-thread-communication/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="之前的文章，比如在多线程环境中使用 synchronized 和 Lock 可以通过锁的方式实现线程之间的同步互斥访问临界资源。也就是说，只有当一个线程释放了锁之后，另一个线程才能获得锁，从而对数据进行操作。但在有些情况下，需要多个线程之间进行协作，以使得多个线程可以一起去解决某个问题，此时就需要采用线程通信-协作机制。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2020/04/07/Java-Inter-thread-communication/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-04-07T22:10:11&#43;08:00" />
-<meta property="article:modified_time" content="2020-04-12T23:19:11&#43;08:00" />
+<meta property="article:published_time" content="2020-04-07T22:10:11+08:00" />
+<meta property="article:modified_time" content="2020-04-12T23:19:11+08:00" />
 
 <meta itemprop="name" content="线程间的通信机制">
-<meta itemprop="description" content="之前的文章，比如在多线程环境中使用 synchronized 和 Lock 可以通过锁的方式实现线程之间的同步互斥访问临界资源。也就是说，只有当一个线程释放了锁之后，另一个线程才能获得锁，从而对数据进行操作。但在有些情况下，需要多个线程之间进行协作，以使得多个线程可以一起去解决某个问题，此时就需要采用线程通信-协作机制。"><meta itemprop="datePublished" content="2020-04-07T22:10:11&#43;08:00" />
-<meta itemprop="dateModified" content="2020-04-12T23:19:11&#43;08:00" />
+<meta itemprop="description" content="之前的文章，比如在多线程环境中使用 synchronized 和 Lock 可以通过锁的方式实现线程之间的同步互斥访问临界资源。也就是说，只有当一个线程释放了锁之后，另一个线程才能获得锁，从而对数据进行操作。但在有些情况下，需要多个线程之间进行协作，以使得多个线程可以一起去解决某个问题，此时就需要采用线程通信-协作机制。"><meta itemprop="datePublished" content="2020-04-07T22:10:11+08:00" />
+<meta itemprop="dateModified" content="2020-04-12T23:19:11+08:00" />
 <meta itemprop="wordCount" content="9220">
 <meta itemprop="keywords" content="Java,Concurrent,wait,notify,notifyAll," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="线程间的通信机制"/>

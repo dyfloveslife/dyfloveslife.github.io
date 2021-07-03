@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.84.3 with theme even" />
+<meta name="generator" content="Hugo 0.84.4 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/27/Java-CopyOnWrite/" />
@@ -43,12 +43,12 @@
 <meta property="og:description" content="在某些读多写少的多线程环境下，基于 CopyOnWrite 思想的 CopyOnWriteArrayList 容器和 CopyOnWriteArraySet 容器可以保证线程安全，能够确保读操作和写操作之间不会被阻塞。本文将会从 线程不安全的 ArrayList 入手，由 CopyOnWrite 思想引申到 CopyOnWriteArrayList，通过示例说明它是怎么保证线程安全的，适用的场景，最后对其进行总结。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2020/04/27/Java-CopyOnWrite/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-04-27T15:02:11&#43;08:00" />
-<meta property="article:modified_time" content="2020-04-27T19:19:56&#43;08:00" />
+<meta property="article:published_time" content="2020-04-27T15:02:11+08:00" />
+<meta property="article:modified_time" content="2020-04-27T19:19:56+08:00" />
 
 <meta itemprop="name" content="Java 中的 CopyOnWrite 容器">
-<meta itemprop="description" content="在某些读多写少的多线程环境下，基于 CopyOnWrite 思想的 CopyOnWriteArrayList 容器和 CopyOnWriteArraySet 容器可以保证线程安全，能够确保读操作和写操作之间不会被阻塞。本文将会从 线程不安全的 ArrayList 入手，由 CopyOnWrite 思想引申到 CopyOnWriteArrayList，通过示例说明它是怎么保证线程安全的，适用的场景，最后对其进行总结。"><meta itemprop="datePublished" content="2020-04-27T15:02:11&#43;08:00" />
-<meta itemprop="dateModified" content="2020-04-27T19:19:56&#43;08:00" />
+<meta itemprop="description" content="在某些读多写少的多线程环境下，基于 CopyOnWrite 思想的 CopyOnWriteArrayList 容器和 CopyOnWriteArraySet 容器可以保证线程安全，能够确保读操作和写操作之间不会被阻塞。本文将会从 线程不安全的 ArrayList 入手，由 CopyOnWrite 思想引申到 CopyOnWriteArrayList，通过示例说明它是怎么保证线程安全的，适用的场景，最后对其进行总结。"><meta itemprop="datePublished" content="2020-04-27T15:02:11+08:00" />
+<meta itemprop="dateModified" content="2020-04-27T19:19:56+08:00" />
 <meta itemprop="wordCount" content="2804">
 <meta itemprop="keywords" content="JVM,Concurrency,CopyOnWriteArrayList,CopyOnWriteArraySet," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java 中的 CopyOnWrite 容器"/>

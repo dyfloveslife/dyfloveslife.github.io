@@ -142,11 +142,11 @@
       <p>本篇文章主要对 Spring 框架进行整体介绍，包括其核心功能模块与体系结构，让大家对该框架有个大体的认识。</p>
 <h1 id="0-前景提要">0. 前景提要</h1>
 <p>如果你之前学过 Servlet 的话，那么一定会对 <a href="https://zh.wikipedia.org/wiki/MVC">MVC</a> 分层概念有所了解，我们一般在做项目的时候，会将与数据库操作（比如增、删、改、查）相关的部分放在 Dao 层，将登录、注册等功能放在 Service 层，而将用户获取表单数据、调用业务逻辑、分发转向等操作放在 Web 层（也叫表示层，具体的说，应该是在表示层下的控制层）。Servlet 的主要功能是交互式地浏览和交互数据，生成动态的 Web 内容，因此其可以响应任何类型的请求。</p>
-<p>一个清晰的结构图如下：
-<img src="https://i.loli.net/2019/11/17/XEg6vO2BrpM5Y7k.png" alt="image.png"></p>
+<p>一个清晰的结构图如下：</p>
+<p><img src="https://i.loli.net/2019/11/17/XEg6vO2BrpM5Y7k.png" alt="image.png"></p>
 <h1 id="1-spring-介绍">1. Spring 介绍</h1>
-<p>这时候你可能会问了：介绍 Servlet 干嘛？这和 Spring 有什么关系吗？其实，我这里是为了引出 Spring 框架，接下来会通过结构图的形式让你知道 Spring 处在什么位置。如下所示：
-<img src="https://i.loli.net/2019/11/17/QWGuve5M4y9lLwZ.png" alt="image.png"></p>
+<p>这时候你可能会问了：介绍 Servlet 干嘛？这和 Spring 有什么关系吗？其实，我这里是为了引出 Spring 框架，接下来会通过结构图的形式让你知道 Spring 处在什么位置。如下所示：</p>
+<p><img src="https://i.loli.net/2019/11/17/QWGuve5M4y9lLwZ.png" alt="image.png"></p>
 <p>你可以看到，不管是 SSH 框架还是 SSM 框架，底层都需要 Spring 的支持，所以说，学好 Spring 极其重要。</p>
 <p>Spring 其实是一种容器框架，基于<strong>控制反转</strong> (IoC，Inversion of Control) 与<strong>依赖注入</strong> (DI，Dependency Injection) 进行实现，我们暂且将这两个名词理解为：通过 IoC 和 DI 操作将<strong>对象</strong>交付给 Spring，让 Sping 容器来控制<strong>对象</strong>，也就是我们平时 new 的<strong>对象</strong>不在程序中 new 了，而是让 Spring 帮助我们去做，我们只需要在配置文件中进行配置就可以了（当然可以在程序中标记注解），后面几篇文章会详细讲到。</p>
 <h1 id="2-spring-体系结构">2. Spring 体系结构</h1>

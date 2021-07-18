@@ -23,7 +23,7 @@
       <pubDate>Sat, 03 Aug 2019 16:30:11 +0000</pubDate>
       
       <guid>http://localhost:1313/2019/08/03/spring-ioc/</guid>
-      <description>&lt;p&gt;本篇文章主要对 Spring 框架中的核心功能之一&lt;strong&gt;控制反转 (IOC，Inversion of Control)&lt;/strong&gt; 进行介绍，采用 &lt;strong&gt;理论+实战&lt;/strong&gt; 的方式给大家阐述其中的原理以及明确需要注意的地方。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本篇文章主要对 Spring 框架中的核心功能之一&lt;strong&gt;控制反转 (IOC，Inversion of Control)&lt;strong&gt;进行介绍，采用&lt;/strong&gt;理论 + 实战&lt;/strong&gt;的方式给大家阐述其中的原理以及明确需要注意的地方。&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/2019/08/03/spring-di/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-08-03T21:03:11+00:00" />
-<meta property="article:modified_time" content="2021-07-17T21:32:00+00:00" />
+<meta property="article:modified_time" content="2021-07-18T17:15:00+00:00" />
 
 <meta itemprop="name" content=" Spring 学习笔记（4）依赖注入 DI ">
 <meta itemprop="description" content="本篇文章主要对 Spring 框架中的核心功能之一依赖注入 (DI，Dependency Injection) 进行介绍，也是采用 理论&#43;实战 的方式给大家阐述其中的原理以及明确需要注意的地方。"><meta itemprop="datePublished" content="2019-08-03T21:03:11+00:00" />
-<meta itemprop="dateModified" content="2021-07-17T21:32:00+00:00" />
-<meta itemprop="wordCount" content="1480">
+<meta itemprop="dateModified" content="2021-07-18T17:15:00+00:00" />
+<meta itemprop="wordCount" content="9445">
 <meta itemprop="keywords" content="Spring,DI," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=" Spring 学习笔记（4）依赖注入 DI "/>
 <meta name="twitter:description" content="本篇文章主要对 Spring 框架中的核心功能之一依赖注入 (DI，Dependency Injection) 进行介绍，也是采用 理论&#43;实战 的方式给大家阐述其中的原理以及明确需要注意的地方。"/>
@@ -126,8 +126,8 @@
         <div class="post-category">
             <a href="/categories/Spring/"> Spring </a>
             </div>
-          <span class="more-meta"> 1480 words </span>
-          <span class="more-meta"> 3 mins read </span>
+          <span class="more-meta"> 9445 words </span>
+          <span class="more-meta"> 19 mins read </span>
         
       </div>
     </header>
@@ -140,13 +140,44 @@
     <li><a href="#1-依赖注入">1. 依赖注入</a></li>
     <li><a href="#2-di-简单案例">2. DI 简单案例</a>
       <ul>
-        <li><a href="#21-创建bookdao-接口和实现类">2.1 创建BookDao 接口和实现类</a></li>
-        <li><a href="#22-创建-bookservice-接口和实现类">2.2 创建 BookService 接口和实现类</a></li>
-        <li><a href="#23-在-xml-配置文件中配置-dao-和-service">2.3 在 xml 配置文件中配置 dao 和 service</a></li>
-        <li><a href="#24-测试类">2.4 测试类</a></li>
+        <li><a href="#创建-bookdao-接口和实现类">创建 BookDao 接口和实现类</a></li>
+        <li><a href="#创建-bookservice-接口和实现类">创建 BookService 接口和实现类</a></li>
+        <li><a href="#在-xml-配置文件中配置-dao-和-service">在 xml 配置文件中配置 dao 和 service</a></li>
+        <li><a href="#测试类">测试类</a></li>
       </ul>
     </li>
-    <li><a href="#3-总结">3. 总结</a></li>
+    <li><a href="#3-注入的方式">3. 注入的方式</a>
+      <ul>
+        <li><a href="#setter-方法注入">setter 方法注入</a></li>
+        <li><a href="#构造方法注入">构造方法注入</a></li>
+        <li><a href="#注入的细节">注入的细节</a></li>
+        <li><a href="#引入其他的-bean">引入其他的 Bean</a></li>
+        <li><a href="#null-值和级联属性">null 值和级联属性</a></li>
+        <li><a href="#集合属性">集合属性</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-自动装配">4. 自动装配</a></li>
+    <li><a href="#5-bean-之间的关系">5. Bean 之间的关系</a>
+      <ul>
+        <li><a href="#继承关系">继承关系</a></li>
+        <li><a href="#依赖关系">依赖关系</a></li>
+        <li><a href="#bean-的作用域">Bean 的作用域</a></li>
+      </ul>
+    </li>
+    <li><a href="#6-ioc-容器中-bean-的生命周期">6. IoC 容器中 Bean 的生命周期</a>
+      <ul>
+        <li><a href="#bean-的后置处理器">Bean 的后置处理器</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-配置-bean-的方式">7. 配置 Bean 的方式</a>
+      <ul>
+        <li><a href="#静态工厂方法">静态工厂方法</a></li>
+        <li><a href="#实例工厂方法">实例工厂方法</a></li>
+        <li><a href="#factorybean">FactoryBean</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-基于注解的方式配置-bean">8. 基于注解的方式配置 Bean</a></li>
+    <li><a href="#9-泛型依赖注入">9. 泛型依赖注入</a></li>
   </ul>
 </nav>
   </div>
@@ -168,7 +199,8 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>有两个类，即 A 类和 B 类，在 B 类中使用了 A 类对象，这时我们就说，当一个对象需要使用另一个对象的时候就产生了依赖。在之前的开发中，对于上面的情况，我们需要使用 <code>接口 引用名称 = new 实现类()</code> 的方式，但这存在一个问题，它们之间的耦合度太高了，彼此产生了依赖，不利于功能的拓展。而当我们引入<strong>依赖注入</strong>后，就对其进行了解耦，当我们需要使用某个接口的时候，不需要知道具体的实现类。</p>
-<p>而对于注入，就是让容器去把符合依赖关系的对象通过 <code>bean</code> 属性或者构造函数的方式传递给需要的对象，分为设值方法注入(Setter Injection)和构造器注入(Constructor Injection)。这里先介绍用 setter 的方式进行注入，构造器的方法在以后会讲到。</p>
+<p>而对于注入，就是让容器去把符合依赖关系的对象通过 <code>bean</code> 属性或者构造函数的方式传递给需要的对象，分为<strong>属性注入(Setter Injection)<strong>和</strong>构造器注入(Constructor Injection)</strong>。这里先介绍用 setter 的方式进行注入，构造器的方法在文章的后面会讲到。</p>
+<p>而 Bean 的配置形式可以是基于 xml 文件的方式，也可以是基于注解的方式。具体的讲，可以通过全类名（反射）、工厂方法（静态工厂方法和实例工厂方法）、FactoryBean 的形式进行配置。</p>
 <h2 id="2-di-简单案例">2. DI 简单案例</h2>
 <p>为了演示依赖注入这一特点，这里的步骤一共有四步，如下所示：</p>
 <ul>
@@ -177,7 +209,7 @@
 <li>在 xml 配置文件中配置 dao 和 service</li>
 <li>测试</li>
 </ul>
-<h3 id="21-创建bookdao-接口和实现类">2.1 创建BookDao 接口和实现类</h3>
+<h3 id="创建-bookdao-接口和实现类">创建 BookDao 接口和实现类</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -216,7 +248,7 @@
 <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="22-创建-bookservice-接口和实现类">2.2 创建 BookService 接口和实现类</h3>
+</div><h3 id="创建-bookservice-接口和实现类">创建 BookService 接口和实现类</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -274,7 +306,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>可以看到，方式 1 是之前使用的方式，这种方式需要用到具体的实现类，增加了耦合性。而方式 2 通过 <code>接口 + setter方法</code> 的形式进行了解耦，这样就胡需要知道具体的实现类了。</p>
-<h3 id="23-在-xml-配置文件中配置-dao-和-service">2.3 在 xml 配置文件中配置 dao 和 service</h3>
+<h3 id="在-xml-配置文件中配置-dao-和-service">在 xml 配置文件中配置 dao 和 service</h3>
 <p>我们还是在 <code>src</code> 下创建 <code>bean.xml</code> 配置文件，文件内容如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -340,7 +372,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>这里对子标签 <code>&lt;property&gt;</code> 进行说明，该标签用于进行属性注入，其中 <code>name</code> 表示 <code>bean</code> 的属性名，是通过<strong>BookServiceImpl.java 实现类</strong>中的 <code>setter</code> 方法获得的，即 <code>bookDao</code>，而 <code>ref</code> 表示另一个 <code>bean</code> 的 <code>id</code> 值的引用，在这里引用的是 <code>dao</code> 的 <code>id</code> ，即 <code>bookDaoId</code> 。至此，对其属性就注入完成了，我们下面编写测试类。</p>
-<h3 id="24-测试类">2.4 测试类</h3>
+<h3 id="测试类">测试类</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -365,9 +397,2119 @@
 </div>
 </div><p>实现方式和上一篇介绍 IoC 一样，也是先获取配置文件，然后获取 <code>bean</code> 并加载元数据，将其强转成 <code>BookService</code> 类型后调用 <code>addBook()</code> 方法即可，最后可以看到输出语句为 <code>b_di...save</code> 。</p>
 <p>需要注意的是，<code>getBean()</code> 的参数是配置文件中配置 <code>service</code> 的 <code>id</code> 。因为我们要先得到 service 层，通过 <code>service</code> 得到 <code>addBook()</code> 方法，在该方法中调用 <code>dao</code> 的 <code>save()</code> 方法，从而输出 <code>b_di...save</code>。</p>
-<h2 id="3-总结">3. 总结</h2>
-<p>本文演示了通过使用控制反转与依赖注入的方式将属性注入到实例 <code>bean</code> 中，以后凡是涉及到与 <code>new</code> 创建对象有关的都会在配置文件中进行配置。当然。后期还会利用注解的方式进行配置，这两种方式都可以，只不过各有优缺点，也是每个人的习惯问题，这个问题我们后面再将。</p>
-<p>如果你认为文章有错误或者描述不准确的话，请与我联系，谢谢！</p>
+<p>这里的 ApplicationContext 代表 IoC 容器，实际上它是一个接口。在 Spring IoC 容器读取 Bean 配置 Bean 实例之前，需要对容器本身进行初始化。只有容器进行初始化后，才可以从 IoC 容器里获取 Bean 实例并使用。</p>
+<p>Spring 提供了两种类型的 IoC 容器实现：</p>
+<ul>
+<li>BeanFactory：IoC 容器的基本实现；</li>
+<li>ApplicationContext：提供了更多的高级功能，是 BeanFactory 的子接口。</li>
+</ul>
+<p>BeanFactory 是 Spring 框架的基础设施，面向 Spring 本身；ApplicationContext 面向使用 Spring 框架的开发者，几乎所有的应用场景都会使用 ApplicationContext 而非底层的 BeanFactory。但无论使用哪种方式，其配置文件都是相同的。</p>
+<p>ApplicationContext 主要有两个实现类：</p>
+<ul>
+<li>ClassPathXmlApplicationContext：从类路径下加载配置文件。</li>
+<li>FileSystemXmlApplicationContext：从文件系统中加载配置文件。</li>
+</ul>
+<p>此外，ConfigurableApplicationContext 扩展于 ApplicationContext，新增加了两个主要方法：refresh() 和 close()，让 ApplicationContext 具有启动、刷新和关闭上下文的能力。WebApplicationContext 是专门为 WEB 应用准备的，它允许从相对于 WEB 根目录的路径中完成初始化工作。它们之间的关系如下图所示：</p>
+<p><img src="https://i.loli.net/2021/07/18/YcBbyCTDJFOx2wo.png" alt="image.png"></p>
+<p>需要注意的是：<strong>ApplicationContext 在初始化上下文时就实例化所有单例 Bean</strong>。</p>
+<p>在获取 Bean 的时候，除了可以使用 getBean(String) 方法之外，还可以使用 getBean(Class) 方法。如果使用后者，则需要确保当前 Bean 在 IoC 容器中是唯一的。如果不是唯一的，那么会出现如下错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&#34;http://www.springframework.org/schema/beans&#34;</span>
+       <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&#34;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!--配置 bean--&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;helloWorld&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.HelloWorld&#34;</span> <span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;name&#34;</span> <span class="na">value=</span><span class="s">&#34;Spring&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;age&#34;</span> <span class="na">value=</span><span class="s">&#34;123&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;helloWorld2&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.HelloWorld&#34;</span> <span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;name&#34;</span> <span class="na">value=</span><span class="s">&#34;Spring&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;age&#34;</span> <span class="na">value=</span><span class="s">&#34;123&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">&#34;main&#34;</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">factory</span><span class="o">.</span><span class="na">NoUniqueBeanDefinitionException</span><span class="o">:</span> <span class="n">No</span> <span class="n">qualifying</span> <span class="n">bean</span> <span class="n">of</span> <span class="n">type</span> <span class="err">&#39;</span><span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">springdemo</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">HelloWorld</span><span class="err">&#39;</span> <span class="n">available</span><span class="o">:</span> <span class="n">expected</span> <span class="n">single</span> <span class="n">matching</span> <span class="n">bean</span> <span class="n">but</span> <span class="n">found</span> <span class="n">2</span><span class="o">:</span> <span class="n">helloWorld</span><span class="o">,</span><span class="n">helloWorld2</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3-注入的方式">3. 注入的方式</h2>
+<h3 id="setter-方法注入">setter 方法注入</h3>
+<p>如前面所提到的，使用 setter 方法注入，就是在 xml 文件中引入 property 属性，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;name&#34;</span> <span class="na">value=</span><span class="s">&#34;Spring&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="构造方法注入">构造方法注入</h3>
+<p>通过构造方法注入 Bean 的属性值或依赖对象，它保证了 Bean 实例在实例化后就可以使用。该方式通过<code>&lt;constructor-arg&gt;</code>元素里声明属性。但需要注意的是，该元素里没有 name 属性。下面通过一个示例，展示其使用方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Car.java
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">brand</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">corp</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">maxSpeed</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Car</span><span class="o">(</span><span class="n">String</span> <span class="n">brand</span><span class="o">,</span> <span class="n">String</span> <span class="n">corp</span><span class="o">,</span> <span class="kt">int</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">brand</span> <span class="o">=</span> <span class="n">brand</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">corp</span> <span class="o">=</span> <span class="n">corp</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;Car{&#34;</span> <span class="o">+</span>
+                <span class="s">&#34;brand=&#39;&#34;</span> <span class="o">+</span> <span class="n">brand</span> <span class="o">+</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">+</span>
+                <span class="s">&#34;, corp=&#39;&#34;</span> <span class="o">+</span> <span class="n">corp</span> <span class="o">+</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">+</span>
+                <span class="s">&#34;, price=&#34;</span> <span class="o">+</span> <span class="n">price</span> <span class="o">+</span>
+                <span class="s">&#34;, maxSpeed=&#34;</span> <span class="o">+</span> <span class="n">maxSpeed</span> <span class="o">+</span>
+                <span class="sc">&#39;}&#39;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!--通过构造方法配置 Bean 的属性--&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Car&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Audi&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;ShangHai&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;300000&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testConstructBean</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;applicationContext.xml&#34;</span><span class="o">);</span>
+        <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="o">(</span><span class="n">Car</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;car&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Car{brand=&#39;Audi&#39;, corp=&#39;ShangHai&#39;, price=300000, maxSpeed=0}
+</code></pre></td></tr></table>
+</div>
+</div><p>如果我们改造一下，再添加一个构造器，同时在 xml 文件中再配置一个 Bean，看看是什么效果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">brand</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">corp</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">price</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">maxSpeed</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Car</span><span class="o">(</span><span class="n">String</span> <span class="n">brand</span><span class="o">,</span> <span class="n">String</span> <span class="n">corp</span><span class="o">,</span> <span class="kt">double</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">brand</span> <span class="o">=</span> <span class="n">brand</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">corp</span> <span class="o">=</span> <span class="n">corp</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Car</span><span class="o">(</span><span class="n">String</span> <span class="n">brand</span><span class="o">,</span> <span class="n">String</span> <span class="n">corp</span><span class="o">,</span> <span class="kt">int</span> <span class="n">maxSpeed</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">brand</span> <span class="o">=</span> <span class="n">brand</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">corp</span> <span class="o">=</span> <span class="n">corp</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">maxSpeed</span> <span class="o">=</span> <span class="n">maxSpeed</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;Car{&#34;</span> <span class="o">+</span>
+                <span class="s">&#34;brand=&#39;&#34;</span> <span class="o">+</span> <span class="n">brand</span> <span class="o">+</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">+</span>
+                <span class="s">&#34;, corp=&#39;&#34;</span> <span class="o">+</span> <span class="n">corp</span> <span class="o">+</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">+</span>
+                <span class="s">&#34;, price=&#34;</span> <span class="o">+</span> <span class="n">price</span> <span class="o">+</span>
+                <span class="s">&#34;, maxSpeed=&#34;</span> <span class="o">+</span> <span class="n">maxSpeed</span> <span class="o">+</span>
+                <span class="sc">&#39;}&#39;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!--通过构造方法配置 Bean 的属性--&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Car&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Audi&#34;</span> <span class="na">index=</span><span class="s">&#34;0&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;ShangHai&#34;</span> <span class="na">index=</span><span class="s">&#34;1&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;300000&#34;</span> <span class="na">index=</span><span class="s">&#34;2&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car2&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Car&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;BMW&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Beijing&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;240&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testConstructBean</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;applicationContext.xml&#34;</span><span class="o">);</span>
+        <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="o">(</span><span class="n">Car</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;car&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
+
+        <span class="n">car</span> <span class="o">=</span> <span class="o">(</span><span class="n">Car</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;car2&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Car{brand=&#39;Audi&#39;, corp=&#39;ShangHai&#39;, price=300000.0, maxSpeed=0}
+Car{brand=&#39;BMW&#39;, corp=&#39;Beijing&#39;, price=240.0, maxSpeed=0}
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到，IoC 容器在给两个构造器赋值的时候，产生了歧义。我们原本想把 id=&ldquo;car2&rdquo; 中的 240 这个值赋值给 maxSpeed，可是现在这个值也都赋值给了 price。</p>
+<p>这有点类似于方法的重载，我们可以通过指定参数的类型来进行赋值。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!--通过构造方法配置 Bean 的属性--&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Car&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Audi&#34;</span> <span class="na">index=</span><span class="s">&#34;0&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;ShangHai&#34;</span> <span class="na">index=</span><span class="s">&#34;1&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;300000&#34;</span> <span class="na">type=</span><span class="s">&#34;double&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car2&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Car&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;BMW&#34;</span> <span class="na">type=</span><span class="s">&#34;java.lang.String&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Beijing&#34;</span> <span class="na">type=</span><span class="s">&#34;java.lang.String&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;240&#34;</span> <span class="na">type=</span><span class="s">&#34;int&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Car{brand=&#39;Audi&#39;, corp=&#39;ShangHai&#39;, price=300000.0, maxSpeed=0}
+Car{brand=&#39;BMW&#39;, corp=&#39;Beijing&#39;, price=0.0, maxSpeed=240}
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到，输出了我们想要的结果。因此，在使用构造器注入属性值时，可以指定参数的位置和参数的类型，以区分重载的构造器。</p>
+<h3 id="注入的细节">注入的细节</h3>
+<p>可以看到，我们在 xml 中通过使用 value=&ldquo;240&rdquo; 的方式，将一个字符串类型的 240 赋值给了 int 类型的 maxSpeed。对于这样的字面值，即使用字符串表示的值，可以通过<code>value</code>元素标签或 value 属性注入。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car2&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Car&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;BMW&#34;</span> <span class="na">type=</span><span class="s">&#34;java.lang.String&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Beijing&#34;</span> <span class="na">type=</span><span class="s">&#34;java.lang.String&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">type=</span><span class="s">&#34;int&#34;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;value&gt;</span>240<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>基本数据类型及其封装类型、String 等类型都可以采取字面值植入的方式。如果字面值包含特殊字符，那么可以使用<code>&lt;![CDATA[]]&gt;</code>把字面值包裹起来。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car2&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Car&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;BMW&#34;</span> <span class="na">type=</span><span class="s">&#34;java.lang.String&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">type=</span><span class="s">&#34;java.lang.String&#34;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;value&gt;</span><span class="cp">&lt;![CDATA[&lt;ShangHai^&gt;]]&gt;</span><span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">type=</span><span class="s">&#34;int&#34;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;value&gt;</span>240<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Car{brand=&#39;BMW&#39;, corp=&#39;&lt;ShangHai^&gt;&#39;, price=0.0, maxSpeed=240}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="引入其他的-bean">引入其他的 Bean</h3>
+<p>组成应用程序的 Bean 经常需要相互协作，以完成应用程序的功能。要使 Bean 能够相互访问，就必须在 Bean 的配置文件中指定对 Bean 的引用。</p>
+<p>在 Bean 的配置文件中，可以通过<code>&lt;ref&gt;</code>元素或 ref 属性为 Bean 的属性或构造器参数指定对 Bean 的引用。也可以在属性或构造器里包含 Bean 的声明，这样的 Bean 被称为<strong>内部 Bean</strong>。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="n">Car</span> <span class="n">car</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Car</span> <span class="nf">getCar</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">car</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCar</span><span class="o">(</span><span class="n">Car</span> <span class="n">car</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">car</span> <span class="o">=</span> <span class="n">car</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;Person{&#34;</span> <span class="o">+</span>
+                <span class="s">&#34;name=&#39;&#34;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">+</span>
+                <span class="s">&#34;, age=&#34;</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span>
+                <span class="s">&#34;, car=&#34;</span> <span class="o">+</span> <span class="n">car</span> <span class="o">+</span>
+                <span class="sc">&#39;}&#39;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car2&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Car&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;BMW&#34;</span> <span class="na">type=</span><span class="s">&#34;java.lang.String&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">type=</span><span class="s">&#34;java.lang.String&#34;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;value&gt;</span><span class="cp">&lt;![CDATA[&lt;ShangHai^&gt;]]&gt;</span><span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">type=</span><span class="s">&#34;int&#34;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;value&gt;</span>240<span class="nt">&lt;/value&gt;</span>
+	<span class="nt">&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;person&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Person&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;name&#34;</span> <span class="na">value=</span><span class="s">&#34;Tom&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;age&#34;</span> <span class="na">value=</span><span class="s">&#34;24&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+	<span class="c">&lt;!-- 这里引用了上面的 car2 --&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;car&#34;</span> <span class="na">ref=</span><span class="s">&#34;car2&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testBeanRef</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;applicationContext.xml&#34;</span><span class="o">);</span>
+        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="o">(</span><span class="n">Person</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;person&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Person{name=&#39;Tom&#39;, age=24, car=Car{brand=&#39;BMW&#39;, corp=&#39;&lt;ShangHai^&gt;&#39;, price=0.0, maxSpeed=240}}
+</code></pre></td></tr></table>
+</div>
+</div><p>当然，也可以写成如下形式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;person&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Person&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;name&#34;</span> <span class="na">value=</span><span class="s">&#34;Tom&#34;</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;age&#34;</span> <span class="na">value=</span><span class="s">&#34;24&#34;</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;car&#34;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;ref</span> <span class="na">bean=</span><span class="s">&#34;car2&#34;</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>下面声明一个内部 Bean，内部 Bean 是不能被外部引用的。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;person&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Person&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;name&#34;</span> <span class="na">value=</span><span class="s">&#34;Tom&#34;</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;age&#34;</span> <span class="na">value=</span><span class="s">&#34;24&#34;</span><span class="nt">/&gt;</span>
+	<span class="c">&lt;!--
+</span><span class="c">	&lt;property name=&#34;car&#34;&gt;
+</span><span class="c">		&lt;ref bean=&#34;car2&#34;/&gt;
+</span><span class="c">	&lt;/property&gt;
+</span><span class="c">	--&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;car&#34;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Car&#34;</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Ford&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+			<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Changan&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+			<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;200000&#34;</span> <span class="na">type=</span><span class="s">&#34;double&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+		<span class="nt">&lt;/bean&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Person{name=&#39;Tom&#39;, age=24, car=Car{brand=&#39;Ford&#39;, corp=&#39;Changan&#39;, price=200000.0, maxSpeed=0}}
+</code></pre></td></tr></table>
+</div>
+</div><p>这里不需要在 Bean 中指定 id 了，因为内部 Bean 不能被外部使用，所以这里的 id 就没有意义了。</p>
+<h3 id="null-值和级联属性">null 值和级联属性</h3>
+<p>可以使用专用的<code>&lt;null/&gt;</code>元素标签为 Bean 的字符串或其他对象类型的属性注入 null 值。同时，Spring 也支持级联属性的配置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;person2&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Person&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Jerry&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;25&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg&gt;&lt;null/&gt;&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Person{name=&#39;Jerry&#39;, age=25, car=null}
+</code></pre></td></tr></table>
+</div>
+</div><p>对于级联属性，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;person2&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.beans.Person&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Jerry&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;25&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">ref=</span><span class="s">&#34;car&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;car.maxSpeed&#34;</span> <span class="na">value=</span><span class="s">&#34;250&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Person{name=&#39;Jerry&#39;, age=25, car=Car{brand=&#39;Audi&#39;, corp=&#39;ShangHai&#39;, price=300000.0, maxSpeed=250}}
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是，属性需要先初始化后才能为级联属性赋值，否则会有异常。这是区别于 Structs2 的一点。</p>
+<h3 id="集合属性">集合属性</h3>
+<p>在 Spring 中可以通过一组内置的 xml 标签（<code>&lt;list&gt;</code>、<code>&lt;set&gt;</code>、<code>&lt;map&gt;</code>）来配置集合属性。List 类型和数组类型的属性，可以使用<code>&lt;List&gt;</code>，Set 类型的属性需要使用<code>&lt;Set&gt;</code>。对于 Map 类型，需要使用多个<code>&lt;entry&gt;</code>作为子标签，每个条目包含一个键和一个值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;person3&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.collections.Person&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;name&#34;</span> <span class="na">value=</span><span class="s">&#34;Mike&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;age&#34;</span> <span class="na">value=</span><span class="s">&#34;25&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;cars&#34;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;list&gt;</span>
+			<span class="nt">&lt;ref</span> <span class="na">bean=</span><span class="s">&#34;car&#34;</span><span class="nt">&gt;&lt;/ref&gt;</span>
+			<span class="nt">&lt;ref</span> <span class="na">bean=</span><span class="s">&#34;car2&#34;</span><span class="nt">&gt;&lt;/ref&gt;</span>
+		<span class="nt">&lt;/list&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testCollectionAttributes</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;applicationContext.xml&#34;</span><span class="o">);</span>
+        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="o">(</span><span class="n">Person</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;person3&#34;</span><span class="o">);</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Person{name=&#39;Mike&#39;, age=25, cars=[Car{brand=&#39;Audi&#39;, corp=&#39;ShangHai&#39;, price=300000.0, maxSpeed=250}, Car{brand=&#39;BMW&#39;, corp=&#39;&lt;ShangHai^&gt;&#39;, price=0.0, maxSpeed=240}]}
+</code></pre></td></tr></table>
+</div>
+</div><p>对于 Map 类型的赋值，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewPerson</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Car</span><span class="o">&gt;</span> <span class="n">cars</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">NewPerson</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Car</span><span class="o">&gt;</span> <span class="nf">getCars</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">cars</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCars</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Car</span><span class="o">&gt;</span> <span class="n">cars</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">cars</span> <span class="o">=</span> <span class="n">cars</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;NewPerson{&#34;</span> <span class="o">+</span>
+                <span class="s">&#34;name=&#39;&#34;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">+</span>
+                <span class="s">&#34;, age=&#34;</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span>
+                <span class="s">&#34;, cars=&#34;</span> <span class="o">+</span> <span class="n">cars</span> <span class="o">+</span>
+                <span class="sc">&#39;}&#39;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!-- 配置 Map 属性值 --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;newPerson&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.collections.NewPerson&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;name&#34;</span> <span class="na">value=</span><span class="s">&#34;Rose&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;age&#34;</span> <span class="na">value=</span><span class="s">&#34;28&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;cars&#34;</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;map&gt;</span>
+			<span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;AA&#34;</span> <span class="na">value-ref=</span><span class="s">&#34;car&#34;</span><span class="nt">&gt;&lt;/entry&gt;</span>
+			<span class="nt">&lt;entry</span> <span class="na">key=</span><span class="s">&#34;BB&#34;</span> <span class="na">value-ref=</span><span class="s">&#34;car2&#34;</span><span class="nt">&gt;&lt;/entry&gt;</span>
+		<span class="nt">&lt;/map&gt;</span>
+	<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testMapAttributes</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;applicationContext.xml&#34;</span><span class="o">);</span>
+        <span class="n">NewPerson</span> <span class="n">newPerson</span> <span class="o">=</span> <span class="o">(</span><span class="n">NewPerson</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;newPerson&#34;</span><span class="o">);</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">newPerson</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">NewPerson{name=&#39;Rose&#39;, age=28, cars={AA=Car{brand=&#39;Audi&#39;, corp=&#39;ShangHai&#39;, price=300000.0, maxSpeed=250}, BB=Car{brand=&#39;BMW&#39;, corp=&#39;&lt;ShangHai^&gt;&#39;, price=0.0, maxSpeed=240}}}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-自动装配">4. 自动装配</h2>
+<p>Spring IoC 容器可以自动装配 Bean，只需在<code>&lt;bean&gt;</code>的 autowire 属性里指定自动装配的模式，有以下几种方式：</p>
+<ul>
+<li>byType：根据类型自动装配。如果 IoC 容器中有多个与目标 Bean 类型一致的 Bean，在这种情况下，Spring 将无法判断哪个 Bean 最适合该属性，所以不能执行自动装配。</li>
+<li>byName：根据名称自动装配。必须将目标 Bean 的名称和属性名设置相同。</li>
+<li>constructor：通过构造器自动装配。当 Bean 中存在多个构造器时，此方式将会很复杂，<strong>不推荐使用</strong>。</li>
+</ul>
+<p>以往的实现方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;address&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.autowire.Address&#34;</span>
+	<span class="na">p:city=</span><span class="s">&#34;Beijing&#34;</span> <span class="na">p:street=</span><span class="s">&#34;ChaoYang&#34;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.autowire.Car&#34;</span>
+	<span class="na">p:brand=</span><span class="s">&#34;Audi&#34;</span> <span class="na">p:price=</span><span class="s">&#34;400000&#34;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;person&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.autowire.Person&#34;</span>
+	<span class="na">p:name=</span><span class="s">&#34;Tom&#34;</span> <span class="na">p:address-ref=</span><span class="s">&#34;address&#34;</span> <span class="na">p:car-ref=</span><span class="s">&#34;car&#34;</span><span class="nt">&gt;&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>采用自动装配的方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;person&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.autowire.Person&#34;</span>
+	<span class="na">p:name=</span><span class="s">&#34;Tom&#34;</span> <span class="na">autowire=</span><span class="s">&#34;byName&#34;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Person{name=&#39;Tom&#39;, address=null, car=Car{brand=&#39;Audi&#39;, price=400000.0}}
+</code></pre></td></tr></table>
+</div>
+</div><p>这里使用了<code>autowire=&quot;byName&quot;</code>，它会根据 Bean 的名字和当前 Bean 的 setter 风格的属性名进行自动装配。而<code>byType</code>根据 Bean 的类型和当前 Bean 的属性的类型进行自动装配。但是，如果 IoC 容器中有一个以上的类型匹配的 Bean，则会抛出异常。</p>
+<p>自动装配也会存在一些缺点：</p>
+<ul>
+<li>在 Bean 的配置文件中设置 autowire 属性进行自动装配时，将会装配 Bean 的所有属性。然而，如果只想装配个别属性，那么 autowire 属性就不那么灵活了；</li>
+<li>autowire 要么根据类型自动装配，要么根据名称自动装配，两者不能兼而有之；</li>
+<li>一般情况下，实际项目中很少用到自动装配的功能。</li>
+</ul>
+<h2 id="5-bean-之间的关系">5. Bean 之间的关系</h2>
+<h3 id="继承关系">继承关系</h3>
+<p>Bean 之间在配置的时候，存在依赖或继承关系。下面是使用以前的方式创建两个 Bean：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;address&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.autowire.Address&#34;</span>
+	<span class="na">p:city=</span><span class="s">&#34;Beijing&#34;</span> <span class="na">p:street=</span><span class="s">&#34;ChaoYang&#34;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;address2&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.autowire.Address&#34;</span>
+	<span class="na">p:city=</span><span class="s">&#34;Beijing&#34;</span> <span class="na">p:street=</span><span class="s">&#34;WangJing&#34;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>你可以看到，两个 Bean 的 city 和 class 属性值都是一样的，为了复用属性值，我们可以使用 Bean 的 parent 属性指定当前 Bean 所继承另外一个 Bean 的配置，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;address&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.autowire.Address&#34;</span>
+	<span class="na">p:city=</span><span class="s">&#34;Beijing^&#34;</span> <span class="na">p:street=</span><span class="s">&#34;ChaoYang&#34;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;address2&#34;</span> <span class="na">p:street=</span><span class="s">&#34;WangJing&#34;</span> <span class="na">parent=</span><span class="s">&#34;address&#34;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是：</p>
+<ul>
+<li>Spring 允许继承 Bean 的配置，被继承的 Bean 称为父 Bean。继承这个父 Bean 的 Bean 称为子 Bean；</li>
+<li>子 Bean 可以从父 Bean 中继承配置，包括 Bean 的属性配置；</li>
+<li>子 Bean 也可以覆盖从父 Bean 继承过来的配置；</li>
+<li>父 Bean 可以作为配置模板，也可以作为 Bean 实例。若只想把父 Bean 作为模板，可以设置<code>＜bean＞</code>的 abstract 属性为 true，这样 Spring 将不会实例化这个 Bean；</li>
+<li>并不是<code>＜bean＞</code>元素里的所有属性都会被继承。比如：autowire、abstract 等；</li>
+<li>可以忽略父 Bean 的 class 属性，让子 Bean 指定自己的类，而共享相同的属性配置。但此时 abstract 必须设为 true。</li>
+</ul>
+<h3 id="依赖关系">依赖关系</h3>
+<p>Spring 允许用户通过<code>depends-on</code>属性设定当前 Bean 的前置依赖 Bean，前置依赖的 Bean 会在当前 Bean 实例化之前创建完成。如果需要依赖于多个 Bean，则可以使用逗号、空格的方式配置 Bean 的名称。</p>
+<p>在配置 Person 的时候，如果想实现必须有一个关联的 Car，即 Person 这个 Bean 依赖于 Car 这个 Bean，那么可以使用<code>depends-on=&quot;car3&quot;</code>。在指定<code>depends-on=&quot;car3&quot;</code>之后，如果<code>car3</code>这个 Bean 没有创建，则 IoC 在初始化的时候就会报错。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!-- 
+</span><span class="c">	&lt;bean id=&#34;car3&#34; class=&#34;com.example.springdemo.autowire.Car&#34;
+</span><span class="c">		p:brand=&#34;TOYOTA&#34; p:price=&#34;200000&#34;&gt;
+</span><span class="c">    &lt;/bean&gt; 
+</span><span class="c">--&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;person&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.autowire.Person&#34;</span>
+	<span class="na">p:name=</span><span class="s">&#34;Tom&#34;</span> <span class="na">p:address-ref=</span><span class="s">&#34;address&#34;</span> <span class="na">depends-on=</span><span class="s">&#34;car3&#34;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果没有创建<code>car3</code>这个 Bean，则报错如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#39;person&#39; defined in class path resource [beans_relation.xml]: &#39;person&#39; depends on missing bean &#39;car3&#39;; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named &#39;car3&#39; available
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="bean-的作用域">Bean 的作用域</h3>
+<p>默认情况下，在配置文件所配置的 Bean 都是单例的。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.autowire.Car&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;brand&#34;</span> <span class="na">value=</span><span class="s">&#34;Audi&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;price&#34;</span> <span class="na">value=</span><span class="s">&#34;100000&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testBeanScope</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;beans_scope.xml&#34;</span><span class="o">);</span>
+        <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="o">(</span><span class="n">Car</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;car&#34;</span><span class="o">);</span>
+        <span class="n">Car</span> <span class="n">car2</span> <span class="o">=</span> <span class="o">(</span><span class="n">Car</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;car&#34;</span><span class="o">);</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">car</span> <span class="o">==</span> <span class="n">car2</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">true
+</code></pre></td></tr></table>
+</div>
+</div><p>可以在 xml 文件中，配置 Bean 的 scope，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car&#34;</span>
+	<span class="na">class=</span><span class="s">&#34;com.example.springdemo.autowire.Car&#34;</span>
+	<span class="na">scope=</span><span class="s">&#34;prototype&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;brand&#34;</span> <span class="na">value=</span><span class="s">&#34;Audi&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;price&#34;</span> <span class="na">value=</span><span class="s">&#34;100000&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>此时再运行测试方法，其结果就变为 false 了。这是因为每次创建的 Bean 都是原生的 Bean，即这两个 Bean 都不是单例的。</p>
+<p>需要注意的是：默认情况下，Bean 的创建过程是单例的（singleton），即在整个容器的生命周期内只创建一个 Bean。因此当前类中的无参构造器是会执行的。而如果指定<code>scope=prototype</code>，那么当创建 IoC 容器的时候，无参的构造器是不会执行的。而当获取 Bean 时，每次都会执行无参的构造器。</p>
+<h2 id="6-ioc-容器中-bean-的生命周期">6. IoC 容器中 Bean 的生命周期</h2>
+<p>Spring IoC 容器可以管理 Bean 的生命周期，Spring 允许在 Bean 生命周期的特定点执行定制的任务。其管理过程如下：</p>
+<ul>
+<li>通过构造器或工厂方法创建 Bean 实例；</li>
+<li>为 Bean 的属性设置值以及对其他 Bean 的引用；</li>
+<li>调用 Bean 的初始化方法；</li>
+<li>此时的 Bean 可以使用了；</li>
+<li>当容器关闭时，调用 Bean 的销毁方法。
+<ul>
+<li>在 Bean 的声明里设置<code>init-method</code>和<code>destroy-method</code>属性，可以为 Bean 指定初始化和销毁方法。</li>
+</ul>
+</li>
+</ul>
+<p>代码如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">brand</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Car</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Car&#39;s constructor...&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBrand</span><span class="o">(</span><span class="n">String</span> <span class="n">brand</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;setBrand...&#34;</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">brand</span> <span class="o">=</span> <span class="n">brand</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;init...&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">destroy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;destroy...&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;Car{&#34;</span> <span class="o">+</span>
+                <span class="s">&#34;brand=&#39;&#34;</span> <span class="o">+</span> <span class="n">brand</span> <span class="o">+</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">+</span>
+                <span class="sc">&#39;}&#39;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car5&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.cycle.Car&#34;</span>
+		<span class="na">init-method=</span><span class="s">&#34;init&#34;</span>
+		<span class="na">destroy-method=</span><span class="s">&#34;destroy&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;brand&#34;</span> <span class="na">value=</span><span class="s">&#34;Audi&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testBeanCycle</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ClassPathXmlApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;beans_cycle.xml&#34;</span><span class="o">);</span>
+        <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="o">(</span><span class="n">Car</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;car5&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
+
+        <span class="c1">// 关闭 IoC 容器
+</span><span class="c1"></span>        <span class="n">context</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Car&#39;s constructor...
+setBrand...
+init...
+Car{brand=&#39;Audi&#39;}
+destroy...
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="bean-的后置处理器">Bean 的后置处理器</h3>
+<p>Bean 的后置处理器允许在调用初始化方法的前后，对 Bean 进行额外的处理。Bean 后置处理器对 IoC 容器里所有的 Bean 实例进行逐一处理，而非单一实例。典型的应用是：检查 Bean 属性的正确性或根据特定的标准更改 Bean 的属性。</p>
+<p>对 Bean 的后置处理器而言，需要实现接口 BeanPostProcessor。在初始化方法被调用前后，Spring 把每个 Bean 实例分别传递给上述接口的两个方法，即：</p>
+<ul>
+<li>Object postProcessBeforeInitialization(Object bean, String beanName)</li>
+<li>Object postProcessAfterInitialization(Object bean, String beanName)</li>
+</ul>
+<p>在添加了 Bean 的后置处理器之后，Bean 的声明周期如下所示：</p>
+<ul>
+<li>通过构造器或工厂方法创建 Bean 实例；</li>
+<li>为 Bean 的属性设置值以及对其他 Bean 的引用；</li>
+<li><strong>将 Bean 实例传递给 Bean 后置处理器的 postProcessBeforeInitialization 方法</strong>；</li>
+<li>调用 Bean 的初始化方法；</li>
+<li><strong>将 Bean 实例传递给 Bean 后置处理器的 postProcessAfterInitialization 方法</strong></li>
+<li>此时的 Bean 可以使用了；</li>
+<li>当容器关闭时，调用 Bean 的销毁方法。
+<ul>
+<li>在 Bean 的声明里设置<code>init-method</code>和<code>destroy-method</code>属性，可以为 Bean 指定初始化和销毁方法。</li>
+</ul>
+</li>
+</ul>
+<p>代码如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyBeanPostProcessor</span> <span class="kd">implements</span> <span class="n">BeanPostProcessor</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">postProcessBeforeInitialization</span><span class="o">(</span><span class="n">Object</span> <span class="n">bean</span><span class="o">,</span> <span class="n">String</span> <span class="n">beanName</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">BeansException</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;postProcessBeforeInitialization: &#34;</span> <span class="o">+</span> <span class="n">bean</span> <span class="o">+</span> <span class="s">&#34;, &#34;</span> <span class="o">+</span> <span class="n">beanName</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">bean</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">postProcessAfterInitialization</span><span class="o">(</span><span class="n">Object</span> <span class="n">bean</span><span class="o">,</span> <span class="n">String</span> <span class="n">beanName</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">BeansException</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;postProcessAfterInitialization: &#34;</span> <span class="o">+</span> <span class="n">bean</span> <span class="o">+</span> <span class="s">&#34;, &#34;</span> <span class="o">+</span> <span class="n">beanName</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">bean</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!-- 配置 Bean 的后置处理器: 不需要配置 id，IoC 容器会自动识别它是一个 BeanPostProcessor--&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.cycle.MyBeanPostProcessor&#34;</span><span class="nt">&gt;&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testBeanCycle</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ClassPathXmlApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;beans_cycle.xml&#34;</span><span class="o">);</span>
+        <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="o">(</span><span class="n">Car</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;car5&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;使用 Bean: &#34;</span> <span class="o">+</span> <span class="n">car</span><span class="o">);</span>
+
+        <span class="c1">// 关闭 IoC 容器
+</span><span class="c1"></span>        <span class="n">context</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Car&#39;s constructor...
+setBrand...
+postProcessBeforeInitialization: Car{brand=&#39;Audi&#39;}, car5
+init...
+postProcessAfterInitialization: Car{brand=&#39;Audi&#39;}, car5
+使用 Bean: Car{brand=&#39;Audi&#39;}
+destroy...
+</code></pre></td></tr></table>
+</div>
+</div><p>在 MyBeanPostProcessor 类中，postProcessBeforeInitialization 方法和 postProcessAfterInitialization 方法中的 bean 表示 Bean 实例本身；beanName 表示在 IoC 容器中配置的 Bean 的名字，也就是 id；方法的返回值实际上返回给用户的那个 Bean。因此，可以在其返回之前，修改返回的 Bean，甚至返回一个新的 Bean。</p>
+<h2 id="7-配置-bean-的方式">7. 配置 Bean 的方式</h2>
+<h3 id="静态工厂方法">静态工厂方法</h3>
+<p>代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Car</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">brand</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">price</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Car</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Car&#39;s constructor...&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">Car</span><span class="o">(</span><span class="n">String</span> <span class="n">brand</span><span class="o">,</span> <span class="kt">double</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">brand</span> <span class="o">=</span> <span class="n">brand</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBrand</span><span class="o">(</span><span class="n">String</span> <span class="n">brand</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;setBrand...&#34;</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">brand</span> <span class="o">=</span> <span class="n">brand</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;Car{&#34;</span> <span class="o">+</span>
+                <span class="s">&#34;brand=&#39;&#34;</span> <span class="o">+</span> <span class="n">brand</span> <span class="o">+</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">+</span>
+                <span class="s">&#34;, price=&#34;</span> <span class="o">+</span> <span class="n">price</span> <span class="o">+</span>
+                <span class="sc">&#39;}&#39;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * 静态工厂方法：直接调用某一个类的静态方法就可以返回 Bean 的实例
+</span><span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StaticCarFactory</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Car</span><span class="o">&gt;</span> <span class="n">cars</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+
+    <span class="kd">static</span> <span class="o">{</span>
+        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="n">300000</span><span class="o">));</span>
+        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="n">200000</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 静态工厂方法
+</span><span class="cm">     *
+</span><span class="cm">     * @param name
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Car</span> <span class="nf">getCar</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">cars</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"> <span class="c">&lt;!-- 通过静态工厂方法配置 Bean，注意不是配置静态工厂方法实例，而是配置 Bean 实例 --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car1&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.factory.StaticCarFactory&#34;</span>
+		<span class="na">factory-method=</span><span class="s">&#34;getCar&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Audi&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testStaticFactory</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;beans_factory.xml&#34;</span><span class="o">);</span>
+        <span class="n">Car</span> <span class="n">car1</span> <span class="o">=</span> <span class="o">(</span><span class="n">Car</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;car1&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">car1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Car{brand=&#39;Audi&#39;, price=300000.0}
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是，xml 中的 class 属性需要指向静态工厂方法的全类名；factory-method 需要指向静态工厂方法的名字。如果工厂方法需要传入参数，则使用 constructor-arg 配置参数。</p>
+<h3 id="实例工厂方法">实例工厂方法</h3>
+<p>代码如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * 实例工厂方法：先需要创建工厂本身，再调用工厂的实例方法来返回 Bean 的实例
+</span><span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstanceCarFactory</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Car</span><span class="o">&gt;</span> <span class="n">cars</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">InstanceCarFactory</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">cars</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="n">400000</span><span class="o">));</span>
+        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="n">500000</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">Car</span> <span class="nf">getCar</span><span class="o">(</span><span class="n">String</span> <span class="n">brand</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">cars</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">brand</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!-- 配置工厂的实例 --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;carFactory&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.factory.InstanceCarFactory&#34;</span><span class="nt">&gt;&lt;/bean&gt;</span>
+
+<span class="c">&lt;!-- 通过实例工厂方法来配置 Bean --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car2&#34;</span> <span class="na">factory-bean=</span><span class="s">&#34;carFactory&#34;</span> <span class="na">factory-method=</span><span class="s">&#34;getCar&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&#34;Ford&#34;</span><span class="nt">&gt;&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testInstanceFactory</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;beans_factory.xml&#34;</span><span class="o">);</span>
+        <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="o">(</span><span class="n">Car</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;car2&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Car{brand=&#39;Ford&#39;, price=500000.0}
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是，factory-bean 需要指向实例工厂方法的 Bean。</p>
+<h3 id="factorybean">FactoryBean</h3>
+<p>代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CarFactoryBean</span> <span class="kd">implements</span> <span class="n">FactoryBean</span><span class="o">&lt;</span><span class="n">Car</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">brand</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBrand</span><span class="o">(</span><span class="n">String</span> <span class="n">brand</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">brand</span> <span class="o">=</span> <span class="n">brand</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 返回 Bean 的对象
+</span><span class="cm">     *
+</span><span class="cm">     * @return
+</span><span class="cm">     * @throws Exception
+</span><span class="cm">     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Car</span> <span class="nf">getObject</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="n">brand</span><span class="o">,</span> <span class="n">500000</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * 返回 Bean 的类型
+</span><span class="cm">     *
+</span><span class="cm">     * @return
+</span><span class="cm">     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">getObjectType</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Car</span><span class="o">.</span><span class="na">class</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isSingleton</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&#34;car&#34;</span> <span class="na">class=</span><span class="s">&#34;com.example.springdemo.factoryBean.CarFactoryBean&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&#34;brand&#34;</span> <span class="na">value=</span><span class="s">&#34;BMW&#34;</span><span class="nt">&gt;&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testFactoryBean</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;beans_factoryBean.xml&#34;</span><span class="o">);</span>
+        <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="o">(</span><span class="n">Car</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;car&#34;</span><span class="o">);</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">car</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Car{brand=&#39;BMW&#39;, price=500000.0}
+</code></pre></td></tr></table>
+</div>
+</div><p>如果想要自定义一个 xxxFactoryBean，则需要实现 FactoryBean 接口。在 xml 文件中，通过 FactoryBean 来配置 Bean 实例。其中，class 指向 FactoryBean 的全类名，property 用于配置 FactoryBean 的属性，但实际返回的实例是 FactoryBean 中 getObject() 方法所返回的实例。</p>
+<h2 id="8-基于注解的方式配置-bean">8. 基于注解的方式配置 Bean</h2>
+<p>如果想要将一个 Bean 加上注解，然后放到 IoC 容器的话，则需要用到组件扫描（Component scanning）的功能。Spring 能够从 classpath 下自动扫描，侦测和实例化具有特定注解的组件。这些组件包括：</p>
+<ul>
+<li>@Component：基本注解，标识了一个受 Spring 管理的组件；</li>
+<li>@Repository：标识持久层组件；</li>
+<li>@Service：标识业务层组件；</li>
+<li>@Controller：标识表现层组件。</li>
+</ul>
+<p>对于扫描到的组件，Spring 有默认的命名策略。它会使用非限定类名的第一个小写字母。也可以在注解中通过 value 属性值来标识组件的名称。</p>
+<p>在组件类上使用了特定的注解之后，还需要在 Spring 的配置文件中声明<code>&lt;context:component-scan&gt;</code>，其中：</p>
+<ul>
+<li>base-package 属性指定一个需要扫描的基类包，Spring 容器将会扫描这个基类包中的类及其子包中的所有类。</li>
+<li>当需要扫描多个包时，可以使用逗号分隔。</li>
+<li>如果希望扫描特定的类而非基类包下的所有类，可以使用 resource-pattern 属性过滤特定的类。</li>
+<li><code>&lt;context:include-filter&gt;</code>：表示子节点想要包含的目标类。</li>
+<li><code>&lt;context:exclude-filter&gt;</code>：表示子节点想要排除在外的目标类。</li>
+<li><code>&lt;context:component-scan&gt;</code>下可以拥有若干个<code>&lt;context:include-filter&gt;</code>和<code>&lt;context:exclude-filter&gt;</code>。</li>
+</ul>
+<p>代码如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.springdemo.annotation</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestObject</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.springdemo.annotation.service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserService</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;UserService add()...&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.springdemo.annotation.repository</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserRepository</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">save</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.example.springdemo.annotation.repository</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Repository</span><span class="o">;</span>
+
+<span class="nd">@Repository</span><span class="o">(</span><span class="s">&#34;userRepository&#34;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRepositoryImpl</span> <span class="kd">implements</span> <span class="n">UserRepository</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;UserRepository save()...&#34;</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&#34;http://www.springframework.org/schema/beans&#34;</span>
+       <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+       <span class="na">xmlns:context=</span><span class="s">&#34;http://www.springframework.org/schema/context&#34;</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">&#34;http://www.springframework.org/schema/beans
+</span><span class="s">       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://www.springframework.org/schema/context
+</span><span class="s">       http://www.springframework.org/schema/context/spring-context-4.2.xsd&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;context:component-scan</span> <span class="na">base-package=</span><span class="s">&#34;com.example.springdemo.annotation&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testAnnotation</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">&#34;beans_annotation.xml&#34;</span><span class="o">);</span>
+
+        <span class="n">TestObject</span> <span class="n">to</span> <span class="o">=</span> <span class="o">(</span><span class="n">TestObject</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;testObject&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">to</span><span class="o">);</span>
+
+        <span class="n">UserController</span> <span class="n">userController</span> <span class="o">=</span> <span class="o">(</span><span class="n">UserController</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;userController&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">userController</span><span class="o">);</span>
+
+        <span class="n">UserService</span> <span class="n">userService</span> <span class="o">=</span> <span class="o">(</span><span class="n">UserService</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;userService&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">userService</span><span class="o">);</span>
+
+        <span class="n">UserRepository</span> <span class="n">userRepository</span> <span class="o">=</span> <span class="o">(</span><span class="n">UserRepository</span><span class="o">)</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">&#34;userRepository&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">userRepository</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">com.example.springdemo.annotation.TestObject@47af7f3d
+com.example.springdemo.annotation.controller.UserController@7c729a55
+com.example.springdemo.annotation.service.UserService@3bb9a3ff
+com.example.springdemo.annotation.repository.UserRepositoryImpl@661972b0
+</code></pre></td></tr></table>
+</div>
+</div><p>此外，可以通过 resource-pattern 指定扫描的资源，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;context:component-scan</span> <span class="na">base-package=</span><span class="s">&#34;com.example.springdemo.annotation&#34;</span>
+	<span class="na">resource-pattern=</span><span class="s">&#34;repository/*.class&#34;</span><span class="nt">&gt;&lt;/context:component-scan&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>context:exclude-filter 的使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;context:component-scan</span> <span class="na">base-package=</span><span class="s">&#34;com.example.springdemo.annotation&#34;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;context:exclude-filter</span> <span class="na">type=</span><span class="s">&#34;annotation&#34;</span> <span class="na">expression=</span><span class="s">&#34;org.springframework.stereotype.Repository&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/context:component-scan&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是，expression 中需要填写的是某个注解的包名。</p>
+<p>context:include-filter 的使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;context:component-scan</span> <span class="na">base-package=</span><span class="s">&#34;com.example.springdemo.annotation&#34;</span>
+                            <span class="na">use-default-filters=</span><span class="s">&#34;false&#34;</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;context:include-filter</span> <span class="na">type=</span><span class="s">&#34;annotation&#34;</span> <span class="na">expression=</span><span class="s">&#34;org.springframework.stereotype.Repository&#34;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/context:component-scan&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>需要说明的是，当使用 context:include-filter 时，需要指定<code>use-default-filters=&quot;false&quot;</code>，只有这样才能仅扫描到所包含的组件。</p>
+<p>此外，在开发中使用最多的就是组件装配。<code>&lt;context:component-scan&gt;</code>元素会自动注册 AutowiredAnnotationBeanPostProcessor 实例，该实例可以自动装配具有 @Autowired、@Resource、@Inject 的注解属性。如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserController</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">UserService</span> <span class="n">userService</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">execute</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;UserController execute()...&#34;</span><span class="o">);</span>
+        <span class="n">userService</span><span class="o">.</span><span class="na">add</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserService</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">UserRepository</span> <span class="n">userRepository</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;UserService add()...&#34;</span><span class="o">);</span>
+        <span class="n">userRepository</span><span class="o">.</span><span class="na">save</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">com.example.springdemo.annotation.controller.UserController@6b81ce95
+UserController execute()...
+UserService add()...
+UserRepository save()...
+</code></pre></td></tr></table>
+</div>
+</div><p>这个 @Autowired 注解会自动装配具有兼容类型的单个 Bena 属性。它可以作用于构造器、普通字段、具有参数的方法上面。</p>
+<p>默认情况下，所有使用 @Autowired 注解的属性都需要被设置。当 Spring 找不到匹配的 Bean 装配属性时，则会抛出异常。如果某一属性允许不被设置，可以通过设置 @Autowired 注解的 required 属性为 false。</p>
+<p>默认情况下，当 IoC 容器里存在多个类型兼容的 Bean 时，通过类型的自动装配将无法工作。此时可以在 @Qualifier 注解里提供 Bean 的名称。Spring 允许对方法的入参标注 @Qualifiter，以指定注入 Bean 的名称。</p>
+<p>如果我们在 UserRepositoryImpl 类中引用了一个没有被设置为 Bean 的 TestObject 类时，那么此时会抛出如下异常：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestObject</span> <span class="o">{</span>
+
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Repository</span><span class="o">(</span><span class="s">&#34;userRepository&#34;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRepositoryImpl</span> <span class="kd">implements</span> <span class="n">UserRepository</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">TestObject</span> <span class="n">testObject</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;UserRepository save()...&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">testObject</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">No qualifying bean of type &#39;com.example.springdemo.annotation.TestObject&#39; available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+</code></pre></td></tr></table>
+</div>
+</div><p>此时，可以在 TestObject 的 @Autowired 注解上添加 required = false，那么程序运行后，testObject 的值就为 null。</p>
+<h2 id="9-泛型依赖注入">9. 泛型依赖注入</h2>
+<p>P15</p>
     </div>
 
     <div class="post-copyright">
@@ -378,7 +2520,7 @@
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2021-07-17
+        2021-07-18
         
     </span>
   </p>

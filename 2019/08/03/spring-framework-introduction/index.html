@@ -49,7 +49,7 @@
 <meta itemprop="name" content=" Spring 学习笔记（2）框架介绍">
 <meta itemprop="description" content="本篇文章主要对 Spring 框架进行整体介绍，包括其核心功能模块与体系结构，让大家对该框架有个大体的认识。"><meta itemprop="datePublished" content="2019-08-03T13:15:11+00:00" />
 <meta itemprop="dateModified" content="2021-07-17T21:18:00+00:00" />
-<meta itemprop="wordCount" content="2315">
+<meta itemprop="wordCount" content="2424">
 <meta itemprop="keywords" content="Spring,DI,IOC,AOP,JdbcTemplate," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=" Spring 学习笔记（2）框架介绍"/>
 <meta name="twitter:description" content="本篇文章主要对 Spring 框架进行整体介绍，包括其核心功能模块与体系结构，让大家对该框架有个大体的认识。"/>
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/Spring/"> Spring </a>
             </div>
-          <span class="more-meta"> 2315 words </span>
+          <span class="more-meta"> 2424 words </span>
           <span class="more-meta"> 5 mins read </span>
         
       </div>
@@ -275,7 +275,7 @@
 <span class="nt">&lt;/beans&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>其中，<code>class</code>需要指定当前类的全限定名，Spring 通过反射的方式来创建 HelloWorld 对象；<code>id</code>通常为首字母小写的类名，用来标识这个对象。Bean 的定义中可以有零个或多个<code>&lt;property&gt;&lt;/property&gt;</code>。<code>&lt;property&gt;&lt;/property&gt;</code>被称为<strong>元素</strong>，元素中有多个<strong>属性</strong>，即<code>name</code>和<code>value</code>。每个 property 元素对应 JavaBean 中相应的 setter 方法。</p>
+</div><p>其中，<code>class</code>需要指定当前类的全限定名，Spring 通过反射的方式来创建 HelloWorld 对象；<code>id</code>通常为首字母小写的类名，用来标识这个对象的同时，引用这个 Bean。Bean 的定义中可以有零个或多个<code>&lt;property&gt;&lt;/property&gt;</code>。<code>&lt;property&gt;&lt;/property&gt;</code>被称为<strong>元素</strong>，元素中有多个<strong>属性</strong>，即<code>name</code>和<code>value</code>。每个 property 元素对应 JavaBean 中相应的 setter 方法。</p>
 <p>此时，可以改写 main 方法，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -379,7 +379,16 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>可以看到，Spring 在创建 IoC 容器的时候，就执行了无参构造器，并调用了 setter 方法。</p>
-<h2 id="4-总结">4. 总结</h2>
+<p>需要注意的是：由于在 xml 中使用全类名的方式，通过反射来创建对象。因此需要当前类提供无参的构造器，如果没有提供的话，那么在运行程序的时候，会出现如下错误：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Instantiation</span> <span class="n">of</span> <span class="n">bean</span> <span class="n">failed</span><span class="o">;</span> <span class="n">nested</span> <span class="n">exception</span> <span class="n">is</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">BeanInstantiationException</span><span class="o">:</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">instantiate</span> <span class="o">[</span><span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">springdemo</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">HelloWorld</span><span class="o">]:</span> <span class="n">No</span> <span class="k">default</span> <span class="n">constructor</span> <span class="n">found</span><span class="o">;</span> <span class="n">nested</span> <span class="n">exception</span> <span class="n">is</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">NoSuchMethodException</span><span class="o">:</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">springdemo</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">HelloWorld</span><span class="o">.&lt;</span><span class="n">init</span><span class="o">&gt;()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-总结">4. 总结</h2>
 <p>这是《Spring 学习笔记》的第一篇文章，主要围绕 Spring 是什么？Spring 可以做什么？以及 Spring 的特点进行介绍，通过引入了结构图可以很清晰的看到 Spring 的内部结构特点，便于自己的理解。当然了，博主只是简单的对这部分内容进行了说明，如果感兴趣的话，可以查看下方的官方文档进行阅读。</p>
 <p>此外，如果有任何错误或者描述不正确的地方，欢迎以评论或邮箱的方式联系我。</p>
 <h2 id="参考">参考</h2>

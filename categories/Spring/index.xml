@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sat, 03 Aug 2019 21:03:11 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/Spring/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Jul 2021 22:03:11 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/Spring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title> Spring 学习笔记（5）AOP</title>
+      <link>http://localhost:1313/2021/07/22/spring-aop/</link>
+      <pubDate>Thu, 22 Jul 2021 22:03:11 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2021/07/22/spring-aop/</guid>
+      <description>&lt;p&gt;本文介绍 Spring 中 AOP 的原理及使用方式。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title> Spring 学习笔记（4）依赖注入 DI </title>
       <link>http://localhost:1313/2019/08/03/spring-di/</link>

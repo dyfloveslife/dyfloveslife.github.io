@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Thu, 03 Jun 2021 15:37:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Jul 2021 22:03:11 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>http://localhost:1313/about/</link>
@@ -15,6 +15,15 @@
       
       <guid>http://localhost:1313/about/</guid>
       <description>$ &#39;&#39; Dare \ to \ dream,\ dare \ to \ do! &#39;&#39; $ 关于我 硕士 / 计算机技术。 自身始终保持着对技术、书籍、写作的热爱。 学会学习，也要学会分享。 我会分享一些包括但不限于</description>
+    </item>
+    
+    <item>
+      <title> Spring 学习笔记（5）AOP</title>
+      <link>http://localhost:1313/2021/07/22/spring-aop/</link>
+      <pubDate>Thu, 22 Jul 2021 22:03:11 +0000</pubDate>
+      
+      <guid>http://localhost:1313/2021/07/22/spring-aop/</guid>
+      <description>&lt;p&gt;本文介绍 Spring 中 AOP 的原理及使用方式。&lt;/p&gt;</description>
     </item>
     
     <item>

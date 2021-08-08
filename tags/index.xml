@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Thu, 22 Jul 2021 22:03:11 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Aug 2021 15:30:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SpringBoot</title>
+      <link>http://localhost:1313/tags/SpringBoot/</link>
+      <pubDate>Sat, 07 Aug 2021 15:30:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/tags/SpringBoot/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>AOP</title>
       <link>http://localhost:1313/tags/AOP/</link>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SpringBoot on Carol&#39;s blog</title>
+    <link>http://localhost:1313/tags/SpringBoot/</link>
+    <description>Recent content in SpringBoot on Carol&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Carol</copyright>
+    <lastBuildDate>Sat, 07 Aug 2021 15:30:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/SpringBoot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring Boot 学习笔记</title>
+      <link>http://localhost:1313/2021/08/07/springboot/</link>
+      <pubDate>Sat, 07 Aug 2021 15:30:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2021/08/07/springboot/</guid>
+      <description>&lt;p&gt;本文将对 Spring Boot 进行介绍，包括基本使用、高级特性等。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

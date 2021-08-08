@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Thu, 22 Jul 2021 22:03:11 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Aug 2021 15:30:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>http://localhost:1313/about/</link>
@@ -15,6 +15,15 @@
       
       <guid>http://localhost:1313/about/</guid>
       <description>$ &#39;&#39; Dare \ to \ dream,\ dare \ to \ do! &#39;&#39; $ 关于我 硕士 / 计算机技术。 自身始终保持着对技术、书籍、写作的热爱。 学会学习，也要学会分享。 我会分享一些包括但不限于</description>
+    </item>
+    
+    <item>
+      <title>Spring Boot 学习笔记</title>
+      <link>http://localhost:1313/2021/08/07/springboot/</link>
+      <pubDate>Sat, 07 Aug 2021 15:30:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2021/08/07/springboot/</guid>
+      <description>&lt;p&gt;本文将对 Spring Boot 进行介绍，包括基本使用、高级特性等。&lt;/p&gt;</description>
     </item>
     
     <item>

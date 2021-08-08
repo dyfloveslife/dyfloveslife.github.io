@@ -115,6 +115,29 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/2020/04/05/Java-Lock/">Java 中的 Lock 及各种锁的概念</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-05 </span>
+      <div class="post-category">
+          <a href="/categories/Java/"> Java </a>
+          </div>
+        <span class="more-meta"> 8185 words </span>
+        <span class="more-meta"> 17 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>上节 <a href="https://dyfloveslife.github.io/2020/04/05/Java-Synchronized/">《Java 中的 synchronized》</a>介绍了能够在多线程访问临界资源的情况下，使用 synchronized 关键字可以保证线程之间的顺序执行（序列化访问临界资源），即同一时刻只能由一个线程获得当前对象的锁。可以看到 synchronized 是在 JVM 层面实现了对临界资源的同步互斥访问，但锁的粒度较大。本文将介绍并发包下的 Lock 接口，同样也可以实现锁的功能。</p>
+    </div>
+    <div class="read-more">
+      <a href="/2020/04/05/Java-Lock/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/2020/04/05/Java-Synchronized/">Java 中的 synchronized</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-04-05 </span>
@@ -316,29 +339,6 @@
     </div>
     <div class="read-more">
       <a href="/2020/03/10/JavaSrc-LinkedHashMap/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/2020/03/07/JavaSrc-LinkedList/">JDK 源码之集合类 LinkedList</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-03-07 </span>
-      <div class="post-category">
-          <a href="/categories/Java/"> Java </a>
-          </div>
-        <span class="more-meta"> 3011 words </span>
-        <span class="more-meta"> 7 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>本文是对 JDK1.8 中 LinkedList 的分析与总结，在阅读源码的同时加深对其提供的方法的使用，以便更好的理解。</p>
-    </div>
-    <div class="read-more">
-      <a href="/2020/03/07/JavaSrc-LinkedList/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

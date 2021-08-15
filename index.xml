@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sat, 07 Aug 2021 15:30:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Aug 2021 16:06:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>http://localhost:1313/about/</link>
@@ -15,6 +15,15 @@
       
       <guid>http://localhost:1313/about/</guid>
       <description>$ &#39;&#39; Dare \ to \ dream,\ dare \ to \ do! &#39;&#39; $ 关于我 硕士 / 计算机技术。 自身始终保持着对技术、书籍、写作的热爱。 学会学习，也要学会分享。 我会分享一些包括但不限于</description>
+    </item>
+    
+    <item>
+      <title>Java stream 总结</title>
+      <link>http://localhost:1313/2021/08/15/java-stream/</link>
+      <pubDate>Sun, 15 Aug 2021 16:06:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2021/08/15/java-stream/</guid>
+      <description>&lt;p&gt;最近在接触公司的新项目，在编写代码时发现了一些不仅好用而且非常方便的方法，例如本文将要介绍的 JDK1.8 特性 stream 的使用，下面将对其进行介绍和总结。&lt;/p&gt;</description>
     </item>
     
     <item>

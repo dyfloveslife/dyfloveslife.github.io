@@ -10,21 +10,49 @@
   
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2021-08-07T15:30:56+08:00</lastmod>
+    <lastmod>2021-08-15T16:06:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2021-08-07T15:30:56+08:00</lastmod>
+    <lastmod>2021-08-15T16:06:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/Java/</loc>
+    <lastmod>2021-08-15T16:06:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/categories/Java/</loc>
+    <lastmod>2021-08-15T16:06:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/2021/08/15/java-stream/</loc>
+    <lastmod>2021-08-15T16:06:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2021-08-07T15:30:56+08:00</lastmod>
+    <lastmod>2021-08-15T16:06:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2021-08-15T16:06:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -45,13 +73,6 @@
   
   <url>
     <loc>http://localhost:1313/categories/SpringBoot/</loc>
-    <lastmod>2021-08-07T15:30:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2021-08-07T15:30:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -87,7 +108,7 @@
   
   <url>
     <loc>http://localhost:1313/categories/%E6%84%9F%E6%82%9F/</loc>
-    <lastmod>2021-06-19T20:06:56+08:00</lastmod>
+    <lastmod>2021-08-15T16:06:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -101,7 +122,7 @@
   
   <url>
     <loc>http://localhost:1313/tags/%E7%94%9F%E6%B4%BB/</loc>
-    <lastmod>2021-06-19T20:06:56+08:00</lastmod>
+    <lastmod>2021-08-15T16:06:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -326,20 +347,6 @@
   <url>
     <loc>http://localhost:1313/tags/Desgin-Patterns/</loc>
     <lastmod>2020-06-11T17:24:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/Java/</loc>
-    <lastmod>2020-06-27T16:35:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/categories/Java/</loc>
-    <lastmod>2020-06-27T16:35:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -1319,7 +1326,7 @@
   
   <url>
     <loc>http://localhost:1313/2018/11/21/read-books/</loc>
-    <lastmod>2021-06-19T20:06:56+08:00</lastmod>
+    <lastmod>2021-08-15T16:06:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

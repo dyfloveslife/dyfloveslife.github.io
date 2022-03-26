@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/08/15/learning-python-Module/" />
@@ -147,7 +147,7 @@
 <p>这里有一个使用 Python 标准库中模块的例子，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -156,19 +156,19 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;命令行参数如下：&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">路径为：&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;命令行参数如下：&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">路径为：&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>用<strong>命令行</strong>运行，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -183,20 +183,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="err">$</span> <span class="n">python</span> <span class="n">test_20180715</span><span class="o">.</span><span class="n">py</span>
-<span class="n">参数1</span> <span class="n">参数2</span>
-<span class="n">命令行参数如下</span><span class="err">：</span>
-<span class="n">test_20180715</span><span class="o">.</span><span class="n">py</span>
-<span class="n">参数1</span>
-<span class="n">参数2</span>
-
-<span class="n">路径为</span><span class="err">：</span> <span class="p">[</span><span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge&#39;</span><span class="p">,</span> <span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\
-</span><span class="se">\v</span><span class="s1">env</span><span class="se">\\</span><span class="s1">Scripts</span><span class="se">\\</span><span class="s1">python36.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;G:</span><span class="se">\\</span><span class="s1">Python</span><span class="se">\\</span><span class="s1">DLLs&#39;</span><span class="p">,</span> <span class="s1">&#39;G:</span><span class="se">\\</span><span class="s1">Python</span>
-\\<span class="n">lib</span><span class="s1">&#39;, &#39;</span><span class="n">G</span><span class="p">:</span>\\<span class="n">Python</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_test</span>\\<span class="n">venv</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_tes</span>
-<span class="n">t</span>\\<span class="n">venv</span>\\<span class="n">lib</span>\\<span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_test</span>\\<span class="n">venv</span>\\<span class="n">lib</span>\\<span class="n">sit</span>
-<span class="n">e</span><span class="o">-</span><span class="n">packages</span>\\<span class="n">setuptools</span><span class="o">-</span><span class="mf">28.8.0</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_test</span>\\<span class="n">ve</span>
-<span class="n">nv</span>\\<span class="n">lib</span>\\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\\<span class="n">pip</span><span class="o">-</span><span class="mf">9.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="s1">&#39;]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">python</span> <span class="n">test_20180715</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">参数1</span> <span class="n">参数2</span>
+</span></span><span class="line"><span class="cl"><span class="n">命令行参数如下</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl"><span class="n">test_20180715</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">参数1</span>
+</span></span><span class="line"><span class="cl"><span class="n">参数2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">路径为</span><span class="err">：</span> <span class="p">[</span><span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge&#39;</span><span class="p">,</span> <span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se">\v</span><span class="s1">env</span><span class="se">\\</span><span class="s1">Scripts</span><span class="se">\\</span><span class="s1">python36.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;G:</span><span class="se">\\</span><span class="s1">Python</span><span class="se">\\</span><span class="s1">DLLs&#39;</span><span class="p">,</span> <span class="s1">&#39;G:</span><span class="se">\\</span><span class="s1">Python</span>
+</span></span><span class="line"><span class="cl">\\<span class="n">lib</span><span class="s1">&#39;, &#39;</span><span class="n">G</span><span class="p">:</span>\\<span class="n">Python</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_test</span>\\<span class="n">venv</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_tes</span>
+</span></span><span class="line"><span class="cl"><span class="n">t</span>\\<span class="n">venv</span>\\<span class="n">lib</span>\\<span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_test</span>\\<span class="n">venv</span>\\<span class="n">lib</span>\\<span class="n">sit</span>
+</span></span><span class="line"><span class="cl"><span class="n">e</span><span class="o">-</span><span class="n">packages</span>\\<span class="n">setuptools</span><span class="o">-</span><span class="mf">28.8.0</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="s1">&#39;, &#39;</span><span class="n">F</span><span class="p">:</span>\\<span class="n">Python_test</span>\\<span class="n">ve</span>
+</span></span><span class="line"><span class="cl"><span class="n">nv</span>\\<span class="n">lib</span>\\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\\<span class="n">pip</span><span class="o">-</span><span class="mf">9.0.1</span><span class="o">-</span><span class="n">py3</span><span class="mf">.6</span><span class="o">.</span><span class="n">egg</span><span class="s1">&#39;]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>说明：</p>
 <ul>
@@ -208,47 +208,47 @@
 <p>语法格式如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">module1</span><span class="p">[,</span> <span class="n">module2</span><span class="p">[,</span><span class="o">...</span> <span class="n">moduleN</span><span class="p">]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">module1</span><span class="p">[,</span> <span class="n">module2</span><span class="p">[,</span><span class="o">...</span> <span class="n">moduleN</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当解释器遇到<code>import</code>语句时，如果模块在当前的搜索路径就会被导入。搜索路径是一个解释器会先进行搜索的所有目录的列表。</p>
 <p>现在我们创建一个<code>support.py</code>文件，键入代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-    <span class="k">return</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>再创建一个<code>test.py</code>文件，键入如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">support</span>  <span class="c1"># 导入模块</span>
-
-<span class="n">support</span><span class="o">.</span><span class="n">fun</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">)</span>  <span class="c1"># 调用模块里面的函数</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">support</span>  <span class="c1"># 导入模块</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">support</span><span class="o">.</span><span class="n">fun</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">)</span>  <span class="c1"># 调用模块里面的函数</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行<code>test.py</code>文件，输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Hello: 10
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Hello: 10
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>一个模块只会被导入一次，不管执行了多少次<code>import</code>。这样可以防止导入模块被一遍又一遍地执行。</p>
 <p>但是，当我们使用<code>import</code>语句的时候，Python 解释器是怎样找到对应的文件的呢？</p>
@@ -257,16 +257,16 @@
 <p>Python 的<code>from</code>语句让你从模块中导入一个指定的部分到当前命名空间中，语法如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">modname</span> <span class="kn">import</span> <span class="n">name1</span><span class="p">[,</span> <span class="n">name2</span><span class="p">[,</span> <span class="o">...</span> <span class="n">nameN</span><span class="p">]]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">modname</span> <span class="kn">import</span> <span class="n">name1</span><span class="p">[,</span> <span class="n">name2</span><span class="p">[,</span> <span class="o">...</span> <span class="n">nameN</span><span class="p">]]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>首先新建<code>fibo.py</code>文件，键入如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -283,55 +283,55 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>   <span class="c1"># 定义到n的斐波那契数列</span>
-    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="nb">print</span><span class="p">()</span>
-
-
-<span class="k">def</span> <span class="nf">fib2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>  <span class="c1"># 返回到n的斐波那契数列</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="k">return</span> <span class="n">result</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>   <span class="c1"># 定义到n的斐波那契数列</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fib2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>  <span class="c1"># 返回到n的斐波那契数列</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>再创建<code>test.py</code>文件，键入如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">fibo</span> <span class="kn">import</span> <span class="n">fib</span><span class="p">,</span><span class="n">fib2</span>
-
-<span class="n">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">fibo</span> <span class="kn">import</span> <span class="n">fib</span><span class="p">,</span><span class="n">fib2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行<code>test.py</code>文件，输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">1 1 2 3 5 8 13 21 34 55 89 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1 1 2 3 5 8 13 21 34 55 89 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>注意：因为我们只使用了<code>fib</code>函数，所以导入的模块不会把所有内容全部导入到当前的命名空间，只会将<code>fib</code>函数引入进来。</p>
 <h1 id="4fromimport--语句">4.from&hellip;import * 语句</h1>
 <p>把一个模块的所有内容全都导入到当前的命名空间也是可行的，语法格式如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">modname</span> <span class="kn">import</span> <span class="o">*</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">modname</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这种声明不该被过多地使用。因为如果将一个模块的所有函数名导入当前命名空间中，假如不同模块包含了相同的函数名，或者是与自己编写得函数名相同，在调用的过程中将会导致混乱，而且在<code>debug</code>时还不容易发现。所以不推荐使用这种方法，它会引入其他来源的命名，很可能覆盖已有的定义。</p>
 <h1 id="5__name__属性">5.<code>__name__</code>属性</h1>
@@ -339,44 +339,44 @@
 <p>新建<code>using_name.py</code>文件，键入如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;程序自身在运行&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;来自另一模块&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;程序自身在运行&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;来自另一模块&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行该文件，输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">程序自身在运行
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">程序自身在运行
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后创建<code>test.py</code>文件，键入如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">using_name</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">using_name</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后运行此文件，输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">来自另一模块
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">来自另一模块
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可见，每个模块都有一个<code>__name__</code>属性，当其值是<code>__main__</code>时，表明该模块自身在运行，否则是被引入。</p>
     </div>
@@ -477,7 +477,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

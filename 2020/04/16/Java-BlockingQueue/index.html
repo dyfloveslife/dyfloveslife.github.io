@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/16/Java-BlockingQueue/" />
@@ -193,7 +193,7 @@
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -207,25 +207,25 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">ArrayBlockingQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">(</span><span class="n">capacity</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="nf">ArrayBlockingQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">fair</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">capacity</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">items</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">capacity</span><span class="o">];</span>
-    <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">(</span><span class="n">fair</span><span class="o">);</span>
-    <span class="n">notEmpty</span> <span class="o">=</span> <span class="n">lock</span><span class="o">.</span><span class="na">newCondition</span><span class="o">();</span>
-    <span class="n">notFull</span> <span class="o">=</span>  <span class="n">lock</span><span class="o">.</span><span class="na">newCondition</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">ArrayBlockingQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">(</span><span class="n">capacity</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">ArrayBlockingQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">fair</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">capacity</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">items</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">capacity</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">(</span><span class="n">fair</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">notEmpty</span> <span class="o">=</span> <span class="n">lock</span><span class="o">.</span><span class="na">newCondition</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">notFull</span> <span class="o">=</span>  <span class="n">lock</span><span class="o">.</span><span class="na">newCondition</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="2linkedblockingqueue">2.LinkedBlockingQueue</h2>
 <p>基于<strong>链表</strong>实现的有界阻塞队列，在创建 LinkedBlockingQueue 时如果不指定具体的容量大小，则默认的大小为 Integer.MAX_VALUE。此外，这也是一个先进先出的队列。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -237,24 +237,24 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">LinkedBlockingQueue</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
-<span class="o">}</span>
-
-
-<span class="kd">public</span> <span class="nf">LinkedBlockingQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">capacity</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">capacity</span> <span class="o">=</span> <span class="n">capacity</span><span class="o">;</span>
-    <span class="n">last</span> <span class="o">=</span> <span class="n">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;(</span><span class="kc">null</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">LinkedBlockingQueue</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">LinkedBlockingQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">capacity</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">capacity</span> <span class="o">=</span> <span class="n">capacity</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">last</span> <span class="o">=</span> <span class="n">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;(</span><span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="3priorityblockingqueue">3.PriorityBlockingQueue</h2>
 <p>支持<strong>优先级</strong>排序的无界阻塞队列，默认情况下采取自然顺序升序排序，按照元素的优先级顺序出队，每次出队的元素都是优先级最高的。此外，该阻塞队列的容量没有上限，亦成为无界阻塞队列。如果不指定参数的话，那么 PriorityBlockingQueue 默认的初始化容量为 11，如果在添加元素的过程中超过了该容量，则 PriorityBlockingQueue 会动态的改变容量大小。正是因为其容量没有限制，所以在添加元素的时候有可能会添加失败，因为不停地添加元素有可能导致资源耗尽并且会发生内存溢出。</p>
 <p>需要注意的是，PriorityBlockingQueue 中不可以插入 null 对象，这是因为在插入元素时会对该元素进行判空检查，如果该元素是 null，则会抛出 NullPointerException。源码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -288,46 +288,46 @@
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
-</span><span class="cm">  * Default array capacity.
-</span><span class="cm">  */</span>
-<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="n">11</span><span class="o">;</span>
-
-
-<span class="kd">public</span> <span class="nf">PriorityBlockingQueue</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">(</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-<span class="o">}</span>
-
-
-<span class="kd">public</span> <span class="nf">PriorityBlockingQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">(</span><span class="n">initialCapacity</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-<span class="o">}</span>
-
-
-<span class="kd">public</span> <span class="nf">PriorityBlockingQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">,</span> <span class="n">Comparator</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">comparator</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">&lt;</span> <span class="n">1</span><span class="o">)</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
-
-    <span class="k">this</span><span class="o">.</span><span class="na">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">notEmpty</span> <span class="o">=</span> <span class="n">lock</span><span class="o">.</span><span class="na">newCondition</span><span class="o">();</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">comparator</span> <span class="o">=</span> <span class="n">comparator</span><span class="o">;</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">initialCapacity</span><span class="o">];</span>
-<span class="o">}</span>
-
-
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">offer</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">();</span>
-    <span class="c1">//...
-</span><span class="c1"></span><span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">  * Default array capacity.
+</span></span></span><span class="line"><span class="cl"><span class="cm">  */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="n">11</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">PriorityBlockingQueue</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">(</span><span class="n">DEFAULT_INITIAL_CAPACITY</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">PriorityBlockingQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">(</span><span class="n">initialCapacity</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">PriorityBlockingQueue</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">,</span> <span class="n">Comparator</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">comparator</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">&lt;</span> <span class="n">1</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">notEmpty</span> <span class="o">=</span> <span class="n">lock</span><span class="o">.</span><span class="na">newCondition</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">comparator</span> <span class="o">=</span> <span class="n">comparator</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">initialCapacity</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">offer</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当然也可以根据 PriorityBlockingQueue 不同的构造函数，通过使用自定义实现类 compareTo() 方法来指定元素的排序规则，或者初始化 PriorityBlockingQueue 时。指定参数 Comparator 来对元素进行排序。但是对于排序的元素也要注意：PriorityBlockingQueue 不能保证同优先级元素的顺序。</p>
 <h2 id="4delayqueue">4.DelayQueue</h2>
 <p>使用优先级队列 PriorityQueue 实现的一个<strong>支持延时获取元素</strong>的无界阻塞队列。DelayQueue 中的元素只有当其指定的延迟时间到了，才能够从队列中获取元素。如果元素没有达到延时时间，则会阻塞当前线程。由于属于无界阻塞队列，因此往队列中插入元素的时永远不会阻塞，而获取元素时有可能会发生阻塞。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -335,13 +335,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">DelayQueue</span><span class="o">()</span> <span class="o">{}</span>
-
-
-<span class="kd">public</span> <span class="nf">DelayQueue</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">DelayQueue</span><span class="o">()</span> <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">DelayQueue</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>正是因为 DelayQueue 具有延时的效果，因此可以适用于以下场景：</p>
 <ul>
@@ -352,7 +352,7 @@
 <p>不存储元素的阻塞队列，每个 put 操作必须等待每个 take 操作，否则不能继续添加元素。此外，SynchronousQueue 默认情况下采用非公平性策略访问队列。并且，该队列不允许 null 元素。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -361,20 +361,20 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">SynchronousQueue</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="nf">SynchronousQueue</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">fair</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">transferer</span> <span class="o">=</span> <span class="n">fair</span> <span class="o">?</span> <span class="k">new</span> <span class="n">TransferQueue</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="k">new</span> <span class="n">TransferStack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">SynchronousQueue</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">SynchronousQueue</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">fair</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">transferer</span> <span class="o">=</span> <span class="n">fair</span> <span class="o">?</span> <span class="k">new</span> <span class="n">TransferQueue</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;()</span> <span class="o">:</span> <span class="k">new</span> <span class="n">TransferStack</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="6linkedtransferqueue">6.LinkedTransferQueue</h2>
 <p>由链表结构组成的无界阻塞队列，基于 TransferQueue 实现的。相对于其它阻塞队列，LinkedTransferQueue 提供了 tryTransfer 和 transfer 方法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -387,18 +387,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">tryTransfer</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">xfer</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">NOW</span><span class="o">,</span> <span class="n">0</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span>
-
-
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">transfer</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">xfer</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">SYNC</span><span class="o">,</span> <span class="n">0</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Thread</span><span class="o">.</span><span class="na">interrupted</span><span class="o">();</span> <span class="c1">// failure possible only due to interrupt
-</span><span class="c1"></span>        <span class="k">throw</span> <span class="k">new</span> <span class="n">InterruptedException</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">tryTransfer</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">xfer</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">NOW</span><span class="o">,</span> <span class="n">0</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">transfer</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">xfer</span><span class="o">(</span><span class="n">e</span><span class="o">,</span> <span class="kc">true</span><span class="o">,</span> <span class="n">SYNC</span><span class="o">,</span> <span class="n">0</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Thread</span><span class="o">.</span><span class="na">interrupted</span><span class="o">();</span> <span class="c1">// failure possible only due to interrupt
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">throw</span> <span class="k">new</span> <span class="n">InterruptedException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>transfer 方法的逻辑是：如果当前有消费者正在等待接收元素，通过 transfer 方法可以把生产者传入的元素立刻传输给消费者。如果没有消费者在等待接收元素，则 transfer 方法会将元素存放在队列的 tail 节点，并等到该元素被消费者消费了才返回。</p>
 <p>而 tryTransfer 方法用来试探生产者传入的元素是否能够直接传输给消费者。如果没有消费者等待接收元素，则返回 fase。和 transfer 方法的区别在于：tryTransfer 方法无论消费者是否接收，则方法会立即返回，而 transfer 方法必须等到消费者消费了才返回。</p>
@@ -406,7 +406,7 @@
 <p>基于链表实现的双向阻塞队列，可以实现在队头进行插入、删除操作，也可以在队尾进行插入、删除操作。与其它阻塞队列的区别在于：LinkedBlockingDeque 新增了 addFirst、addLast、offerFirst、offerLast、peekFirst、peekLast 方法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -433,38 +433,38 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">LinkedBlockingDeque</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
-<span class="o">}</span>
-
-
-<span class="kd">public</span> <span class="nf">LinkedBlockingDeque</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">capacity</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">capacity</span> <span class="o">=</span> <span class="n">capacity</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="nf">LinkedBlockingDeque</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
-    <span class="kd">final</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
-    <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span> <span class="c1">// Never contended, but necessary for visibility
-</span><span class="c1"></span>    <span class="k">try</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">();</span>
-            <span class="k">if</span> <span class="o">(!</span><span class="n">linkLast</span><span class="o">(</span><span class="k">new</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;(</span><span class="n">e</span><span class="o">)))</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="s">&#34;Deque full&#34;</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-        <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">LinkedBlockingDeque</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">LinkedBlockingDeque</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">capacity</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">capacity</span> <span class="o">=</span> <span class="n">capacity</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">LinkedBlockingDeque</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span> <span class="c1">// Never contended, but necessary for visibility
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="n">E</span> <span class="n">e</span> <span class="o">:</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(!</span><span class="n">linkLast</span><span class="o">(</span><span class="k">new</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;(</span><span class="n">e</span><span class="o">)))</span>
+</span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalStateException</span><span class="o">(</span><span class="s">&#34;Deque full&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="阻塞队列的应用">阻塞队列的应用</h1>
 <p>下面以阻塞队列 ArrayListBlockingQueue 实现一个生产者/消费者模型：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -517,63 +517,63 @@
 </span><span class="lnt">51
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">queueSize</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">ArrayBlockingQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">blockingQueue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayBlockingQueue</span><span class="o">&lt;&gt;(</span><span class="n">queueSize</span><span class="o">);</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
-
-        <span class="n">Producer</span> <span class="n">producer</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="na">new</span> <span class="nf">Producer</span><span class="o">();</span>
-        <span class="n">Consumer</span> <span class="n">consumer</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="na">new</span> <span class="nf">Consumer</span><span class="o">();</span>
-
-        <span class="n">producer</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-        <span class="n">consumer</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">class</span> <span class="nc">Consumer</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">consume</span><span class="o">();</span>
-        <span class="o">}</span>
-
-        <span class="kd">private</span> <span class="kt">void</span> <span class="nf">consume</span><span class="o">()</span> <span class="o">{</span>
-            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">try</span> <span class="o">{</span>
-                    <span class="n">blockingQueue</span><span class="o">.</span><span class="na">take</span><span class="o">();</span>
-                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;从队列中取出元素，队列剩余: &#34;</span> <span class="o">+</span> <span class="n">blockingQueue</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 个元素...&#34;</span><span class="o">);</span>
-                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="kd">class</span> <span class="nc">Producer</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
-        <span class="nd">@Override</span>
-        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">produce</span><span class="o">();</span>
-        <span class="o">}</span>
-
-        <span class="kd">private</span> <span class="kt">void</span> <span class="nf">produce</span><span class="o">()</span> <span class="o">{</span>
-            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">try</span> <span class="o">{</span>
-                    <span class="n">blockingQueue</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;向队列中添加元素，队列剩余: &#34;</span> <span class="o">+</span> <span class="n">blockingQueue</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 个元素...&#34;</span><span class="o">);</span>
-                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">queueSize</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">ArrayBlockingQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">blockingQueue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayBlockingQueue</span><span class="o">&lt;&gt;(</span><span class="n">queueSize</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Producer</span> <span class="n">producer</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="na">new</span> <span class="nf">Producer</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Consumer</span> <span class="n">consumer</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="na">new</span> <span class="nf">Consumer</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">producer</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">consumer</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">class</span> <span class="nc">Consumer</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">consume</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">void</span> <span class="nf">consume</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">blockingQueue</span><span class="o">.</span><span class="na">take</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;从队列中取出元素，队列剩余: &#34;</span> <span class="o">+</span> <span class="n">blockingQueue</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 个元素...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">class</span> <span class="nc">Producer</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">produce</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">void</span> <span class="nf">produce</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">blockingQueue</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;向队列中添加元素，队列剩余: &#34;</span> <span class="o">+</span> <span class="n">blockingQueue</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 个元素...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -599,31 +599,31 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">向队列中添加元素，队列剩余: 1 个元素...
-向队列中添加元素，队列剩余: 2 个元素...
-向队列中添加元素，队列剩余: 3 个元素...
-向队列中添加元素，队列剩余: 4 个元素...
-向队列中添加元素，队列剩余: 5 个元素...
-向队列中添加元素，队列剩余: 6 个元素...
-向队列中添加元素，队列剩余: 7 个元素...
-向队列中添加元素，队列剩余: 8 个元素...
-向队列中添加元素，队列剩余: 9 个元素...
-向队列中添加元素，队列剩余: 10 个元素...
-从队列中取出元素，队列剩余: 0 个元素...
-从队列中取出元素，队列剩余: 9 个元素...
-从队列中取出元素，队列剩余: 9 个元素...
-从队列中取出元素，队列剩余: 8 个元素...
-从队列中取出元素，队列剩余: 7 个元素...
-从队列中取出元素，队列剩余: 6 个元素...
-从队列中取出元素，队列剩余: 5 个元素...
-从队列中取出元素，队列剩余: 4 个元素...
-从队列中取出元素，队列剩余: 3 个元素...
-从队列中取出元素，队列剩余: 2 个元素...
-从队列中取出元素，队列剩余: 1 个元素...
-从队列中取出元素，队列剩余: 0 个元素...
-向队列中添加元素，队列剩余: 10 个元素...
-(以下省略)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">向队列中添加元素，队列剩余: 1 个元素...
+</span></span><span class="line"><span class="cl">向队列中添加元素，队列剩余: 2 个元素...
+</span></span><span class="line"><span class="cl">向队列中添加元素，队列剩余: 3 个元素...
+</span></span><span class="line"><span class="cl">向队列中添加元素，队列剩余: 4 个元素...
+</span></span><span class="line"><span class="cl">向队列中添加元素，队列剩余: 5 个元素...
+</span></span><span class="line"><span class="cl">向队列中添加元素，队列剩余: 6 个元素...
+</span></span><span class="line"><span class="cl">向队列中添加元素，队列剩余: 7 个元素...
+</span></span><span class="line"><span class="cl">向队列中添加元素，队列剩余: 8 个元素...
+</span></span><span class="line"><span class="cl">向队列中添加元素，队列剩余: 9 个元素...
+</span></span><span class="line"><span class="cl">向队列中添加元素，队列剩余: 10 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 0 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 9 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 9 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 8 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 7 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 6 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 5 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 4 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 3 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 2 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 1 个元素...
+</span></span><span class="line"><span class="cl">从队列中取出元素，队列剩余: 0 个元素...
+</span></span><span class="line"><span class="cl">向队列中添加元素，队列剩余: 10 个元素...
+</span></span><span class="line"><span class="cl">(以下省略)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="参考">参考</h1>
 <ul>
@@ -732,7 +732,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

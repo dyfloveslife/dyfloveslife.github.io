@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/11/30/learn-Missing-Semester-Data-Wrangling/" />
@@ -157,30 +157,30 @@
 <p>我们可以使用<code>journalctl</code>来查询系统的日志，然后使用<code>grep</code>将想要得到的信息进行过滤：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ journalctl <span class="p">|</span> grep -i intel
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ journalctl <span class="p">|</span> grep -i intel
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>你会看到控制台会一次性显示很多与<code>intel</code>相关的日志信息，为了便于查看，可以使用<code>less</code>命令进行翻页。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ journalctl <span class="p">|</span> grep -i intel <span class="p">|</span> less
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ journalctl <span class="p">|</span> grep -i intel <span class="p">|</span> less
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当然，这里会介绍一个强大的“流编辑器”工具<code>sed</code>，我们可以使用一些简短的命令（例如正则表达式）来修改文件，而不是直接操作文件的内容。</p>
 <p>比较常用的是<code>s</code>，也就是进行替换命令。它的格式为<code>s/REGEX/SUBSTITITION</code>，其中，<code>REGEX</code>需要使用正则表达式，而<code>SUBSTITITION</code>是用于替换匹配结果的文本。例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ cat ssh.log <span class="p">|</span> sed <span class="s1">&#39;s/.*intel //&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat ssh.log <span class="p">|</span> sed <span class="s1">&#39;s/.*intel //&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里的<code>/.*intel /</code>表示可以匹配任何以若干任意字符开头，并且包含<code>intel</code>的字符串。常见的正则表达式如下：</p>
 <ul>
@@ -195,25 +195,25 @@
 <p>这里对<code>[abc]</code>的使用给出一个实例。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;aba&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//&#39;</span>
-ba
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;bba&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//&#39;</span>
-ba
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;aba&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//&#39;</span>
+</span></span><span class="line"><span class="cl">ba
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;bba&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//&#39;</span>
+</span></span><span class="line"><span class="cl">ba
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>正如你所看到的，对于字符串<code>aba</code>来说，当遇到<code>s/[ab]//</code>时，会将首个<code>a</code>替换为空。而对于字符串<code>bba</code>来说，当遇到<code>s/[ab]//</code>时，会将首个<code>b</code>替换为空。</p>
 <p>你也可以使用<code>g</code>来过滤出不在<code>[ab]</code>中的字符，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -222,19 +222,19 @@ carol@ubuntu-carol:~/learnShell$
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abac&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//g&#39;</span>
-c
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abzzcczac&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//g&#39;</span>
-zzcczc
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abzzccabszac&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//g&#39;</span>
-zzccszc
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abac&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//g&#39;</span>
+</span></span><span class="line"><span class="cl">c
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abzzcczac&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//g&#39;</span>
+</span></span><span class="line"><span class="cl">zzcczc
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abzzccabszac&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/[ab]//g&#39;</span>
+</span></span><span class="line"><span class="cl">zzccszc
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>还可以进行一些其它的应用，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -243,14 +243,14 @@ carol@ubuntu-carol:~/learnShell$
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abcabc&#39;</span> <span class="p">|</span> sed -E <span class="s1">&#39;s/(ab)*//g&#39;</span>
-cc
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abcabc&#39;</span> <span class="p">|</span> sed -E <span class="s1">&#39;s/(ab|bc)*//g&#39;</span>
-cc
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abcabbc&#39;</span> <span class="p">|</span> sed -E <span class="s1">&#39;s/(ab|bc)*//g&#39;</span>
-c
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abcabc&#39;</span> <span class="p">|</span> sed -E <span class="s1">&#39;s/(ab)*//g&#39;</span>
+</span></span><span class="line"><span class="cl">cc
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abcabc&#39;</span> <span class="p">|</span> sed -E <span class="s1">&#39;s/(ab|bc)*//g&#39;</span>
+</span></span><span class="line"><span class="cl">cc
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s1">&#39;abcabbc&#39;</span> <span class="p">|</span> sed -E <span class="s1">&#39;s/(ab|bc)*//g&#39;</span>
+</span></span><span class="line"><span class="cl">c
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通篇看下来，文章主要介绍了<code>sed</code>、<code>awk</code>的使用，并结合正则表达式来进行一些数据整理的操作。对于正则表达式来说，可以使用在线调试工具 <a href="https://regex101.com/r/qqbZqh/2">Regex101</a> 来帮助你更好的理解它的使用。</p>
 <p>此外，文章最后还给出了<a href="https://emailregex.com/">匹配电子邮箱</a>的正则表达式、判断一个数<a href="https://www.noulakaz.net/2007/03/18/a-regular-expression-to-check-for-prime-numbers/">是否为质数</a>的正则表达式。</p>
@@ -351,7 +351,7 @@ carol@ubuntu-carol:~/learnShell$
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

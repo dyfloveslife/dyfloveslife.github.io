@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/16/learning-python-ClassesAndObjects/" />
@@ -167,7 +167,7 @@
 <p>语法格式如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -175,13 +175,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">ClassName</span><span class="p">:</span>
-    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ClassName</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>类实例化后，可以使用其属性，实际上，创建一个类之后，可以通过类名访问其属性。</p>
 <h1 id="3类对象">3.类对象</h1>
@@ -189,7 +189,7 @@
 <p>类对象创建后，类命名空间中所有的命名都是有效属性名，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -203,46 +203,46 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">123</span>
-
-    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;Hello World!&#39;</span>
-
-<span class="c1"># 实例化类</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
-
-<span class="c1"># 访问类的属性和方法</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MyClass类的属性i为：&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MyClass类的方法f输出为：&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">f</span><span class="p">())</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">=</span> <span class="mi">123</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;Hello World!&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 实例化类</span>
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 访问类的属性和方法</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MyClass类的属性i为：&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MyClass类的方法f输出为：&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">f</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">MyClass类的属性i为： 123
-MyClass类的方法f输出为： Hello World!
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MyClass类的属性i为： 123
+</span></span><span class="line"><span class="cl">MyClass类的方法f输出为： Hello World!
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>很多类都倾向于将对象创建为有初始状态的。因此类可能会定义一个名为<code>__init__()</code>的特殊方法（构造方法），如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>类定义了<code>__init__()</code>方法后，类的实例化操作会自动调用<code>__init__()</code>方法。当然，<code>__init__()</code>方法可以有参数，参数通过<code>__init__()</code>传递到类的实例化操作上，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -251,20 +251,20 @@ MyClass类的方法f输出为： Hello World!
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Complex</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">realpart</span><span class="p">,</span> <span class="n">imagepart</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">realpart</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="n">imagepart</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">Complex</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># 输出结果：3.0 -4.5</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Complex</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">realpart</span><span class="p">,</span> <span class="n">imagepart</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">realpart</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="n">imagepart</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="n">Complex</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># 输出结果：3.0 -4.5</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong><code>self</code>代表类的实例，而非类。</strong></p>
 <p>类的方法与普通的函数只有一个特别的区别：它们必须有一个额外的<strong>第一个参数名称</strong>，按照惯例它的名称是<code>self</code>。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -273,32 +273,32 @@ MyClass类的方法f输出为： Hello World!
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">prt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
-
-<span class="n">t</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
-<span class="n">t</span><span class="o">.</span><span class="n">prt</span><span class="p">()</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Test</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">prt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">t</span> <span class="o">=</span> <span class="n">Test</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">t</span><span class="o">.</span><span class="n">prt</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Test</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000000000223F9E8</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">Test</span><span class="s1">&#39;&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">Test</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x000000000223F9E8</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">__main__</span><span class="o">.</span><span class="n">Test</span><span class="s1">&#39;&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>从执行结果可以很明显的看出，<code>self</code>代表的是类的实例，代表当前对象的地址，而<code>self.__class__</code>则指向类。<code>self</code>不是 Python 关键字，我们把他换成其他字符也是可以正常执行的。</p>
 <h1 id="4类方法">4.类方法</h1>
 <p>在类地内部，使用<code>def</code>关键字来定义一个方法，与一般函数定义不同，类方法必须包含参数<code>self</code>，且为第一个参数，<code>self</code>代表的是类的实例。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -312,35 +312,35 @@ MyClass类的方法f输出为： Hello World!
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">People</span><span class="p">:</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">a</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">w</span>
-
-    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">))</span>
-
-<span class="n">p</span> <span class="o">=</span> <span class="n">People</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">People</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">w</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">People</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Carol说：我10岁了，体重是30公斤。
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Carol说：我10岁了，体重是30公斤。
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="5继承">5.继承</h1>
 <h2 id="51单继承">5.1单继承</h2>
 <p>语法格式如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -350,30 +350,30 @@ MyClass类的方法f输出为： Hello World!
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># DerivedClassName表示派生类的类名</span>
-<span class="c1"># BaseClassName1表示基类的类名</span>
-<span class="k">class</span> <span class="nc">DerivedClassName</span><span class="p">(</span><span class="n">BaseClassName1</span><span class="p">):</span>
-    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># DerivedClassName表示派生类的类名</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># BaseClassName1表示基类的类名</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DerivedClassName</span><span class="p">(</span><span class="n">BaseClassName1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>需要注意圆括号中基类的顺序，若是基类中有相同的方法名，而在子类使用时未指定，Python从左至右搜索 即方法在子类中未找到时，从左到右查找基类中是否包含方法。基类名<code>BaseClassName</code>必须与派生类定义在一个作用域内。</p>
 <p>除了类，还可以用表达式，基类定义在另一个模块中时这一点非常有用，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">DerivedClassName</span><span class="p">(</span><span class="n">modname</span><span class="o">.</span><span class="n">BaseClassName</span><span class="p">):</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DerivedClassName</span><span class="p">(</span><span class="n">modname</span><span class="o">.</span><span class="n">BaseClassName</span><span class="p">):</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面给出通过继承 People 类，调用并覆写 People 类方法的实例，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -398,45 +398,45 @@ MyClass类的方法f输出为： Hello World!
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 类定义</span>
-<span class="k">class</span> <span class="nc">People</span><span class="p">:</span>
-    <span class="c1"># 定义构造方法</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">a</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">w</span>
-
-    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">))</span>
-
-<span class="c1"># 单继承People类</span>
-<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">People</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-        <span class="c1"># 调用父类的构造方法</span>
-        <span class="n">People</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grade</span> <span class="o">=</span> <span class="n">g</span>
-    <span class="c1"># 覆写父类的方法</span>
-    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤，在读</span><span class="si">%d</span><span class="s1">年级。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade</span><span class="p">))</span>
-
-<span class="n">p</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 类定义</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">People</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 定义构造方法</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">w</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 单继承People类</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">People</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 调用父类的构造方法</span>
+</span></span><span class="line"><span class="cl">        <span class="n">People</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">grade</span> <span class="o">=</span> <span class="n">g</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 覆写父类的方法</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤，在读</span><span class="si">%d</span><span class="s1">年级。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Carol说：我10岁了，体重是30公斤，在读3年级。
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Carol说：我10岁了，体重是30公斤，在读3年级。
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="52多继承">5.2多继承</h2>
 <p>语法格式如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -446,20 +446,20 @@ MyClass类的方法f输出为： Hello World!
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># DerivedClassName表示派生类的类名</span>
-<span class="c1"># BaseClassName1表示基类的类名</span>
-<span class="k">class</span> <span class="nc">DerivedClassName</span><span class="p">(</span><span class="n">Base1</span><span class="p">,</span> <span class="n">Base2</span><span class="p">,</span> <span class="n">Base3</span><span class="p">):</span>
-    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># DerivedClassName表示派生类的类名</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># BaseClassName1表示基类的类名</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DerivedClassName</span><span class="p">(</span><span class="n">Base1</span><span class="p">,</span> <span class="n">Base2</span><span class="p">,</span> <span class="n">Base3</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">statement</span><span class="o">-</span><span class="n">N</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>需要注意圆括号中父类的顺序，若是父类中有相同的方法名，而在子类使用时未指定，Python 从左至右搜索 即方法在子类中未找到时，从左到右查找父类中是否包含方法。实例代码如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -499,60 +499,60 @@ MyClass类的方法f输出为： Hello World!
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 类定义</span>
-<span class="k">class</span> <span class="nc">People</span><span class="p">:</span>
-    <span class="c1"># 定义构造方法</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">a</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">w</span>
-
-    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">))</span>
-
-<span class="c1"># 单继承People类</span>
-<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">People</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-        <span class="c1"># 调用父类的构造方法</span>
-        <span class="n">People</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grade</span> <span class="o">=</span> <span class="n">g</span>
-    <span class="c1"># 覆写父类的方法</span>
-    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤，在读</span><span class="si">%d</span><span class="s1">年级。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade</span><span class="p">))</span>
-
-<span class="c1"># 新创建的一个类，用于多继承</span>
-<span class="k">class</span> <span class="nc">Speaker</span><span class="p">():</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">topic</span> <span class="o">=</span> <span class="n">t</span>
-
-    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;我叫</span><span class="si">%s</span><span class="s1">，我演讲的主题是</span><span class="si">%s</span><span class="s1">。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">topic</span><span class="p">))</span>
-
-<span class="c1"># 多继承Speaker类和Student类</span>
-<span class="k">class</span> <span class="nc">Sample</span><span class="p">(</span><span class="n">Speaker</span><span class="p">,</span> <span class="n">Student</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="n">Student</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-        <span class="n">Speaker</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-
-<span class="n">test</span> <span class="o">=</span> <span class="n">Sample</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">)</span>
-<span class="n">test</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>  <span class="c1"># 方法名相同，默认调用的是在括号中排在前面的父类的方法</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 类定义</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">People</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 定义构造方法</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">w</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 单继承People类</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">People</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 调用父类的构造方法</span>
+</span></span><span class="line"><span class="cl">        <span class="n">People</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">grade</span> <span class="o">=</span> <span class="n">g</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 覆写父类的方法</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">说：我</span><span class="si">%d</span><span class="s1">岁了，体重是</span><span class="si">%d</span><span class="s1">公斤，在读</span><span class="si">%d</span><span class="s1">年级。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 新创建的一个类，用于多继承</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Speaker</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">topic</span> <span class="o">=</span> <span class="n">t</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">speak</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;我叫</span><span class="si">%s</span><span class="s1">，我演讲的主题是</span><span class="si">%s</span><span class="s1">。&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">topic</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 多继承Speaker类和Student类</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Sample</span><span class="p">(</span><span class="n">Speaker</span><span class="p">,</span> <span class="n">Student</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Student</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Speaker</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">test</span> <span class="o">=</span> <span class="n">Sample</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Python&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="o">.</span><span class="n">speak</span><span class="p">()</span>  <span class="c1"># 方法名相同，默认调用的是在括号中排在前面的父类的方法</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">我叫Carol，我演讲的主题是Python。
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">我叫Carol，我演讲的主题是Python。
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="6方法重写">6.方法重写</h1>
 <p>如果你的父类方法的功能不能满足你的需求，你可以在子类重写父类的方法，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -565,36 +565,36 @@ MyClass类的方法f输出为： Hello World!
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Parent</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">myMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;调用父类方法&#39;</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Parent</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">myMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;调用子类方法&#39;</span><span class="p">)</span>
-
-<span class="n">c</span> <span class="o">=</span> <span class="n">Child</span><span class="p">()</span>
-<span class="n">c</span><span class="o">.</span><span class="n">myMethod</span><span class="p">()</span>
-<span class="nb">super</span><span class="p">(</span><span class="n">Child</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">myMethod</span><span class="p">()</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Parent</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">myMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;调用父类方法&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Parent</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">myMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;调用子类方法&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="n">Child</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">c</span><span class="o">.</span><span class="n">myMethod</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">super</span><span class="p">(</span><span class="n">Child</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">myMethod</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">调用子类方法
-调用父类方法
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">调用子类方法
+</span></span><span class="line"><span class="cl">调用父类方法
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="7类属性与方法">7.类属性与方法</h1>
 <h2 id="71类的私有属性">7.1类的私有属性</h2>
 <p><code>__private_attrs</code>：两个下划线开头，声明该属性为私有，不能在类的外部被使用或直接访问。在类内部的方法中使用<code>self.__private_attrs</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -610,26 +610,26 @@ MyClass类的方法f输出为： Hello World!
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">JustCounter</span><span class="p">:</span>
-    <span class="n">__secretCount</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 私有变量</span>
-    <span class="n">publicCount</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 公共变量</span>
-
-    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__secretCount</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">publicCount</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__secretCount</span><span class="p">)</span>
-
-<span class="n">counter</span> <span class="o">=</span> <span class="n">JustCounter</span><span class="p">()</span>
-<span class="n">counter</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="n">counter</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">publicCount</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">__secretCount</span><span class="p">)</span> <span class="c1"># 报错，实例不能访问私有变量</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">JustCounter</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">__secretCount</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 私有变量</span>
+</span></span><span class="line"><span class="cl">    <span class="n">publicCount</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 公共变量</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">__secretCount</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">publicCount</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__secretCount</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">counter</span> <span class="o">=</span> <span class="n">JustCounter</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">counter</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">counter</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">publicCount</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">__secretCount</span><span class="p">)</span> <span class="c1"># 报错，实例不能访问私有变量</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -638,20 +638,20 @@ MyClass类的方法f输出为： Hello World!
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Traceback (most recent call last):
-1
-2
-2
-  File &#34;F:/Python_test/BasicKnowledge/test_20180716.py&#34;, line 95, in &lt;module&gt;
-    print(counter.__secretCount)
-AttributeError: &#39;JustCounter&#39; object has no attribute &#39;__secretCount&#39;  # 报错，实例不能访问私有变量
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Traceback (most recent call last):
+</span></span><span class="line"><span class="cl">1
+</span></span><span class="line"><span class="cl">2
+</span></span><span class="line"><span class="cl">2
+</span></span><span class="line"><span class="cl">  File &#34;F:/Python_test/BasicKnowledge/test_20180716.py&#34;, line 95, in &lt;module&gt;
+</span></span><span class="line"><span class="cl">    print(counter.__secretCount)
+</span></span><span class="line"><span class="cl">AttributeError: &#39;JustCounter&#39; object has no attribute &#39;__secretCount&#39;  # 报错，实例不能访问私有变量
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="72类的私有方法">7.2类的私有方法</h2>
 <p><code>__private_methods</code>：两个下划线开头，声明该方法为私有方法，只能在类的内部调用，不能在类地外部调用。在类内部的方法中使用<code>self.__private_methods</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -672,31 +672,31 @@ AttributeError: &#39;JustCounter&#39; object has no attribute &#39;__secretCount
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Site</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span>  <span class="c1"># 公共</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">=</span> <span class="n">u</span>  <span class="c1"># 私有</span>
-
-    <span class="k">def</span> <span class="nf">who</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;name:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;url:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__url</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 私有方法</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;这是私有方法&#39;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 公共方法</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;这是公共方法&#39;</span><span class="p">)</span>
-
-<span class="n">test</span> <span class="o">=</span> <span class="n">Site</span><span class="p">(</span><span class="s1">&#39;我的博客&#39;</span><span class="p">,</span> <span class="s1">&#39;dyfloveslife.github.io&#39;</span><span class="p">)</span>
-<span class="n">test</span><span class="o">.</span><span class="n">who</span><span class="p">()</span>  <span class="c1"># 正常输出</span>
-<span class="n">test</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>  <span class="c1"># 正常输出</span>
-<span class="n">test</span><span class="o">.</span><span class="n">__foo</span><span class="p">()</span>  <span class="c1"># 报错</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Site</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span>  <span class="c1"># 公共</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">__url</span> <span class="o">=</span> <span class="n">u</span>  <span class="c1"># 私有</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">who</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;name:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;url:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">__foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 私有方法</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;这是私有方法&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># 公共方法</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;这是公共方法&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">test</span> <span class="o">=</span> <span class="n">Site</span><span class="p">(</span><span class="s1">&#39;我的博客&#39;</span><span class="p">,</span> <span class="s1">&#39;dyfloveslife.github.io&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="o">.</span><span class="n">who</span><span class="p">()</span>  <span class="c1"># 正常输出</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span>  <span class="c1"># 正常输出</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="o">.</span><span class="n">__foo</span><span class="p">()</span>  <span class="c1"># 报错</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -705,14 +705,14 @@ AttributeError: &#39;JustCounter&#39; object has no attribute &#39;__secretCount
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">name</span><span class="p">:</span> <span class="n">我的博客</span>
-<span class="n">url</span><span class="p">:</span> <span class="n">dyfloveslife</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span>
-<span class="n">这是公共方法</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&#34;F:/Python_test/BasicKnowledge/test_20180716.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">115</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-    <span class="n">test</span><span class="o">.</span><span class="n">__foo</span><span class="p">()</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;Site&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;__foo&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="n">name</span><span class="p">:</span> <span class="n">我的博客</span>
+</span></span><span class="line"><span class="cl"><span class="n">url</span><span class="p">:</span> <span class="n">dyfloveslife</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span>
+</span></span><span class="line"><span class="cl"><span class="n">这是公共方法</span>
+</span></span><span class="line"><span class="cl"><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;F:/Python_test/BasicKnowledge/test_20180716.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">115</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test</span><span class="o">.</span><span class="n">__foo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;Site&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;__foo&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -813,7 +813,7 @@ AttributeError: &#39;JustCounter&#39; object has no attribute &#39;__secretCount
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/09/11/offer-NextNodeInBinaryTrees/" />
@@ -150,7 +150,7 @@
 <p>对于一棵如下的二叉树，其中序遍历为 <code>{d, b, h, e, i, a, f, c, g}</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -159,14 +159,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">         a
-       /   \
-      b     c
-     / \   / \
-    d   e f   g
-       / \
-      h   i
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">         a
+</span></span><span class="line"><span class="cl">       /   \
+</span></span><span class="line"><span class="cl">      b     c
+</span></span><span class="line"><span class="cl">     / \   / \
+</span></span><span class="line"><span class="cl">    d   e f   g
+</span></span><span class="line"><span class="cl">       / \
+</span></span><span class="line"><span class="cl">      h   i
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>有如下的规律：</p>
 <ol>
@@ -183,7 +183,7 @@
 <h2 id="实现">实现</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -203,25 +203,25 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NextNodeInBinaryTrees</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">TreeNode</span> <span class="nf">getNextNode</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">){</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-        <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
-            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
-            <span class="k">while</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
-                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
-            <span class="o">}</span>
-            <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">parent</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
-            <span class="k">if</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="n">node</span><span class="o">)</span> <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
-            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NextNodeInBinaryTrees</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">TreeNode</span> <span class="nf">getNextNode</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">right</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">left</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">parent</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">.</span><span class="na">left</span> <span class="o">==</span> <span class="n">node</span><span class="o">)</span> <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">parent</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="详解">详解</h2>
 <p>第 <code>4~9</code> 行就对应上面讲到的第 <code>1)</code> 条，而第 <code>12~14</code> 行对应的就是第 <code>2</code> 条。</p>
@@ -324,7 +324,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/09/11/offer-FindInPartiallySortedMatrix/" />
@@ -150,17 +150,17 @@
 <p>上面所描述的二维数组就是如下的数组：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">1 2 8  9
-2 4 9  12
-4 7 10 13
-6 8 11 15
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1 2 8  9
+</span></span><span class="line"><span class="cl">2 4 9  12
+</span></span><span class="line"><span class="cl">4 7 10 13
+</span></span><span class="line"><span class="cl">6 8 11 15
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果我们想要在其中找到是否有<code>7</code>这个数，可以这样做。</p>
 <ol>
@@ -184,7 +184,7 @@
 <h2 id="实现">实现</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -206,27 +206,27 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FindInPartiallySortedMatrix</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">Find</span><span class="o">(</span><span class="kt">int</span> <span class="n">target</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span> <span class="o">||</span> <span class="n">array</span><span class="o">[</span><span class="n">0</span><span class="o">].</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">array</span><span class="o">[</span><span class="n">0</span><span class="o">].</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">column</span> <span class="o">=</span> <span class="n">columns</span><span class="o">;</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">row</span> <span class="o">&lt;=</span> <span class="n">rows</span> <span class="o">&amp;&amp;</span> <span class="n">column</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">array</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">column</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">row</span><span class="o">++;</span>
-            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">array</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">column</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">column</span><span class="o">--;</span>
-            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FindInPartiallySortedMatrix</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">Find</span><span class="o">(</span><span class="kt">int</span> <span class="n">target</span><span class="o">,</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span> <span class="o">||</span> <span class="n">array</span><span class="o">[</span><span class="n">0</span><span class="o">].</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">array</span><span class="o">[</span><span class="n">0</span><span class="o">].</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">column</span> <span class="o">=</span> <span class="n">columns</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(</span><span class="n">row</span> <span class="o">&lt;=</span> <span class="n">rows</span> <span class="o">&amp;&amp;</span> <span class="n">column</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">array</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">column</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">row</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">array</span><span class="o">[</span><span class="n">row</span><span class="o">][</span><span class="n">column</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">column</span><span class="o">--;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="详解">详解</h2>
 <p>第<code>3</code>行，对边界条件进行检查。第<code>10</code>行，如果我们选择的右上角的数字 <code>array[row][column]</code> 比目标数字<code>target</code>要小的话，就增加行数；如果我们选择的右上角的数字<code>array[row][column]</code>比目标数字<code>target</code>要大的话，就减小列数；否则就返回true，即找到这个数字。</p>
@@ -329,7 +329,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

@@ -26,7 +26,7 @@ shrike-i386-disc1.iso、shrike-i386-disc2.iso。
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/03/Linux-DHCP/" />
@@ -195,45 +195,45 @@ shrike-i386-disc1.iso、shrike-i386-disc2.iso。"/>
 <p>左下角<code>主菜单</code>→<code>系统设置</code>→<code>网络</code>，双击设备<code>eth0</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">IP 地址：192.168.1.2
-子网掩码：255.255.255.0
-默认网关地址：192.168.1.254
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">IP 地址：192.168.1.2
+</span></span><span class="line"><span class="cl">子网掩码：255.255.255.0
+</span></span><span class="line"><span class="cl">默认网关地址：192.168.1.254
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="二-安装软件包">二. 安装软件包</h1>
 <p>我们把上面说的这三个包都安装上吧！</p>
 <h2 id="1-挂载第一张镜像安装-dhclient">1. 挂载第一张镜像，安装 dhclient</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">mount /dev/cdrom /mnt/cdrom		//挂载光盘
-cd /mnt/cdrom/RedHat/RPMS		//进入目录
-rpm -ivh dhclient-3.0pl1-23.i386.rpm	//安装
-umount /mnt/cdrom			//卸载光盘
-eject /dev/cdrom			//弹出光盘
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mount /dev/cdrom /mnt/cdrom		//挂载光盘
+</span></span><span class="line"><span class="cl">cd /mnt/cdrom/RedHat/RPMS		//进入目录
+</span></span><span class="line"><span class="cl">rpm -ivh dhclient-3.0pl1-23.i386.rpm	//安装
+</span></span><span class="line"><span class="cl">umount /mnt/cdrom			//卸载光盘
+</span></span><span class="line"><span class="cl">eject /dev/cdrom			//弹出光盘
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="2-挂载第二张镜像安装-dhcp-和-dhcp-devel">2. 挂载第二张镜像，安装 dhcp 和 dhcp-devel</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">rpm -ivh dhcp-3.0pl1.23.i386.rpm
-rpm -ivh dhcp-devel-3.0pl1-23.i386.rpm
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rpm -ivh dhcp-3.0pl1.23.i386.rpm
+</span></span><span class="line"><span class="cl">rpm -ivh dhcp-devel-3.0pl1-23.i386.rpm
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="三-修改配置文件">三. 修改配置文件</h1>
 <p>先将 <code>/usr/share/doc/dhcp-3.0pl1/dhcpd.conf.sample</code> 文件复制并修改文件名 <code>/etc/dhcpd.conf</code>。如下图：</p>
@@ -343,7 +343,7 @@ rpm -ivh dhcp-devel-3.0pl1-23.i386.rpm
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

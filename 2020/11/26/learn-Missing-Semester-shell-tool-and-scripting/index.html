@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/11/26/learn-Missing-Semester-shell-tool-and-scripting/" />
@@ -160,17 +160,17 @@
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~$ <span class="nv">foo</span><span class="o">=</span>bar
-carol@ubuntu-carol:~$ <span class="nb">echo</span> <span class="nv">$foo</span>
-bar
-carol@ubuntu-carol:~$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~$ <span class="nv">foo</span><span class="o">=</span>bar
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~$ <span class="nb">echo</span> <span class="nv">$foo</span>
+</span></span><span class="line"><span class="cl">bar
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此外，还需要注意单引号和双引号的区别，如下所示。</p>
 <blockquote>
@@ -178,7 +178,7 @@ carol@ubuntu-carol:~$
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -187,14 +187,14 @@ carol@ubuntu-carol:~$
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~$ <span class="nb">echo</span> <span class="nv">$foo</span>
-bar
-carol@ubuntu-carol:~$ <span class="nb">echo</span> <span class="s2">&#34;Value is </span><span class="nv">$foo</span><span class="s2">&#34;</span>
-Value is bar
-carol@ubuntu-carol:~$ <span class="nb">echo</span> <span class="s1">&#39;Value is $foo&#39;</span>
-Value is <span class="nv">$foo</span>
-carol@ubuntu-carol:~$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~$ <span class="nb">echo</span> <span class="nv">$foo</span>
+</span></span><span class="line"><span class="cl">bar
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~$ <span class="nb">echo</span> <span class="s2">&#34;Value is </span><span class="nv">$foo</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">Value is bar
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~$ <span class="nb">echo</span> <span class="s1">&#39;Value is $foo&#39;</span>
+</span></span><span class="line"><span class="cl">Value is <span class="nv">$foo</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里编写一个 bash 脚本，其功能是：用于创建一个指定名称的目录，然后进入到该目录中。</p>
 <blockquote>
@@ -202,33 +202,33 @@ carol@ubuntu-carol:~$
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mcd<span class="o">()</span> <span class="o">{</span>
-    mkdir -p <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
-    <span class="nb">cd</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mcd<span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    mkdir -p <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">cd</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nb">source</span> mcd.sh 
-carol@ubuntu-carol:~/learnShell$ mcd <span class="nb">test</span>
-carol@ubuntu-carol:~/learnShell/test$ <span class="nb">pwd</span>
-/home/carol/learnShell/test
-carol@ubuntu-carol:~/learnShell/test$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">source</span> mcd.sh 
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ mcd <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/test$ <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl">/home/carol/learnShell/test
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/test$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此外，对于<code>$_</code>的使用，它所指的是上一个命令中的最后一个参数，或者说当前 shell 环境中的最后一个参数。</p>
 <blockquote>
@@ -236,7 +236,7 @@ carol@ubuntu-carol:~/learnShell/test$
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -247,21 +247,21 @@ carol@ubuntu-carol:~/learnShell/test$
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ ls
-hello2.txt  hello.txt  ls.txt  mcd.sh  number.txt
-carol@ubuntu-carol:~/learnShell$ mkdir file
-carol@ubuntu-carol:~/learnShell$ <span class="nb">cd</span> <span class="nv">$_</span>
-carol@ubuntu-carol:~/learnShell/file$ 
-carol@ubuntu-carol:~/learnShell/file$ <span class="nb">cd</span> ..
-carol@ubuntu-carol:~/learnShell$ mkdir a b
-carol@ubuntu-carol:~/learnShell$ <span class="nb">cd</span> <span class="nv">$_</span>
-carol@ubuntu-carol:~/learnShell/b$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ ls
+</span></span><span class="line"><span class="cl">hello2.txt  hello.txt  ls.txt  mcd.sh  number.txt
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ mkdir file
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">cd</span> <span class="nv">$_</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/file$ 
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/file$ <span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ mkdir a b
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">cd</span> <span class="nv">$_</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/b$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当我们执行<code>grep foobar mcd.sh</code>时，也就是尝试通过<code>grep</code>在<code>mcd.sh</code>脚本中寻找<code>foorbar</code>时，由于匹配不到相应的<code>foobar</code>，因此在<code>echo $?</code>之后，会返回一个错误信息<code>1</code>（事实上，在错误时会返回一个在 1~255 内的整数）。如果上一步没有执行错误，说明执行成功，则会返回信息<code>0</code>。例如，在执行<code>echo &quot;hello&quot;</code>后，由于没有执行错误，因此返回的是<code>0</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -273,39 +273,39 @@ carol@ubuntu-carol:~/learnShell/b$
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ ls
-hello2.txt  hello.txt  ls.txt  mcd.sh  number.txt
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s2">&#34;hello&#34;</span>
-hello
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">0</span>
-carol@ubuntu-carol:~/learnShell$ grep foobar mcd.sh 
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">1</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nv">$?</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ ls
+</span></span><span class="line"><span class="cl">hello2.txt  hello.txt  ls.txt  mcd.sh  number.txt
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="s2">&#34;hello&#34;</span>
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="m">0</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ grep foobar mcd.sh 
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="m">1</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nv">$?</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这很好理解，如果我们在<code>mcd.sh</code>脚本中寻找是否有字符串与<code>dir</code>匹配，那么此时是匹配成功的，然后执行<code>echo $?</code>会返回<code>0</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ grep dir mcd.sh 
-    mkdir -p <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">0</span>
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ grep dir mcd.sh 
+</span></span><span class="line"><span class="cl">    mkdir -p <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="m">0</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当然，我们也可以通过<code>true</code>和<code>false</code>来判断<code>echo $?</code>的输出，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -314,14 +314,14 @@ carol@ubuntu-carol:~/learnShell$
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nb">true</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">0</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nb">false</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">1</span>
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="m">0</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="m">1</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>甚至还可以结合逻辑运算符，如下所示：</p>
 <blockquote>
@@ -329,7 +329,7 @@ carol@ubuntu-carol:~/learnShell$
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -346,37 +346,37 @@ carol@ubuntu-carol:~/learnShell$
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nb">false</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&#34;hello&#34;</span>
-hello
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">0</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nb">false</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;hello&#34;</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">1</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nb">true</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&#34;hello&#34;</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">0</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nb">true</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;hello&#34;</span>
-hello
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
-<span class="m">0</span>
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">false</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&#34;hello&#34;</span>
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="m">0</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">false</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;hello&#34;</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="m">1</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">true</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&#34;hello&#34;</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="m">0</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">true</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;hello&#34;</span>
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$?</span>
+</span></span><span class="line"><span class="cl"><span class="m">0</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>我们可以在 shell 中使用变量去承接一个命令的输出。不对，准确的说，应该是使用变量<code>foo</code>作为<code>pwd</code>命令的一个别名。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nv">foo</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$foo</span>
-/home/carol/learnShell
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nv">foo</span><span class="o">=</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="nv">$foo</span>
+</span></span><span class="line"><span class="cl">/home/carol/learnShell
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用重定向符号<code>&lt;</code>并搭配命令行语句<code>ls</code>，来列出当前目录下以及父级目录下所有的文件，如下所示：</p>
 <blockquote>
@@ -384,7 +384,7 @@ carol@ubuntu-carol:~/learnShell$
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -404,30 +404,30 @@ carol@ubuntu-carol:~/learnShell$
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ cat &lt;<span class="o">(</span>ls<span class="o">)</span> &lt;<span class="o">(</span>ls ..<span class="o">)</span>
-hello2.txt
-hello.txt
-ls.txt
-mcd.sh
-number.txt
-Desktop
-Documents
-Downloads
-learnC
-learnShell
-Music
-Pictures
-Public
-snap
-Templates
-Videos
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat &lt;<span class="o">(</span>ls<span class="o">)</span> &lt;<span class="o">(</span>ls ..<span class="o">)</span>
+</span></span><span class="line"><span class="cl">hello2.txt
+</span></span><span class="line"><span class="cl">hello.txt
+</span></span><span class="line"><span class="cl">ls.txt
+</span></span><span class="line"><span class="cl">mcd.sh
+</span></span><span class="line"><span class="cl">number.txt
+</span></span><span class="line"><span class="cl">Desktop
+</span></span><span class="line"><span class="cl">Documents
+</span></span><span class="line"><span class="cl">Downloads
+</span></span><span class="line"><span class="cl">learnC
+</span></span><span class="line"><span class="cl">learnShell
+</span></span><span class="line"><span class="cl">Music
+</span></span><span class="line"><span class="cl">Pictures
+</span></span><span class="line"><span class="cl">Public
+</span></span><span class="line"><span class="cl">snap
+</span></span><span class="line"><span class="cl">Templates
+</span></span><span class="line"><span class="cl">Videos
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面这段脚本用于遍历我们提供的参数，使用<code>grep</code>搜索字符串<code>foobar</code>，如果没有找到的话，则将其作为注释追加到文件中。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -442,39 +442,39 @@ carol@ubuntu-carol:~/learnShell$
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">echo</span> <span class="s2">&#34;Startint program at </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
-
-<span class="nb">echo</span> <span class="s2">&#34;Running program </span><span class="nv">$0</span><span class="s2"> with </span><span class="nv">$#</span><span class="s2"> arguments with pid </span><span class="nv">$$</span><span class="s2">&#34;</span>
-
-<span class="k">for</span> file in <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
-    grep foobar <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> &gt; /dev/null 2&gt; /dev/null
-    <span class="c1"># 如果我们想要匹配的模式没有找到，则 grep 退出状态会为 1</span>
-    <span class="c1"># 我们将标准输出流和标准错误流重定向到 Null，因为我们并不关心这些信息</span>
-    <span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$?</span><span class="s2">&#34;</span> -ne <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nb">echo</span> <span class="s2">&#34;File </span><span class="nv">$file</span><span class="s2"> does not have any foobar, adding one&#34;</span>
-        <span class="nb">echo</span> <span class="s2">&#34;# foobar&#34;</span> &gt;&gt; <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span>
-    <span class="k">if</span>
-<span class="k">done</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Startint program at </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Running program </span><span class="nv">$0</span><span class="s2"> with </span><span class="nv">$#</span><span class="s2"> arguments with pid </span><span class="nv">$$</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> file in <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    grep foobar <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span> &gt; /dev/null 2&gt; /dev/null
+</span></span><span class="line"><span class="cl">    <span class="c1"># 如果我们想要匹配的模式没有找到，则 grep 退出状态会为 1</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 我们将标准输出流和标准错误流重定向到 Null，因为我们并不关心这些信息</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$?</span><span class="s2">&#34;</span> -ne <span class="m">0</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;File </span><span class="nv">$file</span><span class="s2"> does not have any foobar, adding one&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;# foobar&#34;</span> &gt;&gt; <span class="s2">&#34;</span><span class="nv">$file</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>执行完<code>./example.sh mcd.sh script.py example.sh</code>语句后可以发现，<code>mcd.sh</code>中没有<code>foobar</code>语句，因此程序会在<code>mcd.sh</code>中的末尾添加<code># foobar</code>语句。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -489,25 +489,25 @@ carol@ubuntu-carol:~/learnShell$
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ chmod +777 example.sh 
-carol@ubuntu-carol:~/learnShell$ ./example.sh mcd.sh script.py example.sh 
-Startint program at Thu <span class="m">26</span> Nov <span class="m">2020</span> 09:30:12 PM CST
-Running program ./example.sh with <span class="m">3</span> arguments with pid <span class="m">7787</span>
-File mcd.sh does not have any foobar, adding one
-File script.py does not have any foobar, adding one
-carol@ubuntu-carol:~/learnShell$ cat mcd.sh 
-mcd<span class="o">()</span> <span class="o">{</span>
-    mkdir -p <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
-    <span class="nb">cd</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
-<span class="o">}</span>
-<span class="c1"># foobar</span>
-carol@ubuntu-carol:~/learnShell$
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ chmod +777 example.sh 
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ ./example.sh mcd.sh script.py example.sh 
+</span></span><span class="line"><span class="cl">Startint program at Thu <span class="m">26</span> Nov <span class="m">2020</span> 09:30:12 PM CST
+</span></span><span class="line"><span class="cl">Running program ./example.sh with <span class="m">3</span> arguments with pid <span class="m">7787</span>
+</span></span><span class="line"><span class="cl">File mcd.sh does not have any foobar, adding one
+</span></span><span class="line"><span class="cl">File script.py does not have any foobar, adding one
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat mcd.sh 
+</span></span><span class="line"><span class="cl">mcd<span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    mkdir -p <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">cd</span> <span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># foobar</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>接下来就是一些通配符的使用了，其中<code>*</code>用于匹配多个字符，而<code>?</code>用于匹配一个字符。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -542,46 +542,46 @@ carol@ubuntu-carol:~/learnShell$
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ tree
-.
-├── example.sh
-├── hello2.txt
-├── hello.txt
-├── ls.txt
-├── mcd.sh
-├── number.txt
-├── project1
-│   └── src
-├── project2
-│   └── src
-├── project42
-│   └── src
-└── script.py
-
-<span class="m">6</span> directories, <span class="m">7</span> files
-carol@ubuntu-carol:~/learnShell$ ls project*
-project1:
-src
-
-project2:
-src
-
-project42:
-src
-carol@ubuntu-carol:~/learnShell$ ls project?
-project1:
-src
-
-project2:
-src
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ tree
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── example.sh
+</span></span><span class="line"><span class="cl">├── hello2.txt
+</span></span><span class="line"><span class="cl">├── hello.txt
+</span></span><span class="line"><span class="cl">├── ls.txt
+</span></span><span class="line"><span class="cl">├── mcd.sh
+</span></span><span class="line"><span class="cl">├── number.txt
+</span></span><span class="line"><span class="cl">├── project1
+</span></span><span class="line"><span class="cl">│   └── src
+</span></span><span class="line"><span class="cl">├── project2
+</span></span><span class="line"><span class="cl">│   └── src
+</span></span><span class="line"><span class="cl">├── project42
+</span></span><span class="line"><span class="cl">│   └── src
+</span></span><span class="line"><span class="cl">└── script.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">6</span> directories, <span class="m">7</span> files
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ ls project*
+</span></span><span class="line"><span class="cl">project1:
+</span></span><span class="line"><span class="cl">src
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">project2:
+</span></span><span class="line"><span class="cl">src
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">project42:
+</span></span><span class="line"><span class="cl">src
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ ls project?
+</span></span><span class="line"><span class="cl">project1:
+</span></span><span class="line"><span class="cl">src
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">project2:
+</span></span><span class="line"><span class="cl">src
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于花括号的使用，这个知识点我之前没接触过，在这里记录一下。</p>
 <p>也就是说，当你有一系列命令的时候，其中包含一段公共的字串时，可以使用花括号来自动展开这些命令。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -590,29 +590,29 @@ carol@ubuntu-carol:~/learnShell$
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ ls
-example.sh  hello2.txt  hello.txt  image.jpg  image.png  ls.txt  mcd.sh  number.txt  project1  project2  project42  script.py
-carol@ubuntu-carol:~/learnShell$ cp image.<span class="o">{</span>jpg,png<span class="o">}</span> /home/carol/
-carol@ubuntu-carol:~/learnShell$ <span class="nb">cd</span> /home/carol/
-carol@ubuntu-carol:~$ ls
-Desktop  Documents  Downloads  image.jpg  image.png  learnC  learnShell  Music  Pictures  Public  snap  Templates  Videos
-carol@ubuntu-carol:~$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ ls
+</span></span><span class="line"><span class="cl">example.sh  hello2.txt  hello.txt  image.jpg  image.png  ls.txt  mcd.sh  number.txt  project1  project2  project42  script.py
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cp image.<span class="o">{</span>jpg,png<span class="o">}</span> /home/carol/
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">cd</span> /home/carol/
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~$ ls
+</span></span><span class="line"><span class="cl">Desktop  Documents  Downloads  image.jpg  image.png  learnC  learnShell  Music  Pictures  Public  snap  Templates  Videos
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中：语句<code>cp image.{jpg,png} /home/carol/</code>被自动展开为：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">cp image.jpg image.png /home/carol/
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cp image.jpg image.png /home/carol/
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>需要注意的是：<code>image.{jpg,png}</code>中的逗号两边不能含有空格。</p>
 <p>此外，如果想要使用例如<code>touch</code>创建多个含有公共前缀文件名的文件的话，则也可以使用<code>{ }</code>，例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -621,19 +621,19 @@ carol@ubuntu-carol:~$
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell/project1/src$ touch foo<span class="o">{</span>1,2,3<span class="o">}</span>
-carol@ubuntu-carol:~/learnShell/project1/src$ ls -l
-total <span class="m">0</span>
--rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo1
--rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo2
--rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo3
-carol@ubuntu-carol:~/learnShell/project1/src$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ touch foo<span class="o">{</span>1,2,3<span class="o">}</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ ls -l
+</span></span><span class="line"><span class="cl">total <span class="m">0</span>
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo1
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo2
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo3
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果在逗号两侧含有空格的话，则会发生意想不到的结果，这显然不是我们的目的。例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -645,22 +645,22 @@ carol@ubuntu-carol:~/learnShell/project1/src$
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell/project1/src$ touch foo<span class="o">{</span>4, 5, 6<span class="o">}</span>
-carol@ubuntu-carol:~/learnShell/project1/src$ ls -l
-total <span class="m">0</span>
--rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:04 5,
--rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:04 6<span class="o">}</span>
--rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo1
--rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo2
--rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo3
--rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:04 foo<span class="o">{</span>4,
-carol@ubuntu-carol:~/learnShell/project1/src$
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ touch foo<span class="o">{</span>4, 5, 6<span class="o">}</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ ls -l
+</span></span><span class="line"><span class="cl">total <span class="m">0</span>
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:04 5,
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:04 6<span class="o">}</span>
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo1
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo2
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:02 foo3
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> carol carol <span class="m">0</span> Nov <span class="m">28</span> 16:04 foo<span class="o">{</span>4,
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>甚至可以在多个目录下创建多个文件，例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -693,44 +693,44 @@ carol@ubuntu-carol:~/learnShell/project1/src$
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell/project1/src$ mkdir foo bar
-carol@ubuntu-carol:~/learnShell/project1/src$ ls
-bar  foo
-carol@ubuntu-carol:~/learnShell/project1/src$ touch <span class="o">{</span>foo,bar<span class="o">}</span>/<span class="o">{</span>a..j<span class="o">}</span>
-carol@ubuntu-carol:~/learnShell/project1/src$ tree
-.
-├── bar
-│   ├── a
-│   ├── b
-│   ├── c
-│   ├── d
-│   ├── e
-│   ├── f
-│   ├── g
-│   ├── h
-│   ├── i
-│   └── j
-└── foo
-    ├── a
-    ├── b
-    ├── c
-    ├── d
-    ├── e
-    ├── f
-    ├── g
-    ├── h
-    ├── i
-    └── j
-
-<span class="m">2</span> directories, <span class="m">20</span> files
-carol@ubuntu-carol:~/learnShell/project1/src$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ mkdir foo bar
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ ls
+</span></span><span class="line"><span class="cl">bar  foo
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ touch <span class="o">{</span>foo,bar<span class="o">}</span>/<span class="o">{</span>a..j<span class="o">}</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ tree
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── bar
+</span></span><span class="line"><span class="cl">│   ├── a
+</span></span><span class="line"><span class="cl">│   ├── b
+</span></span><span class="line"><span class="cl">│   ├── c
+</span></span><span class="line"><span class="cl">│   ├── d
+</span></span><span class="line"><span class="cl">│   ├── e
+</span></span><span class="line"><span class="cl">│   ├── f
+</span></span><span class="line"><span class="cl">│   ├── g
+</span></span><span class="line"><span class="cl">│   ├── h
+</span></span><span class="line"><span class="cl">│   ├── i
+</span></span><span class="line"><span class="cl">│   └── j
+</span></span><span class="line"><span class="cl">└── foo
+</span></span><span class="line"><span class="cl">    ├── a
+</span></span><span class="line"><span class="cl">    ├── b
+</span></span><span class="line"><span class="cl">    ├── c
+</span></span><span class="line"><span class="cl">    ├── d
+</span></span><span class="line"><span class="cl">    ├── e
+</span></span><span class="line"><span class="cl">    ├── f
+</span></span><span class="line"><span class="cl">    ├── g
+</span></span><span class="line"><span class="cl">    ├── h
+</span></span><span class="line"><span class="cl">    ├── i
+</span></span><span class="line"><span class="cl">    └── j
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">2</span> directories, <span class="m">20</span> files
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里的<code>touch {foo,bar}/{a..j}</code>命令会被展开成<code>touch foo/a foo/b foo/c ... foo/j bar/a bar/b bar/c ... bar/j</code>。中间的目录我用<code>...</code>给省略了。</p>
 <p>然后我们可以使用<code>diff</code>命令查看<code>ls</code>输出的不同，例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -738,20 +738,20 @@ carol@ubuntu-carol:~/learnShell/project1/src$
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell/project1/src$ touch foo/x foo/y
-carol@ubuntu-carol:~/learnShell/project1/src$ diff &lt;<span class="o">(</span>ls foo<span class="o">)</span> &lt;<span class="o">(</span>ls bar<span class="o">)</span>
-11,12d10
-&lt; x
-&lt; y
-carol@ubuntu-carol:~/learnShell/project1/src$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ touch foo/x foo/y
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ diff &lt;<span class="o">(</span>ls foo<span class="o">)</span> &lt;<span class="o">(</span>ls bar<span class="o">)</span>
+</span></span><span class="line"><span class="cl">11,12d10
+</span></span><span class="line"><span class="cl">&lt; x
+</span></span><span class="line"><span class="cl">&lt; y
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell/project1/src$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，在<code>foo</code>目录下和<code>bar</code>目录下的文件中，只有<code>x</code>和<code>y</code>文件不同。</p>
 <p>在 Linxu 中，可以使用<code>man</code>查看一个某个命令的使用说明，但是<code>man page</code>页面介绍的太罗嗦了。因此，这里有一个实用的工具 <a href="https://tldr.sh/">tldr</a>，即「Too long; Don&rsquo;t Read.」，可以简化地介绍某个命令，并给出一些事例。</p>
 <p>使用<code>find</code>命令在当前目录下，查找名为<code>src</code>的目录，例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -760,41 +760,41 @@ carol@ubuntu-carol:~/learnShell/project1/src$
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ ls
-example.sh  hello2.txt  hello.txt  image.jpg  image.png  ls.txt  mcd.sh  number.txt  project1  project2  project42  script.py
-carol@ubuntu-carol:~/learnShell$ find . -name src -type d
-./project2/src
-./project42/src
-./project1/src
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ ls
+</span></span><span class="line"><span class="cl">example.sh  hello2.txt  hello.txt  image.jpg  image.png  ls.txt  mcd.sh  number.txt  project1  project2  project42  script.py
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ find . -name src -type d
+</span></span><span class="line"><span class="cl">./project2/src
+</span></span><span class="line"><span class="cl">./project42/src
+</span></span><span class="line"><span class="cl">./project1/src
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于<code>find</code>命令的其它功能，例如查找当前目录下所有以<code>.tmp</code>结尾的文件，并执行删除操作，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">find . -name <span class="s1">&#39;*.tmp&#39;</span> -exec rm <span class="o">{}</span> <span class="se">\;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">find . -name <span class="s1">&#39;*.tmp&#39;</span> -exec rm <span class="o">{}</span> <span class="se">\;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>也就是说，在执行<code>find</code>命令后，使用参数<code>-exec</code>再跟上另外一个命令，可以实现多个命令组合的效果，例如：找到所有的<code>.png</code>文件，然后将它们都转换成<code>.jpg</code>格式，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">find . -name <span class="s1">&#39;*png&#39;</span> -exec convert <span class="o">{}</span> <span class="o">{</span>.<span class="o">}</span>.jpg <span class="se">\;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">find . -name <span class="s1">&#39;*png&#39;</span> -exec convert <span class="o">{}</span> <span class="o">{</span>.<span class="o">}</span>.jpg <span class="se">\;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>之前可以使用<code>grep</code>进行文件中的字符串的查找，也可以使用工具<code>fzf</code>进行查找，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ cat example.sh <span class="p">|</span> fzf
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat example.sh <span class="p">|</span> fzf
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输入完上述命令后，则会进入编辑模式。然后，你可以在该模式下输入你想要查找的字符串。</p>
 <p><img src="https://i.loli.net/2020/11/29/tov6cINTF43UK79.png" alt="image.png"></p>
@@ -896,7 +896,7 @@ carol@ubuntu-carol:~/learnShell$
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

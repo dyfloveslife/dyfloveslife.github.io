@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/29/Java-Atomic/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="Java 中的 Atomic 包">
 <meta itemprop="description" content="为了在多线程并发的情况下能够保证多个线程对数据进行合理的访问，避免出现并发情况下的线程安全问题，Java 从 JDK1.5 开始提供了 java.util.concurrent.atomic 包，它可以通过原子操作类来对某个变量实现更加简单、线程安全的更新操作。"><meta itemprop="datePublished" content="2020-04-29T15:02:11+08:00" />
 <meta itemprop="dateModified" content="2020-04-29T19:19:56+08:00" />
-<meta itemprop="wordCount" content="6320">
+<meta itemprop="wordCount" content="6319">
 <meta itemprop="keywords" content="JVM,Concurrency,Atomic," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Java 中的 Atomic 包"/>
 <meta name="twitter:description" content="为了在多线程并发的情况下能够保证多个线程对数据进行合理的访问，避免出现并发情况下的线程安全问题，Java 从 JDK1.5 开始提供了 java.util.concurrent.atomic 包，它可以通过原子操作类来对某个变量实现更加简单、线程安全的更新操作。"/>
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 6320 words </span>
+          <span class="more-meta"> 6319 words </span>
           <span class="more-meta"> 13 mins read </span>
         
       </div>
@@ -234,7 +234,7 @@
 <p>先来看 AtomicInteger 的<strong>构造方法</strong>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -244,47 +244,47 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="nf">AtomicInteger</span><span class="o">()</span> <span class="o">{</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="nf">AtomicInteger</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialValue</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">initialValue</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">AtomicInteger</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">AtomicInteger</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialValue</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">value</span> <span class="o">=</span> <span class="n">initialValue</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果在初始化的时候指定了参数 initialValue，则会将该参数保存在被 volatile 修饰的 value 里，volatile 可以保证一个线程的修改能够被其它线程所看到，即内存的可见性。</p>
 <p><strong>addAndGet(int delta)</strong> 方法使用原子的方式将输入的值 delta 与上述的 value 值进行相加，并返回结果，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">addAndGet</span><span class="o">(</span><span class="kt">int</span> <span class="n">delta</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getAndAddInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">delta</span><span class="o">)</span> <span class="o">+</span> <span class="n">delta</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">addAndGet</span><span class="o">(</span><span class="kt">int</span> <span class="n">delta</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getAndAddInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">delta</span><span class="o">)</span> <span class="o">+</span> <span class="n">delta</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>compareAndSet(int expect, int update)</strong> 属于 CAS 最核心的操作，如果当前值等于预期值，则以原子的方式将该值设置为给定的更新值，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">compareAndSet</span><span class="o">(</span><span class="kt">int</span> <span class="n">expect</span><span class="o">,</span> <span class="kt">int</span> <span class="n">update</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">expect</span><span class="o">,</span> <span class="n">update</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">compareAndSet</span><span class="o">(</span><span class="kt">int</span> <span class="n">expect</span><span class="o">,</span> <span class="kt">int</span> <span class="n">update</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">expect</span><span class="o">,</span> <span class="n">update</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>getAndIncrement()</strong> 方法以原子的方式将当前值加 1。需要注意的是该方法返回的是之前的值。如果想要返回更新后的值，可以使用<strong>incrementAndGet()</strong> 方法，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -293,19 +293,19 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getAndIncrement</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getAndAddInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">1</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">incrementAndGet</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getAndAddInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getAndIncrement</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getAndAddInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">incrementAndGet</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getAndAddInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面就是一个简单的示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -318,39 +318,39 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AtomicIntegerTest</span> <span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">AtomicInteger</span> <span class="n">atomicInteger</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicInteger</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicInteger</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicInteger</span><span class="o">.</span><span class="na">getAndIncrement</span><span class="o">());</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicInteger</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicInteger</span><span class="o">.</span><span class="na">incrementAndGet</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AtomicIntegerTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">AtomicInteger</span> <span class="n">atomicInteger</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicInteger</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicInteger</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicInteger</span><span class="o">.</span><span class="na">getAndIncrement</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicInteger</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicInteger</span><span class="o">.</span><span class="na">incrementAndGet</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">1</span>
-<span class="n">1</span>
-<span class="n">2</span>
-<span class="n">3</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">3</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>get() 方法返回当前的值，因为初始化的时候设置的值为 1，因此 get() 方法返回 1；getAndIncrement() 方法对 1 进行了自增操作，因此 value 是 2，但该方法返回的是之前的值，即 1；这里又一次调用了 get() 方法，因此返回的是 2；最后调用了 incrementAndGet() 方法，该方法对 2 进行了自增操作，然后返回的是更新后的值，也就是 3。</p>
 <p>这里以 getAndIncrement() 的源码为例，来理解整个 CAS 的过程，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -375,37 +375,37 @@
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// AtomicInteger.java
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getAndIncrement</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getAndAddInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">1</span><span class="o">);</span>
-<span class="o">}</span>
-
-
-<span class="c1">// Unsafe.class
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getAndAddInt</span><span class="o">(</span><span class="n">Object</span> <span class="n">var1</span><span class="o">,</span> <span class="kt">long</span> <span class="n">var2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">var4</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">var5</span><span class="o">;</span>
-    <span class="k">do</span> <span class="o">{</span>
-        <span class="n">var5</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getIntVolatile</span><span class="o">(</span><span class="n">var1</span><span class="o">,</span> <span class="n">var2</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">while</span><span class="o">(!</span><span class="k">this</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="n">var1</span><span class="o">,</span> <span class="n">var2</span><span class="o">,</span> <span class="n">var5</span><span class="o">,</span> <span class="n">var5</span> <span class="o">+</span> <span class="n">var4</span><span class="o">));</span>
-
-    <span class="k">return</span> <span class="n">var5</span><span class="o">;</span>
-<span class="o">}</span>
-
-
-<span class="c1">// Unsafe.class
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">int</span> <span class="nf">getIntVolatile</span><span class="o">(</span><span class="n">Object</span> <span class="n">var1</span><span class="o">,</span> <span class="kt">long</span> <span class="n">var2</span><span class="o">);</span>
-
-
-<span class="c1">// Unsafe.class
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">compareAndSwapInt</span><span class="o">(</span><span class="n">Object</span> <span class="n">var1</span><span class="o">,</span> <span class="kt">long</span> <span class="n">var2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">var4</span><span class="o">,</span> <span class="kt">int</span> <span class="n">var5</span><span class="o">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// AtomicInteger.java
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getAndIncrement</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getAndAddInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Unsafe.class
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getAndAddInt</span><span class="o">(</span><span class="n">Object</span> <span class="n">var1</span><span class="o">,</span> <span class="kt">long</span> <span class="n">var2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">var4</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">var5</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">var5</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getIntVolatile</span><span class="o">(</span><span class="n">var1</span><span class="o">,</span> <span class="n">var2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">while</span><span class="o">(!</span><span class="k">this</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="n">var1</span><span class="o">,</span> <span class="n">var2</span><span class="o">,</span> <span class="n">var5</span><span class="o">,</span> <span class="n">var5</span> <span class="o">+</span> <span class="n">var4</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">var5</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Unsafe.class
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">native</span> <span class="kt">int</span> <span class="nf">getIntVolatile</span><span class="o">(</span><span class="n">Object</span> <span class="n">var1</span><span class="o">,</span> <span class="kt">long</span> <span class="n">var2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Unsafe.class
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kd">native</span> <span class="kt">boolean</span> <span class="nf">compareAndSwapInt</span><span class="o">(</span><span class="n">Object</span> <span class="n">var1</span><span class="o">,</span> <span class="kt">long</span> <span class="n">var2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">var4</span><span class="o">,</span> <span class="kt">int</span> <span class="n">var5</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在 JDK1.8 下，调用 AtomicInteger 类下的 getAndIncrement() 方法，实际调用的是 Unsafe 类下的 getAndAddInt(Object var1, long var2, int var4) 方法。因此这里的 var1 表示当前对象 this，var2 表示共享变量在当前对象上的内存偏移量，var4 表示传递过来的值是 1。</p>
 <p>在 getAndAddInt(Object var1, long var2, int var4) 方法中，首先定义了 var5 表示期望的值，然后通过 do-while 直到更新成功才跳出循环。在 do{ } 中通过 getIntVolatile() 方法获取 value 的最新值。在 while() 中，var5 + var4 表示需要更新的值，如果 compareAndSwapInt() 方法返回 false，说明 value 值被其它线程修改了，于是就循环重试，再次获取最新值，再次计算需要跟新的值 var5 + var4，直到更新成功。</p>
 <p>这里使用了 var1、var2、var3、var4、var5，看起来不是很直观，现将其修改如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -415,21 +415,21 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getAndAddInt</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">,</span> <span class="kt">long</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="kt">int</span> <span class="n">var</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">expect</span><span class="o">;</span>
-    <span class="k">do</span> <span class="o">{</span>
-        <span class="n">expect</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getIntVolatile</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">while</span><span class="o">(!</span><span class="k">this</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">expect</span><span class="o">,</span> <span class="n">expect</span> <span class="o">+</span> <span class="n">var</span><span class="o">));</span>
-
-    <span class="k">return</span> <span class="n">expect</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getAndAddInt</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">,</span> <span class="kt">long</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="kt">int</span> <span class="n">var</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">expect</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">expect</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getIntVolatile</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">while</span><span class="o">(!</span><span class="k">this</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="n">valueOffset</span><span class="o">,</span> <span class="n">expect</span><span class="o">,</span> <span class="n">expect</span> <span class="o">+</span> <span class="n">var</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">expect</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="数组类型的原子操作">数组类型的原子操作</h2>
 <p>以 AtomicIntegerArray 为例，该类型是对数组中的每个元素以原子的方式进行更新。先看它的构造方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -440,46 +440,44 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="nf">AtomicIntegerArray</span><span class="o">(</span><span class="kt">int</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">length</span><span class="o">];</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="nf">AtomicIntegerArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">array</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">AtomicIntegerArray</span><span class="o">(</span><span class="kt">int</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">length</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">AtomicIntegerArray</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">array</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在初始化的时候，可以指定数组的长度，也可以传入一个指定的数组。需要注意的是，后面的这种方式会将数组复制一份，因此当 AtomicIntegerArray 对数组中的元素进行修改时，不会影响传入的数组。</p>
 <p>下面看常用的方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">addAndGet</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">delta</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">getAndAdd</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">delta</span><span class="o">)</span> <span class="o">+</span> <span class="n">delta</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getAndAdd</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">delta</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getAndAddInt</span><span class="o">(</span><span class="n">array</span><span class="o">,</span> <span class="n">checkedByteOffset</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">delta</span><span class="o">);</span>
-<span class="o">}</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">addAndGet</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">delta</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">getAndAdd</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">delta</span><span class="o">)</span> <span class="o">+</span> <span class="n">delta</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getAndAdd</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">delta</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">getAndAddInt</span><span class="o">(</span><span class="n">array</span><span class="o">,</span> <span class="n">checkedByteOffset</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">delta</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>addAndGet() 方法表示以原子的方式将给定的值与索引为 i 的值进行相加，<strong>返回更新后的值</strong>。而 getAndAdd() 方法作用和 addAndGet() 方法是一样的，但不同的是，getAndAdd() 方法<strong>返回更新前的值</strong>。</p>
 <p>而下面的 compareAndSet() 方法表示如果当前值等于预期值，则以原子的方式将数组位置 i 的元素设置成 update 值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -488,19 +486,19 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">compareAndSet</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">expect</span><span class="o">,</span> <span class="kt">int</span> <span class="n">update</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">compareAndSetRaw</span><span class="o">(</span><span class="n">checkedByteOffset</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">expect</span><span class="o">,</span> <span class="n">update</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">compareAndSetRaw</span><span class="o">(</span><span class="kt">long</span> <span class="n">offset</span><span class="o">,</span> <span class="kt">int</span> <span class="n">expect</span><span class="o">,</span> <span class="kt">int</span> <span class="n">update</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="n">array</span><span class="o">,</span> <span class="n">offset</span><span class="o">,</span> <span class="n">expect</span><span class="o">,</span> <span class="n">update</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">compareAndSet</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">expect</span><span class="o">,</span> <span class="kt">int</span> <span class="n">update</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">compareAndSetRaw</span><span class="o">(</span><span class="n">checkedByteOffset</span><span class="o">(</span><span class="n">i</span><span class="o">),</span> <span class="n">expect</span><span class="o">,</span> <span class="n">update</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">compareAndSetRaw</span><span class="o">(</span><span class="kt">long</span> <span class="n">offset</span><span class="o">,</span> <span class="kt">int</span> <span class="n">expect</span><span class="o">,</span> <span class="kt">int</span> <span class="n">update</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="n">array</span><span class="o">,</span> <span class="n">offset</span><span class="o">,</span> <span class="n">expect</span><span class="o">,</span> <span class="n">update</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面通过一个示例进行说明：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -524,34 +522,34 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AtomicIntegerArrayTest</span> <span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="n">AtomicIntegerArray</span> <span class="n">ai</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicIntegerArray</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">});</span>
-
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">0</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">addAndGet</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">5</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;--&#34;</span><span class="o">);</span>
-
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">getAndAdd</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">5</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">1</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;--&#34;</span><span class="o">);</span>
-
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="n">10</span><span class="o">,</span> <span class="n">30</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">2</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;--&#34;</span><span class="o">);</span>
-
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">30</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">2</span><span class="o">));</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AtomicIntegerArrayTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">AtomicIntegerArray</span> <span class="n">ai</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicIntegerArray</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">0</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">addAndGet</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">5</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;--&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">getAndAdd</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">5</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;--&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="n">10</span><span class="o">,</span> <span class="n">30</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">2</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;--&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">30</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ai</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">2</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -564,18 +562,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">1</span>
-<span class="n">6</span>
-<span class="o">--</span>
-<span class="n">2</span>
-<span class="n">7</span>
-<span class="o">--</span>
-<span class="kc">false</span>
-<span class="n">3</span>
-<span class="o">--</span>
-<span class="kc">true</span>
-<span class="n">30</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">6</span>
+</span></span><span class="line"><span class="cl"><span class="o">--</span>
+</span></span><span class="line"><span class="cl"><span class="n">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">7</span>
+</span></span><span class="line"><span class="cl"><span class="o">--</span>
+</span></span><span class="line"><span class="cl"><span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">3</span>
+</span></span><span class="line"><span class="cl"><span class="o">--</span>
+</span></span><span class="line"><span class="cl"><span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="n">30</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里一共分为 4 个部分：</p>
 <ul>
@@ -608,7 +606,7 @@
 <p>这里以 AtomicReference 为例，首先看一下它的构造方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -618,21 +616,21 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">volatile</span> <span class="n">V</span> <span class="n">value</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="nf">AtomicReference</span><span class="o">(</span><span class="n">V</span> <span class="n">initialValue</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">initialValue</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="nf">AtomicReference</span><span class="o">()</span> <span class="o">{</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">volatile</span> <span class="n">V</span> <span class="n">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">AtomicReference</span><span class="o">(</span><span class="n">V</span> <span class="n">initialValue</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">value</span> <span class="o">=</span> <span class="n">initialValue</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">AtomicReference</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在创建对象的时候，可以给 AtomicReference 传入一个值，该值将会赋值给被 volatile 修饰的 value，以供其它的方法（如 get()、set() 等）使用。</p>
 <p>下面的 get()、set() 方法也很简单：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -641,19 +639,19 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="n">V</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">(</span><span class="n">V</span> <span class="n">newValue</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="n">newValue</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="n">V</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">(</span><span class="n">V</span> <span class="n">newValue</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">value</span> <span class="o">=</span> <span class="n">newValue</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>接下来通过一个示例说明如何以原子的方式更新引用类型：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -689,54 +687,54 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AtomicReferenceTest</span> <span class="o">{</span>
-
-    <span class="kd">static</span> <span class="n">AtomicReference</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">ar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicReference</span><span class="o">&lt;&gt;();</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="s">&#34;zhangsan&#34;</span><span class="o">,</span> <span class="n">25</span><span class="o">);</span>
-        <span class="n">ar</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
-
-        <span class="n">User</span> <span class="n">updateUser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="s">&#34;lisi&#34;</span><span class="o">,</span> <span class="n">30</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ar</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="n">user</span><span class="o">,</span> <span class="n">updateUser</span><span class="o">));</span>
-
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ar</span><span class="o">.</span><span class="na">get</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ar</span><span class="o">.</span><span class="na">get</span><span class="o">().</span><span class="na">getAge</span><span class="o">());</span>
-    <span class="o">}</span>
-
-    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
-
-        <span class="kd">public</span> <span class="nf">User</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AtomicReferenceTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="n">AtomicReference</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">ar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicReference</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="s">&#34;zhangsan&#34;</span><span class="o">,</span> <span class="n">25</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ar</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">User</span> <span class="n">updateUser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="s">&#34;lisi&#34;</span><span class="o">,</span> <span class="n">30</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ar</span><span class="o">.</span><span class="na">compareAndSet</span><span class="o">(</span><span class="n">user</span><span class="o">,</span> <span class="n">updateUser</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ar</span><span class="o">.</span><span class="na">get</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ar</span><span class="o">.</span><span class="na">get</span><span class="o">().</span><span class="na">getAge</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="nf">User</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">true
-lisi
-30
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">true
+</span></span><span class="line"><span class="cl">lisi
+</span></span><span class="line"><span class="cl">30
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>首先定义了一个内部类 User，并定义了两个字段 name 和 age，给出了 getter() 方法。然后创建了一个 user 对象 (&ldquo;zhangsan&rdquo;, 25)，并通过 set() 方法将该对象设置到了 AtomicReference 中。最后调用了 compareAndSet() 方法进行了原子更新操作，实现的原理和 AtomicInteger 中的 compareAndSet() 方法相同。</p>
 <p>如果将<code>ar.set(user);</code>语句进行注释，则 compareAndSet() 方法会返回 false，因为 AtomicReference 中的 value 没有被设置任务值，当通过 compareAndSet() 进行比较的时候，当前值不等于预期值，因此将会返回 false。</p>
@@ -744,7 +742,7 @@ lisi
 <p>这里可以使用 AtomicStampedReference 来解决 ABA 问题，<!-- raw HTML omitted -->它在实现 compareAndSet() 方法的时候除了要比较当前对象的值和预期值以外，还需要比较当前的戳值和预期戳值，只有全部相同时，CAS 才能操作成功。<!-- raw HTML omitted -->每次更新的时候，戳值都会发生变化，我们可以自己设置该戳值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -753,19 +751,19 @@ lisi
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">compareAndSet</span><span class="o">(</span><span class="n">V</span> <span class="n">expectedReference</span><span class="o">,</span> <span class="n">V</span> <span class="n">newReference</span><span class="o">,</span> <span class="kt">int</span> <span class="n">expectedStamp</span><span class="o">,</span> <span class="kt">int</span> <span class="n">newStamp</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Pair</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">current</span> <span class="o">=</span> <span class="n">pair</span><span class="o">;</span>
-    <span class="k">return</span> <span class="n">expectedReference</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
-            <span class="n">expectedStamp</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">stamp</span> <span class="o">&amp;&amp;</span>
-            <span class="o">((</span><span class="n">newReference</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
-            <span class="n">newStamp</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">stamp</span><span class="o">)</span> <span class="o">||</span> <span class="n">casPair</span><span class="o">(</span><span class="n">current</span><span class="o">,</span> <span class="n">Pair</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">newReference</span><span class="o">,</span> <span class="n">newStamp</span><span class="o">)));</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">compareAndSet</span><span class="o">(</span><span class="n">V</span> <span class="n">expectedReference</span><span class="o">,</span> <span class="n">V</span> <span class="n">newReference</span><span class="o">,</span> <span class="kt">int</span> <span class="n">expectedStamp</span><span class="o">,</span> <span class="kt">int</span> <span class="n">newStamp</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Pair</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">current</span> <span class="o">=</span> <span class="n">pair</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">expectedReference</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">expectedStamp</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">stamp</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">((</span><span class="n">newReference</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">newStamp</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">stamp</span><span class="o">)</span> <span class="o">||</span> <span class="n">casPair</span><span class="o">(</span><span class="n">current</span><span class="o">,</span> <span class="n">Pair</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">newReference</span><span class="o">,</span> <span class="n">newStamp</span><span class="o">)));</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>以上就是使用 AtomicStampedReference 来解决 ABA 问题的主要方法，但是你会发现，这里的 Pair 又是什么呢？这里的 Pair 其实是 AtomicStampedReference 的一个内部类，它将元素值和版本号绑定在了一起，存储在 Pair 的 reference 和 stamp 中，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -778,23 +776,23 @@ lisi
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="n">T</span> <span class="n">reference</span><span class="o">;</span>
-    <span class="kd">final</span> <span class="kt">int</span> <span class="n">stamp</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="nf">Pair</span><span class="o">(</span><span class="n">T</span> <span class="n">reference</span><span class="o">,</span> <span class="kt">int</span> <span class="n">stamp</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">reference</span> <span class="o">=</span> <span class="n">reference</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">stamp</span> <span class="o">=</span> <span class="n">stamp</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">of</span><span class="o">(</span><span class="n">T</span> <span class="n">reference</span><span class="o">,</span> <span class="kt">int</span> <span class="n">stamp</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;(</span><span class="n">reference</span><span class="o">,</span> <span class="n">stamp</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">T</span> <span class="n">reference</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="kt">int</span> <span class="n">stamp</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="nf">Pair</span><span class="o">(</span><span class="n">T</span> <span class="n">reference</span><span class="o">,</span> <span class="kt">int</span> <span class="n">stamp</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">reference</span> <span class="o">=</span> <span class="n">reference</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">stamp</span> <span class="o">=</span> <span class="n">stamp</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">of</span><span class="o">(</span><span class="n">T</span> <span class="n">reference</span><span class="o">,</span> <span class="kt">int</span> <span class="n">stamp</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;(</span><span class="n">reference</span><span class="o">,</span> <span class="n">stamp</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当了解了内部类 Pair 之后，现在我们看一下 compareAndSet() 方法到底是如何执行的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -817,28 +815,28 @@ lisi
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">compareAndSet</span><span class="o">(</span><span class="n">V</span> <span class="n">expectedReference</span><span class="o">,</span> <span class="n">V</span> <span class="n">newReference</span><span class="o">,</span> <span class="kt">int</span> <span class="n">expectedStamp</span><span class="o">,</span> <span class="kt">int</span> <span class="n">newStamp</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 获取当前的（元素值，版本号）对
-</span><span class="c1"></span>    <span class="n">Pair</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">current</span> <span class="o">=</span> <span class="n">pair</span><span class="o">;</span>
-    <span class="k">return</span>
-            <span class="c1">// 如果引用没有变
-</span><span class="c1"></span>            <span class="n">expectedReference</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
-            <span class="c1">// 如果版本号也没有变
-</span><span class="c1"></span>            <span class="n">expectedStamp</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">stamp</span> <span class="o">&amp;&amp;</span>
-            <span class="c1">// 如果新的引用等于旧的引用
-</span><span class="c1"></span>            <span class="o">((</span><span class="n">newReference</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
-            <span class="c1">// 如果新的时间戳等于旧的时间戳
-</span><span class="c1"></span>            <span class="n">newStamp</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">stamp</span><span class="o">)</span> <span class="o">||</span> 
-            <span class="c1">// 构造新的 Pair 对象并使用 CAS 的方式更新
-</span><span class="c1"></span>            <span class="n">casPair</span><span class="o">(</span><span class="n">current</span><span class="o">,</span> <span class="n">Pair</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">newReference</span><span class="o">,</span> <span class="n">newStamp</span><span class="o">)));</span>
-<span class="o">}</span>
-
-
-<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">casPair</span><span class="o">(</span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">cmp</span><span class="o">,</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 调用 Unsafe 中的 compareAndSwapObject 方法通过 CAS 的方式更新 Pair 的引用为新的引用
-</span><span class="c1"></span>    <span class="k">return</span> <span class="n">UNSAFE</span><span class="o">.</span><span class="na">compareAndSwapObject</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">pairOffset</span><span class="o">,</span> <span class="n">cmp</span><span class="o">,</span> <span class="n">val</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">compareAndSet</span><span class="o">(</span><span class="n">V</span> <span class="n">expectedReference</span><span class="o">,</span> <span class="n">V</span> <span class="n">newReference</span><span class="o">,</span> <span class="kt">int</span> <span class="n">expectedStamp</span><span class="o">,</span> <span class="kt">int</span> <span class="n">newStamp</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获取当前的（元素值，版本号）对
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Pair</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">current</span> <span class="o">=</span> <span class="n">pair</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果引用没有变
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">expectedReference</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果版本号也没有变
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">expectedStamp</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">stamp</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果新的引用等于旧的引用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="o">((</span><span class="n">newReference</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">reference</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果新的时间戳等于旧的时间戳
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">newStamp</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="na">stamp</span><span class="o">)</span> <span class="o">||</span> 
+</span></span><span class="line"><span class="cl">            <span class="c1">// 构造新的 Pair 对象并使用 CAS 的方式更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">casPair</span><span class="o">(</span><span class="n">current</span><span class="o">,</span> <span class="n">Pair</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">newReference</span><span class="o">,</span> <span class="n">newStamp</span><span class="o">)));</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">casPair</span><span class="o">(</span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">cmp</span><span class="o">,</span> <span class="n">Pair</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">val</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 调用 Unsafe 中的 compareAndSwapObject 方法通过 CAS 的方式更新 Pair 的引用为新的引用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">UNSAFE</span><span class="o">.</span><span class="na">compareAndSwapObject</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">pairOffset</span><span class="o">,</span> <span class="n">cmp</span><span class="o">,</span> <span class="n">val</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>因此，总体的流程为：</p>
 <ul>
@@ -850,7 +848,7 @@ lisi
 <p>这里以 AtomicIntegerFieldUpdater 为例，它属于以原子的方式更新整型字段的更新器。要想原子的更新字段类，首先由于原子更新类都是抽象类，因此使用的时候必须使用静态方法 newUpdater() 创建一个更新器，并且需要设置想要更新的类和属性，然后在更新类的字段或属性的时候需要使用 public volatile 进行修饰。如以下示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -882,54 +880,54 @@ lisi
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AtomicIntegerFieldUpdaterTest</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">AtomicIntegerFieldUpdater</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">atomicIntegerFieldUpdater</span> <span class="o">=</span> 
-                    <span class="n">AtomicIntegerFieldUpdater</span><span class="o">.</span><span class="na">newUpdater</span><span class="o">(</span><span class="n">User</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">&#34;age&#34;</span><span class="o">);</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="s">&#34;zhangsan&#34;</span><span class="o">,</span> <span class="n">25</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicIntegerFieldUpdater</span><span class="o">.</span><span class="na">getAndIncrement</span><span class="o">(</span><span class="n">user</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicIntegerFieldUpdater</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">user</span><span class="o">));</span>
-    <span class="o">}</span>
-
-
-    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-        <span class="c1">// 注意这里需要使用 public volatile 修饰 age
-</span><span class="c1"></span>        <span class="kd">public</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
-
-        <span class="kd">public</span> <span class="nf">User</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AtomicIntegerFieldUpdaterTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">AtomicIntegerFieldUpdater</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">atomicIntegerFieldUpdater</span> <span class="o">=</span> 
+</span></span><span class="line"><span class="cl">                    <span class="n">AtomicIntegerFieldUpdater</span><span class="o">.</span><span class="na">newUpdater</span><span class="o">(</span><span class="n">User</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="s">&#34;age&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="s">&#34;zhangsan&#34;</span><span class="o">,</span> <span class="n">25</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicIntegerFieldUpdater</span><span class="o">.</span><span class="na">getAndIncrement</span><span class="o">(</span><span class="n">user</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">atomicIntegerFieldUpdater</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">user</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 注意这里需要使用 public volatile 修饰 age
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">public</span> <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="nf">User</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">25
-26
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">25
+</span></span><span class="line"><span class="cl">26
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>首先创建了用于原子操作的更新器 AtomicIntegerFieldUpdater，并指明了需要更新的对象类以及对象的属性，这里指定属性<code>age</code>作为需要更新的属性，但前提是需要在 User 类中将 age 属性使用 public volatile 修饰。然后通过 getAndIncrement() 方法将 age 字段进行加 1 操作，但需要注意的是，该方法返回的是更新之前的值，即 25，最后通过调用 get() 方法给定对象的当前 age 的值，也就是更新后的值，即 26。</p>
 <p>这里的 getAndIncrement() 方法也是通过 CAS 进行不断的自旋进行操作的，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -941,17 +939,17 @@ lisi
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAndIncrement</span><span class="o">(</span><span class="n">T</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">prev</span><span class="o">,</span> <span class="n">next</span><span class="o">;</span>
-    <span class="k">do</span> <span class="o">{</span>
-        <span class="n">prev</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="n">obj</span><span class="o">);</span>
-        <span class="n">next</span> <span class="o">=</span> <span class="n">prev</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">while</span> <span class="o">(!</span><span class="n">compareAndSet</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="n">prev</span><span class="o">,</span> <span class="n">next</span><span class="o">));</span>
-    <span class="k">return</span> <span class="n">prev</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">get</span><span class="o">(</span><span class="n">T</span> <span class="n">obj</span><span class="o">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAndIncrement</span><span class="o">(</span><span class="n">T</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">prev</span><span class="o">,</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prev</span> <span class="o">=</span> <span class="n">get</span><span class="o">(</span><span class="n">obj</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">next</span> <span class="o">=</span> <span class="n">prev</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">while</span> <span class="o">(!</span><span class="n">compareAndSet</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="n">prev</span><span class="o">,</span> <span class="n">next</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">prev</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">get</span><span class="o">(</span><span class="n">T</span> <span class="n">obj</span><span class="o">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="参考">参考</h1>
 <ul>
@@ -1058,7 +1056,7 @@ lisi
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

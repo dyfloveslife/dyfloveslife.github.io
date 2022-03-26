@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/09/11/offer-ReplaceSpaces/" />
@@ -152,7 +152,7 @@
 <h2 id="实现">实现</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -184,37 +184,37 @@
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReplaceSpaces</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">replaceSpaces</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">str1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">))</span> <span class="k">return</span> <span class="n">str1</span><span class="o">;</span>
-        <span class="kt">char</span><span class="o">[]</span> <span class="n">strArray</span> <span class="o">=</span> <span class="n">str1</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
-
-        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">lengthSpaces</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">strArray</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">strArray</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="o">)</span>
-                <span class="n">lengthSpaces</span><span class="o">++;</span>
-            <span class="n">i</span><span class="o">++;</span>
-        <span class="o">}</span>
-        <span class="kt">int</span> <span class="n">newStrLength</span> <span class="o">=</span> <span class="n">strArray</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="n">lengthSpaces</span> <span class="o">*</span> <span class="n">2</span><span class="o">;</span>
-        <span class="kt">char</span><span class="o">[]</span> <span class="n">newStr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">newStrLength</span><span class="o">];</span>
-        <span class="kt">int</span> <span class="n">indexOfOriginal</span> <span class="o">=</span> <span class="n">strArray</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">indexOfNew</span> <span class="o">=</span> <span class="n">newStrLength</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">indexOfOriginal</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span><span class="o">(</span><span class="n">strArray</span><span class="o">[</span><span class="n">indexOfOriginal</span><span class="o">]</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="o">){</span>
-                <span class="n">newStr</span><span class="o">[</span><span class="n">indexOfNew</span><span class="o">--]</span> <span class="o">=</span> <span class="n">strArray</span><span class="o">[</span><span class="n">indexOfOriginal</span><span class="o">--];</span>
-            <span class="o">}</span><span class="k">else</span><span class="o">{</span>
-                <span class="n">newStr</span><span class="o">[</span><span class="n">indexOfNew</span><span class="o">--]</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
-                <span class="n">newStr</span><span class="o">[</span><span class="n">indexOfNew</span><span class="o">--]</span> <span class="o">=</span> <span class="sc">&#39;2&#39;</span><span class="o">;</span>
-                <span class="n">newStr</span><span class="o">[</span><span class="n">indexOfNew</span><span class="o">--]</span> <span class="o">=</span> <span class="sc">&#39;%&#39;</span><span class="o">;</span>
-                <span class="n">indexOfOriginal</span><span class="o">--;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">newStr</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReplaceSpaces</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">replaceSpaces</span><span class="o">(</span><span class="n">StringBuffer</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">str1</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">str1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">))</span> <span class="k">return</span> <span class="n">str1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">char</span><span class="o">[]</span> <span class="n">strArray</span> <span class="o">=</span> <span class="n">str1</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">lengthSpaces</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">strArray</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">strArray</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">lengthSpaces</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">newStrLength</span> <span class="o">=</span> <span class="n">strArray</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="n">lengthSpaces</span> <span class="o">*</span> <span class="n">2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">char</span><span class="o">[]</span> <span class="n">newStr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">newStrLength</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">indexOfOriginal</span> <span class="o">=</span> <span class="n">strArray</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">indexOfNew</span> <span class="o">=</span> <span class="n">newStrLength</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(</span><span class="n">indexOfOriginal</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="o">(</span><span class="n">strArray</span><span class="o">[</span><span class="n">indexOfOriginal</span><span class="o">]</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">newStr</span><span class="o">[</span><span class="n">indexOfNew</span><span class="o">--]</span> <span class="o">=</span> <span class="n">strArray</span><span class="o">[</span><span class="n">indexOfOriginal</span><span class="o">--];</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">newStr</span><span class="o">[</span><span class="n">indexOfNew</span><span class="o">--]</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">newStr</span><span class="o">[</span><span class="n">indexOfNew</span><span class="o">--]</span> <span class="o">=</span> <span class="sc">&#39;2&#39;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">newStr</span><span class="o">[</span><span class="n">indexOfNew</span><span class="o">--]</span> <span class="o">=</span> <span class="sc">&#39;%&#39;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">indexOfOriginal</span><span class="o">--;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">newStr</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="详解">详解</h2>
 <p>首先将原始字符串转换成字符数组，第 <code>9~13</code> 行统计原始字符串中的空格数量。第 <code>14</code> 行计算将空格替换成 <code>%20</code> 后的字符串的长度。第 <code>16~17</code> 行就是之前分析的标志。第 <code>19~20</code> 行，只要 <code>indexOfOriginal</code> 所指向的字符不为空，就进行复制操作，否则的话就进行替换操作。最后返回新生成的字符串。</p>
@@ -317,7 +317,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

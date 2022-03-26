@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2021/08/15/java-stream/" />
@@ -153,7 +153,7 @@
 <p>JDK1.8 中的 stream 支持对元素流进行函数式操作，通过这种方式可以很方便的处理集合（如 List、Map），进而简化代码。下面通过一个例子进行说明：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -169,27 +169,27 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Person</span> <span class="n">person1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="s">&#34;ZhangSan&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Address</span><span class="o">(</span><span class="s">&#34;Beijing&#34;</span><span class="o">,</span> <span class="s">&#34;ChaoYang&#34;</span><span class="o">,</span> <span class="s">&#34;ChangYing Street&#34;</span><span class="o">));</span>
-    <span class="n">Person</span> <span class="n">person2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="s">&#34;LiSi&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Address</span><span class="o">(</span><span class="s">&#34;Shandong&#34;</span><span class="o">,</span> <span class="s">&#34;Linyi&#34;</span><span class="o">,</span> <span class="s">&#34;Lanshan Street&#34;</span><span class="o">));</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person1</span><span class="o">);</span>
-    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person2</span><span class="o">);</span>
-
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="cm">/*
-</span><span class="cm">[Person(id=1, name=ZhangSan, address=Address(province=Beijing, city=ChaoYang, street=ChangYing Street)), Person(id=2, name=LiSi, address=Address(province=Shandong, city=Linyi, street=Lanshan Street))]
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Person</span> <span class="n">person1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="s">&#34;ZhangSan&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Address</span><span class="o">(</span><span class="s">&#34;Beijing&#34;</span><span class="o">,</span> <span class="s">&#34;ChaoYang&#34;</span><span class="o">,</span> <span class="s">&#34;ChangYing Street&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Person</span> <span class="n">person2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="n">2</span><span class="o">,</span> <span class="s">&#34;LiSi&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Address</span><span class="o">(</span><span class="s">&#34;Shandong&#34;</span><span class="o">,</span> <span class="s">&#34;Linyi&#34;</span><span class="o">,</span> <span class="s">&#34;Lanshan Street&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">person2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">[Person(id=1, name=ZhangSan, address=Address(province=Beijing, city=ChaoYang, street=ChangYing Street)), Person(id=2, name=LiSi, address=Address(province=Shandong, city=Linyi, street=Lanshan Street))]
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在上述的代码中，首先创建了两个 Person 对象，在每个对象中又创建了 Address 对象，然后将这两个 Person 对象都添加到 List 中。</p>
 <p>现在，我想获取每个 Person 中的 id 属性，并将这些 id 放到 List 中。在以前的方式中，可以通过遍历 list 中的 Person 对象逐个获取到对应 id 后，再将其逐个添加到新的 List 中。然而，这种方式相对较为繁琐。可以使用如下的方式，一行代码就可以搞定：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -199,21 +199,21 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ids</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-                        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">getId</span><span class="o">)</span>
-                        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ids</span><span class="o">);</span>
-
-<span class="cm">/*
-</span><span class="cm">[1, 2]
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">ids</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">                        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">getId</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ids</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">[1, 2]
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，通过以上的方式，将每个 Person 对象中的 id 都存放到了一个 List 中，最终将其输出即可。</p>
 <p>再看一个例子，例如我想得到一个关于 id 和其对应 Person 映射关系的 Map，可以使用如下方式：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -224,23 +224,23 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Person</span><span class="o">&gt;</span> <span class="n">idAndPersonMap</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-                                          <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">getId</span><span class="o">,</span> 
-                                                                    <span class="n">Function</span><span class="o">.</span><span class="na">identity</span><span class="o">(),</span> 
-                                                                    <span class="o">(</span><span class="n">oldValue</span><span class="o">,</span> <span class="n">newValue</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">newValue</span><span class="o">));</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idAndPersonMap</span><span class="o">);</span>
-
-<span class="cm">/*
-</span><span class="cm">{1=Person(id=1, name=ZhangSan, address=Address(province=Beijing, city=ChaoYang, street=ChangYing Street)), 2=Person(id=2, name=LiSi, address=Address(province=Shandong, city=Linyi, street=Lanshan Street))}
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">Person</span><span class="o">&gt;</span> <span class="n">idAndPersonMap</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">                                          <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">getId</span><span class="o">,</span> 
+</span></span><span class="line"><span class="cl">                                                                    <span class="n">Function</span><span class="o">.</span><span class="na">identity</span><span class="o">(),</span> 
+</span></span><span class="line"><span class="cl">                                                                    <span class="o">(</span><span class="n">oldValue</span><span class="o">,</span> <span class="n">newValue</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">newValue</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">idAndPersonMap</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">{1=Person(id=1, name=ZhangSan, address=Address(province=Beijing, city=ChaoYang, street=ChangYing Street)), 2=Person(id=2, name=LiSi, address=Address(province=Shandong, city=Linyi, street=Lanshan Street))}
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过以上的例子，在利用 JDK1.8 的特性的前提下，不仅可以简化代码，而且还可以使程序的整体结构看起来更加清晰、明了。下面将具体的介绍它们该如何使用。</p>
 <h2 id="介绍">介绍</h2>
 <p>以下面代码为例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -254,19 +254,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;a2&#34;</span><span class="o">,</span> <span class="s">&#34;b1&#34;</span><span class="o">,</span> <span class="s">&#34;c2&#34;</span><span class="o">,</span> <span class="s">&#34;c1&#34;</span><span class="o">);</span>
-
-<span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
-    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">&#34;c&#34;</span><span class="o">))</span>
-    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">String</span><span class="o">::</span><span class="n">toUpperCase</span><span class="o">)</span>
-    <span class="o">.</span><span class="na">sorted</span><span class="o">()</span>
-    <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
-
-<span class="cm">/*
-</span><span class="cm">C1
-</span><span class="cm">C2
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;a2&#34;</span><span class="o">,</span> <span class="s">&#34;b1&#34;</span><span class="o">,</span> <span class="s">&#34;c2&#34;</span><span class="o">,</span> <span class="s">&#34;c1&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">&#34;c&#34;</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">String</span><span class="o">::</span><span class="n">toUpperCase</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">sorted</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">C1
+</span></span></span><span class="line"><span class="cl"><span class="cm">C2
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于 stream 的使用，可以将其分为「中间操作」和「终端操作」的概念。</p>
 <p>「中间操作」是对数据进行处理的相关操作，例如上面的<code>filter()</code>、<code>map()</code>、<code>sorted()</code>，其会再次返回一个流，以供下个「中间操作」进行数据处理；</p>
@@ -302,7 +302,7 @@
 <p>在创建流的时候，除了上述方法之外，还可以直接通过<code>Stream.of()</code>进行创建，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -311,19 +311,19 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a3&#34;</span><span class="o">,</span> <span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;a2&#34;</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">findFirst</span><span class="o">()</span> <span class="c1">// 获取第一个元素
-</span><span class="c1"></span>        <span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span> <span class="c1">// 如果存在，则将其输出
-</span><span class="c1"></span>    
-<span class="cm">/*
-</span><span class="cm">a3
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a3&#34;</span><span class="o">,</span> <span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;a2&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">findFirst</span><span class="o">()</span> <span class="c1">// 获取第一个元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span> <span class="c1">// 如果存在，则将其输出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">a3
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以对流中元素进行计算，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -334,21 +334,21 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">})</span>
-        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">2</span> <span class="o">*</span> <span class="n">i</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
-
-<span class="cm">/*
-</span><span class="cm">2
-</span><span class="cm">4
-</span><span class="cm">6
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">})</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">2</span> <span class="o">*</span> <span class="n">i</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">2
+</span></span></span><span class="line"><span class="cl"><span class="cm">4
+</span></span></span><span class="line"><span class="cl"><span class="cm">6
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>求计算结果的平均值：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -358,20 +358,20 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">})</span>
-        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">2</span> <span class="o">*</span> <span class="n">i</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">average</span><span class="o">()</span>
-        <span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
-
-<span class="cm">/*
-</span><span class="cm">4.0
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">})</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">2</span> <span class="o">*</span> <span class="n">i</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">average</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">4.0
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>将流中的对象数据类型转换为基本数据类型：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -383,22 +383,22 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;b2&#34;</span><span class="o">,</span> <span class="s">&#34;c3&#34;</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">1</span><span class="o">))</span>
-        <span class="o">.</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">Integer</span><span class="o">::</span><span class="n">parseInt</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
-
-<span class="cm">/*
-</span><span class="cm">1
-</span><span class="cm">2
-</span><span class="cm">3
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;b2&#34;</span><span class="o">,</span> <span class="s">&#34;c3&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">1</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">Integer</span><span class="o">::</span><span class="n">parseInt</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">1
+</span></span></span><span class="line"><span class="cl"><span class="cm">2
+</span></span></span><span class="line"><span class="cl"><span class="cm">3
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>将浮点类型转换成正数类型，然后再转换成对象流：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -410,22 +410,22 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">1</span><span class="o">.</span><span class="na">0</span><span class="o">,</span> <span class="n">2</span><span class="o">.</span><span class="na">0</span><span class="o">,</span> <span class="n">3</span><span class="o">.</span><span class="na">11</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">Double</span><span class="o">::</span><span class="n">intValue</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">mapToObj</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="s">&#34;a&#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
-    
-<span class="cm">/*
-</span><span class="cm">a1
-</span><span class="cm">a2
-</span><span class="cm">a3
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">1</span><span class="o">.</span><span class="na">0</span><span class="o">,</span> <span class="n">2</span><span class="o">.</span><span class="na">0</span><span class="o">,</span> <span class="n">3</span><span class="o">.</span><span class="na">11</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">Double</span><span class="o">::</span><span class="n">intValue</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">mapToObj</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="s">&#34;a&#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">a1
+</span></span></span><span class="line"><span class="cl"><span class="cm">a2
+</span></span></span><span class="line"><span class="cl"><span class="cm">a3
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以使用<code>collect</code>将流中的元素作为集合转换成其他<code>Collection</code>的子类，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -437,24 +437,24 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">4</span><span class="o">,</span> <span class="n">4</span><span class="o">,</span> <span class="n">5</span><span class="o">);</span>
-<span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toSet</span><span class="o">()).</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
-
-<span class="cm">/*
-</span><span class="cm">1
-</span><span class="cm">2
-</span><span class="cm">3
-</span><span class="cm">4
-</span><span class="cm">5
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">4</span><span class="o">,</span> <span class="n">4</span><span class="o">,</span> <span class="n">5</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toSet</span><span class="o">()).</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">1
+</span></span></span><span class="line"><span class="cl"><span class="cm">2
+</span></span></span><span class="line"><span class="cl"><span class="cm">3
+</span></span></span><span class="line"><span class="cl"><span class="cm">4
+</span></span></span><span class="line"><span class="cl"><span class="cm">5
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>还有很多的其他方法，例如<code>max</code>、<code>count</code>、<code>anyMatch</code>、<code>allMatch</code>、<code>noneMatch</code>、<code>findAny</code>等。</p>
 <h2 id="处理流程">处理流程</h2>
 <p>前面说到，Stream 在处理的时候包括「中间操作」和「终端操作」两部分。如果不包含「终端操作」呢？看如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -464,20 +464,20 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;b2&#34;</span><span class="o">,</span> <span class="s">&#34;c3&#34;</span><span class="o">,</span> <span class="s">&#34;d4&#34;</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;filer: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">});</span>
-
-<span class="cm">/*
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;b2&#34;</span><span class="o">,</span> <span class="s">&#34;c3&#34;</span><span class="o">,</span> <span class="s">&#34;d4&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;filer: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其输出结果为空，并且 IDEA 会提示<code>Result of 'Stream.filter()' is ignored</code>。也就是说，<strong>只有「终端操作」存在时，「中间操作」才会执行</strong>。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -496,30 +496,30 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;b2&#34;</span><span class="o">,</span> <span class="s">&#34;c3&#34;</span><span class="o">,</span> <span class="s">&#34;d4&#34;</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;filer: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">})</span>
-        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">str</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;forEach: &#34;</span> <span class="o">+</span> <span class="n">str</span><span class="o">));</span>
-
-<span class="cm">/*
-</span><span class="cm">filer: a1
-</span><span class="cm">forEach: a1
-</span><span class="cm">filer: b2
-</span><span class="cm">forEach: b2
-</span><span class="cm">filer: c3
-</span><span class="cm">forEach: c3
-</span><span class="cm">filer: d4
-</span><span class="cm">forEach: d4
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;b2&#34;</span><span class="o">,</span> <span class="s">&#34;c3&#34;</span><span class="o">,</span> <span class="s">&#34;d4&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;filer: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">})</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">str</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;forEach: &#34;</span> <span class="o">+</span> <span class="n">str</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">filer: a1
+</span></span></span><span class="line"><span class="cl"><span class="cm">forEach: a1
+</span></span></span><span class="line"><span class="cl"><span class="cm">filer: b2
+</span></span></span><span class="line"><span class="cl"><span class="cm">forEach: b2
+</span></span></span><span class="line"><span class="cl"><span class="cm">filer: c3
+</span></span></span><span class="line"><span class="cl"><span class="cm">forEach: c3
+</span></span></span><span class="line"><span class="cl"><span class="cm">filer: d4
+</span></span></span><span class="line"><span class="cl"><span class="cm">forEach: d4
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过结果可以看出，先执行一次<code>filter()</code>，其次再执行一次<code>forEach()</code>，然后依次循环执行。也就是在处理完第一元素之后，才会去处理第二个元素。</p>
 <p>这么做的原因是出于<code>效率</code>方面的考虑，关于这点，通过下面的代码进行说明：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -537,23 +537,23 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;b2&#34;</span><span class="o">,</span> <span class="s">&#34;c3&#34;</span><span class="o">,</span> <span class="s">&#34;d4&#34;</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;map: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
-            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
-        <span class="o">})</span>
-        <span class="o">.</span><span class="na">anyMatch</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;anyMatch: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
-            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">);</span>
-        <span class="o">});</span>
-    
-<span class="cm">/*
-</span><span class="cm">map: a1
-</span><span class="cm">anyMatch: A1
-</span><span class="cm">map: b2
-</span><span class="cm">anyMatch: B2
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;a1&#34;</span><span class="o">,</span> <span class="s">&#34;b2&#34;</span><span class="o">,</span> <span class="s">&#34;c3&#34;</span><span class="o">,</span> <span class="s">&#34;d4&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;map: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">})</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">anyMatch</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;anyMatch: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">});</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">map: a1
+</span></span></span><span class="line"><span class="cl"><span class="cm">anyMatch: A1
+</span></span></span><span class="line"><span class="cl"><span class="cm">map: b2
+</span></span></span><span class="line"><span class="cl"><span class="cm">anyMatch: B2
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过输出结果可以看到，「终端操作」<code>anyMatch()</code>表示找到任何一个以<code>B</code>为前缀的字符串就停止，并返回<code>true</code>。首先在遍历到<code>a1</code>时不满足，则开始匹配<code>b2</code>，由于<code>b2</code>被转换成了<code>B2</code>，因此<code>anyMatch()</code>条件满足之后，便返回<code>true</code>，<strong>于是循环就停止了</strong>。</p>
 <p>通过这种方式，可以减少<code>map()</code>的执行次数，进而提高了效率。</p>
@@ -561,7 +561,7 @@
 <p>通过上面的例子可以看出，「中间操作」采用<code>链式调用</code>、<code>垂直执行</code>的方式依次执行。再看如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -587,36 +587,36 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;d2&#34;</span><span class="o">,</span> <span class="s">&#34;a2&#34;</span><span class="o">,</span> <span class="s">&#34;b1&#34;</span><span class="o">,</span> <span class="s">&#34;b3&#34;</span><span class="o">,</span> <span class="s">&#34;c&#34;</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;map: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
-            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
-        <span class="o">})</span>
-        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;filter: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
-            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">);</span>
-        <span class="o">})</span>
-        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;forEach: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">));</span>
-
-<span class="cm">/*
-</span><span class="cm">map: d2
-</span><span class="cm">filter: D2
-</span><span class="cm">map: a2
-</span><span class="cm">filter: A2
-</span><span class="cm">forEach: A2
-</span><span class="cm">map: b1
-</span><span class="cm">filter: B1
-</span><span class="cm">map: b3
-</span><span class="cm">filter: B3
-</span><span class="cm">map: c
-</span><span class="cm">filter: C
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;d2&#34;</span><span class="o">,</span> <span class="s">&#34;a2&#34;</span><span class="o">,</span> <span class="s">&#34;b1&#34;</span><span class="o">,</span> <span class="s">&#34;b3&#34;</span><span class="o">,</span> <span class="s">&#34;c&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;map: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">})</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;filter: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">})</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;forEach: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">map: d2
+</span></span></span><span class="line"><span class="cl"><span class="cm">filter: D2
+</span></span></span><span class="line"><span class="cl"><span class="cm">map: a2
+</span></span></span><span class="line"><span class="cl"><span class="cm">filter: A2
+</span></span></span><span class="line"><span class="cl"><span class="cm">forEach: A2
+</span></span></span><span class="line"><span class="cl"><span class="cm">map: b1
+</span></span></span><span class="line"><span class="cl"><span class="cm">filter: B1
+</span></span></span><span class="line"><span class="cl"><span class="cm">map: b3
+</span></span></span><span class="line"><span class="cl"><span class="cm">filter: B3
+</span></span></span><span class="line"><span class="cl"><span class="cm">map: c
+</span></span></span><span class="line"><span class="cl"><span class="cm">filter: C
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，执行结果很明确，只有元素<code>a2</code>执行了<code>forEach()</code>。但有一点糟糕的是，<code>map()</code>方法执行的次数与元素的个数相同，显然做了很多无意义的<code>map()</code>操作。如果将<code>map()</code>与<code>filter()</code>方法的顺序调整一下呢？如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -640,29 +640,29 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;d2&#34;</span><span class="o">,</span> <span class="s">&#34;a2&#34;</span><span class="o">,</span> <span class="s">&#34;b1&#34;</span><span class="o">,</span> <span class="s">&#34;b3&#34;</span><span class="o">,</span> <span class="s">&#34;c&#34;</span><span class="o">)</span>
-        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;filter: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
-            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">);</span>
-        <span class="o">})</span>
-        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;map: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
-            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
-        <span class="o">})</span>
-        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;forEach: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
-        <span class="o">});</span>
-
-<span class="cm">/*
-</span><span class="cm">filter: d2
-</span><span class="cm">filter: a2
-</span><span class="cm">map: a2
-</span><span class="cm">forEach: A2
-</span><span class="cm">filter: b1
-</span><span class="cm">filter: b3
-</span><span class="cm">filter: c
-</span><span class="cm">*/</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&#34;d2&#34;</span><span class="o">,</span> <span class="s">&#34;a2&#34;</span><span class="o">,</span> <span class="s">&#34;b1&#34;</span><span class="o">,</span> <span class="s">&#34;b3&#34;</span><span class="o">,</span> <span class="s">&#34;c&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;filter: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">})</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;map: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">})</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;forEach: &#34;</span> <span class="o">+</span> <span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">filter: d2
+</span></span></span><span class="line"><span class="cl"><span class="cm">filter: a2
+</span></span></span><span class="line"><span class="cl"><span class="cm">map: a2
+</span></span></span><span class="line"><span class="cl"><span class="cm">forEach: A2
+</span></span></span><span class="line"><span class="cl"><span class="cm">filter: b1
+</span></span></span><span class="line"><span class="cl"><span class="cm">filter: b3
+</span></span></span><span class="line"><span class="cl"><span class="cm">filter: c
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通故结果可以看到，仅有<code>map()</code>和<code>forEach</code>执行了一次，性能得到了提升。</p>
 <p>以上所提方法基本能够应用于日常的开发中，对于 Stream 的其他内容，可以根据下方的链接进行学习。</p>
@@ -712,7 +712,11 @@
           <a href="/tags/Java/">Java</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/2022/03/21/mac-app/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Mac OS 软件推荐</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/2021/08/07/springboot/">
             <span class="next-text nav-default">Spring Boot 学习笔记</span>
             <span class="next-text nav-mobile">Next</span>
@@ -766,7 +770,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

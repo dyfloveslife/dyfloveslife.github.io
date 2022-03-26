@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/03/10/JavaSrc-LinkedHashMap/" />
@@ -49,7 +49,7 @@
 <meta itemprop="name" content="JDK 源码之集合类 LinkedHashMap">
 <meta itemprop="description" content="本文是对 JDK1.8 中 LinkedHashMap 的分析与总结，在阅读源码的同时加深对其提供的方法的使用，以便更好的理解。"><meta itemprop="datePublished" content="2020-03-10T15:09:11+08:00" />
 <meta itemprop="dateModified" content="2020-03-10T15:10:56+08:00" />
-<meta itemprop="wordCount" content="2505">
+<meta itemprop="wordCount" content="2504">
 <meta itemprop="keywords" content="Java,JDK,LinkedHashMap," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="JDK 源码之集合类 LinkedHashMap"/>
 <meta name="twitter:description" content="本文是对 JDK1.8 中 LinkedHashMap 的分析与总结，在阅读源码的同时加深对其提供的方法的使用，以便更好的理解。"/>
@@ -126,7 +126,7 @@
         <div class="post-category">
             <a href="/categories/Java/"> Java </a>
             </div>
-          <span class="more-meta"> 2505 words </span>
+          <span class="more-meta"> 2504 words </span>
           <span class="more-meta"> 5 mins read </span>
         
       </div>
@@ -152,11 +152,11 @@
 <p>之前说到的 <a href="https://dyfloveslife.github.io/2020/02/12/JavaSrc-HashMap/">HashMap</a> 在存储<code>键值对</code>的时候是无序的，在对 HashMap 进行遍历的时候，遍历顺序和之前的 put 顺序是不一样的。而 LinkedHashMap 继承了 HashMap，实现了 Map 接口，其内部维护了一个双向链表，该链表用于保持在插入、删除、修改<code>键值对</code>时的先后顺序，同时也提供了维护<code>键值对</code>顺序的相关方法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedHashMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><!-- raw HTML omitted -->
 <p>此外，LinkedHashMap 不是线程安全的，但允许 key 或 value 为 null。根据链表中元素的顺序可以将 LinkedHashMap 的迭代顺序分为两类：一类是按照<code>插入节点的顺序</code>进行迭代，另一类是通过指定<code>accessOrder</code>参数为<code>true</code>（默认为 flase），则可以按照<code>访问的顺序</code>进行迭代。</p>
@@ -168,7 +168,7 @@
 <p>其中，head 和 tail 分别指向双向链表的头和尾，accessOrder 属性默认为 false，即采用插入节点的顺序进行迭代，如果将其置为 true，则就变成按照访问的顺序进行迭代了。这里需要注意一点的是，由于 LinkedHashMap 的桶数组上也会存在链表，所以这里的 next 维护的是链表中的索引，而 before 和 after 维护的是双向链表。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -184,21 +184,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">HashMap</span><span class="o">.</span><span class="na">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">before</span><span class="o">;</span> 
-    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">after</span><span class="o">;</span>
-
-    <span class="n">Entry</span><span class="o">(</span><span class="kt">int</span> <span class="n">hash</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">next</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">transient</span> <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">head</span><span class="o">;</span>
-
-<span class="kd">transient</span> <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">tail</span><span class="o">;</span>
-
-<span class="kd">final</span> <span class="kt">boolean</span> <span class="n">accessOrder</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">HashMap</span><span class="o">.</span><span class="na">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">before</span><span class="o">;</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">after</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Entry</span><span class="o">(</span><span class="kt">int</span> <span class="n">hash</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">next</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">transient</span> <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">head</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">transient</span> <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">tail</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">final</span> <span class="kt">boolean</span> <span class="n">accessOrder</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="构造方法">构造方法</h2>
 <p>LinkedHashMap 在 HashMap 的基础上，实现了 5 个构造方法：</p>
@@ -212,7 +212,7 @@
 <p>源码如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -244,43 +244,43 @@
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 第一个构造方法
-</span><span class="c1"></span><span class="kd">public</span> <span class="nf">LinkedHashMap</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">super</span><span class="o">(</span><span class="n">initialCapacity</span><span class="o">,</span> <span class="n">loadFactor</span><span class="o">);</span>
-    <span class="n">accessOrder</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="c1">// 第二个构造方法
-</span><span class="c1"></span><span class="kd">public</span> <span class="nf">LinkedHashMap</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">super</span><span class="o">(</span><span class="n">initialCapacity</span><span class="o">);</span>
-    <span class="n">accessOrder</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="c1">// 第三个构造方法
-</span><span class="c1"></span><span class="kd">public</span> <span class="nf">LinkedHashMap</span><span class="o">()</span> <span class="o">{</span>
-    <span class="kd">super</span><span class="o">();</span>
-    <span class="n">accessOrder</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="c1">// 第四个构造方法
-</span><span class="c1"></span><span class="kd">public</span> <span class="nf">LinkedHashMap</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">K</span><span class="o">,</span> <span class="o">?</span> <span class="kd">extends</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">super</span><span class="o">();</span>
-    <span class="n">accessOrder</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="n">putMapEntries</span><span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="c1">// 第五个构造方法
-</span><span class="c1"></span><span class="kd">public</span> <span class="nf">LinkedHashMap</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">accessOrder</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">super</span><span class="o">(</span><span class="n">initialCapacity</span><span class="o">,</span> <span class="n">loadFactor</span><span class="o">);</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">accessOrder</span> <span class="o">=</span> <span class="n">accessOrder</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 第一个构造方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="nf">LinkedHashMap</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">super</span><span class="o">(</span><span class="n">initialCapacity</span><span class="o">,</span> <span class="n">loadFactor</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">accessOrder</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 第二个构造方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="nf">LinkedHashMap</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">super</span><span class="o">(</span><span class="n">initialCapacity</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">accessOrder</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 第三个构造方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="nf">LinkedHashMap</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">super</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">accessOrder</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 第四个构造方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="nf">LinkedHashMap</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">K</span><span class="o">,</span> <span class="o">?</span> <span class="kd">extends</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">m</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">super</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">accessOrder</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">putMapEntries</span><span class="o">(</span><span class="n">m</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 第五个构造方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="nf">LinkedHashMap</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">accessOrder</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">super</span><span class="o">(</span><span class="n">initialCapacity</span><span class="o">,</span> <span class="n">loadFactor</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">accessOrder</span> <span class="o">=</span> <span class="n">accessOrder</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="新增节点">新增节点</h2>
 <p>通过阅读 LinkedHashMap 的源码可以发现，其中没有类似于 HashMap 的 put 方法，但重写了<code>newNode()</code>方法，在每次构建新节点时，通过<code>linkNodeLast()</code>方法将新节点链接在双向链表的尾部。而 newNode() 方法会在 HashMap 中的 putVal() 方法中被调用，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -301,43 +301,43 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="nf">newNode</span><span class="o">(</span><span class="kt">int</span> <span class="n">hash</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
-    <span class="c1">// 将 Entry 链接在双向链表的尾部
-</span><span class="c1"></span>    <span class="n">linkNodeLast</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">linkNodeLast</span><span class="o">(</span><span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">last</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span>
-    <span class="n">tail</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
-    <span class="c1">// 还没有建立链表
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">last</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">head</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
-    <span class="k">else</span> <span class="o">{</span>
-        <span class="c1">// 将节点 p 链接在链表尾部
-</span><span class="c1"></span>        <span class="n">p</span><span class="o">.</span><span class="na">before</span> <span class="o">=</span> <span class="n">last</span><span class="o">;</span>
-        <span class="n">last</span><span class="o">.</span><span class="na">after</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="nf">newNode</span><span class="o">(</span><span class="kt">int</span> <span class="n">hash</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 将 Entry 链接在双向链表的尾部
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">linkNodeLast</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">p</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">linkNodeLast</span><span class="o">(</span><span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">last</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tail</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 还没有建立链表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">last</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">head</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 将节点 p 链接在链表尾部
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">p</span><span class="o">.</span><span class="na">before</span> <span class="o">=</span> <span class="n">last</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">last</span><span class="o">.</span><span class="na">after</span> <span class="o">=</span> <span class="n">p</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>除此之外，还有以下 3 个方法，这些方法在 HashMap 中的 put、get、remove 方法中有被调用，用于在进行相关的操作之后，通过回调的方式，让 LinkedHashMap 有机会做一些后置操作。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">void</span> <span class="nf">afterNodeRemoval</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
-
-<span class="kt">void</span> <span class="nf">afterNodeInsertion</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">evict</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
-
-<span class="kt">void</span> <span class="nf">afterNodeAccess</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">afterNodeRemoval</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">afterNodeInsertion</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">evict</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">afterNodeAccess</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中，<code>afterNodeAccess</code>方法用于将当前节点 e 移至链表的尾部，只有当 accessOrder 属性为 true 的时候，才会执行此方法，在 HashMap 中 putVal 方法就调用了该方法。</p>
 <p>对于<code>afterNodeInsertion</code>方法可以通过 HashMap 中的 removeNode 方法将链表的头节点删掉，在 HashMap 中的 putVal 方法中就调用了 afterNodeInsertion 方法。其中，可以通过覆写 afterNodeInsertion 方法里面的<code>removeEldestEntry</code>方法实现 LRU 算法。</p>
@@ -347,7 +347,7 @@
 <p>源码如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -363,27 +363,27 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">void</span> <span class="nf">afterNodeRemoval</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// unlink
-</span><span class="c1"></span>    <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="o">(</span><span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span><span class="n">e</span><span class="o">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">before</span><span class="o">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">after</span><span class="o">;</span>
-    <span class="n">p</span><span class="o">.</span><span class="na">before</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">after</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="c1">// b 为空，说明 p 是头节点
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">head</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
-    <span class="k">else</span>
-        <span class="n">b</span><span class="o">.</span><span class="na">after</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
-    <span class="c1">// a 为空，说明 p 是尾节点
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
-    <span class="k">else</span>
-        <span class="n">a</span><span class="o">.</span><span class="na">before</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">afterNodeRemoval</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// unlink
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="o">(</span><span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span><span class="n">e</span><span class="o">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">before</span><span class="o">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">after</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="na">before</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">after</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// b 为空，说明 p 是头节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">b</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">head</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">b</span><span class="o">.</span><span class="na">after</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// a 为空，说明 p 是尾节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">a</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tail</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a</span><span class="o">.</span><span class="na">before</span> <span class="o">=</span> <span class="n">b</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="重写的方法">重写的方法</h2>
 <p>LinkedHashMap 重写了 HashMap 中的<code>containsValue</code>方法，如下所示。该方法通过按照<code>插入顺序</code>的的方式使用双向链表来查找是否包含 value，而 HashMap 中的 containsValue 方法是通过遍历桶的方式进行查找的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -408,36 +408,34 @@
 </span><span class="lnt">23
 </span><span class="lnt">24
 </span><span class="lnt">25
-</span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// HashMap
-</span><span class="c1"></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsValue</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;[]</span> <span class="n">tab</span><span class="o">;</span> <span class="n">V</span> <span class="n">v</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">((</span><span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">for</span> <span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">((</span><span class="n">v</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">)</span> <span class="o">==</span> <span class="n">value</span> <span class="o">||</span>
-                    <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">value</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">v</span><span class="o">)))</span>
-                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-
-
-<span class="c1">// LinkedHashMap
-</span><span class="c1"></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsValue</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">after</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">V</span> <span class="n">v</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">value</span> <span class="o">||</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">value</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">v</span><span class="o">)))</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// HashMap
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsValue</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;[]</span> <span class="n">tab</span><span class="o">;</span> <span class="n">V</span> <span class="n">v</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">((</span><span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">)</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">((</span><span class="n">v</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">)</span> <span class="o">==</span> <span class="n">value</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">value</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">v</span><span class="o">)))</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// LinkedHashMap
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsValue</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="n">LinkedHashMap</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">after</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">V</span> <span class="n">v</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">value</span> <span class="o">||</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">value</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">v</span><span class="o">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="总结">总结</h1>
 <p>由于可以通过设置 accessOrder 的属性为 true，将 LinkedHashMap 调整为按照访问顺序维护链表。所以，当在调用 get 等方法的时候，会将这些方法访问到的节点移动到链表的尾部，即让 tail 指向被访问到的节点，然后再调整双向链表的指向，通过这种维护节点的方式来实现按照访问顺序进行遍历。</p>
@@ -544,7 +542,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

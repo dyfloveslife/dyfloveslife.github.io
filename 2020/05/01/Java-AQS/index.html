@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/05/01/Java-AQS/" />
@@ -210,7 +210,7 @@
 <p>以下是 CLH 的简单实现：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -237,32 +237,32 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CLH</span> <span class="kd">implements</span> <span class="n">Lock</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">ThreadLocal</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">preNode</span> <span class="o">=</span> <span class="n">ThreadLocal</span><span class="o">.</span><span class="na">withInitial</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="kc">null</span><span class="o">);</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">ThreadLocal</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">ThreadLocal</span><span class="o">.</span><span class="na">withInitial</span><span class="o">(</span><span class="n">Node</span><span class="o">::</span><span class="k">new</span><span class="o">);</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">AtomicReference</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">tail</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicReference</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="n">Node</span><span class="o">());</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="kd">volatile</span> <span class="kt">boolean</span> <span class="n">locked</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
-        <span class="n">node</span><span class="o">.</span><span class="na">locked</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="n">Node</span> <span class="n">pre</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">tail</span><span class="o">.</span><span class="na">getAndSet</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">preNode</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">pre</span><span class="o">);</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">pre</span><span class="o">.</span><span class="na">locked</span><span class="o">)</span> <span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">unlock</span><span class="o">()</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
-        <span class="n">node</span><span class="o">.</span><span class="na">locked</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">preNode</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CLH</span> <span class="kd">implements</span> <span class="n">Lock</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">ThreadLocal</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">preNode</span> <span class="o">=</span> <span class="n">ThreadLocal</span><span class="o">.</span><span class="na">withInitial</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">ThreadLocal</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">ThreadLocal</span><span class="o">.</span><span class="na">withInitial</span><span class="o">(</span><span class="n">Node</span><span class="o">::</span><span class="k">new</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">AtomicReference</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">tail</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AtomicReference</span><span class="o">&lt;&gt;(</span><span class="k">new</span> <span class="n">Node</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kd">volatile</span> <span class="kt">boolean</span> <span class="n">locked</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">.</span><span class="na">locked</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="n">pre</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">tail</span><span class="o">.</span><span class="na">getAndSet</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">preNode</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">pre</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(</span><span class="n">pre</span><span class="o">.</span><span class="na">locked</span><span class="o">)</span> <span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">unlock</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">.</span><span class="na">locked</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">node</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">preNode</span><span class="o">.</span><span class="na">get</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里顺带一提 CLH 和 MCS 的区别，这俩都是自旋锁的实现，其区别如下：</p>
 <ul>
@@ -286,7 +286,7 @@
 <p>除此之外，AQS 还维护了一个被 volatile 修饰的 state，代表共享资源，访问 state 的方式有以下三种：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -299,18 +299,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getState</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">state</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">protected</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">setState</span><span class="o">(</span><span class="kt">int</span> <span class="n">newState</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">newState</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">protected</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">compareAndSetState</span><span class="o">(</span><span class="kt">int</span> <span class="n">expect</span><span class="o">,</span> <span class="kt">int</span> <span class="n">update</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">stateOffset</span><span class="o">,</span> <span class="n">expect</span><span class="o">,</span> <span class="n">update</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kd">final</span> <span class="kt">int</span> <span class="nf">getState</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">state</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">setState</span><span class="o">(</span><span class="kt">int</span> <span class="n">newState</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">state</span> <span class="o">=</span> <span class="n">newState</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">compareAndSetState</span><span class="o">(</span><span class="kt">int</span> <span class="n">expect</span><span class="o">,</span> <span class="kt">int</span> <span class="n">update</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">unsafe</span><span class="o">.</span><span class="na">compareAndSwapInt</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">stateOffset</span><span class="o">,</span> <span class="n">expect</span><span class="o">,</span> <span class="n">update</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>AQS 定义了两种资源共享的方式：EXCLUSIVE 和 SHARED</code>。EXCLUSIVE 表示独占模式，只能有一个线程执行，例如 ReentrantLock；SHARED 表示共享模式，即多个线程可以同时执行，例如 CountDownLatch、Semaphore。</p>
 <p><strong>不同的自定义同步器争用共享资源的方式也是不同的，在实现自定义同步器时只需要实现共享资源 state 的获取和释放方式即可</strong>，至于线程等待队列的维护（例如获取资源失败入队/唤醒出队），AQS 已经在底层实现好了。如果想要自定义同步器，则需要实现以下几个方法：</p>
@@ -334,7 +334,7 @@
 <p>在内部类 Node 中，使用 waitStatus 表示<strong>当前节点在队列中的等待状态</strong>，共有 5 种取值。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -349,20 +349,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
-    <span class="c1">// 表示一个节点在共享模式下处于等待状态，即共享模式
-</span><span class="c1"></span>    <span class="kd">static</span> <span class="kd">final</span> <span class="n">Node</span> <span class="n">SHARED</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">();</span>
-    <span class="c1">// 表示一个节点在独占模式下处于等待状态，即独占模式
-</span><span class="c1"></span>    <span class="kd">static</span> <span class="kd">final</span> <span class="n">Node</span> <span class="n">EXCLUSIVE</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">CANCELLED</span> <span class="o">=</span>  <span class="n">1</span><span class="o">;</span>
-    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SIGNAL</span>    <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
-    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">CONDITION</span> <span class="o">=</span> <span class="o">-</span><span class="n">2</span><span class="o">;</span>
-    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">PROPAGATE</span> <span class="o">=</span> <span class="o">-</span><span class="n">3</span><span class="o">;</span>
-
-    <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">waitStatus</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">static</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 表示一个节点在共享模式下处于等待状态，即共享模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">static</span> <span class="kd">final</span> <span class="n">Node</span> <span class="n">SHARED</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 表示一个节点在独占模式下处于等待状态，即独占模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">static</span> <span class="kd">final</span> <span class="n">Node</span> <span class="n">EXCLUSIVE</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">CANCELLED</span> <span class="o">=</span>  <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SIGNAL</span>    <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">CONDITION</span> <span class="o">=</span> <span class="o">-</span><span class="n">2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">PROPAGATE</span> <span class="o">=</span> <span class="o">-</span><span class="n">3</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">volatile</span> <span class="kt">int</span> <span class="n">waitStatus</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>CANCELLED = 1：表示当前节点已取消调度，即当前线程取消获取锁，当 timeout 或被中断，会触发变更为此状态，进入该状态后的节点将不再发生状态的变化；</li>
@@ -376,17 +376,17 @@
 <p>AbstractQueuedSynchronizer 类中的 acquire() 方法用于在独占模式下获取资源，如果获取到资源，则线程直接返回，否则进入等待队列，直到获取到资源为止，该过程忽略中断的影响。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(!</span><span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">acquireQueued</span><span class="o">(</span><span class="n">addWaiter</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">EXCLUSIVE</span><span class="o">),</span> <span class="n">arg</span><span class="o">))</span>
-        <span class="n">selfInterrupt</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(!</span><span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">acquireQueued</span><span class="o">(</span><span class="n">addWaiter</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">EXCLUSIVE</span><span class="o">),</span> <span class="n">arg</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">selfInterrupt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>acquire(int arg) 方法的流程是：</p>
 <ul>
@@ -399,15 +399,15 @@
 <p>该方法在独占模式下尝试获取资源，获取成功返回 true，否则返回 false。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">tryAcquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">tryAcquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此方法直接抛出异常，是因为 AQS 只是一个框架，具体获取和释放操作由自定义同步器来实现。因此，该方法需要被重写，具体重写的方式是：可以规定为如果返回 true，则表示获取锁成功，反之失败。</p>
 <p>回到 acquire(int arg) 方法中，如果 tryAcquire(int arg) 获取锁成功了，则 acquire 方法直接返回，如果失败了，则继续后面的操作，即将线程放进等待队列中，也就是 &amp;&amp; 符号后面的 acquireQueued() 方法。但在此之前，需要先了解 addWaiter(Node mode) 方法，</p>
@@ -415,7 +415,7 @@
 <p>该方法用于将当前线程加入到等待队列的队尾，并返回当前线程所在的节点，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -441,31 +441,31 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 位于 Node 类中
-</span><span class="c1"></span><span class="n">Node</span> <span class="n">nextWaiter</span><span class="o">;</span>
-
-<span class="c1">// 位于 Node 类中
-</span><span class="c1"></span><span class="n">Node</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">,</span> <span class="n">Node</span> <span class="n">mode</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">nextWaiter</span> <span class="o">=</span> <span class="n">mode</span><span class="o">;</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">thread</span> <span class="o">=</span> <span class="n">thread</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="c1">// 位于 AbstractQueuedSynchronizer 类中
-</span><span class="c1"></span><span class="kd">private</span> <span class="n">Node</span> <span class="nf">addWaiter</span><span class="o">(</span><span class="n">Node</span> <span class="n">mode</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">(),</span> <span class="n">mode</span><span class="o">);</span>
-
-    <span class="n">Node</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">pred</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">node</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">pred</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetTail</span><span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="n">node</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">pred</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
-            <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="n">enq</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 位于 Node 类中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Node</span> <span class="n">nextWaiter</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 位于 Node 类中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Node</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">,</span> <span class="n">Node</span> <span class="n">mode</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">nextWaiter</span> <span class="o">=</span> <span class="n">mode</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">thread</span> <span class="o">=</span> <span class="n">thread</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 位于 AbstractQueuedSynchronizer 类中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">private</span> <span class="n">Node</span> <span class="nf">addWaiter</span><span class="o">(</span><span class="n">Node</span> <span class="n">mode</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">(),</span> <span class="n">mode</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">pred</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">pred</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetTail</span><span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="n">node</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pred</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">enq</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>流程如下：</p>
 <ul>
@@ -480,7 +480,7 @@
 <p>enq() 方法如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -497,22 +497,22 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="n">Node</span> <span class="nf">enq</span><span class="o">(</span><span class="kd">final</span> <span class="n">Node</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
-        <span class="n">Node</span> <span class="n">t</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">t</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Must initialize
-</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetHead</span><span class="o">(</span><span class="k">new</span> <span class="n">Node</span><span class="o">()))</span>
-                <span class="n">tail</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">node</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetTail</span><span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="n">node</span><span class="o">))</span> <span class="o">{</span>
-                <span class="n">t</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
-                <span class="k">return</span> <span class="n">t</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="n">Node</span> <span class="nf">enq</span><span class="o">(</span><span class="kd">final</span> <span class="n">Node</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="n">t</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">t</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Must initialize
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetHead</span><span class="o">(</span><span class="k">new</span> <span class="n">Node</span><span class="o">()))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tail</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">node</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetTail</span><span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="n">node</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">t</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">t</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>该方法用于将 node 加入队尾，采用 CAS 自旋的方式直到成功加入到队尾。首先获取到队尾 t，如果 t 为空，说明队列没有进行初始化，因此需要进行初始化操作。这里采用 CAS 的方式创建一个空的标志节点作为 head 节点，并将 tail 指向 head。而如果 t 不为空，则直接执行 CAS 操作将 node 插入到队列尾部。</p>
 <p>再次回到 acquire(int arg)，此时需要了解的是 acquireQueued() 方法。</p>
@@ -520,7 +520,7 @@
 <p>前面执行了 tryAcquire() 方法和 addWaiter() 方法，此时表明该线程获取资源失败，已经被放进等待队列尾部了。<strong>下一步就是进入等待状态，直到其它线程释放资源后唤醒该线程，然后该线程再去获取资源</strong>。acquireQueued() 方法就是让线程阻塞在等待队列中获取资源，一直获取到资源后才返回，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -560,51 +560,51 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">acquireQueued</span><span class="o">(</span><span class="kd">final</span> <span class="n">Node</span> <span class="n">node</span><span class="o">,</span> <span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 表示是否成功拿到资源
-</span><span class="c1"></span>    <span class="kt">boolean</span> <span class="n">failed</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="c1">// 表示等待过程中是否被中断过
-</span><span class="c1"></span>        <span class="kt">boolean</span> <span class="n">interrupted</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="c1">// 自旋操作
-</span><span class="c1"></span>        <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
-            <span class="c1">// 获得当前节点 node 的前驱节点
-</span><span class="c1"></span>            <span class="kd">final</span> <span class="n">Node</span> <span class="n">p</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">predecessor</span><span class="o">();</span>
-            <span class="c1">// 如果前驱节点是头节点，则说明当前节点 node 是第二个节点，
-</span><span class="c1"></span>            <span class="c1">// 因此便有资格去尝试获取资源
-</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">head</span> <span class="o">&amp;&amp;</span> <span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span> <span class="o">{</span>
-                <span class="c1">// 将 head 指向当前节点 node
-</span><span class="c1"></span>                <span class="n">setHead</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
-                <span class="c1">// 经过 setHead() 后，node.prev 已经指向了 null，
-</span><span class="c1"></span>                <span class="c1">// 此时再将 p.next 置为 null，便于 GC 回收，
-</span><span class="c1"></span>                <span class="c1">// 也就意味着之前拿完资源的节点出队了
-</span><span class="c1"></span>                <span class="n">p</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-                <span class="c1">// 表示成功获取到资源
-</span><span class="c1"></span>                <span class="n">failed</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                <span class="c1">// 返回等待过程中是否被中断过
-</span><span class="c1"></span>                <span class="k">return</span> <span class="n">interrupted</span><span class="o">;</span>
-            <span class="o">}</span>
-            <span class="c1">// 如果当前线程可以休息了，就通过 park() 进入 waiting 状态，直到 unpark()，
-</span><span class="c1"></span>            <span class="c1">// 如果在不可中断的情况下被中断了，则会从 park() 中醒过来，会发现拿不到资源，
-</span><span class="c1"></span>            <span class="c1">// 从而继续进入 park() 等待
-</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">shouldParkAfterFailedAcquire</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">node</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">parkAndCheckInterrupt</span><span class="o">())</span>
-                <span class="c1">// 如果等待过程中被中断过，就将 interrupted 标记为 true
-</span><span class="c1"></span>                <span class="n">interrupted</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-        <span class="c1">// 如果等待过程中没有成功获取到资源，例如 timeout 或可中断的情况下被中断了，
-</span><span class="c1"></span>        <span class="c1">// 那么取消节点在队列中的等待
-</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">failed</span><span class="o">)</span>
-            <span class="n">cancelAcquire</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">acquireQueued</span><span class="o">(</span><span class="kd">final</span> <span class="n">Node</span> <span class="n">node</span><span class="o">,</span> <span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 表示是否成功拿到资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">boolean</span> <span class="n">failed</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 表示等待过程中是否被中断过
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">boolean</span> <span class="n">interrupted</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 自旋操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 获得当前节点 node 的前驱节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kd">final</span> <span class="n">Node</span> <span class="n">p</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">predecessor</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果前驱节点是头节点，则说明当前节点 node 是第二个节点，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 因此便有资格去尝试获取资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">head</span> <span class="o">&amp;&amp;</span> <span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 将 head 指向当前节点 node
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">setHead</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 经过 setHead() 后，node.prev 已经指向了 null，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// 此时再将 p.next 置为 null，便于 GC 回收，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// 也就意味着之前拿完资源的节点出队了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">p</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 表示成功获取到资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">failed</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 返回等待过程中是否被中断过
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">return</span> <span class="n">interrupted</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果当前线程可以休息了，就通过 park() 进入 waiting 状态，直到 unpark()，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 如果在不可中断的情况下被中断了，则会从 park() 中醒过来，会发现拿不到资源，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 从而继续进入 park() 等待
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">shouldParkAfterFailedAcquire</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">node</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">parkAndCheckInterrupt</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 如果等待过程中被中断过，就将 interrupted 标记为 true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">interrupted</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果等待过程中没有成功获取到资源，例如 timeout 或可中断的情况下被中断了，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 那么取消节点在队列中的等待
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">failed</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cancelAcquire</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>从注释中可以看到基本的执行流程，在梳理流程之前，这里再看一下 shouldParkAfterFailedAcquire() 和 parkAndCheckInterrupt() 方法的作用。</p>
 <p>首先看一下 <strong>shouldParkAfterFailedAcquire()</strong> 方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -630,63 +630,63 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">shouldParkAfterFailedAcquire</span><span class="o">(</span><span class="n">Node</span> <span class="n">pred</span><span class="o">,</span> <span class="n">Node</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 获得前驱节点 pred 的状态
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="na">waitStatus</span><span class="o">;</span>
-    <span class="c1">// 这个地方怎么理解呢？
-</span><span class="c1"></span>    <span class="c1">// 如果之前已经告诉前驱节点：你拿到资源后要通知一下我哈
-</span><span class="c1"></span>    <span class="c1">// 也就是说，如果前驱节点处于这种 SIGNAL 状态的时候，
-</span><span class="c1"></span>    <span class="c1">// 那么我就可以直接返回了
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="na">SIGNAL</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 来到这里说明前驱节点取消获取锁的操作，那就一直往前找，
-</span><span class="c1"></span>        <span class="c1">// 直到找到最近的一个处于等待状态的节点，并插在该节点的后面，
-</span><span class="c1"></span>        <span class="c1">// 那些已经略过的节点，即那些大于 0 状态的节点都会失效，被 GC 回收
-</span><span class="c1"></span>        <span class="k">do</span> <span class="o">{</span>
-            <span class="n">node</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="na">prev</span><span class="o">;</span>
-        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">pred</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">);</span>
-        <span class="n">pred</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="c1">// 如果前驱节点正常，则通过 CAS 的方式将前驱节点设置成 SIGNAL 状态，
-</span><span class="c1"></span>        <span class="c1">// 告诉它：获取到资源后通知一下我（当前节点）
-</span><span class="c1"></span>        <span class="n">compareAndSetWaitStatus</span><span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="n">ws</span><span class="o">,</span> <span class="n">Node</span><span class="o">.</span><span class="na">SIGNAL</span><span class="o">);</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">shouldParkAfterFailedAcquire</span><span class="o">(</span><span class="n">Node</span> <span class="n">pred</span><span class="o">,</span> <span class="n">Node</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获得前驱节点 pred 的状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="na">waitStatus</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 这个地方怎么理解呢？
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 如果之前已经告诉前驱节点：你拿到资源后要通知一下我哈
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 也就是说，如果前驱节点处于这种 SIGNAL 状态的时候，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 那么我就可以直接返回了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="na">SIGNAL</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 来到这里说明前驱节点取消获取锁的操作，那就一直往前找，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 直到找到最近的一个处于等待状态的节点，并插在该节点的后面，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 那些已经略过的节点，即那些大于 0 状态的节点都会失效，被 GC 回收
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">do</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">node</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="na">prev</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">while</span> <span class="o">(</span><span class="n">pred</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果前驱节点正常，则通过 CAS 的方式将前驱节点设置成 SIGNAL 状态，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 告诉它：获取到资源后通知一下我（当前节点）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">compareAndSetWaitStatus</span><span class="o">(</span><span class="n">pred</span><span class="o">,</span> <span class="n">ws</span><span class="o">,</span> <span class="n">Node</span><span class="o">.</span><span class="na">SIGNAL</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>再来看一下 <strong>parkAndCheckInterrupt()</strong> 方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">parkAndCheckInterrupt</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">LockSupport</span><span class="o">.</span><span class="na">park</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">Thread</span><span class="o">.</span><span class="na">interrupted</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">parkAndCheckInterrupt</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LockSupport</span><span class="o">.</span><span class="na">park</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Thread</span><span class="o">.</span><span class="na">interrupted</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>该方法会通过 park() 让当前线程进入 waiting 状态，等到有别的线程唤醒，然后返回当前线程是否被中断了。需要注意的是，Thread.interrupted() 方法会清除当前线程的中断标记位，即清除中断状态。</p>
 <p>再次回到 acquireQueued() 方法，具体流程就是将刚刚创建的线程节点挂起，然后等待唤醒，如果被唤醒了，则将自己设置为 head，最后返回是否被中断。</p>
 <p>将以上方法介绍完以后，再次回到 acquire(int arg) 方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(!</span><span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">acquireQueued</span><span class="o">(</span><span class="n">addWaiter</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">EXCLUSIVE</span><span class="o">),</span> <span class="n">arg</span><span class="o">))</span>
-        <span class="n">selfInterrupt</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(!</span><span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">acquireQueued</span><span class="o">(</span><span class="n">addWaiter</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">EXCLUSIVE</span><span class="o">),</span> <span class="n">arg</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">selfInterrupt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>现在总结一下 acquire() 方法的流程：</p>
 <ul>
@@ -701,7 +701,7 @@
 <p>该方法用于在独占模式下释放共享资源，可以用来实现 unlock() 方法，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -712,37 +712,37 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">release</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">tryRelease</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span> <span class="o">{</span>
-        <span class="n">Node</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">h</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">h</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span>
-            <span class="n">unparkSuccessor</span><span class="o">(</span><span class="n">h</span><span class="o">);</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">release</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">tryRelease</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">h</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">h</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">unparkSuccessor</span><span class="o">(</span><span class="n">h</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>首先通过 tryRelease(arg) 尝试释放资源，如果成功，则获取头节点，当头节点不为空并且还有资源的话，则唤醒等待队列里的下一个线程。需要注意的是，release(int arg) 方法的返回值是根据 tryRelease() 方法的返回值来判断线程是否已经完成释放掉资源了。</p>
 <h3 id="tryreleaseint-arg">tryRelease(int arg)</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">tryRelease</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">tryRelease</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="k">new</span> <span class="n">UnsupportedOperationException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>release() 方法被 final 修饰，因此不能重写，但我们可以重写 tryRelease() 方法。该方法在独占模式下通过设置 state 的状态来尝试释放资源。由于是独占模式，因此如果某个线程要释放资源的话，那么它肯定已经拿到独占的资源了，直接通过<code>state -= arg</code>减掉相应的资源即可。如果已经将资源彻底释放了（state=0），则返回 true，否则返回 false。</p>
 <h3 id="unparksuccessornode-node">unparkSuccessor(Node node)</h3>
 <p>该方法通过 unpark() 来唤醒等待队列中的下一个线程，也就是当前节点的后继节点。需要注意的是，需要确保后继节是存在的，如果后继节点不存在，则无法唤醒。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -765,28 +765,28 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">unparkSuccessor</span><span class="o">(</span><span class="n">Node</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 获得当前节点的状态
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">waitStatus</span><span class="o">;</span>
-    <span class="c1">// 通过 CAS 将当前节点的状态置为 0
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
-        <span class="n">compareAndSetWaitStatus</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">ws</span><span class="o">,</span> <span class="n">0</span><span class="o">);</span>
-
-    <span class="c1">// 找到下一个需要唤醒的节点，也就是当前节点的后继节点
-</span><span class="c1"></span>    <span class="n">Node</span> <span class="n">s</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-    <span class="c1">// 如果后继节点为空或后继节点已经取消获取锁了
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-        <span class="c1">// 从队尾往队头开始找，找到第一个状态是小于等于 0 的节点
-</span><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">Node</span> <span class="n">t</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span> <span class="n">t</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="o">!=</span> <span class="n">node</span><span class="o">;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">prev</span><span class="o">)</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span>
-                <span class="n">s</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="c1">// 找到后将其唤醒
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">LockSupport</span><span class="o">.</span><span class="na">unpark</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">thread</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">unparkSuccessor</span><span class="o">(</span><span class="n">Node</span> <span class="n">node</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获得当前节点的状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">waitStatus</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 通过 CAS 将当前节点的状态置为 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">compareAndSetWaitStatus</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">ws</span><span class="o">,</span> <span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 找到下一个需要唤醒的节点，也就是当前节点的后继节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Node</span> <span class="n">s</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果后继节点为空或后继节点已经取消获取锁了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 从队尾往队头开始找，找到第一个状态是小于等于 0 的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">Node</span> <span class="n">t</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span> <span class="n">t</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="o">!=</span> <span class="n">node</span><span class="o">;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">prev</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">&lt;=</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">s</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 找到后将其唤醒
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LockSupport</span><span class="o">.</span><span class="na">unpark</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">thread</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>需要注意的是，release() 只是将队列中第一个满足条件的线程唤醒，所以接下来的逻辑还是在 acquireQueued() 方法中，继续尝试 tryAcquire()，如果成功，则会被出队（当前节点设为头节点），线程继续执行，否则继续等待。</p>
 <p><strong>综上，release() 方法是独占模式下线程释放共享资源的顶级入口，它会释放指定数量的资源，如果彻底释放了（state=0），则它会唤醒等待队列里的其它线程来获取资源</strong>。</p>
@@ -794,17 +794,17 @@
 <p>该方法是处于共享模式下线程获取资源的顶级入口，它会获取指定数量的资源，获取成功则直接返回，获取失败则进入等待队列，直到获取成功为止，整个过程是忽略中断的。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquireShared</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">tryAcquireShared</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
-        <span class="n">doAcquireShared</span><span class="o">(</span><span class="n">arg</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquireShared</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">tryAcquireShared</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">doAcquireShared</span><span class="o">(</span><span class="n">arg</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里的 tryAcquireShared(arg) 表示在共享模式下尝试获取资源，它的返回值也代表了不同的含义：</p>
 <ul>
@@ -817,7 +817,7 @@
 <p>该方法是以共享的、不可中断的方式获取资源为基础的，将当前线程加入等待队列的尾部，直到其它线程释放资源唤醒自己，自己成功拿到对应数量的资源时再返回，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -860,48 +860,48 @@
 </span><span class="lnt">41
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">doAcquireShared</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 创建节点并加入到队列的尾部
-</span><span class="c1"></span>    <span class="kd">final</span> <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="n">addWaiter</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">SHARED</span><span class="o">);</span>
-    <span class="c1">// 用于标识是否成功
-</span><span class="c1"></span>    <span class="kt">boolean</span> <span class="n">failed</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="c1">// 用于标识等待过程中是否被中断过
-</span><span class="c1"></span>        <span class="kt">boolean</span> <span class="n">interrupted</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-        <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
-            <span class="c1">// 获得当前节点的前驱
-</span><span class="c1"></span>            <span class="kd">final</span> <span class="n">Node</span> <span class="n">p</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">predecessor</span><span class="o">();</span>
-            <span class="c1">// 由于 head 是拿到资源的线程，
-</span><span class="c1"></span>            <span class="c1">// 如果当前节点的前驱是 head，则当前节点 node 需要被唤醒，
-</span><span class="c1"></span>            <span class="c1">// 也就是 head 用完了资源来唤醒当前节点 node
-</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
-                <span class="c1">// 尝试获取资源
-</span><span class="c1"></span>                <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">tryAcquireShared</span><span class="o">(</span><span class="n">arg</span><span class="o">);</span>
-                <span class="c1">// 获取成功
-</span><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="c1">// 将 head 指向当前节点 node，
-</span><span class="c1"></span>                    <span class="c1">// 如果还有剩余资源，则可以再唤醒 node 之后的线程
-</span><span class="c1"></span>                    <span class="n">setHeadAndPropagate</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
-                    <span class="n">p</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// help GC
-</span><span class="c1"></span>                    <span class="c1">// 如果等待过程中被中断过，则补上中断
-</span><span class="c1"></span>                    <span class="k">if</span> <span class="o">(</span><span class="n">interrupted</span><span class="o">)</span>
-                        <span class="n">selfInterrupt</span><span class="o">();</span>
-                    <span class="n">failed</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-                    <span class="k">return</span><span class="o">;</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-            <span class="c1">// 如果当前节点 node 的前驱不是 head，
-</span><span class="c1"></span>            <span class="c1">// 则寻找安全点，进入 waiting 状态，等待被 unpark() 或被 interrput()
-</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">shouldParkAfterFailedAcquire</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">node</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
-                <span class="n">parkAndCheckInterrupt</span><span class="o">())</span>
-                <span class="n">interrupted</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">failed</span><span class="o">)</span>
-            <span class="n">cancelAcquire</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">doAcquireShared</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建节点并加入到队列的尾部
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">final</span> <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="n">addWaiter</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">SHARED</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 用于标识是否成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">boolean</span> <span class="n">failed</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 用于标识等待过程中是否被中断过
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">boolean</span> <span class="n">interrupted</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 获得当前节点的前驱
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kd">final</span> <span class="n">Node</span> <span class="n">p</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">predecessor</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 由于 head 是拿到资源的线程，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 如果当前节点的前驱是 head，则当前节点 node 需要被唤醒，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 也就是 head 用完了资源来唤醒当前节点 node
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 尝试获取资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">tryAcquireShared</span><span class="o">(</span><span class="n">arg</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 获取成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="o">(</span><span class="n">r</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 将 head 指向当前节点 node，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="c1">// 如果还有剩余资源，则可以再唤醒 node 之后的线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">setHeadAndPropagate</span><span class="o">(</span><span class="n">node</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">p</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span> <span class="c1">// help GC
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="c1">// 如果等待过程中被中断过，则补上中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">if</span> <span class="o">(</span><span class="n">interrupted</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">selfInterrupt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">failed</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果当前节点 node 的前驱不是 head，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 则寻找安全点，进入 waiting 状态，等待被 unpark() 或被 interrput()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">shouldParkAfterFailedAcquire</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">node</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">parkAndCheckInterrupt</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">                <span class="n">interrupted</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">failed</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cancelAcquire</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>以上方法的执行过程和 acquireQueued(final Node node, int arg) 类似，这里只有线程是 head.next 的时候才回去尝试获取资源，还有剩余的话则会唤醒之后的线程。</p>
 <p>假设如下场景：如果 head 节点释放了 5 个资源，而 node 节点需要 6 个，node.next 需要 1 个，node.next.next 需要 2 个，head 先唤醒了 node，node 一看资源不够，那它会把资源让给 node.next　吗？</p>
@@ -910,7 +910,7 @@
 <p>从下面的方法中可以看出，在唤醒自己（当前节点 ndoe）的同时，（如果还有资源的话）还回去唤醒后继节点，这是因为处于共享模式下的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -924,19 +924,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">setHeadAndPropagate</span><span class="o">(</span><span class="n">Node</span> <span class="n">node</span><span class="o">,</span> <span class="kt">int</span> <span class="n">propagate</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Node</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-    <span class="c1">// 让 head 指向当前节点 node
-</span><span class="c1"></span>    <span class="n">setHead</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
-    <span class="c1">// 如果还有剩余资源，则唤醒当前节点 node 之后的线程
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">propagate</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">||</span> <span class="n">h</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">h</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">&lt;</span> <span class="n">0</span> <span class="o">||</span>
-        <span class="o">(</span><span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">h</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Node</span> <span class="n">s</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">isShared</span><span class="o">())</span>
-            <span class="n">doReleaseShared</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">setHeadAndPropagate</span><span class="o">(</span><span class="n">Node</span> <span class="n">node</span><span class="o">,</span> <span class="kt">int</span> <span class="n">propagate</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 让 head 指向当前节点 node
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">setHead</span><span class="o">(</span><span class="n">node</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果还有剩余资源，则唤醒当前节点 node 之后的线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">propagate</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">||</span> <span class="n">h</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">h</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">&lt;</span> <span class="n">0</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">        <span class="o">(</span><span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">h</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="n">s</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">s</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">isShared</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">            <span class="n">doReleaseShared</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>这里对 acquireShared(int arg) 做一个小结</strong>：</p>
 <ul>
@@ -948,7 +948,7 @@
 <p>该方法是在共享模式下释放指定量的资源，如果成功释放且允许唤醒等待的线程，则它会唤醒等待队列里的其它线程来获取资源，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -959,16 +959,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">releaseShared</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 尝试释放资源
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">tryReleaseShared</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span> <span class="o">{</span>
-        <span class="c1">// 唤醒后继节点
-</span><span class="c1"></span>        <span class="n">doReleaseShared</span><span class="o">();</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">releaseShared</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 尝试释放资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">tryReleaseShared</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 唤醒后继节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">doReleaseShared</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>与独占模式下的 tryRelease() 不同的是：tryRelease() 是在<strong>完全</strong>释放完资源（state=0）后，才会返回 true 并唤醒其它线程；而共享模式下的 releaseShared() 则没有这种<strong>完全</strong>的要求，而是拥有资源的线程在释放掉<strong>部分</strong>资源后就可以唤醒后续等待的线程。</p>
 <p>例如资源总量是 13，线程 A 获取了 5 个资源，线程 B 获取了 7 个资源，然后并发执行，此时还剩下 1 个资源。等到线程 C 到来时，由于 C 需要获取 4 个资源才能运行，因此线程 C 目前由于资源不够而处于等待状态。当线程 A 释放了 2 个资源后，通过 tryReleaseShared(2) 返回 true 唤醒线程 C，线程 C 发现目前有 3 个资源，还是继续等待。然后线程 B 又释放了 2 个资源，通过 tryReleaseShared(2) 返回 true 唤醒线程 C，线程 C 看到总共有 5 个资源够用了，因此线程 C 就会和线程 A 和 B 一起运行了。</p>
@@ -977,7 +977,7 @@
 <p>该方法用于在共享模式下唤醒当前节点的后继节点，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -997,25 +997,25 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">doReleaseShared</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
-        <span class="n">Node</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">h</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">h</span> <span class="o">!=</span> <span class="n">tail</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="na">waitStatus</span><span class="o">;</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="na">SIGNAL</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(!</span><span class="n">compareAndSetWaitStatus</span><span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">Node</span><span class="o">.</span><span class="na">SIGNAL</span><span class="o">,</span> <span class="n">0</span><span class="o">))</span>
-                    <span class="k">continue</span><span class="o">;</span>            <span class="c1">// loop to recheck cases
-</span><span class="c1"></span>                <span class="c1">// 唤醒后继节点
-</span><span class="c1"></span>                <span class="n">unparkSuccessor</span><span class="o">(</span><span class="n">h</span><span class="o">);</span>
-            <span class="o">}</span>
-            <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">==</span> <span class="n">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">compareAndSetWaitStatus</span><span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">Node</span><span class="o">.</span><span class="na">PROPAGATE</span><span class="o">))</span>
-                <span class="k">continue</span><span class="o">;</span>                <span class="c1">// loop on failed CAS
-</span><span class="c1"></span>        <span class="o">}</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">h</span> <span class="o">==</span> <span class="n">head</span><span class="o">)</span>                   <span class="c1">// loop if head changed
-</span><span class="c1"></span>            <span class="k">break</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">doReleaseShared</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">h</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">h</span> <span class="o">!=</span> <span class="n">tail</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">ws</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="na">waitStatus</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">==</span> <span class="n">Node</span><span class="o">.</span><span class="na">SIGNAL</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(!</span><span class="n">compareAndSetWaitStatus</span><span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">Node</span><span class="o">.</span><span class="na">SIGNAL</span><span class="o">,</span> <span class="n">0</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">continue</span><span class="o">;</span>            <span class="c1">// loop to recheck cases
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// 唤醒后继节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">unparkSuccessor</span><span class="o">(</span><span class="n">h</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">ws</span> <span class="o">==</span> <span class="n">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">compareAndSetWaitStatus</span><span class="o">(</span><span class="n">h</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">Node</span><span class="o">.</span><span class="na">PROPAGATE</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span><span class="o">;</span>                <span class="c1">// loop on failed CAS
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">h</span> <span class="o">==</span> <span class="n">head</span><span class="o">)</span>                   <span class="c1">// loop if head changed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="小结">小结</h1>
 <p>以上的全部就是对 AQS 的源码分析了，下面再对<code>独占模式</code>和<code>共享模式</code>的主要方法做一个总结：</p>
@@ -1144,7 +1144,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

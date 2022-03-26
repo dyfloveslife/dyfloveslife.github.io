@@ -7,14 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sun, 15 Aug 2021 16:06:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Mar 2022 19:06:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>http://localhost:1313/about/</link>
       <pubDate>Sat, 16 Nov 2019 09:30:52 +0800</pubDate>
       
       <guid>http://localhost:1313/about/</guid>
-      <description>$ &#39;&#39; Dare \ to \ dream,\ dare \ to \ do! &#39;&#39; $ 关于我 硕士 / 计算机技术。 自身始终保持着对技术、书籍、写作的热爱。 学会学习，也要学会分享。 我会分享一些包括但不限于</description>
+      <description>$ &amp;rsquo;&amp;rsquo; Dare \ to \ dream,\ dare \ to \ do! &amp;rsquo;&amp;rsquo; $ 关于我 硕士 / 计算机技术。 自身始终保持着对技术、书籍、写作的热爱。 学会学习，也要学会分享。 我会分享一些包括但不限于</description>
+    </item>
+    
+    <item>
+      <title>Mac OS 软件推荐</title>
+      <link>http://localhost:1313/2022/03/21/mac-app/</link>
+      <pubDate>Mon, 21 Mar 2022 19:06:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2022/03/21/mac-app/</guid>
+      <description>&lt;p&gt;我一直想要一台属于自己的 Macbook Pro。&lt;/p&gt;</description>
     </item>
     
     <item>

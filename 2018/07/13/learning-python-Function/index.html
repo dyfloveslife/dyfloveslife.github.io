@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/13/learning-python-Function/" />
@@ -183,42 +183,42 @@
 <p>定义一个函数用<code>def</code>关键字，格式如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">函数名</span><span class="p">(</span><span class="n">参数列表</span><span class="p">):</span>
-    <span class="n">函数体</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">函数名</span><span class="p">(</span><span class="n">参数列表</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">函数体</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>默认情况下，参数值和参数名称是按函数声明中定义的顺序匹配起来的。下面定义一个函数用来输出<code>Hello World!</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
-
-<span class="n">hello</span><span class="p">()</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">hello</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Hello World!
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Hello World!
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面定义一个带有参数的函数，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -233,37 +233,37 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 定义计算面积函数</span>
-<span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span>
-
-
-<span class="k">def</span> <span class="nf">print_hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-
-
-<span class="n">print_hello</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
-<span class="n">w</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">h</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;width =&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="s1">&#39;height =&#39;</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="s1">&#39;area =&#39;</span><span class="p">,</span> <span class="n">area</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 定义计算面积函数</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">print_hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">print_hello</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">w</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">h</span> <span class="o">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;width =&#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="s1">&#39;height =&#39;</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="s1">&#39;area =&#39;</span><span class="p">,</span> <span class="n">area</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Hello Carol
-width = 1 height = 2 area = 2
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Hello Carol
+</span></span><span class="line"><span class="cl">width = 1 height = 2 area = 2
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="2函数调用">2.函数调用</h1>
 <p>在调用函数的时候，通常需要知道函数的名称和参数。如果传入的参数数量不对，或者传入的参数数量对了而参数类型不能被函数接受，则程序就会报错，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -271,22 +271,22 @@ width = 1 height = 2 area = 2
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 定义函数</span>
-<span class="k">def</span> <span class="nf">print_me</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-
-<span class="c1"># 调用函数</span>
-<span class="n">print_me</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 定义函数</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">print_me</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 调用函数</span>
+</span></span><span class="line"><span class="cl"><span class="n">print_me</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Hello World!
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Hello World!
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="3参数传递">3.参数传递</h1>
 <h2 id="31可变对象与不可变对象">3.1可变对象与不可变对象</h2>
@@ -308,7 +308,7 @@ width = 1 height = 2 area = 2
 <p>下面给出对不可变对象进行传递，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -316,20 +316,20 @@ width = 1 height = 2 area = 2
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">change_int</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
-
-<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">change_int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>  <span class="c1"># 输出结果为2</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">change_int</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">change_int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>  <span class="c1"># 输出结果为2</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>实例中有<code>int</code>对象<code>2</code>，指向它的变量是<code>b</code>，在传递给<code>change_int</code>函数时，按传值的方式复制了变量<code>b</code>，<code>a</code>和<code>b</code>都指向了同一个<code>int</code>对象，在 <code>a=10</code>时，则新生成一个<code>int</code>值对象<code>10</code>，并让<code>a</code>指向它。</p>
 <h2 id="33可变对象的传递">3.3可变对象的传递</h2>
 <p>可变对象在函数里修改了参数，那么在调用这个函数的函数里，原始的参数也被改变了，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -339,26 +339,26 @@ width = 1 height = 2 area = 2
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">change_me</span><span class="p">(</span><span class="n">mylist</span><span class="p">):</span>
-    <span class="n">mylist</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数内取值：&#39;</span><span class="p">,</span> <span class="n">mylist</span><span class="p">)</span>
-    <span class="k">return</span>
-
-<span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
-<span class="n">change_me</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数外取值：&#39;</span><span class="p">,</span> <span class="n">mylist</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">change_me</span><span class="p">(</span><span class="n">mylist</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mylist</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数内取值：&#39;</span><span class="p">,</span> <span class="n">mylist</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">change_me</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数外取值：&#39;</span><span class="p">,</span> <span class="n">mylist</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">函数内取值</span><span class="err">：</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
-<span class="n">函数外取值</span><span class="err">：</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">函数内取值</span><span class="err">：</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="n">函数外取值</span><span class="err">：</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看出，传入函数的对象和在末尾添加新内容的对象用的是同一个引用。</p>
 <h1 id="4参数类型">4.参数类型</h1>
@@ -373,7 +373,7 @@ width = 1 height = 2 area = 2
 <p>必需参数要用正确的顺序传入函数，调用时的数量必须和声明时的一样，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -381,20 +381,20 @@ width = 1 height = 2 area = 2
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 定义函数</span>
-<span class="k">def</span> <span class="nf">print_me</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-
-<span class="c1"># 调用函数</span>
-<span class="n">print_me</span><span class="p">()</span>  <span class="c1"># 这里没有给参数，所以程序报错</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 定义函数</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">print_me</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 调用函数</span>
+</span></span><span class="line"><span class="cl"><span class="n">print_me</span><span class="p">()</span>  <span class="c1"># 这里没有给参数，所以程序报错</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="42关键字参数">4.2关键字参数</h2>
 <p>关键字参数和函数调用关系紧密，函数调用使用关键字参数来确定传入的参数值。使用关键字参数允许函数调用时参数的顺序与声明时不一致，因为 Python 解释器能够用参数名匹配参数值。</p>
 <p>下面使用参数名来进行函数调用，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -402,27 +402,27 @@ width = 1 height = 2 area = 2
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 定义函数</span>
-<span class="k">def</span> <span class="nf">print_me</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-
-<span class="c1"># 调用函数</span>
-<span class="n">print_me</span><span class="p">(</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 定义函数</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">print_me</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 调用函数</span>
+</span></span><span class="line"><span class="cl"><span class="n">print_me</span><span class="p">(</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Hello World!
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Hello World!
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在进行函数调用的时候也可以不需要指定参数顺序，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -432,26 +432,26 @@ width = 1 height = 2 area = 2
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 定义函数</span>
-<span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;名字：&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;年龄：&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
-    <span class="k">return</span>
-
-<span class="c1"># 调用函数</span>
-<span class="n">print_info</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 定义函数</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;名字：&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;年龄：&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 调用函数</span>
+</span></span><span class="line"><span class="cl"><span class="n">print_info</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">名字： Carol
-年龄： 20
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">名字： Carol
+</span></span><span class="line"><span class="cl">年龄： 20
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="43-默认参数">4.3 默认参数</h2>
 <p>调用函数时，如果没有传递参数，则会使用默认参数。</p>
@@ -461,7 +461,7 @@ width = 1 height = 2 area = 2
 <p>以下实例中如果没有传入<code>age</code>参数，则使用默认值，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -471,53 +471,53 @@ width = 1 height = 2 area = 2
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;名字：&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;年龄：&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
-    <span class="k">return</span>
-
-<span class="n">print_info</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jack&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;============&#39;</span><span class="p">)</span>
-<span class="n">print_info</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;名字：&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;年龄：&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">print_info</span><span class="p">(</span><span class="n">age</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Jack&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;============&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">print_info</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">名字： Jack
-年龄： 50
-============
-名字： Carol
-年龄： 30
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">名字： Jack
+</span></span><span class="line"><span class="cl">年龄： 50
+</span></span><span class="line"><span class="cl">============
+</span></span><span class="line"><span class="cl">名字： Carol
+</span></span><span class="line"><span class="cl">年龄： 30
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="44不定长参数">4.4不定长参数</h2>
 <p>你可能需要一个函数能处理比当初声明时更多的参数。这些参数叫做不定长参数，和上述两种参数不同，声明时不会命名。基本语法如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">functionname</span><span class="p">([</span><span class="n">formal_args</span><span class="p">,]</span> <span class="o">*</span><span class="n">var_args_tuple</span><span class="p">):</span>
-   <span class="s2">&#34;函数_文档字符串&#34;</span>
-   <span class="n">function_suite</span>
-   <span class="k">return</span> <span class="p">[</span><span class="n">expression</span><span class="p">]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">functionname</span><span class="p">([</span><span class="n">formal_args</span><span class="p">,]</span> <span class="o">*</span><span class="n">var_args_tuple</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="s2">&#34;函数_文档字符串&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="n">function_suite</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="p">[</span><span class="n">expression</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>加了星号<code>*</code>的参数会以元组(Tuple)的形式导入，存放所有未命名的变量参数。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -525,31 +525,31 @@ width = 1 height = 2 area = 2
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">*</span><span class="n">vartuple</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">vartuple</span><span class="p">)</span>
-
-<span class="n">print_info</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">*</span><span class="n">vartuple</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">vartuple</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">print_info</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">输出：
-hello
-(10, 20, 30, &#39;world&#39;)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输出：
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">(10, 20, 30, &#39;world&#39;)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果在函数调用时没有指定参数，它就是一个空元组。我们也可以不向函数传递未命名的变量，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -560,21 +560,21 @@ hello
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">*</span><span class="n">vartuple</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vartuple</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-    <span class="k">return</span>
-
-<span class="n">print_info</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">print_info</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">*</span><span class="n">vartuple</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vartuple</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">print_info</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">print_info</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -584,35 +584,35 @@ hello
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">输出：
-10
-输出：
-hello
-10
-20
-30
-world
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输出：
+</span></span><span class="line"><span class="cl">10
+</span></span><span class="line"><span class="cl">输出：
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">10
+</span></span><span class="line"><span class="cl">20
+</span></span><span class="line"><span class="cl">30
+</span></span><span class="line"><span class="cl">world
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>另外一种带有两个星号<code>**</code>的参数会以字典的形式导入，基本语法如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">functionname</span><span class="p">([</span><span class="n">formal_args</span><span class="p">,]</span> <span class="o">**</span><span class="n">var_args_dict</span><span class="p">):</span>
-   <span class="s2">&#34;函数_文档字符串&#34;</span>
-   <span class="n">function_suite</span>
-   <span class="k">return</span> <span class="p">[</span><span class="n">expression</span><span class="p">]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">functionname</span><span class="p">([</span><span class="n">formal_args</span><span class="p">,]</span> <span class="o">**</span><span class="n">var_args_dict</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="s2">&#34;函数_文档字符串&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="n">function_suite</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="p">[</span><span class="n">expression</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>示例如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -620,54 +620,54 @@ world
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">vardict</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">vardict</span><span class="p">)</span>
-
-<span class="n">print_info</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">print_info</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">vardict</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;输出：&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">vardict</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">print_info</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">输出：
-1
-{&#39;a&#39;: 2, &#39;b&#39;: 3}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输出：
+</span></span><span class="line"><span class="cl">1
+</span></span><span class="line"><span class="cl">{&#39;a&#39;: 2, &#39;b&#39;: 3}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在声明函数时，参数中星号<code>*</code>可以单独出现，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>但是如果单独出现星号<code>*</code>，则它后面的参数必须用关键字传入，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 程序会报错</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 输出为6</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 程序会报错</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 输出为6</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="5匿名函数">5.匿名函数</h1>
 <p><code>Python</code>使用<code>lambda</code>来创建匿名函数，不再使用<code>def</code>语句定义一个函数。</p>
@@ -681,70 +681,70 @@ world
 <p><code>lambda</code>函数的语法只包含一个语句，具体格式如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">lambda</span> <span class="p">[</span><span class="n">arg1</span> <span class="p">[,</span><span class="n">arg2</span><span class="p">,</span><span class="o">.....</span><span class="n">argn</span><span class="p">]]:</span><span class="n">expression</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">lambda</span> <span class="p">[</span><span class="n">arg1</span> <span class="p">[,</span><span class="n">arg2</span><span class="p">,</span><span class="o">.....</span><span class="n">argn</span><span class="p">]]:</span><span class="n">expression</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>一个简单的<code>lambda</code>实例如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">:</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;相加后的值为：&#39;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">:</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;相加后的值为：&#39;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">相加后的值为： 30
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">相加后的值为： 30
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当然，<code>lambda</code>匿名函数也是可以使用<code>关键字参数</code>进行参数传递，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 输出结果为13</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 输出结果为13</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>同样的，<code>lambda</code>匿名函数也是可以设定默认值，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 这里x=3，y=0</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># 这里x=0，y=2</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">sum</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">y</span> <span class="o">**</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># 这里x=3，y=0</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># 这里x=0，y=2</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">7
-3
-4
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">7
+</span></span><span class="line"><span class="cl">3
+</span></span><span class="line"><span class="cl">4
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>所以，如果只打算给其中一部分参数设定默认值，那么应当将其放在靠后的位置（和定义函数时一样，避免歧义），否则会报错。</p>
 <h1 id="6return-语句">6.return 语句</h1>
@@ -752,7 +752,7 @@ world
 <p>下面给出<code>return</code>语句的用法，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -761,25 +761,25 @@ world
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数内：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">total</span>
-
-<span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数外：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">total</span> <span class="o">=</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数内：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">total</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数外：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">函数内： 30
-函数外： 30
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">函数内： 30
+</span></span><span class="line"><span class="cl">函数外： 30
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="7变量作用域">7.变量作用域</h1>
 <p>Python 中的变量并不是在哪个位置都可以访问的，访问权限决定于这个变量是在哪里赋值的。变量的作用域决定了在哪一部分程序可以访问哪个特定的变量名称。</p>
@@ -793,7 +793,7 @@ world
 <p>以<code>L–&gt;E–&gt;G–&gt;B</code>的规则查找，即：在局部找不到，便会去局部外的局部找（例如闭包），再找不到就会去全局找，再者去内建中找。作用范围示例如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -802,65 +802,65 @@ world
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">2.9</span><span class="p">)</span>  <span class="c1"># 内建作用域</span>
-<span class="n">g_count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 全局作用域</span>
-
-<span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
-    <span class="n">o_count</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 闭包函数外的函数中</span>
-    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
-        <span class="n">i_count</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 局部作用域</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">2.9</span><span class="p">)</span>  <span class="c1"># 内建作用域</span>
+</span></span><span class="line"><span class="cl"><span class="n">g_count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 全局作用域</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">o_count</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 闭包函数外的函数中</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i_count</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 局部作用域</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Python 中只有模块（module），类（class）以及函数（def、lambda）才会引入新的作用域，其它的代码块（如 if/elif/else/、try/except、for/while等）是不会引入新的作用域的，也就是说这些语句内定义的变量，外部也可以访问，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;HelloWorld&#39;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;HelloWorld&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">HelloWorld
-HelloWorld
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">HelloWorld
+</span></span><span class="line"><span class="cl">HelloWorld
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看出，实例中<code>msg</code>变量定义在<code>if</code>语句块中，但外部还是可以访问的。下面将<code>msg</code>定义在函数内，则它就是局部变量，外部不能访问，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
-    <span class="n">msg_inner</span> <span class="o">=</span> <span class="s1">&#39;HelloWorld&#39;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">msg_inner</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">msg_inner</span><span class="p">)</span>  <span class="c1"># 这里程序会报错，显示name &#39;msg_inner&#39; is not defined，也就是msg_inner未定义</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">msg_inner</span> <span class="o">=</span> <span class="s1">&#39;HelloWorld&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">msg_inner</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">msg_inner</span><span class="p">)</span>  <span class="c1"># 这里程序会报错，显示name &#39;msg_inner&#39; is not defined，也就是msg_inner未定义</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="71全局变量和局部变量">7.1全局变量和局部变量</h2>
 <p>定义在函数内部的变量拥有一个<code>局部作用域</code>，定义在函数外的拥有<code>全局作用域</code>。局部变量只能在其被声明的<code>函数内部</code>访问，而全局变量可以在<code>整个程序范围</code>内访问。调用函数时，所有在函数内声明的变量名称都将被加入到作用域中，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -871,33 +871,33 @@ HelloWorld
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 定义全局变量</span>
-
-<span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>  <span class="c1"># 这里的total是局部变量</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数内是局部变量：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">total</span>
-
-<span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数外是全局变量：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 定义全局变量</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">total</span> <span class="o">=</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span>  <span class="c1"># 这里的total是局部变量</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数内是局部变量：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">total</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">sum</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;函数外是全局变量：&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">函数内是局部变量： 30
-函数外是全局变量： 0
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">函数内是局部变量： 30
+</span></span><span class="line"><span class="cl">函数外是全局变量： 0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="72global-和-nonlocal-关键字">7.2global 和 nonlocal 关键字</h2>
 <p>当内部作用域想修改外部作用域的变量时，就要用到<code>global</code>和<code>nonlocal</code>关键字了。如果想为一个在函数外的变量重新赋值，并且这个变量会作用于许多函数中时，就需要告诉Python这个变量的作用域是全局变量。此时用<code>global</code>语句就可以变成这个任务，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -908,33 +908,33 @@ HelloWorld
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
-    <span class="k">global</span> <span class="n">num</span>  <span class="c1"># 加了global后，在函数内部是可以改变外面的全局变量</span>
-    <span class="n">num</span> <span class="o">=</span> <span class="mi">123</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;在函数中的 num：&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>  <span class="c1"># 这里输出内部的num=123</span>
-
-<span class="n">fun</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;全局变量 num：&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">num</span>  <span class="c1"># 加了global后，在函数内部是可以改变外面的全局变量</span>
+</span></span><span class="line"><span class="cl">    <span class="n">num</span> <span class="o">=</span> <span class="mi">123</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;在函数中的 num：&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>  <span class="c1"># 这里输出内部的num=123</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fun</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;全局变量 num：&#39;</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">在函数中的 num： 123
-全局变量 num： 123
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">在函数中的 num： 123
+</span></span><span class="line"><span class="cl">全局变量 num： 123
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果要修改嵌套作用域（enclosing 作用域，外层非全局作用域）中的变量，则需要<code>nonlocal</code>关键字了。也就是说，<code>nonlocal</code>关键字表示否定当前命名空间的作用域，寻找父函数的作用域并绑定对象；使用<code>nonlocal</code>关键字可以在一个嵌套的函数中修改嵌套作用域中的变量。</p>
 <p>我们先来看一个例子，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -946,22 +946,22 @@ HelloWorld
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
-        <span class="n">count</span> <span class="o">=</span> <span class="mi">12</span>
-
-    <span class="n">inner</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
-
-<span class="n">outer</span><span class="p">()</span>  <span class="c1"># 输出结果为1</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="n">count</span> <span class="o">=</span> <span class="mi">12</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">inner</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">outer</span><span class="p">()</span>  <span class="c1"># 输出结果为1</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面的程序中，在嵌套的<code>inner()</code>函数内，<code>count = 12</code>会创建一个新的变量，但是我们想要使用<code>count = 12</code>，也就是想要输出结果为12，那么就需要用到<code>nonlocal</code>关键字了，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -974,23 +974,23 @@ HelloWorld
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
-        <span class="k">nonlocal</span> <span class="n">count</span>
-        <span class="n">count</span> <span class="o">=</span> <span class="mi">12</span>
-
-    <span class="n">inner</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
-
-<span class="n">outer</span><span class="p">()</span>  <span class="c1"># 输出结果为12</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">nonlocal</span> <span class="n">count</span>
+</span></span><span class="line"><span class="cl">        <span class="n">count</span> <span class="o">=</span> <span class="mi">12</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">inner</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">outer</span><span class="p">()</span>  <span class="c1"># 输出结果为12</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>还有一种情况，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -998,18 +998,18 @@ HelloWorld
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-
-<span class="n">test</span><span class="p">()</span>  <span class="c1"># 程序会出现局部作用域引用错误</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="p">()</span>  <span class="c1"># 程序会出现局部作用域引用错误</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>之所以出现局部作用域引用错误，是在因为<code>test()</code>函数中，<code>a</code>使用的是局部变量，未定义，无法修改。但我们可以通过修改<code>a</code>为局部变量，通过函数参数传递即可是程序正常运行，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1017,13 +1017,13 @@ HelloWorld
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-
-<span class="n">test</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 输出结果为11</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>  <span class="c1"># 输出结果为11</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -1124,7 +1124,7 @@ HelloWorld
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

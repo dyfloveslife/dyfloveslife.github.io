@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/11/18/java-memory-areas/" />
@@ -348,20 +348,20 @@
 <p>默认的分配策略<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">long/double -&gt; int/float -&gt; short/char -&gt; byte/boolean -&gt; reference
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">long/double -&gt; int/float -&gt; short/char -&gt; byte/boolean -&gt; reference
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果设置了 <code>-XX:FieldsAllocationStyle=0</code>（默认是1），那么引用就会放在最前面:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">reference -&gt; long/double -&gt; int/float -&gt; short/char -&gt; byte/boolean
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">reference -&gt; long/double -&gt; int/float -&gt; short/char -&gt; byte/boolean
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>即：分配策略总是按照宽度由大到小的顺序排列，相同宽度的放在一起。</p>
 <h3 id="对齐填充">对齐填充</h3>
@@ -496,7 +496,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

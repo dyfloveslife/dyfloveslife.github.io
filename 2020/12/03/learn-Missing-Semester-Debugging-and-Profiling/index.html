@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/12/03/learn-Missing-Semester-Debugging-and-Profiling/" />
@@ -161,7 +161,7 @@
 <p>如果你调试的是那种类似于二进制的程序，那么可以使用专门的工具进行调试。当你的程序中需要执行一些只有操作系统内核才能完成的操作时，则需要经过系统调用。在 Linux 下可以通过 <a href="https://man7.org/linux/man-pages/man1/strace.1.html">strace</a> 命令来追踪程序执行的系统调用。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -188,32 +188,32 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~$ sudo strace ls -l &gt; /dev/null 
-execve<span class="o">(</span><span class="s2">&#34;/usr/bin/ls&#34;</span>, <span class="o">[</span><span class="s2">&#34;ls&#34;</span>, <span class="s2">&#34;-l&#34;</span><span class="o">]</span>, 0x7ffdef66c4f8 /* <span class="m">16</span> vars */<span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
-brk<span class="o">(</span>NULL<span class="o">)</span>                               <span class="o">=</span> 0x55899474c000
-arch_prctl<span class="o">(</span>0x3001 /* ARCH_??? */, 0x7ffd296c75b0<span class="o">)</span> <span class="o">=</span> -1 EINVAL <span class="o">(</span>Invalid argument<span class="o">)</span>
-access<span class="o">(</span><span class="s2">&#34;/etc/ld.so.preload&#34;</span>, R_OK<span class="o">)</span>      <span class="o">=</span> -1 ENOENT <span class="o">(</span>No such file or directory<span class="o">)</span>
-openat<span class="o">(</span>AT_FDCWD, <span class="s2">&#34;/etc/ld.so.cache&#34;</span>, O_RDONLY<span class="p">|</span>O_CLOEXEC<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
-fstat<span class="o">(</span>3, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span>0644, <span class="nv">st_size</span><span class="o">=</span>65827, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
-mmap<span class="o">(</span>NULL, 65827, PROT_READ, MAP_PRIVATE, 3, 0<span class="o">)</span> <span class="o">=</span> 0x7fbcccaa9000
-close<span class="o">(</span>3<span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
-openat<span class="o">(</span>AT_FDCWD, <span class="s2">&#34;/lib/x86_64-linux-gnu/libselinux.so.1&#34;</span>, O_RDONLY<span class="p">|</span>O_CLOEXEC<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
-read<span class="o">(</span>3, <span class="s2">&#34;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0@p\0\0\0\0\0\0&#34;</span>..., 832<span class="o">)</span> <span class="o">=</span> <span class="m">832</span>
-fstat<span class="o">(</span>3, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span>0644, <span class="nv">st_size</span><span class="o">=</span>163200, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
-mmap<span class="o">(</span>NULL, 8192, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS, -1, 0<span class="o">)</span> <span class="o">=</span> 0x7fbcccaa7000
-mmap<span class="o">(</span>NULL, 174600, PROT_READ, MAP_PRIVATE<span class="p">|</span>MAP_DENYWRITE, 3, 0<span class="o">)</span> <span class="o">=</span> 0x7fbccca7c000
-mprotect<span class="o">(</span>0x7fbccca82000, 135168, PROT_NONE<span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
-mmap<span class="o">(</span>0x7fbccca82000, 102400, PROT_READ<span class="p">|</span>PROT_EXEC, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, 3, 0x6000<span class="o">)</span> <span class="o">=</span> 0x7fbccca82000
-mmap<span class="o">(</span>0x7fbccca9b000, 28672, PROT_READ, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, 3, 0x1f000<span class="o">)</span> <span class="o">=</span> 0x7fbccca9b000
-mmap<span class="o">(</span>0x7fbcccaa3000, 8192, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, 3, 0x26000<span class="o">)</span> <span class="o">=</span> 0x7fbcccaa3000
-mmap<span class="o">(</span>0x7fbcccaa5000, 6664, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_ANONYMOUS, -1, 0<span class="o">)</span> <span class="o">=</span> 0x7fbcccaa5000
-close<span class="o">(</span>3<span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
-openat<span class="o">(</span>AT_FDCWD, <span class="s2">&#34;/lib/x86_64-linux-gnu/libc.so.6&#34;</span>, O_RDONLY<span class="p">|</span>O_CLOEXEC<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
-...
-<span class="o">(</span>more information<span class="o">)</span>
-...
-carol@ubuntu-carol:~$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~$ sudo strace ls -l &gt; /dev/null 
+</span></span><span class="line"><span class="cl">execve<span class="o">(</span><span class="s2">&#34;/usr/bin/ls&#34;</span>, <span class="o">[</span><span class="s2">&#34;ls&#34;</span>, <span class="s2">&#34;-l&#34;</span><span class="o">]</span>, 0x7ffdef66c4f8 /* <span class="m">16</span> vars */<span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">brk<span class="o">(</span>NULL<span class="o">)</span>                               <span class="o">=</span> 0x55899474c000
+</span></span><span class="line"><span class="cl">arch_prctl<span class="o">(</span>0x3001 /* ARCH_??? */, 0x7ffd296c75b0<span class="o">)</span> <span class="o">=</span> -1 EINVAL <span class="o">(</span>Invalid argument<span class="o">)</span>
+</span></span><span class="line"><span class="cl">access<span class="o">(</span><span class="s2">&#34;/etc/ld.so.preload&#34;</span>, R_OK<span class="o">)</span>      <span class="o">=</span> -1 ENOENT <span class="o">(</span>No such file or directory<span class="o">)</span>
+</span></span><span class="line"><span class="cl">openat<span class="o">(</span>AT_FDCWD, <span class="s2">&#34;/etc/ld.so.cache&#34;</span>, O_RDONLY<span class="p">|</span>O_CLOEXEC<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">fstat<span class="o">(</span>3, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span>0644, <span class="nv">st_size</span><span class="o">=</span>65827, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">mmap<span class="o">(</span>NULL, 65827, PROT_READ, MAP_PRIVATE, 3, 0<span class="o">)</span> <span class="o">=</span> 0x7fbcccaa9000
+</span></span><span class="line"><span class="cl">close<span class="o">(</span>3<span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">openat<span class="o">(</span>AT_FDCWD, <span class="s2">&#34;/lib/x86_64-linux-gnu/libselinux.so.1&#34;</span>, O_RDONLY<span class="p">|</span>O_CLOEXEC<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">read<span class="o">(</span>3, <span class="s2">&#34;\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0@p\0\0\0\0\0\0&#34;</span>..., 832<span class="o">)</span> <span class="o">=</span> <span class="m">832</span>
+</span></span><span class="line"><span class="cl">fstat<span class="o">(</span>3, <span class="o">{</span><span class="nv">st_mode</span><span class="o">=</span>S_IFREG<span class="p">|</span>0644, <span class="nv">st_size</span><span class="o">=</span>163200, ...<span class="o">})</span> <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">mmap<span class="o">(</span>NULL, 8192, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_ANONYMOUS, -1, 0<span class="o">)</span> <span class="o">=</span> 0x7fbcccaa7000
+</span></span><span class="line"><span class="cl">mmap<span class="o">(</span>NULL, 174600, PROT_READ, MAP_PRIVATE<span class="p">|</span>MAP_DENYWRITE, 3, 0<span class="o">)</span> <span class="o">=</span> 0x7fbccca7c000
+</span></span><span class="line"><span class="cl">mprotect<span class="o">(</span>0x7fbccca82000, 135168, PROT_NONE<span class="o">)</span> <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">mmap<span class="o">(</span>0x7fbccca82000, 102400, PROT_READ<span class="p">|</span>PROT_EXEC, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, 3, 0x6000<span class="o">)</span> <span class="o">=</span> 0x7fbccca82000
+</span></span><span class="line"><span class="cl">mmap<span class="o">(</span>0x7fbccca9b000, 28672, PROT_READ, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, 3, 0x1f000<span class="o">)</span> <span class="o">=</span> 0x7fbccca9b000
+</span></span><span class="line"><span class="cl">mmap<span class="o">(</span>0x7fbcccaa3000, 8192, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_DENYWRITE, 3, 0x26000<span class="o">)</span> <span class="o">=</span> 0x7fbcccaa3000
+</span></span><span class="line"><span class="cl">mmap<span class="o">(</span>0x7fbcccaa5000, 6664, PROT_READ<span class="p">|</span>PROT_WRITE, MAP_PRIVATE<span class="p">|</span>MAP_FIXED<span class="p">|</span>MAP_ANONYMOUS, -1, 0<span class="o">)</span> <span class="o">=</span> 0x7fbcccaa5000
+</span></span><span class="line"><span class="cl">close<span class="o">(</span>3<span class="o">)</span>                                <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">openat<span class="o">(</span>AT_FDCWD, <span class="s2">&#34;/lib/x86_64-linux-gnu/libc.so.6&#34;</span>, O_RDONLY<span class="p">|</span>O_CLOEXEC<span class="o">)</span> <span class="o">=</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl"><span class="o">(</span>more information<span class="o">)</span>
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>strace</code>是如何追踪系统调用的？情况这篇文章 <a href="https://blogs.oracle.com/linux/strace-the-sysadmins-microscope-v2">Strace &ndash; The Sysadmin&rsquo;s Microscope</a>。</p>
 <p>此外，如果你是 Web 开发者或是前端开发，那么可以使用 <a href="https://developers.google.com/web/tools/chrome-devtools/javascript">Chrome</a> 或 <a href="https://developer.mozilla.org/en-US/docs/Tools/Debugger">Firefox</a> 开发者工具进行相应的调试。</p>
@@ -329,7 +329,7 @@ carol@ubuntu-carol:~$
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

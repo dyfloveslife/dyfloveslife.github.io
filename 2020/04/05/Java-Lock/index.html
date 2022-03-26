@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/05/Java-Lock/" />
@@ -188,7 +188,7 @@
 <p>Lock 接口定义了获取锁和释放锁的基本操作，它里面有 6 个方法，具体的方法签名与描述如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -203,20 +203,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Lock</span> <span class="o">{</span>
-    <span class="kt">void</span> <span class="nf">lock</span><span class="o">();</span>
-
-    <span class="kt">void</span> <span class="nf">lockInterruptibly</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span><span class="o">;</span>
-
-    <span class="kt">boolean</span> <span class="nf">tryLock</span><span class="o">();</span>
-
-    <span class="kt">boolean</span> <span class="nf">tryLock</span><span class="o">(</span><span class="kt">long</span> <span class="n">time</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span><span class="o">;</span>
-
-    <span class="kt">void</span> <span class="nf">unlock</span><span class="o">();</span>
-
-    <span class="n">Condition</span> <span class="nf">newCondition</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Lock</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">lock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">lockInterruptibly</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">boolean</span> <span class="nf">tryLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">boolean</span> <span class="nf">tryLock</span><span class="o">(</span><span class="kt">long</span> <span class="n">time</span><span class="o">,</span> <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Condition</span> <span class="nf">newCondition</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><table>
 <thead>
@@ -258,7 +258,7 @@
 <p>一般情况下，会在<code>try...catch</code>块中进行任务处理，而在<code>finally</code>块中执行释放锁的操作，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -271,18 +271,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
-<span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
-<span class="k">try</span> <span class="o">{</span>
-    <span class="c1">// 处理任务
-</span><span class="c1"></span>    <span class="c1">// ...
-</span><span class="c1"></span><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    
-<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-    <span class="c1">// 释放锁
-</span><span class="c1"></span>    <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 处理任务
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 释放锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>需要注意的是：最好不要将获取锁的过程（lock.lock()）放在 try 块中，因为如果在<code>获取锁</code>时发生了异常，那么异常抛出的同时也会导致锁无故释放。<code>获取锁</code>的这个操作可以使用 ReentrantLock 中的 lock，也可以自定义锁的实现。因此，假如我们使用自定义锁的时候，如果在实现的过程中发生了异常，那么就会导致锁的无故释放。也就是说，我还没加上锁，就要执行解锁，这显然是不合理的</strong>。</p>
 <h2 id="trylock">tryLock()</h2>
@@ -290,7 +290,7 @@
 <p>tryLock(long time, TimeUnit unit) 方法可以设置等待时间，即在获取不到锁的时候，在时间期限内如果还拿不到锁，则返回 fasle。此外，如果在给定的等待时间内空闲且当前线程未被中断，则获得锁。也就是说，该方法可以响应中断。使用方式如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -305,26 +305,26 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
-<span class="k">if</span> <span class="o">(</span><span class="n">lock</span><span class="o">.</span><span class="na">tryLock</span><span class="o">())</span> <span class="o">{</span>
-     <span class="k">try</span> <span class="o">{</span>
-         <span class="c1">// 处理任务
-</span><span class="c1"></span>     <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="o">){</span>
-
-     <span class="o">}</span> <span class="k">finally</span><span class="o">{</span>
-         <span class="c1">// 释放锁
-</span><span class="c1"></span>         <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>   
-     <span class="o">}</span> 
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-    <span class="c1">// 如果不能获取锁，则直接做其他事情
-</span><span class="c1"></span><span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">(</span><span class="n">lock</span><span class="o">.</span><span class="na">tryLock</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">     <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">         <span class="c1">// 处理任务
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     <span class="o">}</span> <span class="k">finally</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">         <span class="c1">// 释放锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>         <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>   
+</span></span><span class="line"><span class="cl">     <span class="o">}</span> 
+</span></span><span class="line"><span class="cl"><span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果不能获取锁，则直接做其他事情
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="lockinterruptibly">lockInterruptibly()</h2>
 <p>lockInterruptibly() 表示在获取锁时，如果线程正在等待获取锁，则这个线程能够响应中断，即中断线程的等待状态。也就是说，当两个线程同时通过 lock.lockInterruptibly() 方法获取某个锁的时候，如果线程 A 先获取到了锁，那么此时线程 B 会处于等待状态。而如果对线程 B 调用 threadB.interrupt() 方法则能够中断线程 B 的等待过程。其使用方式如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -336,17 +336,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">fun</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
-    <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
-    <span class="n">lock</span><span class="o">.</span><span class="na">lockInterruptibly</span><span class="o">();</span>
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="c1">// 处理任务
-</span><span class="c1"></span>    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-        <span class="c1">// 释放锁
-</span><span class="c1"></span>        <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">fun</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lock</span><span class="o">.</span><span class="na">lockInterruptibly</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 处理任务
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 释放锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>需要注意的是，<strong>当一个线程获得了锁之后不会被 interrupt() 方法中断</strong>。因为 interrupt() 方法只能中断阻塞过程中的线程而不能中断正在运行过程中的线程。因此，当通过 lockInterruptibly() 方法获取某个锁时，如果获取不到，则只有在等待情况下才可以响应中断。而 synchronized 关键字在当一个线程处于等待某个锁的状态时，是无法被中断的，只有一只等待下去。</p>
 <p>通过以上对锁的使用方式可以看到，最好的实现方式就是将获取锁的代码放到<code>try...catch...</code>块中，然后在<code>finally</code>块中调用释放锁的操作。如果不将获取锁的代码放到<code>try...catch...</code>块中，而仍然在<code>finally</code>块中调用释放锁的操作的话，此时如果线程没有获取到锁，则依然会执行释放锁（unlock）的操作，从而会抛出异常，因为该线程并未获取到锁，却执行了解锁操作。</p>
@@ -357,7 +357,7 @@
 <p>下面通过一个具体的实例来演示 Lock 的使用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -396,64 +396,64 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LockTest</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">LockTest</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LockTest</span><span class="o">();</span>
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insertData</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 该 lock 为局部变量
-</span><span class="c1"></span>        <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
-        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 得到了锁...&#34;</span><span class="o">);</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="o">}</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 释放了锁...&#34;</span><span class="o">);</span>
-            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LockTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LockTest</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LockTest</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insertData</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 该 lock 为局部变量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 得到了锁...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 释放了锁...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">线程 A 得到了锁...
-线程 B 得到了锁...
-线程 A 释放了锁...
-线程 B 释放了锁...
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">线程 A 得到了锁...
+</span></span><span class="line"><span class="cl">线程 B 得到了锁...
+</span></span><span class="line"><span class="cl">线程 A 释放了锁...
+</span></span><span class="line"><span class="cl">线程 B 释放了锁...
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过运行结果可以看出，线程 B 在线程 A 没有释放锁之前就获得了锁，这与我们之前分析的看起来不一样。原因是因为在<code>insertData(Thread thread)</code>方法中的 lock 是<code>局部变量</code>，每当有一个线程执行该方法时都会保存一个 lock 副本，所以每个线程执行到<code>lock.lock();</code>时获取到的都是不同的锁，因此就不会对临界资源<code>ArrayList</code>进行同步互斥访问。此时，只需要将其声明为<code>成员变量</code>即可。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -492,65 +492,65 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LockTest</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-    <span class="c1">// 将 lock 声明为成员变量
-</span><span class="c1"></span>    <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">LockTest</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LockTest</span><span class="o">();</span>
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insertData</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 得到了锁...&#34;</span><span class="o">);</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="o">}</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 释放了锁...&#34;</span><span class="o">);</span>
-            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LockTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 将 lock 声明为成员变量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LockTest</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LockTest</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insertData</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 得到了锁...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 释放了锁...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">线程 A 得到了锁...
-线程 A 释放了锁...
-线程 B 得到了锁...
-线程 B 释放了锁...
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">线程 A 得到了锁...
+</span></span><span class="line"><span class="cl">线程 A 释放了锁...
+</span></span><span class="line"><span class="cl">线程 B 得到了锁...
+</span></span><span class="line"><span class="cl">线程 B 释放了锁...
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="trylock-的使用">tryLock() 的使用</h1>
 <p>这里使用 tryLock() 方法来演示其中一个线程获取锁失败的情况，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -590,64 +590,64 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TryLockTest</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-    <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TryLockTest</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TryLockTest</span><span class="o">();</span>
-
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insertData</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">lock</span><span class="o">.</span><span class="na">tryLock</span><span class="o">())</span> <span class="o">{</span>
-            <span class="k">try</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 得到了锁...&#34;</span><span class="o">);</span>
-                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-                    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-                <span class="o">}</span>
-            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-
-            <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 释放了锁...&#34;</span><span class="o">);</span>
-                <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-            <span class="o">}</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 获取锁失败...&#34;</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TryLockTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TryLockTest</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TryLockTest</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="na">insertData</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insertData</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">lock</span><span class="o">.</span><span class="na">tryLock</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 得到了锁...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 释放了锁...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 获取锁失败...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">线程 A 得到了锁...
-线程 B 获取锁失败...
-线程 A 释放了锁...
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">线程 A 得到了锁...
+</span></span><span class="line"><span class="cl">线程 B 获取锁失败...
+</span></span><span class="line"><span class="cl">线程 A 释放了锁...
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，线程 A 首先获得了锁，而当线程 B 试图去获得锁时，由于锁被线程 A 占用，所以线程 B 会获取锁失败。</p>
 <p>tryLock(long time, TimeUnit unit) 方法能够响应中断，即支持对获取锁的中断。但需要注意的是：当尝试获取一个内部锁的操作时是不能被中断的，如进入 synchronized 代码块。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -705,96 +705,96 @@
 </span><span class="lnt">56
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TryLockTest2</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">TryLockTest2</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TryLockTest2</span><span class="o">();</span>
-        <span class="n">MyThread</span> <span class="n">thread1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;A&#34;</span><span class="o">);</span>
-        <span class="n">MyThread</span> <span class="n">thread2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;B&#34;</span><span class="o">);</span>
-        <span class="n">thread1</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-        <span class="n">thread2</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">2000</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-        <span class="o">}</span>
-        <span class="n">thread2</span><span class="o">.</span><span class="na">interrupt</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">lock</span><span class="o">.</span><span class="na">tryLock</span><span class="o">(</span><span class="n">4</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">))</span> <span class="o">{</span>
-            <span class="k">try</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;时间: &#34;</span> <span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; ,线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 得到了锁...&#34;</span><span class="o">);</span>
-                <span class="kt">long</span> <span class="n">nowTime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
-                <span class="k">while</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">nowTime</span> <span class="o">&lt;</span> <span class="n">5000</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="c1">// 为了避免 Thread.sleep() 而需要捕获 InterruptedException 而带来的理解上的困惑，
-</span><span class="c1"></span>                    <span class="c1">// 此处用这种方法空转5秒
-</span><span class="c1"></span>                <span class="o">}</span>
-            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-
-            <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;时间: &#34;</span> <span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; ,线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 释放了锁...&#34;</span><span class="o">);</span>
-                <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-            <span class="o">}</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 放弃了对锁的获取...&#34;</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">MyThread</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">TryLockTest2</span> <span class="n">test2</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">MyThread</span><span class="o">(</span><span class="n">TryLockTest2</span> <span class="n">test2</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">test2</span> <span class="o">=</span> <span class="n">test2</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">test2</span><span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;时间: &#34;</span> <span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; ,线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 被中断...&#34;</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TryLockTest2</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TryLockTest2</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TryLockTest2</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MyThread</span> <span class="n">thread1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;A&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MyThread</span> <span class="n">thread2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;B&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thread1</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thread2</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">2000</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thread2</span><span class="o">.</span><span class="na">interrupt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">method</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">lock</span><span class="o">.</span><span class="na">tryLock</span><span class="o">(</span><span class="n">4</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;时间: &#34;</span> <span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; ,线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 得到了锁...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">long</span> <span class="n">nowTime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">while</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">nowTime</span> <span class="o">&lt;</span> <span class="n">5000</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 为了避免 Thread.sleep() 而需要捕获 InterruptedException 而带来的理解上的困惑，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="c1">// 此处用这种方法空转5秒
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;时间: &#34;</span> <span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; ,线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 释放了锁...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 放弃了对锁的获取...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MyThread</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">TryLockTest2</span> <span class="n">test2</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">MyThread</span><span class="o">(</span><span class="n">TryLockTest2</span> <span class="n">test2</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">test2</span> <span class="o">=</span> <span class="n">test2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">test2</span><span class="o">.</span><span class="na">method</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;时间: &#34;</span> <span class="o">+</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; ,线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 被中断...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>运行结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">时间: 1586146499091 ,线程 A 得到了锁...
-时间: 1586146501101 ,线程 B 被中断...
-时间: 1586146504095 ,线程 A 释放了锁...
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">时间: 1586146499091 ,线程 A 得到了锁...
+</span></span><span class="line"><span class="cl">时间: 1586146501101 ,线程 B 被中断...
+</span></span><span class="line"><span class="cl">时间: 1586146504095 ,线程 A 释放了锁...
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>从结果可以看出，线程 A 得到锁，然后过了 2000 毫秒（2 秒）以后，线程 B 被中断了。</p>
 <p>还有一种可能出现的运行结果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">时间: 1586147113994 ,线程 B 得到了锁...
-线程 A 放弃了对锁的获取...
-时间: 1586147119002 ,线程 B 释放了锁...
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">时间: 1586147113994 ,线程 B 得到了锁...
+</span></span><span class="line"><span class="cl">线程 A 放弃了对锁的获取...
+</span></span><span class="line"><span class="cl">时间: 1586147119002 ,线程 B 释放了锁...
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>也就是说，线程 B 先获得到了锁，然后线程 A 由于拿不到锁，所以会等待 4 秒的时间，在该时间内也没有拿到锁，因此返回 false，即放弃了对锁的获取。</p>
 <h1 id="lockinterruptibly-的使用">lockInterruptibly() 的使用</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -854,76 +854,76 @@
 </span><span class="lnt">58
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LockInterruptiblyTest</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">LockInterruptiblyTest</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LockInterruptiblyTest</span><span class="o">();</span>
-
-        <span class="n">MyThreadDemo</span> <span class="n">thread1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThreadDemo</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;A&#34;</span><span class="o">);</span>
-        <span class="n">MyThreadDemo</span> <span class="n">thread2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThreadDemo</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;B&#34;</span><span class="o">);</span>
-
-        <span class="n">thread1</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-        <span class="n">thread2</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">2000</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-        <span class="o">}</span>
-        <span class="n">thread2</span><span class="o">.</span><span class="na">interrupt</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
-        <span class="c1">// 这里将获取锁的语句放在了 try 的外面
-</span><span class="c1"></span>        <span class="n">lock</span><span class="o">.</span><span class="na">lockInterruptibly</span><span class="o">();</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 得到了锁...&#34;</span><span class="o">);</span>
-            <span class="kt">long</span> <span class="n">startTime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
-            <span class="k">for</span> <span class="o">(;</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">startTime</span> <span class="o">&gt;=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="k">break</span><span class="o">;</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 执行 finally...&#34;</span><span class="o">);</span>
-            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 释放了锁...&#34;</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行完毕...&#34;</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-
-<span class="kd">class</span> <span class="nc">MyThreadDemo</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">LockInterruptiblyTest</span> <span class="n">test</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="kd">public</span> <span class="nf">MyThreadDemo</span><span class="o">(</span><span class="n">LockInterruptiblyTest</span> <span class="n">test</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">test</span> <span class="o">=</span> <span class="n">test</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">test</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 被中断...&#34;</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LockInterruptiblyTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Lock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LockInterruptiblyTest</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LockInterruptiblyTest</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">MyThreadDemo</span> <span class="n">thread1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThreadDemo</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;A&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MyThreadDemo</span> <span class="n">thread2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThreadDemo</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;B&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">thread1</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thread2</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">2000</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">thread2</span><span class="o">.</span><span class="na">interrupt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 这里将获取锁的语句放在了 try 的外面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">lock</span><span class="o">.</span><span class="na">lockInterruptibly</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 得到了锁...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">long</span> <span class="n">startTime</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="o">(;</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">startTime</span> <span class="o">&gt;=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 执行 finally...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 释放了锁...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行完毕...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MyThreadDemo</span> <span class="kd">extends</span> <span class="n">Thread</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">LockInterruptiblyTest</span> <span class="n">test</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">MyThreadDemo</span><span class="o">(</span><span class="n">LockInterruptiblyTest</span> <span class="n">test</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">test</span> <span class="o">=</span> <span class="n">test</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">test</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 被中断...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>执行结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">线程 A 得到了锁...
-线程 B 被中断...
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">线程 A 得到了锁...
+</span></span><span class="line"><span class="cl">线程 B 被中断...
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>从结果可以看出，线程 B 能够被正确的中断，放弃对任务的执行。需要注意的是：如果需要正确中断等待锁的过程，必须将获取锁的语句放在 try 的外面，然后再将 InterruptedException 抛出。而如果将获取锁的语句放在了 try 里面，则一定会执行 finally 块的解锁操作。如果线程在获取锁时被中断，则再执行解锁操作就会导致异常，因为该线程并未获得锁却执行了解锁操作。</p>
 <h1 id="readwritelock">ReadWriteLock</h1>
@@ -932,7 +932,7 @@
 <p>ReadWriteLock 接口中定义了连两个方法，分别用于获取读锁和获取写锁。即对临界资源的读写操作分成两个锁来分配给线程，从而使多个线程可以进行读操作。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -949,22 +949,22 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ReadWriteLock</span> <span class="o">{</span>
-    <span class="cm">/**
-</span><span class="cm">     * Returns the lock used for reading.
-</span><span class="cm">     *
-</span><span class="cm">     * @return the lock used for reading
-</span><span class="cm">     */</span>
-    <span class="n">Lock</span> <span class="nf">readLock</span><span class="o">();</span>
-
-    <span class="cm">/**
-</span><span class="cm">     * Returns the lock used for writing.
-</span><span class="cm">     *
-</span><span class="cm">     * @return the lock used for writing
-</span><span class="cm">     */</span>
-    <span class="n">Lock</span> <span class="nf">writeLock</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ReadWriteLock</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * Returns the lock used for reading.
+</span></span></span><span class="line"><span class="cl"><span class="cm">     *
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return the lock used for reading
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Lock</span> <span class="nf">readLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * Returns the lock used for writing.
+</span></span></span><span class="line"><span class="cl"><span class="cm">     *
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * @return the lock used for writing
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Lock</span> <span class="nf">writeLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="reentrantreadwritelock">ReentrantReadWriteLock</h1>
 <p>ReentrantLock 具有排他性，是一种排他锁。即同一时刻只允许一个线程访问，这样做虽然保证了线程安全，但效率很低。ReentrantLock 接口的实现类 ReentrantReadWriteLock 这一读写锁解决了这个问题，其提供了许多方法，但最主要的是 readLock() 和 writeLock() 方法。</p>
@@ -995,7 +995,7 @@
 <p>如果有多个线程要同时进行读操作的话，以下是 synchronized 的使用方式及效果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1026,41 +1026,41 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
-
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">test</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">test</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 开始读操作...&#34;</span><span class="o">);</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 正在进行读操作...&#34;</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 读操作完成...&#34;</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 开始读操作...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 正在进行读操作...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 读操作完成...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1072,22 +1072,22 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">线程 A 开始读操作...
-线程 A 正在进行读操作...
-（部分打印结果省略）
-线程 A 正在进行读操作...
-线程 A 读操作完成...
-线程 B 开始读操作...
-线程 B 正在进行读操作...
-（部分打印结果省略）
-线程 B 正在进行读操作...
-线程 B 读操作完成...
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">线程 A 开始读操作...
+</span></span><span class="line"><span class="cl">线程 A 正在进行读操作...
+</span></span><span class="line"><span class="cl">（部分打印结果省略）
+</span></span><span class="line"><span class="cl">线程 A 正在进行读操作...
+</span></span><span class="line"><span class="cl">线程 A 读操作完成...
+</span></span><span class="line"><span class="cl">线程 B 开始读操作...
+</span></span><span class="line"><span class="cl">线程 B 正在进行读操作...
+</span></span><span class="line"><span class="cl">（部分打印结果省略）
+</span></span><span class="line"><span class="cl">线程 B 正在进行读操作...
+</span></span><span class="line"><span class="cl">线程 B 读操作完成...
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>从结果可以看出，只有先获得锁的线程 A 进行读操作执行完之后，释放掉这个锁，然后其它的线程 B 才能去进行读操作。而如果使用<code>读写锁</code>的话，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1128,51 +1128,51 @@
 </span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.concurrent.locks.ReentrantReadWriteLock</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="n">ReentrantReadWriteLock</span> <span class="n">rwl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantReadWriteLock</span><span class="o">();</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
-
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">test</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">)</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">test</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 在外面定义
-</span><span class="c1"></span>        <span class="n">rwl</span><span class="o">.</span><span class="na">readLock</span><span class="o">().</span><span class="na">lock</span><span class="o">();</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 开始读操作...&#34;</span><span class="o">);</span>
-            <span class="k">while</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 正在进行读操作...&#34;</span><span class="o">);</span>
-            <span class="o">}</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 读操作完成...&#34;</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-            <span class="n">rwl</span><span class="o">.</span><span class="na">readLock</span><span class="o">().</span><span class="na">unlock</span><span class="o">();</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.concurrent.locks.ReentrantReadWriteLock</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">ReentrantReadWriteLock</span> <span class="n">rwl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantReadWriteLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Test</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">test</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 在外面定义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">rwl</span><span class="o">.</span><span class="na">readLock</span><span class="o">().</span><span class="na">lock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">long</span> <span class="n">start</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 开始读操作...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 正在进行读操作...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;线程 &#34;</span> <span class="o">+</span> <span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; 读操作完成...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rwl</span><span class="o">.</span><span class="na">readLock</span><span class="o">().</span><span class="na">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1183,16 +1183,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">线程 B 开始读操作...
-线程 A 开始读操作...
-线程 B 正在进行读操作...
-线程 A 正在进行读操作...
-（部分打印结果省略）
-线程 B 正在进行读操作...
-线程 A 正在进行读操作...
-线程 B 读操作完成...
-线程 A 读操作完成...
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">线程 B 开始读操作...
+</span></span><span class="line"><span class="cl">线程 A 开始读操作...
+</span></span><span class="line"><span class="cl">线程 B 正在进行读操作...
+</span></span><span class="line"><span class="cl">线程 A 正在进行读操作...
+</span></span><span class="line"><span class="cl">（部分打印结果省略）
+</span></span><span class="line"><span class="cl">线程 B 正在进行读操作...
+</span></span><span class="line"><span class="cl">线程 A 正在进行读操作...
+</span></span><span class="line"><span class="cl">线程 B 读操作完成...
+</span></span><span class="line"><span class="cl">线程 A 读操作完成...
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>从结果中可以看到，两个线程同时进行了读操作，这样就提升了读操作的效率。但需要注意的是：<strong>读操作的共享锁可以保证并发的读，并且非常高效，而读写、写读、写写的过程是互斥的。</strong></p>
 <p>也就是说：</p>
@@ -1364,7 +1364,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

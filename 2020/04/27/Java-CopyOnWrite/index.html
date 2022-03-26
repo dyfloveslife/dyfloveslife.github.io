@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/27/Java-CopyOnWrite/" />
@@ -161,25 +161,25 @@
 <p>通过继承图可以看到，CopyOnWriteArrayList 实现了 List 接口，并且可以被迭代。下面通过 CopyOnWriteArrayList 类中的一些成员变量和成员方法来分析它为什么是线程安全的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/** The lock protecting all mutators */</span>
-<span class="kd">final</span> <span class="kd">transient</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
-
-<span class="cm">/** The array, accessed only via getArray/setArray. */</span>
-<span class="kd">private</span> <span class="kd">transient</span> <span class="kd">volatile</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">array</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="cm">/** The lock protecting all mutators */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">final</span> <span class="kd">transient</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantLock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** The array, accessed only via getArray/setArray. */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">transient</span> <span class="kd">volatile</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">array</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，这里使用了 ReentrantLock 来支持并发操作，而用来存放数组对象的 array 是被 volatile 修饰的，volatile 的作用是一方面可以保证 array 在内存的可见性，另一方面可以禁止指令的重排。详见 <a href="https://dyfloveslife.github.io/2020/03/16/Java-volatile/">Java 中的 volatile</a>。当然，这里最终要的还是 CopyOnWriteArrayList 中读写操作的实现，如下所示：</p>
 <p><strong>add(E e) 方法的实现</strong>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -201,34 +201,34 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
-    <span class="c1">// 加锁
-</span><span class="c1"></span>    <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="c1">// 获取当前数组对象
-</span><span class="c1"></span>        <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
-        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-        <span class="c1">// 将原数组中的内容拷贝到新数组中
-</span><span class="c1"></span>        <span class="n">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">len</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
-        <span class="c1">// 将指定的元素 e 插入到新数组中的末尾
-</span><span class="c1"></span>        <span class="n">newElements</span><span class="o">[</span><span class="n">len</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
-        <span class="c1">// 设置新数组对象
-</span><span class="c1"></span>        <span class="n">setArray</span><span class="o">(</span><span class="n">newElements</span><span class="o">);</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-        <span class="c1">// 释放锁
-</span><span class="c1"></span>        <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">ReentrantLock</span> <span class="n">lock</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">lock</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 加锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">lock</span><span class="o">.</span><span class="na">lock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 获取当前数组对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 将原数组中的内容拷贝到新数组中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">len</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 将指定的元素 e 插入到新数组中的末尾
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">newElements</span><span class="o">[</span><span class="n">len</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置新数组对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">setArray</span><span class="o">(</span><span class="n">newElements</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 释放锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">lock</span><span class="o">.</span><span class="na">unlock</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>add(E e) 方法的作用是将指定的元素 e 插入到新数组的末尾。首先使用 ReentrantLock 保证同一时刻只能有一个写线程正在进行数组的复制，否则会在内存中产生多份被复制的数据。由于数组是被 volatile 修饰的，因此根据 happens-before 规则，写线程对数组引用的修改操作，对读线程是可见的。由于是在新数组中进行写入数据的，因此能够保证读写操作是在两个不同的数据容器中进行的。</p>
 <p>需要注意的是，这里的 volatile 所修饰的仅仅是数组的引用，也就是对数组引用的可见性，而对于数组中元素的修改不能保证可见性，通过<code>setArray(newElements);</code>语句可以看出。</p>
 <p><strong>get() 方法的实现</strong>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -241,25 +241,25 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">get</span><span class="o">(</span><span class="n">getArray</span><span class="o">(),</span> <span class="n">index</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="o">(</span><span class="n">E</span><span class="o">)</span> <span class="n">a</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
-<span class="o">}</span>
-
-<span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="nf">getArray</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">array</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">get</span><span class="o">(</span><span class="n">getArray</span><span class="o">(),</span> <span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">(</span><span class="n">E</span><span class="o">)</span> <span class="n">a</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="nf">getArray</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">array</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>get 方法没有进行加锁或者一些其它的操作，这是因为所有的读操作只是会读取容器中的数据，而不会进行修改。因此读操作是允许多个线程同时访问的。</p>
 <p><strong>迭代时的注意事项</strong>：</p>
 <p>看一下例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -275,26 +275,26 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">CopyOnWriteArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">writeArrayList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CopyOnWriteArrayList</span><span class="o">&lt;&gt;();</span>
-
-    <span class="n">writeArrayList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">);</span>
-    <span class="n">writeArrayList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;b&#34;</span><span class="o">);</span>
-
-    <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">writeArrayList</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
-
-    <span class="n">writeArrayList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;c&#34;</span><span class="o">);</span>
-
-    <span class="k">while</span> <span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">CopyOnWriteArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">writeArrayList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CopyOnWriteArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">writeArrayList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;a&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">writeArrayList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;b&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">writeArrayList</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">writeArrayList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;c&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>程序会输出 a 和 b，而不会输出 c。这是因为当调用<code>writeArrayList.iterator();</code>时会返回 CopyOnWriteArrayList 下的内部实现类 COWIterator 对象，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -312,23 +312,23 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="n">COWIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;(</span><span class="n">getArray</span><span class="o">(),</span> <span class="n">0</span><span class="o">);</span>
-<span class="o">}</span>
-
-
-<span class="kd">static</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">COWIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">ListIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="cm">/** Snapshot of the array */</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">snapshot</span><span class="o">;</span>
-    <span class="cm">/** Index of element to be returned by subsequent call to next.  */</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">cursor</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="nf">COWIterator</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">,</span> <span class="kt">int</span> <span class="n">initialCursor</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">cursor</span> <span class="o">=</span> <span class="n">initialCursor</span><span class="o">;</span>
-        <span class="n">snapshot</span> <span class="o">=</span> <span class="n">elements</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">COWIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;(</span><span class="n">getArray</span><span class="o">(),</span> <span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">static</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">COWIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">ListIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Snapshot of the array */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">snapshot</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/** Index of element to be returned by subsequent call to next.  */</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">cursor</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="nf">COWIterator</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span><span class="o">,</span> <span class="kt">int</span> <span class="n">initialCursor</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cursor</span> <span class="o">=</span> <span class="n">initialCursor</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">snapshot</span> <span class="o">=</span> <span class="n">elements</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>也就是说，在遍历的时候首先会获得当前数组对象的一个拷贝，即快照 snapshot，后序的遍历操作会在该快照上进行。因此，如果在获取快照之后再向数组中添加元素的话，则之后添加的元素将不会被遍历到。因此，上面的程序只会输出 a 和 b，而不会再输出 c。</p>
 <h1 id="总结">总结</h1>
@@ -456,7 +456,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

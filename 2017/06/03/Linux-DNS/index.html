@@ -26,7 +26,7 @@ shrike-i386-disc1.iso、shrike-i386-disc2.iso。
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2017/06/03/Linux-DNS/" />
@@ -203,39 +203,39 @@ shrike-i386-disc1.iso、shrike-i386-disc2.iso。"/>
 <h2 id="1-挂载第一张镜像安装-bind">1. 挂载第一张镜像，安装 bind</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">mount /dev/cdrom /mnt/cdrom		//挂载镜像
-cd /mnt/cdrom/RedHat/RPMS		//进入软件包目录
-rpm -ivh bind-9.2.1-16.i386.rpm		//安装
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mount /dev/cdrom /mnt/cdrom		//挂载镜像
+</span></span><span class="line"><span class="cl">cd /mnt/cdrom/RedHat/RPMS		//进入软件包目录
+</span></span><span class="line"><span class="cl">rpm -ivh bind-9.2.1-16.i386.rpm		//安装
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="2-挂载第二张镜像安装-caching">2. 挂载第二张镜像，安装 caching</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">rpm -ivh caching-nameserver-7.2-7.noarch.rpm
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rpm -ivh caching-nameserver-7.2-7.noarch.rpm
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="二配置-dns">二、配置 dns</h1>
 <h2 id="1-配置虚拟机静态-ip">1. 配置虚拟机静态 IP</h2>
 <p>左下角<code>主菜单</code>→<code>系统设置</code>→<code>网络</code>，双击设备<code>eth0</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">IP 地址：192.168.1.2
-子网掩码：255.255.255.0
-默认网关地址：192.168.1.254
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">IP 地址：192.168.1.2
+</span></span><span class="line"><span class="cl">子网掩码：255.255.255.0
+</span></span><span class="line"><span class="cl">默认网关地址：192.168.1.254
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在<code>DNS</code>选项卡下，修改<code>主 DNS</code>为：192.168.1.2，最后单击<code>激活</code>。</p>
 <p>如果配置静态 IP 不成功，则需要修改网卡配置文件。(前面加上<code>#</code>即可)位置为：<code>/etc/sysconfig/network-scripts/ifup</code> 文件。如下图：</p>
@@ -248,7 +248,7 @@ rpm -ivh bind-9.2.1-16.i386.rpm		//安装
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -258,15 +258,15 @@ rpm -ivh bind-9.2.1-16.i386.rpm		//安装
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">zone &#34;bzu.com&#34; IN {
-    type master;
-    file &#34;bzu.com.zone&#34;;
-};
-    zone &#34;1.168.192.in-addr.arpa&#34; IN {
-    type master;
-    file &#34;1.zone&#34;;
-};
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">zone &#34;bzu.com&#34; IN {
+</span></span><span class="line"><span class="cl">    type master;
+</span></span><span class="line"><span class="cl">    file &#34;bzu.com.zone&#34;;
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">    zone &#34;1.168.192.in-addr.arpa&#34; IN {
+</span></span><span class="line"><span class="cl">    type master;
+</span></span><span class="line"><span class="cl">    file &#34;1.zone&#34;;
+</span></span><span class="line"><span class="cl">};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="3-在-varnamed-下新建正向和反向解析文件并修改配置信息">3. 在 /var/named 下新建正向和反向解析文件，并修改配置信息</h2>
 <blockquote>
@@ -275,7 +275,7 @@ rpm -ivh bind-9.2.1-16.i386.rpm		//安装
 <p>bzu.com.zone 文件配置信息：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -286,21 +286,21 @@ rpm -ivh bind-9.2.1-16.i386.rpm		//安装
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$TTL 86400
-@	1D IN	SOA	dns.bzu.com. mail.bzu.com. (
-                42		; serial (d. adams)
-                3H		; refresh
-                15M		; retry
-                1W		; expiry
-                1D	)	; minimum
-@	IN NS	dns.bzu.com.
-www	IN A	192.168.1.2
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$TTL 86400
+</span></span><span class="line"><span class="cl">@	1D IN	SOA	dns.bzu.com. mail.bzu.com. (
+</span></span><span class="line"><span class="cl">                42		; serial (d. adams)
+</span></span><span class="line"><span class="cl">                3H		; refresh
+</span></span><span class="line"><span class="cl">                15M		; retry
+</span></span><span class="line"><span class="cl">                1W		; expiry
+</span></span><span class="line"><span class="cl">                1D	)	; minimum
+</span></span><span class="line"><span class="cl">@	IN NS	dns.bzu.com.
+</span></span><span class="line"><span class="cl">www	IN A	192.168.1.2
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>1.zone 文件配置信息</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -312,27 +312,27 @@ www	IN A	192.168.1.2
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$TTL 86400
-@   1D IN   SOA	dns.bzu.com. mail.bzu.com. (
-                42		; serial (d. adams)
-                3H		; refresh
-                15M		; retry
-                1W		; expiry
-                1D	)	; minimum
-@   IN NS   dns.bzu.com.
-www IN A    192.168.1.2
-2   PTR     dns.bzu.com.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$TTL 86400
+</span></span><span class="line"><span class="cl">@   1D IN   SOA	dns.bzu.com. mail.bzu.com. (
+</span></span><span class="line"><span class="cl">                42		; serial (d. adams)
+</span></span><span class="line"><span class="cl">                3H		; refresh
+</span></span><span class="line"><span class="cl">                15M		; retry
+</span></span><span class="line"><span class="cl">                1W		; expiry
+</span></span><span class="line"><span class="cl">                1D	)	; minimum
+</span></span><span class="line"><span class="cl">@   IN NS   dns.bzu.com.
+</span></span><span class="line"><span class="cl">www IN A    192.168.1.2
+</span></span><span class="line"><span class="cl">2   PTR     dns.bzu.com.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="4-启动-named-服务检测-dns-是否配置成功">4. 启动 named 服务，检测 DNS 是否配置成功</h2>
 <p>在终端键入命令：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">nslookup
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nslookup
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>若出现以下内容，说明 DNS 配置成功。</p>
 <!-- raw HTML omitted -->
@@ -434,7 +434,7 @@ www IN A    192.168.1.2
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

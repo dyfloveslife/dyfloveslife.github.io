@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/11/16/hexo-to-hugo/" />
@@ -176,18 +176,18 @@
 <p>在 <code>D</code> 盘下使用如下命令创建站点：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo new site myblog
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo new site myblog
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后会出现如下信息：</p>
 <blockquote>
 <p>Congratulations! Your new Hugo site is created in D:\myblog.</p>
 <p>Just a few more steps and you’re ready to go:</p>
 <ol>
-<li>Download a theme into the same-named folder. Choose a theme from <a href="https://themes.gohugo.io/,">https://themes.gohugo.io/,</a> or create your own with the “hugo new theme ” command.</li>
+<li>Download a theme into the same-named folder. Choose a theme from <a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a>, or create your own with the “hugo new theme ” command.</li>
 <li>Perhaps you want to add some content. You can add single files with “hugo new /.”.</li>
 <li>Start the built-in live server via “hugo server”.</li>
 </ol>
@@ -208,24 +208,24 @@
 <p>在 <code>myblog</code> 根目录下，使用如下命令获得主题：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git init
-git submodule add https://github.com/olOwOlo/hugo-theme-even themes/even
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">git submodule add https://github.com/olOwOlo/hugo-theme-even themes/even
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于我之前使用 Hexo 在 Github 上部署了博客，所以这里使用了 <code>git submodule</code> 命令。如果你是第一次将博客部署到 <code>Github</code> 的话，那么使用如下命令即可：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git init
-git clone https://github.com/olOwOlo/hugo-theme-even themes/even
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">git clone https://github.com/olOwOlo/hugo-theme-even themes/even
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下载完成以后，会在 <code>D:\myblog\themes\even\exampleSite</code> 下有一个 <code>config.toml</code> 文件，将该文件复制到 <code>myblog</code> 下即可使用 <code>even</code> 主题。</p>
 <blockquote>
@@ -239,7 +239,7 @@ git clone https://github.com/olOwOlo/hugo-theme-even themes/even
 <p>Hexo 使用的头部格式：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -249,20 +249,20 @@ git clone https://github.com/olOwOlo/hugo-theme-even themes/even
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">---
-title: &#39;国庆小记&#39;
-date: 2018/10/8 10:28:27
-tags:
-  - 生活
-categories: 感悟
-comments: true
----
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: &#39;国庆小记&#39;
+</span></span><span class="line"><span class="cl">date: 2018/10/8 10:28:27
+</span></span><span class="line"><span class="cl">tags:
+</span></span><span class="line"><span class="cl">  - 生活
+</span></span><span class="line"><span class="cl">categories: 感悟
+</span></span><span class="line"><span class="cl">comments: true
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Hugo 使用的格式：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -271,37 +271,37 @@ comments: true
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">---
-title: &#39;国庆小记&#39;
-date: 2018-10-08T10:28:27+08:00
-tags: [&#34;生活&#34;]
-categories: [&#34;感悟&#34;]
-draft: false
----
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: &#39;国庆小记&#39;
+</span></span><span class="line"><span class="cl">date: 2018-10-08T10:28:27+08:00
+</span></span><span class="line"><span class="cl">tags: [&#34;生活&#34;]
+</span></span><span class="line"><span class="cl">categories: [&#34;感悟&#34;]
+</span></span><span class="line"><span class="cl">draft: false
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>你可以很明显的看出它俩的不同，其中 Hugo 中的 <code>+08:00</code> 表示时区，<code>draft</code> 置为 <code>false</code> 表示这不是一个草稿文件，这是要准备上传到 <code>Github</code> 的文章。</p>
 <h3 id="坑-2">坑 2</h3>
 <p>在 <code>config.toml</code> 中加入如下设置可以实现和 Hexo 一样的 url 链接，即 <code>YYYY/MM/DD/post_name/</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">[permalinks]
-  post = &#34;/:year/:month/:day/:filename/&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[permalinks]
+</span></span><span class="line"><span class="cl">  post = &#34;/:year/:month/:day/:filename/&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="本地预览">本地预览</h2>
 <p>现在可以在根目录下，键入如下命令，打开 <a href="localhost:1313">localhost:1313</a> 即可预览你的网站。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo server
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo server
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="上传到-github">上传到 Github</h1>
 <h2 id="坑-3">坑 3</h2>
@@ -309,33 +309,33 @@ draft: false
 <p>如果不想让 url 进行大小写的转换，可以在文件中添加如下设置：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">disablePathToLower = true
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">disablePathToLower = true
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果不想让网站的<code>分类名称</code>转换为小写，则可以加入：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">preserveTaxonomyNames = true
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">preserveTaxonomyNames = true
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="部署">部署</h2>
 <p>由于之前使用 Hexo 在 GitHub 上部署过，所以远程仓库还有之前的文章。现在可以在博客的根目录下新建一个文件夹，让 Hugo 每次将静态文件都生成到该文件夹下，通过 Git 将该文件下的内容全部上传到 GitHub 即可。</p>
 <p>在 <code>public</code> 文件夹下键入如下命令：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git init
-git remote add upstream https://github.com/dyfloveslife/dyfloveslife.github.io.git
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">git remote add upstream https://github.com/dyfloveslife/dyfloveslife.github.io.git
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>注意要将 url 替换成你自己的网址。</p>
@@ -343,31 +343,31 @@ git remote add upstream https://github.com/dyfloveslife/dyfloveslife.github.io.g
 <p>然后回到 <code>myblog</code> 目录下，键入如下命令，让 Hugo 生成静态资源到 <code>public</code> 下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">hugo -t even
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo -t even
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于之前在 <code>static</code> 文件夹下放入了许多图标，所以执行完上面的命令以后，<code>public</code> 文件夹下就会生成许多文件夹和网站图片。</p>
 <p>其次，进入 <code>public</code> 文件夹，将里面的文件全部上传即可，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git add .
-git commit -m  &#34;switch to hugo&#34;
-git push -f upstream master
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m  &#34;switch to hugo&#34;
+</span></span><span class="line"><span class="cl">git push -f upstream master
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于之前远程仓库有文件，所以根据 <a href="https://stackoverflow.com/questions/44678942/difference-between-git-push-and-git-push-f">这里</a> 所说的，进行强制 push 操作。</p>
 <p>除此之外，可以参考 <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#put-it-into-a-script">Hugo 官网</a> 写一个脚本 <code>deploy.sh</code> 放到 <code>D:\myblog</code> 下，这样在上传的时候会方便一些，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -392,30 +392,30 @@ git push -f upstream master
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># If a command fails then the deploy stops</span>
-<span class="nb">set</span> -e
-
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m\n&#34;</span>
-
-<span class="c1"># Build the project.</span>
-hugo -t even <span class="c1"># if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`</span>
-
-<span class="c1"># Go To Public folder</span>
-<span class="nb">cd</span> public
-
-<span class="c1"># Add changes to git.</span>
-git add .
-
-<span class="c1"># Commit changes.</span>
-<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
-<span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-	<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span>
-<span class="k">fi</span>
-git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
-
-<span class="c1"># Push source and build repos.</span>
-git push upstream master
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># If a command fails then the deploy stops</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> -e
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Build the project.</span>
+</span></span><span class="line"><span class="cl">hugo -t even <span class="c1"># if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Go To Public folder</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> public
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add changes to git.</span>
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Commit changes.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Push source and build repos.</span>
+</span></span><span class="line"><span class="cl">git push upstream master
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后执行 <code>./deploy.sh</code> 即可上传。</p>
 <h1 id="添加-disqus-评论">添加 Disqus 评论</h1>
@@ -423,11 +423,11 @@ git push upstream master
 <p>设置方法也很简单，直接修改 <code>config.toml</code> 文件中的 <code>disqusShortname</code> 字段设置为你在 Disqus 注册的名字即可，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">disqusShortname = &#34;SirCarol&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">disqusShortname = &#34;SirCarol&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -528,7 +528,7 @@ git push upstream master
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

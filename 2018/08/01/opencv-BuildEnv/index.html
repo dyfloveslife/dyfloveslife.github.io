@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/08/01/opencv-BuildEnv/" />
@@ -230,7 +230,7 @@
 <p>好了之后键入如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -247,22 +247,22 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;opencv2/core.hpp&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;opencv2/imgcodecs.hpp&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;opencv2/highgui.hpp&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="n">using</span> <span class="n">namespace</span> <span class="n">cv</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="n">Mat</span> <span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&#34;picture.jpg&#34;</span><span class="p">);</span>
-	<span class="n">namedWindow</span><span class="p">(</span><span class="s">&#34;Display window&#34;</span><span class="p">);</span>
-	<span class="n">imshow</span><span class="p">(</span><span class="s">&#34;Display window&#34;</span><span class="p">,</span> <span class="n">img</span><span class="p">);</span>
-	<span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;opencv2/core.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;opencv2/imgcodecs.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;opencv2/highgui.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="n">using</span> <span class="n">namespace</span> <span class="n">cv</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Mat</span> <span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&#34;picture.jpg&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">namedWindow</span><span class="p">(</span><span class="s">&#34;Display window&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">imshow</span><span class="p">(</span><span class="s">&#34;Display window&#34;</span><span class="p">,</span> <span class="n">img</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <p><img src="/images/OpenCV/BuildEnv/display.png" alt="OpenCV"></p>
@@ -369,7 +369,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Carol</copyright>
-    <lastBuildDate>Sun, 15 Aug 2021 16:06:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Mar 2022 19:06:11 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mac OS 软件推荐</title>
+      <link>http://localhost:1313/2022/03/21/mac-app/</link>
+      <pubDate>Mon, 21 Mar 2022 19:06:11 +0800</pubDate>
+      
+      <guid>http://localhost:1313/2022/03/21/mac-app/</guid>
+      <description>&lt;p&gt;我一直想要一台属于自己的 Macbook Pro。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Java stream 总结</title>
       <link>http://localhost:1313/2021/08/15/java-stream/</link>

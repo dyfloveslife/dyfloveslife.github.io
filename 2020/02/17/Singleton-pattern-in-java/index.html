@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/02/17/Singleton-pattern-in-java/" />
@@ -153,7 +153,7 @@
 <p>饿汉式的实例在类加载的时候就完成了初始化任务，导致类加载的速度比较慢，但获取对象的速度快。该方式是线程安全的，并且不能延迟加载，因为在类初始化时，已经自行实例化了。同时，提供了一个私有的构造器，只有这样才能保证单例不会在系统中的其它地方被实例化。并对外部提供一个公共的获取实例的方法，该方法和<code>INSTANCE</code>一样，都是使用<code>static</code>修饰。代码如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -166,18 +166,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonOne</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">SingletonOne</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SingletonOne</span><span class="o">();</span>
-
-    <span class="kd">private</span> <span class="nf">SingletonOne</span><span class="o">()</span> <span class="o">{</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">SingletonOne</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonOne</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">SingletonOne</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SingletonOne</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="nf">SingletonOne</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">SingletonOne</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">INSTANCE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="懒汉式">懒汉式</h1>
 <p>顾名思义，懒汉式只有在想要获取实例（即调用<code>getInstance()</code>方法）的时候才创建实例，这种方式可以做到懒加载，即延迟加载。同时使用了<code>synchronized</code>关键字能够保证该方式是线程安全的，因为在多线程的情况下，当线程 A 正在新建单例的时候，在完成赋值操作之前，此时如果线程 B 将<code>instance</code>判断为<code>null</code>的话，则线程 B 也会进行单例的创建，从而会导致多个实例被创建的错误，因此需要使用线程同步。</p>
@@ -185,7 +185,7 @@
 <p>在<code>getInstance()</code>方法中，首先判断当前实例是否已经存在，存在则返回，不存在才进行创建。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -201,28 +201,28 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonTwo</span> <span class="o">{</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">SingletonTwo</span> <span class="n">instance</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="nf">SingletonTwo</span><span class="o">()</span> <span class="o">{</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">synchronized</span> <span class="n">SingletonTwo</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="k">new</span> <span class="n">SingletonTwo</span><span class="o">();</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonTwo</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">SingletonTwo</span> <span class="n">instance</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="nf">SingletonTwo</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">synchronized</span> <span class="n">SingletonTwo</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">new</span> <span class="n">SingletonTwo</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>虽然懒汉式在第一次调用的时候才进行初始化，看似节约了系统资源，但第一次加载的时候需要实例化，无疑会出现效率低等问题。</p>
 <h1 id="双重校验锁">双重校验锁</h1>
 <p>双重检验锁（Double CheckLock）和懒汉式很相似，能够保证线程安全的同时进行延迟加载。与懒汉式不同的是，在<code>getInstance()</code>方法内部进行了两次判空操作，第二次判空是因为在多线程环境下其它的线程在调用<code>getInstance()</code>方法的时候，有可能在此之前<code>instance</code>已经被创建过了，所以需要再次进行判断。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -241,59 +241,59 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonThree</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">volatile</span> <span class="kd">static</span> <span class="n">SingletonThree</span> <span class="n">instance</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="nf">SingletonThree</span><span class="o">()</span> <span class="o">{</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">SingletonThree</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kd">synchronized</span> <span class="o">(</span><span class="n">SingletonThree</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SingletonThree</span><span class="o">();</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonThree</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">volatile</span> <span class="kd">static</span> <span class="n">SingletonThree</span> <span class="n">instance</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="nf">SingletonThree</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">SingletonThree</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">synchronized</span> <span class="o">(</span><span class="n">SingletonThree</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SingletonThree</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">                <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此外，使用<code>volatile</code>关键字修饰<code>instance</code>，这样可以避免在进行<code>instance = new SingletonThree();</code>时造成的<a href="http://ifeve.com/jmm-cookbook-reorderings/">指令重排</a>问题。</p>
 <p>原本的指令<code>instance = new SingletonThree();</code>可分解为以下三步：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">memory</span> <span class="o">=</span> <span class="n">allocate</span><span class="o">();</span>  <span class="c1">// 1. 分配对象的内存空间
-</span><span class="c1"></span><span class="n">ctorInstance</span><span class="o">(</span><span class="n">memory</span><span class="o">);</span> <span class="c1">// 2. 初始化对象
-</span><span class="c1"></span><span class="n">instance</span> <span class="o">=</span> <span class="n">memory</span><span class="o">;</span>    <span class="c1">// 3. 设置 instance 指向刚分配的内存空间。
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">memory</span> <span class="o">=</span> <span class="n">allocate</span><span class="o">();</span>  <span class="c1">// 1. 分配对象的内存空间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">ctorInstance</span><span class="o">(</span><span class="n">memory</span><span class="o">);</span> <span class="c1">// 2. 初始化对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">instance</span> <span class="o">=</span> <span class="n">memory</span><span class="o">;</span>    <span class="c1">// 3. 设置 instance 指向刚分配的内存空间。
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>假如不使用<code>volatile</code>关键字进行修饰，则有可能会在第 11 行发生指令重排，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">memory</span> <span class="o">=</span> <span class="n">allocate</span><span class="o">();</span>  <span class="c1">// 1. 分配对象的内存空间
-</span><span class="c1"></span><span class="n">instance</span> <span class="o">=</span> <span class="n">memory</span><span class="o">;</span>    <span class="c1">// 3. 设置 instance 指向刚分配的内存空间。
-</span><span class="c1"></span>                      <span class="c1">// 注意，此时对象还没有初始化！
-</span><span class="c1"></span><span class="n">ctorInstance</span><span class="o">(</span><span class="n">memory</span><span class="o">);</span> <span class="c1">// 2. 初始化对象
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">memory</span> <span class="o">=</span> <span class="n">allocate</span><span class="o">();</span>  <span class="c1">// 1. 分配对象的内存空间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">instance</span> <span class="o">=</span> <span class="n">memory</span><span class="o">;</span>    <span class="c1">// 3. 设置 instance 指向刚分配的内存空间。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                      <span class="c1">// 注意，此时对象还没有初始化！
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">ctorInstance</span><span class="o">(</span><span class="n">memory</span><span class="o">);</span> <span class="c1">// 2. 初始化对象
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="静态内部类">静态内部类</h1>
 <p>通过使用静态的内部类来创建实例，可以实现延迟加载，即第一次加载<code>SingletonFour</code>类时不会初始化<code>INSTANCE</code>，只有在调用<code>getInstance()</code>方法的时候才初始化对象。此方法可以保证线程安全也能够保证该类的唯一性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -310,28 +310,28 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonFour</span> <span class="o">{</span>
-    <span class="c1">// 私有构造器
-</span><span class="c1"></span>    <span class="kd">private</span> <span class="nf">SingletonFour</span><span class="o">()</span> <span class="o">{</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 对外提供公共的获得实例的方法
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">SingletonFour</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Inner</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 静态内部类
-</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Inner</span> <span class="o">{</span>
-        <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">SingletonFour</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SingletonFour</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonFour</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 私有构造器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="nf">SingletonFour</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 对外提供公共的获得实例的方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">SingletonFour</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Inner</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 静态内部类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Inner</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">SingletonFour</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SingletonFour</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="枚举类">枚举类</h1>
 <p>使用枚举方式实现的单例虽然不能延迟加载，但可以保证线程安全，并且能够防止反射和反序列化调用。因为枚举默认是线程安全的，在任何情况下都是单例的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -358,32 +358,32 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonFive</span> <span class="o">{</span>
-
-    <span class="c1">// 私有化构造器
-</span><span class="c1"></span>    <span class="kd">private</span> <span class="nf">SingletonFive</span><span class="o">()</span> <span class="o">{</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 枚举
-</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">enum</span> <span class="n">Singleton</span><span class="o">{</span>
-        <span class="n">INSTANCE</span><span class="o">;</span>
-
-        <span class="kd">private</span> <span class="n">SingletonFive</span> <span class="n">singleton</span><span class="o">;</span>
-
-        <span class="c1">// JVM 会保证此方法绝对只调用一次
-</span><span class="c1"></span>        <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
-            <span class="n">singleton</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SingletonFive</span><span class="o">();</span>
-        <span class="o">}</span>
-        <span class="kd">public</span> <span class="n">SingletonFive</span> <span class="nf">getSingleton</span><span class="o">()</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">singleton</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">SingletonFive</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Singleton</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">.</span><span class="na">getSingleton</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingletonFive</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 私有化构造器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="nf">SingletonFive</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 枚举
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">enum</span> <span class="n">Singleton</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">INSTANCE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="n">SingletonFive</span> <span class="n">singleton</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// JVM 会保证此方法绝对只调用一次
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">singleton</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SingletonFive</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="n">SingletonFive</span> <span class="nf">getSingleton</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">singleton</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">SingletonFive</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Singleton</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">.</span><span class="na">getSingleton</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>最后再简单说一下如何选择，对于单例对象占用资源少、不需要延时加载的情况，枚举好于饿汉式；对于单例对象占用资源多、需要延时加载的情况，静态内部类要好于懒汉式。</p>
 <h1 id="参考">参考</h1>
@@ -489,7 +489,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

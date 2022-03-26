@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/07/06/learning-python-BasicDataType/" />
@@ -153,26 +153,26 @@
 <p>在 Python中，对于每个变量在使用前不需要声明，但需要用<code>=</code>赋值。同时，也可对多个变量进行赋值，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">var1</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">var2</span> <span class="o">=</span> <span class="n">var3</span> <span class="o">=</span> <span class="mf">10.1</span>  <span class="c1"># 创建一个对象，值为10.1，两个变量都指向同一内存位置</span>
-<span class="n">var4</span><span class="p">,</span> <span class="n">var5</span><span class="p">,</span> <span class="n">var6</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span>  <span class="c1"># 两个整型对象5和6分配给var4和var5，字符串对象hello分配给var6</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="n">var3</span><span class="p">,</span> <span class="n">var4</span><span class="p">,</span> <span class="n">var5</span><span class="p">,</span> <span class="n">var6</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">var1</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">var2</span> <span class="o">=</span> <span class="n">var3</span> <span class="o">=</span> <span class="mf">10.1</span>  <span class="c1"># 创建一个对象，值为10.1，两个变量都指向同一内存位置</span>
+</span></span><span class="line"><span class="cl"><span class="n">var4</span><span class="p">,</span> <span class="n">var5</span><span class="p">,</span> <span class="n">var6</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span>  <span class="c1"># 两个整型对象5和6分配给var4和var5，字符串对象hello分配给var6</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="n">var3</span><span class="p">,</span> <span class="n">var4</span><span class="p">,</span> <span class="n">var5</span><span class="p">,</span> <span class="n">var6</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">10 10.1 10.1 5 6 hello
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">10 10.1 10.1 5 6 hello
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="2标准数据类型">2.标准数据类型</h1>
 <p>在 Python3 中，有 6 种标准的数据类型：</p>
@@ -193,57 +193,57 @@
 <p>上一篇文章中有说到，数字类型包括<code>int</code>、<code>float</code>、<code>bool</code>和<code>complex</code>四种。我们可以通过<code>type()</code>函数来查看变量所指的对象类型，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="n">j</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="n">j</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;class &#39;int&#39;&gt;
-&lt;class &#39;float&#39;&gt;
-&lt;class &#39;bool&#39;&gt;
-&lt;class &#39;complex&#39;&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;class &#39;int&#39;&gt;
+</span></span><span class="line"><span class="cl">&lt;class &#39;float&#39;&gt;
+</span></span><span class="line"><span class="cl">&lt;class &#39;bool&#39;&gt;
+</span></span><span class="line"><span class="cl">&lt;class &#39;complex&#39;&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可见，变量<code>a</code>所指的对象类型为<code>int</code>型，变量<code>b</code>所指的对象类型为<code>float</code>型&hellip;&hellip;所以说，<strong>变量的类型是由赋予它的值来确定的</strong>。</p>
 <p>当然，也可以用<code>isinstance(object, classinfo)</code>函数来判断一个对象是否是一个已知的类型。其中<code>object</code>表示实例对象，<code>classinfo</code>表示直接或间接类名、基本类型或者由它们组成的元组，如果对象的类型（object）与参数二的类型（classinfo）相同则返回<code>True</code>，否则返回 <code>False</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">result</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">True
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">True
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>type()</code>与<code>isinstance()</code>的区别在于：</p>
 <ul>
@@ -253,7 +253,7 @@
 <p>除此之外，对于日常的数值运算，Python在计算起来也十分的方便，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -262,19 +262,19 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1 + 2 =&#39;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 加法</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2 - 1 =&#39;</span><span class="p">,</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 减法</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1 * 2 =&#39;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 乘法</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;13 / 5 =&#39;</span><span class="p">,</span> <span class="mi">13</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 除法，得到一个浮点数</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;13 // 5 =&#39;</span><span class="p">,</span> <span class="mi">13</span> <span class="o">//</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 除法，得到一个整数</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;13 % 5 =&#39;</span><span class="p">,</span> <span class="mi">13</span> <span class="o">%</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 取余</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2 ** 3 =&#39;</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># 2的3次方</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1 + 2 =&#39;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 加法</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2 - 1 =&#39;</span><span class="p">,</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 减法</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1 * 2 =&#39;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 乘法</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;13 / 5 =&#39;</span><span class="p">,</span> <span class="mi">13</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 除法，得到一个浮点数</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;13 // 5 =&#39;</span><span class="p">,</span> <span class="mi">13</span> <span class="o">//</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 除法，得到一个整数</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;13 % 5 =&#39;</span><span class="p">,</span> <span class="mi">13</span> <span class="o">%</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 取余</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2 ** 3 =&#39;</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># 2的3次方</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -283,14 +283,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">1 + 2 = 3
-2 - 1 = 1
-1 * 2 = 2
-13 / 5 = 2.6
-13 // 5 = 2
-13 % 5 = 3
-2 ** 3 = 6
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1 + 2 = 3
+</span></span><span class="line"><span class="cl">2 - 1 = 1
+</span></span><span class="line"><span class="cl">1 * 2 = 2
+</span></span><span class="line"><span class="cl">13 / 5 = 2.6
+</span></span><span class="line"><span class="cl">13 // 5 = 2
+</span></span><span class="line"><span class="cl">13 % 5 = 3
+</span></span><span class="line"><span class="cl">2 ** 3 = 6
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此外：</p>
 <ul>
@@ -309,33 +309,33 @@
 <p>对于字符串的解释在上一篇博文提到过，这里不再进行多余赘述，反而要注意一点的是：对于<code>isinstance(object, classinfo)</code>中的<code>classinfo</code>来说，其基本类型如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">int</span><span class="err">，</span><span class="nb">float</span><span class="err">，</span><span class="nb">bool</span><span class="err">，</span><span class="nb">complex</span><span class="err">，</span><span class="nb">str</span><span class="p">(</span><span class="n">字符串</span><span class="p">)</span><span class="err">，</span><span class="nb">list</span><span class="err">，</span><span class="nb">dict</span><span class="p">(</span><span class="n">字典</span><span class="p">)</span><span class="err">，</span><span class="nb">set</span><span class="err">，</span><span class="nb">tuple</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">int</span><span class="err">，</span><span class="nb">float</span><span class="err">，</span><span class="nb">bool</span><span class="err">，</span><span class="nb">complex</span><span class="err">，</span><span class="nb">str</span><span class="p">(</span><span class="n">字符串</span><span class="p">)</span><span class="err">，</span><span class="nb">list</span><span class="err">，</span><span class="nb">dict</span><span class="p">(</span><span class="n">字典</span><span class="p">)</span><span class="err">，</span><span class="nb">set</span><span class="err">，</span><span class="nb">tuple</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中，字符串是<code>str</code>而不是<code>string</code>，字典也是简写成<code>dict</code>，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">var</span> <span class="o">=</span> <span class="mi">123</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>    <span class="c1">#输出True</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>    <span class="c1">#输出False</span>
-<span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span> <span class="c1">#报错</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">var</span> <span class="o">=</span> <span class="mi">123</span>
+</span></span><span class="line"><span class="cl"><span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>    <span class="c1">#输出True</span>
+</span></span><span class="line"><span class="cl"><span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>    <span class="c1">#输出False</span>
+</span></span><span class="line"><span class="cl"><span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span> <span class="c1">#报错</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="23-list列表">2.3 List（列表）</h2>
 <p>列表是 Python 常用的数据类型，在列表中的元素类型可以不同，支持数字，字符串，或者再包含列表，即嵌套。</p>
 <p>列表的元素被放在一对中括号内，多个元素用逗号分隔开。它和字符串一样，也可以被索引和截取，左侧以索引<code>0</code>为开始，右侧以索引<code>-1</code>为开始，列表被截取后返回一个包含所需元素的新列表，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -347,22 +347,22 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">]</span>
-<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span>  <span class="c1"># 输出完整的列表</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[:])</span>  <span class="c1"># 输出完整的列表</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 输出列表中第一个元素</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 输出列表中最后一个元素</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># 输出列表中第二个到第三个元素，因为有冒号，所以不包括右侧</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 输出列表中除了最后一个元素以外的所有元素，同样的，因为有冒号，所以不包括右侧</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">list1</span> <span class="o">+</span> <span class="n">list2</span><span class="p">)</span>  <span class="c1"># 将列表进行连接</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># 注意这个写法，它表示[索引:索引:步长]，即每隔2个元素取一次元素</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span>  <span class="c1"># 输出完整的列表</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[:])</span>  <span class="c1"># 输出完整的列表</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 输出列表中第一个元素</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 输出列表中最后一个元素</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># 输出列表中第二个到第三个元素，因为有冒号，所以不包括右侧</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># 输出列表中除了最后一个元素以外的所有元素，同样的，因为有冒号，所以不包括右侧</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span> <span class="o">+</span> <span class="n">list2</span><span class="p">)</span>  <span class="c1"># 将列表进行连接</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># 注意这个写法，它表示[索引:索引:步长]，即每隔2个元素取一次元素</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -372,67 +372,67 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">[0, 1, 2, &#39;a&#39;, &#39;abc&#39;]
-[0, 1, 2, &#39;a&#39;, &#39;abc&#39;]
-0
-abc
-[1, 2]
-[0, 1, 2, &#39;a&#39;]
-[0, 1, 2, &#39;a&#39;, &#39;abc&#39;, &#39;def&#39;, 3, 4]
-[1, &#39;a&#39;]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[0, 1, 2, &#39;a&#39;, &#39;abc&#39;]
+</span></span><span class="line"><span class="cl">[0, 1, 2, &#39;a&#39;, &#39;abc&#39;]
+</span></span><span class="line"><span class="cl">0
+</span></span><span class="line"><span class="cl">abc
+</span></span><span class="line"><span class="cl">[1, 2]
+</span></span><span class="line"><span class="cl">[0, 1, 2, &#39;a&#39;]
+</span></span><span class="line"><span class="cl">[0, 1, 2, &#39;a&#39;, &#39;abc&#39;, &#39;def&#39;, 3, 4]
+</span></span><span class="line"><span class="cl">[1, &#39;a&#39;]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>前面说到列表是可变的数据类型，可以改变列表中的某个元素或全部元素，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="nb">list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;number&#39;</span>  <span class="c1"># 这里将数字1改为了number</span>
-<span class="nb">list</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>  <span class="c1"># 这里进行了切片操作</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;number&#39;</span>  <span class="c1"># 这里将数字1改为了number</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>  <span class="c1"># 这里进行了切片操作</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">[&#39;number&#39;, 2, 100, 200, 5]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[&#39;number&#39;, 2, 100, 200, 5]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于列表的<code>删除</code>或<code>添加</code>操作，可以用<code>pop()</code>和<code>append()</code>函数实现，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>  <span class="c1"># 删除了数字5</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-<span class="nb">list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;banana&#39;</span><span class="p">)</span>  <span class="c1"># 添加了字符串banana</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>  <span class="c1"># 删除了数字5</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;banana&#39;</span><span class="p">)</span>  <span class="c1"># 添加了字符串banana</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">[1, 2, 3, 4]
-[1, 2, 3, 4, &#39;banana&#39;]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[1, 2, 3, 4]
+</span></span><span class="line"><span class="cl">[1, 2, 3, 4, &#39;banana&#39;]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此外还有关于列表的一些函数和方法，<strong>列表的函数</strong>如下图：</p>
 <p><img src="/images/Python/BasicDataType/list_function.png" alt="list_function"></p>
@@ -442,7 +442,7 @@ abc
 <p>元组与列表类似，但元组中的元素不能修改。其元素放在小括号<code>()</code>里面，元素之间也用逗号隔开，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -452,20 +452,20 @@ abc
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tuple1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">)</span>
-<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;ghi&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">)</span>  <span class="c1"># 输出tuple1元组全部元素</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 输出tuple1元组第一个元素</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># 输出tuple1元组第二个到第三个元素,因为有冒号，所以不包括右侧右侧</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>  <span class="c1"># 输出tuple1元组从第三个开始的所有元素</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 输出两遍tuple1元组</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span> <span class="o">+</span> <span class="n">tuple2</span><span class="p">)</span>  <span class="c1"># 连接元组</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tuple1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;ghi&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">)</span>  <span class="c1"># 输出tuple1元组全部元素</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 输出tuple1元组第一个元素</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># 输出tuple1元组第二个到第三个元素,因为有冒号，所以不包括右侧右侧</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>  <span class="c1"># 输出tuple1元组从第三个开始的所有元素</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 输出两遍tuple1元组</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tuple1</span> <span class="o">+</span> <span class="n">tuple2</span><span class="p">)</span>  <span class="c1"># 连接元组</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -473,55 +473,55 @@ abc
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">(1, 2, &#39;abc&#39;, 3.14, &#39;def&#39;)
-1
-(2, &#39;abc&#39;)
-(&#39;abc&#39;, 3.14, &#39;def&#39;)
-(1, 2, &#39;abc&#39;, 3.14, &#39;def&#39;, 1, 2, &#39;abc&#39;, 3.14, &#39;def&#39;)
-(1, 2, &#39;abc&#39;, 3.14, &#39;def&#39;, 4, 5, &#39;ghi&#39;)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(1, 2, &#39;abc&#39;, 3.14, &#39;def&#39;)
+</span></span><span class="line"><span class="cl">1
+</span></span><span class="line"><span class="cl">(2, &#39;abc&#39;)
+</span></span><span class="line"><span class="cl">(&#39;abc&#39;, 3.14, &#39;def&#39;)
+</span></span><span class="line"><span class="cl">(1, 2, &#39;abc&#39;, 3.14, &#39;def&#39;, 1, 2, &#39;abc&#39;, 3.14, &#39;def&#39;)
+</span></span><span class="line"><span class="cl">(1, 2, &#39;abc&#39;, 3.14, &#39;def&#39;, 4, 5, &#39;ghi&#39;)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>另：虽然元组的元素不可改变，但它可以包含可变的对象，如 list。</p>
 <p>构造包含 0 个或 1 个元素的元组比较特殊，所以有一些额外的语法规则，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tup1</span> <span class="o">=</span> <span class="p">()</span>    <span class="c1"># 空元组</span>
-<span class="n">tup2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,)</span> <span class="c1"># 一个元素，需要在元素后添加逗号</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tup1</span> <span class="o">=</span> <span class="p">()</span>    <span class="c1"># 空元组</span>
+</span></span><span class="line"><span class="cl"><span class="n">tup2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,)</span> <span class="c1"># 一个元素，需要在元素后添加逗号</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>因为元组中的元素不可修改，但可以用<code>del</code>语句删除整个元组，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tup1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tup1</span><span class="p">)</span>
-<span class="k">del</span> <span class="n">tup1</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tup1</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">tup1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tup1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">del</span> <span class="n">tup1</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">tup1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">(1, 2, 3, 4, 5)
-Traceback (most recent call last):  # 由于元组被删除，所以这三行出现错误提示。
-    print(tup1)
-NameError: name &#39;tup1&#39; is not defined
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(1, 2, 3, 4, 5)
+</span></span><span class="line"><span class="cl">Traceback (most recent call last):  # 由于元组被删除，所以这三行出现错误提示。
+</span></span><span class="line"><span class="cl">    print(tup1)
+</span></span><span class="line"><span class="cl">NameError: name &#39;tup1&#39; is not defined
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>元组也有一些内置函数，如下图：</p>
 <p><img src="/images/Python/BasicDataType/tuple_function.png" alt="tuple_function"></p>
@@ -530,7 +530,7 @@ NameError: name &#39;tup1&#39; is not defined
 <p>可以使用一对花括号<code>{}</code>或者<code>set()</code>函数创建集合。但创建一个空集合必须用<code>set()</code>而不是<code>{ }</code>，因为<code>{ }</code>是用来创建一个空字典。具体如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -548,28 +548,28 @@ NameError: name &#39;tup1&#39; is not defined
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
-
-<span class="c1"># 进行成员测试</span>
-<span class="k">if</span> <span class="s1">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a 在集合中&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a 不在集合中&#39;</span><span class="p">)</span>
-
-<span class="c1"># 进行集合运算</span>
-<span class="n">a</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;abracadabra&#39;</span><span class="p">)</span>
-<span class="n">b</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;alacazam&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># 差集，输出在a中，但不在b中的元素</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># 并集</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># 交集</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># a和b不同时存在的元素</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 进行成员测试</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="s1">&#39;a&#39;</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a 在集合中&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a 不在集合中&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 进行集合运算</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;abracadabra&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;alacazam&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># 差集，输出在a中，但不在b中的元素</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># 并集</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># 交集</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">)</span>  <span class="c1"># a和b不同时存在的元素</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -577,18 +577,18 @@ NameError: name &#39;tup1&#39; is not defined
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">{1, 2, 3, &#39;a&#39;, &#39;c&#39;, &#39;b&#39;}  # 自动去除重复元素
-a 在集合中
-{&#39;d&#39;, &#39;r&#39;, &#39;b&#39;}
-{&#39;m&#39;, &#39;d&#39;, &#39;l&#39;, &#39;a&#39;, &#39;c&#39;, &#39;b&#39;, &#39;z&#39;, &#39;r&#39;}
-{&#39;c&#39;, &#39;a&#39;}
-{&#39;d&#39;, &#39;l&#39;, &#39;m&#39;, &#39;r&#39;, &#39;b&#39;, &#39;z&#39;}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{1, 2, 3, &#39;a&#39;, &#39;c&#39;, &#39;b&#39;}  # 自动去除重复元素
+</span></span><span class="line"><span class="cl">a 在集合中
+</span></span><span class="line"><span class="cl">{&#39;d&#39;, &#39;r&#39;, &#39;b&#39;}
+</span></span><span class="line"><span class="cl">{&#39;m&#39;, &#39;d&#39;, &#39;l&#39;, &#39;a&#39;, &#39;c&#39;, &#39;b&#39;, &#39;z&#39;, &#39;r&#39;}
+</span></span><span class="line"><span class="cl">{&#39;c&#39;, &#39;a&#39;}
+</span></span><span class="line"><span class="cl">{&#39;d&#39;, &#39;l&#39;, &#39;m&#39;, &#39;r&#39;, &#39;b&#39;, &#39;z&#39;}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>若要向集合中添加元素，可用<code>add()</code>方法，此方法只可添加一个元素；若要添加多个元素，可用<code>update()</code>方法；如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -600,34 +600,34 @@ a 在集合中
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
-<span class="n">set1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;Google&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
-<span class="n">set1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span>  <span class="c1"># 这种添加方式会将字符串拆分单个字符，然后再一个个添加到集合中，有重复的会忽略。</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
-<span class="n">set1</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">})</span>  <span class="c1"># 添加字典类型</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
-<span class="n">set1</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="s1">&#39;Github&#39;</span><span class="p">])</span>  <span class="c1"># 添加列表类型</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">set1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;Google&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">set1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span>  <span class="c1"># 这种添加方式会将字符串拆分单个字符，然后再一个个添加到集合中，有重复的会忽略。</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">set1</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">})</span>  <span class="c1"># 添加字典类型</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">set1</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="s1">&#39;Github&#39;</span><span class="p">])</span>  <span class="c1"># 添加列表类型</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">{1, 2, &#39;a&#39;}
-{&#39;Google&#39;, 1, 2, &#39;a&#39;}
-{1, 2, &#39;e&#39;, &#39;H&#39;, &#39;a&#39;, &#39;l&#39;, &#39;Google&#39;, &#39;o&#39;}
-{1, 2, 100, 200, &#39;e&#39;, &#39;H&#39;, &#39;a&#39;, &#39;l&#39;, &#39;Google&#39;, &#39;o&#39;}
-{&#39;Github&#39;, 1, 2, 100, 200, &#39;e&#39;, 300, &#39;H&#39;, &#39;a&#39;, &#39;l&#39;, &#39;Google&#39;, &#39;o&#39;}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{1, 2, &#39;a&#39;}
+</span></span><span class="line"><span class="cl">{&#39;Google&#39;, 1, 2, &#39;a&#39;}
+</span></span><span class="line"><span class="cl">{1, 2, &#39;e&#39;, &#39;H&#39;, &#39;a&#39;, &#39;l&#39;, &#39;Google&#39;, &#39;o&#39;}
+</span></span><span class="line"><span class="cl">{1, 2, 100, 200, &#39;e&#39;, &#39;H&#39;, &#39;a&#39;, &#39;l&#39;, &#39;Google&#39;, &#39;o&#39;}
+</span></span><span class="line"><span class="cl">{&#39;Github&#39;, 1, 2, 100, 200, &#39;e&#39;, 300, &#39;H&#39;, &#39;a&#39;, &#39;l&#39;, &#39;Google&#39;, &#39;o&#39;}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>若要移除元素，可用<code>remove()</code>、<code>dicard()</code>或者<code>pop()</code>方法，它们的区别在于：</p>
 <ul>
@@ -638,7 +638,7 @@ a 在集合中
 <p>如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -648,30 +648,30 @@ a 在集合中
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
-<span class="n">set1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
-<span class="n">set1</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
-<span class="n">set1</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">set1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">set1</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">set1</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">{1, 2, 3, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;}
-{2, 3, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;}
-{3, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;}
-{&#39;a&#39;, &#39;b&#39;, &#39;c&#39;}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{1, 2, 3, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;}
+</span></span><span class="line"><span class="cl">{2, 3, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;}
+</span></span><span class="line"><span class="cl">{3, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;}
+</span></span><span class="line"><span class="cl">{&#39;a&#39;, &#39;b&#39;, &#39;c&#39;}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="26-dictionary字典">2.6 Dictionary（字典）</h2>
 <p>字典是可变且无序的对象集合，它是通过<code>键</code>来存取的。</p>
@@ -685,63 +685,63 @@ a 在集合中
 <p>具体如下所示:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">dic1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">dic1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">{&#39;name&#39;: &#39;Carol&#39;, &#39;gender&#39;: &#39;male&#39;, &#39;age&#39;: 18}
-Carol
-dict_keys([&#39;name&#39;, &#39;gender&#39;, &#39;age&#39;])
-dict_values([&#39;Carol&#39;, &#39;male&#39;, 18])
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{&#39;name&#39;: &#39;Carol&#39;, &#39;gender&#39;: &#39;male&#39;, &#39;age&#39;: 18}
+</span></span><span class="line"><span class="cl">Carol
+</span></span><span class="line"><span class="cl">dict_keys([&#39;name&#39;, &#39;gender&#39;, &#39;age&#39;])
+</span></span><span class="line"><span class="cl">dict_values([&#39;Carol&#39;, &#39;male&#39;, 18])
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于字典的修改，通过修改其<code>键:值</code>即可实现，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">dic1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
-<span class="n">dic1</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Jack&#39;</span>  <span class="c1"># 修改姓名</span>
-<span class="n">dic1</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">23</span>  <span class="c1"># 修改年龄</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">dic1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">dic1</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Jack&#39;</span>  <span class="c1"># 修改姓名</span>
+</span></span><span class="line"><span class="cl"><span class="n">dic1</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">23</span>  <span class="c1"># 修改年龄</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">{&#39;name&#39;: &#39;Jack&#39;, &#39;gender&#39;: &#39;male&#39;, &#39;age&#39;: 23}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{&#39;name&#39;: &#39;Jack&#39;, &#39;gender&#39;: &#39;male&#39;, &#39;age&#39;: 23}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于字典的删除，也可用<code>del</code>函数，而要清空字典的话，就用<code>clear()</code>方法，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -749,26 +749,26 @@ dict_values([&#39;Carol&#39;, &#39;male&#39;, 18])
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">dic1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">)</span>
-<span class="k">del</span> <span class="n">dic1</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">)</span>
-<span class="n">dic1</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">dic1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">del</span> <span class="n">dic1</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">dic1</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">dic1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">{&#39;name&#39;: &#39;Carol&#39;, &#39;gender&#39;: &#39;male&#39;, &#39;age&#39;: 18}  # 原字典
-{&#39;gender&#39;: &#39;male&#39;, &#39;age&#39;: 18}  # 删除name后的字典
-{}  # 清空后的字典
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{&#39;name&#39;: &#39;Carol&#39;, &#39;gender&#39;: &#39;male&#39;, &#39;age&#39;: 18}  # 原字典
+</span></span><span class="line"><span class="cl">{&#39;gender&#39;: &#39;male&#39;, &#39;age&#39;: 18}  # 删除name后的字典
+</span></span><span class="line"><span class="cl">{}  # 清空后的字典
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此外还有关于字典的一些函数和方法。</p>
 <p>字典的函数如下图：</p>
@@ -876,7 +876,7 @@ dict_values([&#39;Carol&#39;, &#39;male&#39;, 18])
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

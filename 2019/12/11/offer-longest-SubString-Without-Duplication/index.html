@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/12/11/offer-longest-SubString-Without-Duplication/" />
@@ -279,7 +279,7 @@
 <h1 id="代码">代码</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -312,38 +312,38 @@
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">longestSubstringWithoutDup</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">str</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">0</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="kt">int</span> <span class="n">curLen</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">maxLen</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">position</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">26</span><span class="o">];</span>
-        <span class="c1">// Arrays.fill(position,-1);
-</span><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">position</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">position</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">curIndex</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">curIndex</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">curIndex</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">curIndex</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="o">;</span>
-            <span class="kt">int</span> <span class="n">preIndex</span> <span class="o">=</span> <span class="n">position</span><span class="o">[</span><span class="n">c</span><span class="o">];</span>
-            <span class="c1">// 如果第 i 个字符之前没有出现过 或者 第 i 个字符之前出现过并且 d &gt; f(i - 1)
-</span><span class="c1"></span>            <span class="c1">// 那么 f(i) = f(i - 1) + 1
-</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">preIndex</span> <span class="o">==</span> <span class="o">-</span><span class="n">1</span> <span class="o">||</span> <span class="n">curIndex</span> <span class="o">-</span> <span class="n">preIndex</span> <span class="o">&gt;</span> <span class="n">curLen</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">curLen</span><span class="o">++;</span>
-            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                <span class="c1">// 如果第 i 个字符之前出现过，并且 d &lt;= f(i - 1)
-</span><span class="c1"></span>                <span class="n">maxLen</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">curLen</span><span class="o">,</span> <span class="n">maxLen</span><span class="o">);</span>
-                <span class="n">curLen</span> <span class="o">=</span> <span class="n">curIndex</span> <span class="o">-</span> <span class="n">preIndex</span><span class="o">;</span>
-            <span class="o">}</span>
-            <span class="n">position</span><span class="o">[</span><span class="n">c</span><span class="o">]</span> <span class="o">=</span> <span class="n">curIndex</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="n">maxLen</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">curLen</span><span class="o">,</span> <span class="n">maxLen</span><span class="o">);</span>
-        <span class="k">return</span> <span class="n">maxLen</span><span class="o">;</span>
-    <span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">longestSubstringWithoutDup</span><span class="o">(</span><span class="n">String</span> <span class="n">str</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">str</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">curLen</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">maxLen</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span><span class="o">[]</span> <span class="n">position</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">26</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Arrays.fill(position,-1);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">position</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">position</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">curIndex</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">curIndex</span> <span class="o">&lt;</span> <span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span> <span class="n">curIndex</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">curIndex</span><span class="o">)</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">preIndex</span> <span class="o">=</span> <span class="n">position</span><span class="o">[</span><span class="n">c</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 如果第 i 个字符之前没有出现过 或者 第 i 个字符之前出现过并且 d &gt; f(i - 1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 那么 f(i) = f(i - 1) + 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">preIndex</span> <span class="o">==</span> <span class="o">-</span><span class="n">1</span> <span class="o">||</span> <span class="n">curIndex</span> <span class="o">-</span> <span class="n">preIndex</span> <span class="o">&gt;</span> <span class="n">curLen</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">curLen</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 如果第 i 个字符之前出现过，并且 d &lt;= f(i - 1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">maxLen</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">curLen</span><span class="o">,</span> <span class="n">maxLen</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">curLen</span> <span class="o">=</span> <span class="n">curIndex</span> <span class="o">-</span> <span class="n">preIndex</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">position</span><span class="o">[</span><span class="n">c</span><span class="o">]</span> <span class="o">=</span> <span class="n">curIndex</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">maxLen</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">curLen</span><span class="o">,</span> <span class="n">maxLen</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">maxLen</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -445,7 +445,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

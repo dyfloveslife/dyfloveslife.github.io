@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/03/07/JavaSrc-LinkedList/" />
@@ -154,15 +154,15 @@
 <!-- raw HTML omitted -->
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
-    <span class="kd">extends</span> <span class="n">AbstractSequentialList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
-    <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">Deque</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">extends</span> <span class="n">AbstractSequentialList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">Deque</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过源码可以看出，LinkedList 继承了 AbstractSequentialList，分别实现了 List、Deque、Cloneable 以及 Serializable 接口，而没有实现 RandomAccess 接口（这是 ListList 与 ArrayList 的区别）。其中，AbstractSequentialList 继承自 AbstractList，而<a href="https://dyfloveslife.github.io/2020/03/04/JavaSrc-ArrayList/">上篇</a>文章中提到的 ArrayList 是直接继承自 AbstractList 的。</p>
 <p>从整体上看，LinkedList 属于双向链表，可以实现 Stack、Queue、Deque（双端队列）结构，由于继承了 AbstractSequentialList 类，所以 LinkedList 具有 get、set、add、remove、insert 等方法。</p>
@@ -175,25 +175,25 @@
 <p>在 JDK1.8 中，LinkedList 的域有 3 个，其中 size 表示链表中元素的数量，first 表示指向第一个节点的指针，而 last 表示指向最后一个节点的指针。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">transient</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-
-<span class="kd">transient</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">first</span><span class="o">;</span>
-
-<span class="kd">transient</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">last</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">transient</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">transient</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">first</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">transient</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">last</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="node">Node</h2>
 <p>首先看一下 Node 节点的结构定义，其中，item 表示当前节点所包含的值，next 表示当前节点的下一个节点，prev 表示当前节点的上一个节点。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -206,24 +206,24 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="n">E</span> <span class="n">item</span><span class="o">;</span>
-    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
-    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">prev</span><span class="o">;</span>
-
-    <span class="n">Node</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">prev</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">item</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">E</span> <span class="n">item</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">prev</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">prev</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">item</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="构造函数">构造函数</h2>
 <p>LinkedList 中有两个构造函数，一个是默认无参的构造函数，另一个是参数为指定容器的构造函数，这个含参的构造函数通过调用第一个构造方法创建一个空的链表，然后调用 addAll() 方法将所有的元素添加到链表中。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -233,21 +233,21 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">LinkedList</span><span class="o">()</span> <span class="o">{</span>
-<span class="o">}</span>
-
-
-<span class="kd">public</span> <span class="nf">LinkedList</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">();</span>
-    <span class="n">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">LinkedList</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">LinkedList</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="添加">添加</h2>
 <p>单纯的 add 方法有两个，一个是接收一个元素，然后调用 linkLast 方法将该元素插入到链表尾部；另一个是接收一个索引和元素，用于在链表指定位置插入该元素。具体的插入方式有些不同，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -304,68 +304,68 @@
 </span><span class="lnt">55
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 将元素插入到链表尾部
-</span><span class="c1"></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">linkLast</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
-    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-<span class="o">}</span>
-
-
-<span class="c1">// 将元素插入到链表的指定位置
-</span><span class="c1"></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 判断索引是否合法
-</span><span class="c1"></span>    <span class="n">checkPositionIndex</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-
-    <span class="c1">// 判断索引是不是链表的尾部，如果是，则直接将该元素插入到链表尾部
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">size</span><span class="o">)</span>
-        <span class="n">linkLast</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
-    <span class="k">else</span>
-        <span class="n">linkBefore</span><span class="o">(</span><span class="n">element</span><span class="o">,</span> <span class="n">node</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
-<span class="o">}</span>
-
-
-<span class="c1">// 将元素插入到链表尾部
-</span><span class="c1"></span><span class="kt">void</span> <span class="nf">linkLast</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">last</span><span class="o">;</span>
-    <span class="c1">// 创建一个新的节点，并指定新节点的 prev 为链表尾节点的 last，新节点的 next 为 null
-</span><span class="c1"></span>    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="n">l</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-    <span class="c1">// 将链表的 last 指向新的节点，此时这个新插入的节点就成为了链表的最后一个节点
-</span><span class="c1"></span>    <span class="n">last</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
-    <span class="c1">// 如果尾节点为空，则当前链表还没有节点
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">l</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">first</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
-    <span class="c1">// 如果尾节点不为空，则让原来的尾节点的 next 指向新插入的节点
-</span><span class="c1"></span>    <span class="k">else</span>
-        <span class="n">l</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
-    <span class="n">size</span><span class="o">++;</span>
-    <span class="n">modCount</span><span class="o">++;</span>
-<span class="o">}</span>
-
-
-<span class="c1">// 在非 null 节点 succ 之前插入元素 e
-</span><span class="c1"></span><span class="kt">void</span> <span class="nf">linkBefore</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">succ</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// assert succ != null;
-</span><span class="c1"></span>    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">succ</span><span class="o">.</span><span class="na">prev</span><span class="o">;</span>
-    <span class="c1">// 创建一个新节点，并将其前驱指向 succ 的前驱，后继指向 succ
-</span><span class="c1"></span>    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="n">pred</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span> <span class="n">succ</span><span class="o">);</span>
-    <span class="c1">// 将 succ 的前驱指向新节点
-</span><span class="c1"></span>    <span class="n">succ</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
-    <span class="c1">// 如果尾节点为空，则当前链表还没有节点
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">pred</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-        <span class="n">first</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
-    <span class="c1">// 将 succ 前驱节点的后继指向新节点
-</span><span class="c1"></span>    <span class="k">else</span>
-        <span class="n">pred</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
-    <span class="n">size</span><span class="o">++;</span>
-    <span class="n">modCount</span><span class="o">++;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 将元素插入到链表尾部
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">linkLast</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 将元素插入到链表的指定位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 判断索引是否合法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">checkPositionIndex</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 判断索引是不是链表的尾部，如果是，则直接将该元素插入到链表尾部
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">size</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">linkLast</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">linkBefore</span><span class="o">(</span><span class="n">element</span><span class="o">,</span> <span class="n">node</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 将元素插入到链表尾部
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">linkLast</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="n">last</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建一个新的节点，并指定新节点的 prev 为链表尾节点的 last，新节点的 next 为 null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="n">l</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 将链表的 last 指向新的节点，此时这个新插入的节点就成为了链表的最后一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">last</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果尾节点为空，则当前链表还没有节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">l</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">first</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果尾节点不为空，则让原来的尾节点的 next 指向新插入的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">l</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modCount</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 在非 null 节点 succ 之前插入元素 e
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">linkBefore</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">,</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">succ</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// assert succ != null;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">succ</span><span class="o">.</span><span class="na">prev</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建一个新节点，并将其前驱指向 succ 的前驱，后继指向 succ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="o">&lt;&gt;(</span><span class="n">pred</span><span class="o">,</span> <span class="n">e</span><span class="o">,</span> <span class="n">succ</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 将 succ 的前驱指向新节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">succ</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果尾节点为空，则当前链表还没有节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">pred</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">first</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 将 succ 前驱节点的后继指向新节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pred</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modCount</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="查找">查找</h2>
 <p>LinkedList 的查找过程需要从头节点（或尾节点）开始查找，时间复杂度为 O(N)，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -389,34 +389,34 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">checkElementIndex</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">node</span><span class="o">(</span><span class="n">index</span><span class="o">).</span><span class="na">item</span><span class="o">;</span>
-<span class="o">}</span>
-
-
-<span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">node</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-
-    <span class="c1">// 如果需要查找的元素的 index 小于链表元素数量的一半，则从头节点开始往后查找
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="o">(</span><span class="n">size</span> <span class="o">&gt;&gt;</span> <span class="n">1</span><span class="o">))</span> <span class="o">{</span>
-        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">index</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
-    <span class="c1">// 否则，从尾节点向前查找
-</span><span class="c1"></span>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">last</span><span class="o">;</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">index</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">prev</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">checkElementIndex</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">node</span><span class="o">(</span><span class="n">index</span><span class="o">).</span><span class="na">item</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">node</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果需要查找的元素的 index 小于链表元素数量的一半，则从头节点开始往后查找
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="o">(</span><span class="n">size</span> <span class="o">&gt;&gt;</span> <span class="n">1</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">index</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 否则，从尾节点向前查找
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">last</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">index</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">prev</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="删除">删除</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -446,40 +446,40 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 根据索引删除元素
-</span><span class="c1"></span><span class="kd">public</span> <span class="n">E</span> <span class="nf">remove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">checkElementIndex</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-    <span class="c1">// 通过 node 方法定位 index 索引的元素，然后调用 unlink 方法断开与链表的连接
-</span><span class="c1"></span>    <span class="k">return</span> <span class="n">unlink</span><span class="o">(</span><span class="n">node</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
-<span class="o">}</span>
-
-<span class="c1">// 直接将元素进行删除
-</span><span class="c1"></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="na">item</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">unlink</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="c1">// 在 o 不等于 null 的情况下，从头开始遍历链表，直到找到与 o 相等的元素，
-</span><span class="c1"></span>        <span class="c1">// 使用 unlink 方法将它们断开连接
-</span><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="na">item</span><span class="o">))</span> <span class="o">{</span>
-                <span class="n">unlink</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
-                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 根据索引删除元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="n">E</span> <span class="nf">remove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">checkElementIndex</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 通过 node 方法定位 index 索引的元素，然后调用 unlink 方法断开与链表的连接
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">unlink</span><span class="o">(</span><span class="n">node</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 直接将元素进行删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="na">item</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">unlink</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 在 o 不等于 null 的情况下，从头开始遍历链表，直到找到与 o 相等的元素，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 使用 unlink 方法将它们断开连接
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">first</span><span class="o">;</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">x</span><span class="o">.</span><span class="na">item</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">unlink</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>再来看看将某一节点与链表进行断开的方法 unlink，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -518,50 +518,50 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 断开非空节点 x
-</span><span class="c1"></span><span class="n">E</span> <span class="nf">unlink</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 将待删除的节点保存下来，便于返回
-</span><span class="c1"></span>    <span class="kd">final</span> <span class="n">E</span> <span class="n">element</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">item</span><span class="o">;</span>
-    <span class="c1">// 记录待删除节点的前驱和后继节点，后面有用
-</span><span class="c1"></span>    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">prev</span><span class="o">;</span>
-
-    <span class="c1">// 待删除的节点是头节点
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">prev</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 则 first 就来到待删除节点的后一个节点
-</span><span class="c1"></span>        <span class="n">first</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="c1">// 将待删除节点的前一个节点的 next 指针指向待删除节点的后一个节点
-</span><span class="c1"></span>        <span class="n">prev</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
-        <span class="c1">// 将待删除节点的 prev 指针指向空，为了将待删除节点与前面的链表进行断开
-</span><span class="c1"></span>        <span class="n">x</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 待删除节点是尾节点
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 则 last 就来到待删除节点的前一个节点
-</span><span class="c1"></span>        <span class="n">last</span> <span class="o">=</span> <span class="n">prev</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="c1">// 将待删除节点的后一个节点的 prev 指针指向待删除节点的前一个节点
-</span><span class="c1"></span>        <span class="n">next</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="o">;</span>
-        <span class="c1">// 将待删除节点的 next 指针指向空，为了将待删除节点与后面的链表进行断开
-</span><span class="c1"></span>        <span class="n">x</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 将待删除节点置为空，便于垃圾回收
-</span><span class="c1"></span>    <span class="n">x</span><span class="o">.</span><span class="na">item</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="n">size</span><span class="o">--;</span>
-    <span class="n">modCount</span><span class="o">++;</span>
-    <span class="c1">// 返回被删除的节点
-</span><span class="c1"></span>    <span class="k">return</span> <span class="n">element</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 断开非空节点 x
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">E</span> <span class="nf">unlink</span><span class="o">(</span><span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 将待删除的节点保存下来，便于返回
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">final</span> <span class="n">E</span> <span class="n">element</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">item</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 记录待删除节点的前驱和后继节点，后面有用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="na">prev</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 待删除的节点是头节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">prev</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 则 first 就来到待删除节点的后一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">first</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 将待删除节点的前一个节点的 next 指针指向待删除节点的后一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">prev</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 将待删除节点的 prev 指针指向空，为了将待删除节点与前面的链表进行断开
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">x</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 待删除节点是尾节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 则 last 就来到待删除节点的前一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">last</span> <span class="o">=</span> <span class="n">prev</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 将待删除节点的后一个节点的 prev 指针指向待删除节点的前一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">next</span><span class="o">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 将待删除节点的 next 指针指向空，为了将待删除节点与后面的链表进行断开
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">x</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 将待删除节点置为空，便于垃圾回收
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">x</span><span class="o">.</span><span class="na">item</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size</span><span class="o">--;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modCount</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 返回被删除的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">element</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="遍历">遍历</h2>
 <p>在遍历 LinkedList 的时候，最好使用 foreach 进行遍历，因为通过 javap 进行反编译后，LinkedList 的遍历操作会转化为迭代器。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -601,45 +601,45 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">ListIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">listIterator</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">checkPositionIndex</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="n">ListItr</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kd">class</span> <span class="nc">ListItr</span> <span class="kd">implements</span> <span class="n">ListIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">lastReturned</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">nextIndex</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">expectedModCount</span> <span class="o">=</span> <span class="n">modCount</span><span class="o">;</span>
-
-    <span class="c1">// 构造方法接收一个索引，将 next 的引用指向 index 位置的节点
-</span><span class="c1"></span>    <span class="n">ListItr</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// assert isPositionIndex(index);
-</span><span class="c1"></span>        <span class="n">next</span> <span class="o">=</span> <span class="o">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">size</span><span class="o">)</span> <span class="o">?</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">node</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-        <span class="n">nextIndex</span> <span class="o">=</span> <span class="n">index</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 如果 nextIndex 小于链表元素的大小，则说明还能够继续遍历
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">nextIndex</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="c1">// 获取下一个元素
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">E</span> <span class="nf">next</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">checkForComodification</span><span class="o">();</span>
-        <span class="c1">// 如果不能继续遍历了，则说明已经遍历完了
-</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(!</span><span class="n">hasNext</span><span class="o">())</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="n">NoSuchElementException</span><span class="o">();</span>
-
-        <span class="c1">// 设置最近一次访问的节点为 next 节点
-</span><span class="c1"></span>        <span class="n">lastReturned</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
-        <span class="c1">// next 指针后移
-</span><span class="c1"></span>        <span class="n">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-        <span class="n">nextIndex</span><span class="o">++;</span>
-        <span class="k">return</span> <span class="n">lastReturned</span><span class="o">.</span><span class="na">item</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">ListIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">listIterator</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">checkPositionIndex</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">ListItr</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">class</span> <span class="nc">ListItr</span> <span class="kd">implements</span> <span class="n">ListIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">lastReturned</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Node</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">nextIndex</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">expectedModCount</span> <span class="o">=</span> <span class="n">modCount</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 构造方法接收一个索引，将 next 的引用指向 index 位置的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ListItr</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// assert isPositionIndex(index);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">next</span> <span class="o">=</span> <span class="o">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">size</span><span class="o">)</span> <span class="o">?</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">node</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nextIndex</span> <span class="o">=</span> <span class="n">index</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果 nextIndex 小于链表元素的大小，则说明还能够继续遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">nextIndex</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获取下一个元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="n">E</span> <span class="nf">next</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">checkForComodification</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果不能继续遍历了，则说明已经遍历完了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(!</span><span class="n">hasNext</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="n">NoSuchElementException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置最近一次访问的节点为 next 节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">lastReturned</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// next 指针后移
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nextIndex</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">lastReturned</span><span class="o">.</span><span class="na">item</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="总结">总结</h1>
 <p>一般会把 LinkedList 和 ArrayList 进行比较，此处的总结，也将它们之间异同进行整理。</p>
@@ -759,7 +759,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

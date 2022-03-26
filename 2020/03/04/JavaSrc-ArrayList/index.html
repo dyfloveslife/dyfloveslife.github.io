@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/03/04/JavaSrc-ArrayList/" />
@@ -164,13 +164,13 @@
 <p>从源码中可以看到，ArrayList 继承了AbstractList 类，同时实现了 List、RandomAccess、Cloneable 以及 java.io.Serializable 接口。因此 ArrayList 可以支持序列化传输、支持快速的随机访问以及克隆功能。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
-        <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">RandomAccess</span><span class="o">,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">implements</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;,</span> <span class="n">RandomAccess</span><span class="o">,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面给出了它们之间详细的继承图：</p>
 <!-- raw HTML omitted -->
@@ -191,7 +191,7 @@
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -202,23 +202,23 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_CAPACITY</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
-
-<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">EMPTY_ELEMENTDATA</span> <span class="o">=</span> <span class="o">{};</span>
-
-<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span> <span class="o">=</span> <span class="o">{};</span>
-
-<span class="kd">transient</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elementData</span><span class="o">;</span>
-
-<span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">DEFAULT_CAPACITY</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">EMPTY_ELEMENTDATA</span> <span class="o">=</span> <span class="o">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span> <span class="o">=</span> <span class="o">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">transient</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">elementData</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="构造方法">构造方法</h2>
 <p>ArrayList 提供了三个构造方法，如下所示：</p>
 <p><strong>第一个是给定一个初始容量的构造方法</strong>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -229,34 +229,34 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">ArrayList</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">initialCapacity</span><span class="o">];</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="n">EMPTY_ELEMENTDATA</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Illegal Capacity: &#34;</span> <span class="o">+</span> <span class="n">initialCapacity</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">ArrayList</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">initialCapacity</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="n">EMPTY_ELEMENTDATA</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Illegal Capacity: &#34;</span> <span class="o">+</span> <span class="n">initialCapacity</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>第二个是默认无参的构造函数，数组的初始化容量为 10</strong>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">ArrayList</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">ArrayList</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>第三个是一个包含指定集合的构造函数</strong>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -267,22 +267,22 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">ArrayList</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">elementData</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
-    <span class="k">if</span> <span class="o">((</span><span class="n">size</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">Object</span><span class="o">[].</span><span class="na">class</span><span class="o">)</span>
-            <span class="n">elementData</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">Object</span><span class="o">[].</span><span class="na">class</span><span class="o">);</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="n">EMPTY_ELEMENTDATA</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">ArrayList</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elementData</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">((</span><span class="n">size</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span><span class="o">.</span><span class="na">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">Object</span><span class="o">[].</span><span class="na">class</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">elementData</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">Object</span><span class="o">[].</span><span class="na">class</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">elementData</span> <span class="o">=</span> <span class="n">EMPTY_ELEMENTDATA</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="添加">添加</h2>
 <p>为了保证能够顺利的对元素进行添加，ArrayList 提供了一些例如边界检查、调整数组容量等方法，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -295,23 +295,23 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 检查给定的 index 是否在数组的范围内
-</span><span class="c1"></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">rangeCheck</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">size</span><span class="o">)</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IndexOutOfBoundsException</span><span class="o">(</span><span class="n">outOfBoundsMsg</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
-<span class="o">}</span>
-
-<span class="c1">// 用于 add 和 addAll 方法使用的索引检查方法
-</span><span class="c1"></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">rangeCheckForAdd</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">size</span> <span class="o">||</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IndexOutOfBoundsException</span><span class="o">(</span><span class="n">outOfBoundsMsg</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 检查给定的 index 是否在数组的范围内
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">rangeCheck</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">size</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">IndexOutOfBoundsException</span><span class="o">(</span><span class="n">outOfBoundsMsg</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 用于 add 和 addAll 方法使用的索引检查方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">private</span> <span class="kt">void</span> <span class="nf">rangeCheckForAdd</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">size</span> <span class="o">||</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">IndexOutOfBoundsException</span><span class="o">(</span><span class="n">outOfBoundsMsg</span><span class="o">(</span><span class="n">index</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面是进行扩容校验的方法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -340,40 +340,40 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">ensureCapacity</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">minExpand</span> <span class="o">=</span> <span class="o">(</span><span class="n">elementData</span> <span class="o">!=</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="o">)</span>
-        <span class="o">?</span> <span class="n">0</span>
-        <span class="o">:</span> <span class="n">DEFAULT_CAPACITY</span><span class="o">;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">&gt;</span> <span class="n">minExpand</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">ensureExplicitCapacity</span><span class="o">(</span><span class="n">minCapacity</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">calculateCapacity</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">elementData</span><span class="o">,</span> <span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span> <span class="o">==</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">DEFAULT_CAPACITY</span><span class="o">,</span> <span class="n">minCapacity</span><span class="o">);</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">minCapacity</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureCapacityInternal</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">ensureExplicitCapacity</span><span class="o">(</span><span class="n">calculateCapacity</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">minCapacity</span><span class="o">));</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureExplicitCapacity</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">modCount</span><span class="o">++;</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">-</span> <span class="n">elementData</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
-        <span class="n">grow</span><span class="o">(</span><span class="n">minCapacity</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">ensureCapacity</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minExpand</span> <span class="o">=</span> <span class="o">(</span><span class="n">elementData</span> <span class="o">!=</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">?</span> <span class="n">0</span>
+</span></span><span class="line"><span class="cl">        <span class="o">:</span> <span class="n">DEFAULT_CAPACITY</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">&gt;</span> <span class="n">minExpand</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ensureExplicitCapacity</span><span class="o">(</span><span class="n">minCapacity</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">calculateCapacity</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">elementData</span><span class="o">,</span> <span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span> <span class="o">==</span> <span class="n">DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">DEFAULT_CAPACITY</span><span class="o">,</span> <span class="n">minCapacity</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">minCapacity</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureCapacityInternal</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ensureExplicitCapacity</span><span class="o">(</span><span class="n">calculateCapacity</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">minCapacity</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">ensureExplicitCapacity</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modCount</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">-</span> <span class="n">elementData</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">grow</span><span class="o">(</span><span class="n">minCapacity</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，在每次向数组中添加元素的时候，都需要去检查添加后的元素的个数是否会超出当前数组的长度，即<code>ensureCapacityInternal</code>方法。如果超出，则会将数组进行扩容。</p>
 <p>第<code>26</code>行的<code>grow</code>方法即为扩容的最终实现，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -391,47 +391,47 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">grow</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kt">int</span> <span class="n">oldCapacity</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="c1">// 扩容后的新数组的长度约为原数组长度的 1.5 倍
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">oldCapacity</span> <span class="o">+</span> <span class="o">(</span><span class="n">oldCapacity</span> <span class="o">&gt;&gt;</span> <span class="n">1</span><span class="o">);</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">minCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
-        <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">minCapacity</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">MAX_ARRAY_SIZE</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
-        <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">hugeCapacity</span><span class="o">(</span><span class="n">minCapacity</span><span class="o">);</span>
-    <span class="n">elementData</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">newCapacity</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">hugeCapacity</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> 
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">OutOfMemoryError</span><span class="o">();</span>
-    <span class="k">return</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">&gt;</span> <span class="n">MAX_ARRAY_SIZE</span><span class="o">)</span> <span class="o">?</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">:</span> <span class="n">MAX_ARRAY_SIZE</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">grow</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">oldCapacity</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 扩容后的新数组的长度约为原数组长度的 1.5 倍
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">oldCapacity</span> <span class="o">+</span> <span class="o">(</span><span class="n">oldCapacity</span> <span class="o">&gt;&gt;</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">minCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">minCapacity</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">MAX_ARRAY_SIZE</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">hugeCapacity</span><span class="o">(</span><span class="n">minCapacity</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elementData</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">newCapacity</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">hugeCapacity</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">OutOfMemoryError</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">(</span><span class="n">minCapacity</span> <span class="o">&gt;</span> <span class="n">MAX_ARRAY_SIZE</span><span class="o">)</span> <span class="o">?</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">:</span> <span class="n">MAX_ARRAY_SIZE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>等到计算完新的数组的容量时，再次对容量大小进行检查，最后通过<code>Arrays.copyOf</code>函数将老数组中的元素重新拷贝到新数组中。</p>
 <p>ArrayList 中提供了四个添加元素的方法，下面分别进行介绍：</p>
 <p>如下所示，该方法将指定的元素添加到列表的尾部，再添加之前，当然需要检查一下数组是否还有容量，以便确保能够进行插入操作。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
-    <span class="n">elementData</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
-    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elementData</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如下所示，该方法将指定元素（element）插入到指定的位置（index）。如果<code>index</code>位置已经有元素了，则将<code>index</code>位置及其后面<code>size - index</code>长度的元素拷贝到<code>index + 1</code>位置。换句话说，就是将<code>index</code>及其之后的元素往后移动一位，给新插入的元素留出空位。由此可见，ArrayList 对于插入操作来说，是非常耗时的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -442,21 +442,21 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">rangeCheckForAdd</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-
-    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span> 
-    <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span>
-                        <span class="n">size</span> <span class="o">-</span> <span class="n">index</span><span class="o">);</span>
-    <span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
-    <span class="n">size</span><span class="o">++;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rangeCheckForAdd</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">size</span> <span class="o">-</span> <span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面是两个<code>addAll</code>方法，再添加元素的过程中，也涉及到了元素的拷贝操作，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -484,39 +484,39 @@
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Object</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">numNew</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">numNew</span><span class="o">);</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">numNew</span><span class="o">);</span>
-    <span class="n">size</span> <span class="o">+=</span> <span class="n">numNew</span><span class="o">;</span>
-    <span class="k">return</span> <span class="n">numNew</span> <span class="o">!=</span> <span class="n">0</span><span class="o">;</span>
-<span class="o">}</span>
-
-
-<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">rangeCheckForAdd</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-
-    <span class="n">Object</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">numNew</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">numNew</span><span class="o">);</span>
-
-    <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">index</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span> <span class="o">+</span> <span class="n">numNew</span><span class="o">,</span>
-                            <span class="n">numMoved</span><span class="o">);</span>
-
-    <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span> <span class="n">numNew</span><span class="o">);</span>
-    <span class="n">size</span> <span class="o">+=</span> <span class="n">numNew</span><span class="o">;</span>
-    <span class="k">return</span> <span class="n">numNew</span> <span class="o">!=</span> <span class="n">0</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Object</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">numNew</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">numNew</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">numNew</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size</span> <span class="o">+=</span> <span class="n">numNew</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">numNew</span> <span class="o">!=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rangeCheckForAdd</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Object</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">numNew</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="n">numNew</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">index</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span> <span class="o">+</span> <span class="n">numNew</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">numMoved</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span> <span class="n">numNew</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size</span> <span class="o">+=</span> <span class="n">numNew</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">numNew</span> <span class="o">!=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="修改">修改</h2>
 <p>用指定的元素替代数组中指定位置上的元素，返回以前位于该位置上的元素，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -525,38 +525,38 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">E</span> <span class="nf">set</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">rangeCheck</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-
-    <span class="n">E</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-    <span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
-    <span class="k">return</span> <span class="n">oldValue</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">E</span> <span class="nf">set</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rangeCheck</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">E</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">oldValue</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="查询">查询</h2>
 <p>即返回数组中指定索引上的元素，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">rangeCheck</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-
-    <span class="k">return</span> <span class="n">elementData</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">E</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rangeCheck</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">elementData</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="删除">删除</h2>
 <p>常用的删除操作有<strong>根据索引删除元素</strong>以及<strong>根据指定的对象删除元素</strong>。先看第一种情况，首先检查<code>index</code>是否在指定的范围，确保<code>index</code>不越界；然后暂存被删除的元素，用于最终返回；最后将<code>index + 1</code>及其后面的元素往前移动一个位置，再将最后那个空出来的位置填上<code>null</code>即可。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -572,26 +572,26 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">E</span> <span class="nf">remove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">rangeCheck</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-
-    <span class="n">modCount</span><span class="o">++;</span>
-    <span class="n">E</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-
-    <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">+</span><span class="n">1</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span>
-                            <span class="n">numMoved</span><span class="o">);</span>
-    <span class="n">elementData</span><span class="o">[--</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-
-    <span class="k">return</span> <span class="n">oldValue</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">E</span> <span class="nf">remove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rangeCheck</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">modCount</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">E</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">elementData</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">+</span><span class="n">1</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">numMoved</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elementData</span><span class="o">[--</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">oldValue</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>第二种情况是根据指定的对象进行删除，这里需要注意一下。由于 ArrayList 可以存储相同的元素，所以此方法删除的是在该列表中第一次出现的元素，删除成功返回 true，如果列表中不包含该元素，则返回 false。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -609,28 +609,28 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">index</span><span class="o">++)</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">fastRemove</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-            <span class="o">}</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">index</span><span class="o">++)</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]))</span> <span class="o">{</span>
-                <span class="n">fastRemove</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
-                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-            <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">index</span><span class="o">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fastRemove</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">index</span><span class="o">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">elementData</span><span class="o">[</span><span class="n">index</span><span class="o">]))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fastRemove</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里使用了私有的方法<code>fastRemove</code>移除元素，原因是该方法跳过了边界检查，并且不返回已删除的元素。其方法如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -640,15 +640,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">fastRemove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">modCount</span><span class="o">++;</span>
-    <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">+</span><span class="n">1</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span>
-                            <span class="n">numMoved</span><span class="o">);</span>
-    <span class="n">elementData</span><span class="o">[--</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">fastRemove</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modCount</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">numMoved</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">index</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">numMoved</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">arraycopy</span><span class="o">(</span><span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">+</span><span class="n">1</span><span class="o">,</span> <span class="n">elementData</span><span class="o">,</span> <span class="n">index</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">numMoved</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elementData</span><span class="o">[--</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="总结">总结</h1>
 <p>在明确了 ArrayList 的相关操作之后，可以看到它确实不适合用来进行插入、删除操作，因为这需要移动大量的元素，即对元素进行复制操作。但是基于数组的特性，ArrayList 在查询方面的效率非常高，可直接通过索引找到指定位置的元素。</p>
@@ -754,7 +754,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

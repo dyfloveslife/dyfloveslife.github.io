@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/12/06/learn-Missing-Security-and-Cryptography/" />
@@ -158,7 +158,7 @@
 <p><a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">加密散列函数</a>是散列函数中的一种单向函数，即很难通过函数的输出结果来反推出函数的输入。例如 <a href="https://en.wikipedia.org/wiki/SHA-1">SHA-1</a> 是在 Git 中使用的一种散列函数，可以将任意大小的输入映射为一个 160 比特的输出，而其散列值通常的呈现形式为 40 个十六进制数。你可以在 Git 下使用<code>sha1sum</code>命令查看某个字符串的 SHA-1 值，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -169,16 +169,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ print <span class="s2">&#34;hello&#34;</span> <span class="p">|</span> sha1sum 
-f572d396fae9206628714fb2ce00f72e94f2258f  -
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ print <span class="s2">&#34;hello&#34;</span> <span class="p">|</span> sha1sum
-f572d396fae9206628714fb2ce00f72e94f2258f  -
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ print <span class="s2">&#34;hello &#34;</span> <span class="p">|</span> sha1sum
-2beec0d1b3eeee6c25b1eacc1063338047d588e3  -
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ print <span class="s2">&#34;Hello &#34;</span> <span class="p">|</span> sha1sum
-a83f9352aa642ceec0a03b126e453a5984cf68ab  -
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ print <span class="s2">&#34;hello&#34;</span> <span class="p">|</span> sha1sum 
+</span></span><span class="line"><span class="cl">f572d396fae9206628714fb2ce00f72e94f2258f  -
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ print <span class="s2">&#34;hello&#34;</span> <span class="p">|</span> sha1sum
+</span></span><span class="line"><span class="cl">f572d396fae9206628714fb2ce00f72e94f2258f  -
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ print <span class="s2">&#34;hello &#34;</span> <span class="p">|</span> sha1sum
+</span></span><span class="line"><span class="cl">2beec0d1b3eeee6c25b1eacc1063338047d588e3  -
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ print <span class="s2">&#34;Hello &#34;</span> <span class="p">|</span> sha1sum
+</span></span><span class="line"><span class="cl">a83f9352aa642ceec0a03b126e453a5984cf68ab  -
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于这些结果，都是通过<a href="https://zh.wikipedia.org/zh-cn/%E9%9A%A8%E6%A9%9F%E9%A0%90%E8%A8%80%E6%A9%9F">随机语言机</a>得到的。它对于任何输入都回传一个真正随机的输出。而对于相同的输入，该语言机每次都会使用同一方法输出。也就是说，随机预言机就是一个将所有可能的输入与输出作随机映射的函数。</p>
 <p>那么密码散列函数（加密散列函数）可以应用于哪些方面呢？</p>
@@ -290,7 +290,7 @@ a83f9352aa642ceec0a03b126e453a5984cf68ab  -
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

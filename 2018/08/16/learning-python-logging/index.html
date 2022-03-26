@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2018/08/16/learning-python-logging/" />
@@ -212,7 +212,7 @@
 <p>先来看一个简单的例子，首先导入 <code>logging</code> 模块，通过模块的 <code>basicConfig</code> 方法设置了日志文件的名称以及将跟踪阈值的日志记录级别设置为 <code>DEBUG</code>，最后输出三条日志信息，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -220,13 +220,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
-
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;example.log&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;This message should go to the log file.&#39;</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;So should this&#39;</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;And this, too.&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">logging</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;example.log&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;This message should go to the log file.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;So should this&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;And this, too.&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>执行程序后会生成一个日志文件<code>example.log</code>，打开它就会看到日志信息，如下图：</p>
 <!-- raw HTML omitted -->
@@ -234,7 +234,7 @@
 <p>下面的例子用于计算一元二次方程的根，计算完成后将日志记录下来，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -270,50 +270,50 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">math</span>
-
-<span class="c1"># 规定打印日志的格式</span>
-<span class="n">LOG_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1"> </span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
-<span class="c1"># 增加以及初始化logger</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;f:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge</span><span class="se">\\</span><span class="s1">test.log&#39;</span><span class="p">,</span>
-                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
-                    <span class="nb">format</span><span class="o">=</span><span class="n">LOG_FORMAT</span><span class="p">,</span>
-                    <span class="n">filemode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="c1"># getLogger(name)用于获取logger对象，如果不指定记录器的名称name，则返回root对象</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">quadratic_formula</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">    返回方程 ax^2 + bx + c = 0 的根
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;quadratic_formula(</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">, </span><span class="si">{2}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
-
-    <span class="c1"># 计算判别式</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;# Compute the discriminant&#39;</span><span class="p">)</span>
-    <span class="n">disc</span> <span class="o">=</span> <span class="n">b</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">c</span>
-
-    <span class="c1"># 计算两个根</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;# compute the two roots&#39;</span><span class="p">)</span>
-    <span class="n">root1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">disc</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
-    <span class="n">root2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">disc</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
-
-    <span class="c1"># 返回根</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;# return the roots&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">root1</span><span class="p">,</span> <span class="n">root2</span>
-
-<span class="n">roots</span> <span class="o">=</span> <span class="n">quadratic_formula</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">logging</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">math</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 规定打印日志的格式</span>
+</span></span><span class="line"><span class="cl"><span class="n">LOG_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1"> </span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 增加以及初始化logger</span>
+</span></span><span class="line"><span class="cl"><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;f:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge</span><span class="se">\\</span><span class="s1">test.log&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">format</span><span class="o">=</span><span class="n">LOG_FORMAT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">filemode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># getLogger(name)用于获取logger对象，如果不指定记录器的名称name，则返回root对象</span>
+</span></span><span class="line"><span class="cl"><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;Carol&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">quadratic_formula</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    返回方程 ax^2 + bx + c = 0 的根
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;quadratic_formula(</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">, </span><span class="si">{2}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 计算判别式</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;# Compute the discriminant&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">disc</span> <span class="o">=</span> <span class="n">b</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">c</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 计算两个根</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;# compute the two roots&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">root1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">disc</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">root2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">disc</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 返回根</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;# return the roots&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">root1</span><span class="p">,</span> <span class="n">root2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">roots</span> <span class="o">=</span> <span class="n">quadratic_formula</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">(2.0, -2.0)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(2.0, -2.0)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>同时，执行程序后会生成一个日志文件 <code>test.log</code>，打开它就会看到日志信息，如下图：</p>
 <!-- raw HTML omitted -->
@@ -321,11 +321,11 @@
 <p>下面我们给它一个无解的参数，看看它的日志文件会保存什么东西。修改下列语句：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">roots</span> <span class="o">=</span> <span class="n">quadratic_formula</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">roots</span> <span class="o">=</span> <span class="n">quadratic_formula</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>你可以看到控制台报错，同时日志文件如下图：</p>
 <!-- raw HTML omitted -->
@@ -336,7 +336,7 @@
 <p>该例子用于统计打开一个文件所需要的时间，并将其记录在日志文件中，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -363,32 +363,32 @@
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">time</span>
-
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&#34;F:</span><span class="se">\\</span><span class="s2">Python_test</span><span class="se">\\</span><span class="s2">BasicKnowledge</span><span class="se">\\</span><span class="s2">problems.log&#34;</span><span class="p">,</span>
-                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">read_file_timed</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;Return the contents of the file at &#39;path&#39; and measure time required&#34;&#34;&#34;</span>
-    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">data</span>
-    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
-        <span class="k">raise</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="k">finally</span><span class="p">:</span>
-        <span class="n">stop_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="n">dt</span> <span class="o">=</span> <span class="n">stop_time</span> <span class="o">-</span> <span class="n">start_time</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Time required for </span><span class="si">{file}</span><span class="s1"> = </span><span class="si">{time}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">dt</span><span class="p">))</span>
-
-<span class="n">path</span> <span class="o">=</span> <span class="n">read_file_timed</span><span class="p">(</span><span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge</span><span class="se">\\</span><span class="s1">google_stock_data.csv&#39;</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">logging</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&#34;F:</span><span class="se">\\</span><span class="s2">Python_test</span><span class="se">\\</span><span class="s2">BasicKnowledge</span><span class="se">\\</span><span class="s2">problems.log&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">read_file_timed</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Return the contents of the file at &#39;path&#39; and measure time required&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">data</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">raise</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">finally</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stop_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dt</span> <span class="o">=</span> <span class="n">stop_time</span> <span class="o">-</span> <span class="n">start_time</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Time required for </span><span class="si">{file}</span><span class="s1"> = </span><span class="si">{time}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">dt</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">path</span> <span class="o">=</span> <span class="n">read_file_timed</span><span class="p">(</span><span class="s1">&#39;F:</span><span class="se">\\</span><span class="s1">Python_test</span><span class="se">\\</span><span class="s1">BasicKnowledge</span><span class="se">\\</span><span class="s1">google_stock_data.csv&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果 <code>google_stock_data.csv</code> 文件存在的话，你可以看到日志文件中有如下内容：</p>
 <p><img src="https://i.loli.net/2019/11/17/mEBKOVzMkgurh5S.png" alt="image.png"></p>
@@ -494,7 +494,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

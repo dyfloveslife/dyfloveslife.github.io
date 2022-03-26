@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/03/11/JavaSrc-HashTable/" />
@@ -145,7 +145,7 @@
 <p>HashTable 产生于 JDK1.0，HashMap 产生于 JDK1.2。与 HashMap 相同的是，HashTable 底层同样采用<code>数组+链表</code>的形式，也是 Map 下的核心容器，实现了 Map 、Cloneable 以及 Serializable 接口。但不同的是，HashTable 继承的是抽象类 Dictionary，而 HashMap 继承的是抽象类 AbstractMap。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -154,20 +154,20 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// HashTable
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hashtable</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> 
-                            <span class="kd">implements</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span> <span class="o">{}</span>
-
-<span class="c1">// HashMap
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span>
-                          <span class="kd">implements</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">Serializable</span> <span class="o">{}</span>          
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// HashTable
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hashtable</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl">                            <span class="kd">implements</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span> <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// HashMap
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HashMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractMap</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">                          <span class="kd">implements</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;,</span> <span class="n">Cloneable</span><span class="o">,</span> <span class="n">Serializable</span> <span class="o">{}</span>          
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="成员变量">成员变量</h1>
 <p>HashTable 中主要的成员变量与 HashMap 中的基本相同，其中桶数组 table 是用于存储键值对的 Entry 对象，count 表示 Entry 对象的个数，threshold 表示对数组进行扩容的阈值，loadFactor 表示默认值为 0.75 的负载因子，以及结构性修改次数 modCount，此变量用于在并发环境中，如果其他线程对其进行了结构性的修改，则这时迭代器会立马感知并抛出异常，便于快速失败。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -178,22 +178,22 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">transient</span> <span class="n">Entry</span><span class="o">&lt;?,</span> <span class="o">?&gt;[]</span> <span class="n">table</span><span class="o">;</span>
-
-<span class="kd">private</span> <span class="kd">transient</span> <span class="kt">int</span> <span class="n">count</span><span class="o">;</span>
-
-<span class="kd">private</span> <span class="kt">int</span> <span class="n">threshold</span><span class="o">;</span>
-
-<span class="kd">private</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">;</span>
-
-<span class="kd">private</span> <span class="kd">transient</span> <span class="kt">int</span> <span class="n">modCount</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">transient</span> <span class="n">Entry</span><span class="o">&lt;?,</span> <span class="o">?&gt;[]</span> <span class="n">table</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">transient</span> <span class="kt">int</span> <span class="n">count</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">int</span> <span class="n">threshold</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">transient</span> <span class="kt">int</span> <span class="n">modCount</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="内部类-entry">内部类 Entry</h1>
 <p>Entry 封装了键值对，其结构与 HashMap 中的相同。<strong>但这里 hash 值的计算方法不同于 HashMap</strong>，至于不同之处，将在下面的 put() 方法进行介绍。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -208,20 +208,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="kt">int</span> <span class="n">hash</span><span class="o">;</span>
-    <span class="kd">final</span> <span class="n">K</span> <span class="n">key</span><span class="o">;</span>
-    <span class="n">V</span> <span class="n">value</span><span class="o">;</span>
-    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
-
-    <span class="kd">protected</span> <span class="nf">Entry</span><span class="o">(</span><span class="kt">int</span> <span class="n">hash</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">hash</span> <span class="o">=</span> <span class="n">hash</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span>  <span class="n">key</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="kt">int</span> <span class="n">hash</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">K</span> <span class="n">key</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">V</span> <span class="n">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="nf">Entry</span><span class="o">(</span><span class="kt">int</span> <span class="n">hash</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">hash</span> <span class="o">=</span> <span class="n">hash</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span>  <span class="n">key</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="构造函数">构造函数</h1>
 <p>HashTable 有 4 个构造函数，整体与 HashMap 中的相同，但在初始化容量上有所不同。</p>
@@ -234,7 +234,7 @@
 <p>源代码如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -266,37 +266,37 @@
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 第一个构造函数
-</span><span class="c1"></span><span class="kd">public</span> <span class="nf">Hashtable</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Illegal Capacity: &#34;</span><span class="o">+</span>
-                                            <span class="n">initialCapacity</span><span class="o">);</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">loadFactor</span> <span class="o">&lt;=</span> <span class="n">0</span> <span class="o">||</span> <span class="n">Float</span><span class="o">.</span><span class="na">isNaN</span><span class="o">(</span><span class="n">loadFactor</span><span class="o">))</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Illegal Load: &#34;</span><span class="o">+</span><span class="n">loadFactor</span><span class="o">);</span>
-
-    <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span>
-        <span class="n">initialCapacity</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">loadFactor</span> <span class="o">=</span> <span class="n">loadFactor</span><span class="o">;</span>
-    <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">&lt;?,?&gt;[</span><span class="n">initialCapacity</span><span class="o">];</span>
-    <span class="n">threshold</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">initialCapacity</span> <span class="o">*</span> <span class="n">loadFactor</span><span class="o">,</span> <span class="n">MAX_ARRAY_SIZE</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="c1">// 第二个构造函数
-</span><span class="c1"></span><span class="kd">public</span> <span class="nf">Hashtable</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">(</span><span class="n">initialCapacity</span><span class="o">,</span> <span class="n">0</span><span class="o">.</span><span class="na">75f</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="c1">// 第三个构造函数
-</span><span class="c1"></span><span class="kd">public</span> <span class="nf">Hashtable</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">(</span><span class="n">11</span><span class="o">,</span> <span class="n">0</span><span class="o">.</span><span class="na">75f</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="c1">// 第四个构造函数
-</span><span class="c1"></span><span class="kd">public</span> <span class="nf">Hashtable</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">K</span><span class="o">,</span> <span class="o">?</span> <span class="kd">extends</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">this</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">2</span><span class="o">*</span><span class="n">t</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">11</span><span class="o">),</span> <span class="n">0</span><span class="o">.</span><span class="na">75f</span><span class="o">);</span>
-    <span class="n">putAll</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 第一个构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="nf">Hashtable</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Illegal Capacity: &#34;</span><span class="o">+</span>
+</span></span><span class="line"><span class="cl">                                            <span class="n">initialCapacity</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">loadFactor</span> <span class="o">&lt;=</span> <span class="n">0</span> <span class="o">||</span> <span class="n">Float</span><span class="o">.</span><span class="na">isNaN</span><span class="o">(</span><span class="n">loadFactor</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&#34;Illegal Load: &#34;</span><span class="o">+</span><span class="n">loadFactor</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">initialCapacity</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">initialCapacity</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">.</span><span class="na">loadFactor</span> <span class="o">=</span> <span class="n">loadFactor</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">&lt;?,?&gt;[</span><span class="n">initialCapacity</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">threshold</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">initialCapacity</span> <span class="o">*</span> <span class="n">loadFactor</span><span class="o">,</span> <span class="n">MAX_ARRAY_SIZE</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 第二个构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="nf">Hashtable</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialCapacity</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">(</span><span class="n">initialCapacity</span><span class="o">,</span> <span class="n">0</span><span class="o">.</span><span class="na">75f</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 第三个构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="nf">Hashtable</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">(</span><span class="n">11</span><span class="o">,</span> <span class="n">0</span><span class="o">.</span><span class="na">75f</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 第四个构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="nf">Hashtable</span><span class="o">(</span><span class="n">Map</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">K</span><span class="o">,</span> <span class="o">?</span> <span class="kd">extends</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">2</span><span class="o">*</span><span class="n">t</span><span class="o">.</span><span class="na">size</span><span class="o">(),</span> <span class="n">11</span><span class="o">),</span> <span class="n">0</span><span class="o">.</span><span class="na">75f</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">putAll</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>注意第一个构造函数中的<code>initialCapacity == 0</code>，<strong>其初始容量不必是 2 的整数次幂</strong>。其中，扩容阈值<code>threshold</code>使用了 min 函数，用于在<code>initialCapacity * loadFactor</code>和<code>MAX_ARRAY_SIZE + 1</code>中选择最小值，而<code>MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8</code>。</p>
 <h1 id="put-方法">put 方法</h1>
@@ -311,7 +311,7 @@
 <p>源码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -342,40 +342,40 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">synchronized</span> <span class="n">V</span> <span class="nf">put</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// Make sure the value is not null
-</span><span class="c1"></span>    <span class="c1">// 不允许 value 为空
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Makes sure the key is not already in the hashtable.
-</span><span class="c1"></span>    <span class="n">Entry</span><span class="o">&lt;?,?&gt;</span> <span class="n">tab</span><span class="o">[]</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-    <span class="c1">// 计算 key 的哈希值，此处与 HashMap 的计算方式不同
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
-    <span class="c1">// 定位桶位置，即桶数组中的索引
-</span><span class="c1"></span>    <span class="c1">// 二进制 0x7FFFFFFF 表示整数的最大值：2147483647
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="o">(</span><span class="n">hash</span> <span class="o">&amp;</span> <span class="n">0x7FFFFFFF</span><span class="o">)</span> <span class="o">%</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="c1">// 查找 index 位置上是否具有相同的节点
-</span><span class="c1"></span>    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">entry</span> <span class="o">=</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span><span class="n">tab</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
-    <span class="k">for</span><span class="o">(;</span> <span class="n">entry</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">;</span> <span class="n">entry</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 若相同，则将对应的 value 进行覆盖
-</span><span class="c1"></span>        <span class="k">if</span> <span class="o">((</span><span class="n">entry</span><span class="o">.</span><span class="na">hash</span> <span class="o">==</span> <span class="n">hash</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">entry</span><span class="o">.</span><span class="na">key</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">key</span><span class="o">))</span> <span class="o">{</span>
-            <span class="n">V</span> <span class="n">old</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
-            <span class="n">entry</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
-            <span class="k">return</span> <span class="n">old</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="c1">// 如果没有相同的节点，则以头插法的方式插入到链表中
-</span><span class="c1"></span>    <span class="c1">// 如果该桶上是空的，则直接保存
-</span><span class="c1"></span>    <span class="n">addEntry</span><span class="o">(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">index</span><span class="o">);</span>
-    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">synchronized</span> <span class="n">V</span> <span class="nf">put</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Make sure the value is not null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 不允许 value 为空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Makes sure the key is not already in the hashtable.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Entry</span><span class="o">&lt;?,?&gt;</span> <span class="n">tab</span><span class="o">[]</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 计算 key 的哈希值，此处与 HashMap 的计算方式不同
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 定位桶位置，即桶数组中的索引
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 二进制 0x7FFFFFFF 表示整数的最大值：2147483647
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="o">(</span><span class="n">hash</span> <span class="o">&amp;</span> <span class="n">0x7FFFFFFF</span><span class="o">)</span> <span class="o">%</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 查找 index 位置上是否具有相同的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">entry</span> <span class="o">=</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span><span class="n">tab</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="o">(;</span> <span class="n">entry</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">;</span> <span class="n">entry</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 若相同，则将对应的 value 进行覆盖
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">((</span><span class="n">entry</span><span class="o">.</span><span class="na">hash</span> <span class="o">==</span> <span class="n">hash</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">entry</span><span class="o">.</span><span class="na">key</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">key</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">V</span> <span class="n">old</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">entry</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">old</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果没有相同的节点，则以头插法的方式插入到链表中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 如果该桶上是空的，则直接保存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">addEntry</span><span class="o">(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">index</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -399,29 +399,29 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">addEntry</span><span class="o">(</span><span class="kt">int</span> <span class="n">hash</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">modCount</span><span class="o">++;</span>
-
-    <span class="n">Entry</span><span class="o">&lt;?,?&gt;</span> <span class="n">tab</span><span class="o">[]</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-    <span class="c1">// 插入节点前，需要检查是否需要进行扩容
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 进行扩容
-</span><span class="c1"></span>        <span class="n">rehash</span><span class="o">();</span>
-
-        <span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-        <span class="c1">// 重新计算 key 的哈希值
-</span><span class="c1"></span>        <span class="n">hash</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
-        <span class="c1">// 重新计算键值对所对应的桶位置
-</span><span class="c1"></span>        <span class="n">index</span> <span class="o">=</span> <span class="o">(</span><span class="n">hash</span> <span class="o">&amp;</span> <span class="n">0x7FFFFFFF</span><span class="o">)</span> <span class="o">%</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="c1">// Creates the new entry.
-</span><span class="c1"></span>    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&#34;unchecked&#34;</span><span class="o">)</span>
-    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span> <span class="n">tab</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
-    <span class="n">tab</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">&lt;&gt;(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
-    <span class="n">count</span><span class="o">++;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">addEntry</span><span class="o">(</span><span class="kt">int</span> <span class="n">hash</span><span class="o">,</span> <span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modCount</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Entry</span><span class="o">&lt;?,?&gt;</span> <span class="n">tab</span><span class="o">[]</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 插入节点前，需要检查是否需要进行扩容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 进行扩容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">rehash</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">tab</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 重新计算 key 的哈希值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">hash</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 重新计算键值对所对应的桶位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">index</span> <span class="o">=</span> <span class="o">(</span><span class="n">hash</span> <span class="o">&amp;</span> <span class="n">0x7FFFFFFF</span><span class="o">)</span> <span class="o">%</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Creates the new entry.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">&#34;unchecked&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span> <span class="n">tab</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tab</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">&lt;&gt;(</span><span class="n">hash</span><span class="o">,</span> <span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">count</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="rehash-方法">rehash 方法</h1>
 <p>整体流程：</p>
@@ -432,7 +432,7 @@
 <p>源码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -471,50 +471,50 @@
 </span><span class="lnt">37
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">rehash</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// 获取旧的桶长度
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">oldCapacity</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="n">Entry</span><span class="o">&lt;?,?&gt;[]</span> <span class="n">oldMap</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-
-    <span class="c1">// overflow-conscious code
-</span><span class="c1"></span>    <span class="c1">// 扩容为原来的两倍再加一
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="o">(</span><span class="n">oldCapacity</span> <span class="o">&lt;&lt;</span> <span class="n">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
-    <span class="c1">// 对新容量进行越界检查
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">MAX_ARRAY_SIZE</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">oldCapacity</span> <span class="o">==</span> <span class="n">MAX_ARRAY_SIZE</span><span class="o">)</span>
-            <span class="c1">// Keep running with MAX_ARRAY_SIZE buckets
-</span><span class="c1"></span>            <span class="k">return</span><span class="o">;</span>
-        <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">MAX_ARRAY_SIZE</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="c1">// 没有问题的话，就创建一个 newCapacity 大小的桶数组
-</span><span class="c1"></span>    <span class="n">Entry</span><span class="o">&lt;?,?&gt;[]</span> <span class="n">newMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">&lt;?,?&gt;[</span><span class="n">newCapacity</span><span class="o">];</span>
-
-    <span class="n">modCount</span><span class="o">++;</span>
-    <span class="c1">// 更新阈值
-</span><span class="c1"></span>    <span class="n">threshold</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">newCapacity</span> <span class="o">*</span> <span class="n">loadFactor</span><span class="o">,</span> <span class="n">MAX_ARRAY_SIZE</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
-    <span class="n">table</span> <span class="o">=</span> <span class="n">newMap</span><span class="o">;</span>
-
-    <span class="c1">// 重新将节点映射到新数组中，从后往前遍历
-</span><span class="c1"></span>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">oldCapacity</span> <span class="o">;</span> <span class="n">i</span><span class="o">--</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">;)</span> <span class="o">{</span>
-        <span class="c1">// 取出旧数组中 i 位置的节点
-</span><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">old</span> <span class="o">=</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span><span class="n">oldMap</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">;</span> <span class="n">old</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
-            <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">old</span><span class="o">;</span>
-            <span class="n">old</span> <span class="o">=</span> <span class="n">old</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
-
-            <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">hash</span> <span class="o">&amp;</span> <span class="n">0x7FFFFFFF</span><span class="o">)</span> <span class="o">%</span> <span class="n">newCapacity</span><span class="o">;</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span><span class="n">newMap</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
-            <span class="c1">// 将旧节点赋值到新数组中的位置
-</span><span class="c1"></span>            <span class="n">newMap</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">rehash</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获取旧的桶长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">oldCapacity</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Entry</span><span class="o">&lt;?,?&gt;[]</span> <span class="n">oldMap</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// overflow-conscious code
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 扩容为原来的两倍再加一
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="o">(</span><span class="n">oldCapacity</span> <span class="o">&lt;&lt;</span> <span class="n">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 对新容量进行越界检查
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">newCapacity</span> <span class="o">-</span> <span class="n">MAX_ARRAY_SIZE</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">oldCapacity</span> <span class="o">==</span> <span class="n">MAX_ARRAY_SIZE</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Keep running with MAX_ARRAY_SIZE buckets
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">MAX_ARRAY_SIZE</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 没有问题的话，就创建一个 newCapacity 大小的桶数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Entry</span><span class="o">&lt;?,?&gt;[]</span> <span class="n">newMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Entry</span><span class="o">&lt;?,?&gt;[</span><span class="n">newCapacity</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">modCount</span><span class="o">++;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 更新阈值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">threshold</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">newCapacity</span> <span class="o">*</span> <span class="n">loadFactor</span><span class="o">,</span> <span class="n">MAX_ARRAY_SIZE</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">table</span> <span class="o">=</span> <span class="n">newMap</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 重新将节点映射到新数组中，从后往前遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">oldCapacity</span> <span class="o">;</span> <span class="n">i</span><span class="o">--</span> <span class="o">&gt;</span> <span class="n">0</span> <span class="o">;)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 取出旧数组中 i 位置的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">old</span> <span class="o">=</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span><span class="n">oldMap</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">;</span> <span class="n">old</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">;</span> <span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">old</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">old</span> <span class="o">=</span> <span class="n">old</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">hash</span> <span class="o">&amp;</span> <span class="n">0x7FFFFFFF</span><span class="o">)</span> <span class="o">%</span> <span class="n">newCapacity</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;)</span><span class="n">newMap</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 将旧节点赋值到新数组中的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">newMap</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="get-操作">get 操作</h1>
 <p>get 方法是同步的，首先计算 key 的哈希值，然后通过再定位到对应的桶位置，通过使用 equals 方法比较对应的 key 是否相同，最后返回响应的 value。这里与 HashMap 有些细微上的差别，HashTable 中如果 get 某个 key 返回的是 null 的话，则表示在 HashTable 中不含有该 key 对应的节点，而 HashMap 中，如果 get 某个 key 返回的是 null，则一种情况是该 key 所对应的 value 就是 null，另一种情况是 HashMap 中不存在该 key。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -527,18 +527,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">synchronized</span> <span class="n">V</span> <span class="nf">get</span><span class="o">(</span><span class="n">Object</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">Entry</span><span class="o">&lt;?,?&gt;</span> <span class="n">tab</span><span class="o">[]</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
-    <span class="kt">int</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
-    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="o">(</span><span class="n">hash</span> <span class="o">&amp;</span> <span class="n">0x7FFFFFFF</span><span class="o">)</span> <span class="o">%</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-    <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;?,?&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">;</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">((</span><span class="n">e</span><span class="o">.</span><span class="na">hash</span> <span class="o">==</span> <span class="n">hash</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="o">.</span><span class="na">key</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">key</span><span class="o">))</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="o">(</span><span class="n">V</span><span class="o">)</span><span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">synchronized</span> <span class="n">V</span> <span class="nf">get</span><span class="o">(</span><span class="n">Object</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Entry</span><span class="o">&lt;?,?&gt;</span> <span class="n">tab</span><span class="o">[]</span> <span class="o">=</span> <span class="n">table</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="o">(</span><span class="n">hash</span> <span class="o">&amp;</span> <span class="n">0x7FFFFFFF</span><span class="o">)</span> <span class="o">%</span> <span class="n">tab</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="n">Entry</span><span class="o">&lt;?,?&gt;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">tab</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">;</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">((</span><span class="n">e</span><span class="o">.</span><span class="na">hash</span> <span class="o">==</span> <span class="n">hash</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="o">.</span><span class="na">key</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">key</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">(</span><span class="n">V</span><span class="o">)</span><span class="n">e</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="总结">总结</h1>
 <p>HashTable 和 HashMap 在具体的细节上还是有一定的差别的，在此总结：</p>
@@ -650,7 +650,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

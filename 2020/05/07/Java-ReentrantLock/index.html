@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/05/07/Java-ReentrantLock/" />
@@ -224,7 +224,7 @@
 <p>通过重写的方法可以看到，ReentrantLock 实现的是 AQS 的独占模式，在类型上属于悲观锁。AQS 很好的封装了同步队列的管理、线程的阻塞与唤醒等基础操作。下面看一看 ReentrantLock 的构造器：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -235,23 +235,23 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">final</span> <span class="n">Sync</span> <span class="n">sync</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="nf">ReentrantLock</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">sync</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NonfairSync</span><span class="o">();</span>
-<span class="o">}</span>
-
-<span class="kd">public</span> <span class="nf">ReentrantLock</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">fair</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">sync</span> <span class="o">=</span> <span class="n">fair</span> <span class="o">?</span> <span class="k">new</span> <span class="n">FairSync</span><span class="o">()</span> <span class="o">:</span> <span class="k">new</span> <span class="n">NonfairSync</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">final</span> <span class="n">Sync</span> <span class="n">sync</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">ReentrantLock</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sync</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NonfairSync</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">ReentrantLock</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">fair</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sync</span> <span class="o">=</span> <span class="n">fair</span> <span class="o">?</span> <span class="k">new</span> <span class="n">FairSync</span><span class="o">()</span> <span class="o">:</span> <span class="k">new</span> <span class="n">NonfairSync</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>正如开头所说，ReentrantLock 默认使用的是<code>非公平锁</code>，也就是说，当我们使用<code>new ReentrantLock();</code>进行初始化的时候，等价于使用<code>new ReentrantLock(false);</code>，通过给构造函数传递一个<code>true/false</code>来实现锁的公平与否。</p>
 <h1 id="获取锁">获取锁</h1>
 <p>在介绍获取锁的过程之前，先来回顾一下 AQS 中的同步等待队列，该队列是 CLH 队列的变体，是一种基于双向链表的同步队列。线程在获取同步状态失败的情况下，都会被封装成节点，然后加该入队列中，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -261,20 +261,20 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">      head                                tail
-        ↓                                   ↓
-     +------+   prev   +------+   prev   +------+
-     |||||||| &lt;------- |      | &lt;------- |      |
-     |||||||| -------&gt; |      | -------&gt; |      |
-     +------+   next   +------+   next   +------+
-     头节点已
-   获得同步状态
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">      head                                tail
+</span></span><span class="line"><span class="cl">        ↓                                   ↓
+</span></span><span class="line"><span class="cl">     +------+   prev   +------+   prev   +------+
+</span></span><span class="line"><span class="cl">     |||||||| &lt;------- |      | &lt;------- |      |
+</span></span><span class="line"><span class="cl">     |||||||| -------&gt; |      | -------&gt; |      |
+</span></span><span class="line"><span class="cl">     +------+   next   +------+   next   +------+
+</span></span><span class="line"><span class="cl">     头节点已
+</span></span><span class="line"><span class="cl">   获得同步状态
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在队列中，头节点 head 是获取同步状态的节点，其它节点在尝试获取同步状态失败后，会进入等待队列等待。当头节点释放同步状态后，会唤醒其后继节点。后继节点会将自己设置为头节点，并将之前的头节点从队列中移除（这时大体上的流程，如果你看过 AQS 的源码后会发现，里面还设计到许多细节）。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -284,21 +284,21 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">                        head               tail
-                          ↓                  ↓
-     +------+          +------+   prev   +------+
-     |      |          |||||||| &lt;------- |      |
-     |      |          |||||||| -------&gt; |      |
-     +------+          +------+   next   +------+
-     原头节点           头节点已
-                      获得同步状态
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">                        head               tail
+</span></span><span class="line"><span class="cl">                          ↓                  ↓
+</span></span><span class="line"><span class="cl">     +------+          +------+   prev   +------+
+</span></span><span class="line"><span class="cl">     |      |          |||||||| &lt;------- |      |
+</span></span><span class="line"><span class="cl">     |      |          |||||||| -------&gt; |      |
+</span></span><span class="line"><span class="cl">     +------+          +------+   next   +------+
+</span></span><span class="line"><span class="cl">     原头节点           头节点已
+</span></span><span class="line"><span class="cl">                      获得同步状态
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="公平锁">公平锁</h2>
 <p>在内部类 FairSync 中可以看到公平锁的加锁流程，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -355,62 +355,62 @@
 </span><span class="lnt">55
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// ReentrantLock.FairSync#lock
-</span><span class="c1"></span><span class="kd">final</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// 调用 AQS 的 acquire 方法
-</span><span class="c1"></span>    <span class="n">acquire</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="c1">// AbstractQueuedSynchronizer#acquire
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(!</span><span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
-        <span class="n">acquireQueued</span><span class="o">(</span><span class="n">addWaiter</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">EXCLUSIVE</span><span class="o">),</span> <span class="n">arg</span><span class="o">))</span>
-        <span class="n">selfInterrupt</span><span class="o">();</span>
-<span class="o">}</span>
-
-<span class="c1">// ReentrantLock.FairSync#tryAcquire
-</span><span class="c1"></span><span class="kd">protected</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">tryAcquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">acquires</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="n">Thread</span> <span class="n">current</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
-    <span class="c1">// 获得同步状态
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getState</span><span class="o">();</span>
-    <span class="c1">// 同步状态为 0 说明锁暂时没被其它线程获取（占用），不等于 0 说明锁被占用着
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 判断是否有其它线程比当前线程等待的时间更长。
-</span><span class="c1"></span>        <span class="c1">// 如果有，则应该先让等待时间更长的节点获得锁；
-</span><span class="c1"></span>        <span class="c1">// 如果没有，则让当前线程称为锁的所有者，并调用 compareAndSetState() 尝试设置同步状态。
-</span><span class="c1"></span>        <span class="c1">// 这里的逻辑就是实现公平锁的机制，即让先来的线程获取锁，后来的不能抢先获取。
-</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(!</span><span class="n">hasQueuedPredecessors</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">compareAndSetState</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">acquires</span><span class="o">))</span> <span class="o">{</span>
-            <span class="c1">// 将当前线程设置为持有锁的线程
-</span><span class="c1"></span>            <span class="n">setExclusiveOwnerThread</span><span class="o">(</span><span class="n">current</span><span class="o">);</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="c1">// 如果当前线程为持有锁的线程，则执行重入逻辑
-</span><span class="c1"></span>    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">current</span> <span class="o">==</span> <span class="n">getExclusiveOwnerThread</span><span class="o">())</span> <span class="o">{</span>
-        <span class="c1">// 计算重入后的同步状态，acquires 为 1
-</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">nextc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="n">acquires</span><span class="o">;</span>
-        <span class="c1">// 如果重入次数超过限制，则抛出异常
-</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">nextc</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="n">Error</span><span class="o">(</span><span class="s">&#34;Maximum lock count exceeded&#34;</span><span class="o">);</span>
-        <span class="c1">// 设置重入后的同步状态
-</span><span class="c1"></span>        <span class="n">setState</span><span class="o">(</span><span class="n">nextc</span><span class="o">);</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="c1">// 如果同步队列中有线程存在且锁的所有者不是当前线程，则返回 false
-</span><span class="c1"></span>    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="c1">// AbstractQueuedSynchronizer#hasQueuedPredecessors
-</span><span class="c1">// 用于判断同步队列中是否有比当前线程等待时间更长的线程
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">hasQueuedPredecessors</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// 在同步队列中，头节点是已经获取了锁的节点，头节点的后继节点是即将获取锁的节点
-</span><span class="c1"></span>    <span class="n">Node</span> <span class="n">t</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span>
-    <span class="n">Node</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-    <span class="n">Node</span> <span class="n">s</span><span class="o">;</span>
-    <span class="c1">// 如果某个线程等待的时间比当前线程长，则返回 true，否则返回 false
-</span><span class="c1"></span>    <span class="k">return</span> <span class="n">h</span> <span class="o">!=</span> <span class="n">t</span> <span class="o">&amp;&amp;</span> <span class="o">((</span><span class="n">s</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">thread</span> <span class="o">!=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// ReentrantLock.FairSync#lock
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">final</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 调用 AQS 的 acquire 方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">acquire</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// AbstractQueuedSynchronizer#acquire
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(!</span><span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">acquireQueued</span><span class="o">(</span><span class="n">addWaiter</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">EXCLUSIVE</span><span class="o">),</span> <span class="n">arg</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">selfInterrupt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ReentrantLock.FairSync#tryAcquire
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">protected</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">tryAcquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">acquires</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">Thread</span> <span class="n">current</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获得同步状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getState</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 同步状态为 0 说明锁暂时没被其它线程获取（占用），不等于 0 说明锁被占用着
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 判断是否有其它线程比当前线程等待的时间更长。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 如果有，则应该先让等待时间更长的节点获得锁；
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 如果没有，则让当前线程称为锁的所有者，并调用 compareAndSetState() 尝试设置同步状态。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 这里的逻辑就是实现公平锁的机制，即让先来的线程获取锁，后来的不能抢先获取。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(!</span><span class="n">hasQueuedPredecessors</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">compareAndSetState</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">acquires</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 将当前线程设置为持有锁的线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">setExclusiveOwnerThread</span><span class="o">(</span><span class="n">current</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果当前线程为持有锁的线程，则执行重入逻辑
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">current</span> <span class="o">==</span> <span class="n">getExclusiveOwnerThread</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 计算重入后的同步状态，acquires 为 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">nextc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="n">acquires</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果重入次数超过限制，则抛出异常
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">nextc</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="n">Error</span><span class="o">(</span><span class="s">&#34;Maximum lock count exceeded&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置重入后的同步状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">setState</span><span class="o">(</span><span class="n">nextc</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果同步队列中有线程存在且锁的所有者不是当前线程，则返回 false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// AbstractQueuedSynchronizer#hasQueuedPredecessors
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 用于判断同步队列中是否有比当前线程等待时间更长的线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">hasQueuedPredecessors</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 在同步队列中，头节点是已经获取了锁的节点，头节点的后继节点是即将获取锁的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Node</span> <span class="n">t</span> <span class="o">=</span> <span class="n">tail</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span> <span class="n">s</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果某个线程等待的时间比当前线程长，则返回 true，否则返回 false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">h</span> <span class="o">!=</span> <span class="n">t</span> <span class="o">&amp;&amp;</span> <span class="o">((</span><span class="n">s</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="na">next</span><span class="o">)</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">s</span><span class="o">.</span><span class="na">thread</span> <span class="o">!=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当调用公平锁的 lock.lock() 方法后，将会调用 AQS 的 acquire(1) 方法。在 acquire(1) 方法中，首先通过 tryAcquire(arg) 尝试获取锁，该方法由 AQS 的继承类（FairSync）实现，获取成功直接返回。如果 tryAcquire(arg) 返回 false，则调用 addWaiter() 方法，将当前线程封装成节点，并将节点加入到同步队列的尾部。最后调用 acquireQueued() 方法让同步队列中的节点循环尝试获取锁。</p>
 <p>如果在同步队列中成功获取锁，则将自己（当前线程）设置为持有锁的线程，然后返回。如果同步状态不为 0，且当前线程为持有锁的线程，则执行重入逻辑。</p>
@@ -418,7 +418,7 @@
 <p>在内部类 NonfairSync 中可以看到非公平锁的加锁流程，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -474,68 +474,68 @@
 </span><span class="lnt">54
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// ReentrantLock.NonfairSync
-</span><span class="c1"></span><span class="kd">final</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// 非公平锁在加锁的时候，会直接调用 CAS 设置 state 变量，如果设置成功，则说明加锁成功。
-</span><span class="c1"></span>    <span class="c1">// 这里并没有像公平锁那样调用 acquire() 方法让线程进入同步队列进行排队，而是直接调用
-</span><span class="c1"></span>    <span class="c1">// CAS 进行抢占。抢占失败后，才调用 acquire() 方法将线程放入同步队列尾部进行排队
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetState</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">1</span><span class="o">))</span>
-        <span class="n">setExclusiveOwnerThread</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-    <span class="k">else</span>
-        <span class="n">acquire</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="c1">// AbstractQueuedSynchronizer#acquire
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(!</span><span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
-        <span class="n">acquireQueued</span><span class="o">(</span><span class="n">addWaiter</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">EXCLUSIVE</span><span class="o">),</span> <span class="n">arg</span><span class="o">))</span>
-        <span class="n">selfInterrupt</span><span class="o">();</span>
-<span class="o">}</span>
-
-<span class="c1">// ReentrantLock.NonfairSync#tryAcquire
-</span><span class="c1"></span><span class="kd">protected</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">tryAcquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">acquires</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">nonfairTryAcquire</span><span class="o">(</span><span class="n">acquires</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="c1">// ReentrantLock.Sync#nonfairTryAcquire
-</span><span class="c1"></span><span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">nonfairTryAcquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">acquires</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">final</span> <span class="n">Thread</span> <span class="n">current</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
-    <span class="c1">// 获取同步状态
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getState</span><span class="o">();</span>
-    <span class="c1">// 同步状态为 0 说明锁暂时没被其它线程获取（占用），此时可以加锁
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">// 由于状态可能在检查后被立即修改，因此此处使用 compareAndSetState 来
-</span><span class="c1"></span>        <span class="c1">// 原子地更新状态，表示这个锁已经被占有，并确保状态在最后一次检查以后
-</span><span class="c1"></span>        <span class="c1">// 就没有被修改过
-</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetState</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">acquires</span><span class="o">))</span> <span class="o">{</span>
-            <span class="c1">// 将当前线程设置为持有锁的线程
-</span><span class="c1"></span>            <span class="n">setExclusiveOwnerThread</span><span class="o">(</span><span class="n">current</span><span class="o">);</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="c1">// 如果当前线程已经持有锁，即占用锁的线程是自己，则此处为 true，
-</span><span class="c1"></span>    <span class="c1">// 表明线程再次获取锁，即重入
-</span><span class="c1"></span>    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">current</span> <span class="o">==</span> <span class="n">getExclusiveOwnerThread</span><span class="o">())</span> <span class="o">{</span>
-        <span class="c1">// 计算重入后的同步状态，acquires 为 1
-</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">nextc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="n">acquires</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">nextc</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="c1">// overflow
-</span><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">Error</span><span class="o">(</span><span class="s">&#34;Maximum lock count exceeded&#34;</span><span class="o">);</span>
-        <span class="c1">// 设置新的同步状态值
-</span><span class="c1"></span>        <span class="n">setState</span><span class="o">(</span><span class="n">nextc</span><span class="o">);</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="c1">// 如果 state 不为 0，且锁的持有者也不是自己，则返回 false，
-</span><span class="c1"></span>    <span class="c1">// 然后线程就会进入到同步队列中
-</span><span class="c1"></span>    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// ReentrantLock.NonfairSync
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">final</span> <span class="kt">void</span> <span class="nf">lock</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 非公平锁在加锁的时候，会直接调用 CAS 设置 state 变量，如果设置成功，则说明加锁成功。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 这里并没有像公平锁那样调用 acquire() 方法让线程进入同步队列进行排队，而是直接调用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// CAS 进行抢占。抢占失败后，才调用 acquire() 方法将线程放入同步队列尾部进行排队
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetState</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">1</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setExclusiveOwnerThread</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">acquire</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// AbstractQueuedSynchronizer#acquire
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(!</span><span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">acquireQueued</span><span class="o">(</span><span class="n">addWaiter</span><span class="o">(</span><span class="n">Node</span><span class="o">.</span><span class="na">EXCLUSIVE</span><span class="o">),</span> <span class="n">arg</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">selfInterrupt</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ReentrantLock.NonfairSync#tryAcquire
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">protected</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">tryAcquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">acquires</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">nonfairTryAcquire</span><span class="o">(</span><span class="n">acquires</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ReentrantLock.Sync#nonfairTryAcquire
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">nonfairTryAcquire</span><span class="o">(</span><span class="kt">int</span> <span class="n">acquires</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">final</span> <span class="n">Thread</span> <span class="n">current</span> <span class="o">=</span> <span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获取同步状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getState</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 同步状态为 0 说明锁暂时没被其它线程获取（占用），此时可以加锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 由于状态可能在检查后被立即修改，因此此处使用 compareAndSetState 来
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 原子地更新状态，表示这个锁已经被占有，并确保状态在最后一次检查以后
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 就没有被修改过
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">compareAndSetState</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">acquires</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 将当前线程设置为持有锁的线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">setExclusiveOwnerThread</span><span class="o">(</span><span class="n">current</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果当前线程已经持有锁，即占用锁的线程是自己，则此处为 true，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 表明线程再次获取锁，即重入
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">current</span> <span class="o">==</span> <span class="n">getExclusiveOwnerThread</span><span class="o">())</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 计算重入后的同步状态，acquires 为 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">nextc</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="n">acquires</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">nextc</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="c1">// overflow
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">Error</span><span class="o">(</span><span class="s">&#34;Maximum lock count exceeded&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置新的同步状态值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">setState</span><span class="o">(</span><span class="n">nextc</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果 state 不为 0，且锁的持有者也不是自己，则返回 false，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 然后线程就会进入到同步队列中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>非公平锁的加锁方式是，首先直接调用 compareAndSetState() 方法进行抢占式的加锁，加锁成功后将当前线程设置为持有锁的线程，然后返回。如果加锁失败，则将会调用 acquire() 方法，将当前线程放入同步队列的尾部进行等待。如果线程在同步队列中成功获取锁，则将自己设置为持有锁的线程，然后返回。如果同步状态不为 0，并且当前线程已经是持有锁的线程，则执行重入操作。</p>
 <h1 id="释放锁">释放锁</h1>
 <p>不管是公平锁还是非公平锁，它们释放锁的操作都是相同的，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -580,57 +580,57 @@
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// ReentrantLock#unlock
-</span><span class="c1"></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">unlock</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// 调用 AQS 中的 release 方法
-</span><span class="c1"></span>    <span class="n">sync</span><span class="o">.</span><span class="na">release</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="c1">// AbstractQueuedSynchronizer#release
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">release</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 调用 ReentrantLock.Sync 中的 tryRelease 方法尝试释放锁
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">tryRelease</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span> <span class="o">{</span>
-        <span class="n">Node</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
-        <span class="c1">// 如果出现 head == null 的情况，表示初始的时候 head 指向的是 null，当第一个节点入队后，
-</span><span class="c1"></span>        <span class="c1">// head 会被初始化为一个 dummy 节点。如果在其它节点入队之前就调用了 release() 方法，释放同步状态的话，
-</span><span class="c1"></span>        <span class="c1">// 则会出现 head == null 的情况。
-</span><span class="c1"></span>        <span class="c1">// 如果头节点不等于 null 且等待状态为 0，则表示头节点的后继节点（线程）是活跃的（正在运行的），无需唤醒。
-</span><span class="c1"></span>        <span class="c1">// 因此，这里的头节点 h 的等待状态不是 0 的话，说明后继节点对应的线程可能被阻塞了，
-</span><span class="c1"></span>        <span class="c1">// 则应该唤醒头节点的后继节点
-</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">h</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">h</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span>
-            <span class="c1">// 唤醒头节点的后继节点
-</span><span class="c1"></span>            <span class="n">unparkSuccessor</span><span class="o">(</span><span class="n">h</span><span class="o">);</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-
-<span class="c1">// ReentrantLock.Sync#tryRelease
-</span><span class="c1"></span><span class="kd">protected</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">tryRelease</span><span class="o">(</span><span class="kt">int</span> <span class="n">releases</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 用 getState() 方法得到同步状态减去所释放的量 release，得到本次释放锁后的同步状态量。
-</span><span class="c1"></span>    <span class="c1">// 当 state 为 0 的时候，表示锁才完全释放完毕
-</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getState</span><span class="o">()</span> <span class="o">-</span> <span class="n">releases</span><span class="o">;</span>
-    <span class="c1">// 判断当前线程是否已经持有锁，仅允许持有锁的线程执行锁释放的逻辑
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">()</span> <span class="o">!=</span> <span class="n">getExclusiveOwnerThread</span><span class="o">())</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalMonitorStateException</span><span class="o">();</span>
-    <span class="kt">boolean</span> <span class="n">free</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="c1">// 如果 c 为 0，则说明已经完全释放锁了，此时需要将持锁线程设为 null
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">free</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-        <span class="n">setExclusiveOwnerThread</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-    <span class="o">}</span>
-    <span class="c1">// 设置新的同步状态
-</span><span class="c1"></span>    <span class="n">setState</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
-    <span class="k">return</span> <span class="n">free</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// ReentrantLock#unlock
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">unlock</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 调用 AQS 中的 release 方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">sync</span><span class="o">.</span><span class="na">release</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// AbstractQueuedSynchronizer#release
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">release</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 调用 ReentrantLock.Sync 中的 tryRelease 方法尝试释放锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">tryRelease</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="n">h</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果出现 head == null 的情况，表示初始的时候 head 指向的是 null，当第一个节点入队后，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// head 会被初始化为一个 dummy 节点。如果在其它节点入队之前就调用了 release() 方法，释放同步状态的话，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 则会出现 head == null 的情况。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 如果头节点不等于 null 且等待状态为 0，则表示头节点的后继节点（线程）是活跃的（正在运行的），无需唤醒。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 因此，这里的头节点 h 的等待状态不是 0 的话，说明后继节点对应的线程可能被阻塞了，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 则应该唤醒头节点的后继节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">h</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">h</span><span class="o">.</span><span class="na">waitStatus</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 唤醒头节点的后继节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">unparkSuccessor</span><span class="o">(</span><span class="n">h</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ReentrantLock.Sync#tryRelease
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">protected</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="nf">tryRelease</span><span class="o">(</span><span class="kt">int</span> <span class="n">releases</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 用 getState() 方法得到同步状态减去所释放的量 release，得到本次释放锁后的同步状态量。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 当 state 为 0 的时候，表示锁才完全释放完毕
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">getState</span><span class="o">()</span> <span class="o">-</span> <span class="n">releases</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 判断当前线程是否已经持有锁，仅允许持有锁的线程执行锁释放的逻辑
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">()</span> <span class="o">!=</span> <span class="n">getExclusiveOwnerThread</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalMonitorStateException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">boolean</span> <span class="n">free</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果 c 为 0，则说明已经完全释放锁了，此时需要将持锁线程设为 null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">free</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setExclusiveOwnerThread</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 设置新的同步状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">setState</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">free</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>需要注意的是，在<code>if (c == 0)</code> 进行判断的时候，如果当前线程释放锁之后的状态 state 为 0，则表示锁没有重入了，那么直接将锁的持有者设置为 null 即可，并返回 true，这就说明可以唤醒其它线程去获取锁了。而如果当前线程释放锁之后的状态 state 不为 0，则说明锁被重入了，则会返回 false，代表锁还未完全释放，不需要去唤醒其它线程。</p>
 <h1 id="区别">区别</h1>
 <p>在获取锁的过程中，公平与非公平的区别在于是否含有 hasQueuedPredecessors() 方法，该方法用于判断<strong>是否其它线程比当前线程在同步队列中等待的时间更长</strong>，有的话返回 true，否则返回 false。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -640,15 +640,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">      head               node1            node2              tail
-        ↓                  ↓                ↓                  ↓
-     +------+   prev   +------+   prev   +------+   prev   +------+
-     |||||||| &lt;------- |      | &lt;------- |      | &lt;------- |      |
-     |||||||| -------&gt; |      | -------&gt; |      | -------&gt; |      |
-     +------+   next   +------+   next   +------+   next   +------+
-     头节点已
-   获得同步状态
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">      head               node1            node2              tail
+</span></span><span class="line"><span class="cl">        ↓                  ↓                ↓                  ↓
+</span></span><span class="line"><span class="cl">     +------+   prev   +------+   prev   +------+   prev   +------+
+</span></span><span class="line"><span class="cl">     |||||||| &lt;------- |      | &lt;------- |      | &lt;------- |      |
+</span></span><span class="line"><span class="cl">     |||||||| -------&gt; |      | -------&gt; |      | -------&gt; |      |
+</span></span><span class="line"><span class="cl">     +------+   next   +------+   next   +------+   next   +------+
+</span></span><span class="line"><span class="cl">     头节点已
+</span></span><span class="line"><span class="cl">   获得同步状态
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于上图来说，节点 node1 对应的线程比节点 node2 对应的线程在等待队列中等待的时间更长。如果 node2 调用 hasQueuedPredecessors() 方法的话，则会返回 true，而 node1 调用 hasQueuedPredecessors() 方法的话，则会返回 false。这时因为 node1 的前驱节点是头节点，它已经获取了同步状态，不处于等待状态。</p>
 <p>如果在公平锁中将此方法去掉，则公平锁将不再“公平”，而会像非公平锁那样，抢占失败才会入队。</p>
@@ -656,7 +656,7 @@
 <p>正如文章开头的表格中所提到的，ReentrantLock 可以响应可中断，即以中断的方式获取锁，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -673,22 +673,22 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// ReentrantLock#lockInterruptibly
-</span><span class="c1"></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">lockInterruptibly</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
-    <span class="n">sync</span><span class="o">.</span><span class="na">acquireInterruptibly</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
-<span class="o">}</span>
-
-<span class="c1">// AbstractQueuedSynchronizer#acquireInterruptibly
-</span><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquireInterruptibly</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
-    <span class="c1">// 如果当前线程已经中断了，则抛出异常
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">interrupted</span><span class="o">())</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="n">InterruptedException</span><span class="o">();</span>
-    <span class="c1">// 如果当前线程仍未成功获取锁，则调用 doAcquireInterruptibly() 方法，
-</span><span class="c1"></span>    <span class="c1">// 该方法在独占的可中断的模式下获取锁
-</span><span class="c1"></span>    <span class="k">if</span> <span class="o">(!</span><span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span>
-        <span class="n">doAcquireInterruptibly</span><span class="o">(</span><span class="n">arg</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// ReentrantLock#lockInterruptibly
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">lockInterruptibly</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sync</span><span class="o">.</span><span class="na">acquireInterruptibly</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// AbstractQueuedSynchronizer#acquireInterruptibly
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">acquireInterruptibly</span><span class="o">(</span><span class="kt">int</span> <span class="n">arg</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">InterruptedException</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果当前线程已经中断了，则抛出异常
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">interrupted</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">InterruptedException</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果当前线程仍未成功获取锁，则调用 doAcquireInterruptibly() 方法，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 该方法在独占的可中断的模式下获取锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(!</span><span class="n">tryAcquire</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">doAcquireInterruptibly</span><span class="o">(</span><span class="n">arg</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="小结">小结</h1>
 <p>对于以上获取锁与释放锁的底层实现，其实也在 AQS 那篇文章中讲到了，但本文从 ReentrantLock 层面分析了获取/释放锁的流程，也算是对 AQS 的一次复习和总结。在进行展开的时候，可以先从 synchronized 和 ReentrantLock 的区别说起，然后再逐渐过渡到共享模式和独占模式，最后再谈到在不同模式下的获取锁和释放锁的区别。</p>
@@ -800,7 +800,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

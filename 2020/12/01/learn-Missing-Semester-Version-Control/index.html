@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/12/01/learn-Missing-Semester-Version-Control/" />
@@ -183,7 +183,7 @@
 <p>当我使用<code>git log --all --graph --decorate</code>之后，会出现以下内容：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -196,24 +196,24 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">* commit 53a1f501bbbce4a5e45702d7ef8ddf00543c2be8 (HEAD -&gt; master)
-| Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-| Date:   Tue Dec 1 15:16:41 2020 +0800
-| 
-|     append new line
-| 
-* commit 06958eddd326032f5e199409ada6b575037c3479
-  Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-  Date:   Tue Dec 1 15:00:27 2020 +0800
-  
-      Add hello.txt
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">* commit 53a1f501bbbce4a5e45702d7ef8ddf00543c2be8 (HEAD -&gt; master)
+</span></span><span class="line"><span class="cl">| Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl">| Date:   Tue Dec 1 15:16:41 2020 +0800
+</span></span><span class="line"><span class="cl">| 
+</span></span><span class="line"><span class="cl">|     append new line
+</span></span><span class="line"><span class="cl">| 
+</span></span><span class="line"><span class="cl">* commit 06958eddd326032f5e199409ada6b575037c3479
+</span></span><span class="line"><span class="cl">  Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl">  Date:   Tue Dec 1 15:00:27 2020 +0800
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">      Add hello.txt
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>最新提交的结果，将显示在最上方。除了提交的作者（Author）、提交日期（Date）以及提交信息（commit）以外，注意到还有一个<code>HEAD -&gt; master</code>标志。其中，<code>master</code>表示默认的分支，这是在执行完<code>git init</code>后自动生成的。而<code>HEAD</code>相当于一个指针（或者说引用），它指向当前所在的分支。显然，当前所在的分支为<code>master</code>。</p>
 <p>当我执行<code>git checkout 06958e</code>的时候，那么我将会来到<code>06958e</code>分支，并且指针<code>HEAD</code>将会指向<code>06958e</code>分支，而不再指向<code>master</code>分支。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -233,43 +233,43 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">➜  demo git:<span class="o">(</span>master<span class="o">)</span> git checkout 06958e
-Note: switching to <span class="s1">&#39;06958e&#39;</span>.
-...
-<span class="o">(</span>some information<span class="o">)</span>
-...
-➜  demo git:<span class="o">(</span>06958ed<span class="o">)</span> git log --all --graph --decorate
-* commit 53a1f501bbbce4a5e45702d7ef8ddf00543c2be8 <span class="o">(</span>master<span class="o">)</span>
-<span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-<span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 15:16:41 <span class="m">2020</span> +0800
-<span class="p">|</span> 
-<span class="p">|</span>     append new line
-<span class="p">|</span> 
-* commit 06958eddd326032f5e199409ada6b575037c3479 <span class="o">(</span>HEAD<span class="o">)</span>
-  Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-  Date:   Tue Dec <span class="m">1</span> 15:00:27 <span class="m">2020</span> +0800
-  
-      Add hello.txt
-➜  demo git:<span class="o">(</span>06958ed<span class="o">)</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> git checkout 06958e
+</span></span><span class="line"><span class="cl">Note: switching to <span class="s1">&#39;06958e&#39;</span>.
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl"><span class="o">(</span>some information<span class="o">)</span>
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>06958ed<span class="o">)</span> git log --all --graph --decorate
+</span></span><span class="line"><span class="cl">* commit 53a1f501bbbce4a5e45702d7ef8ddf00543c2be8 <span class="o">(</span>master<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 15:16:41 <span class="m">2020</span> +0800
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     append new line
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl">* commit 06958eddd326032f5e199409ada6b575037c3479 <span class="o">(</span>HEAD<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl">  Date:   Tue Dec <span class="m">1</span> 15:00:27 <span class="m">2020</span> +0800
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">      Add hello.txt
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>06958ed<span class="o">)</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>来到<code>06958e</code>分支后，你可以查看一下文件<code>hellp.txt</code>的内容，它显示了当前版本（06958e）下的内容。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">➜  demo git:<span class="o">(</span>06958ed<span class="o">)</span> cat hello.txt 
-hello
-➜  demo git:<span class="o">(</span>06958ed<span class="o">)</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>06958ed<span class="o">)</span> cat hello.txt 
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>06958ed<span class="o">)</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后，你可以通过<code>git checkout master</code>再将<code>master</code>作为当前的分支。此时再次查看<code>hello.txt</code>中的内容，则会显示当前<code>master</code>分支提交的结果。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -278,14 +278,14 @@ hello
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">➜  demo git:<span class="o">(</span>06958ed<span class="o">)</span> git checkout master
-Previous HEAD position was 06958ed Add hello.txt
-Switched to branch <span class="s1">&#39;master&#39;</span>
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> cat hello.txt 
-hello
-another line
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>06958ed<span class="o">)</span> git checkout master
+</span></span><span class="line"><span class="cl">Previous HEAD position was 06958ed Add hello.txt
+</span></span><span class="line"><span class="cl">Switched to branch <span class="s1">&#39;master&#39;</span>
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> cat hello.txt 
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">another line
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面是操作<strong>分支</strong>与<strong>合并</strong>的一些命令。</p>
 <ul>
@@ -307,7 +307,7 @@ another line
 <p>当我在创建完一个<code>animal.py</code>文件之后，将其添加到暂存区中，然后再创建一个<code>cat</code>分支。显示的信息如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -331,35 +331,35 @@ another line
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">➜  demo git:<span class="o">(</span>master<span class="o">)</span> git branch -vv
-  cat    9e378e5 Add animal.py
-* master 9e378e5 Add animal.py
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> git log --all --graph --decorate
-* commit 9e378e559be54fef0e923509e19e7e09c1d1c7c8 <span class="o">(</span>HEAD -&gt; master, cat<span class="o">)</span>
-<span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-<span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 16:13:19 <span class="m">2020</span> +0800
-<span class="p">|</span> 
-<span class="p">|</span>     Add animal.py
-<span class="p">|</span> 
-* commit 53a1f501bbbce4a5e45702d7ef8ddf00543c2be8
-<span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-<span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 15:16:41 <span class="m">2020</span> +0800
-<span class="p">|</span> 
-<span class="p">|</span>     append new line
-<span class="p">|</span> 
-* commit 06958eddd326032f5e199409ada6b575037c3479
-  Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-  Date:   Tue Dec <span class="m">1</span> 15:00:27 <span class="m">2020</span> +0800
-  
-      Add hello.txt
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> git branch -vv
+</span></span><span class="line"><span class="cl">  cat    9e378e5 Add animal.py
+</span></span><span class="line"><span class="cl">* master 9e378e5 Add animal.py
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> git log --all --graph --decorate
+</span></span><span class="line"><span class="cl">* commit 9e378e559be54fef0e923509e19e7e09c1d1c7c8 <span class="o">(</span>HEAD -&gt; master, cat<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 16:13:19 <span class="m">2020</span> +0800
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Add animal.py
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl">* commit 53a1f501bbbce4a5e45702d7ef8ddf00543c2be8
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 15:16:41 <span class="m">2020</span> +0800
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     append new line
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl">* commit 06958eddd326032f5e199409ada6b575037c3479
+</span></span><span class="line"><span class="cl">  Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl">  Date:   Tue Dec <span class="m">1</span> 15:00:27 <span class="m">2020</span> +0800
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">      Add hello.txt
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>根据<code>(HEAD -&gt; master, cat)</code>所示，你可以看到，这里多了一个新的分支<code>cat</code>，但此时的<code>master</code>分支是位于<code>cat</code>分支之前的。而当我切换到<code>cat</code>分支之后，就会将<code>cat</code>置于<code>master</code>之前，即<code>(HEAD -&gt; cat, master)</code>。</p>
 <p>如果我在<code>cat</code>分支下，修改了<code>animal.py</code>文件中的内容，并进行了<code>add</code>与<code>commit</code>。那么，此时查看<code>log</code>将会是如下情况：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -386,37 +386,37 @@ another line
 </span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">➜  demo git:<span class="o">(</span>master<span class="o">)</span> git log --all --graph --decorate
-* commit ee92c5932ef1f5720c3f4645f9eafb5598d75f4d <span class="o">(</span>HEAD -&gt; cat<span class="o">)</span>
-<span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-<span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 16:30:37 <span class="m">2020</span> +0800
-<span class="p">|</span> 
-<span class="p">|</span>     Add cat <span class="k">function</span> in animal.py
-<span class="p">|</span> 
-* commit 9e378e559be54fef0e923509e19e7e09c1d1c7c8 <span class="o">(</span>master<span class="o">)</span>
-<span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-<span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 16:13:19 <span class="m">2020</span> +0800
-<span class="p">|</span> 
-<span class="p">|</span>     Add animal.py
-<span class="p">|</span> 
-* commit 53a1f501bbbce4a5e45702d7ef8ddf00543c2be8
-<span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-<span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 15:16:41 <span class="m">2020</span> +0800
-<span class="p">|</span> 
-<span class="p">|</span>     append new line
-<span class="p">|</span> 
-* commit 06958eddd326032f5e199409ada6b575037c3479
-  Author: mycaroltest &lt;carolsir95@gmail.com&gt;
-  Date:   Tue Dec <span class="m">1</span> 15:00:27 <span class="m">2020</span> +0800
-  
-      Add hello.txt
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> git log --all --graph --decorate
+</span></span><span class="line"><span class="cl">* commit ee92c5932ef1f5720c3f4645f9eafb5598d75f4d <span class="o">(</span>HEAD -&gt; cat<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 16:30:37 <span class="m">2020</span> +0800
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Add cat <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl">* commit 9e378e559be54fef0e923509e19e7e09c1d1c7c8 <span class="o">(</span>master<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 16:13:19 <span class="m">2020</span> +0800
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     Add animal.py
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl">* commit 53a1f501bbbce4a5e45702d7ef8ddf00543c2be8
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl"><span class="p">|</span> Date:   Tue Dec <span class="m">1</span> 15:16:41 <span class="m">2020</span> +0800
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>     append new line
+</span></span><span class="line"><span class="cl"><span class="p">|</span> 
+</span></span><span class="line"><span class="cl">* commit 06958eddd326032f5e199409ada6b575037c3479
+</span></span><span class="line"><span class="cl">  Author: mycaroltest &lt;carolsir95@gmail.com&gt;
+</span></span><span class="line"><span class="cl">  Date:   Tue Dec <span class="m">1</span> 15:00:27 <span class="m">2020</span> +0800
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">      Add hello.txt
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以使用<code>git log --all --graph --decorate --oneline</code>命令，简化日志的输出，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -424,19 +424,19 @@ another line
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">➜  demo git:<span class="o">(</span>cat<span class="o">)</span> git log --all --graph --decorate --oneline
-* ee92c59 <span class="o">(</span>HEAD -&gt; cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
-* 9e378e5 <span class="o">(</span>master<span class="o">)</span> Add animal.py
-* 53a1f50 append new line
-* 06958ed Add hello.txt
-➜  demo git:<span class="o">(</span>cat<span class="o">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>cat<span class="o">)</span> git log --all --graph --decorate --oneline
+</span></span><span class="line"><span class="cl">* ee92c59 <span class="o">(</span>HEAD -&gt; cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl">* 9e378e5 <span class="o">(</span>master<span class="o">)</span> Add animal.py
+</span></span><span class="line"><span class="cl">* 53a1f50 append new line
+</span></span><span class="line"><span class="cl">* 06958ed Add hello.txt
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>cat<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果再将分支从<code>cat</code>却换到<code>master</code>的话，则在处于<code>master</code>的情况下，则不会看到<code>cat</code>对<code>animal.py</code>的修改。</p>
 <p>好，现在我们创建一个<code>dog</code>分支，并同时切换到<code>dog</code>分支，即<code>git checkout -b dog</code>。所有分支信息如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -444,18 +444,18 @@ another line
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">➜  demo git:<span class="o">(</span>dog<span class="o">)</span> git log --all --graph --decorate --oneline
-* ee92c59 <span class="o">(</span>cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
-* 9e378e5 <span class="o">(</span>HEAD -&gt; dog, master<span class="o">)</span> Add animal.py
-* 53a1f50 append new line
-* 06958ed Add hello.txt
-➜  demo git:<span class="o">(</span>dog<span class="o">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>dog<span class="o">)</span> git log --all --graph --decorate --oneline
+</span></span><span class="line"><span class="cl">* ee92c59 <span class="o">(</span>cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl">* 9e378e5 <span class="o">(</span>HEAD -&gt; dog, master<span class="o">)</span> Add animal.py
+</span></span><span class="line"><span class="cl">* 53a1f50 append new line
+</span></span><span class="line"><span class="cl">* 06958ed Add hello.txt
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>dog<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>我在<code>dog</code>分支下，修改<code>animal.py</code>中的内容，其中<code>dog()</code>函数是新添加的内容。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -473,28 +473,28 @@ another line
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="k">def</span> <span class="nf">default</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Hello&#34;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">dog</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Woof!&#34;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;dog&#39;</span><span class="p">:</span>
-        <span class="n">dog</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">default</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">default</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Hello&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">dog</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Woof!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;dog&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dog</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">default</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后进行<code>add</code>和<code>commit</code>操作。现在，我们再看一看日志中的内容：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -504,21 +504,21 @@ another line
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">➜  demo git:<span class="o">(</span>dog<span class="o">)</span> git log --all --graph --decorate --oneline
-* dd42b6e <span class="o">(</span>HEAD -&gt; dog<span class="o">)</span> Add dog <span class="k">function</span> in animal.py
-<span class="p">|</span> * ee92c59 <span class="o">(</span>cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
-<span class="p">|</span>/  
-* 9e378e5 <span class="o">(</span>master<span class="o">)</span> Add animal.py
-* 53a1f50 append new line
-* 06958ed Add hello.txt
-➜  demo git:<span class="o">(</span>dog<span class="o">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>dog<span class="o">)</span> git log --all --graph --decorate --oneline
+</span></span><span class="line"><span class="cl">* dd42b6e <span class="o">(</span>HEAD -&gt; dog<span class="o">)</span> Add dog <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl"><span class="p">|</span> * ee92c59 <span class="o">(</span>cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl"><span class="p">|</span>/  
+</span></span><span class="line"><span class="cl">* 9e378e5 <span class="o">(</span>master<span class="o">)</span> Add animal.py
+</span></span><span class="line"><span class="cl">* 53a1f50 append new line
+</span></span><span class="line"><span class="cl">* 06958ed Add hello.txt
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>dog<span class="o">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，与之前不同的是，这里出现了一个<strong>分叉</strong>。下面将演示<code>merge</code>命令的使用。</p>
 <p>首先将分支切换到<code>master</code>，然后将<code>master</code>和<code>cat</code>分支进行合并，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -531,23 +531,23 @@ another line
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">378e5..ee92c59
-Fast-forward
- animal.py <span class="p">|</span> <span class="m">8</span> +++++++-
- <span class="m">1</span> file changed, <span class="m">7</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">1</span> deletion<span class="o">(</span>-<span class="o">)</span>
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> git log --all --graph --decorate --oneline
-2c59 <span class="o">(</span>HEAD -&gt; master, cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
-<span class="p">|</span>/  
-* 9e378e5 Add animal.py
-* 53a1f50 append new line
-* 06958ed Add hello.txt
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">378e5..ee92c59
+</span></span><span class="line"><span class="cl">Fast-forward
+</span></span><span class="line"><span class="cl"> animal.py <span class="p">|</span> <span class="m">8</span> +++++++-
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> file changed, <span class="m">7</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">1</span> deletion<span class="o">(</span>-<span class="o">)</span>
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> git log --all --graph --decorate --oneline
+</span></span><span class="line"><span class="cl">2c59 <span class="o">(</span>HEAD -&gt; master, cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl"><span class="p">|</span>/  
+</span></span><span class="line"><span class="cl">* 9e378e5 Add animal.py
+</span></span><span class="line"><span class="cl">* 53a1f50 append new line
+</span></span><span class="line"><span class="cl">* 06958ed Add hello.txt
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果此时再进行<code>git merge dog</code>的话，则会出现 <!-- raw HTML omitted --> Merge conflict <!-- raw HTML omitted -->，即<strong>合并冲突</strong>。因此，这里使用<code>git mergetool</code>中的 <a href="https://gist.github.com/karenyyng/f19ff75c60f18b4b8149">vimdiff</a> 进行冲突检查，并对<code>animal.py</code>进行一些修改，修改完以后的代码如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -570,33 +570,33 @@ Fast-forward
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="k">def</span> <span class="nf">cat</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Meow!&#34;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">default</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Hello&#34;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">dog</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Woof!&#34;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span>
-        <span class="n">cat</span><span class="p">()</span>
-    <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;dog&#39;</span><span class="p">:</span>
-        <span class="n">dog</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">default</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">cat</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Meow!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">default</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Hello&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">dog</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Woof!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cat</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;dog&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dog</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">default</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此时，冲突已经被解决了，然后将<code>animal.py</code>进行<code>add</code>操作，最后我们可以<code>merge</code>到<code>dog</code>分支了。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -610,24 +610,24 @@ Fast-forward
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git merge --continue
-<span class="o">[</span>master 0013a1f<span class="o">]</span> Merge branch <span class="s1">&#39;dog&#39;</span>
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git log --all --graph --decorate --oneline
-*   0013a1f <span class="o">(</span>HEAD -&gt; master<span class="o">)</span> Merge branch <span class="s1">&#39;dog&#39;</span>
-<span class="p">|</span><span class="se">\ </span> 
-<span class="p">|</span> * dd42b6e <span class="o">(</span>dog<span class="o">)</span> Add dog <span class="k">function</span> in animal.py
-* <span class="p">|</span> ee92c59 <span class="o">(</span>cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
-<span class="p">|</span>/  
-* 9e378e5 Add animal.py
-* 53a1f50 append new line
-* 06958ed Add hello.txt
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git merge --continue
+</span></span><span class="line"><span class="cl"><span class="o">[</span>master 0013a1f<span class="o">]</span> Merge branch <span class="s1">&#39;dog&#39;</span>
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git log --all --graph --decorate --oneline
+</span></span><span class="line"><span class="cl">*   0013a1f <span class="o">(</span>HEAD -&gt; master<span class="o">)</span> Merge branch <span class="s1">&#39;dog&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span><span class="se">\ </span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span> * dd42b6e <span class="o">(</span>dog<span class="o">)</span> Add dog <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl">* <span class="p">|</span> ee92c59 <span class="o">(</span>cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl"><span class="p">|</span>/  
+</span></span><span class="line"><span class="cl">* 9e378e5 Add animal.py
+</span></span><span class="line"><span class="cl">* 53a1f50 append new line
+</span></span><span class="line"><span class="cl">* 06958ed Add hello.txt
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>至此，你就可以任意执行<code>animal.py</code>文件了，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -636,14 +636,14 @@ Fast-forward
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ python3 animal.py cat
-Meow!
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ python3 animal.py dog
-Woof!
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ python3 animal.py dsdda  
-Hello
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ python3 animal.py cat
+</span></span><span class="line"><span class="cl">Meow!
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ python3 animal.py dog
+</span></span><span class="line"><span class="cl">Woof!
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ python3 animal.py dsdda  
+</span></span><span class="line"><span class="cl">Hello
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>接下来是对<strong>远程仓库</strong>进行操作的命令。常用的命令如下：</p>
 <ul>
@@ -665,22 +665,22 @@ Hello
 <p>为了方便演示，这里使用本地仓库代替 Github 远程仓库。我在<code>demo</code>同级目录下创建了一个<code>remote</code>目录，将其当作远程仓库。然后将<code>remote</code>目录添加到<code>demo</code>的远程仓库中。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git remote add origin ../remote
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git remote
-origin
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git remote add origin ../remote
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git remote
+</span></span><span class="line"><span class="cl">origin
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后进行<code>push</code>操作，并查看<code>log</code>。如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -701,31 +701,31 @@ origin
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git push origin master:master
-Enumerating objects: 19, <span class="k">done</span>.
-Counting objects: 100% <span class="o">(</span>19/19<span class="o">)</span>, <span class="k">done</span>.
-Delta compression using up to <span class="m">4</span> threads
-Compressing objects: 100% <span class="o">(</span>15/15<span class="o">)</span>, <span class="k">done</span>.
-Writing objects: 100% <span class="o">(</span>19/19<span class="o">)</span>, 1.72 KiB <span class="p">|</span> 1.72 MiB/s, <span class="k">done</span>.
-Total <span class="m">19</span> <span class="o">(</span>delta 4<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
-To ../remote
- * <span class="o">[</span>new branch<span class="o">]</span>      master -&gt; master
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git log --all --graph --decorate --oneline
-*   0013a1f <span class="o">(</span>HEAD -&gt; master, origin/master<span class="o">)</span> Merge branch <span class="s1">&#39;dog&#39;</span>
-<span class="p">|</span><span class="se">\ </span> 
-<span class="p">|</span> * dd42b6e <span class="o">(</span>dog<span class="o">)</span> Add dog <span class="k">function</span> in animal.py
-* <span class="p">|</span> ee92c59 <span class="o">(</span>cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
-<span class="p">|</span>/  
-* 9e378e5 Add animal.py
-* 53a1f50 append new line
-* 06958ed Add hello.txt
-➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git push origin master:master
+</span></span><span class="line"><span class="cl">Enumerating objects: 19, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">Counting objects: 100% <span class="o">(</span>19/19<span class="o">)</span>, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">Delta compression using up to <span class="m">4</span> threads
+</span></span><span class="line"><span class="cl">Compressing objects: 100% <span class="o">(</span>15/15<span class="o">)</span>, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">Writing objects: 100% <span class="o">(</span>19/19<span class="o">)</span>, 1.72 KiB <span class="p">|</span> 1.72 MiB/s, <span class="k">done</span>.
+</span></span><span class="line"><span class="cl">Total <span class="m">19</span> <span class="o">(</span>delta 4<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">To ../remote
+</span></span><span class="line"><span class="cl"> * <span class="o">[</span>new branch<span class="o">]</span>      master -&gt; master
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ git log --all --graph --decorate --oneline
+</span></span><span class="line"><span class="cl">*   0013a1f <span class="o">(</span>HEAD -&gt; master, origin/master<span class="o">)</span> Merge branch <span class="s1">&#39;dog&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span><span class="se">\ </span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span> * dd42b6e <span class="o">(</span>dog<span class="o">)</span> Add dog <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl">* <span class="p">|</span> ee92c59 <span class="o">(</span>cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl"><span class="p">|</span>/  
+</span></span><span class="line"><span class="cl">* 9e378e5 Add animal.py
+</span></span><span class="line"><span class="cl">* 53a1f50 append new line
+</span></span><span class="line"><span class="cl">* 06958ed Add hello.txt
+</span></span><span class="line"><span class="cl">➜  demo git:<span class="o">(</span>master<span class="o">)</span> ✗ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此时，我在<code>master</code>分支下，将<code>animal.py</code>文件进行一些修改。当<code>commit</code>之后，日志如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -736,21 +736,21 @@ To ../remote
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">* 32a4ab7 <span class="o">(</span>HEAD -&gt; master<span class="o">)</span> x
-*   0013a1f <span class="o">(</span>origin/master<span class="o">)</span> Merge branch <span class="s1">&#39;dog&#39;</span>
-<span class="p">|</span><span class="se">\ </span> 
-<span class="p">|</span> * dd42b6e <span class="o">(</span>dog<span class="o">)</span> Add dog <span class="k">function</span> in animal.py
-* <span class="p">|</span> ee92c59 <span class="o">(</span>cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
-<span class="p">|</span>/  
-* 9e378e5 Add animal.py
-* 53a1f50 append new line
-* 06958ed Add hello.txt
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">* 32a4ab7 <span class="o">(</span>HEAD -&gt; master<span class="o">)</span> x
+</span></span><span class="line"><span class="cl">*   0013a1f <span class="o">(</span>origin/master<span class="o">)</span> Merge branch <span class="s1">&#39;dog&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span><span class="se">\ </span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span> * dd42b6e <span class="o">(</span>dog<span class="o">)</span> Add dog <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl">* <span class="p">|</span> ee92c59 <span class="o">(</span>cat<span class="o">)</span> Add cat <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl"><span class="p">|</span>/  
+</span></span><span class="line"><span class="cl">* 9e378e5 Add animal.py
+</span></span><span class="line"><span class="cl">* 53a1f50 append new line
+</span></span><span class="line"><span class="cl">* 06958ed Add hello.txt
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果我将<code>remote</code>这一远程仓库<code>clone</code>到<code>demo2</code>目录下，则其日志如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -760,15 +760,15 @@ To ../remote
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">*   0013a1f <span class="o">(</span>HEAD -&gt; master, origin/master, origin/HEAD<span class="o">)</span> Merge branch <span class="s1">&#39;dog&#39;</span>
-<span class="p">|</span><span class="se">\ </span> 
-<span class="p">|</span> * dd42b6e Add dog <span class="k">function</span> in animal.py
-* <span class="p">|</span> ee92c59 Add cat <span class="k">function</span> in animal.py
-<span class="p">|</span>/  
-* 9e378e5 Add animal.py
-* 53a1f50 append new line
-* 06958ed Add hello.txt
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">*   0013a1f <span class="o">(</span>HEAD -&gt; master, origin/master, origin/HEAD<span class="o">)</span> Merge branch <span class="s1">&#39;dog&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span><span class="se">\ </span> 
+</span></span><span class="line"><span class="cl"><span class="p">|</span> * dd42b6e Add dog <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl">* <span class="p">|</span> ee92c59 Add cat <span class="k">function</span> in animal.py
+</span></span><span class="line"><span class="cl"><span class="p">|</span>/  
+</span></span><span class="line"><span class="cl">* 9e378e5 Add animal.py
+</span></span><span class="line"><span class="cl">* 53a1f50 append new line
+</span></span><span class="line"><span class="cl">* 06958ed Add hello.txt
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此时你会发现，<code>demo2</code>中的<code>animal.py</code>文件是没有被修改过的。为了实现同步，我们需要在<code>demo</code>目录下进行<code>--set-upstream-to=</code>操作，最后直接进行<code>push</code>操作。</p>
 <p>此时，在<code>demo2</code>中，就需要进行同步操作了，即<code>git fetch</code>。这一操作仅仅是更新了索引或对象，而文件还没有被更新。我们可以使用<code>git pull</code>拉取文件中的内容，从而实现同步。</p>
@@ -871,7 +871,7 @@ To ../remote
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

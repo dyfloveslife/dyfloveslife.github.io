@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/02/01/java-object-and-reference/" />
@@ -150,26 +150,26 @@
 <p>为了便于理解，我们首先定义一个简单的类：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>然后可以使用以下语句创建对象：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这是我初次学习 Java 面向对象的时候，视频中的老师给出的引子。对于一个 <code>类</code> 来说，它是构造对象的模板和蓝图。而通过 <code>类</code> 来构造对象的过程称为 <code>创建类的实例</code>，也叫 <code>实例化</code>。</p>
 <p>上面的语句创建了一个对象，有如下几步：</p>
@@ -180,13 +180,13 @@
 <p>此时，我们再看如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Person</span> <span class="n">p</span><span class="o">;</span>
-<span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Person</span> <span class="n">p</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这看似和上面的代码没有什么差别，但更方便理解。这里首先创建了一个 <code>Person</code> 类型的引用变量 <code>p</code>，然后用对象的引用 <code>p</code> 通过 <code>=</code> 操作符指向刚才创建的 <code>Person</code> 对象。</p>
 <p>很显然，这里的 <code>p</code> 是对象的一个引用，是一个可以指向 <code>Person</code> 类的对象的引用，而不是所创建的对象，真正创建对象的语句是 <code>new Person()</code>。</p>
@@ -196,21 +196,21 @@
 <p>此时，再声明一个 <code>Person</code> 类型的引用，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Person</span> <span class="n">p1</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Person</span> <span class="n">p1</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>表示又做了一根绳子，但是还没有系上气球。如果再加上一句 <code>p1 = p;</code>，则说明系上了气球。因为这里对象没有被复制，而是对象的引用被复制了，所以 <code>p1</code> 也指向了 <code>p</code> 所指的对象。两根绳子（p 引用 和 p1 引用）系上的是同一个气球（对象）。</p>
 <p>如果执行了以下语句：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>则说明 <code>p1</code> 这一引用指向了另外一个对象，即另一个气球。</p>
 <p>此时，可以得到：</p>
@@ -221,21 +221,21 @@
 <p>此时，再执行下面的语句：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">p</span> <span class="o">=</span> <span class="n">p1</span><span class="o">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">p1</span><span class="o">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>同理，<code>p</code> 指向了第二个对象，也就是说，<code>p</code> 指向了 <code>p1</code> 所指的对象。那么第一个对象去哪儿了呢？第一个气球没有绳子了，它往哪儿飞了呢？其实，第一个对象被 Java 中的垃圾回收机制给回收了。</p>
 <p>好了，现在我们不看上面的语句，只看下面的语句：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样写也是合法的，表明生成一个临时对象，只是没有引用变量来引用它而已。</p>
 <h1 id="例子">例子</h1>
@@ -365,7 +365,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

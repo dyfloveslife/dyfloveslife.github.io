@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/12/09/talk-with-String/" />
@@ -144,7 +144,7 @@
 <p>先来个例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -158,19 +158,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="o">;</span>
-    <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="o">;</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="o">);</span> <span class="c1">// true
-</span><span class="c1"></span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;----&#34;</span><span class="o">);</span>
-
-    <span class="n">String</span> <span class="n">s3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abc&#34;</span><span class="o">);</span>
-    <span class="n">String</span> <span class="n">s4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abc&#34;</span><span class="o">);</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s3</span> <span class="o">==</span> <span class="n">s4</span><span class="o">);</span> <span class="c1">// false
-</span><span class="c1"></span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="o">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;----&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">s3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abc&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">s4</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abc&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s3</span> <span class="o">==</span> <span class="n">s4</span><span class="o">);</span> <span class="c1">// false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>从输出结果可以看到，<code>s1 == s2</code> 此时比较的是这两个对象的引用是否相等，而不是比较具体的内容。</strong></p>
 <p><strong>对于 <code>s3 == s4</code> 来说虽然内容相等，但是 <code>s3</code> 和 <code>s4</code> 是两个不同的引用，因此返回 <code>false</code>。</strong></p>
@@ -190,7 +190,7 @@
 <p>对于这条约定，我们可以用以下代码说明：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -198,13 +198,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Integer</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">100</span><span class="o">;</span>
-<span class="n">Integer</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">100</span><span class="o">;</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i1</span> <span class="o">==</span> <span class="n">i2</span><span class="o">);</span> <span class="c1">// true
-</span><span class="c1"></span><span class="n">Integer</span> <span class="n">i3</span> <span class="o">=</span> <span class="n">200</span><span class="o">;</span>
-<span class="n">Integer</span> <span class="n">i4</span> <span class="o">=</span> <span class="n">200</span><span class="o">;</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i3</span> <span class="o">==</span> <span class="n">i4</span><span class="o">);</span> <span class="c1">// false
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">100</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Integer</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">100</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i1</span> <span class="o">==</span> <span class="n">i2</span><span class="o">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Integer</span> <span class="n">i3</span> <span class="o">=</span> <span class="n">200</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Integer</span> <span class="n">i4</span> <span class="o">=</span> <span class="n">200</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i3</span> <span class="o">==</span> <span class="n">i4</span><span class="o">);</span> <span class="c1">// false
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>产生这种现象的原因是由于 <code>自动装箱</code> 造成的：</p>
 <ul>
@@ -232,7 +232,7 @@
 <p>源文件：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -243,21 +243,21 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Demo</span><span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="o">;</span>
-        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#34;456&#34;</span><span class="o">;</span>
-        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#34;789&#34;</span><span class="o">;</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Demo</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;123&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#34;456&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">+=</span> <span class="s">&#34;789&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>编译后的字节码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -295,60 +295,60 @@
 </span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ javap -c Demo
-Compiled from &#34;Demo.java&#34;
-public class Demo {
-  public Demo();
-    Code:
-       0: aload_0
-       1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
-       4: return
-
-  public static void main(java.lang.String[]);
-    Code:
-       0: ldc           #2                  // String 123
-       2: astore_1
-       3: new           #3                  // class java/lang/StringBuilder
-       6: dup
-       7: invokespecial #4                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
-      10: aload_1
-      11: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      14: ldc           #6                  // String 456
-      16: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      19: invokevirtual #7                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-      22: astore_1
-      23: new           #3                  // class java/lang/StringBuilder
-      26: dup
-      27: invokespecial #4                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
-      30: aload_1
-      31: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      34: ldc           #8                  // String 789
-      36: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      39: invokevirtual #7                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-      42: astore_1
-      43: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
-      46: aload_1
-      47: invokevirtual #10                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-      50: return
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ javap -c Demo
+</span></span><span class="line"><span class="cl">Compiled from &#34;Demo.java&#34;
+</span></span><span class="line"><span class="cl">public class Demo {
+</span></span><span class="line"><span class="cl">  public Demo();
+</span></span><span class="line"><span class="cl">    Code:
+</span></span><span class="line"><span class="cl">       0: aload_0
+</span></span><span class="line"><span class="cl">       1: invokespecial #1                  // Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">       4: return
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  public static void main(java.lang.String[]);
+</span></span><span class="line"><span class="cl">    Code:
+</span></span><span class="line"><span class="cl">       0: ldc           #2                  // String 123
+</span></span><span class="line"><span class="cl">       2: astore_1
+</span></span><span class="line"><span class="cl">       3: new           #3                  // class java/lang/StringBuilder
+</span></span><span class="line"><span class="cl">       6: dup
+</span></span><span class="line"><span class="cl">       7: invokespecial #4                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">      10: aload_1
+</span></span><span class="line"><span class="cl">      11: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+</span></span><span class="line"><span class="cl">      14: ldc           #6                  // String 456
+</span></span><span class="line"><span class="cl">      16: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+</span></span><span class="line"><span class="cl">      19: invokevirtual #7                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+</span></span><span class="line"><span class="cl">      22: astore_1
+</span></span><span class="line"><span class="cl">      23: new           #3                  // class java/lang/StringBuilder
+</span></span><span class="line"><span class="cl">      26: dup
+</span></span><span class="line"><span class="cl">      27: invokespecial #4                  // Method java/lang/StringBuilder.&#34;&lt;init&gt;&#34;:()V
+</span></span><span class="line"><span class="cl">      30: aload_1
+</span></span><span class="line"><span class="cl">      31: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+</span></span><span class="line"><span class="cl">      34: ldc           #8                  // String 789
+</span></span><span class="line"><span class="cl">      36: invokevirtual #5                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+</span></span><span class="line"><span class="cl">      39: invokevirtual #7                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+</span></span><span class="line"><span class="cl">      42: astore_1
+</span></span><span class="line"><span class="cl">      43: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
+</span></span><span class="line"><span class="cl">      46: aload_1
+</span></span><span class="line"><span class="cl">      47: invokevirtual #10                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+</span></span><span class="line"><span class="cl">      50: return
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过编译结果可以看出，第 <code>16</code> 行对应的是源代码中的第 <code>#4</code> 行，也就是 <code>String s = &quot;123&quot;;</code>语句。在初始化 <code>s</code> 的时候，其实在内部使用了 <code>StringBuilder</code>。</p>
 <p>然后到了第 <code>18</code> 行，也就是对应源代码中的第 <code>#5</code> 行，再执行 <code>s += &quot;456&quot;;</code> 语句的时候，调用了 <code>StringBuilder</code> 的 <code>append</code> 方法，最后调用 <code>StringBuilder</code> 的 <code>toString</code> 方法生成字符串。</p>
 <p>然而 <code>StringBuilder</code> 的 <code>toString</code> 方法是创建一个新的 <code>String</code> 对象的拷贝，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
-    <span class="c1">// Create a copy, don&#39;t share the array
-</span><span class="c1"></span>    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Create a copy, don&#39;t share the array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">count</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>所以说，每次在使用符号 “+” 的时候，都会 new 一个 <code>StringBuilder</code>，使用这种方式连接字符串无疑是一种对内存的浪费。</p>
 <h1 id="如何正确的连接字符串">如何正确的连接字符串？</h1>
@@ -358,7 +358,7 @@ public class Demo {
 <p>如下面代码所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -368,15 +368,15 @@ public class Demo {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">IntegerDemo</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abc &#34;</span><span class="o">)</span> <span class="o">+</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;def&#34;</span><span class="o">);</span>
-        <span class="n">s1</span><span class="o">.</span><span class="na">intern</span><span class="o">();</span>
-        <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;abc def&#34;</span><span class="o">;</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="o">);</span> <span class="c1">// true
-</span><span class="c1"></span>    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">IntegerDemo</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abc &#34;</span><span class="o">)</span> <span class="o">+</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;def&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s1</span><span class="o">.</span><span class="na">intern</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;abc def&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="o">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果将 <code>s1.intern();</code> 语句注释掉后，结果则返回 <code>false</code>。为什么？</p>
 <p>来分析一下第 3 行语句 <code>String s1 = new String(&quot;abc &quot;) + new String(&quot;def&quot;);</code>：</p>
@@ -401,7 +401,7 @@ public class Demo {
 <p>看下列代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -410,14 +410,14 @@ public class Demo {
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;aaa &#34;</span><span class="o">;</span> <span class="c1">// 注意：aaa 后面有一个空格
-</span><span class="c1"></span>    <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;bbb&#34;</span><span class="o">;</span>
-    <span class="n">String</span> <span class="n">s3</span> <span class="o">=</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span><span class="o">;</span>
-    <span class="n">String</span> <span class="n">s4</span> <span class="o">=</span> <span class="s">&#34;aaa bbb&#34;</span><span class="o">;</span>
-    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s3</span> <span class="o">==</span> <span class="n">s4</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;aaa &#34;</span><span class="o">;</span> <span class="c1">// 注意：aaa 后面有一个空格
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;bbb&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">s3</span> <span class="o">=</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">s2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">s4</span> <span class="o">=</span> <span class="s">&#34;aaa bbb&#34;</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s3</span> <span class="o">==</span> <span class="n">s4</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>经过前面的“修炼”，我想你应该知道上面代码最终的输出结果了。我们还是来分析一下最终的结果为什么是 <code>fasle</code>。</p>
 <ul>
@@ -522,7 +522,7 @@ public class Demo {
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/11/26/learn-Missing-Semester-shell/" />
@@ -162,7 +162,7 @@
 <p>例如：使用<code>echo</code>输出<code>hello</code>，然后使用<code>&gt;</code>将<code>hello</code>存储到<code>hello.txt</code>文件中，最后再输出<code>hello.txt</code>文件中的内容。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -170,45 +170,45 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> hello
-hello
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> hello &gt; hello.txt
-carol@ubuntu-carol:~/learnShell$ cat hello.txt 
-hello
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> hello
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> hello &gt; hello.txt
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat hello.txt 
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>例如：将<code>hello.txt</code>文件中的内容重定向给<code>cat</code>命令，然后再直接重定向到<code>hello2.txt</code>文件中。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ cat &lt; hello.txt &gt; hello2.txt
-carol@ubuntu-carol:~/learnShell$ cat hello2.txt 
-hello
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat &lt; hello.txt &gt; hello2.txt
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat hello2.txt 
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用<code>&gt;&gt;</code>以追加的方式，将指定的内容重定向到文件中。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ cat &lt; hello.txt &gt;&gt; hello2.txt 
-carol@ubuntu-carol:~/learnShell$ cat hello2.txt 
-hello
-hello
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat &lt; hello.txt &gt;&gt; hello2.txt 
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat hello2.txt 
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用管道命令<code>|</code>，将管道命令之前的输出作为管道命令之后的输入。</p>
 <blockquote>
@@ -216,32 +216,32 @@ carol@ubuntu-carol:~/learnShell$
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ ls -l / <span class="p">|</span> tail -n1
-drwxr-xr-x  <span class="m">14</span> root root       <span class="m">4096</span> Aug  <span class="m">1</span> 00:35 var
-carol@ubuntu-carol:~/learnShell$
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ ls -l / <span class="p">|</span> tail -n1
+</span></span><span class="line"><span class="cl">drwxr-xr-x  <span class="m">14</span> root root       <span class="m">4096</span> Aug  <span class="m">1</span> 00:35 var
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>当然，我们也可以将输出的内容重定向到一个文件中，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ ls -l / <span class="p">|</span> tail -n2 &gt; ls.txt
-carol@ubuntu-carol:~/learnShell$ cat ls.txt 
-drwxr-xr-x  <span class="m">14</span> root root       <span class="m">4096</span> Aug  <span class="m">1</span> 00:28 usr
-drwxr-xr-x  <span class="m">14</span> root root       <span class="m">4096</span> Aug  <span class="m">1</span> 00:35 var
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ ls -l / <span class="p">|</span> tail -n2 &gt; ls.txt
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat ls.txt 
+</span></span><span class="line"><span class="cl">drwxr-xr-x  <span class="m">14</span> root root       <span class="m">4096</span> Aug  <span class="m">1</span> 00:28 usr
+</span></span><span class="line"><span class="cl">drwxr-xr-x  <span class="m">14</span> root root       <span class="m">4096</span> Aug  <span class="m">1</span> 00:35 var
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>管道命令还可以这么使用。</p>
 <blockquote>
@@ -249,7 +249,7 @@ carol@ubuntu-carol:~/learnShell$
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -266,22 +266,22 @@ carol@ubuntu-carol:~/learnShell$
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ curl --head --silent www.baidu.com
-HTTP/1.1 <span class="m">200</span> OK
-Accept-Ranges: bytes
-Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform
-Connection: keep-alive
-Content-Length: <span class="m">277</span>
-Content-Type: text/html
-Date: Thu, <span class="m">26</span> Nov <span class="m">2020</span> 08:22:06 GMT
-Etag: <span class="s2">&#34;575e1f5c-115&#34;</span>
-Last-Modified: Mon, <span class="m">13</span> Jun <span class="m">2016</span> 02:50:04 GMT
-Pragma: no-cache
-Server: bfe/1.0.8.18
-
-carol@ubuntu-carol:~/learnShell$ curl --head --silent www.baidu.com <span class="p">|</span> grep -i content-length
-Content-Length: <span class="m">277</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ curl --head --silent www.baidu.com
+</span></span><span class="line"><span class="cl">HTTP/1.1 <span class="m">200</span> OK
+</span></span><span class="line"><span class="cl">Accept-Ranges: bytes
+</span></span><span class="line"><span class="cl">Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform
+</span></span><span class="line"><span class="cl">Connection: keep-alive
+</span></span><span class="line"><span class="cl">Content-Length: <span class="m">277</span>
+</span></span><span class="line"><span class="cl">Content-Type: text/html
+</span></span><span class="line"><span class="cl">Date: Thu, <span class="m">26</span> Nov <span class="m">2020</span> 08:22:06 GMT
+</span></span><span class="line"><span class="cl">Etag: <span class="s2">&#34;575e1f5c-115&#34;</span>
+</span></span><span class="line"><span class="cl">Last-Modified: Mon, <span class="m">13</span> Jun <span class="m">2016</span> 02:50:04 GMT
+</span></span><span class="line"><span class="cl">Pragma: no-cache
+</span></span><span class="line"><span class="cl">Server: bfe/1.0.8.18
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ curl --head --silent www.baidu.com <span class="p">|</span> grep -i content-length
+</span></span><span class="line"><span class="cl">Content-Length: <span class="m">277</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果想要获得<code>Content-Length: 277</code>中的<code>277</code>，则如下所示：</p>
 <blockquote>
@@ -289,15 +289,15 @@ Content-Length: <span class="m">277</span>
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ curl --head --silent www.baidu.com <span class="p">|</span> grep -i content-length <span class="p">|</span> cut --delimiter<span class="o">=</span><span class="s1">&#39; &#39;</span> -f2
-<span class="m">277</span>
-carol@ubuntu-carol:~/learnShell$
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ curl --head --silent www.baidu.com <span class="p">|</span> grep -i content-length <span class="p">|</span> cut --delimiter<span class="o">=</span><span class="s1">&#39; &#39;</span> -f2
+</span></span><span class="line"><span class="cl"><span class="m">277</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>值得一提的是：可以看到，在上面的命令行中，对于当前的用户<code>carol</code>来说，它的终端总是以<code>$</code>结尾。而如果我们使用<code>root</code>作为登录用户的话，则终端会变成以<code>#</code>结尾。如下所示：</p>
 <blockquote>
@@ -305,24 +305,24 @@ carol@ubuntu-carol:~/learnShell$
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~$ <span class="nb">pwd</span>
-/home/carol
-carol@ubuntu-carol:~$ sudo su
-➜  carol    
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~$ <span class="nb">pwd</span>
+</span></span><span class="line"><span class="cl">/home/carol
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~$ sudo su
+</span></span><span class="line"><span class="cl">➜  carol    
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>下图是在不安装 oh-my-zsh 的情况下，正常显示的结果。可以看到，用户名从<code>jon</code>变成了<code>root</code>，同时符号从<code>$</code>变成了<code>#</code>。</p>
 <p><img src="https://i.loli.net/2020/11/26/Jp36PO1ao4tQhX5.png" alt="image.png"></p>
 <p><code>tee</code>命令的作用是从标准输入中读取内容并写到标准输出中或文件中。你会看到，在使用<code>tee</code>后，对于想要写入到<code>number.txt</code>中的内容<code>1060</code>来说，它被打印了出来。因此，使用该命名相对其它写入命令来说更加安全一些，因为你可以看见其输出的内容。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -331,27 +331,27 @@ carol@ubuntu-carol:~$ sudo su
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ ls
-hello2.txt  hello.txt  ls.txt
-carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="m">1060</span> <span class="p">|</span> tee number.txt
-<span class="m">1060</span>
-carol@ubuntu-carol:~/learnShell$ cat number.txt 
-<span class="m">1060</span>
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ ls
+</span></span><span class="line"><span class="cl">hello2.txt  hello.txt  ls.txt
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ <span class="nb">echo</span> <span class="m">1060</span> <span class="p">|</span> tee number.txt
+</span></span><span class="line"><span class="cl"><span class="m">1060</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ cat number.txt 
+</span></span><span class="line"><span class="cl"><span class="m">1060</span>
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于<code>xdg-open</code>命令，在用户的首选应用程序中打开文件或 URL。例如，使用默认的浏览器打开<code>index.html</code>文件。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">carol@ubuntu-carol:~/learnShell$ xdg-open index.html 
-carol@ubuntu-carol:~/learnShell$ man xdg-open
-carol@ubuntu-carol:~/learnShell$ 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ xdg-open index.html 
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ man xdg-open
+</span></span><span class="line"><span class="cl">carol@ubuntu-carol:~/learnShell$ 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>至于其它的如<code>cd</code>、<code>ls</code>、<code>echo</code>等基础命令，这里就不涉及了。</p>
     </div>
@@ -451,7 +451,7 @@ carol@ubuntu-carol:~/learnShell$
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

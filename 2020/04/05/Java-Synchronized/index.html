@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/05/Java-Synchronized/" />
@@ -165,7 +165,7 @@
 <p>下面演示一个在不使用 synchronized 关键字时，两个线程同时对临界资源进行操作的例子，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -196,41 +196,41 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SynchronizedTest</span> <span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">InsertData</span> <span class="n">insertData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InsertData</span><span class="o">();</span>
-        <span class="c1">// 启动第一个线程
-</span><span class="c1"></span>        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">insertData</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">())).</span><span class="na">start</span><span class="o">();</span>
-
-        <span class="c1">// 启动第二个线程
-</span><span class="c1"></span>        <span class="k">new</span> <span class="n">Thread</span><span class="o">()</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">insertData</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-
-<span class="kd">class</span> <span class="nc">InsertData</span> <span class="o">{</span>
-    <span class="c1">// 临界资源
-</span><span class="c1"></span>    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span> <span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
-            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SynchronizedTest</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">InsertData</span> <span class="n">insertData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InsertData</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 启动第一个线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">insertData</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">())).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 启动第二个线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">new</span> <span class="n">Thread</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">insertData</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">InsertData</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 临界资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span> <span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -252,32 +252,32 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Thread-0正在插入数据: 0
-Thread-1正在插入数据: 0
-Thread-1正在插入数据: 1
-Thread-1正在插入数据: 2
-Thread-1正在插入数据: 3
-Thread-1正在插入数据: 4
-Thread-1正在插入数据: 5
-Thread-1正在插入数据: 6
-Thread-1正在插入数据: 7
-Thread-0正在插入数据: 1
-Thread-1正在插入数据: 8
-Thread-0正在插入数据: 2
-Thread-0正在插入数据: 3
-Thread-0正在插入数据: 4
-Thread-0正在插入数据: 5
-Thread-0正在插入数据: 6
-Thread-1正在插入数据: 9
-Thread-0正在插入数据: 7
-Thread-0正在插入数据: 8
-Thread-0正在插入数据: 9
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Thread-0正在插入数据: 0
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 0
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 1
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 2
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 3
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 4
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 5
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 6
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 7
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 1
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 8
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 2
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 3
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 4
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 5
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 6
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 9
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 7
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 8
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 9
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过结果可以看出，这两个线程在同时执行 insert 方法，而如果将 insert 方法用 synchronized 进行修饰，则会出现以下执行结果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -291,24 +291,24 @@ Thread-0正在插入数据: 9
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">InsertData</span> <span class="o">{</span>
-
-    <span class="c1">// 临界资源
-</span><span class="c1"></span>    <span class="kd">private</span>  <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-    <span class="c1">// 使用 synchronized 修饰
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
-            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">InsertData</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 临界资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span>  <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 使用 synchronized 修饰
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>执行结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -330,27 +330,27 @@ Thread-0正在插入数据: 9
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">Thread-0正在插入数据: 0
-Thread-0正在插入数据: 1
-Thread-0正在插入数据: 2
-Thread-0正在插入数据: 3
-Thread-0正在插入数据: 4
-Thread-0正在插入数据: 5
-Thread-0正在插入数据: 6
-Thread-0正在插入数据: 7
-Thread-0正在插入数据: 8
-Thread-0正在插入数据: 9
-Thread-1正在插入数据: 0
-Thread-1正在插入数据: 1
-Thread-1正在插入数据: 2
-Thread-1正在插入数据: 3
-Thread-1正在插入数据: 4
-Thread-1正在插入数据: 5
-Thread-1正在插入数据: 6
-Thread-1正在插入数据: 7
-Thread-1正在插入数据: 8
-Thread-1正在插入数据: 9
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Thread-0正在插入数据: 0
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 1
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 2
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 3
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 4
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 5
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 6
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 7
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 8
+</span></span><span class="line"><span class="cl">Thread-0正在插入数据: 9
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 0
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 1
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 2
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 3
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 4
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 5
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 6
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 7
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 8
+</span></span><span class="line"><span class="cl">Thread-1正在插入数据: 9
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>不管执行多少次，都是第一个线程（Thread-0）先获得 insert 方法的锁对象，等到第一个线程执行完并释放锁以后，第二个线程（Thread-1）才会获取锁，继而执行 insert 方法。</p>
 <p>synchronized 关键字让线程顺序执行成为了可能，但在使用时应<strong>注意以下几点</strong>：</p>
@@ -363,21 +363,21 @@ Thread-1正在插入数据: 9
 <p>可用以下形式让 synchronized 修饰同步代码块：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">synchronized</span> <span class="o">(</span><span class="n">object</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// 访问临界资源的代码
-</span><span class="c1"></span><span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">synchronized</span> <span class="o">(</span><span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 访问临界资源的代码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>此时，锁的是 synchronized 括号里配置的对象，也就是 object。当然，括号里面的也可以是<code>this</code>，其表示获取当前对象的锁。但需要注意的是：普通的同步方法与 synchronized(this) 同步代码块是<code>互斥的</code>，因为它们锁的是同一个对象，而普通的同步方法与 synchronized(非 this) 同步代码块是异步的，因为它们锁的是不同的对象。</p>
 <p>括号里面是<code>this</code>监视器的情况：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -392,25 +392,25 @@ Thread-1正在插入数据: 9
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">InsertData</span> <span class="o">{</span>
-    <span class="c1">// 临界资源
-</span><span class="c1"></span>    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
-                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">InsertData</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 临界资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>括号里面是<code>对象</code>监视器的情况：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -426,21 +426,21 @@ Thread-1正在插入数据: 9
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">InsertData</span> <span class="o">{</span>
-    <span class="c1">// 临界资源
-</span><span class="c1"></span>    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-    <span class="kd">private</span> <span class="n">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">();</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">synchronized</span> <span class="o">(</span><span class="n">object</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
-                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">InsertData</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 临界资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">Object</span> <span class="n">object</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Thread</span> <span class="n">thread</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">synchronized</span> <span class="o">(</span><span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">thread</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;正在插入数据: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对比普通同步方法和同步代码块可以看到，使用 synchronized 修饰的代码块比 synchronized 修饰的同步方法在锁粒度方面要细一些，也就是说锁定对象的范文更小了，从而减小了锁发生冲突的可能性，继而提高了系统的并发能力。</p>
 <p>如果我们想要在一个方法中将其中的一部分代码进行同步的话，如果此时使用 synchronized 来修饰整个方法，则会影响程序的执行效率，而使用同步代码快只对这部分代码进行同步的话，效果会好一些。</p>
@@ -450,7 +450,7 @@ Thread-1正在插入数据: 9
 <p>同时也需要注意的是，如果一个线程执行一个对象的非 static synchronized 方法，另外一个线程想要执行这个对象所属类的 static synchronized 方法时，是不会发生互斥的现象。因为访问 static synchronized 方法占用的是类的锁，而访问非 static synchronized 方法占用的是对象的锁，所以不存在互斥的现象。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -486,63 +486,63 @@ Thread-1正在插入数据: 9
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SynchronizedTest2</span> <span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-
-        <span class="kd">final</span> <span class="n">InsertData2</span> <span class="n">insertData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InsertData2</span><span class="o">();</span>
-        <span class="c1">// 分别启动两个线程
-</span><span class="c1"></span>        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">insertData</span><span class="o">.</span><span class="na">insert1</span><span class="o">()).</span><span class="na">start</span><span class="o">();</span>
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">()</span> <span class="o">{</span>
-            <span class="nd">@Override</span>
-            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-                <span class="n">insertData</span><span class="o">.</span><span class="na">insert2</span><span class="o">();</span>
-            <span class="o">}</span>
-        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">InsertData2</span> <span class="o">{</span>
-    <span class="c1">// 非 static 修饰的 synchronized 方法
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">insert1</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行 insert1&#34;</span><span class="o">);</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">5000</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-        <span class="o">}</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行 insert1 完毕&#34;</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="c1">// static 修饰的 synchronized 方法
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">insert2</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行 insert2&#34;</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行 insert2 完毕&#34;</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SynchronizedTest2</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">InsertData2</span> <span class="n">insertData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InsertData2</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 分别启动两个线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">insertData</span><span class="o">.</span><span class="na">insert1</span><span class="o">()).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">insertData</span><span class="o">.</span><span class="na">insert2</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}.</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">InsertData2</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 非 static 修饰的 synchronized 方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">insert1</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行 insert1&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">5000</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行 insert1 完毕&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// static 修饰的 synchronized 方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">insert2</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行 insert2&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;执行 insert2 完毕&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">执行</span> <span class="n">insert1</span>
-<span class="n">执行</span> <span class="n">insert2</span>
-<span class="n">执行</span> <span class="n">insert2</span> <span class="n">完毕</span>
-<span class="n">执行</span> <span class="n">insert1</span> <span class="n">完毕</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">执行</span> <span class="n">insert1</span>
+</span></span><span class="line"><span class="cl"><span class="n">执行</span> <span class="n">insert2</span>
+</span></span><span class="line"><span class="cl"><span class="n">执行</span> <span class="n">insert2</span> <span class="n">完毕</span>
+</span></span><span class="line"><span class="cl"><span class="n">执行</span> <span class="n">insert1</span> <span class="n">完毕</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，第一个线程执行的是 insert1 方法，不会导致第二个线程执行 insert2 方法时发生阻塞现象。最后需要注意的是，对于 synchronized 修饰的同步方法和 synchronized 修饰的同步代码快来说，当出现异常时，JVM 会自动释放当前线程占用的锁，因此不会出现由于异常而导致的死锁现象。</p>
 <h1 id="可重入锁">可重入锁</h1>
 <p>一般情况下，当某个线程请求一个由其它线程只有的锁时，发起请求的线程就会阻塞。<strong>而如果某个线程试图获得一个已经由它自己持有的锁时，那么这个请求就会成功，因此也称为可重入锁</strong>。Java 中的 ReentrantLock 和 synchronized 都属于可重入锁。其作用是可以在一定上避免死锁。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -570,38 +570,38 @@ Thread-1正在插入数据: 9
 </span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SynchronizedTest3</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
-
-    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
-        <span class="c1">// 注意这里调用了被 synchronized 修饰的 set 方法
-</span><span class="c1"></span>        <span class="n">set</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;run start...&#34;</span><span class="o">);</span>
-        <span class="n">get</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;run end...&#34;</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">SynchronizedTest3</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SynchronizedTest3</span><span class="o">();</span>
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;Thread-0&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;Thread-1&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
-        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;Thread-2&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SynchronizedTest3</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 注意这里调用了被 synchronized 修饰的 set 方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">set</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">set</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;run start...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">get</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;run end...&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SynchronizedTest3</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SynchronizedTest3</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;Thread-0&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;Thread-1&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">test</span><span class="o">,</span> <span class="s">&#34;Thread-2&#34;</span><span class="o">).</span><span class="na">start</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -615,19 +615,19 @@ Thread-1正在插入数据: 9
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">run</span> <span class="n">start</span><span class="o">...</span>
-<span class="n">Thread</span><span class="o">-</span><span class="n">0</span>
-<span class="n">Thread</span><span class="o">-</span><span class="n">0</span>
-<span class="n">run</span> <span class="n">end</span><span class="o">...</span>
-<span class="n">run</span> <span class="n">start</span><span class="o">...</span>
-<span class="n">Thread</span><span class="o">-</span><span class="n">2</span>
-<span class="n">Thread</span><span class="o">-</span><span class="n">2</span>
-<span class="n">run</span> <span class="n">end</span><span class="o">...</span>
-<span class="n">run</span> <span class="n">start</span><span class="o">...</span>
-<span class="n">Thread</span><span class="o">-</span><span class="n">1</span>
-<span class="n">Thread</span><span class="o">-</span><span class="n">1</span>
-<span class="n">run</span> <span class="n">end</span><span class="o">...</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">run</span> <span class="n">start</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">Thread</span><span class="o">-</span><span class="n">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">Thread</span><span class="o">-</span><span class="n">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">run</span> <span class="n">end</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">run</span> <span class="n">start</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">Thread</span><span class="o">-</span><span class="n">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Thread</span><span class="o">-</span><span class="n">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">run</span> <span class="n">end</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">run</span> <span class="n">start</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">Thread</span><span class="o">-</span><span class="n">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Thread</span><span class="o">-</span><span class="n">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">run</span> <span class="n">end</span><span class="o">...</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="同步代码块的注意事项">同步代码块的注意事项</h1>
 <p>需要注意的是：由于存在字符串常量池的原因，在使用同步代码块时<strong>不能</strong>使用 String 作为锁的对象，可以实例化 Object 对象，因为它并不会被放入缓存中。</p>
@@ -745,7 +745,7 @@ Thread-1正在插入数据: 9
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

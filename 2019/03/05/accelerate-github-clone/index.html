@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.85.0 with theme even" />
+<meta name="generator" content="Hugo 0.95.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/03/05/accelerate-github-clone/" />
@@ -150,7 +150,7 @@
 <p>在 <a href="https://github.com/chenxuhua/issues-blog/issues/3">这里</a> 看到了可以通过修改 Hosts 文件来加速 clone 速度，其给出的 Hosts 如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -170,25 +170,25 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># GitHub Start
-192.30.253.112 github.com
-192.30.253.118 gist.github.com
-151.101.112.133 assets-cdn.github.com
-151.101.184.133 raw.githubusercontent.com
-151.101.112.133 gist.githubusercontent.com
-151.101.184.133 cloud.githubusercontent.com
-151.101.112.133 camo.githubusercontent.com
-151.101.112.133 avatars0.githubusercontent.com
-151.101.112.133 avatars1.githubusercontent.com
-151.101.184.133 avatars2.githubusercontent.com
-151.101.12.133 avatars3.githubusercontent.com
-151.101.12.133 avatars4.githubusercontent.com
-151.101.184.133 avatars5.githubusercontent.com
-151.101.184.133 avatars6.githubusercontent.com
-151.101.184.133 avatars7.githubusercontent.com
-151.101.12.133 avatars8.githubusercontent.com
-# GitHub End
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># GitHub Start
+</span></span><span class="line"><span class="cl">192.30.253.112 github.com
+</span></span><span class="line"><span class="cl">192.30.253.118 gist.github.com
+</span></span><span class="line"><span class="cl">151.101.112.133 assets-cdn.github.com
+</span></span><span class="line"><span class="cl">151.101.184.133 raw.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.112.133 gist.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.184.133 cloud.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.112.133 camo.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.112.133 avatars0.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.112.133 avatars1.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.184.133 avatars2.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.12.133 avatars3.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.12.133 avatars4.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.184.133 avatars5.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.184.133 avatars6.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.184.133 avatars7.githubusercontent.com
+</span></span><span class="line"><span class="cl">151.101.12.133 avatars8.githubusercontent.com
+</span></span><span class="line"><span class="cl"># GitHub End
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>得到 Hosts 以后，就可以修改 Hosts 文件了。你可以使用 <a href="https://github.com/oldj/SwitchHosts/releases">SwitchHosts</a> 来进行更改，使用起来十分方便。</p>
 <p>下载好以后，双击<strong>SwitchHosts!.exe</strong>即可打开该软件，点击<strong>File</strong>-&gt;<strong>New</strong>，在<strong>Local</strong>的<strong>Hosts title</strong>可以填写上<strong>github</strong>，用于和其他 Hosts 进行区分，然后将上面的Hosts复制进去就可以了，如下图所示：</p>
@@ -200,7 +200,7 @@
 <p>然后，修改 git 配置文件，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -209,19 +209,19 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># socks5 协议，请将 1080 端口修改成自己的本地代理端口</span>
-git config --global http.proxy socks5://127.0.0.1:1080
-git config --global https.proxy socks5://127.0.0.1:1080
-
-<span class="c1"># http 协议，请将 1081 端口修改成自己的本地代理端口</span>
-git config --global http.proxy http://127.0.0.1:1081
-git config --global https.proxy https://127.0.0.1:1081
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># socks5 协议，请将 1080 端口修改成自己的本地代理端口</span>
+</span></span><span class="line"><span class="cl">git config --global http.proxy socks5://127.0.0.1:1080
+</span></span><span class="line"><span class="cl">git config --global https.proxy socks5://127.0.0.1:1080
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># http 协议，请将 1081 端口修改成自己的本地代理端口</span>
+</span></span><span class="line"><span class="cl">git config --global http.proxy http://127.0.0.1:1081
+</span></span><span class="line"><span class="cl">git config --global https.proxy https://127.0.0.1:1081
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过以上设置，就可以加快<code>git clone</code>的速度了，下面是一些常用的命令：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -229,13 +229,13 @@ git config --global https.proxy https://127.0.0.1:1081
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 查看所有配置</span>
-git config -l
-
-<span class="c1"># 重置代理设置</span>
-git config --global --unset http.proxy
-git config --global --unset https.proxy
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查看所有配置</span>
+</span></span><span class="line"><span class="cl">git config -l
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 重置代理设置</span>
+</span></span><span class="line"><span class="cl">git config --global --unset http.proxy
+</span></span><span class="line"><span class="cl">git config --global --unset https.proxy
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -336,7 +336,7 @@ git config --global --unset https.proxy
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

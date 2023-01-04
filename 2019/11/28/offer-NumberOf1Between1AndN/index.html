@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.95.0 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/11/28/offer-NumberOf1Between1AndN/" />
@@ -45,11 +45,10 @@
 <meta property="og:url" content="http://localhost:1313/2019/11/28/offer-NumberOf1Between1AndN/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-11-28T15:26:11+08:00" />
 <meta property="article:modified_time" content="2019-11-28T15:32:56+08:00" />
-
 <meta itemprop="name" content="剑指 Offer 之 从整数 1 到 n 中 1 出现的次数">
 <meta itemprop="description" content="该题是剑指 Offer 中一道考验分析数字规律的题，在 LeetCode 上看到一种十分巧妙的方法，为此在这里记录一下，以便日后复习。"><meta itemprop="datePublished" content="2019-11-28T15:26:11+08:00" />
 <meta itemprop="dateModified" content="2019-11-28T15:32:56+08:00" />
-<meta itemprop="wordCount" content="1205">
+<meta itemprop="wordCount" content="1206">
 <meta itemprop="keywords" content="Algorithm,剑指Offer," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="剑指 Offer 之 从整数 1 到 n 中 1 出现的次数"/>
 <meta name="twitter:description" content="该题是剑指 Offer 中一道考验分析数字规律的题，在 LeetCode 上看到一种十分巧妙的方法，为此在这里记录一下，以便日后复习。"/>
@@ -126,7 +125,7 @@
         <div class="post-category">
             <a href="/categories/Algorithm/"> Algorithm </a>
             </div>
-          <span class="more-meta"> 1205 words </span>
+          <span class="more-meta"> 1206 words </span>
           <span class="more-meta"> 3 mins read </span>
         
       </div>
@@ -390,10 +389,10 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">NumberOf1Between1AndN_Solution</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">m</span> <span class="o">*=</span> <span class="n">10</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="o">;</span> <span class="n">m</span> <span class="o">*=</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="n">m</span><span class="o">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="n">m</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">+=</span> <span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">8</span><span class="o">)</span> <span class="o">/</span> <span class="n">10</span> <span class="o">*</span> <span class="n">m</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">%</span> <span class="n">10</span> <span class="o">==</span> <span class="n">1</span> <span class="o">?</span> <span class="n">b</span> <span class="o">+</span> <span class="n">1</span> <span class="o">:</span> <span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">+=</span> <span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">8</span><span class="o">)</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">m</span> <span class="o">+</span> <span class="o">(</span><span class="n">a</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -501,7 +500,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

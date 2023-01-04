@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.95.0 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/04/27/Java-CopyOnWrite/" />
@@ -45,7 +45,6 @@
 <meta property="og:url" content="http://localhost:1313/2020/04/27/Java-CopyOnWrite/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-04-27T15:02:11+08:00" />
 <meta property="article:modified_time" content="2020-04-27T19:19:56+08:00" />
-
 <meta itemprop="name" content="Java 中的 CopyOnWrite 容器">
 <meta itemprop="description" content="在某些读多写少的多线程环境下，基于 CopyOnWrite 思想的 CopyOnWriteArrayList 容器和 CopyOnWriteArraySet 容器可以保证线程安全，能够确保读操作和写操作之间不会被阻塞。本文将会从 线程不安全的 ArrayList 入手，由 CopyOnWrite 思想引申到 CopyOnWriteArrayList，通过示例说明它是怎么保证线程安全的，适用的场景，最后对其进行总结。"><meta itemprop="datePublished" content="2020-04-27T15:02:11+08:00" />
 <meta itemprop="dateModified" content="2020-04-27T19:19:56+08:00" />
@@ -210,7 +209,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Object</span><span class="o">[]</span> <span class="n">elements</span> <span class="o">=</span> <span class="n">getArray</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 将原数组中的内容拷贝到新数组中
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">len</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Object</span><span class="o">[]</span> <span class="n">newElements</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">elements</span><span class="o">,</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 将指定的元素 e 插入到新数组中的末尾
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">newElements</span><span class="o">[</span><span class="n">len</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 设置新数组对象
@@ -313,7 +312,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">COWIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;(</span><span class="n">getArray</span><span class="o">(),</span> <span class="n">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">COWIterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;(</span><span class="n">getArray</span><span class="o">(),</span> <span class="mi">0</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
@@ -456,7 +455,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

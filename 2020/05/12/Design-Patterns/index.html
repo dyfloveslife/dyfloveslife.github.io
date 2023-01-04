@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.95.0 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/05/12/Design-Patterns/" />
@@ -45,7 +45,6 @@
 <meta property="og:url" content="http://localhost:1313/2020/05/12/Design-Patterns/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-05-12T11:43:11+08:00" />
 <meta property="article:modified_time" content="2020-06-11T17:24:56+08:00" />
-
 <meta itemprop="name" content="设计模式汇总">
 <meta itemprop="description" content="之前或多或少接触过几种设计模式，只不过没有好好的总结。本文用于记录自己在设计模式方面的学习过程，在学习期间阅读了有关设计模式的书籍，挑选了博客园中优秀的文章，搜集网上的资料并进行了筛选，也看过别人对设计模式的总结。只是单纯看的话，会容易忘记。因此，我一般喜欢“输出式学习”，将学过的知识与自己对知识的理解整理下来，构建一套属于自己的知识体系。即便以后忘记了，也会通过浏览对原有知识的总结，很快重新拾起这部分的知识。"><meta itemprop="datePublished" content="2020-05-12T11:43:11+08:00" />
 <meta itemprop="dateModified" content="2020-06-11T17:24:56+08:00" />
@@ -298,9 +297,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">汽车</span> <span class="n">在公路上运行</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="n">飞机</span> <span class="n">在公路上运行</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="n">潜艇</span> <span class="n">在公路上运行</span><span class="o">...</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">汽车</span> <span class="err">在公路上运行</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">飞机</span> <span class="err">在公路上运行</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">潜艇</span> <span class="err">在公路上运行</span><span class="o">...</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>从结果可以看到，<code>飞机 在公路上运行...</code>以及<code>潜艇 在公路上运行...</code>这显然是不合适的，这是因为它们都使用了 Vehicle 中的 run() 方法，这里了违反了<code>单一职责原则</code>。解决方法也很简单，可以根据交通工具运行方式的不同，分解成不同的类即可。如下所示：</p>
@@ -442,9 +441,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">汽车</span> <span class="n">在路上跑</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="n">飞机</span> <span class="n">在空中飞</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="n">潜艇</span> <span class="n">在水里游</span><span class="o">...</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">汽车</span> <span class="err">在路上跑</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">飞机</span> <span class="err">在空中飞</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">潜艇</span> <span class="err">在水里游</span><span class="o">...</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，以上修改方式虽然也违背了<code>单一职责原则</code>，对原来的类做了修改，但只是增加了几个方法。从方法层面上看，它是符合<code>单一职责原则</code>的，因为没有改动原来方法中的代码，每个方法分别有自己的职责，完成自己的任务，不干涉其它方法的任务。</p>
@@ -493,15 +492,15 @@
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">_02_1_LiskovSubstitutionPrinciple</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">A</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">1</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;8 - 2 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="n">8</span><span class="o">,</span> <span class="n">2</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;8 - 2 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;==============&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">B</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">B</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">1</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;8 - 2 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="n">8</span><span class="o">,</span> <span class="n">2</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 + 1 + 10 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func2</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;8 - 2 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 + 1 + 10 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func2</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -517,7 +516,7 @@
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">func2</span><span class="o">(</span><span class="kt">int</span> <span class="n">value1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">value2</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">func1</span><span class="o">(</span><span class="n">value1</span><span class="o">,</span> <span class="n">value2</span><span class="o">)</span> <span class="o">+</span> <span class="n">10</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">func1</span><span class="o">(</span><span class="n">value1</span><span class="o">,</span> <span class="n">value2</span><span class="o">)</span> <span class="o">+</span> <span class="mi">10</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
@@ -533,12 +532,12 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">3</span> <span class="o">-</span> <span class="n">1</span> <span class="o">=</span> <span class="n">2</span>
-</span></span><span class="line"><span class="cl"><span class="n">8</span> <span class="o">-</span> <span class="n">2</span> <span class="o">=</span> <span class="n">6</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="mi">3</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="mi">8</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">=</span> <span class="mi">6</span>
 </span></span><span class="line"><span class="cl"><span class="o">==============</span>
-</span></span><span class="line"><span class="cl"><span class="n">3</span> <span class="o">-</span> <span class="n">1</span> <span class="o">=</span> <span class="n">4</span>
-</span></span><span class="line"><span class="cl"><span class="n">8</span> <span class="o">-</span> <span class="n">2</span> <span class="o">=</span> <span class="n">10</span>
-</span></span><span class="line"><span class="cl"><span class="n">3</span> <span class="o">+</span> <span class="n">1</span> <span class="o">+</span> <span class="n">10</span> <span class="o">=</span> <span class="n">14</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="mi">8</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">=</span> <span class="mi">14</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>先不着急看运行结果，我们先看一下类 A 和类 B 所实现的功能。类 A 中的 func1() 方法用于返回两数之差，类 B 继承了类 A，但是由于需要在类 B 中新添加一个功能：即完成两数相加，然后再和 10 求和的功能。也就是说，类 B 无意间重写了类 A 中的 func1() 方法。</p>
@@ -598,19 +597,19 @@
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">_02_2_LiskovSubstitutionPrinciple</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">A</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">1</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;8 - 2 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="n">8</span><span class="o">,</span> <span class="n">2</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;8 - 2 = &#34;</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;==============&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">B</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">B</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 由于类 B 不再继承类 A，因此调用者就会很明确该函数完成的功能
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 + 1 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">1</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;8 + 2 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="n">8</span><span class="o">,</span> <span class="n">2</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 + 1 + 10 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func2</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">1</span><span class="o">));</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 + 1 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;8 + 2 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func1</span><span class="o">(</span><span class="mi">8</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 + 1 + 10 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func2</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;==============&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func3</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;3 - 1 = &#34;</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="na">func3</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -633,7 +632,7 @@
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">func2</span><span class="o">(</span><span class="kt">int</span> <span class="n">value1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">value2</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">func1</span><span class="o">(</span><span class="n">value1</span><span class="o">,</span> <span class="n">value2</span><span class="o">)</span> <span class="o">+</span> <span class="n">10</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">func1</span><span class="o">(</span><span class="n">value1</span><span class="o">,</span> <span class="n">value2</span><span class="o">)</span> <span class="o">+</span> <span class="mi">10</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 调用类 A 中的求差方法
@@ -1159,12 +1158,12 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">类</span> <span class="n">B</span> <span class="n">中实现了</span> <span class="nf">method1</span><span class="o">()...</span>
-</span></span><span class="line"><span class="cl"><span class="n">类</span> <span class="n">B</span> <span class="n">中实现了</span> <span class="nf">method2</span><span class="o">()...</span>
-</span></span><span class="line"><span class="cl"><span class="n">类</span> <span class="n">B</span> <span class="n">中实现了</span> <span class="nf">method3</span><span class="o">()...</span>
-</span></span><span class="line"><span class="cl"><span class="n">类</span> <span class="n">D</span> <span class="n">中实现了</span> <span class="nf">method1</span><span class="o">()...</span>
-</span></span><span class="line"><span class="cl"><span class="n">类</span> <span class="n">D</span> <span class="n">中实现了</span> <span class="nf">method4</span><span class="o">()...</span>
-</span></span><span class="line"><span class="cl"><span class="n">类</span> <span class="n">D</span> <span class="n">中实现了</span> <span class="nf">method5</span><span class="o">()...</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">类</span> <span class="n">B</span> <span class="err">中实现了</span> <span class="n">method1</span><span class="o">()...</span>
+</span></span><span class="line"><span class="cl"><span class="err">类</span> <span class="n">B</span> <span class="err">中实现了</span> <span class="n">method2</span><span class="o">()...</span>
+</span></span><span class="line"><span class="cl"><span class="err">类</span> <span class="n">B</span> <span class="err">中实现了</span> <span class="n">method3</span><span class="o">()...</span>
+</span></span><span class="line"><span class="cl"><span class="err">类</span> <span class="n">D</span> <span class="err">中实现了</span> <span class="n">method1</span><span class="o">()...</span>
+</span></span><span class="line"><span class="cl"><span class="err">类</span> <span class="n">D</span> <span class="err">中实现了</span> <span class="n">method4</span><span class="o">()...</span>
+</span></span><span class="line"><span class="cl"><span class="err">类</span> <span class="n">D</span> <span class="err">中实现了</span> <span class="n">method5</span><span class="o">()...</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过改进可以看出，这里对之前的接口进行了改进，将其分解成多个接口，尽量做到接口的细化，接口中的方法尽量少，为每个类设计专用的接口。</p>
@@ -1296,7 +1295,7 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">// 返回学院所有的员工 id
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CollegeEmployee</span><span class="o">&gt;</span> <span class="nf">getAllEmployee</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">CollegeEmployee</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">CollegeEmployee</span> <span class="n">emp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CollegeEmployee</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">            <span class="n">emp</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="s">&#34;学院员工 id = &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">emp</span><span class="o">);</span>
@@ -1310,7 +1309,7 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">// 返回学校总部的所有员工的 id
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="nf">getAllEmployee</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">Employee</span> <span class="n">emp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Employee</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">            <span class="n">emp</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="s">&#34;学校总部员工 id = &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">emp</span><span class="o">);</span>
@@ -1431,7 +1430,7 @@
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">CollegeManager</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">CollegeEmployee</span><span class="o">&gt;</span> <span class="nf">getAllEmployee</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">CollegeEmployee</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">CollegeEmployee</span> <span class="n">emp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CollegeEmployee</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">            <span class="n">emp</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="s">&#34;学院员工 id = &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">emp</span><span class="o">);</span>
@@ -1452,7 +1451,7 @@
 </span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">SchoolManager</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="nf">getAllEmployee</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">Employee</span> <span class="n">emp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Employee</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">            <span class="n">emp</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="s">&#34;学校总部员工 id = &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">emp</span><span class="o">);</span>
@@ -1534,9 +1533,9 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">GraphicEditor</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawShape</span><span class="o">(</span><span class="n">Shape</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">type</span> <span class="o">==</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">type</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">drawRectangle</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">type</span> <span class="o">==</span> <span class="n">2</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">type</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">drawCircle</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -1556,13 +1555,13 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">extends</span> <span class="n">Shape</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Rectangle</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">extends</span> <span class="n">Shape</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Circle</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1655,12 +1654,12 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">GraphicEditor</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drawShape</span><span class="o">(</span><span class="n">Shape</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">type</span> <span class="o">==</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">type</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">drawRectangle</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">type</span> <span class="o">==</span> <span class="n">2</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">type</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">drawCircle</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// 这里增加了判断
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">type</span> <span class="o">==</span> <span class="n">3</span><span class="o">)</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">type</span> <span class="o">==</span> <span class="mi">3</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">drawTriangle</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -1685,20 +1684,20 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">extends</span> <span class="n">Shape</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Rectangle</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">extends</span> <span class="n">Shape</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Circle</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 这里增加了新的类
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">class</span> <span class="nc">Triangle</span> <span class="kd">extends</span> <span class="n">Shape</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Triangle</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="n">3</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
@@ -1805,7 +1804,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">extends</span> <span class="n">Shape</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Rectangle</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
@@ -1816,7 +1815,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">extends</span> <span class="n">Shape</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Circle</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
@@ -1827,7 +1826,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">Triangle</span> <span class="kd">extends</span> <span class="n">Shape</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Triangle</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="n">3</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">type</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
@@ -3122,13 +3121,13 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">普通房子打桩</span> <span class="n">5</span> <span class="n">米</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="n">普通房子砌墙</span> <span class="n">2</span> <span class="n">米</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="n">普通房子封顶</span> <span class="n">1</span> <span class="n">米</span><span class="o">...</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">普通房子打桩</span> <span class="mi">5</span> <span class="err">米</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">普通房子砌墙</span> <span class="mi">2</span> <span class="err">米</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">普通房子封顶</span> <span class="mi">1</span> <span class="err">米</span><span class="o">...</span>
 </span></span><span class="line"><span class="cl"><span class="o">=================</span>
-</span></span><span class="line"><span class="cl"><span class="n">高楼打桩</span> <span class="n">10</span> <span class="n">米</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="n">高楼砌墙</span> <span class="n">5</span> <span class="n">米</span><span class="o">...</span>
-</span></span><span class="line"><span class="cl"><span class="n">高楼封顶</span> <span class="n">10</span> <span class="n">米</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">高楼打桩</span> <span class="mi">10</span> <span class="err">米</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">高楼砌墙</span> <span class="mi">5</span> <span class="err">米</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="err">高楼封顶</span> <span class="mi">10</span> <span class="err">米</span><span class="o">...</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><!-- raw HTML omitted -->
@@ -3636,7 +3635,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Voltage220V</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">output220V</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">src</span> <span class="o">=</span> <span class="n">220</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">src</span> <span class="o">=</span> <span class="mi">220</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;电压 = &#34;</span> <span class="o">+</span> <span class="n">src</span> <span class="o">+</span> <span class="s">&#34;V...&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">src</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -3653,7 +3652,7 @@
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">output5V</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 拿到 220V 电压之后将其处理成 5V 电压，然后返回
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">src</span> <span class="o">=</span> <span class="n">output220V</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">dst</span> <span class="o">=</span> <span class="n">src</span> <span class="o">/</span> <span class="n">44</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">dst</span> <span class="o">=</span> <span class="n">src</span> <span class="o">/</span> <span class="mi">44</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dst</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -3662,7 +3661,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Phone</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">charging</span><span class="o">(</span><span class="n">IVoltage5V</span> <span class="n">iVoltage5V</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">iVoltage5V</span><span class="o">.</span><span class="na">output5V</span><span class="o">()</span> <span class="o">==</span> <span class="n">5</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">iVoltage5V</span><span class="o">.</span><span class="na">output5V</span><span class="o">()</span> <span class="o">==</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;电压为 5V，手机开始充电...&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;电压不为 5V，不适合手机充电...&#34;</span><span class="o">);</span>
@@ -3739,10 +3738,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">output5V</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">dst</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">dst</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">voltage220V</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">src</span> <span class="o">=</span> <span class="n">voltage220V</span><span class="o">.</span><span class="na">output220V</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">dst</span> <span class="o">=</span> <span class="n">src</span> <span class="o">/</span> <span class="n">44</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dst</span> <span class="o">=</span> <span class="n">src</span> <span class="o">/</span> <span class="mi">44</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dst</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
@@ -3940,7 +3939,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">ShortBlack</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">setDes</span><span class="o">(</span><span class="s">&#34;ShortBlack 咖啡...&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="n">7</span><span class="o">.</span><span class="na">0F</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="mf">7.0F</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -3948,7 +3947,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Decaf</span> <span class="kd">extends</span> <span class="n">Coffee</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">Decaf</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">setDes</span><span class="o">(</span><span class="s">&#34;Decaf 咖啡...&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="n">10</span><span class="o">.</span><span class="na">0F</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="mf">10.0F</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -3957,7 +3956,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">Espresso</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">setDes</span><span class="o">(</span><span class="s">&#34;Espresso 咖啡...&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="n">6</span><span class="o">.</span><span class="na">0F</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="mf">6.0F</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -3965,7 +3964,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LongBlack</span> <span class="kd">extends</span> <span class="n">Coffee</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">LongBlack</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">setDes</span><span class="o">(</span><span class="s">&#34;LongBlack 咖啡...&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="n">11</span><span class="o">.</span><span class="na">0F</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="mf">11.0F</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
@@ -4003,7 +4002,7 @@
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Drink</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="n">des</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">float</span> <span class="n">price</span> <span class="o">=</span> <span class="n">0</span><span class="o">.</span><span class="na">0F</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">float</span> <span class="n">price</span> <span class="o">=</span> <span class="mf">0.0F</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getDes</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">des</span><span class="o">;</span>
@@ -4129,7 +4128,7 @@
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">Chocolate</span><span class="o">(</span><span class="n">Drink</span> <span class="n">drink</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">(</span><span class="n">drink</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">setDes</span><span class="o">(</span><span class="s">&#34;Chocolate...&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="n">2</span><span class="o">.</span><span class="na">0F</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="mf">2.0F</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -4139,7 +4138,7 @@
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">Milk</span><span class="o">(</span><span class="n">Drink</span> <span class="n">drink</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">(</span><span class="n">drink</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">setDes</span><span class="o">(</span><span class="s">&#34;Milk...&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="n">1</span><span class="o">.</span><span class="na">2F</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="mf">1.2F</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -4149,7 +4148,7 @@
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">Soy</span><span class="o">(</span><span class="n">Drink</span> <span class="n">drink</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">(</span><span class="n">drink</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">setDes</span><span class="o">(</span><span class="s">&#34;Soy...&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="n">0</span><span class="o">.</span><span class="na">6F</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setPrice</span><span class="o">(</span><span class="mf">0.6F</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
@@ -4380,7 +4379,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

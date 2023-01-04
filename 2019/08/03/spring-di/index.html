@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.95.0 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/08/03/spring-di/" />
@@ -45,7 +45,6 @@
 <meta property="og:url" content="http://localhost:1313/2019/08/03/spring-di/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-08-03T21:03:11+00:00" />
 <meta property="article:modified_time" content="2021-07-18T17:15:00+00:00" />
-
 <meta itemprop="name" content=" Spring 学习笔记（4）依赖注入 DI ">
 <meta itemprop="description" content="本篇文章主要对 Spring 框架中的核心功能之一依赖注入 (DI，Dependency Injection) 进行介绍，也是采用 理论&#43;实战 的方式给大家阐述其中的原理以及明确需要注意的地方。"><meta itemprop="datePublished" content="2019-08-03T21:03:11+00:00" />
 <meta itemprop="dateModified" content="2021-07-18T17:15:00+00:00" />
@@ -456,7 +455,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">&#34;main&#34;</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">factory</span><span class="o">.</span><span class="na">NoUniqueBeanDefinitionException</span><span class="o">:</span> <span class="n">No</span> <span class="n">qualifying</span> <span class="n">bean</span> <span class="n">of</span> <span class="n">type</span> <span class="err">&#39;</span><span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">springdemo</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">HelloWorld</span><span class="err">&#39;</span> <span class="n">available</span><span class="o">:</span> <span class="n">expected</span> <span class="n">single</span> <span class="n">matching</span> <span class="n">bean</span> <span class="n">but</span> <span class="n">found</span> <span class="n">2</span><span class="o">:</span> <span class="n">helloWorld</span><span class="o">,</span><span class="n">helloWorld2</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">&#34;main&#34;</span> <span class="n">org</span><span class="o">.</span><span class="na">springframework</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">factory</span><span class="o">.</span><span class="na">NoUniqueBeanDefinitionException</span><span class="o">:</span> <span class="n">No</span> <span class="n">qualifying</span> <span class="n">bean</span> <span class="n">of</span> <span class="n">type</span> <span class="err">&#39;</span><span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">springdemo</span><span class="o">.</span><span class="na">beans</span><span class="o">.</span><span class="na">HelloWorld</span><span class="err">&#39;</span> <span class="n">available</span><span class="o">:</span> <span class="n">expected</span> <span class="n">single</span> <span class="n">matching</span> <span class="n">bean</span> <span class="n">but</span> <span class="n">found</span> <span class="mi">2</span><span class="o">:</span> <span class="n">helloWorld</span><span class="o">,</span><span class="n">helloWorld2</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="3-注入的方式">3. 注入的方式</h2>
@@ -1872,8 +1871,8 @@
 </span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Car</span><span class="o">&gt;</span> <span class="n">cars</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="n">300000</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="n">200000</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="mi">300000</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="mi">200000</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="cm">/**
@@ -1966,8 +1965,8 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="nf">InstanceCarFactory</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">cars</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="n">400000</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="n">500000</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Audi&#34;</span><span class="o">,</span> <span class="mi">400000</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cars</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="s">&#34;Ford&#34;</span><span class="o">,</span> <span class="mi">500000</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Car</span> <span class="nf">getCar</span><span class="o">(</span><span class="n">String</span> <span class="n">brand</span><span class="o">)</span> <span class="o">{</span>
@@ -2082,7 +2081,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm">     */</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Car</span> <span class="nf">getObject</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="n">brand</span><span class="o">,</span> <span class="n">500000</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">Car</span><span class="o">(</span><span class="n">brand</span><span class="o">,</span> <span class="mi">500000</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="cm">/**
@@ -2738,7 +2737,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

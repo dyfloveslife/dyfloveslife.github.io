@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.95.0 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/03/20/Java-final-static/" />
@@ -44,7 +44,6 @@
 <meta property="og:url" content="http://localhost:1313/2020/03/20/Java-final-static/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-03-20T13:32:11+08:00" />
 <meta property="article:modified_time" content="2020-03-20T20:07:11+08:00" />
-
 <meta itemprop="name" content="Java 中的 final 和 static 关键字">
 <meta itemprop="description" content="之前对关键字 final 和 static 的具体使用场景很是模糊，什么时候使用 final，什么时候使用 static，当使用它们的时候会产生什么效果。本文将对 final 和 static 进"><meta itemprop="datePublished" content="2020-03-20T13:32:11+08:00" />
 <meta itemprop="dateModified" content="2020-03-20T20:07:11+08:00" />
@@ -236,8 +235,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">子类中重写了父类中普通的</span> <span class="n">m1</span> <span class="n">方法</span>
-</span></span><span class="line"><span class="cl"><span class="n">父类中被</span> <span class="kd">final</span> <span class="n">修饰的</span> <span class="n">m2</span> <span class="n">方法</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">子类中重写了父类中普通的</span> <span class="n">m1</span> <span class="err">方法</span>
+</span></span><span class="line"><span class="cl"><span class="err">父类中被</span> <span class="kd">final</span> <span class="err">修饰的</span> <span class="n">m2</span> <span class="err">方法</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="final-修饰变量">final 修饰变量</h2>
@@ -373,7 +372,7 @@
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">StaticMethodTest</span><span class="o">.</span><span class="na">sum</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">StaticMethodTest</span><span class="o">.</span><span class="na">sum</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sum</span><span class="o">);</span> <span class="c1">// 输出 3
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -406,7 +405,7 @@
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">i</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;静态代码块中的 i: &#34;</span> <span class="o">+</span> <span class="n">i</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -426,8 +425,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">静态代码块中的</span> <span class="n">i</span><span class="o">:</span> <span class="n">1</span>
-</span></span><span class="line"><span class="cl"><span class="n">main</span> <span class="n">方法中的</span> <span class="n">i</span><span class="o">:</span> <span class="n">1</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">静态代码块中的</span> <span class="n">i</span><span class="o">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">main</span> <span class="err">方法中的</span> <span class="n">i</span><span class="o">:</span> <span class="mi">1</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看出，由于静态代码块是在类的初始化阶段完成的，因此在创建类的第二个对象<code>test1</code>的时候，该类的静态代码块就不会执行了。</p>
@@ -576,15 +575,15 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="n">的静态代码块</span> <span class="n">1</span>
-</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="n">的静态代码块</span> <span class="n">2</span>
-</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="n">的非静态代码块</span> <span class="n">1</span>
-</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="n">的非静态代码块</span> <span class="n">2</span>
-</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="n">的构造器</span><span class="o">.</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="err">的静态代码块</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="err">的静态代码块</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="err">的非静态代码块</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="err">的非静态代码块</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="err">的构造器</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl"><span class="o">====================</span>
-</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="n">的非静态代码块</span> <span class="n">1</span>
-</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="n">的非静态代码块</span> <span class="n">2</span>
-</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="n">的构造器</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="err">的非静态代码块</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="err">的非静态代码块</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">CodeBlockTest</span> <span class="err">的构造器</span><span class="o">.</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>对于多个类（继承）的情况</strong>：</p>
@@ -916,7 +915,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

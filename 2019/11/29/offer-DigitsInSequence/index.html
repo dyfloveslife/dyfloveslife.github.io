@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.95.0 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/11/29/offer-DigitsInSequence/" />
@@ -45,7 +45,6 @@
 <meta property="og:url" content="http://localhost:1313/2019/11/29/offer-DigitsInSequence/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-11-29T19:23:11+08:00" />
 <meta property="article:modified_time" content="2019-11-29T19:23:56+08:00" />
-
 <meta itemprop="name" content="剑指 Offer 之 数字序列中某一位的数字">
 <meta itemprop="description" content="这道题目和《剑指 Offer 之 从整数 1 到 n 中 1 出现的次数》是一样的，也是通过寻找数字序列的规律解决的。"><meta itemprop="datePublished" content="2019-11-29T19:23:11+08:00" />
 <meta itemprop="dateModified" content="2019-11-29T19:23:56+08:00" />
@@ -209,29 +208,29 @@ $$ =38890 $$</p>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">digitsInSequence</span><span class="o">(</span><span class="kt">int</span> <span class="n">arr</span><span class="o">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="n">9</span><span class="o">)</span> <span class="k">return</span> <span class="n">n</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="o">)</span> <span class="k">return</span> <span class="n">n</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">9</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                <span class="n">m</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">            <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">arr</span><span class="o">[</span><span class="n">m</span> <span class="o">-</span> <span class="n">1</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">arr</span><span class="o">[</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="o">];</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">temp1</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="n">m</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">temp2</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="n">m</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">temp3</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">temp1</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">10</span><span class="o">,</span> <span class="n">m</span> <span class="o">-</span> <span class="n">1</span><span class="o">));</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">temp3</span> <span class="o">/</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="n">10</span><span class="o">,</span> <span class="n">m</span> <span class="o">-</span> <span class="n">temp2</span> <span class="o">-</span> <span class="n">1</span><span class="o">))</span> <span class="o">%</span> <span class="n">10</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">temp3</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">temp1</span> <span class="o">+</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">temp3</span> <span class="o">/</span> <span class="n">Math</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="n">m</span> <span class="o">-</span> <span class="n">temp2</span> <span class="o">-</span> <span class="mi">1</span><span class="o">))</span> <span class="o">%</span> <span class="mi">10</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 由于 int 装不下 8888888890 这个数，所以没有将其放到数组里
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="o">{</span><span class="n">0</span><span class="o">,</span> <span class="n">10</span><span class="o">,</span> <span class="n">190</span><span class="o">,</span> <span class="n">2890</span><span class="o">,</span> <span class="n">38890</span><span class="o">,</span> <span class="n">488890</span><span class="o">,</span> <span class="n">5888890</span><span class="o">,</span> <span class="n">68888890</span><span class="o">,</span> <span class="n">788888890</span><span class="o">};</span> 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">190</span><span class="o">,</span> <span class="mi">2890</span><span class="o">,</span> <span class="mi">38890</span><span class="o">,</span> <span class="mi">488890</span><span class="o">,</span> <span class="mi">5888890</span><span class="o">,</span> <span class="mi">68888890</span><span class="o">,</span> <span class="mi">788888890</span><span class="o">};</span> 
 </span></span><span class="line"><span class="cl">        <span class="n">Solution</span> <span class="n">solution</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Solution</span><span class="o">();</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="na">digitsInSequence</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">1001</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="na">digitsInSequence</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="mi">1001</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -339,7 +338,7 @@ $$ =38890 $$</p>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

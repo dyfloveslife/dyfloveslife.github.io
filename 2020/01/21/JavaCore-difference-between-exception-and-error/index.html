@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.95.0 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/01/21/JavaCore-difference-between-exception-and-error/" />
@@ -45,7 +45,6 @@
 <meta property="og:url" content="http://localhost:1313/2020/01/21/JavaCore-difference-between-exception-and-error/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-01-21T11:09:11+08:00" />
 <meta property="article:modified_time" content="2020-06-27T16:35:56+08:00" />
-
 <meta itemprop="name" content="Java 中的 Exception 和 Error">
 <meta itemprop="description" content="程序的异常处理在开发中很是常见，只有正确处理好意外情况，才能保证程序的可靠性。本文通过 Java 异常处理机制，详细的分析与解释 Java 中的 Exception 与 Error 之间的区别以及需要注意的点，以便更好的实现程序的可维护性。"><meta itemprop="datePublished" content="2020-01-21T11:09:11+08:00" />
 <meta itemprop="dateModified" content="2020-06-27T16:35:56+08:00" />
@@ -273,9 +272,9 @@
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;the previous statement of try block&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;try block&#34;</span><span class="o">);</span>
@@ -298,8 +297,8 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">the</span> <span class="n">previous</span> <span class="n">statement</span> <span class="n">of</span> <span class="k">try</span> <span class="n">block</span>
 </span></span><span class="line"><span class="cl"><span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">&#34;main&#34;</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArithmeticException</span><span class="o">:</span> <span class="o">/</span> <span class="n">by</span> <span class="n">zero</span>
-</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">_01_BasicClass</span><span class="o">.</span><span class="na">ExceptionAndErrorTests</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">ExceptionAndErrorTests</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">11</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">_01_BasicClass</span><span class="o">.</span><span class="na">ExceptionAndErrorTests</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="n">ExceptionAndErrorTests</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">5</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">_01_BasicClass</span><span class="o">.</span><span class="na">ExceptionAndErrorTests</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">ExceptionAndErrorTests</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">11</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">_01_BasicClass</span><span class="o">.</span><span class="na">ExceptionAndErrorTests</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="n">ExceptionAndErrorTests</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="mi">5</span><span class="o">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于没有执行<code>try</code>语句，所以<code>finally</code>子句也没有执行。</p>
@@ -374,15 +373,15 @@
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;try block&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">=</span> <span class="n">1</span> <span class="o">/</span> <span class="n">0</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;exception block&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">2</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">2</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;finally block&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
@@ -402,7 +401,7 @@
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span> <span class="n">block</span>
 </span></span><span class="line"><span class="cl"><span class="n">exception</span> <span class="n">block</span>
 </span></span><span class="line"><span class="cl"><span class="k">finally</span> <span class="n">block</span>
-</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="n">value</span> <span class="n">of</span> <span class="nf">test</span><span class="o">()</span> <span class="o">:</span> <span class="n">2</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="n">value</span> <span class="n">of</span> <span class="nf">test</span><span class="o">()</span> <span class="o">:</span> <span class="mi">2</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>从结果可以看出，在进入<code>try</code>块后，首先打印了<code>try block</code>，由于发生了异常，会被<code>catch</code>捕获，继而输出<code>exception block</code>，最后输出<code>finally block</code>语句。</p>
@@ -425,10 +424,10 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExceptionAndErrorTests</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;try block1&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">=</span> <span class="n">1</span> <span class="o">/</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;try block2&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="o">;</span>
@@ -554,9 +553,9 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -568,7 +567,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">value</span> <span class="n">of</span> <span class="nf">getValue</span><span class="o">():</span> <span class="n">1</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">value</span> <span class="n">of</span> <span class="nf">getValue</span><span class="o">():</span> <span class="mi">1</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>还有一个例子：</p>
@@ -598,7 +597,7 @@
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">i</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
@@ -614,7 +613,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">value</span> <span class="n">of</span> <span class="nf">getValue</span><span class="o">():</span> <span class="n">1</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">value</span> <span class="n">of</span> <span class="nf">getValue</span><span class="o">():</span> <span class="mi">1</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>按照之前的逻辑，最终的结果应该是<code>2</code>才对，为什么结果是<code>1</code>呢？</p>
@@ -726,7 +725,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

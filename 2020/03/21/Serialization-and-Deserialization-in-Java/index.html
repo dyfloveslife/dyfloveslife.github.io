@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.95.0 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2020/03/21/Serialization-and-Deserialization-in-Java/" />
@@ -45,7 +45,6 @@
 <meta property="og:url" content="http://localhost:1313/2020/03/21/Serialization-and-Deserialization-in-Java/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-03-21T17:04:11+08:00" />
 <meta property="article:modified_time" content="2020-03-24T00:15:11+08:00" />
-
 <meta itemprop="name" content="Java 中的序列化和反序列化">
 <meta itemprop="description" content="当在 Java 中创建对象的时候，只要我们需要这个对象，它就会一直存在。但是一旦程序终止，它们也就不复存在了。如果我们想让对象能够在程序不运行的状态下仍然能够保存它们的信息，那就需要用到序列化机制。"><meta itemprop="datePublished" content="2020-03-21T17:04:11+08:00" />
 <meta itemprop="dateModified" content="2020-03-24T00:15:11+08:00" />
@@ -230,7 +229,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SerializableTest</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;zhangsan&#34;</span><span class="o">,</span> <span class="n">24</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;zhangsan&#34;</span><span class="o">,</span> <span class="mi">24</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="n">ObjectOutputStream</span> <span class="n">oos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&#34;abc.txt&#34;</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">        <span class="n">oos</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">person</span><span class="o">);</span>
@@ -425,7 +424,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SerializableTest</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;zhangsan&#34;</span><span class="o">,</span> <span class="n">24</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;zhangsan&#34;</span><span class="o">,</span> <span class="mi">24</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">Teacher</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Teacher</span><span class="o">(</span><span class="s">&#34;lisi&#34;</span><span class="o">,</span> <span class="n">person</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="n">ObjectOutputStream</span> <span class="n">oos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&#34;abc.txt&#34;</span><span class="o">));</span>
@@ -618,7 +617,7 @@
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ExPerson</span> <span class="n">exPerson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ExPerson</span><span class="o">(</span><span class="s">&#34;zhangsan&#34;</span><span class="o">,</span> <span class="n">25</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ExPerson</span> <span class="n">exPerson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ExPerson</span><span class="o">(</span><span class="s">&#34;zhangsan&#34;</span><span class="o">,</span> <span class="mi">25</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">exPerson</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 序列化
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ObjectOutputStream</span> <span class="n">oos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="s">&#34;123.txt&#34;</span><span class="o">));</span>
@@ -648,13 +647,13 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">有参构造</span><span class="o">.</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">有参构造</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl"><span class="n">zhangsan25</span>
-</span></span><span class="line"><span class="cl"><span class="n">保存对象</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl"><span class="err">保存对象：</span>
 </span></span><span class="line"><span class="cl"><span class="n">writeExternal</span><span class="o">()</span> <span class="n">method</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="n">接收对象</span><span class="err">：</span>
-</span></span><span class="line"><span class="cl"><span class="n">无参构造</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="nf">readExternal</span><span class="o">()</span> <span class="n">method</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="err">接收对象：</span>
+</span></span><span class="line"><span class="cl"><span class="err">无参构造</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">readExternal</span><span class="o">()</span> <span class="n">method</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl"><span class="n">zhangsan25</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -729,8 +728,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">有参构造</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="n">Person</span><span class="o">{</span><span class="n">name</span><span class="o">=</span><span class="err">&#39;</span><span class="kc">null</span><span class="err">&#39;</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="n">0</span><span class="o">,</span> <span class="n">height</span><span class="o">=</span><span class="n">180</span><span class="o">}</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">有参构造</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">Person</span><span class="o">{</span><span class="n">name</span><span class="o">=</span><span class="err">&#39;</span><span class="kc">null</span><span class="err">&#39;</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">0</span><span class="o">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">180</span><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到，由于 name 和 age 都被<code>transient</code>修饰，所以在进行反序列化输出的时候，均输出了默认值 null 或 0。</p>
@@ -771,7 +770,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StaticSerializableTest</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="n">25</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">25</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 序列化
@@ -780,7 +779,7 @@
 </span></span><span class="line"><span class="cl">        <span class="n">oos</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// 修改静态变量的值
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">StaticSerializableTest</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">30</span><span class="o">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">StaticSerializableTest</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="mi">30</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="c1">// 反序列化
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ObjectInputStream</span> <span class="n">ois</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">&#34;staticSerializable.txt&#34;</span><span class="o">));</span>
@@ -972,7 +971,7 @@
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">rep</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">isArray</span><span class="o">())</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                <span class="n">filterCheck</span><span class="o">(</span><span class="n">rep</span><span class="o">.</span><span class="na">getClass</span><span class="o">(),</span> <span class="n">Array</span><span class="o">.</span><span class="na">getLength</span><span class="o">(</span><span class="n">rep</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">filterCheck</span><span class="o">(</span><span class="n">rep</span><span class="o">.</span><span class="na">getClass</span><span class="o">(),</span> <span class="o">-</span><span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">filterCheck</span><span class="o">(</span><span class="n">rep</span><span class="o">.</span><span class="na">getClass</span><span class="o">(),</span> <span class="o">-</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">        <span class="n">handles</span><span class="o">.</span><span class="na">setObject</span><span class="o">(</span><span class="n">passHandle</span><span class="o">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">rep</span><span class="o">);</span>
@@ -1148,7 +1147,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.95.0 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/12/13/JavaSrc-BasicClass-Integer/" />
@@ -45,7 +45,6 @@
 <meta property="og:url" content="http://localhost:1313/2019/12/13/JavaSrc-BasicClass-Integer/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-12-13T21:20:11+08:00" />
 <meta property="article:modified_time" content="2020-01-14T17:36:56+08:00" />
-
 <meta itemprop="name" content="JDK 源码之基础类 Integer">
 <meta itemprop="description" content="本片文章主要介绍 Integer 类中一些比较常用的方法，并分析该类在 Java 中的作用。"><meta itemprop="datePublished" content="2019-12-13T21:20:11+08:00" />
 <meta itemprop="dateModified" content="2020-01-14T17:36:56+08:00" />
@@ -265,14 +264,14 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">final</span> <span class="kd">static</span> <span class="kt">int</span> <span class="o">[]</span> <span class="n">sizeTable</span> <span class="o">=</span> <span class="o">{</span> <span class="n">9</span><span class="o">,</span> <span class="n">99</span><span class="o">,</span> <span class="n">999</span><span class="o">,</span> <span class="n">9999</span><span class="o">,</span> <span class="n">99999</span><span class="o">,</span> <span class="n">999999</span><span class="o">,</span> <span class="n">9999999</span><span class="o">,</span>
-</span></span><span class="line"><span class="cl">                                    <span class="n">99999999</span><span class="o">,</span> <span class="n">999999999</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">};</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">final</span> <span class="kd">static</span> <span class="kt">int</span> <span class="o">[]</span> <span class="n">sizeTable</span> <span class="o">=</span> <span class="o">{</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">99</span><span class="o">,</span> <span class="mi">999</span><span class="o">,</span> <span class="mi">9999</span><span class="o">,</span> <span class="mi">99999</span><span class="o">,</span> <span class="mi">999999</span><span class="o">,</span> <span class="mi">9999999</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                                    <span class="mi">99999999</span><span class="o">,</span> <span class="mi">999999999</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Requires positive x
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">static</span> <span class="kt">int</span> <span class="nf">stringSize</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">sizeTable</span><span class="o">[</span><span class="n">i</span><span class="o">])</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">i</span><span class="o">+</span><span class="n">1</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -316,34 +315,34 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">IntegerCache</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">low</span> <span class="o">=</span> <span class="o">-</span><span class="n">128</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">low</span> <span class="o">=</span> <span class="o">-</span><span class="mi">128</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">high</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">static</span> <span class="kd">final</span> <span class="n">Integer</span> <span class="n">cache</span><span class="o">[];</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="kd">static</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">// high value may be configured by property
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">127</span><span class="o">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">127</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">            <span class="n">String</span> <span class="n">integerCacheHighPropValue</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">                <span class="n">sun</span><span class="o">.</span><span class="na">misc</span><span class="o">.</span><span class="na">VM</span><span class="o">.</span><span class="na">getSavedProperty</span><span class="o">(</span><span class="s">&#34;java.lang.Integer.IntegerCache.high&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">integerCacheHighPropValue</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                <span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">parseInt</span><span class="o">(</span><span class="n">integerCacheHighPropValue</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">i</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">127</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">i</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="mi">127</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// Maximum array size is Integer.MAX_VALUE
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">h</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">-</span> <span class="o">(-</span><span class="n">low</span><span class="o">)</span> <span class="o">-</span><span class="n">1</span><span class="o">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">h</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span> <span class="o">-</span> <span class="o">(-</span><span class="n">low</span><span class="o">)</span> <span class="o">-</span><span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">                <span class="o">}</span> <span class="k">catch</span><span class="o">(</span> <span class="n">NumberFormatException</span> <span class="n">nfe</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="c1">// If the property cannot be parsed into an int, ignore it.
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="o">}</span>
 </span></span><span class="line"><span class="cl">            <span class="o">}</span>
 </span></span><span class="line"><span class="cl">            <span class="n">high</span> <span class="o">=</span> <span class="n">h</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">[(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="o">)</span> <span class="o">+</span> <span class="n">1</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">[(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span><span class="o">];</span>
 </span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">low</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cache</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cache</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span>
 </span></span><span class="line"><span class="cl">                <span class="n">cache</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">j</span><span class="o">++);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// range [-128, 127] must be interned (JLS7 5.1.7)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">assert</span> <span class="n">IntegerCache</span><span class="o">.</span><span class="na">high</span> <span class="o">&gt;=</span> <span class="n">127</span><span class="o">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">assert</span> <span class="n">IntegerCache</span><span class="o">.</span><span class="na">high</span> <span class="o">&gt;=</span> <span class="mi">127</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="nf">IntegerCache</span><span class="o">()</span> <span class="o">{}</span>
@@ -377,7 +376,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="nf">Integer</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NumberFormatException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">10</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -466,7 +465,7 @@
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 第一个 parseInt 方法
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">parseInt</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NumberFormatException</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 将字符串 s 以十进制输出
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">10</span><span class="o">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 第二个 parseInt 方法（主要看这个）
@@ -488,19 +487,19 @@
 </span></span><span class="line"><span class="cl">                                        <span class="s">&#34; greater than Character.MAX_RADIX&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">boolean</span> <span class="n">negative</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">,</span> <span class="n">len</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">len</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// limit = -2147483647
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">limit</span> <span class="o">=</span> <span class="o">-</span><span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">multmin</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">digit</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 如果待转换的字符串 s 的长度大于 0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">len</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 取出字符串 s 的第一个字符，从而进行判断是 “+” 还是 “-”，
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 因为这两个字符的 ASCII 码都是小于字符 &#39;0&#39; 的 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">char</span> <span class="n">firstChar</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">char</span> <span class="n">firstChar</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">firstChar</span> <span class="o">&lt;</span> <span class="sc">&#39;0&#39;</span><span class="o">)</span> <span class="o">{</span> 
 </span></span><span class="line"><span class="cl">            <span class="c1">// 如果字符串 s 的第一个字符是 &#39;-&#39;
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">firstChar</span> <span class="o">==</span> <span class="sc">&#39;-&#39;</span><span class="o">)</span> <span class="o">{</span>
@@ -510,7 +509,7 @@
 </span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="n">NumberFormatException</span><span class="o">.</span><span class="na">forInputString</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="c1">// 待转换字符串 s 的长度是 1，不能是单独的 “+” 或 “-”
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">len</span> <span class="o">==</span> <span class="n">1</span><span class="o">)</span> 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">len</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> 
 </span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="n">NumberFormatException</span><span class="o">.</span><span class="na">forInputString</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
@@ -520,7 +519,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//       parseInt(&#34;123&#34;, 8)，则计算方式为 1*(8的2次方)+2*(8的1次方)+*(8的2次方)=83
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">digit</span> <span class="o">=</span> <span class="n">Character</span><span class="o">.</span><span class="na">digit</span><span class="o">(</span><span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">++),</span><span class="n">radix</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">digit</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">digit</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="n">NumberFormatException</span><span class="o">.</span><span class="na">forInputString</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">            <span class="o">}</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">result</span> <span class="o">&lt;</span> <span class="n">multmin</span><span class="o">)</span> <span class="o">{</span>
@@ -586,19 +585,19 @@
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">static</span> <span class="kt">void</span> <span class="nf">getChars</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="kt">char</span><span class="o">[]</span> <span class="n">buf</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">q</span><span class="o">,</span> <span class="n">r</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">charPos</span> <span class="o">=</span> <span class="n">index</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">sign</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">sign</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 如果 i 小于 0，则用 sign 记下负号 &#39;-&#39;，然后将 i 转换成正数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">sign</span> <span class="o">=</span> <span class="sc">&#39;-&#39;</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="n">i</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// 处理高位的两个字节
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">65536</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">q</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">100</span><span class="o">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">65536</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">100</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 下面的计算方式等同于 r = i - (q * 100);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="o">((</span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="n">6</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="n">5</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="n">2</span><span class="o">));</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="o">((</span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="mi">6</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="n">q</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">buf</span> <span class="o">[--</span><span class="n">charPos</span><span class="o">]</span> <span class="o">=</span> <span class="n">DigitOnes</span><span class="o">[</span><span class="n">r</span><span class="o">];</span>
 </span></span><span class="line"><span class="cl">        <span class="n">buf</span> <span class="o">[--</span><span class="n">charPos</span><span class="o">]</span> <span class="o">=</span> <span class="n">DigitTens</span><span class="o">[</span><span class="n">r</span><span class="o">];</span>
@@ -607,14 +606,14 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">//处理低位的两个字节
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// assert(i &lt;= 65536, i);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="o">(;;)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">52429</span><span class="o">)</span> <span class="o">&gt;&gt;&gt;</span> <span class="o">(</span><span class="n">16</span><span class="o">+</span><span class="n">3</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">52429</span><span class="o">)</span> <span class="o">&gt;&gt;&gt;</span> <span class="o">(</span><span class="mi">16</span><span class="o">+</span><span class="mi">3</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 下面的计算方式等同于 r = i-(q*10)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="o">((</span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="n">3</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="n">1</span><span class="o">));</span>  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="o">((</span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="o">));</span>  
 </span></span><span class="line"><span class="cl">        <span class="n">buf</span> <span class="o">[--</span><span class="n">charPos</span><span class="o">]</span> <span class="o">=</span> <span class="n">digits</span> <span class="o">[</span><span class="n">r</span><span class="o">];</span>
 </span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="n">q</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">sign</span> <span class="o">!=</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">sign</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">buf</span> <span class="o">[--</span><span class="n">charPos</span><span class="o">]</span> <span class="o">=</span> <span class="n">sign</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
@@ -688,7 +687,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">)</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;-2147483648&#34;</span><span class="o">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">?</span> <span class="n">stringSize</span><span class="o">(-</span><span class="n">i</span><span class="o">)</span> <span class="o">+</span> <span class="n">1</span> <span class="o">:</span> <span class="n">stringSize</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">?</span> <span class="n">stringSize</span><span class="o">(-</span><span class="n">i</span><span class="o">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">stringSize</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">char</span><span class="o">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">size</span><span class="o">];</span>
 </span></span><span class="line"><span class="cl">    <span class="n">getChars</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">size</span><span class="o">,</span> <span class="n">buf</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">buf</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
@@ -697,16 +696,16 @@
 </span></span><span class="line"><span class="cl"><span class="c1">// 第三个 toString() 方法
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">radix</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">radix</span> <span class="o">&lt;</span> <span class="n">Character</span><span class="o">.</span><span class="na">MIN_RADIX</span> <span class="o">||</span> <span class="n">radix</span> <span class="o">&gt;</span> <span class="n">Character</span><span class="o">.</span><span class="na">MAX_RADIX</span><span class="o">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">radix</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">radix</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="cm">/* Use the faster version */</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">radix</span> <span class="o">==</span> <span class="n">10</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">radix</span> <span class="o">==</span> <span class="mi">10</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">toString</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buf</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">33</span><span class="o">];</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">boolean</span> <span class="n">negative</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">charPos</span> <span class="o">=</span> <span class="n">32</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buf</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="mi">33</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">boolean</span> <span class="n">negative</span> <span class="o">=</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">charPos</span> <span class="o">=</span> <span class="mi">32</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(!</span><span class="n">negative</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="n">i</span><span class="o">;</span>
@@ -722,7 +721,7 @@
 </span></span><span class="line"><span class="cl">        <span class="n">buf</span><span class="o">[--</span><span class="n">charPos</span><span class="o">]</span> <span class="o">=</span> <span class="sc">&#39;-&#39;</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">buf</span><span class="o">,</span> <span class="n">charPos</span><span class="o">,</span> <span class="o">(</span><span class="n">33</span> <span class="o">-</span> <span class="n">charPos</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="n">buf</span><span class="o">,</span> <span class="n">charPos</span><span class="o">,</span> <span class="o">(</span><span class="mi">33</span> <span class="o">-</span> <span class="n">charPos</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -759,7 +758,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 第二个 valueOf() 方法
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="n">Integer</span> <span class="nf">valueOf</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NumberFormatException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">10</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">parseInt</span><span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="mi">10</span><span class="o">));</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 第三个 valueOf() 方法
@@ -778,7 +777,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">123</span><span class="o">);</span>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="mi">123</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -813,7 +812,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="o">?</span> <span class="o">-</span><span class="n">1</span> <span class="o">:</span> <span class="o">((</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="o">)</span> <span class="o">?</span> <span class="n">0</span> <span class="o">:</span> <span class="n">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="o">((</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="o">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -917,7 +916,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

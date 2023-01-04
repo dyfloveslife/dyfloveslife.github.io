@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.95.0 with theme even" />
+<meta name="generator" content="Hugo 0.108.0 with theme even" />
 
 
 <link rel="canonical" href="http://localhost:1313/2019/12/16/Correlation-Filter/" />
@@ -45,7 +45,6 @@
 <meta property="og:url" content="http://localhost:1313/2019/12/16/Correlation-Filter/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-12-16T17:44:11+08:00" />
 <meta property="article:modified_time" content="2019-12-19T16:08:56+08:00" />
-
 <meta itemprop="name" content="基于相关滤波器（Correlation Filters）的 MOSSE 算法">
 <meta itemprop="description" content="本文将会从 相关滤波器 的相关理论进行展开，讲述如何将信号处理领域的 相关滤波器 融入到目前比较热门的 目标追踪 领域，以及对 MOSSE 算法进行了介绍。"><meta itemprop="datePublished" content="2019-12-16T17:44:11+08:00" />
 <meta itemprop="dateModified" content="2019-12-19T16:08:56+08:00" />
@@ -216,11 +215,11 @@ $$</p>
 <p>$$
 0 = \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} {\mid} H_{w,v}^*F_{w,v,i} - G_{w,v,i} {\mid}^{2} \qquad(10)
 $$</p>
-<p>$$ 
-\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i}-G_{w,v,i})(H_{w,v}^*F_{w,v,i}-G_{w,v,i}) ^ * 
+<p>$$
+\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i}-G_{w,v,i})(H_{w,v}^*F_{w,v,i}-G_{w,v,i}) ^ *
 $$</p>
 <p>$$
-\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i}-G_{w,v,i})(H_{w,v}F_{w,v,i} ^ * - G_{w,v,i} ^ *) 
+\Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i}-G_{w,v,i})(H_{w,v}F_{w,v,i} ^ * - G_{w,v,i} ^ *)
 $$</p>
 <p>$$
 \Rightarrow 0 =  \frac {\partial}{\partial H_ {w,v}^{*}} \sum_{i=1}^{m} (H_{w,v}^*F_{w,v,i} {\cdot} H_{w,v}F_{w,v,i} ^ *- H_{w,v}^*F_{w,v,i} {\cdot} G_{w,v,i} ^ * - H_{w,v}F_{w,v,i} ^ * {\cdot} G_{w,v,i} + G_{w,v,i} {\cdot} G_{w,v,i} ^ *)
@@ -367,7 +366,7 @@ $$</p>
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
